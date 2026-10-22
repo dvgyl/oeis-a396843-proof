@@ -1,0 +1,117 @@
+{
+  "status": "all finite exact-arithmetic checks passed",
+  "scope": "Finite verification only; not a proof for all indices.",
+  "terms_per_parameter": 100,
+  "checks": [
+    {
+      "m": 2,
+      "known_prefix_terms_checked": 0,
+      "parity_terms_checked": 100,
+      "mod_m_squared_terms_checked": 100,
+      "binary_digit_bound_terms_checked_A": 100,
+      "binary_digit_bound_terms_checked_B": 100,
+      "exact_dyadic_valuation_indices_checked": 7,
+      "composition_residual_zero_through_degree": 101,
+      "both_inverse_compositions_equal_x_through_degree": 100,
+      "normalized_inverse_identity_checked_through_degree": 99
+    },
+    {
+      "m": 3,
+      "known_prefix_terms_checked": 20,
+      "parity_terms_checked": 100,
+      "mod_m_squared_terms_checked": 100,
+      "binary_digit_bound_terms_checked_A": 100,
+      "binary_digit_bound_terms_checked_B": 100,
+      "exact_dyadic_valuation_indices_checked": 7,
+      "composition_residual_zero_through_degree": 101,
+      "both_inverse_compositions_equal_x_through_degree": 100,
+      "normalized_inverse_identity_checked_through_degree": 99
+    },
+    {
+      "m": 4,
+      "known_prefix_terms_checked": 20,
+      "parity_terms_checked": 100,
+      "mod_m_squared_terms_checked": 100,
+      "binary_digit_bound_terms_checked_A": 100,
+      "binary_digit_bound_terms_checked_B": 100,
+      "exact_dyadic_valuation_indices_checked": 7,
+      "composition_residual_zero_through_degree": 101,
+      "both_inverse_compositions_equal_x_through_degree": 100,
+      "normalized_inverse_identity_checked_through_degree": 99
+    },
+    {
+      "m": 5,
+      "known_prefix_terms_checked": 0,
+      "parity_terms_checked": 100,
+      "mod_m_squared_terms_checked": 100,
+      "binary_digit_bound_terms_checked_A": 100,
+      "binary_digit_bound_terms_checked_B": 100,
+      "exact_dyadic_valuation_indices_checked": 7,
+      "composition_residual_zero_through_degree": 101,
+      "both_inverse_compositions_equal_x_through_degree": 100,
+      "normalized_inverse_identity_checked_through_degree": 99
+    },
+    {
+      "m": 6,
+      "known_prefix_terms_checked": 0,
+      "parity_terms_checked": 100,
+      "mod_m_squared_terms_checked": 100,
+      "binary_digit_bound_terms_checked_A": 100,
+      "binary_digit_bound_terms_checked_B": 100,
+      "exact_dyadic_valuation_indices_checked": 7,
+      "composition_residual_zero_through_degree": 101,
+      "both_inverse_compositions_equal_x_through_degree": 100,
+      "normalized_inverse_identity_checked_through_degree": 99
+    },
+    {
+      "m": 7,
+      "known_prefix_terms_checked": 0,
+      "parity_terms_checked": 100,
+      "mod_m_squared_terms_checked": 100,
+      "binary_digit_bound_terms_checked_A": 100,
+      "binary_digit_bound_terms_checked_B": 100,
+      "exact_dyadic_valuation_indices_checked": 7,
+      "composition_residual_zero_through_degree": 101,
+      "both_inverse_compositions_equal_x_through_degree": 100,
+      "normalized_inverse_identity_checked_through_degree": 99
+    },
+    {
+      "m": 8,
+      "known_prefix_terms_checked": 0,
+      "parity_terms_checked": 100,
+      "mod_m_squared_terms_checked": 100,
+      "binary_digit_bound_terms_checked_A": 100,
+      "binary_digit_bound_terms_checked_B": 100,
+      "exact_dyadic_valuation_indices_checked": 7,
+      "composition_residual_zero_through_degree": 101,
+      "both_inverse_compositions_equal_x_through_degree": 100,
+      "normalized_inverse_identity_checked_through_degree": 99
+    },
+    {
+      "m": 9,
+      "known_prefix_terms_checked": 0,
+      "parity_terms_checked": 100,
+      "mod_m_squared_terms_checked": 100,
+      "binary_digit_bound_terms_checked_A": 100,
+      "binary_digit_bound_terms_checked_B": 100,
+      "exact_dyadic_valuation_indices_checked": 7,
+      "composition_residual_zero_through_degree": 101,
+      "both_inverse_compositions_equal_x_through_degree": 100,
+      "normalized_inverse_identity_checked_through_degree": 99
+    }
+  ],
+  "counterexample": {
+    "sequence": "A396844",
+    "n": 17,
+    "a_n": 113101684573952804,
+    "residue_mod_16": 4,
+    "listed_conjecture_predicts_residue": 0
+  },
+  "binary_bound_example": {
+    "m": 3,
+    "n": 32,
+    "ones_in_binary_n_minus_1": 5,
+    "guaranteed_v_3_lower_bound": 5,
+    "actual_v_3": 6
+  }
+}
