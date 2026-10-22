@@ -1,0 +1,11 @@
+# Public review summary
+
+ChatGPT developed the mathematical arguments, manuscript, finite checker, and Lean formalization from Dev Goyal's prompts. Dev initiated the investigation and requested checks and revisions. He did not supply the strategy or intermediate mathematical arguments. He has confirmed that human verification is complete. Dev is the sole human author and accepts responsibility. The confirmation did not specify a reviewer identity, method, or scope. No journal review is claimed.
+
+The Lean checker completed a clean build and checked all 16 fixed theorem endpoints and their explicit types. It recorded their transitive axioms. A separate AI source review compared the endpoint types and definitions with the theorem specification. The Python verifier checked finite cases independently from the defining equation. These checks have different scopes. The [verification evidence](../reproducibility/README.md) identifies their current reports.
+
+Paul D. Hanna recorded five parameter cases and their inverse identity in [A265940](https://oeis.org/A265940), [A271958](https://oeis.org/A271958), [A396843](https://oeis.org/A396843), [A396844](https://oeis.org/A396844), and [A396845](https://oeis.org/A396845). Danial Asaria's prior counterexample is credited in the report and the [A396843 history](https://oeis.org/history?seq=A396843). These recorded cases and identities are prior work.
+
+A bounded search used 28 web queries, six scholarly-registry queries, and a check of a 492-item OEIS proof dataset at a recorded commit. It compared the stated theorems with the located sources. No earlier proof of the full family results was found. The search did not cover all languages, private drafts, authenticated databases, or every unindexed source. It does not establish absolute novelty or priority.
+
+An audit of the earlier formalization work examined saved actions, final reports, and validation records. Some progress-message bodies were encrypted, and some tool output was truncated. Earlier research chats that produced the original manuscript were unavailable. The audit therefore cannot claim full access to every message or output byte. The current source, fixed contracts, and fresh checks are available in this package for direct review.
