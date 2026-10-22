@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: >-
+  Cite this report and source package as authored by Dev Goyal.
+title: "An AI-developed proof for OEIS A396843 and related compositional power series"
+type: software
+authors:
+  - family-names: Goyal
+    given-names: Dev
+version: 1.0.0
+repository-code: "https://github.com/dvgyl/oeis-a396843-proof"
+doi: "10.5281/zenodo.23567463"
+abstract: >-
+  Mathematical report, Lean formalization, and exact finite checks for parity,
+  congruences, and binary-weight divisibility in a family of formal power series.
+  ChatGPT developed the arguments and formalization from the author's prompts.
+keywords:
+  - formal power series
+  - integer sequences
+  - congruences
+  - Lean
+  - artificial intelligence
