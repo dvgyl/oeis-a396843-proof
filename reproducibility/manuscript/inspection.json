@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "build_command": "make paper",
+  "build_runs": [
+    {
+      "log": "build-1.log",
+      "sha256": "ed5139f6e6bf3317ed73cf4dd4807cf130f99d4c5697f4008f58eb9fbd6e3494",
+      "exit_code": 0
+    },
+    {
+      "log": "build-2.log",
+      "sha256": "7a675dd7726dbc9ab29c727aca5270cdb14d67aecb6b6953cb12fd9c607a3e8d",
+      "exit_code": 0
+    }
+  ],
+  "source": "manuscript/hanna_congruences.tex",
+  "source_sha256": "2e8ac18428d43811e0c9f2f387beac81f54daf79b87e5af91098f8ff685a33df",
+  "pdf": "manuscript/hanna_congruences.pdf",
+  "pdf_sha256": "b470625eccb6c38a1d299d695bf7f92fe0a8906e91e07d842cbab281f9c483b1",
+  "page_count": 9,
+  "inspection": "Rendered every page with pdftoppm at 68 dpi and inspected all nine page images. The contribution box, equations, page breaks, and references are readable. No clipping was observed.",
+  "pages_inspected": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ]
+}
