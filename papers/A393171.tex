@@ -1,0 +1,521 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+\setlist{itemsep=2pt,topsep=3pt}
+\raggedbottom
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\ps}[1]{#1[[x]]}
+\newcommand{\coeff}[2]{[x^{#1}]\,#2}
+\newcommand{\hl}[1]{\textbf{#1}}
+\newcommand{\para}[1]{\par\medskip\noindent\textbf{#1}\enspace}
+\hypersetup{pdftitle={Remainders modulo 8 of a series built from the Catalan numbers: a proof of a conjecture in OEIS A393171},pdfauthor={Dev D. Goyal},pdfsubject={OEIS A393171}}
+\title{Remainders modulo $8$ of a series built from the Catalan numbers\\[6pt]\large A proof of a conjecture in OEIS A393171}
+\author{Dev D. Goyal}
+\date{October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The sequence A393171 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Paul D.~Hanna, consists of
+the coefficients of the power series $B(x)=x+x^2+4x^3+20x^4+116x^5+\cdots$ defined by the equation
+$B(x)=x+B(C(x))^2$, where $C(x)$ is the generating function of the Catalan numbers. Hanna conjectured that, for
+$n>2$, the coefficient $a(n)$ leaves remainder $4$ on division by $8$ when $n$ or $n-1$ is a power of $2$, and is
+divisible by $8$ otherwise. We prove this conjecture. The proof goes through the companion sequence A393172, whose
+series $A(x)$ satisfies $A(x-x^2)=x+A(x)^2$: we show that $B=x+A^2$, and that $A=2C-x+4K$ for a series $K$ with integer
+coefficients. Squaring then gives $B$ modulo $8$ in closed form, $B\equiv x+x^2+4(C-x-xC)$, from which the conjecture
+can be read off. The result has also been checked by computer and proved formally in the Lean proof assistant.
+\end{abstract}
+\begin{center}\begin{minipage}{0.88\linewidth}\small
+\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
+ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
+Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
+every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
+The section ``About this paper'' at the end gives the details.
+\end{minipage}\end{center}
+
+\section{Introduction}
+
+\subsection{The sequence}\label{sec:sequence}
+The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
+sequences, used by mathematicians and scientists to identify sequences and to record what is known about them. Many
+entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
+
+This paper is about entry A393171~\cite{oeis}, contributed by Paul~D.~Hanna in February 2026. The entry reads, in part:
+\begin{quote}\small\ttfamily\raggedright G.f. satisfies A(x) = x + A(C(x))\^{}2, where C(x) = x + C(x)\^{}2 is a g.f. of the Catalan numbers (A000108).\par\smallskip Conjecture: for n > 2, a(n) == 4 (mod 8) iff n = 2\^{}k or n = 2\^{}k + 1 for k >= 1, otherwise a(n) is divisible by 8.\par\smallskip (1) A(x-x\^{}2) = x-x\^{}2 + A(x)\^{}2.\par\smallskip\hfill\textrm{--- OEIS A393171, Paul D. Hanna, February 2026}\end{quote}
+
+Here ``G.f.''\ stands for \emph{generating function}: the terms $a(1),a(2),a(3),\dots$ of the sequence are stored as the
+coefficients of a power series. The companion entry A393172~\cite{oeis172} is about a closely related series, which it
+also calls $A(x)$. To avoid a clash of names, in this paper we write
+\[
+B(x)=a(1)\,x+a(2)\,x^2+a(3)\,x^3+\cdots
+\]
+for the series of A393171, and we reserve the letter $A$ for the series of A393172 (defined in
+Section~\ref{sec:results}). So the defining equation reads
+\[
+B(x)=x+\bigl(B(C(x))\bigr)^2 .
+\]
+In it, $B(C(x))$ means that the series $C(x)$ is substituted for $x$ in $B$, and the result is then squared in the
+ordinary way. Section~\ref{sec:background} explains these operations. The first terms, starting at $n=1$, are
+1, 1, 4, 20, 116, 752, 5328, 40644, 330324, 2838296, \dots
+
+The equation involves the \emph{Catalan numbers} $1,1,2,5,14,42,132,\dots$ (OEIS A000108), one of the most common
+sequences in combinatorics. For example, there are $1,1,2,5,14,\dots$ binary trees with $1,2,3,4,5,\dots$ leaves, if
+every branching point splits into a left and a right branch. They are stored in the series
+\[
+C(x)=x+x^2+2x^3+5x^4+14x^5+42x^6+\cdots,
+\]
+which is the only series without constant term that satisfies $C=x+C^2$. We write $c_n$ for its coefficient of $x^n$.
+
+\subsection{The question}
+Hanna's conjecture says that for $n>2$ the remainder of $a(n)$ on division by $8$ is $4$ when $n$ is a power of $2$ or
+one more than a power of $2$, and $0$ otherwise. The first row of the table shows these remainders; the indices
+$n>2$ of the form $2^k$ or $2^k+1$ are printed in bold. The second row anticipates the main result: it shows the
+remainder of $4(c_n-c_{n-1})$ modulo $8$.
+\begin{center}\small\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{8.6em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & 1 & 2 & \hl{3} & \hl{4} & \hl{5} & 6 & 7 & \hl{8} & \hl{9} & 10 & 11 & 12 & 13 & 14 & 15 & \hl{16} \\ \midrule
+$a(n)\bmod 8$ & 1 & 1 & \hl{4} & \hl{4} & \hl{4} & 0 & 0 & \hl{4} & \hl{4} & 0 & 0 & 0 & 0 & 0 & 0 & \hl{4} \\
+$4(c_n{-}c_{n-1})\bmod 8$ & -- & -- & \hl{4} & \hl{4} & \hl{4} & 0 & 0 & \hl{4} & \hl{4} & 0 & 0 & 0 & 0 & 0 & 0 & \hl{4} \\
+\bottomrule
+\end{tabular}
+\\[4pt]
+\begin{tabular}{>{\raggedright\arraybackslash}p{8.6em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & \hl{17} & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 & \hl{32} \\ \midrule
+$a(n)\bmod 8$ & \hl{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \hl{4} \\
+$4(c_n{-}c_{n-1})\bmod 8$ & \hl{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \hl{4} \\
+\bottomrule
+\end{tabular}
+\\[4pt]
+\begin{tabular}{>{\raggedright\arraybackslash}p{8.6em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & \hl{33} & 34 & 35 & 36 & 37 & 38 & 39 & 40 & 41 & 42 & 43 & 44 & 45 & 46 & 47 & 48 \\ \midrule
+$a(n)\bmod 8$ & \hl{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+$4(c_n{-}c_{n-1})\bmod 8$ & \hl{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\subsection{What this paper proves}
+\textbf{Main result} (Theorem~\ref{thm:main}). \emph{Modulo $8$,
+\[
+B(x)\equiv x+x^2+4\bigl(C(x)-x-x\,C(x)\bigr)\pmod 8 .
+\]
+In particular, $a(n)\equiv4\,(c_n-c_{n-1})\pmod8$ for every $n>2$.}
+
+The number $4(c_n-c_{n-1})$ leaves remainder $4$ on division by $8$ when $c_n-c_{n-1}$ is odd, and remainder $0$ when it
+is even. A classical fact (Lemma~\ref{lem:catalan}) says that $c_n$ is odd exactly when $n$ is a power of $2$. Together
+these prove Hanna's conjecture (Corollary~\ref{cor:conj}). Along the way we prove the relations between the two
+entries: $B=x+A^2$, $B(C(x))=A$, and formula (1) of the entry.
+
+\subsection{What was known}
+The two OEIS entries record the relations between $A$ and $B$ as formulas, without proofs; they are easy, and we prove
+them here (Theorem~\ref{thm:main}(b)). The parity of the Catalan numbers is classical; see for
+example~\cite{deutschsagan}. We are not aware of an earlier proof of the conjecture. The conjecture of the companion
+entry A393172, about $A$ modulo $4$, is proved in a separate paper of this collection; to keep the present paper
+self-contained, we repeat that proof here (Proposition~\ref{prop:172}).
+
+\subsection{Why it is interesting}
+Equations in which an unknown power series is substituted into something, or something is substituted into it, are
+called \emph{functional equations}. They arise naturally when counting objects that are built recursively, such as trees,
+and the OEIS contains many sequences defined in this way. Their coefficients usually grow quickly and look irregular, but
+their remainders modulo small powers of $2$ often show patterns. This example shows a useful technique for moving from
+one power of $2$ to the next: a congruence modulo $4$ for one series, written as an exact equation with integer
+coefficients, becomes a congruence modulo $8$ for its square. The technique avoids division by $2$, which is not
+possible in arithmetic modulo $8$.
+
+\subsection{How to read this paper}
+Section~\ref{sec:background} explains the few notions we need: power series, substitution, remainders, and the Catalan
+numbers modulo $2$. Section~\ref{sec:results} states the results precisely, and Section~\ref{sec:proofs} proves them.
+Section~\ref{sec:checks} describes how the results were checked, by computer and by a formal proof in Lean.
+Section~\ref{sec:discussion} discusses the scope of the result and some open questions.
+\section{Background}\label{sec:background}
+This section collects the definitions and facts used later. Readers who know formal power series and congruences can skip it and return when needed.
+\subsection{Power series as bookkeeping}
+A \emph{formal power series} is a way of storing an infinite sequence of numbers $u_0,u_1,u_2,\dots$ in one object,
+\[
+U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots .
+\]
+The letter $x$ is only a placeholder that keeps the terms apart. We never substitute a number for $x$, so the question
+of whether the series ``converges'' never arises; a power series is simply its list of coefficients. We write
+$\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$. Two series are equal when all their coefficients are equal.
+
+Series are added coefficient by coefficient and multiplied like polynomials:
+\[
+\coeff{n}{(UV)}=u_0v_n+u_1v_{n-1}+\cdots+u_nv_0 .
+\]
+Each coefficient of a product is a finite sum, so everything is well defined. For example,
+$(1-x)(1+x+x^2+x^3+\cdots)=1$, because all the other terms cancel. So $1+x+x^2+\cdots$ is the
+\emph{multiplicative inverse} of $1-x$, and we write it as $\frac{1}{1-x}$. In the same way, every series $D$ whose
+constant term is $1$ has exactly one multiplicative inverse $\frac1D$. Its coefficients can be computed one at a time
+from $D\cdot\frac1D=1$, using only additions, subtractions and multiplications. Every fraction in this paper has a
+denominator of this kind, so it stands for an honest power series.
+
+Two more pieces of notation. We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
+$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
+constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+
+\subsection{Substituting one series into another}
+If $V(x)$ has constant term $0$, we can substitute $V$ for $x$ in $U$:
+\[
+U(V(x))=u_0+u_1V(x)+u_2V(x)^2+u_3V(x)^3+\cdots .
+\]
+This is called \emph{composition}, also written $U\circ V$. It makes sense because $V(x)^k$ has no terms below $x^k$,
+so only the finitely many terms with $k\le n$ affect the coefficient of $x^n$. For example, if $U=x+x^2$ and $V=x^2$, then
+$U(V(x))=x^2+x^4$. Composition is associative: $U\circ(V\circ W)=(U\circ V)\circ W$.
+
+Substituting a series into itself repeatedly gives its \emph{iterates}: $U^{\circ2}(x)=U(U(x))$,
+$U^{\circ3}(x)=U(U(U(x)))$, and so on, with $U^{\circ0}(x)=x$ and $U^{\circ1}=U$. They must not be confused with
+\emph{powers} $U^2=U\cdot U$, $U^3=U\cdot U\cdot U$. (The OEIS sometimes writes $A^k(x)$ for the $k$-th iterate. In
+this paper the small circle always means an iterate, and a plain exponent always means a power.)
+
+\subsection{Undoing a substitution}
+A normalized series can always be ``undone'' by another normalized series.
+
+\begin{lemma}[Compositional inverse]\label{lem:inverse}
+For every normalized series $U$ there is exactly one normalized series $V$ with $U(V(x))=x$, and this $V$ also
+satisfies $V(U(x))=x$. If $U$ has integer coefficients, so does $V$.
+\end{lemma}
+
+We call $V$ the \emph{compositional inverse} of $U$. The OEIS calls it the \emph{series reversion} of $U$. For example,
+the compositional inverse of $x-x^2$ is $C(x)=x+x^2+2x^3+5x^4+14x^5+\cdots$, whose coefficients are the Catalan numbers.
+Indeed $C-C^2=x$, which says exactly that substituting $C$ into $x-x^2$ gives $x$.
+
+\begin{proof}
+Write $V=x+v_2x^2+v_3x^3+\cdots$ with unknown coefficients. In
+$U(V)=V+u_2V^2+u_3V^3+\cdots$, the coefficient of $x^n$ (for $n\ge2$) equals $v_n$ plus terms that involve only
+$v_2,\dots,v_{n-1}$. Setting it equal to $0$ therefore determines $v_n$ from the earlier coefficients, using only
+additions, subtractions and multiplications. So there is exactly one $V$ with $U\circ V=x$, and it has integer
+coefficients if $U$ does. Applying the same construction to $V$ gives a normalized $W$ with $V\circ W=x$. Then
+$U=U\circ(V\circ W)=(U\circ V)\circ W=W$, so $V\circ U=V\circ W=x$ as well.
+\end{proof}
+
+\subsection{Remainders and congruences}
+For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
+remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
+$a$ is odd is the same as saying $a\equiv1\pmod2$.
+
+Residues can be added and multiplied consistently, as on a clock. The residues $0,1,\dots,m-1$ with this ``clock
+arithmetic'' form a number system written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we
+have $1+1=0$, so adding and subtracting are the same thing.
+
+For power series with integer coefficients, $U\equiv V\pmod m$ means that \emph{every} coefficient of $U-V$ is
+divisible by $m$. Equivalently, the two series become equal when every coefficient is replaced by its residue; we call
+this \emph{reducing} the series modulo $m$. The key fact is simple:
+
+\emph{Reduction modulo $m$ is compatible with all the operations above.} To reduce a sum, a product, a substitution, or
+an inverse, we may reduce the ingredients first and then compute with clock arithmetic. This holds because every
+coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
+multiplying, and these operations are compatible with remainders.
+
+\para{A word on ``rings''.} Several lemmas below hold not only for integers, but in every number system in
+which one can add, subtract and multiply with the usual rules (such as $\Z$, $\Q$, and $\Z/m\Z$). Mathematicians call
+such a number system a \emph{commutative ring}. We use the word only in this sense. No division is ever needed, which
+matters because in $\Z/m\Z$ one cannot always divide (for instance, $2$ has no inverse in $\Z/4\Z$).
+
+\subsection{The method in one paragraph}
+Almost every proof in this paper follows the same three steps.
+\begin{enumerate}
+\item \emph{Uniqueness.} Show that the defining equation determines the coefficients one at a time, using only
+addition, subtraction and multiplication. Then the equation has exactly one solution of the required shape, in every
+commutative ring, including the clock arithmetic $\Z/8\Z$.
+\item \emph{Reduction.} Reducing the integer solution modulo $8$ gives a solution of the reduced equation,
+because reduction is compatible with all operations.
+\item \emph{A good guess.} Find a simple series that satisfies the reduced equation and check that it does. By uniqueness,
+this simple series \emph{is} the reduction of the sequence, and its coefficients can simply be read off.
+\end{enumerate}
+The creative part is step~3: finding a simple series that works. Step~1 sometimes needs care, when the equation seems to
+require a division.
+For a first example, take the Catalan series $C=x+C^2$ from above. Its coefficients $1,1,2,5,14,42,\dots$ are
+determined one at a time by this equation. Modulo $2$, the series $S=x+x^2+x^4+x^8+\cdots$ satisfies the same
+equation: in $\F_2$, $S^2=x^2+x^4+x^8+\cdots$ (see Lemma~\ref{lem:frobenius}), so $x+S^2=S$. Hence $C\equiv S\pmod2$,
+and the Catalan coefficient $\coeff{n}{C}$ is odd exactly when $n$ is a power of $2$.
+
+\subsection{Squaring in clock arithmetic modulo \texorpdfstring{$2$}{2}}
+\begin{lemma}[Frobenius identity]\label{lem:frobenius}
+Let $p$ be a prime. For every power series $U$ with coefficients in $\F_p$, we have $U(x)^p=U(x^p)$.
+\end{lemma}
+
+\begin{proof}
+In $\F_p$, the binomial theorem simplifies to $(a+b)^p=a^p+b^p$, because every binomial coefficient
+$\binom pi$ with $0<i<p$ is divisible by $p$. Also $c^p=c$ for every $c\in\F_p$ (Fermat's little theorem). So
+$\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. Only finitely many terms matter for any given
+coefficient, so this is a polynomial identity.
+\end{proof}
+
+For $p=2$ this says that squaring a series modulo $2$ just doubles every exponent: for instance,
+$(x+x^3)^2\equiv x^2+x^6\pmod2$. In particular, the square of any series has, modulo $2$, no terms of odd degree.
+
+\subsection{The Catalan numbers modulo 2}
+\begin{lemma}\label{lem:catalan}
+In every commutative ring the equation $U=x+U^2$ has exactly one solution with $U(0)=0$. Over the integers it is the
+Catalan series $C(x)=x+x^2+2x^3+5x^4+14x^5+\cdots$, and
+\[
+C(x)\equiv x+x^2+x^4+x^8+\cdots=\sum_{k\ge0}x^{2^k}\pmod 2 .
+\]
+So $\coeff{n}{C}$ is odd exactly when $n$ is a power of $2$.
+\end{lemma}
+
+\begin{proof}
+The coefficient of $x^n$ in $U^2$ involves only $u_1,\dots,u_{n-1}$, so the equation determines $u_n$ one at a time:
+$u_1=1$ and $u_n=\sum_{i=1}^{n-1}u_iu_{n-i}$. Over $\F_2$, the series $S=\sum_kx^{2^k}$ satisfies
+$x+S^2=x+\sum_kx^{2^{k+1}}=S$ by Lemma~\ref{lem:frobenius}, so by uniqueness $C\equiv S\pmod2$.
+\end{proof}
+The parity of the Catalan numbers is classical; see for example~\cite{deutschsagan}. (Here the Catalan number
+$\frac1{n}\binom{2n-2}{n-1}$ appears as the coefficient of $x^n$, so ``$n$ a power of $2$'' corresponds to the familiar
+statement that the $k$-th Catalan number is odd exactly when $k+1$ is a power of $2$.)
+
+
+\section{Results}\label{sec:results}
+
+Throughout, $C$ is the Catalan series, the unique normalized series with $C=x+C^2$ (Lemma~\ref{lem:catalan}), and
+$c_n=\coeff{n}{C}$. We also need the series of the companion entry A393172: $A$ denotes the unique normalized series with
+integer coefficients that satisfies
+\begin{equation}\label{eq:first}
+A(x-x^2)=x+A(x)^2
+\end{equation}
+(Proposition~\ref{prop:172} below shows that there is exactly one). The series of A393171 is defined by
+\begin{equation}\label{eq:def}
+B(x)=x+\bigl(B(C(x))\bigr)^2 .
+\end{equation}
+
+\begin{theorem}\label{thm:main}
+\begin{enumerate}[label=(\alph*)]
+\item Equation~\eqref{eq:def} has exactly one normalized solution $B$ with integer coefficients (and, more generally,
+exactly one with coefficients in any commutative ring). The sequence A393171 is $a(n)=\coeff{n}{B}$.
+\item The series $A$ and $B$ are related by
+\[
+B=x+A^2,\qquad B(C(x))=A(x),\qquad B(x-x^2)=x-x^2+B(x)^2 .
+\]
+\item Modulo $8$,
+\[
+B(x)\equiv x+x^2+4\bigl(C(x)-x-x\,C(x)\bigr)\pmod 8 .
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{corollary}[Hanna's conjecture]\label{cor:conj}
+For every $n>2$: if $n=2^k$ or $n=2^k+1$ for some $k\ge1$, then $a(n)\equiv4\pmod8$; otherwise $a(n)$ is divisible by
+$8$.
+\end{corollary}
+
+\begin{proof}
+Let $n>2$. The coefficient of $x^n$ in $x+x^2$ is $0$, and in $4(C-x-xC)$ it is $4(c_n-c_{n-1})$, because the
+coefficient of $x^n$ in $x\,C(x)$ is $c_{n-1}$. So Theorem~\ref{thm:main}(c) gives $a(n)\equiv4(c_n-c_{n-1})\pmod8$.
+This is $4$ modulo $8$ if $c_n-c_{n-1}$ is odd, and $0$ if it is even. Now $c_n-c_{n-1}$ is odd exactly when one of
+$c_n$, $c_{n-1}$ is odd and the other is even. By Lemma~\ref{lem:catalan}, $c_j$ is odd exactly when $j$ is a power of
+$2$. Since $n>2$, the numbers $n$ and $n-1$ are not both powers of $2$ (the only consecutive powers of $2$ are $1$ and
+$2$). So $a(n)\equiv4\pmod8$ exactly when $n$ or $n-1$ is a power of $2$, that is, when $n=2^k$ or $n=2^k+1$; and
+since $n>2$, in both cases $k\ge1$.
+\end{proof}
+
+For example, $a(5)=116=8\cdot14+4$, and indeed $c_5-c_4=14-5=9$ is odd; while $a(6)=752=8\cdot94$, and
+$c_6-c_5=42-14=28$ is even.
+
+\section{Proofs}\label{sec:proofs}
+
+\para{The idea in brief.} First we prove the result for the companion series $A$: modulo $4$ it equals $2C-x$.
+Written over the integers, this says $A=2C-x+4K$ for some series $K$ with integer coefficients. Next we show that
+$B=x+A^2$. Squaring $2C-x+4K$ gives $(2C-x)^2$ plus multiples of $8$, so modulo $8$ the unknown series $K$ disappears,
+and $B$ is determined. The identity $C^2=C-x$ simplifies the result.
+
+\begin{lemma}[An equation with a square]\label{lem:square}
+Let $T$ and $P$ be normalized series with coefficients in a commutative ring $R$. There is exactly one normalized
+series $G$ with coefficients in $R$ such that
+\[
+G(x)=T(x)+\bigl(G(P(x))\bigr)^2 .
+\]
+If $T$ and $P$ have integer coefficients, then so does $G$, and reducing $G$ modulo $m$ gives the solution of the same
+equation over $\Z/m\Z$ (with $T$ and $P$ reduced modulo $m$).
+\end{lemma}
+
+\begin{proof}
+The point is that the coefficient of $x^n$ on the right-hand side depends only on the coefficients of $G$ below degree
+$n$. To see this, let $G$ and $H$ be two series with constant term $0$ that agree below degree $r$, so $G-H=O(x^r)$.
+Since $P$ starts with $x$, the power $P^k$ has no terms below $x^k$, and so $G(P)-H(P)=O(x^r)$ as well. Moreover
+$G(P)+H(P)$ has constant term $0$. Hence
+\[
+G(P)^2-H(P)^2=\bigl(G(P)-H(P)\bigr)\bigl(G(P)+H(P)\bigr)=O(x^{r+1}).
+\]
+In words: changing $G$ in degree $r$ and above changes the right-hand side only in degree $r+1$ and above.
+
+So the equation fixes the coefficients of $G$ one at a time. The constant term is $0$, the coefficient of $x$ is the
+coefficient of $x$ in $T$, which is $1$, and for $n\ge2$ the coefficient of $x^n$ in $G$ must equal the coefficient of
+$x^n$ in $T+G(P)^2$, which has already been computed from the earlier coefficients. Only additions and multiplications
+are used, so this works in every commutative ring, and gives integer coefficients when $T$ and $P$ have them. Finally,
+reducing the integer solution modulo $m$ gives a normalized series that satisfies the reduced equation (reduction is
+compatible with all the operations involved), and by uniqueness it is \emph{the} solution over $\Z/m\Z$.
+\end{proof}
+
+\begin{proposition}[The companion sequence A393172]\label{prop:172}
+Write $N(x)=x-x^2$. Equation~\eqref{eq:first} has exactly one normalized solution $A$ with integer coefficients. It also
+satisfies $A=C+A(C)^2$, and $A\equiv2C-x\pmod4$.
+\end{proposition}
+
+\begin{proof}
+Since $N(C)=C-C^2=x$, the series $C$ is the compositional inverse of $N$, and also $C(N(x))=x$
+(Lemma~\ref{lem:inverse}). Substitution can be done in steps, and substituting into a sum or product is the same as
+adding or multiplying the substituted terms. So, substituting $C$ for $x$ in $A(N)=x+A^2$ gives $A=C+A(C)^2$, and
+substituting $N$ for $x$ in $A=C+A(C)^2$ gives back $A(N)=x+A^2$. The two equations therefore have the same normalized
+solutions, and by Lemma~\ref{lem:square} (with $T=P=C$) the second has exactly one, in every commutative ring.
+
+Over $\Z/4\Z$ the solution is the reduction of the integer $A$ (Lemma~\ref{lem:square}), so it suffices to check that
+$D=2C-x$ satisfies \eqref{eq:first} in $\Z/4\Z$. Indeed $D(N)=2C(N)-N=2x-(x-x^2)=x+x^2$, and
+$x+D^2=x+4C^2-4xC+x^2=x+x^2$ in $\Z/4\Z$. Hence $A\equiv2C-x\pmod4$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+(a) This is Lemma~\ref{lem:square} with $T=x$ and $P=C$.
+
+(b) Put $B'=x+A^2$. Substituting $C$ for $x$ and using $A=C+A(C)^2$ (Proposition~\ref{prop:172}),
+\[
+B'(C(x))=C+A(C)^2=A .
+\]
+Hence $B'=x+A^2=x+B'(C)^2$, so $B'$ is a normalized solution of \eqref{eq:def}. By the uniqueness in part (a), $B=B'$.
+This proves $B=x+A^2$ and $B(C)=A$. Finally, \eqref{eq:first} says that $A(N)=x+A^2=B$; substituting $N$ for $x$ in
+$B=x+A^2$ therefore gives $B(N)=N+A(N)^2=N+B^2$, which is the third relation.
+
+(c) By Proposition~\ref{prop:172}, every coefficient of $A-(2C-x)$ is divisible by $4$. So $A=2C-x+4K$, where $K$ is a
+series with \emph{integer} coefficients. Squaring, over the integers,
+\[
+A^2=(2C-x)^2+8K\,(2C-x)+16K^2 .
+\]
+The last two terms are divisible by $8$. Using $C^2=C-x$,
+\[
+(2C-x)^2=4C^2-4xC+x^2=x^2+4\bigl(C-x-xC\bigr).
+\]
+So $A^2\equiv x^2+4(C-x-xC)\pmod8$, and by part (b), $B=x+A^2\equiv x+x^2+4(C-x-xC)\pmod8$.
+\end{proof}
+
+Note that we never divided by $2$ or $4$ in arithmetic modulo $8$, which would not be allowed. The information modulo $4$
+was first turned into an exact statement over the integers (the series $K$), and only then reduced modulo $8$.
+
+\section{Checking the results}\label{sec:checks}
+
+A mathematical proof can contain mistakes, so the results were checked in two independent ways.
+
+\para{Numerical check.}
+We computed $B$ by repeating the substitution $B\mapsto x+B(C)^2$ with exact integer arithmetic, starting
+from $B=x$; each round fixes at least one more coefficient. This reproduces all 24 terms printed in the OEIS entry. We
+also computed the series $A$ of A393172 separately, from its own equation \eqref{eq:first}, and checked that $B=x+A^2$
+for all coefficients below degree $200$, and that the rule of Corollary~\ref{cor:conj} holds for every $n$ with
+$2<n<200$.
+The computation was done with the PARI/GP computer algebra system, using code that was written separately from the
+formal proofs (file \texttt{verification/independent\_checks.gp} in the accompanying repository~\cite{repo}).
+A computation can only test finitely many cases, so it is a check on the definitions and on the indexing, not a proof.
+
+\para{Formal proof in Lean.}
+Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
+this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
+mathematics. The statements are collected in the file \texttt{lean/Entries/A393171.lean} of the repository,
+in the namespace \texttt{FinalCollection.A393171}. There the Catalan series is called \texttt{catalan}, and $B$ is defined as $x+A^2$; the theorems show that this series satisfies the equation of the entry and is its only normalized solution. The main proofs are in the module \texttt{Round4/CatalanComposition.lean}.
+The table lists where each result of this paper is proved.
+\begin{center}\small\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
+\toprule
+Statement in this paper & Lean theorem(s)\\
+\midrule
+Theorem~\ref{thm:main}(a) for integer coefficients, and the same for the equation $B(x-x^2)=x-x^2+B^2$; $B$ is normalized and satisfies both & \texttt{second\_\allowbreak{}named\_\allowbreak{}existence}, \texttt{second\_\allowbreak{}existence}, \texttt{second\_\allowbreak{}definition} \\
+Theorem~\ref{thm:main}(b): $B=x+A^2$ and $B(C)=A$ & \texttt{link\_\allowbreak{}to\_\allowbreak{}first\_\allowbreak{}sequence}, \texttt{link\_\allowbreak{}composed\_\allowbreak{}catalan} \\
+Theorem~\ref{thm:main}(c): the formula modulo $8$ & \texttt{complete\_\allowbreak{}series\_\allowbreak{}mod\_\allowbreak{}eight} \\
+Corollary~\ref{cor:conj}, also for any normalized integer solution of $B(x-x^2)=x-x^2+B^2$ & \texttt{second\_\allowbreak{}residue}, \texttt{divisibility\_\allowbreak{}complement}, \texttt{second\_\allowbreak{}arbitrary\_\allowbreak{}source} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
+that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+(\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
+exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
+so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+(Section~\ref{sec:sequence}).
+
+\section{Discussion}\label{sec:discussion}
+
+\para{Scope.} Theorem~\ref{thm:main} determines the remainder of every coefficient $a(n)$ modulo $8$, so it settles the
+conjecture of the entry completely. It says nothing about the size of $a(n)$, and nothing about remainders modulo $16$
+or higher powers of $2$.
+
+\para{Going further.} The step from $A$ to $B=x+A^2$ always gains one power of $2$: if $A=D+2^kK$ with $k\ge1$ and $K$ a
+series with integer coefficients, then $A^2=D^2+2^{k+1}DK+2^{2k}K^2\equiv D^2\pmod{2^{k+1}}$. So any rule for $A$ modulo
+$8$ would give a rule for $B$ modulo $16$. The companion paper on A393172 records such a rule for $A$ modulo $8$, found
+by computer and checked for all $n<200$, but not proved. Proving it would therefore also describe $B$ modulo $16$.
+
+\para{The method.} The proof illustrates a principle used throughout this collection of papers: a sequence defined by
+an equation between power series often becomes simple after reduction modulo a small number. The simple form can be
+guessed from the data, and then verified by a short calculation, because the equation has only one solution.
+
+\section*{About this paper}\label{sec:about}
+\para{How the work was done.}
+This paper is one of 34 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
+by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+\begin{itemize}
+\item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
+revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
+\item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
+searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
+of this paper.
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
+rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
+written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
+terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
+theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
+places, wrote out an argument in more detail or by a more elementary route. The Discussion section was written during
+this rewrite; the further observations it contains were checked by computer, and they are not part of the Lean
+formalization.
+\end{itemize}
+Dev~D.~Goyal has verified the results and is responsible for this paper.
+
+\para{Review status.} This paper has not been peer reviewed, and it has not been submitted to a journal or to the OEIS.
+
+\para{Priority.} An OEIS entry that labels a statement as a conjecture shows only that its contributor did not know
+a proof; it does not show that no proof existed. During the research only limited searches for earlier work were
+made. No claim of priority is made.
+
+\para{Corrections.} Please report any error in the issue tracker of the repository~\cite{repo}, where the Lean
+sources, the numerical checks, and the earlier drafts are also available.
+
+\section*{Acknowledgements}
+The sequence, its formulas and the conjecture are due to Paul~D.~Hanna~\cite{oeis}, as is the companion entry
+A393172~\cite{oeis172}.
+
+\begin{thebibliography}{99}\small
+\raggedright
+\bibitem{oeis} P.~D.~Hanna, entry A393171 (G.f.\ satisfies $A(x)=x+A(C(x))^2$, where $C(x)=x+C(x)^2$), \emph{The On-Line Encyclopedia of Integer Sequences}, February 2026. \url{https://oeis.org/A393171}. Text as of October 2026.
+\bibitem{oeis172} P.~D.~Hanna, entry A393172 (G.f.\ $A(x)$ satisfies $A(x-x^2)=x+A(x)^2$), \emph{The On-Line Encyclopedia of Integer Sequences}, February 2026. \url{https://oeis.org/A393172}. Text as of October 2026.
+\bibitem{deutschsagan} E.~Deutsch and B.~E.~Sagan, Congruences for Catalan and Motzkin numbers and related sequences, \emph{Journal of Number Theory} 117 (2006), 191--215.
+\bibitem{oeisdb} N.~J.~A.~Sloane and The OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences}. \url{https://oeis.org}.
+\bibitem{stanley} R.~P.~Stanley, \emph{Enumerative Combinatorics}, Volume~2, Cambridge University Press, 1999. (Chapter~5 treats formal power series, composition and compositional inverses.)
+\bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
+\bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
+\bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections for 34 OEIS entries, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\end{thebibliography}
+\end{document}

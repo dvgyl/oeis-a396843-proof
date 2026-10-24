@@ -1,0 +1,631 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+\setlist{itemsep=2pt,topsep=3pt}
+\raggedbottom
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\ps}[1]{#1[[x]]}
+\newcommand{\coeff}[2]{[x^{#1}]\,#2}
+\newcommand{\hl}[1]{\textbf{#1}}
+\newcommand{\para}[1]{\par\medskip\noindent\textbf{#1}\enspace}
+\hypersetup{pdftitle={The iterates of a self-referential power series modulo 10: a proof of two conjectures in OEIS A396807},pdfauthor={Dev D. Goyal},pdfsubject={OEIS A396807}}
+\title{The iterates of a self-referential power series modulo $10$\\[6pt]\large A proof of two conjectures in OEIS A396807}
+\author{Dev D. Goyal}
+\date{October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $A(x)=x+x^2+\cdots$ be the power series defined by the equation
+$A(x)=x+A^{\circ5}(x)\cdot A^{\circ6}(x)$, where $A^{\circ k}$ means $A$ substituted into
+itself $k$ times. Its coefficients form the sequence A396807 of the On-Line Encyclopedia of Integer Sequences
+(OEIS). Paul~D.~Hanna conjectured that $a(n)$ leaves remainder $1$ on division by $10$ for every $n\ge1$, and more generally
+that the coefficient of $x^n$ in the $k$-th iterate $A^{\circ k}$ leaves the same remainder as $k^{n-1}$, for every
+integer $k$. We prove both: modulo $10$, the iterate $A^{\circ k}$ equals the fraction $x/(1-kx)$, for every integer
+$k$. The proof covers the whole family of
+equations $F=x+F^{\circ r}\cdot F^{\circ(r+1)}$, $r\ge1$. Modulo $2r$, every iterate $F^{\circ k}$ (including those
+with $k<0$, built from the inverse series) equals the simple fraction $x/(1-kx)$, plus an explicit correction
+$r\,x^4/(1-x)^3$ when $r$ is even and $k$ is odd. All results have been checked by computer and proved formally in the
+Lean proof assistant.
+\end{abstract}
+\begin{center}\begin{minipage}{0.88\linewidth}\small
+\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
+ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
+Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
+every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
+The section ``About this paper'' at the end gives the details.
+\end{minipage}\end{center}
+
+\section{Introduction}
+
+\subsection{The sequence}\label{sec:sequence}
+The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
+sequences. Mathematicians and scientists use it to identify sequences and to record what is known about them. Many
+entries also record \emph{conjectures}: patterns that the contributor saw in the data but could not prove.
+
+This paper is about entry A396807~\cite{oeis}, contributed by Paul~D.~Hanna in June 2026.
+The entry defines a power series $A(x)=\sum_{n\ge1}a(n)\,x^n$ by an equation in which $A$ is substituted into
+itself. The entry reads:
+\begin{quote}\small\ttfamily\raggedright G.f. satisfies A(x) = x + A\^{}5(x)*A\^{}6(x).\par\smallskip Conjecture: a(n) = 1 (mod 10) for n >= 1.\par\smallskip Conjecture: [x\^{}n] A\^{}k(x) == k\^{}(n-1) (mod 10) for n >= 1 and all integer k.\par\smallskip\hfill\textrm{--- OEIS A396807, Paul D. Hanna, June 2026}\end{quote}
+
+Here ``G.f.''\ stands for \emph{generating function}, the series whose coefficients are the terms of the sequence.
+The notation needs care. In the entry, $A^k(x)$ does not mean the $k$-th power of $A(x)$, but the $k$-th
+\emph{iterate}: $A$ substituted into itself $k$ times, so that $A^2(x)=A(A(x))$ and $A^3(x)=A(A(A(x)))$. The entry
+says so explicitly in its list of formulas (``$A^n(x)$ denotes the $n$-th iteration of $A(x)$''). To avoid any
+confusion we write $A^{\circ k}$ for the iterate and keep $A^k$ for the ordinary power. So the sequence is defined by
+\begin{equation}\label{eq:def}
+A(x)=x+A^{\circ5}(x)\cdot A^{\circ6}(x),\qquad A(x)=x+a(2)x^2+a(3)x^3+\cdots,
+\end{equation}
+and $a(n)$ is the coefficient of $x^n$ in $A(x)$.
+
+At first sight it is not clear that \eqref{eq:def} defines anything, since the unknown series appears on both sides,
+substituted into itself many times. It does, and the coefficients can be computed one after another. Every iterate
+of $A$ starts with $x$, so the product on the right starts with $x^2$; this gives $a(2)=1$. In general the
+coefficient of $x^n$ on the right only involves $a(1),\dots,a(n-1)$, so each new coefficient is determined by the
+earlier ones (Lemma~\ref{lem:unique} below makes this precise). The first terms, starting at $n=1$, are
+1, 1, 11, 201, 4721, 129671, 3976201, 132554541, 4724742051, \dots; they grow quickly.
+
+\subsection{The question}
+The entry makes two conjectures. Here $[x^n]\,U$ denotes the coefficient of $x^n$ in a series $U$, and
+``$==$'' or ``$=$ \dots{} (mod 10)'' means that the two sides leave the same remainder on division by $10$. The first
+conjecture says that every $a(n)$ ends in the digit $1$. The second is much stronger. It concerns all iterates
+$A^{\circ k}$ of $A$, including those with negative index $k$, which are the iterates of the inverse series
+(Section~\ref{sec:background}). It says that the coefficient of $x^n$ in $A^{\circ k}$ leaves the same remainder as
+$k^{n-1}$ on division by $10$. For $k=1$ this is the first conjecture. For example, the entry lists
+$A^{\circ2}=x+2x^2+24x^3+458x^4+\cdots$, and indeed $24\equiv4=2^2$ and $458\equiv8=2^3\pmod{10}$. The table shows the
+first remainders of $a(n)$.
+\begin{center}\small\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.4em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\ \midrule
+$a(n)\bmod10$ & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+\bottomrule
+\end{tabular}
+\\[4pt]
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.4em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 & 32 \\ \midrule
+$a(n)\bmod10$ & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\subsection{What this paper proves}
+Both conjectures are true (Corollary~\ref{cor:app}). In fact, modulo $10$, the $k$-th iterate of $A$
+equals the fraction $x/(1-kx)=x+kx^2+k^2x^3+\cdots$, for every integer $k$.
+
+More generally, we treat the whole family of equations
+\[
+F=x+F^{\circ r}\cdot F^{\circ(r+1)},\qquad r=1,2,3,\dots,
+\]
+of which the entry is the case $r=5$. Theorem~\ref{thm:general} gives, for every $r$, every
+iterate $F^{\circ k}$ of the solution modulo $2r$, for every integer $k$, positive, zero or negative. The answer is
+remarkably simple: up to a small correction when $r$ is even, $F$ behaves modulo $2r$ exactly like the fraction
+$x/(1-x)$, whose $k$-th iterate is $x/(1-kx)=x+kx^2+k^2x^3+\cdots$. In particular, modulo $2r$, substituting $F$ into
+itself $2r$ times gives back $x$, and no smaller number of substitutions does.
+
+\subsection{What was known}
+Hanna recorded the conjectures in June 2026, as part of a family of four entries with $r=2,3,4,5$:
+A396099, A396797, A396798 and A396807. For $r=3$ (entry A396797) the conjectures were proved by Shiva~Priyan
+Shanmuga~Sundaram in September 2026~\cite{sundaram}; the proof is linked from that entry. Our argument for odd $r$ compares
+the solution with the simple series $x/(1-x)$ and uses the uniqueness of the solution, for every odd $r$ at
+once. For even $r$ (entries A396099 and A396798), the comparison with $x/(1-x)$ alone does not work; the correction term $rH$ in
+Theorem~\ref{thm:general} is the extra ingredient that even $r$ needs. When we checked the entries on
+24~October~2026, the statements for $r=2,4,5$ were still labelled as conjectures. We are not aware of an earlier proof
+of them.
+
+\subsection{Why it is interesting}
+Most equations that define sequences in the OEIS combine \emph{known} series by sums, products and substitutions.
+In \eqref{eq:def} the unknown series is substituted into \emph{itself}, several times, inside its own definition.
+Such self-referential equations are hard to handle: there is no closed formula for $A$, and even computing many terms
+takes real effort. It is therefore striking that the remainders have simple patterns, and Hanna's conjectures ask
+for an explanation.
+
+The explanation found here is that, modulo $2r$, the complicated series $A$ is indistinguishable from the simple
+fraction $x/(1-x)$, possibly plus a correction that is easy to control. Substituting a series into itself is the
+basic operation of \emph{iteration}, that is, of repeating a process, and iterates of power series appear throughout
+combinatorics and in the study of dynamical systems. Their arithmetic properties are much less understood than those
+of sums and products, so complete results like the one here are rare. The method is general: guess the answer modulo
+a small number, check that the guess satisfies the equation, and conclude by uniqueness. The correction needed for
+even $r$ uses a second general idea, a Taylor formula that is exact because the correction squares to zero.
+
+\subsection{How to read this paper}
+Section~\ref{sec:background} explains the few notions we need: power series, substitution and iteration, inverse
+series, and remainders. Section~\ref{sec:results} states the results precisely, and Section~\ref{sec:proofs} proves
+them; the proof of the main theorem comes first, and the consequences for this entry are derived from it at the end of
+that section. Section~\ref{sec:checks} describes how the results were checked, by computer and by a formal proof in
+Lean. Section~\ref{sec:discussion} discusses the scope of the results, open questions, and related work.
+\section{Background}\label{sec:background}
+This section collects the definitions and facts used later. Readers who know formal power series and congruences can skip it and return when needed.
+\subsection{Power series as bookkeeping}
+A \emph{formal power series} is a way of storing an infinite sequence of numbers $u_0,u_1,u_2,\dots$ in one object,
+\[
+U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots .
+\]
+The letter $x$ is only a placeholder that keeps the terms apart. We never substitute a number for $x$, so the question
+of whether the series ``converges'' never arises; a power series is simply its list of coefficients. We write
+$\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$. Two series are equal when all their coefficients are equal.
+
+Series are added coefficient by coefficient and multiplied like polynomials:
+\[
+\coeff{n}{(UV)}=u_0v_n+u_1v_{n-1}+\cdots+u_nv_0 .
+\]
+Each coefficient of a product is a finite sum, so everything is well defined. For example,
+$(1-x)(1+x+x^2+x^3+\cdots)=1$, because all the other terms cancel. So $1+x+x^2+\cdots$ is the
+\emph{multiplicative inverse} of $1-x$, and we write it as $\frac{1}{1-x}$. In the same way, every series $D$ whose
+constant term is $1$ has exactly one multiplicative inverse $\frac1D$. Its coefficients can be computed one at a time
+from $D\cdot\frac1D=1$, using only additions, subtractions and multiplications. Every fraction in this paper has a
+denominator of this kind, so it stands for an honest power series.
+
+Two more pieces of notation. We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
+$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
+constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+
+\subsection{Substituting one series into another}
+If $V(x)$ has constant term $0$, we can substitute $V$ for $x$ in $U$:
+\[
+U(V(x))=u_0+u_1V(x)+u_2V(x)^2+u_3V(x)^3+\cdots .
+\]
+This is called \emph{composition}, also written $U\circ V$. It makes sense because $V(x)^k$ has no terms below $x^k$,
+so only the finitely many terms with $k\le n$ affect the coefficient of $x^n$. For example, if $U=x+x^2$ and $V=x^2$, then
+$U(V(x))=x^2+x^4$. Composition is associative: $U\circ(V\circ W)=(U\circ V)\circ W$.
+
+Substituting a series into itself repeatedly gives its \emph{iterates}: $U^{\circ2}(x)=U(U(x))$,
+$U^{\circ3}(x)=U(U(U(x)))$, and so on, with $U^{\circ0}(x)=x$ and $U^{\circ1}=U$. They must not be confused with
+\emph{powers} $U^2=U\cdot U$, $U^3=U\cdot U\cdot U$. (The OEIS sometimes writes $A^k(x)$ for the $k$-th iterate. In
+this paper the small circle always means an iterate, and a plain exponent always means a power.)
+
+\subsection{Undoing a substitution}
+A normalized series can always be ``undone'' by another normalized series.
+
+\begin{lemma}[Compositional inverse]\label{lem:inverse}
+For every normalized series $U$ there is exactly one normalized series $V$ with $U(V(x))=x$, and this $V$ also
+satisfies $V(U(x))=x$. If $U$ has integer coefficients, so does $V$.
+\end{lemma}
+
+We call $V$ the \emph{compositional inverse} of $U$. The OEIS calls it the \emph{series reversion} of $U$. For example,
+the compositional inverse of $x-x^2$ is $C(x)=x+x^2+2x^3+5x^4+14x^5+\cdots$, whose coefficients are the Catalan numbers.
+Indeed $C-C^2=x$, which says exactly that substituting $C$ into $x-x^2$ gives $x$.
+
+\begin{proof}
+Write $V=x+v_2x^2+v_3x^3+\cdots$ with unknown coefficients. In
+$U(V)=V+u_2V^2+u_3V^3+\cdots$, the coefficient of $x^n$ (for $n\ge2$) equals $v_n$ plus terms that involve only
+$v_2,\dots,v_{n-1}$. Setting it equal to $0$ therefore determines $v_n$ from the earlier coefficients, using only
+additions, subtractions and multiplications. So there is exactly one $V$ with $U\circ V=x$, and it has integer
+coefficients if $U$ does. Applying the same construction to $V$ gives a normalized $W$ with $V\circ W=x$. Then
+$U=U\circ(V\circ W)=(U\circ V)\circ W=W$, so $V\circ U=V\circ W=x$ as well.
+\end{proof}
+
+\subsection{Iterates with negative index, and the order of a series}
+Let $F$ be a normalized series and let $F^{-1}$ be its compositional inverse (Lemma~\ref{lem:inverse}). For a
+negative integer $k$ we define $F^{\circ k}$ as the $|k|$-th iterate of $F^{-1}$; for example
+$F^{\circ(-2)}=F^{-1}(F^{-1}(x))$. With this convention $F^{\circ j}\circ F^{\circ k}=F^{\circ(j+k)}$ for all integers
+$j$ and $k$, just as for powers of a number. The \emph{order} of $F$ under composition is the smallest $k\ge1$ with
+$F^{\circ k}(x)=x$, if there is one. Over the integers only $F=x$ has finite order, but after reduction modulo $m$
+other series can have finite order, and this will happen below.
+
+Two more pieces of notation. For a statement $S$ we write $[S]$ for $1$ if $S$ is true and $0$ if it is false
+(for example $[k\text{ odd}]$). And $\binom{j}{2}=j(j-1)/2$ is the number of ways to choose $2$ objects out of $j$.
+
+\subsection{Remainders and congruences}
+For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
+remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
+$a$ is odd is the same as saying $a\equiv1\pmod2$.
+
+Residues can be added and multiplied consistently, as on a clock. The residues $0,1,\dots,m-1$ with this ``clock
+arithmetic'' form a number system written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we
+have $1+1=0$, so adding and subtracting are the same thing.
+
+For power series with integer coefficients, $U\equiv V\pmod m$ means that \emph{every} coefficient of $U-V$ is
+divisible by $m$. Equivalently, the two series become equal when every coefficient is replaced by its residue; we call
+this \emph{reducing} the series modulo $m$. The key fact is simple:
+
+\emph{Reduction modulo $m$ is compatible with all the operations above.} To reduce a sum, a product, a substitution, or
+an inverse, we may reduce the ingredients first and then compute with clock arithmetic. This holds because every
+coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
+multiplying, and these operations are compatible with remainders.
+
+\para{A word on ``rings''.} Several lemmas below hold not only for integers, but in every number system in
+which one can add, subtract and multiply with the usual rules (such as $\Z$, $\Q$, and $\Z/m\Z$). Mathematicians call
+such a number system a \emph{commutative ring}. We use the word only in this sense. No division is ever needed, which
+matters because in $\Z/m\Z$ one cannot always divide (for instance, $2$ has no inverse in $\Z/4\Z$).
+
+\subsection{The method in one paragraph}
+Almost every proof in this paper follows the same three steps.
+\begin{enumerate}
+\item \emph{Uniqueness.} Show that the defining equation determines the coefficients one at a time, using only
+addition, subtraction and multiplication. Then the equation has exactly one solution of the required shape, in every
+commutative ring, including the clock arithmetic $\Z/2r\Z$.
+\item \emph{Reduction.} Reducing the integer solution modulo $2r$ gives a solution of the reduced equation,
+because reduction is compatible with all operations.
+\item \emph{A good guess.} Find a simple series that satisfies the reduced equation and check that it does. By uniqueness,
+this simple series \emph{is} the reduction of the sequence, and its coefficients can simply be read off.
+\end{enumerate}
+The creative part is step~3: finding a simple series that works. Step~1 sometimes needs care, when the equation seems to
+require a division.
+\subsection{A one-term Taylor formula}
+\begin{lemma}\label{lem:taylor}
+Let $\varepsilon$ be an element of a commutative ring with $\varepsilon^2=0$. If $u$ and $v$ are series with constant
+term $0$, then for every series $S$
+\[
+S(u+\varepsilon v)=S(u)+\varepsilon\,v\,S'(u),
+\]
+where $S'=\sum_{n\ge1}n\,s_nx^{n-1}$ is the formal derivative of $S$.
+\end{lemma}
+
+\begin{proof}
+By the binomial theorem, $(u+\varepsilon v)^j=u^j+j\,\varepsilon v\,u^{j-1}$, because all terms with
+$\varepsilon^2$ or higher powers vanish. Multiply by $s_j$ and add up over $j$.
+\end{proof}
+An example of such an $\varepsilon$: in $\Z/8\Z$, the element $4$ satisfies $4^2=16=0$.
+
+
+\section{Results}\label{sec:results}
+
+For every integer $r\ge1$, Lemma~\ref{lem:unique} below shows that there is exactly one normalized series $F_r$ with
+\begin{equation}\label{eq:family}
+F_r=x+F_r^{\circ r}\cdot F_r^{\circ(r+1)},
+\end{equation}
+and that it has integer coefficients. The series of the entry is $A=F_{5}$. To state the result we use
+two simple series with integer coefficients. For an integer $k$, let
+\[
+T_k(x)=\frac{x}{1-kx}=x+kx^2+k^2x^3+\cdots=\sum_{n\ge1}k^{\,n-1}x^n ,
+\]
+with the convention $k^0=1$ (so $T_0=x$), and let
+\[
+H(x)=\frac{x^4}{(1-x)^3}=x^4+3x^5+6x^6+10x^7+\cdots=\sum_{n\ge4}h_n\,x^n,\qquad h_n=\binom{n-2}{2}.
+\]
+We also set $h_n=0$ for $n<4$. (Lemma~\ref{lem:mobius} checks the formula for $h_n$.)
+
+\begin{theorem}\label{thm:general}
+Let $r\ge1$ and let $k$ be any integer. Modulo $2r$,
+\[
+F_r^{\circ k}\equiv
+\begin{cases}
+T_k+r\,H, & \text{if $r$ is even and $k$ is odd},\\
+T_k, & \text{otherwise}.
+\end{cases}
+\]
+In terms of coefficients: for every $n\ge1$,
+\[
+\coeff{n}{F_r^{\circ k}}\equiv k^{\,n-1}+r\,h_n\,[\,r\text{ even and }k\text{ odd}\,]\pmod{2r}.
+\]
+Moreover, $F_r^{\circ k}\equiv x\pmod{2r}$ if and only if $k$ is a multiple of $2r$. So, modulo $2r$, the series $F_r$
+has order exactly $2r$ under composition.
+\end{theorem}
+
+In words: when $r$ is odd, the $k$-th iterate of $F_r$ has, modulo $2r$, the same coefficients as $x/(1-kx)$,
+namely the powers $1,k,k^2,k^3,\dots$. When $r$ is even, the same is true for even $k$, while for odd $k$ the
+coefficients are shifted by $r\,h_n$; since $2r\equiv0$, this shift only depends on whether $h_n$ is even or odd.
+
+For the entry, the theorem gives the following.
+
+\begin{corollary}\label{cor:app}
+For $A=F_5$, the series of OEIS A396807, and for every integer $k$,
+\[
+A^{\circ k}\equiv\frac{x}{1-kx}\pmod{10} .
+\]
+Hence $\coeff{n}{A^{\circ k}}\equiv k^{\,n-1}\pmod{10}$ for all $n\ge1$ and all integers $k$ (with $k^0=1$). In
+particular $a(n)\equiv1\pmod{10}$ for every $n\ge1$. Moreover, modulo $10$, the series $A$ has order exactly $10$
+under composition.
+\end{corollary}
+These are the two conjectures of the entry.
+
+\section{Proofs}\label{sec:proofs}
+
+\para{The idea in brief.} We follow the method of Section~\ref{sec:background}. First we show that
+\eqref{eq:family} has exactly one solution, over every commutative ring, so it is enough to find \emph{some} solution
+modulo $2r$. For odd $r$, the fraction $T_1=x/(1-x)$ works: its iterates are $T_k=x/(1-kx)$, and a one-line
+calculation shows that $T_1$ satisfies the equation modulo $2r$. For even $r$, $T_1$ is not quite right, and we
+correct it to $T_1+rH$. Because $r^2$ is a multiple of $2r$, every calculation with the correction can be done
+``to first order'' with the Taylor formula of Lemma~\ref{lem:taylor}, which is exact here. The statements of the entry
+are then read off from the formula.
+
+\subsection{Existence and uniqueness}
+
+\begin{lemma}\label{lem:unique}
+Let $R$ be a commutative ring and $r\ge1$. There is exactly one normalized series $F$ with coefficients in $R$ such
+that $F=x+F^{\circ r}\cdot F^{\circ(r+1)}$. Its coefficients are obtained from those of lower degree using only
+additions and multiplications. In particular \eqref{eq:family} defines a series $F_r$ with integer coefficients, and
+for every $m\ge2$ the reduction of $F_r$ modulo $m$ is the unique solution over $\Z/m\Z$.
+\end{lemma}
+
+\begin{proof}
+Write $\Phi(F)=x+F^{\circ r}\cdot F^{\circ(r+1)}$ for the right-hand side. The key observation is:
+
+\emph{If two normalized series $U$ and $V$ agree below degree $N$ (that is, $U-V=O(x^N)$, with $N\ge2$), then $\Phi(U)$
+and $\Phi(V)$ agree below degree $N+1$.}
+
+To see this, we first show that $U^{\circ k}-V^{\circ k}=O(x^N)$ for every $k\ge0$, by induction on $k$. The case
+$k=0$ is clear. For the step, write
+\[
+U^{\circ(k+1)}-V^{\circ(k+1)}=\bigl(U(U^{\circ k})-U(V^{\circ k})\bigr)+\bigl(U(V^{\circ k})-V(V^{\circ k})\bigr).
+\]
+The first bracket is a sum of terms $u_j\bigl((U^{\circ k})^j-(V^{\circ k})^j\bigr)$, and each of them is divisible by
+$U^{\circ k}-V^{\circ k}=O(x^N)$. The second bracket is the series $U-V=O(x^N)$ with $V^{\circ k}=x+\cdots$ substituted
+for $x$, so it is $O(x^N)$ as well. Next, since all iterates start with $x$,
+\[
+U^{\circ r}U^{\circ(r+1)}-V^{\circ r}V^{\circ(r+1)}
+=\bigl(U^{\circ r}-V^{\circ r}\bigr)\,U^{\circ(r+1)}+V^{\circ r}\,\bigl(U^{\circ(r+1)}-V^{\circ(r+1)}\bigr),
+\]
+and each product is $O(x^N)$ times a series starting with $x$, hence $O(x^{N+1})$. This proves the observation.
+
+\emph{Existence.} Start with $G_0=x$ and put $G_{i+1}=\Phi(G_i)$. Each $G_i$ is normalized. The series $G_0=x$ and
+$G_1=x+x^2+\cdots$ agree below degree $2$, and by the observation and induction, $G_i$ and $G_{i+1}$ agree below degree
+$i+2$. So the coefficient of $x^n$ in $G_i$ no longer changes once $i\ge n-1$, and we let $F$ be the series whose
+coefficient of $x^n$ is this final value. Then $F$ and $G_i$ agree below degree $i+2$, so $\Phi(F)$ and
+$\Phi(G_i)=G_{i+1}$ agree below degree $i+3$; hence $\Phi(F)$ and $F$ agree below degree $i+2$ for every $i$, that is,
+$\Phi(F)=F$.
+
+\emph{Uniqueness.} If $U$ and $V$ are two normalized solutions, they agree below degree $2$. If they agree below
+degree $N$, then $U=\Phi(U)$ and $V=\Phi(V)$ agree below degree $N+1$. So they agree in every degree.
+
+The construction uses only additions and multiplications of coefficients, so it works over every commutative ring
+and gives integer coefficients over $\Z$. Finally, reducing \eqref{eq:family} modulo $m$ shows that the reduction of
+$F_r$ is a normalized solution over $\Z/m\Z$, because reduction is compatible with products and substitutions; by
+uniqueness it is the only one.
+\end{proof}
+
+\subsection{Two calculations with fractions}
+
+\begin{lemma}\label{lem:mobius}
+Over every commutative ring, $T_c\circ T_d=T_{c+d}$ for all $c,d$. Consequently $T_1^{\circ k}=T_k$ for every integer
+$k$, $T_0=x$, and $T_{-k}$ is the compositional inverse of $T_k$. Moreover $\coeff{n}{H}=\binom{n-2}{2}$ for $n\ge4$.
+\end{lemma}
+
+\begin{proof}
+Substituting $T_d$ into $T_c$ and multiplying the numerator and the denominator by $1-dx$,
+\[
+T_c\bigl(T_d(x)\bigr)=\frac{x/(1-dx)}{1-c\,x/(1-dx)}=\frac{x}{1-dx-cx}=T_{c+d}(x).
+\]
+(Each step is an identity of power series, since all denominators have constant term $1$.) The other statements
+follow: $T_1^{\circ k}=T_{1+\cdots+1}=T_k$ for $k\ge0$, and $T_k\circ T_{-k}=T_0=x$. For $H$: the coefficient of $x^j$
+in $(1-x)^{-3}=(1+x+x^2+\cdots)^3$ is the number of ways to write $j$ as a sum of three nonnegative integers in order,
+which is $\binom{j+2}{2}$; put $j=n-4$.
+\end{proof}
+
+The map $c\mapsto T_c$ thus turns addition of numbers into composition of series. This is why the iterates of $T_1$
+are so simple. (The fractions $T_c$ are special cases of M\"obius transformations, whose compositions correspond to
+products of $2\times2$ matrices.)
+
+\begin{lemma}\label{lem:ident}
+Let $T=T_1=x/(1-x)$ and let $T'=1/(1-x)^2$ be its derivative. Then, as power series with integer coefficients,
+\begin{align}
+H\cdot T'(T)+H(T)&=\frac{2x^4}{(1-2x)^3},\label{eq:id1}\\
+(1-x)H-x^2\,T-x^3\,T'&=-\frac{2x^3}{1-x}.\label{eq:id2}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Since $1-T=\frac{1-2x}{1-x}$, we get $T'(T)=\frac{1}{(1-T)^2}=\frac{(1-x)^2}{(1-2x)^2}$ and
+$H(T)=\frac{T^4}{(1-T)^3}=\frac{x^4}{(1-x)(1-2x)^3}$. Also $H\cdot T'(T)=\frac{x^4}{(1-x)(1-2x)^2}$. Adding,
+\[
+H\cdot T'(T)+H(T)=\frac{x^4\bigl((1-2x)+1\bigr)}{(1-x)(1-2x)^3}=\frac{2x^4}{(1-2x)^3}.
+\]
+For \eqref{eq:id2}, bring the three terms to the common denominator $(1-x)^2$: the numerator is
+$x^4-x^3(1-x)-x^3=2x^4-2x^3=-2x^3(1-x)$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:general}}
+
+We first prove the formula for $k\ge0$, separately for odd and even $r$, then extend it to negative $k$, and finally
+prove the statement about the order.
+
+\begin{proof}[Proof for odd $r$ and $k\ge0$]
+Work modulo $2r$. We have
+\[
+(1-rx)\bigl(1-(r+1)x\bigr)=1-(2r+1)x+r(r+1)x^2\equiv1-x\pmod{2r},
+\]
+because $2r+1\equiv1$, and $r(r+1)=2r\cdot\frac{r+1}{2}$ is a multiple of $2r$ (here we use that $r+1$ is even). By
+Lemma~\ref{lem:mobius}, $T^{\circ r}=T_r$ and $T^{\circ(r+1)}=T_{r+1}$, so
+\[
+x+T^{\circ r}\cdot T^{\circ(r+1)}=x+\frac{x^2}{(1-rx)\bigl(1-(r+1)x\bigr)}\equiv x+\frac{x^2}{1-x}=\frac{x}{1-x}=T\pmod{2r}.
+\]
+So $T$ satisfies the reduced equation, and by Lemma~\ref{lem:unique}, $F_r\equiv T\pmod{2r}$. Since reduction is
+compatible with substitution, $F_r^{\circ k}\equiv T^{\circ k}=T_k$ for every $k\ge0$.
+\end{proof}
+
+\begin{proof}[Proof for even $r$ and $k\ge0$]
+Work in $\Z/2r\Z$. There $r^2=2r\cdot\frac r2=0$, so Lemma~\ref{lem:taylor} applies with $\varepsilon=r$. Let
+$f=T+rH$.
+
+\emph{Step 1: $f^{\circ2}=T_2$.} By Lemma~\ref{lem:taylor},
+\[
+f(f)=T(T+rH)+r\,H(T+rH)=\bigl(T(T)+r\,H\,T'(T)\bigr)+r\,H(T)=T_2+r\bigl(H\,T'(T)+H(T)\bigr).
+\]
+(In the second term, Lemma~\ref{lem:taylor} would add $r\cdot r\,H\,H'(T)$, which is $0$ because $r^2=0$.) By
+\eqref{eq:id1} the bracket equals $2x^4/(1-2x)^3$, and $r\cdot2=0$. So $f^{\circ2}=T_2$.
+
+\emph{Step 2: $f$ satisfies the equation.} Since $r$ is even, Step~1 and Lemma~\ref{lem:mobius} give
+$f^{\circ r}=(f^{\circ2})^{\circ r/2}=T_2^{\circ r/2}=T_r=x+rx^2+r^2x^3+\cdots=x+rx^2$. By Lemma~\ref{lem:taylor} again
+(with $u=x$, $v=x^2$), $f^{\circ(r+1)}=f(x+rx^2)=f+rx^2f'$. Multiplying out and dropping every term that contains
+$r^2$,
+\[
+f-x-f^{\circ r}\cdot f^{\circ(r+1)}=f-x-(x+rx^2)(f+rx^2f')=(1-x)f-x-rx^2f-rx^3f'.
+\]
+Now $(1-x)f=(1-x)T+r(1-x)H=x+r(1-x)H$, and in the terms already multiplied by $r$ we may replace $f$ by $T$ (the
+difference is again a multiple of $r^2$). So the right side equals
+\[
+r\bigl((1-x)H-x^2T-x^3T'\bigr)=-\frac{2r\,x^3}{1-x}=0,
+\]
+by \eqref{eq:id2} and $2r=0$. Thus $f$ satisfies the reduced equation, and $F_r\equiv f\pmod{2r}$ by
+Lemma~\ref{lem:unique}.
+
+\emph{Step 3: all iterates with $k\ge0$.} If $k=2j$ is even, $f^{\circ k}=(f^{\circ 2})^{\circ j}=T_2^{\circ j}=T_k$.
+If $k=2j+1$ is odd, $f^{\circ k}=f\circ T_{2j}=T(T_{2j})+r\,H(T_{2j})=T_k+r\,H(T_{2j})$. Over the integers,
+$T_{2j}=x+2jx^2+\cdots$ agrees with $x$ modulo $2$, so $H(T_{2j})-H$ has even coefficients, and $r$ times it is a
+multiple of $2r$. Hence $r\,H(T_{2j})=r\,H$ in $\Z/2r\Z$, and $f^{\circ k}=T_k+rH$.
+\end{proof}
+
+\begin{proof}[Proof for negative $k$, and of the statement about the order]
+Write $E_k$ for the series on the right side of the theorem ($T_k+rH$ or $T_k$). For $k=2r$ we have shown
+$F_r^{\circ 2r}\equiv E_{2r}=T_{2r}$, and $T_{2r}=x+2r\,x^2+(2r)^2x^3+\cdots\equiv x$. So $F_r^{\circ2r}\equiv x$, and
+therefore also its inverse $F_r^{\circ(-2r)}\equiv x$. Now let $k$ be any integer, and write $k=j+2rq$ with
+$0\le j<2r$ and $q$ an integer. Then $F_r^{\circ k}=F_r^{\circ j}\circ(F_r^{\circ 2r})^{\circ q}\equiv F_r^{\circ j}\equiv E_j$.
+Finally $E_j\equiv E_k$: the coefficients $j^{n-1}$ and $k^{n-1}$ of $T_j$ and $T_k$ are congruent modulo $2r$
+because $j\equiv k$, and $j$ and $k$ have the same parity because $2r$ is even. This proves the formula for every
+integer $k$. The coefficient form follows from $\coeff{n}{T_k}=k^{n-1}$ and Lemma~\ref{lem:mobius}.
+
+For the order: the coefficient of $x^2$ in $E_k$ is $k$, because $H$ starts with $x^4$. So if $F_r^{\circ k}\equiv x$,
+then $k\equiv0\pmod{2r}$. Conversely, if $2r$ divides $k$, then $k$ is even, so $E_k=T_k$, and every coefficient
+$k^{n-1}$ with $n\ge2$ is a multiple of $k$, hence of $2r$; so $F_r^{\circ k}\equiv T_k\equiv x$.
+\end{proof}
+
+\subsection{Proof of Corollary~\ref{cor:app}}
+
+\begin{proof}[Proof of Corollary~\ref{cor:app}]
+Take $r=5$ in Theorem~\ref{thm:general}. Since $5$ is odd there is no correction term, so $A^{\circ k}\equiv T_k$
+modulo $10$ for every integer $k$, and the coefficient of $x^n$ in $T_k$ is $k^{n-1}$. Taking $k=1$ gives
+$a(n)\equiv1$. The statement about the order is part of the theorem.
+\end{proof}
+
+\section{Checking the results}\label{sec:checks}
+
+A mathematical proof can contain mistakes, so the results were checked in two independent ways.
+
+\para{Numerical check.}
+We computed the coefficients of $A$ up to $x^{23}$ exactly from \eqref{eq:def}. They reproduce all
+$19$ terms published in the entry. Working modulo $10$, we then computed $A$ and its iterates $A^{\circ k}$ for every
+$k$ with $-6\le k\le12$ up to $x^{159}$, and confirmed that $a(n)\equiv1$ and $\coeff{n}{A^{\circ k}}\equiv k^{n-1}$
+for every $n<160$. Finally, we confirmed the formula of Theorem~\ref{thm:general}, modulo $2r$, for every $r\le8$, every
+$k$ with $-4\le k\le9$, and every $n<90$.
+The computation was done with the PARI/GP computer algebra system, using code that was written separately from the
+formal proofs (file \texttt{verification/independent\_checks.gp} in the accompanying repository~\cite{repo}).
+A computation can only test finitely many cases, so it is a check on the definitions and on the indexing, not a proof.
+
+\para{Formal proof in Lean.}
+Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
+this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
+mathematics. The statements are collected in the file \texttt{lean/Entries/A396807.lean} of the repository,
+in the namespace \texttt{FinalCollection.A396807}. The general results for the whole family are proved in the folder \texttt{lean/Consecutive} of the
+repository; the last rows of the table give their full names. In Lean, iterates with negative index are built from the
+compositional inverse, exactly as in Section~\ref{sec:background}.
+The table lists where each result of this paper is proved.
+\begin{center}\small\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
+\toprule
+Statement in this paper & Lean theorem(s)\\
+\midrule
+Lemma~\ref{lem:unique} for $r=5$; the series $A$ is normalized and satisfies \eqref{eq:def} & \texttt{source\_\allowbreak{}existence\_\allowbreak{}uniqueness}, \texttt{source\_\allowbreak{}normalized}, \texttt{source\_\allowbreak{}equation} \\
+$a(n)\equiv1\pmod{10}$ for $n\ge1$ & \texttt{a396807\_\allowbreak{}residue} \\
+$\coeff{n}{A^{\circ k}}\equiv k^{n-1}\pmod{10}$ for $k\ge0$, and for all integers $k$ & \texttt{a396807\_\allowbreak{}iterate\_\allowbreak{}residue}, \texttt{a396807\_\allowbreak{}integer\_\allowbreak{}iterate\_\allowbreak{}congruence} \\
+The order: $A^{\circ k}\equiv x\pmod{10}$ if and only if $10$ divides $k$ & \texttt{exact\_\allowbreak{}composition\_\allowbreak{}order} \\
+Lemma~\ref{lem:unique} for every $r\ge1$, over every commutative ring & \texttt{Consecutive.existence\_\allowbreak{}uniqueness} \\
+Theorem~\ref{thm:general}, the formula for every $r\ge1$ and every integer $k$ & \texttt{Consecutive.ziter\_\allowbreak{}solution\_\allowbreak{}mod} \\
+Theorem~\ref{thm:general}, the statement about the order, for every $r\ge1$ & \texttt{Consecutive.ziter\_\allowbreak{}solution\_\allowbreak{}mod\_\allowbreak{}eq\_\allowbreak{}X\_\allowbreak{}iff} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
+that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+(\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
+exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
+so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+(Section~\ref{sec:sequence}).
+
+\section{Discussion}\label{sec:discussion}
+
+\para{Scope.} Theorem~\ref{thm:general} determines every coefficient of every iterate of $A$ modulo $10$, which is
+exactly what the two conjectures of the entry assert. Theorem~\ref{thm:general} says nothing about remainders modulo numbers that do
+not divide $2r$, or about the size of the coefficients.
+
+\para{All coefficients are odd.} Since $2$ divides $2r$, the theorem also determines every $F_r$ modulo $2$: the
+correction $rH$ has even coefficients when $r$ is even, so in all cases $F_r\equiv x/(1-x)\pmod2$. Thus every
+coefficient of every $F_r$ is odd.
+
+\para{Higher moduli.} A computer calculation suggests that the remainders modulo $4r$ are periodic too. For $r=1,2,3,4,5$
+and all $n<130$, the residues of $\coeff{n}{F_r}$ modulo $4r$ repeat with period $3$, $4$, $6$, $8$ and $3$
+respectively (from $n=1$, $4$, $1$, $2$ and $1$ on). We have not tried to prove this, and we do not know a formula for
+the period in general.
+
+\para{A more general equation.} The proof for odd $r$ uses very little. Consider, for any integers $r,s\ge1$, the
+equation $F=x+F^{\circ r}\cdot F^{\circ s}$. The proof of Lemma~\ref{lem:unique} works without change, so it has exactly
+one normalized solution over every commutative ring. Let $m$ be a common divisor of $r+s-1$ and $rs$. Then
+$(1-rx)(1-sx)=1-(r+s)x+rs\,x^2\equiv1-x\pmod m$, and the calculation in the proof for odd $r$ shows that
+$x/(1-x)$ solves the equation modulo $m$. Hence every iterate of the solution is congruent to $x/(1-kx)$ modulo $m$.
+For $s=r+1$ with $r$ odd this is the case $m=2r$ of Theorem~\ref{thm:general}; another example is $r=1$, where
+$F=x+F\cdot F^{\circ s}$ gives $F\equiv x/(1-x)\pmod s$. We checked this remark by computer for all $r\le7$ and
+$s\le8$ with $m>1$ ($38$ pairs), for $-3\le k\le6$ and all $n<50$. It is not part of the Lean formalization.
+
+\para{Related work.} Normalized power series with composition as the operation form a \emph{group}: composition is
+associative, $x$ is a neutral element, and every element has an inverse (Lemma~\ref{lem:inverse}). When the
+coefficients are taken modulo a prime $p$, this group is known as the \emph{Nottingham group}. It has been studied
+extensively in group theory, and in particular its elements of finite order have been investigated in
+detail~\cite{camina}. Theorem~\ref{thm:general} produces, from a natural equation, an explicit series of order exactly
+$2r$ in the corresponding group with coefficients modulo $2r$.
+
+\section*{About this paper}\label{sec:about}
+\para{How the work was done.}
+This paper is one of 34 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
+by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+\begin{itemize}
+\item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
+revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
+\item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
+searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
+of this paper.
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
+rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
+written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
+terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
+theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
+places, wrote out an argument in more detail or by a more elementary route. The Discussion section was written during
+this rewrite; the further observations it contains were checked by computer, and they are not part of the Lean
+formalization.
+\end{itemize}
+Dev~D.~Goyal has verified the results and is responsible for this paper.
+
+\para{Review status.} This paper has not been peer reviewed, and it has not been submitted to a journal or to the OEIS.
+
+\para{Priority.} An OEIS entry that labels a statement as a conjecture shows only that its contributor did not know
+a proof; it does not show that no proof existed. During the research only limited searches for earlier work were
+made. No claim of priority is made.
+
+\para{Corrections.} Please report any error in the issue tracker of the repository~\cite{repo}, where the Lean
+sources, the numerical checks, and the earlier drafts are also available.
+
+\section*{Acknowledgements}
+The sequence and its conjectures are due to Paul~D.~Hanna~\cite{oeis}, who also contributed the other members of the
+family: A396099, A396797, A396798 (the four entries correspond to $r=2,3,4,5$). The case $r=3$ (entry A396797) was
+proved earlier by Shiva~Priyan~Shanmuga~Sundaram~\cite{sundaram}. 
+
+\begin{thebibliography}{99}\small
+\raggedright
+\bibitem{oeis} P.~D.~Hanna, entry A396807 (G.f.\ satisfies $A(x)=x+A^{5}(x)\cdot A^{6}(x)$), \emph{The On-Line Encyclopedia of Integer Sequences}, June 2026. \url{https://oeis.org/A396807}. Text as of October 2026.
+\bibitem{sundaram} S.~P.~Shanmuga~Sundaram, \emph{A proof of the congruence conjectures for OEIS A396797}, September 2026. Linked from the OEIS entry: \url{https://oeis.org/A396797/a396797.pdf}.
+\bibitem{camina} R.~Camina, The Nottingham group, in \emph{New Horizons in pro-$p$ Groups}, M.~du~Sautoy, D.~Segal and A.~Shalev (eds.), Progress in Mathematics 184, Birkh\"auser, 2000, 205--221.
+\bibitem{oeisdb} N.~J.~A.~Sloane and The OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences}. \url{https://oeis.org}.
+\bibitem{stanley} R.~P.~Stanley, \emph{Enumerative Combinatorics}, Volume~2, Cambridge University Press, 1999. (Chapter~5 treats formal power series, composition and compositional inverses.)
+\bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
+\bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
+\bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections for 34 OEIS entries, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\end{thebibliography}
+\end{document}

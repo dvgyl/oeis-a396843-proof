@@ -1,0 +1,470 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+\setlist{itemsep=2pt,topsep=3pt}
+\raggedbottom
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\ps}[1]{#1[[x]]}
+\newcommand{\coeff}[2]{[x^{#1}]\,#2}
+\newcommand{\hl}[1]{\textbf{#1}}
+\newcommand{\para}[1]{\par\medskip\noindent\textbf{#1}\enspace}
+\hypersetup{pdftitle={The odd-indexed terms of a nested square are even: a proof of an observation in OEIS A392210},pdfauthor={Dev D. Goyal},pdfsubject={OEIS A392210}}
+\title{The odd-indexed terms of a nested square are even\\[6pt]\large A proof of an observation in OEIS A392210}
+\author{Dev D. Goyal}
+\date{October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The sequence A392210 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Paul D.~Hanna, is defined
+by an ``infinitely nested square''
+\[
+x+\mathrm{sq}\Bigl(\frac{x}{1-x}+\mathrm{sq}\Bigl(\frac{x}{1-2x}+\mathrm{sq}\Bigl(\frac{x}{1-3x}+\cdots\Bigr)\Bigr)\Bigr),
+\qquad \mathrm{sq}(y)=y^2 .
+\]
+Its terms are $1,1,4,18,96,579,\dots$, and the entry observes that the terms $a(2n-1)$ with $n>1$ appear to be even.
+We first make the nested expression precise: cutting it off after $d$ levels gives the correct coefficients up to
+degree $d+1$, and the resulting series is the unique solution of the simpler equation $A(x)=x+A\bigl(x/(1-x)\bigr)^2$.
+We then prove the observation. The proof is short: once all coefficients are reduced modulo $2$, the square of any power
+series contains only even powers of $x$. The same idea also gives a recursive rule for the parity of the even-indexed
+terms. The main results have been checked by computer and proved formally in the Lean proof assistant.
+\end{abstract}
+\begin{center}\begin{minipage}{0.88\linewidth}\small
+\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
+ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
+Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
+every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
+The section ``About this paper'' at the end gives the details.
+\end{minipage}\end{center}
+
+\section{Introduction}
+
+\subsection{The sequence}\label{sec:sequence}
+The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
+sequences, used by mathematicians and scientists to identify sequences and to record what is known about them. Many
+entries also record observed patterns that the contributor could not prove.
+
+This paper is about entry A392210~\cite{oeis}, contributed by Paul~D.~Hanna in February 2026. The entry reads, in part:
+\begin{quote}\small\ttfamily\raggedright G.f.: x + sq(x/(1-x) + sq(x/(1-2*x) + sq(x/(1-3*x) + sq(x/(1-4*x) + ...)))) where sq(x) = x\^{}2, an infinitely nested square.\par\smallskip This sequence equals the self-convolution (shifted right) of the binomial transform of this sequence.\par\smallskip It appears that a(2*n-1) is even for n > 1.\par\smallskip (1) A(x) = x + A(x/(1-x))\^{}2.\par\smallskip (5) A(x/(1-n*x)) = x/(1-n*x) + A( x/(1-(n+1)*x) )\^{}2 for all n.\par\smallskip\hfill\textrm{--- OEIS A392210, Paul D. Hanna, February 2026}\end{quote}
+
+Here ``G.f.''\ stands for \emph{generating function}: the terms $a(1),a(2),a(3),\dots$ of the sequence are stored as the
+coefficients of the power series $A(x)=a(1)\,x+a(2)\,x^2+a(3)\,x^3+\cdots$. The expression $\frac{x}{1-x}$ stands for
+the power series $x+x^2+x^3+\cdots$, and more generally $\frac{x}{1-cx}=x+cx^2+c^2x^3+\cdots$.
+Section~\ref{sec:background} explains these notions.
+
+The first line defines the series by an \emph{infinitely nested} expression: a square inside a square inside a square,
+without end. It is not obvious what such an expression means. Section~\ref{sec:results} gives a precise meaning, by
+cutting the nesting off after finitely many levels, and shows that the result is the same as the series defined by
+formula (1) of the entry,
+\[
+A(x)=x+A\Bigl(\frac{x}{1-x}\Bigr)^2 .
+\]
+Here $A\bigl(\frac{x}{1-x}\bigr)$ means that the series $\frac{x}{1-x}$ is substituted for $x$ in $A$, and the result is
+then squared in the ordinary way. We take formula (1) as the definition.
+
+The second line of the quotation says the same thing as formula (1), in words. Substituting $\frac{x}{1-x}$ into $A$
+gives the series whose coefficients are
+\[
+b(n)=\sum_{k=1}^{n}\binom{n-1}{k-1}\,a(k),
+\]
+which is called the \emph{binomial transform} of the sequence. Squaring a series combines its coefficients into the sums
+$\sum_kb(k)\,b(n-k)$, called the \emph{self-convolution}. So formula (1) says that $a(1)=1$ and, for $n>1$,
+\[
+a(n)=\sum_{k=1}^{n-1}b(k)\,b(n-k),
+\]
+which lets one compute the terms one at a time. The first terms, starting at $n=1$, are
+1, 1, 4, 18, 96, 579, 3834, 27404, 209052, 1688389, \dots
+
+\subsection{The question}
+The entry observes that $a(2n-1)$ appears to be even for every $n>1$, that is, that $a(3),a(5),a(7),\dots$ are all even.
+The table shows the parity of the first terms ($1$ means odd, $0$ means even). The odd indices $n\ge3$ are printed in
+bold.
+\begin{center}\small\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.4em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & 1 & 2 & \hl{3} & 4 & \hl{5} & 6 & \hl{7} & 8 & \hl{9} & 10 & \hl{11} & 12 & \hl{13} & 14 & \hl{15} & 16 \\ \midrule
+$a(n)\bmod 2$ & 1 & 1 & \hl{0} & 0 & \hl{0} & 1 & \hl{0} & 0 & \hl{0} & 1 & \hl{0} & 1 & \hl{0} & 1 & \hl{0} & 1 \\
+\bottomrule
+\end{tabular}
+\\[4pt]
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.4em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & \hl{17} & 18 & \hl{19} & 20 & \hl{21} & 22 & \hl{23} & 24 & \hl{25} & 26 & \hl{27} & 28 & \hl{29} & 30 & \hl{31} & 32 \\ \midrule
+$a(n)\bmod 2$ & \hl{0} & 1 & \hl{0} & 1 & \hl{0} & 1 & \hl{0} & 0 & \hl{0} & 1 & \hl{0} & 1 & \hl{0} & 1 & \hl{0} & 1 \\
+\bottomrule
+\end{tabular}
+\\[4pt]
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.4em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & \hl{33} & 34 & \hl{35} & 36 & \hl{37} & 38 & \hl{39} & 40 & \hl{41} & 42 & \hl{43} & 44 & \hl{45} & 46 & \hl{47} & 48 \\ \midrule
+$a(n)\bmod 2$ & \hl{0} & 1 & \hl{0} & 1 & \hl{0} & 1 & \hl{0} & 0 & \hl{0} & 1 & \hl{0} & 1 & \hl{0} & 1 & \hl{0} & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\subsection{What this paper proves}
+\textbf{Main results.} \emph{(1) The nested expression of the title has a precise meaning, and it defines the same
+series as formula (1) (Theorem~\ref{thm:def}). (2) The coefficient $a(2n-1)$ is even for every $n>1$
+(Theorem~\ref{thm:main}).}
+
+The reason for (2) is simple. Modulo $2$, the square of a power series contains only even powers of $x$. So, by formula
+(1), modulo $2$ the only odd power of $x$ in $A(x)$ is the single term $x$.
+
+\subsection{What was known}
+The entry lists eight equivalent formulas for $A$, among them formula (1), formula (5), and the nested expression of the
+title, and states the evenness of $a(2n-1)$ as an observation (``It appears that''). The observation follows quickly
+from formula (1), and it may well have been known to the contributor; we are not aware of a written proof. We include it
+for completeness, together with a precise treatment of the nested expression.
+
+\subsection{Why it is interesting}
+Infinitely nested expressions, such as nested squares, nested square roots, or continued fractions, are a common way of
+describing power series in the OEIS. They raise a natural question: what does the expression mean? For power series
+there is a simple and general answer, which we explain here: each additional level of nesting fixes one more
+coefficient, so the coefficients of the truncated expressions eventually stop changing. The parity argument, in turn, is
+a basic tool that is used throughout this collection of papers: modulo $2$, squaring a series simply doubles all its
+exponents.
+
+\subsection{How to read this paper}
+Section~\ref{sec:background} explains the few notions we need: power series, substitution, the fractions
+$\frac{x}{1-cx}$, and remainders. Section~\ref{sec:results} states the results precisely, and Section~\ref{sec:proofs}
+proves them. Section~\ref{sec:checks} describes how the results were checked, by computer and by a formal proof in
+Lean. Section~\ref{sec:discussion} discusses the scope of the result, and the parity of the even-indexed terms.
+\section{Background}\label{sec:background}
+This section collects the definitions and facts used later. Readers who know formal power series and congruences can skip it and return when needed.
+\subsection{Power series as bookkeeping}
+A \emph{formal power series} is a way of storing an infinite sequence of numbers $u_0,u_1,u_2,\dots$ in one object,
+\[
+U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots .
+\]
+The letter $x$ is only a placeholder that keeps the terms apart. We never substitute a number for $x$, so the question
+of whether the series ``converges'' never arises; a power series is simply its list of coefficients. We write
+$\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$. Two series are equal when all their coefficients are equal.
+
+Series are added coefficient by coefficient and multiplied like polynomials:
+\[
+\coeff{n}{(UV)}=u_0v_n+u_1v_{n-1}+\cdots+u_nv_0 .
+\]
+Each coefficient of a product is a finite sum, so everything is well defined. For example,
+$(1-x)(1+x+x^2+x^3+\cdots)=1$, because all the other terms cancel. So $1+x+x^2+\cdots$ is the
+\emph{multiplicative inverse} of $1-x$, and we write it as $\frac{1}{1-x}$. In the same way, every series $D$ whose
+constant term is $1$ has exactly one multiplicative inverse $\frac1D$. Its coefficients can be computed one at a time
+from $D\cdot\frac1D=1$, using only additions, subtractions and multiplications. Every fraction in this paper has a
+denominator of this kind, so it stands for an honest power series.
+
+Two more pieces of notation. We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
+$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
+constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+
+\subsection{Substituting one series into another}
+If $V(x)$ has constant term $0$, we can substitute $V$ for $x$ in $U$:
+\[
+U(V(x))=u_0+u_1V(x)+u_2V(x)^2+u_3V(x)^3+\cdots .
+\]
+This is called \emph{composition}, also written $U\circ V$. It makes sense because $V(x)^k$ has no terms below $x^k$,
+so only the finitely many terms with $k\le n$ affect the coefficient of $x^n$. For example, if $U=x+x^2$ and $V=x^2$, then
+$U(V(x))=x^2+x^4$. Composition is associative: $U\circ(V\circ W)=(U\circ V)\circ W$.
+
+Substituting a series into itself repeatedly gives its \emph{iterates}: $U^{\circ2}(x)=U(U(x))$,
+$U^{\circ3}(x)=U(U(U(x)))$, and so on, with $U^{\circ0}(x)=x$ and $U^{\circ1}=U$. They must not be confused with
+\emph{powers} $U^2=U\cdot U$, $U^3=U\cdot U\cdot U$. (The OEIS sometimes writes $A^k(x)$ for the $k$-th iterate. In
+this paper the small circle always means an iterate, and a plain exponent always means a power.)
+
+\subsection{The fractions \texorpdfstring{$x/(1-cx)$}{x/(1-cx)}}
+For a number $c$ we write
+\[
+M_c(x)=\frac{x}{1-cx}=x+cx^2+c^2x^3+c^3x^4+\cdots .
+\]
+In particular $M_0(x)=x$. These series behave very simply under substitution:
+\begin{equation}\label{eq:mobius}
+M_c\bigl(M_d(x)\bigr)=M_{c+d}(x).
+\end{equation}
+To see this, start from $M_c(y)\,(1-cy)=y$, which is the definition of $M_c$, and substitute $y=M_d(x)$. Since
+$M_d(x)\,(1-dx)=x$, multiplying both sides by $1-dx$ gives $M_c(M_d(x))\,(1-dx-cx)=x$, which says exactly that
+$M_c(M_d(x))=\frac{x}{1-(c+d)x}$. (Here we used that substituting into a product is the same as multiplying the
+substituted factors.) For example, substituting $\frac{x}{1-x}$ into itself gives $\frac{x}{1-2x}$.
+
+Substituting $M_1$ into a series is the binomial transform mentioned in the introduction: since
+$M_1(x)^k=x^k(1-x)^{-k}=\sum_{n\ge k}\binom{n-1}{k-1}x^n$, the coefficient of $x^n$ in $A(M_1(x))$ is
+$\sum_k\binom{n-1}{k-1}a(k)$.
+
+\subsection{Remainders and congruences}
+For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
+remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
+$a$ is odd is the same as saying $a\equiv1\pmod2$.
+
+Residues can be added and multiplied consistently, as on a clock. The residues $0,1,\dots,m-1$ with this ``clock
+arithmetic'' form a number system written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we
+have $1+1=0$, so adding and subtracting are the same thing.
+
+For power series with integer coefficients, $U\equiv V\pmod m$ means that \emph{every} coefficient of $U-V$ is
+divisible by $m$. Equivalently, the two series become equal when every coefficient is replaced by its residue; we call
+this \emph{reducing} the series modulo $m$. The key fact is simple:
+
+\emph{Reduction modulo $m$ is compatible with all the operations above.} To reduce a sum, a product, a substitution, or
+an inverse, we may reduce the ingredients first and then compute with clock arithmetic. This holds because every
+coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
+multiplying, and these operations are compatible with remainders.
+
+\para{A word on ``rings''.} Several lemmas below hold not only for integers, but in every number system in
+which one can add, subtract and multiply with the usual rules (such as $\Z$, $\Q$, and $\Z/m\Z$). Mathematicians call
+such a number system a \emph{commutative ring}. We use the word only in this sense. No division is ever needed, which
+matters because in $\Z/m\Z$ one cannot always divide (for instance, $2$ has no inverse in $\Z/4\Z$).
+
+\subsection{Squaring in clock arithmetic modulo \texorpdfstring{$2$}{2}}
+\begin{lemma}[Frobenius identity]\label{lem:frobenius}
+Let $p$ be a prime. For every power series $U$ with coefficients in $\F_p$, we have $U(x)^p=U(x^p)$.
+\end{lemma}
+
+\begin{proof}
+In $\F_p$, the binomial theorem simplifies to $(a+b)^p=a^p+b^p$, because every binomial coefficient
+$\binom pi$ with $0<i<p$ is divisible by $p$. Also $c^p=c$ for every $c\in\F_p$ (Fermat's little theorem). So
+$\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. Only finitely many terms matter for any given
+coefficient, so this is a polynomial identity.
+\end{proof}
+
+For $p=2$ this says that squaring a series modulo $2$ just doubles every exponent: for instance,
+$(x+x^3)^2\equiv x^2+x^6\pmod2$. In particular, the square of any series has, modulo $2$, no terms of odd degree.
+
+
+\section{Results}\label{sec:results}
+
+We take formula (1) of the entry as the definition:
+\begin{equation}\label{eq:def}
+A(x)=x+A\bigl(M_1(x)\bigr)^2,\qquad M_1(x)=\frac{x}{1-x}.
+\end{equation}
+
+\para{The nested expression.} To give the title a precise meaning, cut the nesting off after $d$ levels. That is, for
+$d\ge1$ define series $H^{(d)}_d,H^{(d)}_{d-1},\dots,H^{(d)}_1$ from the inside out by
+\[
+H^{(d)}_d=M_d,\qquad H^{(d)}_j=M_j+\bigl(H^{(d)}_{j+1}\bigr)^2\quad(j=d-1,\dots,1),
+\]
+and put $A^{[d]}=x+\bigl(H^{(d)}_1\bigr)^2$. For example,
+\[
+A^{[3]}=x+\Bigl(M_1+\bigl(M_2+M_3^2\bigr)^2\Bigr)^2 .
+\]
+These are honest power series, obtained by finitely many additions, multiplications and divisions by $1-cx$.
+
+\begin{theorem}[What the nested square means]\label{thm:def}
+\begin{enumerate}[label=(\alph*)]
+\item Equation~\eqref{eq:def} has exactly one normalized solution $A$ with integer coefficients (and, more generally,
+exactly one with coefficients in any commutative ring).
+\item For $j\ge0$ put $G_j=A(M_j(x))$. Then $G_0=A$ and
+\[
+G_j=M_j+G_{j+1}^2\qquad\text{for every }j\ge0 .
+\]
+This is formula (5) of the entry.
+\item For every $d\ge1$, the series $A^{[d]}$ and $A$ have the same coefficients up to degree $d+1$:
+$A-A^{[d]}=O(x^{d+2})$.
+\end{enumerate}
+\end{theorem}
+
+Part (c) says that the coefficient of $x^n$ in $A^{[d]}$ no longer changes once $d\ge n-1$. The infinitely nested
+expression of the title stands for the series made of these stable coefficients, and part (c) says that this series is
+$A$. So the definition in the title and formula (1) agree, and the sequence A392210 is $a(n)=\coeff{n}{A}$.
+
+\begin{theorem}\label{thm:main}
+For every $n>1$, the coefficient $a(2n-1)$ is even.
+\end{theorem}
+
+\section{Proofs}\label{sec:proofs}
+
+\para{The idea in brief.} The right-hand side of \eqref{eq:def} contains $A$ only inside a square, and squaring
+``pushes'' differences to higher degree; this gives uniqueness. Substituting $M_j$ into \eqref{eq:def} and using
+$M_1(M_j)=M_{j+1}$ gives the nested form, and each level of nesting fixes one more coefficient. Finally, modulo $2$ the
+square of a series has only even powers of $x$, so the only odd power of $x$ in $A$ is $x$ itself.
+
+\begin{lemma}[An equation with a square]\label{lem:square}
+Let $T$ and $P$ be normalized series with coefficients in a commutative ring $R$. There is exactly one normalized
+series $G$ with coefficients in $R$ such that
+\[
+G(x)=T(x)+\bigl(G(P(x))\bigr)^2 .
+\]
+If $T$ and $P$ have integer coefficients, then so does $G$, and reducing $G$ modulo $m$ gives the solution of the same
+equation over $\Z/m\Z$ (with $T$ and $P$ reduced modulo $m$).
+\end{lemma}
+
+\begin{proof}
+The point is that the coefficient of $x^n$ on the right-hand side depends only on the coefficients of $G$ below degree
+$n$. To see this, let $G$ and $H$ be two series with constant term $0$ that agree below degree $r$, so $G-H=O(x^r)$.
+Since $P$ starts with $x$, the power $P^k$ has no terms below $x^k$, and so $G(P)-H(P)=O(x^r)$ as well. Moreover
+$G(P)+H(P)$ has constant term $0$. Hence
+\[
+G(P)^2-H(P)^2=\bigl(G(P)-H(P)\bigr)\bigl(G(P)+H(P)\bigr)=O(x^{r+1}).
+\]
+In words: changing $G$ in degree $r$ and above changes the right-hand side only in degree $r+1$ and above.
+
+So the equation fixes the coefficients of $G$ one at a time. The constant term is $0$, the coefficient of $x$ is the
+coefficient of $x$ in $T$, which is $1$, and for $n\ge2$ the coefficient of $x^n$ in $G$ must equal the coefficient of
+$x^n$ in $T+G(P)^2$, which has already been computed from the earlier coefficients. Only additions and multiplications
+are used, so this works in every commutative ring, and gives integer coefficients when $T$ and $P$ have them. Finally,
+reducing the integer solution modulo $m$ gives a normalized series that satisfies the reduced equation (reduction is
+compatible with all the operations involved), and by uniqueness it is \emph{the} solution over $\Z/m\Z$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:def}]
+(a) This is Lemma~\ref{lem:square} with $T=x$ and $P=M_1$.
+
+(b) Since $M_0(x)=x$, we have $G_0=A$. Substitute $M_j(x)$ for $x$ in \eqref{eq:def}. Substitution can be done in steps,
+and substituting into a square is the same as squaring the substituted series, so
+\[
+A(M_j)=M_j+\Bigl(A\bigl(M_1(M_j)\bigr)\Bigr)^2=M_j+A(M_{j+1})^2,
+\]
+using $M_1(M_j)=M_{j+1}$ from \eqref{eq:mobius}. This is $G_j=M_j+G_{j+1}^2$.
+
+(c) Fix $d\ge1$, and set $H_{d+1}=0$, $H_j=H^{(d)}_j$ for $1\le j\le d$, and $H_0=A^{[d]}$. Then
+$H_j=M_j+H_{j+1}^2$ for $0\le j\le d$, the same rule as in part (b). We show by downward induction on $j$ that
+\[
+G_j-H_j=O\bigl(x^{\,d+2-j}\bigr)\qquad(0\le j\le d+1).
+\]
+For $j=d+1$ this says $G_{d+1}=O(x)$, which is true because $G_{d+1}$ has constant term $0$. If the claim holds for
+$j+1$, then
+\[
+G_j-H_j=G_{j+1}^2-H_{j+1}^2=\bigl(G_{j+1}-H_{j+1}\bigr)\bigl(G_{j+1}+H_{j+1}\bigr)=O\bigl(x^{\,d+1-j}\bigr)\cdot O(x),
+\]
+because $G_{j+1}$ and $H_{j+1}$ both have constant term $0$. This is $O(x^{d+2-j})$, as claimed. For $j=0$ we get
+$A-A^{[d]}=O(x^{d+2})$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Reduce \eqref{eq:def} modulo $2$; this is allowed because reduction is compatible with all the operations involved. By
+Lemma~\ref{lem:frobenius}, for every series $U$ with coefficients in $\F_2$ we have $U(x)^2=U(x^2)$, which contains only
+even powers of $x$. Applying this to $U=A(M_1(x))$, we see that, modulo $2$, the right-hand side $x+A(M_1)^2$ has no odd
+powers of $x$ except $x$ itself. Hence the coefficient of $x^{2n-1}$ in $A$ is even whenever $2n-1\ge3$, that is,
+whenever $n>1$.
+\end{proof}
+
+\section{Checking the results}\label{sec:checks}
+
+A mathematical proof can contain mistakes, so the results were checked in two independent ways.
+
+\para{Numerical check.}
+We computed $A$ by repeating the substitution $A\mapsto x+A(M_1)^2$ with exact integer arithmetic, starting
+from $A=x$. This reproduces all 24 terms printed in the OEIS entry. We also evaluated the nested expression of the title,
+cut off after $202$ levels, and found the same coefficients below degree $200$, as Theorem~\ref{thm:def}(c) predicts.
+All coefficients of odd degree $2n-1$ with $3\le2n-1<200$ are even.
+The computation was done with the PARI/GP computer algebra system, using code that was written separately from the
+formal proofs (file \texttt{verification/independent\_checks.gp} in the accompanying repository~\cite{repo}).
+A computation can only test finitely many cases, so it is a check on the definitions and on the indexing, not a proof.
+
+\para{Formal proof in Lean.}
+Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
+this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
+mathematics. The statements are collected in the file \texttt{lean/Entries/A392210.lean} of the repository,
+in the namespace \texttt{FinalCollection.A392210}. There $x/(1-x)$ is called \texttt{geometric}, and the proofs are in the module \texttt{Round4/NestedBinomial.lean}. Parts (b) and (c) of Theorem~\ref{thm:def}, which connect formula (1) with the nested expression of the title, are proved in this paper but are not part of the Lean formalization.
+The table lists where each result of this paper is proved.
+\begin{center}\small\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
+\toprule
+Statement in this paper & Lean theorem(s)\\
+\midrule
+Theorem~\ref{thm:def}(a) for integer coefficients & \texttt{third\_\allowbreak{}existence} \\
+$A$ is normalized and satisfies \eqref{eq:def}; and $M_1(x)\cdot(1-x)=x$ & \texttt{third\_\allowbreak{}definition} \\
+Theorem~\ref{thm:main}, for $A$ and for any normalized integer solution of \eqref{eq:def} & \texttt{third\_\allowbreak{}evenness}, \texttt{third\_\allowbreak{}arbitrary\_\allowbreak{}source} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
+that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+(\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
+exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
+so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+(Section~\ref{sec:sequence}).
+
+\section{Discussion}\label{sec:discussion}
+
+\para{Scope.} Theorem~\ref{thm:main} proves the observation of the entry for every $n$. It is an elementary fact, and the
+point of this paper is to give a complete and checked account of it, including the meaning of the nested expression.
+The theorem says nothing about the terms of even index, nor about remainders modulo $4$ or other numbers.
+
+\para{The even-indexed terms.} The same idea gives a rule for the parity of the remaining terms. Apply
+Lemma~\ref{lem:frobenius} to $U=A(M_1(x))$ more carefully: modulo $2$, $U(x)^2=U(x^2)=A\bigl(M_1(x^2)\bigr)$. So
+\[
+A(x)\equiv x+A\Bigl(\frac{x^2}{1-x^2}\Bigr)\pmod 2 .
+\]
+Comparing the coefficients of $x^{2m}$ on both sides gives, for every $m\ge1$,
+\[
+a(2m)\equiv\sum_{k=1}^{m}\binom{m-1}{k-1}\,a(k)\pmod 2 .
+\]
+So the parity of $a(2m)$ is determined by the parities of $a(1),\dots,a(m)$. (This rule is not part of the Lean
+formalization; we checked it numerically for all $2m<130$.) Unlike the odd-indexed terms, the even-indexed terms show no
+simple pattern in our data.
+
+\para{Other equations of the same kind.} The entry lists further identities of the same shape, for example
+$A\bigl(x/g(x)\bigr)=x/g(x)+A\bigl(x/(g(x)-x)\bigr)^2$ for every series $g$ with constant term
+$1$. All of them follow from formula (1) by substitution, in the same way as part (b) of Theorem~\ref{thm:def}.
+
+\para{The method.} The proof illustrates a principle used throughout this collection of papers: a sequence defined by an
+equation between power series often becomes simple after reduction modulo a small number. Here, reduction modulo $2$
+turns every square into a series in $x^2$.
+
+\section*{About this paper}\label{sec:about}
+\para{How the work was done.}
+This paper is one of 34 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
+by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+\begin{itemize}
+\item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
+revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
+\item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
+searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
+of this paper.
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
+rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
+written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
+terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
+theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
+places, wrote out an argument in more detail or by a more elementary route. The Discussion section was written during
+this rewrite; the further observations it contains were checked by computer, and they are not part of the Lean
+formalization.
+\end{itemize}
+Dev~D.~Goyal has verified the results and is responsible for this paper.
+
+\para{Review status.} This paper has not been peer reviewed, and it has not been submitted to a journal or to the OEIS.
+
+\para{Priority.} An OEIS entry that labels a statement as a conjecture shows only that its contributor did not know
+a proof; it does not show that no proof existed. During the research only limited searches for earlier work were
+made. No claim of priority is made.
+
+\para{Corrections.} Please report any error in the issue tracker of the repository~\cite{repo}, where the Lean
+sources, the numerical checks, and the earlier drafts are also available.
+
+\section*{Acknowledgements}
+The sequence, its formulas and the observation are due to Paul~D.~Hanna~\cite{oeis}.
+
+\begin{thebibliography}{99}\small
+\raggedright
+\bibitem{oeis} P.~D.~Hanna, entry A392210 (G.f.: $x+\mathrm{sq}(x/(1-x)+\mathrm{sq}(x/(1-2x)+\cdots))$, an infinitely nested square), \emph{The On-Line Encyclopedia of Integer Sequences}, February 2026. \url{https://oeis.org/A392210}. Text as of October 2026.
+\bibitem{oeisdb} N.~J.~A.~Sloane and The OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences}. \url{https://oeis.org}.
+\bibitem{stanley} R.~P.~Stanley, \emph{Enumerative Combinatorics}, Volume~2, Cambridge University Press, 1999. (Chapter~5 treats formal power series, composition and compositional inverses.)
+\bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
+\bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
+\bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections for 34 OEIS entries, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\end{thebibliography}
+\end{document}

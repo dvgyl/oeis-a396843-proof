@@ -341,3 +341,12 @@ import Entries
 #print axioms FinalCollection.A397588.differential_parity
 #print axioms FinalCollection.A397588.differential_mod_three
 #print axioms FinalCollection.A397588.differential_divisible_by_three
+
+-- General theorems from the shared modules that the papers cite directly
+-- (the entry theorems above depend on them, so they are also covered indirectly)
+#print axioms Consecutive.existence_uniqueness
+#print axioms Consecutive.ziter_solution_mod
+#print axioms Consecutive.ziter_solution_mod_eq_X_iff
+#print axioms Hanna.Related.ScaledInverse.integer_mod_parameter_add_one
+#print axioms Hanna.Related.ScaledInverse.integer_coeff_odd_iff
+#print axioms More.Stirling.transform_totient_period
