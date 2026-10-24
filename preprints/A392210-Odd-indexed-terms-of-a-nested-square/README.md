@@ -1,4 +1,4 @@
-# [The odd-indexed terms of a nested square are even](paper.pdf)
+# [The odd-indexed terms of a nested square are even after the first term](paper.pdf)
 
 *A proof of an observation in OEIS A392210*
 
@@ -20,7 +20,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 ```bibtex
 @misc{Goyal:A392210,
   author = {Goyal, Dev D.},
-  title = {{The odd-indexed terms of a nested square are even}},
+  title = {{The odd-indexed terms of a nested square are even after the first term}},
   howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A392210-Odd-indexed-terms-of-a-nested-square/paper.pdf}},
   year = {2026}
 }

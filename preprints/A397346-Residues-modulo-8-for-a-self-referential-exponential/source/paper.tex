@@ -40,18 +40,20 @@ The sequence A397346 of the On-Line Encyclopedia of Integer Sequences (OEIS), co
 coefficients of the power series $A(x)=\sum_{n\ge0}a(n)x^n=1+x+4x^2+66x^3+2248x^4+\cdots$ determined by
 $A(x)=\exp\bigl(x+\sum_{n\ge2}\frac{2n^2-1}{2n^2}a(n)x^n\bigr)$. The entry conjectures that, from $n=2$ on, the
 remainders of $a(n)$ on division by $8$ repeat the block $4,2,0,2$. We prove this. We first show that the equation is
-equivalent to a recurrence recorded in the entry, which shows that $a(n)$ is an integer divisible by $n$. For the
+equivalent to a recurrence recorded in the entry, and deduce from it that $a(n)$ is an integer divisible by $n$. For the
 quotients $b(n)=a(n)/n$ we prove the stronger statement that $b(n)\equiv6\pmod8$ when $n\equiv3\pmod4$ and
 $b(n)\equiv2\pmod8$ otherwise, for $n\ge2$. The results have been checked by computer, and the recurrence and the
 congruences are proved formally in the Lean proof assistant.
 \end{abstract}
 \begin{center}\begin{minipage}{0.88\linewidth}\small
-\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
-ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
-Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
-Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
-source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
-every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+\textbf{How this paper was produced.} This paper reports the result of an AI research effort directed by
+Dev~D.~Goyal. ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working autonomously from prompts by
+Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
+ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
+and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
 \end{minipage}\end{center}
@@ -68,14 +70,14 @@ Here ``O.g.f.''\ stands for \emph{ordinary generating function}, the series $A(x
 \begin{equation}\label{eq:source}
 A(x)=\exp H(x),\qquad H(x)=x+\sum_{n\ge2}\frac{2n^2-1}{2n^2}\,a(n)\,x^n .
 \end{equation}
-The equation is self-referential: the unknown coefficients $a(n)$ appear on both sides. The third line quoted is formula
-(7) of the entry, a recurrence for $a(n)$; Lemma~\ref{lem:equiv} below proves that it is equivalent to
+The equation is self-referential: the unknown coefficients $a(n)$ appear on both sides. The last formula quoted, labelled
+(7) in the entry, is a recurrence for $a(n)$; Lemma~\ref{lem:equiv} below proves that it is equivalent to
 \eqref{eq:source}. The first terms are 1, 1, 4, 66, 2248, 121690, 9370716, 966649250, \dots{} (from $n=0$).
 
 \subsection{The question}
 The conjecture says that from $n=2$ on, $a(n)$ modulo $8$ repeats $4,2,0,2$. The table shows the first terms; the
-indices in bold are $n\equiv3\pmod4$. The last row shows the remainders of the quotients $b(n)=a(n)/n$, which turn out
-to be simpler.
+indices in bold are $n\equiv3\pmod4$. The last row shows the remainders of the quotients $b(n)=a(n)/n$, which follow
+a simpler pattern.
 \begin{center}\small\setlength{\tabcolsep}{3.2pt}
 \begin{tabular}{>{\raggedright\arraybackslash}p{5.4em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
 \toprule
@@ -127,8 +129,8 @@ A \emph{formal power series} is an expression
 \[
 U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots ,
 \]
-determined by its sequence of coefficients $u_0,u_1,u_2,\dots$. No number is ever substituted for $x$, so questions
-of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
+determined by its sequence of coefficients $u_0,u_1,u_2,\dots$; see~\cite{niven,stanley}. No number is ever
+substituted for $x$, so questions of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
 when all their coefficients are equal.
 
 Series are added coefficient by coefficient and multiplied like polynomials:
@@ -138,12 +140,15 @@ Series are added coefficient by coefficient and multiplied like polynomials:
 Each coefficient of a product is a finite sum. For example, $(1-x)(1+x+x^2+x^3+\cdots)=1$, so $1+x+x^2+\cdots$ is
 the \emph{multiplicative inverse} of $1-x$, written $\frac{1}{1-x}$. More generally, every series $D$ with constant term
 $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determined one at a time by $D\cdot\frac1D=1$
-using only addition, subtraction and multiplication. Every fraction in this paper has a denominator of this kind, so it
-denotes a power series.
+using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
+denominator has constant term $1$, so the quotient is again a power series.
 
-We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
-$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
-constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
+series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+$U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
+zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
+constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
+called \emph{normalized}.
 
 \subsection{The formal derivative and the formal exponential}
 The \emph{formal derivative} of $U=\sum_nu_nx^n$ is $U'=\sum_{n\ge1}nu_nx^{n-1}$. It obeys the usual rules
@@ -170,9 +175,8 @@ and $f_0=1$ is given. Hence there is at most one such $F$, and $\exp H$ is one.
 
 \subsection{Remainders and congruences}
 For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
-$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $22\equiv6\pmod8$, since both leave remainder $6$. The
-remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
-$a$ is odd is the same as saying $a\equiv1\pmod2$.
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. The remainder of $a$ on division by
+$m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$.
 
 Addition and multiplication are compatible with congruences, so the residues $0,1,\dots,m-1$, added and multiplied
 modulo $m$, form a ring, written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we have $1+1=0$,
@@ -294,9 +298,8 @@ A computation can only test finitely many cases, so it is a check on the definit
 
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
-in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
-this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
-mathematics. The statements are collected in the file \texttt{lean/Entries/A397346.lean} of the repository,
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A397346.lean} of the repository,
 in the namespace \texttt{OEIS.A397346}. In Lean the sequence is defined by the recurrence \eqref{eq:rec}, formula (7) of the OEIS entry, and the
 identity $A'=AH'$ is proved for it. The last step of Lemma~\ref{lem:equiv}, from $A'=AH'$ to $A=\exp H$
 (Lemma~\ref{lem:ode}), is proved in this paper but not in Lean. The proofs are in
@@ -316,11 +319,11 @@ The differential equation $A'=AH'$ of Lemma~\ref{lem:equiv} & \texttt{exact\_\al
 \bottomrule
 \end{tabular}
 \end{center}
-The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
-that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+The Lean project was rebuilt from source, and the axioms on which each of these theorems depends were listed with
+Lean's \texttt{\#print axioms} command. Every one depends only on the three standard axioms of Lean's logic
 (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
 exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
-so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+so the Lean definitions were also compared with the definition in the OEIS entry
 (Section~\ref{sec:sequence}).
 
 \section{Discussion}\label{sec:discussion}
@@ -335,27 +338,27 @@ longer constant.
 
 \para{The role of the factor $n$.} The fractions in \eqref{eq:source} have denominators $2n^2$, and those in
 \eqref{eq:rec} have denominators $j$. Both disappear for the quotients $b(n)=a(n)/n$, which satisfy a recurrence with
-integer coefficients. Passing to such an integral normalization before reducing modulo a prime power is the main
-technical point of the proof.
+integer coefficients. The main technical point of the proof is to pass to these quotients before reducing
+modulo $8$.
 
 \section*{About this paper}\label{sec:about}
 \para{How the work was done.}
-This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
-by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+This paper is one of 29 papers on conjectures from the OEIS that came out of an AI research effort directed by
+Dev~D.~Goyal~\cite{repo}. The roles were as follows.
 \begin{itemize}
 \item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
 revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
 \item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
 searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
 of this paper.
-\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
-rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently. It rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
 Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
 written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
-terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
-theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
-places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
-the further observations in it were checked by computer and are not part of the Lean formalization.
+terms; and read every step of the proofs. It then wrote the present version of the paper, expanding the
+explanations and, in places, writing out an argument in more detail or by a more elementary route. The theorems of
+Section~\ref{sec:results} and the proof strategies are ChatGPT's. The Discussion section, including the short arguments
+in it, was written by Claude Opus~5.5; its observations were checked by computer and are not part of the Lean
+formalization.
 \end{itemize}
 Dev~D.~Goyal has verified the results and is responsible for this paper.
 

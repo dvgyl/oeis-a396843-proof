@@ -39,20 +39,22 @@
 The sequence A389475 of the On-Line Encyclopedia of Integer Sequences (OEIS) lists the coefficients of the power series
 $A(x)=x+x^2+7x^3+17x^4+\cdots$ that satisfies $A(3x^2)=2x^2+A(x)^2-2A(x)^3$. Paul~D.~Hanna conjectured two congruences
 modulo $3$: $A(x)^3\equiv A(x^3)$ and $A(x)^2\equiv x^2+2A(x^3)$. We prove both. We also prove that the equation has
-exactly one solution with integer coefficients, which is not obvious, because computing the coefficients from the
-equation requires a division by $2$ at every step. The first congruence is an instance of a classical identity that
+exactly one solution with integer coefficients; this requires an argument, because computing the coefficients from the
+equation involves a division by $2$ at every step. The first congruence is an instance of a classical identity that
 holds for every power series with integer coefficients. The second follows from the first, because modulo $3$ the left
 side $A(3x^2)$ of the equation vanishes. The results have been checked by computer and proved formally in the Lean proof
-assistant. Finally, by a short argument that is not part of the formal verification, we note that modulo $9$ the
-equation determines $A$ completely, as the inverse of an explicit series.
+assistant. A short further argument, not part of the formal verification, shows that modulo $9$ the equation
+determines $A$ completely, as the inverse of an explicit series.
 \end{abstract}
 \begin{center}\begin{minipage}{0.88\linewidth}\small
-\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
-ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
-Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
-Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
-source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
-every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+\textbf{How this paper was produced.} This paper reports the result of an AI research effort directed by
+Dev~D.~Goyal. ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working autonomously from prompts by
+Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
+ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
+and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
 \end{minipage}\end{center}
@@ -61,7 +63,7 @@ The section ``About this paper'' at the end gives the details.
 
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
-sequences, used by mathematicians and scientists to identify sequences and to record what is known about them. Many
+sequences. Many
 entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
 
 This paper is about entry A389475~\cite{oeis}, contributed by Paul~D.~Hanna in October 2025. It defines a power series
@@ -127,8 +129,7 @@ We also prove that \eqref{eq:oeis} has exactly one normalized solution with inte
 time, each new coefficient $a(n)$ first appears in degree $n+1$, in $A(x)^2$, with the factor $2$, so each step
 involves a division by $2$.
 
-The proofs are short. The first congruence holds for every power series with integer coefficients, by a classical
-identity. For the second, note that every coefficient of $A(3x^2)$ is divisible by $3$, so modulo $3$ the equation says
+The first congruence holds for every power series with integer coefficients, by a classical identity. For the second, note that every coefficient of $A(3x^2)$ is divisible by $3$, so modulo $3$ the equation says
 $0\equiv2x^2+A(x)^2-2A(x)^3$; rearranging and using the first congruence gives the second.
 
 \subsection{What was known}
@@ -139,12 +140,11 @@ is treated in a companion paper with the same method. Statement (4.a) is a direc
 an earlier proof of (4.b) or of the existence of an integer solution.
 
 \subsection{Why it is interesting}
-Equations in which an unknown series is substituted into a simple series, and compared with powers of itself,
-are a natural source of integer sequences, and Hanna has contributed many of them to the OEIS. Two questions come up
-again and again for such equations: are the solutions integers, and do their remainders follow a pattern? This entry
-shows both in a clean form. The existence of an integer solution depends on a division by $2$ that turns out to be
-always exact, and the congruences come from the simple observation that the left side of the equation disappears
-modulo $3$.
+Equations in which a simple series is substituted into the unknown series, and the result is compared
+with powers of the unknown, are a natural source of integer sequences; the OEIS contains many of them. Two questions
+arise for such equations: whether the solution has integer coefficients, and whether its residues follow a pattern.
+This entry exhibits both. The existence of an integer solution depends on a division by $2$ that turns out to be always
+exact, and the congruences follow from the fact that the left side of the equation vanishes modulo $3$.
 
 \subsection{How to read this paper}
 Section~\ref{sec:background} explains the notions we need: power series, substitution, compositional inverses, and
@@ -158,8 +158,8 @@ A \emph{formal power series} is an expression
 \[
 U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots ,
 \]
-determined by its sequence of coefficients $u_0,u_1,u_2,\dots$. No number is ever substituted for $x$, so questions
-of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
+determined by its sequence of coefficients $u_0,u_1,u_2,\dots$; see~\cite{niven,stanley}. No number is ever
+substituted for $x$, so questions of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
 when all their coefficients are equal.
 
 Series are added coefficient by coefficient and multiplied like polynomials:
@@ -169,12 +169,15 @@ Series are added coefficient by coefficient and multiplied like polynomials:
 Each coefficient of a product is a finite sum. For example, $(1-x)(1+x+x^2+x^3+\cdots)=1$, so $1+x+x^2+\cdots$ is
 the \emph{multiplicative inverse} of $1-x$, written $\frac{1}{1-x}$. More generally, every series $D$ with constant term
 $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determined one at a time by $D\cdot\frac1D=1$
-using only addition, subtraction and multiplication. Every fraction in this paper has a denominator of this kind, so it
-denotes a power series.
+using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
+denominator has constant term $1$, so the quotient is again a power series.
 
-We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
-$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
-constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
+series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+$U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
+zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
+constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
+called \emph{normalized}.
 
 \subsection{Substituting one series into another}
 If $V(x)$ has constant term $0$, we can substitute $V$ for $x$ in $U$:
@@ -213,9 +216,8 @@ $U=U\circ(V\circ W)=(U\circ V)\circ W=W$, so $V\circ U=V\circ W=x$ as well.
 
 \subsection{Remainders and congruences}
 For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
-$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
-remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
-$a$ is odd is the same as saying $a\equiv1\pmod2$.
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. The remainder of $a$ on division by
+$m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$.
 
 Addition and multiplication are compatible with congruences, so the residues $0,1,\dots,m-1$, added and multiplied
 modulo $m$, form a ring, written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we have $1+1=0$,
@@ -230,12 +232,12 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Several lemmas below hold over every \emph{commutative ring}, that is, every set with an addition,
+\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
 subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
 division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
 
-\subsection{Squaring modulo a prime}
+\subsection{The Frobenius identity}
 \begin{lemma}[Frobenius identity]\label{lem:frobenius}
 Let $p$ be a prime. For every power series $U$ with coefficients in $\F_p$, we have $U(x)^p=U(x^p)$.
 \end{lemma}
@@ -243,8 +245,9 @@ Let $p$ be a prime. For every power series $U$ with coefficients in $\F_p$, we h
 \begin{proof}
 In $\F_p$, the binomial theorem simplifies to $(a+b)^p=a^p+b^p$, because every binomial coefficient
 $\binom pi$ with $0<i<p$ is divisible by $p$. Also $c^p=c$ for every $c\in\F_p$ (Fermat's little theorem). So
-$\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. Only finitely many terms matter for any given
-coefficient, so this is a polynomial identity.
+$\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. The first equality holds for polynomials by
+repeated use of $(a+b)^p=a^p+b^p$; it holds for power series because each coefficient of $U(x)^p$ involves only finitely
+many coefficients of $U$.
 \end{proof}
 
 For $p=2$ this says that squaring a series modulo $2$ doubles every exponent: for instance,
@@ -281,7 +284,7 @@ R(3x^2)=2x^2+R(x)^2+2s\,R(x)^3 ,
 where $s$ is a fixed integer. Here $R(3x^2)$ is $R$ with $x$ replaced by $3x^2$, so its coefficient of $x^{2k}$ is
 $3^kr_k$, and $R(x)^2$, $R(x)^3$ are ordinary powers.
 
-\emph{Why the lemma is not obvious.} Suppose we try to compute the coefficients $r_2,r_3,\dots$ of a normalized
+\emph{Why an argument is needed.} Suppose we compute the coefficients $r_2,r_3,\dots$ of a normalized
 solution $R=x+r_2x^2+r_3x^3+\cdots$ one at a time. The coefficient $r_n$ first appears in degree $n+1$, in the square
 $R(x)^2=x^2+\cdots+2r_nx^{n+1}+\cdots$, with the factor $2$. (In $R(x)^3$ it appears only from degree $n+2$ on, and in
 $R(3x^2)$ only in degree $2n$.) So each step requires a division by $2$, and it is not clear that the result is an
@@ -318,9 +321,9 @@ $E(V)-E(U)=O(x^{r+2})$.
 $r=2$ by Step~1). Let $e$ be the coefficient of $x^{r+1}$ in $E(U)$. By Step~1, $e$ is even, so $e/2$ is an integer.
 Replace $U$ by $U-(e/2)\,x^r$. By Step~2 the new error is $E(U)-e\,x^{r+1}+O(x^{r+2})=O(x^{r+2})$, and the coefficients
 of $U$ below degree $r$ have not changed. Repeating this for $r=2,3,4,\dots$ fixes the coefficients of $U$ one at a
-time. The resulting series $R_s$ has integer coefficients, and its error vanishes: for each $r$ it agrees with the
-$r$-th approximation up to degree $r$, so by Step~2 its error agrees with that approximation's error, which is
-$O(x^{r+2})$, up to degree $r+1$.
+time. Let $U_r$ denote the series obtained after the step for degree $r$, so that $E(U_r)=O(x^{r+2})$. The
+resulting series $R_s$ has integer coefficients, and $R_s-U_r=O(x^{r+1})$ for every $r$. By Step~2,
+$E(R_s)-E(U_r)=O(x^{r+2})$, so $E(R_s)=O(x^{r+2})$ for every $r$; that is, $E(R_s)=0$.
 
 \emph{Step 4: uniqueness.} Suppose two different normalized solutions first differ in degree $r$, by $c\ne0$. Then
 $r\ge2$, and by Step~2 their errors differ by $2c\ne0$ in degree $r+1$. But both errors are $0$, a contradiction.
@@ -357,9 +360,8 @@ A computation can only test finitely many cases, so it is a check on the definit
 
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
-in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
-this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
-mathematics. The statements are collected in the file \texttt{lean/Entries/A389475.lean} of the repository,
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A389475.lean} of the repository,
 in the namespace \texttt{OEIS.A389475}. Lemma~\ref{lem:family} is \texttt{integral\_family\_existence}. The constructions are in \texttt{lean/Families/CubicReversion.lean}, and the congruences use \texttt{lean/Families/CubicFrobenius.lean} and \texttt{lean/Families/CubicConsequences.lean}.
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
@@ -374,11 +376,11 @@ Theorem~\ref{thm:three}(b), as a series and coefficient by coefficient & \texttt
 \bottomrule
 \end{tabular}
 \end{center}
-The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
-that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+The Lean project was rebuilt from source, and the axioms on which each of these theorems depends were listed with
+Lean's \texttt{\#print axioms} command. Every one depends only on the three standard axioms of Lean's logic
 (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
 exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
-so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+so the Lean definitions were also compared with the definition in the OEIS entry
 (Section~\ref{sec:sequence}).
 
 \section{Discussion}\label{sec:discussion}
@@ -407,22 +409,22 @@ the family, and the remainders of the coefficients $a(n)$ themselves modulo high
 
 \section*{About this paper}\label{sec:about}
 \para{How the work was done.}
-This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
-by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+This paper is one of 29 papers on conjectures from the OEIS that came out of an AI research effort directed by
+Dev~D.~Goyal~\cite{repo}. The roles were as follows.
 \begin{itemize}
 \item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
 revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
 \item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
 searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
 of this paper.
-\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
-rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently. It rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
 Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
 written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
-terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
-theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
-places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
-the further observations in it were checked by computer and are not part of the Lean formalization.
+terms; and read every step of the proofs. It then wrote the present version of the paper, expanding the
+explanations and, in places, writing out an argument in more detail or by a more elementary route. The theorems of
+Section~\ref{sec:results} and the proof strategies are ChatGPT's. The Discussion section, including the short arguments
+in it, was written by Claude Opus~5.5; its observations were checked by computer and are not part of the Lean
+formalization.
 \end{itemize}
 Dev~D.~Goyal has verified the results and is responsible for this paper.
 

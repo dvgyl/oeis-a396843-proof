@@ -40,17 +40,19 @@ Substituting the power series $B(x)=x/(1-x)^2=x+2x^2+3x^3+\cdots$ into itself tw
 $A(x)=B(B(B(x)))=x+6x^2+33x^3+174x^4+\cdots$, whose coefficients form the sequence A396093 of the On-Line Encyclopedia
 of Integer Sequences (OEIS). Paul D.~Hanna conjectured two rules for when these coefficients are even. We prove both,
 and more: the coefficient of $x^n$ is odd if and only if $n$ leaves remainder $1$, $3$, $7$ or $9$ on division by $10$.
-The proof works with coefficients modulo $2$, where the triple substitution collapses to the simple fraction
+The proof works with coefficients modulo $2$, where the triple substitution reduces to the fraction
 $(x+x^3+x^7+x^9)/(1+x^{10})$. The result has also been checked by computer and proved formally in the Lean proof
 assistant.
 \end{abstract}
 \begin{center}\begin{minipage}{0.88\linewidth}\small
-\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
-ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
-Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
-Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
-source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
-every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+\textbf{How this paper was produced.} This paper reports the result of an AI research effort directed by
+Dev~D.~Goyal. ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working autonomously from prompts by
+Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
+ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
+and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
 \end{minipage}\end{center}
@@ -59,7 +61,7 @@ The section ``About this paper'' at the end gives the details.
 
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
-sequences, used by mathematicians and scientists to identify sequences and to record what is known about them. Many
+sequences. Many
 entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
 
 This paper is about entry A396093~\cite{oeis}, contributed by Paul~D.~Hanna. It starts from the series
@@ -78,7 +80,7 @@ Here ``G.f.''\ stands for \emph{generating function}, the series whose coefficie
 
 \subsection{The question}
 The two conjectures say when $a(n)$ is even. The first says that every term with an even index is even. The second
-says that a term with an odd index $2n-1$ is even only when $n$ is one of $3,8,13,18,\dots$, that is, when the index is
+says that a term with an odd index $2n-1$ is even exactly when $n$ is one of $3,8,13,18,\dots$, that is, when the index is
 one of $5,15,25,35,\dots$. The table shows the parity of the first forty terms ($1$ means odd, $0$ means even).
 The indices printed in bold are those that leave remainder $1$, $3$, $7$ or $9$ on division by $10$.
 \begin{center}\small\setlength{\tabcolsep}{3.2pt}
@@ -97,14 +99,14 @@ $a(n)\bmod 2$ & 0 & \hl{1} & 0 & \hl{1} & 0 & 0 & 0 & \hl{1} & 0 & \hl{1} & 0 & 
 \end{tabular}
 \end{center}
 
-The data suggest a cleaner statement, which is what we prove.
+The data suggest a single rule for all indices, which we prove.
 
 \subsection{What this paper proves}
 \textbf{Main result} (Theorem~\ref{thm:main}). \emph{The coefficient $a(n)$ is odd if and only if $n$ leaves remainder
 $1$, $3$, $7$ or $9$ on division by $10$.}
 
 Both of Hanna's conjectures follow at once (Corollary~\ref{cor:conj}). The key step is a short calculation showing that,
-once every coefficient is replaced by its remainder modulo $2$, the series $A(x)$ becomes the simple fraction
+once every coefficient is replaced by its remainder modulo $2$, the series $A(x)$ becomes the fraction
 \[
 \frac{x+x^3+x^7+x^9}{1+x^{10}}=(x+x^3+x^7+x^9)\,(1+x^{10}+x^{20}+\cdots),
 \]
@@ -127,7 +129,7 @@ modulo $2$ can collapse a complicated expression (here a ratio of two polynomial
 transparent. Section~\ref{sec:discussion} describes related questions.
 
 \subsection{How to read this paper}
-Section~\ref{sec:background} explains the few notions we need: power series, substitution, and remainders. Section~\ref{sec:results}
+Section~\ref{sec:background} explains the notions we need: power series, substitution, and remainders. Section~\ref{sec:results}
 states the results precisely, and Section~\ref{sec:proofs} proves them. Section~\ref{sec:checks} describes how the results were
 checked, by computer and by a formal proof in Lean. Section~\ref{sec:discussion} discusses the scope of the result and
 open questions.
@@ -138,8 +140,8 @@ A \emph{formal power series} is an expression
 \[
 U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots ,
 \]
-determined by its sequence of coefficients $u_0,u_1,u_2,\dots$. No number is ever substituted for $x$, so questions
-of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
+determined by its sequence of coefficients $u_0,u_1,u_2,\dots$; see~\cite{niven,stanley}. No number is ever
+substituted for $x$, so questions of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
 when all their coefficients are equal.
 
 Series are added coefficient by coefficient and multiplied like polynomials:
@@ -149,12 +151,15 @@ Series are added coefficient by coefficient and multiplied like polynomials:
 Each coefficient of a product is a finite sum. For example, $(1-x)(1+x+x^2+x^3+\cdots)=1$, so $1+x+x^2+\cdots$ is
 the \emph{multiplicative inverse} of $1-x$, written $\frac{1}{1-x}$. More generally, every series $D$ with constant term
 $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determined one at a time by $D\cdot\frac1D=1$
-using only addition, subtraction and multiplication. Every fraction in this paper has a denominator of this kind, so it
-denotes a power series.
+using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
+denominator has constant term $1$, so the quotient is again a power series.
 
-We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
-$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
-constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
+series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+$U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
+zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
+constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
+called \emph{normalized}.
 
 \subsection{Substituting one series into another}
 If $V(x)$ has constant term $0$, we can substitute $V$ for $x$ in $U$:
@@ -172,9 +177,8 @@ this paper the small circle always means an iterate, and a plain exponent always
 
 \subsection{Remainders and congruences}
 For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
-$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
-remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
-$a$ is odd is the same as saying $a\equiv1\pmod2$.
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. The remainder of $a$ on division by
+$m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$.
 
 Addition and multiplication are compatible with congruences, so the residues $0,1,\dots,m-1$, added and multiplied
 modulo $m$, form a ring, written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we have $1+1=0$,
@@ -189,7 +193,7 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\subsection{Squaring modulo \texorpdfstring{$2$}{2}}
+\subsection{The Frobenius identity}
 \begin{lemma}[Frobenius identity]\label{lem:frobenius}
 Let $p$ be a prime. For every power series $U$ with coefficients in $\F_p$, we have $U(x)^p=U(x^p)$.
 \end{lemma}
@@ -197,8 +201,9 @@ Let $p$ be a prime. For every power series $U$ with coefficients in $\F_p$, we h
 \begin{proof}
 In $\F_p$, the binomial theorem simplifies to $(a+b)^p=a^p+b^p$, because every binomial coefficient
 $\binom pi$ with $0<i<p$ is divisible by $p$. Also $c^p=c$ for every $c\in\F_p$ (Fermat's little theorem). So
-$\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. Only finitely many terms matter for any given
-coefficient, so this is a polynomial identity.
+$\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. The first equality holds for polynomials by
+repeated use of $(a+b)^p=a^p+b^p$; it holds for power series because each coefficient of $U(x)^p$ involves only finitely
+many coefficients of $U$.
 \end{proof}
 
 For $p=2$ this says that squaring a series modulo $2$ doubles every exponent: for instance,
@@ -227,15 +232,16 @@ A(x)\equiv\frac{x+x^3+x^7+x^9}{1+x^{10}}=\sum_{j\ge0}\bigl(x^{10j+1}+x^{10j+3}+x
 \begin{proof}
 (a) An even number never leaves remainder $1$, $3$, $7$ or $9$ on division by $10$.
 (b) An odd number $2n-1$ leaves one of the remainders $1,3,5,7,9$. By Theorem~\ref{thm:main}, $a(2n-1)$ is even
-exactly in the remaining case $2n-1\equiv5\pmod{10}$. This means $2n\equiv6\pmod{10}$, that is, $n\equiv3\pmod5$. For
+if and only if $2n-1\equiv5\pmod{10}$. This means $2n\equiv6\pmod{10}$, that is, $n\equiv3\pmod5$. For
 $n\ge1$ these are the numbers $3,8,13,\dots$, which are exactly the numbers $5k-2$ with $k\ge1$.
 \end{proof}
 
 \section{Proofs}\label{sec:proofs}
 
 \para{The idea in brief.} We reduce all coefficients modulo $2$. There, $B(x)=x/(1+x^2)$, and substituting a fraction
-into $B$ gives another fraction by a simple rule (Lemma~\ref{lem:step}). Applying the rule three times gives $A$ as a
-fraction, and multiplying top and bottom by $1+x^2$ turns the denominator into $1+x^{10}$.
+into $B$ gives another fraction by a simple rule (Lemma~\ref{lem:step}). Applying the rule three times expresses
+$A=B\circ B\circ B$ as a fraction, and multiplying its numerator and denominator by $1+x^2$ turns the denominator into
+$1+x^{10}$.
 
 From now on we work in $\ps{\F_2}$, that is, with coefficients modulo $2$, and we keep the names $A$ and $B$ for the
 reduced series. Because reduction is compatible with substitution, the reduction of $A=B(B(B(x)))$ equals the triple
@@ -276,8 +282,8 @@ A(x)=\frac{x+x^7}{1+x^2+x^4+x^6+x^8}.
 \]
 Now multiply the numerator and the denominator by $1+x^2$. The numerator becomes $(x+x^7)(1+x^2)=x+x^3+x^7+x^9$. The
 denominator becomes $(1+x^2)(1+x^2+x^4+x^6+x^8)=1+x^{10}$, because every middle term appears twice and so vanishes.
-This proves the first form of \eqref{eq:key}. Finally, $1/(1+x^{10})=1+x^{10}+x^{20}+\cdots$ (check by multiplying out),
-which gives the second form. Reading off coefficients, $a(n)$ is odd exactly when $n\equiv1,3,7,9\pmod{10}$.
+This proves the first form of \eqref{eq:key}. Finally, $1/(1+x^{10})=1+x^{10}+x^{20}+\cdots$, which
+gives the second form. Reading off coefficients, $a(n)$ is odd exactly when $n\equiv1,3,7,9\pmod{10}$.
 \end{proof}
 
 \section{Checking the results}\label{sec:checks}
@@ -293,10 +299,9 @@ A computation can only test finitely many cases, so it is a check on the definit
 
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
-in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
-this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
-mathematics. The statements are collected in the file \texttt{lean/Entries/A396093.lean} of the repository,
-in the namespace \texttt{OEIS.A396093}. There $B$ is defined by the equation $B\cdot(1-x)^2=x$ and $A$ as the actual threefold composition.
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A396093.lean} of the repository,
+in the namespace \texttt{OEIS.A396093}. There $B$ is defined by the equation $B\cdot(1-x)^2=x$ and $A$ as $B\circ B\circ B$.
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
@@ -311,11 +316,11 @@ Corollary~\ref{cor:conj}(a) and (b) & \texttt{even\_\allowbreak{}indices}, \text
 \bottomrule
 \end{tabular}
 \end{center}
-The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
-that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+The Lean project was rebuilt from source, and the axioms on which each of these theorems depends were listed with
+Lean's \texttt{\#print axioms} command. Every one depends only on the three standard axioms of Lean's logic
 (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
 exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
-so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+so the Lean definitions were also compared with the definition in the OEIS entry
 (Section~\ref{sec:sequence}).
 
 \section{Discussion}\label{sec:discussion}
@@ -326,31 +331,31 @@ entry completely. It says nothing about the remainders of $a(n)$ modulo other nu
 \para{Other iterates.} The same calculation applies to every iterate of $B$. The first two rows of the table above
 already show that $B(x)\equiv x/(1+x^2)$ and, after multiplying by $1+x^2$, that
 $B(B(x))\equiv(x+x^5)/(1+x^6)\pmod2$. So the coefficients of $B(B(x))$ (OEIS A030267) are odd exactly when
-$n\equiv1$ or $5\pmod 6$. For the fourth iterate, a computer calculation shows a parity pattern of period $34$; we did not
-find a simple rule that predicts the period for every iterate, and this seems a natural question.
+$n\equiv1$ or $5\pmod 6$. For the fourth iterate, a computer calculation shows a parity pattern of period $34$. We do not
+know a rule that gives the period for every iterate.
 
-\para{Higher moduli.} A computer calculation suggests that $a(n)$ modulo $4$ is also periodic, with period $20$,
-starting from $n=0$. Since $A$ is a ratio of polynomials, some period is guaranteed; the method of this paper could be used to
-determine it exactly.
+\para{Higher moduli.} In a computer calculation, the remainders of $a(n)$ modulo $4$ repeat with period $20$,
+starting from $n=0$; we have not proved that this continues. Since $A$ is a ratio of polynomials, these remainders are
+periodic from some point on, and the method of this paper could be used to determine the period.
 
 \section*{About this paper}\label{sec:about}
 \para{How the work was done.}
-This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
-by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+This paper is one of 29 papers on conjectures from the OEIS that came out of an AI research effort directed by
+Dev~D.~Goyal~\cite{repo}. The roles were as follows.
 \begin{itemize}
 \item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
 revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
 \item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
 searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
 of this paper.
-\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
-rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently. It rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
 Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
 written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
-terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
-theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
-places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
-the further observations in it were checked by computer and are not part of the Lean formalization.
+terms; and read every step of the proofs. It then wrote the present version of the paper, expanding the
+explanations and, in places, writing out an argument in more detail or by a more elementary route. The theorems of
+Section~\ref{sec:results} and the proof strategies are ChatGPT's. The Discussion section, including the short arguments
+in it, was written by Claude Opus~5.5; its observations were checked by computer and are not part of the Lean
+formalization.
 \end{itemize}
 Dev~D.~Goyal has verified the results and is responsible for this paper.
 

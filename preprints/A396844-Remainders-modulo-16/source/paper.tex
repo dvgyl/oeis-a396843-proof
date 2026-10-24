@@ -47,12 +47,14 @@ $n-1$. Both results hold, in a form that depends on $m$, for the whole family of
 The results were checked by computer and proved formally in the Lean proof assistant.
 \end{abstract}
 \begin{center}\begin{minipage}{0.88\linewidth}\small
-\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
-ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
-Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
-Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
-source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
-every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+\textbf{How this paper was produced.} This paper reports the result of an AI research effort directed by
+Dev~D.~Goyal. ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working autonomously from prompts by
+Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
+ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
+and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
 \end{minipage}\end{center}
@@ -61,7 +63,7 @@ The section ``About this paper'' at the end gives the details.
 
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
-sequences, used by mathematicians and scientists to identify sequences and to record what is known about them. Many
+sequences. Many
 entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
 
 This paper is about entry A396844~\cite{oeis4}, contributed by Paul~D.~Hanna in July 2026.
@@ -76,13 +78,12 @@ A\bigl(x\,A(x)-4\,x\,A(x)^2\bigr)=x^2 .
 \end{equation}
 To read the left side, first form the series $T(x)=x\,A(x)-4\,x\,A(x)^2$, which begins with $x^2$, and
 then substitute $T(x)$ for $x$ in $A$. (Section~\ref{sec:background} explains what substituting one series into another
-means.) The equation says that the result is $x^2$. The entry reads:
+means.) The equation states that the result is $x^2$. The entry reads:
 \begin{quote}\small\ttfamily\raggedright G.f. A(x) satisfies A( x*A(x) - 4*x*A(x)\^{}2 ) = x\^{}2.\par\smallskip Conjecture: for n > 8, a(n) == 12 (mod 16) iff n is of the form 2*4\^{}k+1 otherwise a(n) is divisible by 16.\par\smallskip\hfill\textrm{--- OEIS A396844, Paul D. Hanna, July 2026}\end{quote}
 
 Here ``G.f.''\ stands for \emph{generating function}, the series whose coefficients are the terms of the sequence.
 
-It is not obvious that equation~\eqref{eq:entry} pins down a series at all, so let us see how it determines the
-coefficients. Write $A=x+a(2)x^2+\cdots$, with first coefficient $a(1)=1$ as in the entry. Then
+Equation~\eqref{eq:entry} determines the coefficients of $A$ one at a time, as follows. Write $A=x+a(2)x^2+\cdots$, with first coefficient $a(1)=1$ as in the entry. Then
 \[
 T=x\,A-4\,x\,A^2=x^2+\bigl(a(2)-4\bigr)x^3+\cdots,
 \qquad
@@ -125,8 +126,8 @@ is $12$ if $n=2\cdot4^k+1$ ($n=3,9,33,129,\dots$), and it is $0$ for all other $
 
 So the first half of the conjecture is true: for $n>8$, the remainder is $12$ exactly when $n=2\cdot4^k+1$. The second
 half, ``otherwise $a(n)$ is divisible by $16$'', is false: it fails at $n=17,65,257,\dots$, where the remainder is $4$.
-The smallest counterexample is $a(17)=113101684573952804$. These exceptions are rare (below $1000$ there are only three
-of them after $n=8$), which may explain why they were missed.
+The smallest counterexample is $a(17)=113101684573952804$. These exceptions are rare: below $1000$ there are only three
+of them after $n=8$.
 \item \emph{$a(n)$ is divisible by $4^{s_2(n-1)}$, where $s_2(n-1)$ is the number of ones in the binary expansion of
 $n-1$.} The same holds for the coefficients of the compositional inverse of $A$.
 \end{enumerate}
@@ -136,8 +137,8 @@ All of these statements are special cases of theorems about the whole family of 
 A_m\bigl(x\,A_m(x)-m\,x\,A_m(x)^2\bigr)=x^2,
 \]
 in which $4$ is replaced by an arbitrary integer $m$. Hanna's entries A265940, A271958, A396843,
-A396844 and A396845~\cite{oeis1,oeis2,oeis3,oeis4,oeis5} are the cases $m=1,2,3,4,5$. The heart of the matter is a
-simple formula for the whole series modulo $m^2$ (Theorem~\ref{thm:modsq}):
+A396844 and A396845~\cite{oeis1,oeis2,oeis3,oeis4,oeis5} are the cases $m=1,2,3,4,5$. The central result is a
+formula for the whole series modulo $m^2$ (Theorem~\ref{thm:modsq}):
 \[
 A_m(x)\equiv x+m\,\bigl(x^2-x^3+x^5-x^9+x^{17}-x^{33}+\cdots\bigr)\pmod{m^2},
 \]
@@ -147,7 +148,7 @@ where the exponents are the numbers $2^j+1$ and the signs alternate.
 The entry records several formulas due to Hanna. One of them, $B(x^2)=x\,A(x)-4\,x\,A(x)^2$, where $B$ is
 the compositional inverse of $A$ (Section~\ref{sec:background}), is the starting point of our proof of the divisibility
 result. As of October 2026 the entry does not mention the exceptions at $n=4^k+1$.
-We are not aware of any other proof of these statements.
+We are not aware of an earlier proof of these statements.
 
 \subsection{Why it is interesting}
 Equation~\eqref{eq:entry} mixes two operations, multiplication and substitution. Such equations rarely have explicit
@@ -155,8 +156,8 @@ solutions: the coefficients can be computed one after another, but there is usua
 quickly. Hanna has contributed many sequences of this kind to the OEIS. For such sequences, divisibility patterns are
 often the only structure that is visible in the data, and proving them is one way to understand the sequence.
 
-The divisibility result is perhaps the most surprising of the three. Statements in which the binary digits of $n$
-control divisibility are classical for explicit numbers. For instance, Legendre's formula says that the exponent of $2$
+In the divisibility result, the binary digits of $n-1$ control the power of $m$ that divides $a(n)$. Statements of
+this kind are classical for explicit numbers. For instance, Legendre's formula says that the exponent of $2$
 in $n!$ equals $n-s_2(n)$, where $s_2(n)$ is the number of ones in the binary expansion of $n$~\cite{concrete}.
 Here the same kind of structure appears in a series that is defined only implicitly.
 
@@ -176,8 +177,8 @@ A \emph{formal power series} is an expression
 \[
 U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots ,
 \]
-determined by its sequence of coefficients $u_0,u_1,u_2,\dots$. No number is ever substituted for $x$, so questions
-of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
+determined by its sequence of coefficients $u_0,u_1,u_2,\dots$; see~\cite{niven,stanley}. No number is ever
+substituted for $x$, so questions of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
 when all their coefficients are equal.
 
 Series are added coefficient by coefficient and multiplied like polynomials:
@@ -187,12 +188,15 @@ Series are added coefficient by coefficient and multiplied like polynomials:
 Each coefficient of a product is a finite sum. For example, $(1-x)(1+x+x^2+x^3+\cdots)=1$, so $1+x+x^2+\cdots$ is
 the \emph{multiplicative inverse} of $1-x$, written $\frac{1}{1-x}$. More generally, every series $D$ with constant term
 $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determined one at a time by $D\cdot\frac1D=1$
-using only addition, subtraction and multiplication. Every fraction in this paper has a denominator of this kind, so it
-denotes a power series.
+using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
+denominator has constant term $1$, so the quotient is again a power series.
 
-We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
-$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
-constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
+series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+$U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
+zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
+constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
+called \emph{normalized}.
 
 \subsection{Substituting one series into another}
 If $V(x)$ has constant term $0$, we can substitute $V$ for $x$ in $U$:
@@ -231,9 +235,8 @@ $U=U\circ(V\circ W)=(U\circ V)\circ W=W$, so $V\circ U=V\circ W=x$ as well.
 
 \subsection{Remainders and congruences}
 For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
-$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
-remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
-$a$ is odd is the same as saying $a\equiv1\pmod2$.
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. The remainder of $a$ on division by
+$m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$.
 
 Addition and multiplication are compatible with congruences, so the residues $0,1,\dots,m-1$, added and multiplied
 modulo $m$, form a ring, written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we have $1+1=0$,
@@ -248,7 +251,7 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Several lemmas below hold over every \emph{commutative ring}, that is, every set with an addition,
+\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
 subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
 division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
@@ -261,17 +264,11 @@ addition, subtraction and multiplication. Then the equation has exactly one solu
 commutative ring, including $\Z/m\Z$.
 \item \emph{Reduction.} Reducing the integer solution modulo $m$ gives a solution of the reduced equation,
 because reduction is compatible with all operations.
-\item \emph{A good guess.} Find a simple series that satisfies the reduced equation and check that it does. By uniqueness,
-this simple series \emph{is} the reduction of the sequence, and its coefficients can simply be read off.
+\item \emph{A candidate solution.} Find an explicit series that satisfies the reduced equation. By uniqueness, it is
+the reduction of the sequence, and its coefficients can be read off.
 \end{enumerate}
-The creative part is step~3: finding a simple series that works. Step~1 sometimes needs care, when the equation seems to
-require a division.
-For a first example, take the Catalan series $C=x+C^2$ from above. Its coefficients $1,1,2,5,14,42,\dots$ are
-determined one at a time by this equation. Modulo $2$, the series $S=x+x^2+x^4+x^8+\cdots$ satisfies the same
-equation: in $\F_2$, $S^2=x^2+x^4+x^8+\cdots$ (see Lemma~\ref{lem:frobenius}), so $x+S^2=S$. Hence $C\equiv S\pmod2$,
-and the Catalan coefficient $\coeff{n}{C}$ is odd exactly when $n$ is a power of $2$.
-
-\subsection{Squaring modulo \texorpdfstring{$2$}{2}}
+Finding the candidate in step~3 is usually the main difficulty.
+\subsection{The Frobenius identity}
 \begin{lemma}[Frobenius identity]\label{lem:frobenius}
 Let $p$ be a prime. For every power series $U$ with coefficients in $\F_p$, we have $U(x)^p=U(x^p)$.
 \end{lemma}
@@ -279,18 +276,19 @@ Let $p$ be a prime. For every power series $U$ with coefficients in $\F_p$, we h
 \begin{proof}
 In $\F_p$, the binomial theorem simplifies to $(a+b)^p=a^p+b^p$, because every binomial coefficient
 $\binom pi$ with $0<i<p$ is divisible by $p$. Also $c^p=c$ for every $c\in\F_p$ (Fermat's little theorem). So
-$\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. Only finitely many terms matter for any given
-coefficient, so this is a polynomial identity.
+$\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. The first equality holds for polynomials by
+repeated use of $(a+b)^p=a^p+b^p$; it holds for power series because each coefficient of $U(x)^p$ involves only finitely
+many coefficients of $U$.
 \end{proof}
 
 For $p=2$ this says that squaring a series modulo $2$ doubles every exponent: for instance,
 $(x+x^3)^2\equiv x^2+x^6\pmod2$. In particular, the square of any series has, modulo $2$, no terms of odd degree.
 
 \subsection{Binary digits}
-Every whole number $r\ge0$ can be written in exactly one way as a sum of distinct powers of $2$; this is its binary
+Every integer $r\ge0$ can be written in exactly one way as a sum of distinct powers of $2$; this is its binary
 expansion. For example $13=8+4+1$, which is written $1101$ in binary. We write $s_2(r)$ for the number of powers of $2$
 in this sum, that is, the number of ones in the binary expansion of $r$. So $s_2(0)=0$, $s_2(13)=3$, $s_2(2^k)=1$, and
-$s_2(2^k-1)=k$, because $2^k-1=1+2+4+\cdots+2^{k-1}$. We use two simple facts:
+$s_2(2^k-1)=k$, because $2^k-1=1+2+4+\cdots+2^{k-1}$. We use two facts:
 \begin{equation}\label{eq:digits}
 s_2(2r)=s_2(r),\qquad s_2(r_1+r_2+\cdots+r_k)\le s_2(r_1)+s_2(r_2)+\cdots+s_2(r_k).
 \end{equation}
@@ -337,9 +335,9 @@ Recall that $s_2(r)$ is the number of ones in the binary expansion of $r$.
 Let $m\ge2$ and $n\ge1$.
 \begin{enumerate}[label=(\alph*)]
 \item $m^{\,s_2(n-1)}$ divides both $a_n(m)$ and $b_n(m)$. In particular, $m^k$ divides $a_{2^k}(m)$ for every $k\ge0$.
-\item The same holds with $m$ replaced by a variable $t$. Section~\ref{sec:proofs} shows that $a_n(m)$ and $b_n(m)$ are
-the values at $t=m$ of polynomials $a_n(t)$ and $b_n(t)$ with integer coefficients. These polynomials have no terms of
-degree less than $s_2(n-1)$ in $t$.
+\item The same holds with $m$ replaced by a variable $t$. More precisely, there are polynomials $a_n(t)$ and $b_n(t)$
+in $t$ with integer coefficients whose values at $t=m$ are $a_n(m)$ and $b_n(m)$ for every integer $m$; they are
+constructed in Section~\ref{sec:proofs}. These polynomials have no terms of degree less than $s_2(n-1)$ in $t$.
 \end{enumerate}
 \end{theorem}
 
@@ -365,7 +363,7 @@ $v_{2}(a(n))$ & 2 & 5 & 4 & 8 & 4 & 9 & 6 & 13 & 4 & 8 & 6 & 11 & 6 & 14 & 8 & \
 \end{tabular}
 \end{center}
 
-\begin{corollary}[Where the smallest power of a prime occurs]\label{cor:val}
+\begin{corollary}[Exponents of the primes dividing $m$]\label{cor:val}
 Let $m\ge2$, let $p$ be a prime that divides $m$, and let $e=v_p(m)$. Then $v_p(a_n(m))\ge e\,s_2(n-1)$ for every
 $n\ge1$. Moreover, for $n\ge2$,
 \[
@@ -396,7 +394,7 @@ at $n=17,65,257,\dots$, so the clause ``otherwise $a(n)$ is divisible by $16$'' 
 \emph{Parity:} modulo $2$, the equation is solved by $x/(1+x)=x+x^2+x^3+\cdots$ when $m$ is odd, and by $x$ when $m$ is
 even; since the solution is unique, this is the reduction of $A_m$.
 \emph{Remainders modulo $m^2$:} modulo $m$ the solution is $x$, so $A_m=x+m\,C$ for some integer series $C$.
-Putting this into the equation and discarding multiples of $m^2$ leaves the simple linear equation
+Putting this into the equation and discarding multiples of $m^2$ leaves the linear equation
 $x\,C(x)+C(x^2)\equiv x^3\pmod m$, whose solution has nonzero terms only in the degrees $2^j+1$.
 \emph{Binary digits:} substituting the inverse series into the equation gives an identity that expresses each
 coefficient through earlier ones. In that identity, an index is either halved, which does not change its binary digit
@@ -450,7 +448,7 @@ of $a_n(t)$ at $t=m$; for example $a_3(3)=2\cdot9-3=15$. The same applies to the
 
 \begin{proof}[Proof of Theorem~\ref{thm:parity}]
 Let $m$ be odd and reduce modulo $2$. Since $m\equiv1$ and $-1\equiv1$, the equation becomes $P(xP+xP^2)=x^2$ over
-$\F_2$. We try $H=x/(1+x)=x+x^2+x^3+\cdots$. Working in $\ps{\F_2}$, where $(1+x)^2=1+x^2$ (Lemma~\ref{lem:frobenius}),
+$\F_2$. Consider $H=x/(1+x)=x+x^2+x^3+\cdots$. Working in $\ps{\F_2}$, where $(1+x)^2=1+x^2$ (Lemma~\ref{lem:frobenius}),
 \begin{align*}
 xH+xH^2&=\frac{x^2(1+x)+x^3}{(1+x)^2}=\frac{x^2+2x^3}{(1+x)^2}=\frac{x^2}{(1+x)^2},\\
 H\!\left(\frac{x^2}{(1+x)^2}\right)&=\frac{x^2}{(1+x)^2+x^2}=\frac{x^2}{1+2x+2x^2}=x^2 ,
@@ -566,9 +564,8 @@ A computation can only test finitely many cases, so it is a check on the definit
 
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
-in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
-this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
-mathematics. The statements are collected in the file \texttt{lean/Entries/A396844.lean} of the repository,
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A396844.lean} of the repository,
 in the namespace \texttt{OEIS.A396844}. The general theorems of Section~\ref{sec:results}, for every $m$, are proved in the companion file
 \texttt{lean/Entries/A396843.lean}; see the paper on A396843 for the corresponding table. The failure of the
 conjectured clause at $n=17$ is the case $k=2$ of the first part of \texttt{residues\_parameter\_four}.
@@ -585,11 +582,11 @@ Corollary~\ref{cor:entry}(c): remainders $4$, $12$ and $0$ modulo $16$ & \texttt
 \bottomrule
 \end{tabular}
 \end{center}
-The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
-that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+The Lean project was rebuilt from source, and the axioms on which each of these theorems depends were listed with
+Lean's \texttt{\#print axioms} command. Every one depends only on the three standard axioms of Lean's logic
 (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
 exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
-so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+so the Lean definitions were also compared with the definition in the OEIS entry
 (Section~\ref{sec:sequence}).
 
 \section{Discussion}\label{sec:discussion}
@@ -601,37 +598,36 @@ about the radius of convergence that the entry also discusses.
 \para{Higher powers of $m$.} Theorem~\ref{thm:binary} also gives information modulo every power of $m$: modulo
 $m^k$, the coefficient $a_n(m)$ is $0$ unless $n-1$ has fewer than $k$ ones in its binary expansion. So modulo $m^k$
 the nonzero remainders can occur only at a very sparse set of indices. For $k=2$, Theorem~\ref{thm:modsq} describes these
-remainders completely. For $k=3$ the candidates are $n=1$, $n=2^i+1$ and $n=2^i+2^j+1$ with $i>j$. We did not try to
-describe the remainders modulo $m^3$; this seems a natural next question.
+remainders completely. For $k=3$ the candidates are $n=1$, $n=2^i+1$ and $n=2^i+2^j+1$ with $i>j$. The remainders modulo
+$m^3$ are not determined here.
 
 \para{Other values of $m$.} For $m=1$ (entry A265940) the results say only that every coefficient is odd. For $m=2$
-(entry A271958) they say, for example, that $a_n(2)\equiv\pm2\pmod 4$ when $n=2^j+1$ and $a_n(2)\equiv0\pmod4$ for the
+(entry A271958) they say, for example, that $a_n(2)\equiv2\pmod 4$ when $n=2^j+1$ and $a_n(2)\equiv0\pmod4$ for the
 other $n\ge2$. For $m=5$ (entry A396845) the remainders modulo $25$ are $5$ and $20$ at $n=4^k+1$ and $n=2\cdot4^k+1$,
-and $0$ elsewhere.
+respectively, and $0$ for the other $n\ge2$.
 
-\para{Why the exceptions are easy to miss.} The exceptional indices $n=4^k+1$ grow exponentially, and the conjecture
+\para{The exceptional indices.} The exceptional indices $n=4^k+1$ grow exponentially, and the conjecture
 excluded $n\le8$. So the first index at which the conjecture can be tested against an exception is $n=17$, and the next is
-$n=65$. A table with fewer than $17$ terms cannot reveal the problem. This is a small example of why a proof, rather than
-more data, is needed to settle such a pattern.
+$n=65$. A table with fewer than $17$ terms cannot reveal the problem.
 
 \section*{About this paper}\label{sec:about}
 \para{How the work was done.}
-This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
-by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+This paper is one of 29 papers on conjectures from the OEIS that came out of an AI research effort directed by
+Dev~D.~Goyal~\cite{repo}. The roles were as follows.
 \begin{itemize}
 \item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
 revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
 \item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
 searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
 of this paper.
-\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
-rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently. It rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
 Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
 written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
-terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
-theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
-places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
-the further observations in it were checked by computer and are not part of the Lean formalization.
+terms; and read every step of the proofs. It then wrote the present version of the paper, expanding the
+explanations and, in places, writing out an argument in more detail or by a more elementary route. The theorems of
+Section~\ref{sec:results} and the proof strategies are ChatGPT's. The Discussion section, including the short arguments
+in it, was written by Claude Opus~5.5; its observations were checked by computer and are not part of the Lean
+formalization.
 \end{itemize}
 Dev~D.~Goyal has verified the results and is responsible for this paper.
 

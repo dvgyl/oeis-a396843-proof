@@ -39,17 +39,19 @@
 The sequence A393859 of the On-Line Encyclopedia of Integer Sequences (OEIS) lists the coefficients of the power
 series $A(x)=x+x^2+9x^3+481x^4+\cdots$ defined by the equation
 $A\bigl(x-x\,A(7x)/7\bigr)=x$. The unknown series $A$ appears on both sides of this equation, and its coefficients grow very fast.
-Paul~D.~Hanna conjectured that every coefficient leaves remainder $1$ on division by $8$. We prove this. In fact we prove that, with $7$ replaced by any positive integer $q$, the series becomes $x+x^2+x^3+\cdots$ once its coefficients are reduced modulo $q+1$. The key observation is that in arithmetic modulo $q+1$ the number $q$ behaves like $-1$, and
-for $q=-1$ the equation can be solved by hand. The results have also been checked by computer and proved formally in the
+Paul~D.~Hanna conjectured that every coefficient leaves remainder $1$ on division by $8$. We prove this. In fact we prove that, with $7$ replaced by any positive integer $q$, the series becomes $x+x^2+x^3+\cdots$ once its coefficients are reduced modulo $q+1$. The proof rests on the congruence $q\equiv-1\pmod{q+1}$: for $q=-1$ the equation
+has an explicit solution. The results have also been checked by computer and proved formally in the
 Lean proof assistant.
 \end{abstract}
 \begin{center}\begin{minipage}{0.88\linewidth}\small
-\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
-ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
-Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
-Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
-source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
-every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+\textbf{How this paper was produced.} This paper reports the result of an AI research effort directed by
+Dev~D.~Goyal. ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working autonomously from prompts by
+Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
+ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
+and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
 \end{minipage}\end{center}
@@ -58,7 +60,7 @@ The section ``About this paper'' at the end gives the details.
 
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
-sequences, used by mathematicians and scientists to identify sequences and to record what is known about them. Many
+sequences. Many
 entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
 
 This paper is about entry A393859~\cite{oeis}, contributed by Paul~D.~Hanna in March 2026. It defines a power series
@@ -107,14 +109,14 @@ $a(n)\bmod 8$ & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
 \subsection{What this paper proves}
 \textbf{Main result} (Corollary~\ref{cor:oeis}). \emph{The conjecture is true: $a(n)\equiv1\pmod{8}$ for every $n\ge1$.}
 
-The number $7$ plays no special role. Hanna contributed a whole family of such sequences, in which
+The number $7$ plays no special role. Hanna contributed a family of such sequences, in which
 $7$ is replaced by another positive integer $q$, and we treat all of them at once.
 Theorem~\ref{thm:mod} shows that, for every $q\ge1$, all coefficients leave remainder $1$ on division by $q+1$.
 Theorem~\ref{thm:parity} shows that, for every even $q$, a coefficient is odd exactly when its index is a power of $2$.
 
-The key observation is very simple. In arithmetic modulo $q+1$, the number $q$ is the same as $-1$, and when $q=-1$ the
-equation has the obvious solution $x+x^2+x^3+\cdots$. In the same way, modulo $2$ an even number $q$ is the same as $0$,
-and when $q=0$ the equation becomes the classical equation of the Catalan numbers, whose parity is well known.
+The proof rests on two observations. Modulo $q+1$ we have $q\equiv-1$, and for $q=-1$ the equation has the
+explicit solution $x+x^2+x^3+\cdots$. Similarly, modulo $2$ an even $q$ is congruent to $0$, and for $q=0$ the
+equation becomes the classical equation of the Catalan numbers, whose parity is well known.
 
 \subsection{What was known}
 Hanna contributed the four entries A393856--A393859, for $q=4,5,6,7$, in March 2026, each with the conjectures for its
@@ -128,10 +130,10 @@ series and their reduction modulo an integer, are standard; see~\cite{niven,stan
 Equations in which an unknown series is substituted into an expression built from itself are common in
 combinatorics, where they describe structures defined recursively, such as trees. The Catalan numbers, the case $q=0$
 of this family, are the classic example. Hanna has contributed many such equations to the OEIS. For $q\ge1$ the
-coefficients grow so fast that no direct formula for them is in sight, so it is striking that their remainders follow
-such simple rules. The proof explains the rules: working modulo $q+1$ or modulo $2$ replaces the parameter $q$ by $-1$
-or by $0$, two values at which the equation can be solved by hand. This idea, choosing a modulus in which the equation
-becomes simple, runs through this whole collection of papers.
+coefficients grow rapidly and no closed formula for them is known to us, yet their remainders follow simple rules. The
+proof explains these rules: working modulo $q+1$ replaces the parameter $q$ by $-1$, and, for even $q$, working modulo
+$2$ replaces it by $0$; at these two values the equation can be solved explicitly. The same approach, reduction modulo
+a number for which the equation simplifies, is used in other papers of this collection.
 
 \subsection{How to read this paper}
 Section~\ref{sec:background} explains the few notions we need: power series, substitution, and remainders.
@@ -146,8 +148,8 @@ A \emph{formal power series} is an expression
 \[
 U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots ,
 \]
-determined by its sequence of coefficients $u_0,u_1,u_2,\dots$. No number is ever substituted for $x$, so questions
-of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
+determined by its sequence of coefficients $u_0,u_1,u_2,\dots$; see~\cite{niven,stanley}. No number is ever
+substituted for $x$, so questions of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
 when all their coefficients are equal.
 
 Series are added coefficient by coefficient and multiplied like polynomials:
@@ -157,12 +159,15 @@ Series are added coefficient by coefficient and multiplied like polynomials:
 Each coefficient of a product is a finite sum. For example, $(1-x)(1+x+x^2+x^3+\cdots)=1$, so $1+x+x^2+\cdots$ is
 the \emph{multiplicative inverse} of $1-x$, written $\frac{1}{1-x}$. More generally, every series $D$ with constant term
 $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determined one at a time by $D\cdot\frac1D=1$
-using only addition, subtraction and multiplication. Every fraction in this paper has a denominator of this kind, so it
-denotes a power series.
+using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
+denominator has constant term $1$, so the quotient is again a power series.
 
-We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
-$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
-constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
+series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+$U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
+zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
+constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
+called \emph{normalized}.
 
 \subsection{Substituting one series into another}
 If $V(x)$ has constant term $0$, we can substitute $V$ for $x$ in $U$:
@@ -201,9 +206,8 @@ $U=U\circ(V\circ W)=(U\circ V)\circ W=W$, so $V\circ U=V\circ W=x$ as well.
 
 \subsection{Remainders and congruences}
 For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
-$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
-remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
-$a$ is odd is the same as saying $a\equiv1\pmod2$.
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. The remainder of $a$ on division by
+$m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$.
 
 Addition and multiplication are compatible with congruences, so the residues $0,1,\dots,m-1$, added and multiplied
 modulo $m$, form a ring, written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we have $1+1=0$,
@@ -218,7 +222,7 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Several lemmas below hold over every \emph{commutative ring}, that is, every set with an addition,
+\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
 subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
 division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
@@ -231,11 +235,10 @@ addition, subtraction and multiplication. Then the equation has exactly one solu
 commutative ring, including $\Z/m\Z$.
 \item \emph{Reduction.} Reducing the integer solution modulo $m$ gives a solution of the reduced equation,
 because reduction is compatible with all operations.
-\item \emph{A good guess.} Find a simple series that satisfies the reduced equation and check that it does. By uniqueness,
-this simple series \emph{is} the reduction of the sequence, and its coefficients can simply be read off.
+\item \emph{A candidate solution.} Find an explicit series that satisfies the reduced equation. By uniqueness, it is
+the reduction of the sequence, and its coefficients can be read off.
 \end{enumerate}
-The creative part is step~3: finding a simple series that works. Step~1 sometimes needs care, when the equation seems to
-require a division.
+Finding the candidate in step~3 is usually the main difficulty.
 
 \section{Results}\label{sec:results}
 
@@ -285,10 +288,10 @@ For the sequence of OEIS A393859: $a(n)\equiv1\pmod{8}$ for every $n\ge1$.
 
 \para{The idea in brief.} The equation determines the coefficients of $A$ one at a time, without any division, so it
 has exactly one solution over every commutative ring, including $\Z/(q+1)\Z$ and $\Z/2\Z$
-(Theorem~\ref{thm:exist}). Modulo $q+1$ we may replace $q$ by $-1$, and then $x+x^2+x^3+\cdots$ is easily seen to be a
-solution. Modulo $2$, for even $q$, we may replace $q$ by $0$, and then the equation says that $A$ undoes the
-substitution $x\mapsto x-x^2$, which is exactly what the Catalan series does. By uniqueness, these simple series are
-the reductions of $G_q$.
+(Theorem~\ref{thm:exist}). Modulo $q+1$ we may replace $q$ by $-1$, and then a direct calculation shows that $x+x^2+x^3+\cdots$ is
+a solution. Modulo $2$, for even $q$, we may replace $q$ by $0$, and then the equation says that $A$ undoes the
+substitution $x\mapsto x-x^2$, which is exactly what the Catalan series does. By uniqueness, these explicit series
+are the reductions of $G_q$.
 
 \begin{proof}[Proof of Theorem~\ref{thm:exist}]
 Write $G=x+g_2x^2+g_3x^3+\cdots$ with unknown coefficients, and put $V=x-x\,L_q(G)$. By \eqref{eq:L}, the coefficient
@@ -359,9 +362,8 @@ A computation can only test finitely many cases, so it is a check on the definit
 
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
-in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
-this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
-mathematics. The statements are collected in the file \texttt{lean/Entries/A393859.lean} of the repository,
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A393859.lean} of the repository,
 in the namespace \texttt{OEIS.A393859}. In Lean, the operation $L_q$ of \eqref{eq:L} is called \texttt{scaleTail q}. The general theorems for every $q$ are \texttt{integer\_mod\_parameter\_add\_one} (Theorem~\ref{thm:mod}) and \texttt{integer\_coeff\_odd\_iff} (Theorem~\ref{thm:parity} for even $q$), in the namespace \texttt{Hanna.\allowbreak Related.\allowbreak ScaledInverse}, in the files \texttt{lean/\allowbreak Hanna/\allowbreak Related/\allowbreak ScaledInverse.lean} and \texttt{ScaledParity.lean} of the same folder.
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
@@ -375,11 +377,11 @@ Corollary~\ref{cor:oeis}: $a(n)\equiv1\pmod{8}$ for $n\ge1$ & \texttt{a393859\_\
 \bottomrule
 \end{tabular}
 \end{center}
-The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
-that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+The Lean project was rebuilt from source, and the axioms on which each of these theorems depends were listed with
+Lean's \texttt{\#print axioms} command. Every one depends only on the three standard axioms of Lean's logic
 (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
 exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
-so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+so the Lean definitions were also compared with the definition in the OEIS entry
 (Section~\ref{sec:sequence}).
 
 \section{Discussion}\label{sec:discussion}
@@ -406,26 +408,26 @@ A088714 after shifting the index by one). For instance, A195195 is defined by th
 exactly when its index is a power of $2$.
 
 \para{Open questions.} We have not studied the remainders modulo other numbers, such as $64=(q+1)^2$
-for $q=7$. It would be interesting to know whether they are also governed by a simple series.
+for $q=7$. It would be interesting to know whether they are also given by an explicit series.
 
 \section*{About this paper}\label{sec:about}
 \para{How the work was done.}
-This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
-by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+This paper is one of 29 papers on conjectures from the OEIS that came out of an AI research effort directed by
+Dev~D.~Goyal~\cite{repo}. The roles were as follows.
 \begin{itemize}
 \item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
 revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
 \item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
 searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
 of this paper.
-\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
-rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently. It rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
 Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
 written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
-terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
-theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
-places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
-the further observations in it were checked by computer and are not part of the Lean formalization.
+terms; and read every step of the proofs. It then wrote the present version of the paper, expanding the
+explanations and, in places, writing out an argument in more detail or by a more elementary route. The theorems of
+Section~\ref{sec:results} and the proof strategies are ChatGPT's. The Discussion section, including the short arguments
+in it, was written by Claude Opus~5.5; its observations were checked by computer and are not part of the Lean
+formalization.
 \end{itemize}
 Dev~D.~Goyal has verified the results and is responsible for this paper.
 
@@ -440,7 +442,7 @@ available.
 
 \section*{Acknowledgements}
 The sequence and the conjecture are due to Paul~D.~Hanna~\cite{oeis}, who contributed
-the whole family A393856--A393859 ($q=4,5,6,7$), as well as the earlier members A088714, A195195 and A195196.
+the entries A393856--A393859 ($q=4,5,6,7$), as well as the earlier members A088714, A195195 and A195196.
 
 \begin{thebibliography}{99}\small
 \raggedright

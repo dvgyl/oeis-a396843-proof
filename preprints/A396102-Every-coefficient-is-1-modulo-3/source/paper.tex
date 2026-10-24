@@ -47,12 +47,14 @@ A140094 is $1$ modulo $3$, and every term of OEIS A067145 is odd. The main resul
 proved formally in the Lean proof assistant.
 \end{abstract}
 \begin{center}\begin{minipage}{0.88\linewidth}\small
-\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
-ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
-Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
-Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
-source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
-every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+\textbf{How this paper was produced.} This paper reports the result of an AI research effort directed by
+Dev~D.~Goyal. ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working autonomously from prompts by
+Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
+ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
+and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
 \end{minipage}\end{center}
@@ -61,7 +63,7 @@ The section ``About this paper'' at the end gives the details.
 
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
-sequences, used by mathematicians and scientists to identify sequences and to record what is known about them. Many
+sequences. Many
 entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
 
 This paper is about entry A396102~\cite{oeis}, contributed by Paul~D.~Hanna in June 2026. Its name is:
@@ -125,18 +127,19 @@ $1$ modulo $3$ and every term of A067145 is odd (Section~\ref{sec:discussion}).
 \subsection{What was known}
 The equation for the inverse series $R$ recorded in the entry (its formula~(5)) is the starting point of our proof; we
 prove it from the definition (Lemma~\ref{lem:aux}). In October 2026, Amol Bhave added to OEIS A196523~\cite{oeisB} a
-proof of a congruence for a different family, $A(x)=x+x\cdot A^{\circ l}(x)$, by comparing the solution with
-$x/(1-x)$ in the same way. The equation treated here is different: it relates two consecutive iterates, and the
+proof of a congruence for a different family: for every $\ell\ge2$, the coefficients of the solution of
+$A(x)=x+x\cdot A^{\circ\ell}(x)$, where $A^{\circ\ell}$ is the $\ell$-th iterate of $A$, are all $1$ modulo $\ell-1$. The
+proof compares the solution with $x/(1-x)$, as we do here. The equation treated here is different: it relates two
+consecutive iterates, and the
 comparison works for the inverse series rather than for $A$ itself. We are not aware of an earlier proof of the
 conjecture of A396102.
 
 \subsection{Why it is interesting}
 Equations that involve iterates of an unknown series, such as $A(A(A(x)))=(1+x)A(A(x))$, are hard to study: there is
-no general method for solving them, and the coefficients of the solutions are usually large and irregular. Simple
-remainders are one of the few kinds of structure that can be proved. This example shows that the structure can be
-explained by a single simple series, $x/(1-x)$, whose iterates are $x/(1-kx)$. It also shows the value of looking at a
-whole family of equations at once, and at the inverse series: the proof becomes a short calculation, and it gives
-results for other OEIS entries at no extra cost.
+no general method for solving them, and the coefficients of the solutions are usually large and irregular. In this
+example the remainders are explained by a single series, $x/(1-x)$, whose iterates are $x/(1-kx)$. The proof works with
+a whole family of equations at once, and with the inverse series rather than with $A$; it also gives results for two
+other OEIS entries.
 
 \subsection{How to read this paper}
 Section~\ref{sec:background} explains the few notions we need: power series, substitution, compositional inverses,
@@ -151,8 +154,8 @@ A \emph{formal power series} is an expression
 \[
 U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots ,
 \]
-determined by its sequence of coefficients $u_0,u_1,u_2,\dots$. No number is ever substituted for $x$, so questions
-of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
+determined by its sequence of coefficients $u_0,u_1,u_2,\dots$; see~\cite{niven,stanley}. No number is ever
+substituted for $x$, so questions of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
 when all their coefficients are equal.
 
 Series are added coefficient by coefficient and multiplied like polynomials:
@@ -162,12 +165,15 @@ Series are added coefficient by coefficient and multiplied like polynomials:
 Each coefficient of a product is a finite sum. For example, $(1-x)(1+x+x^2+x^3+\cdots)=1$, so $1+x+x^2+\cdots$ is
 the \emph{multiplicative inverse} of $1-x$, written $\frac{1}{1-x}$. More generally, every series $D$ with constant term
 $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determined one at a time by $D\cdot\frac1D=1$
-using only addition, subtraction and multiplication. Every fraction in this paper has a denominator of this kind, so it
-denotes a power series.
+using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
+denominator has constant term $1$, so the quotient is again a power series.
 
-We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
-$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
-constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
+series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+$U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
+zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
+constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
+called \emph{normalized}.
 
 \subsection{Substituting one series into another}
 If $V(x)$ has constant term $0$, we can substitute $V$ for $x$ in $U$:
@@ -206,9 +212,8 @@ $U=U\circ(V\circ W)=(U\circ V)\circ W=W$, so $V\circ U=V\circ W=x$ as well.
 
 \subsection{Remainders and congruences}
 For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
-$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
-remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
-$a$ is odd is the same as saying $a\equiv1\pmod2$.
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. The remainder of $a$ on division by
+$m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$.
 
 Addition and multiplication are compatible with congruences, so the residues $0,1,\dots,m-1$, added and multiplied
 modulo $m$, form a ring, written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we have $1+1=0$,
@@ -223,7 +228,7 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Several lemmas below hold over every \emph{commutative ring}, that is, every set with an addition,
+\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
 subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
 division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
@@ -236,11 +241,10 @@ addition, subtraction and multiplication. Then the equation has exactly one solu
 commutative ring, including $\Z/r\Z$.
 \item \emph{Reduction.} Reducing the integer solution modulo $r$ gives a solution of the reduced equation,
 because reduction is compatible with all operations.
-\item \emph{A good guess.} Find a simple series that satisfies the reduced equation and check that it does. By uniqueness,
-this simple series \emph{is} the reduction of the sequence, and its coefficients can simply be read off.
+\item \emph{A candidate solution.} Find an explicit series that satisfies the reduced equation. By uniqueness, it is
+the reduction of the sequence, and its coefficients can be read off.
 \end{enumerate}
-The creative part is step~3: finding a simple series that works. Step~1 sometimes needs care, when the equation seems to
-require a division.
+Finding the candidate in step~3 is usually the main difficulty.
 \subsection{The series \texorpdfstring{$x/(1-cx)$}{x/(1-cx)}}
 For a number $c$ in a commutative ring, put
 \[
@@ -372,10 +376,9 @@ A computation can only test finitely many cases, so it is a check on the definit
 
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
-in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
-this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
-mathematics. The statements are collected in the file \texttt{lean/Entries/A396102.lean} of the repository,
-in the namespace \texttt{OEIS.A396102}. In Lean the family is indexed so that \texttt{family\_source\_existence r} is the case $r+1$ of~\eqref{eq:family}. The proofs are in the file \texttt{lean/Families/InverseIterate.lean}. The consequences for OEIS A140094 and A067145 in Section~\ref{sec:discussion} are not part of the Lean formalization.
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A396102.lean} of the repository,
+in the namespace \texttt{OEIS.A396102}. In Lean, \texttt{family\_source\_existence r} and \texttt{family\_source\_equation r} state the case $r+1$ of~\eqref{eq:family}, so that $r=0$ in Lean corresponds to $r=1$ in this paper; the other declarations use the same $r$ as the paper. The proofs are in the file \texttt{lean/Families/InverseIterate.lean}. The consequences for OEIS A140094 and A067145 in Section~\ref{sec:discussion} are not part of the Lean formalization.
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
@@ -389,19 +392,19 @@ Theorem~\ref{thm:main} for every $r$ & \texttt{family\_\allowbreak{}coefficient\
 \bottomrule
 \end{tabular}
 \end{center}
-The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
-that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+The Lean project was rebuilt from source, and the axioms on which each of these theorems depends were listed with
+Lean's \texttt{\#print axioms} command. Every one depends only on the three standard axioms of Lean's logic
 (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
 exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
-so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+so the Lean definitions were also compared with the definition in the OEIS entry
 (Section~\ref{sec:sequence}).
 
 \section{Discussion}\label{sec:discussion}
 
 \para{Scope.} Theorem~\ref{thm:main} determines every coefficient of every member of the family modulo $r$, and every
 coefficient of every iterate. It says nothing about higher powers of $r$: modulo $9$ the coefficients of A396102 show no
-evident pattern (see the table in Section~\ref{sec:sequence}). It also says nothing about the signs. The terms of
-A396102 alternate in sign from $n=2$ on for every $n<60$ that we computed; we have not proved this.
+evident pattern (see the table in Section~\ref{sec:sequence}). It also says nothing about the signs. The computed
+terms $a(2),a(3),\dots,a(59)$ of A396102 alternate in sign; we have not proved that this continues.
 
 \para{Two related entries.} The theorem has consequences for two older OEIS entries, which we checked against their
 published terms.
@@ -421,29 +424,29 @@ and by Theorem~\ref{thm:main} \emph{every term of A067145 is odd.} The 23 terms 
 \end{itemize}
 
 \para{Why $x/(1-x)$?} The series $M_1=x/(1-x)$ is special because its iterates are so simple: $M_1^{\circ k}=x/(1-kx)$.
-Modulo $r$, the $r$-th iterate is $x$ again, so in any equation in which iterates appear only through their number
-modulo $r$, the series $x/(1-x)$ or $x/(1+x)$ is a natural candidate. The same observation underlies Bhave's proof
+Modulo $r$, the $r$-th iterate is $x$ again. So in any equation in which the number of iterations matters only modulo
+$r$, the series $x/(1-x)$ or $x/(1+x)$ is a natural candidate for a solution modulo $r$. The same observation underlies Bhave's proof
 for A196523~\cite{oeisB}. It would be interesting to know which other iterative equations in the OEIS can be treated
 this way.
 
 \section*{About this paper}\label{sec:about}
 \para{How the work was done.}
-This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
-by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+This paper is one of 29 papers on conjectures from the OEIS that came out of an AI research effort directed by
+Dev~D.~Goyal~\cite{repo}. The roles were as follows.
 \begin{itemize}
 \item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
 revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
 \item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
 searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
 of this paper.
-\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
-rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently. It rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
 Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
 written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
-terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
-theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
-places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
-the further observations in it were checked by computer and are not part of the Lean formalization.
+terms; and read every step of the proofs. It then wrote the present version of the paper, expanding the
+explanations and, in places, writing out an argument in more detail or by a more elementary route. The theorems of
+Section~\ref{sec:results} and the proof strategies are ChatGPT's. The Discussion section, including the short arguments
+in it, was written by Claude Opus~5.5; its observations were checked by computer and are not part of the Lean
+formalization.
 \end{itemize}
 Dev~D.~Goyal has verified the results and is responsible for this paper.
 

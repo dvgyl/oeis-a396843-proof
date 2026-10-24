@@ -105,7 +105,7 @@ sources:
     type: article
     relationship: formalizes
 
-  - title: "The odd-indexed terms of a nested square are even"
+  - title: "The odd-indexed terms of a nested square are even after the first term"
     authors: ["Dev D. Goyal"]
     id: ../preprints/A392210-Odd-indexed-terms-of-a-nested-square/paper.pdf
     type: article
@@ -165,7 +165,7 @@ sources:
     type: article
     relationship: formalizes
 
-  - title: "The coefficients of (exp(x)-1)/cos(2x) modulo 4 and 5"
+  - title: "The numbers with exponential generating function (exp(x)-1)/cos(2x), modulo 4 and 5"
     authors: ["Dev D. Goyal"]
     id: ../preprints/A380056-Exponential-over-cosine-modulo-4-and-5/paper.pdf
     type: article

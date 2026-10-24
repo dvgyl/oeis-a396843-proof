@@ -36,7 +36,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $\theta(x)=1+2x+2x^4+2x^9+2x^{16}+\cdots$ be the theta series, whose coefficient of $x^n$ is $2$ when $n$ is a
+Let $\theta(x)=1+2x+2x^4+2x^9+2x^{16}+\cdots$ be the Jacobi theta series $\theta_3$, whose coefficient of $x^n$ is $2$ when $n$ is a
 positive perfect square and $0$ otherwise. Entry A378581 of the On-Line Encyclopedia of Integer Sequences (OEIS),
 contributed by Paul~D.~Hanna, lists the coefficients $a(n)$ of the power series $A(x)=1+2x-4x^2+24x^3-206x^4+\cdots$
 determined by $A\bigl(x\,A(x)\bigr)=\theta(x)$. The entry conjectures that for $n>0$ the coefficient $a(n)$ leaves remainder $2$ on
@@ -47,12 +47,14 @@ does not change when its argument is changed by a multiple of $2$. The results w
 formally in the Lean proof assistant.
 \end{abstract}
 \begin{center}\begin{minipage}{0.88\linewidth}\small
-\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
-ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
-Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
-Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
-source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
-every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+\textbf{How this paper was produced.} This paper reports the result of an AI research effort directed by
+Dev~D.~Goyal. ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working autonomously from prompts by
+Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
+ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
+and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
 \end{minipage}\end{center}
@@ -61,7 +63,7 @@ The section ``About this paper'' at the end gives the details.
 
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
-sequences, used by mathematicians and scientists to identify sequences and to record what is known about them. Many
+sequences. Many
 entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
 
 This paper is about entry A378581~\cite{oeis}, contributed by Paul~D.~Hanna in January 2025. It starts from the
@@ -72,7 +74,7 @@ This paper is about entry A378581~\cite{oeis}, contributed by Paul~D.~Hanna in J
 Another way to write it is $\theta(x)=\sum_{k}x^{k^2}$, where $k$ runs over all integers, positive, negative and zero:
 each positive square $j^2$ appears twice, once from $k=j$ and once from $k=-j$. So the coefficient of $x^n$ in
 $\theta(x)$ is the number of integers whose square is $n$. This series is one of the classical theta functions studied
-by Jacobi, and the OEIS writes it as \texttt{theta\_3}.
+by Jacobi, usually denoted $\theta_3$; the OEIS writes it as \texttt{theta\_3}, and we write $\theta$.
 
 The entry defines a power series $A(x)=a(0)+a(1)x+a(2)x^2+\cdots$, with $a(0)=1$, by the equation
 \begin{equation}\label{eq:entry}
@@ -130,8 +132,8 @@ coefficient $a(n)$ leaves the same remainder on division by $4$ as the correspon
 
 Since the coefficients of $\theta(x)$ are $1$ at $n=0$, $2$ at the positive squares and $0$ elsewhere, this is exactly
 Hanna's conjecture (Corollary~\ref{cor:conj}). The theorem also covers the companion entry A378580~\cite{oeisother},
-defined by $A\bigl(x/A(x)\bigr)=\theta(x)$, which has the same conjecture. The two papers on these entries share all
-of their mathematics.
+defined by $A\bigl(x/A(x)\bigr)=\theta(x)$, which has the same conjecture. Both entries are treated by the same theorem and
+the same proof; the two papers differ only in the description of the entry.
 
 \subsection{What was known}
 The entry records several formulas due to Hanna, for example $A(x)=\theta\bigl(B(x)\bigr)$, where $B$ is the
@@ -139,15 +141,15 @@ compositional inverse of $x\,A(x)$. These formulas do not seem to give the remai
 not aware of an earlier proof of the conjecture.
 
 \subsection{Why it is interesting}
-Theta series are among the most important objects in number theory. For instance, the coefficient of $x^n$ in
+Theta series are classical objects of number theory. For instance, the coefficient of $x^n$ in
 $\theta(x)^k$ is the number of ways to write $n$ as a sum of $k$ squares of integers, and classical theorems of Jacobi
 give exact formulas for these numbers when $k=2$ and $k=4$~\cite{hardywright}. Hanna's entries explore what happens when
 such classical series are combined with substitution. The result here says that, modulo $4$, the substitution in
-\eqref{eq:entry} is invisible: the solution is $\theta$ itself.
+\eqref{eq:entry} has no effect: the solution is congruent to $\theta$ itself.
 
-The reason is simple and general (Section~\ref{sec:discussion}): the argument works for every target series of the form
-$1+2S$, and the same argument handles both entries at once. The key tool, Lemma~\ref{lem:double}, is a simple way of
-passing from information modulo $2$ to information modulo $4$; it is used repeatedly in this collection of papers.
+The argument is general (Section~\ref{sec:discussion}): it applies to every target series of the form $1+2S$, and it
+treats both entries at once. Its main tool, Lemma~\ref{lem:double}, passes from information modulo $2$ to information
+modulo $4$; it is also used in other papers of this collection.
 
 \subsection{How to read this paper}
 Section~\ref{sec:background} explains the few notions we need: power series, substitution, and remainders.
@@ -162,8 +164,8 @@ A \emph{formal power series} is an expression
 \[
 U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots ,
 \]
-determined by its sequence of coefficients $u_0,u_1,u_2,\dots$. No number is ever substituted for $x$, so questions
-of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
+determined by its sequence of coefficients $u_0,u_1,u_2,\dots$; see~\cite{niven,stanley}. No number is ever
+substituted for $x$, so questions of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
 when all their coefficients are equal.
 
 Series are added coefficient by coefficient and multiplied like polynomials:
@@ -173,12 +175,15 @@ Series are added coefficient by coefficient and multiplied like polynomials:
 Each coefficient of a product is a finite sum. For example, $(1-x)(1+x+x^2+x^3+\cdots)=1$, so $1+x+x^2+\cdots$ is
 the \emph{multiplicative inverse} of $1-x$, written $\frac{1}{1-x}$. More generally, every series $D$ with constant term
 $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determined one at a time by $D\cdot\frac1D=1$
-using only addition, subtraction and multiplication. Every fraction in this paper has a denominator of this kind, so it
-denotes a power series.
+using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
+denominator has constant term $1$, so the quotient is again a power series.
 
-We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
-$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
-constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
+series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+$U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
+zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
+constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
+called \emph{normalized}.
 
 \subsection{Substituting one series into another}
 If $V(x)$ has constant term $0$, we can substitute $V$ for $x$ in $U$:
@@ -196,9 +201,8 @@ this paper the small circle always means an iterate, and a plain exponent always
 
 \subsection{Remainders and congruences}
 For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
-$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
-remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
-$a$ is odd is the same as saying $a\equiv1\pmod2$.
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. The remainder of $a$ on division by
+$m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$.
 
 Addition and multiplication are compatible with congruences, so the residues $0,1,\dots,m-1$, added and multiplied
 modulo $m$, form a ring, written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we have $1+1=0$,
@@ -213,7 +217,7 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Several lemmas below hold over every \emph{commutative ring}, that is, every set with an addition,
+\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
 subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
 division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
@@ -226,11 +230,10 @@ addition, subtraction and multiplication. Then the equation has exactly one solu
 commutative ring, including $\Z/4\Z$.
 \item \emph{Reduction.} Reducing the integer solution modulo $4$ gives a solution of the reduced equation,
 because reduction is compatible with all operations.
-\item \emph{A good guess.} Find a simple series that satisfies the reduced equation and check that it does. By uniqueness,
-this simple series \emph{is} the reduction of the sequence, and its coefficients can simply be read off.
+\item \emph{A candidate solution.} Find an explicit series that satisfies the reduced equation. By uniqueness, it is
+the reduction of the sequence, and its coefficients can be read off.
 \end{enumerate}
-The creative part is step~3: finding a simple series that works. Step~1 sometimes needs care, when the equation seems to
-require a division.
+Finding the candidate in step~3 is usually the main difficulty.
 \subsection{Doubling modulo 4}
 \begin{lemma}\label{lem:double}
 Let $U,V$ be series with coefficients in $\Z/4\Z$. Then $2U=2V$ if and only if $U$ and $V$ agree modulo $2$.
@@ -361,11 +364,12 @@ A computation can only test finitely many cases, so it is a check on the definit
 
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
-in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
-this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
-mathematics. The statements are collected in the file \texttt{lean/Entries/A378581.lean} of the repository,
-in the namespace \texttt{OEIS.A378581}. There $\theta$ is \texttt{theta}, and $x/A$ is written \texttt{X * invOfUnit A 1}, the product of
-$x$ with the multiplicative inverse of $A$. The general constructions, for an arbitrary series $T$ with constant term $1$
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A378581.lean} of the repository,
+in the namespace \texttt{OEIS.A378581}. In the Lean code, $\theta$ is called \texttt{theta}. The prefix \texttt{plus} in the
+names of the declarations refers to the product equation $A(xA)=\theta$; the corresponding declarations for A378580 carry the prefix
+\texttt{minus}. The quotient $x/A$ is written \texttt{X * invOfUnit A 1}, the
+product of $x$ with the multiplicative inverse of $A$. The general constructions, for an arbitrary series $T$ with constant term $1$
 over any commutative ring, are in \texttt{lean/Families/ThetaSubstitution.lean}. The Lean proof of Lemma~\ref{lem:unique}
 takes a slightly different route from the one above: it treats the product form through the equivalent equation
 $G(G(x))=G(x)\,T(x)$ for $G=xU$, and reduces the quotient form to the product form using $U=1/V$.
@@ -381,11 +385,11 @@ Theorem~\ref{thm:main} ($A\equiv\theta\pmod 4$) and Corollary~\ref{cor:conj} & \
 \bottomrule
 \end{tabular}
 \end{center}
-The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
-that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+The Lean project was rebuilt from source, and the axioms on which each of these theorems depends were listed with
+Lean's \texttt{\#print axioms} command. Every one depends only on the three standard axioms of Lean's logic
 (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
 exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
-so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+so the Lean definitions were also compared with the definition in the OEIS entry
 (Section~\ref{sec:sequence}).
 
 \section{Discussion}\label{sec:discussion}
@@ -415,29 +419,29 @@ is $0$. Hence $U(x/U)=U(xU)=T$: the same $U$ solves the quotient equation, and b
 solutions agree modulo $8$. The two sequences do not agree modulo $16$: already $a(2)=4$ for A378580 and $a(2)=-4$ for
 A378581, which differ by $8$. A computer check confirms the agreement modulo $8$ for every $n<160$.
 
-\para{Context.} Section~\ref{sec:background} explained the general method: reduce modulo a small number, find a simple
-solution of the reduced equation, and conclude by uniqueness. Here the simple solution is the target itself. The same
+\para{Context.} Section~\ref{sec:background} explained the general method: reduce modulo a small number, find an explicit
+solution of the reduced equation, and conclude by uniqueness. Here that solution is the target itself. The same
 doubling argument (Lemma~\ref{lem:double}) appears in other papers of this collection, for example for the theta-type
 sums of entries A380060 and A380680.
 
 \section*{About this paper}\label{sec:about}
 \para{How the work was done.}
-This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
-by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+This paper is one of 29 papers on conjectures from the OEIS that came out of an AI research effort directed by
+Dev~D.~Goyal~\cite{repo}. The roles were as follows.
 \begin{itemize}
 \item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
 revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
 \item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
 searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
 of this paper.
-\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
-rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently. It rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
 Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
 written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
-terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
-theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
-places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
-the further observations in it were checked by computer and are not part of the Lean formalization.
+terms; and read every step of the proofs. It then wrote the present version of the paper, expanding the
+explanations and, in places, writing out an argument in more detail or by a more elementary route. The theorems of
+Section~\ref{sec:results} and the proof strategies are ChatGPT's. The Discussion section, including the short arguments
+in it, was written by Claude Opus~5.5; its observations were checked by computer and are not part of the Lean
+formalization.
 \end{itemize}
 Dev~D.~Goyal has verified the results and is responsible for this paper.
 

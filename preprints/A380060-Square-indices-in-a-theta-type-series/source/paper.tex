@@ -42,17 +42,19 @@ is $x^{n^2}\bigl((A-x^n)/(1-x^nA)\bigr)^n$, so $A$ appears on both sides. The su
 $\theta(x)=\sum_nx^{n^2}=1+2x+2x^4+2x^9+\cdots$. Hanna conjectured that, for $n>0$, the coefficient $a(n)$ leaves
 remainder $2$ on division by $4$ when $n$ is a perfect square, and is divisible by $4$ otherwise. We prove this. In
 fact $A(x)\equiv\theta(x)\pmod 4$: every coefficient of $A$ has the same remainder modulo $4$ as the corresponding
-coefficient of the theta series. The proof rests on two simple observations: modulo $2$ the series $A$ is $1$,
-and twice a number is known modulo $4$ once the number is known modulo $2$. The result has also been checked by
+coefficient of the theta series. The proof rests on two observations: modulo $2$ the series $A$ is congruent to $1$,
+and twice an integer is determined modulo $4$ by the integer modulo $2$. The result has also been checked by
 computer and proved formally in the Lean proof assistant.
 \end{abstract}
 \begin{center}\begin{minipage}{0.88\linewidth}\small
-\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
-ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
-Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
-Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
-source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
-every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+\textbf{How this paper was produced.} This paper reports the result of an AI research effort directed by
+Dev~D.~Goyal. ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working autonomously from prompts by
+Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
+ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
+and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
 \end{minipage}\end{center}
@@ -61,7 +63,7 @@ The section ``About this paper'' at the end gives the details.
 
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
-sequences, used by mathematicians and scientists to identify sequences and to record what is known about them. Many
+sequences. Many
 entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
 
 This paper is about entry A380060~\cite{oeis}, contributed by Paul~D.~Hanna in February 2025. It reads:
@@ -75,7 +77,8 @@ Using the symmetry noted in the entry, the sum over all integers can be folded i
 A=1+2\,\Sigma(A),\qquad\text{where}\qquad
 \Sigma(A)=\sum_{j\ge1}x^{j^2}\Bigl(\frac{A-x^j}{1-x^jA}\Bigr)^{j}.
 \end{equation}
-This one-sided form is formula~(2) of the entry, and it is the definition we work with. Lemma~\ref{lem:exist} shows
+This one-sided form is formula~(2) of the entry (not to be confused with equation~\eqref{eq:fold} of this
+paper), and it is the definition we work with. Lemma~\ref{lem:exist} shows
 that it determines $A$ completely.
 
 The first terms, starting at $n=0$, are 1, 2, 4, 16, 66, 284, 1256, 5752, 26944, 128538, 622560, 3053224, 15132720, 75679956, \dots{}
@@ -84,14 +87,14 @@ The sum in the definition looks like the classical \emph{theta series} $\theta(x
 (Section~\ref{sec:background}), except that each term $x^{n^2}$ carries an extra factor. We call such sums
 \emph{theta-type sums}. A companion entry by the same author, OEIS A380680~\cite{oeisother}, contributed on
 the same day, defines a similar series, with the constant $2$ in place of $A$ inside the sum, and states the same
-conjecture word for word. For that entry the conjecture is false; it is treated in a companion paper in the same
-collection~\cite{repo}.
+conjecture word for word. For that entry the conjecture is false; it is treated in a companion
+paper~\cite{repo}.
 
 \subsection{The question}
 The entry contains the following conjecture.
 \begin{quote}\small\ttfamily\raggedright Conjecture: for n > 0, a(n) == 2 (mod 4) iff n is a square, and a(n) is divisible by 4 when n is nonsquare.\par\smallskip\hfill\textrm{--- OEIS A380060, Paul D. Hanna, February 2025}\end{quote}
 
-Here \texttt{a(n) == 2 (mod 4)} means that $a(n)$ leaves remainder $2$ on division by $4$. So, for $n>0$, the conjecture says that $a(n)$ has remainder $2$ modulo $4$ when $n$ is a perfect square
+(In the OEIS notation, \texttt{==} denotes congruence.) So, for $n>0$, the conjecture says that $a(n)$ has remainder $2$ modulo $4$ when $n$ is a perfect square
 $1,4,9,16,\dots$, and remainder $0$ otherwise. The table shows the remainders of the first $48$ terms. The indices in
 bold are the perfect squares.
 \begin{center}\small\setlength{\tabcolsep}{3.2pt}
@@ -123,27 +126,27 @@ has the same remainder modulo $4$ as the corresponding coefficient of the theta 
 \[
 A(x)\equiv\theta(x)=1+2\sum_{j\ge1}x^{j^2}\pmod 4 .
 \]
-The proof needs two observations. First, modulo $2$ the equation says $A\equiv1$, because the sum is multiplied
+The proof needs two observations. First, modulo $2$ the equation reduces to $A\equiv1$, because the sum is multiplied
 by $2$. Second, when $1$ is put in place of $A$, each factor $(A-x^j)/(1-x^jA)$ becomes $(1-x^j)/(1-x^j)=1$, and the sum
 turns into the theta series itself.
 
 \subsection{What was known}
-The entry records the folded form of the sum (its formula~(2), our equation~\eqref{eq:fold}) and two further
+The entry records the folded form of the sum (formula~(2) of the entry; see Lemma~\ref{lem:fold}) and two further
 rewritings of it. Vaclav Kotesovec added an asymptotic formula for the size of $a(n)$. We are not aware of an earlier proof or disproof of the conjecture.
 
 \subsection{Why it is interesting}
-The theta series is a central object of number theory, and Hanna's sums are deformations of it: each term
-$x^{n^2}$ is multiplied by a complicated factor. One may ask how much of the arithmetic of the theta series survives
-the deformation. For the remainders modulo $4$ the answer turns out to be simple: modulo $4$, Hanna's sums are again
-theta series (Section~\ref{sec:discussion}).
-The two companion entries also make a useful pair of examples. They look almost the same, their conjectures are
-stated in the same words, and yet the conjecture is true for A380060 and false for A380680. The proofs show exactly where the
+The theta series is a classical object of number theory, and Hanna's sums are deformations of it: each term
+$x^{n^2}$ is multiplied by a further factor. One may ask how much of the arithmetic of the theta series survives the
+deformation. For the two entries treated here, the sums reduce modulo $4$ to theta series
+(Section~\ref{sec:discussion}).
+The two companion entries also form an instructive pair. Their definitions differ only in one symbol, their
+conjectures are stated in the same words, and yet the conjecture is true for A380060 and false for A380680. The proofs show exactly where the
 difference comes from.
 
 \subsection{How to read this paper}
 Section~\ref{sec:background} explains the few notions we need: power series, remainders, the theta series, and how to
 make sense of a sum over all integers. Section~\ref{sec:results} states the results precisely, and
-Section~\ref{sec:proofs} proves them; the proofs are short. Section~\ref{sec:checks} describes how the results were
+Section~\ref{sec:proofs} proves them. Section~\ref{sec:checks} describes how the results were
 checked, by computer and by a formal proof in Lean. Section~\ref{sec:discussion} discusses the scope of the result
 and a generalization.
 \section{Background}\label{sec:background}
@@ -153,8 +156,8 @@ A \emph{formal power series} is an expression
 \[
 U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots ,
 \]
-determined by its sequence of coefficients $u_0,u_1,u_2,\dots$. No number is ever substituted for $x$, so questions
-of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
+determined by its sequence of coefficients $u_0,u_1,u_2,\dots$; see~\cite{niven,stanley}. No number is ever
+substituted for $x$, so questions of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
 when all their coefficients are equal.
 
 Series are added coefficient by coefficient and multiplied like polynomials:
@@ -164,18 +167,20 @@ Series are added coefficient by coefficient and multiplied like polynomials:
 Each coefficient of a product is a finite sum. For example, $(1-x)(1+x+x^2+x^3+\cdots)=1$, so $1+x+x^2+\cdots$ is
 the \emph{multiplicative inverse} of $1-x$, written $\frac{1}{1-x}$. More generally, every series $D$ with constant term
 $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determined one at a time by $D\cdot\frac1D=1$
-using only addition, subtraction and multiplication. Every fraction in this paper has a denominator of this kind, so it
-denotes a power series.
+using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
+denominator has constant term $1$, so the quotient is again a power series.
 
-We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
-$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
-constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
+series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+$U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
+zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
+constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
+called \emph{normalized}.
 
 \subsection{Remainders and congruences}
 For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
-$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
-remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
-$a$ is odd is the same as saying $a\equiv1\pmod2$.
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. The remainder of $a$ on division by
+$m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$.
 
 Addition and multiplication are compatible with congruences, so the residues $0,1,\dots,m-1$, added and multiplied
 modulo $m$, form a ring, written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we have $1+1=0$,
@@ -190,7 +195,7 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Several lemmas below hold over every \emph{commutative ring}, that is, every set with an addition,
+\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
 subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
 division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
@@ -206,12 +211,11 @@ gives $1$, so
 \theta(x)=1+2\sum_{j\ge1}x^{j^2}.
 \]
 So the coefficient of $x^n$ in $\theta$ is the number of integers whose square is $n$: it is $1$ for $n=0$, it is $2$
-when $n$ is a positive perfect square (the two square roots $\pm j$), and it is $0$ otherwise. In particular, for
-$n>0$ the coefficient of $x^n$ in $\theta(x)$ is $2$ if $n$ is a square and $0$ if it is not. Replacing $x$ by $x^2$
+when $n$ is a positive perfect square (the two square roots $\pm j$), and it is $0$ otherwise. Replacing $x$ by $x^2$
 gives $\theta(x^2)=1+2\sum_{j\ge1}x^{2j^2}=1+2x^2+2x^8+2x^{18}+\cdots$, whose nonzero coefficients sit at twice the
 squares.
 
-The theta series goes back to Jacobi, and it is one of the basic objects of number theory. For example, the
+The theta series goes back to Jacobi. For example, the
 coefficient of $x^n$ in $\theta(x)^k$ is the number of ways to write $n$ as a sum of $k$ squares of integers,
 counting order and signs; see~\cite{grosswald}.
 
@@ -245,7 +249,7 @@ Consequently the two-sided sum is a power series, and
 
 \begin{proof}
 Both $U-x^{-j}$ and $1-x^{-j}U$ are nonzero Laurent series (the first contains the term $-x^{-j}$, and the second is
-not zero because $U$ has a constant term and so is not $x^j$), so the fraction and its inverse make sense. A negative
+not zero because $U$ has a nonzero constant term and so is not $x^j$), so the fraction and its inverse make sense. A negative
 exponent means: invert, then raise to the power $j$. So the left side is
 \[
 x^{j^2}\Bigl(\frac{1-x^{-j}U}{U-x^{-j}}\Bigr)^{j}
@@ -259,8 +263,8 @@ sum is a well-defined power series.
 \end{proof}
 
 The OEIS entry notes the symmetry of Lemma~\ref{lem:fold} (``invariant under sign reversal of $n$'') and records the
-folded form as its formula~(2). In the one-sided form no negative powers and no division occur, so it makes sense
-with coefficients in any commutative ring, including $\Z/4\Z$.
+folded form as formula~(2) of the entry. In the one-sided form no negative powers occur, and the only division is by a
+series with constant term $1$; so it makes sense with coefficients in any commutative ring, including $\Z/4\Z$.
 
 \subsection{Doubling modulo 4}
 \begin{lemma}\label{lem:double}
@@ -270,8 +274,8 @@ Let $U$ and $V$ be power series with integer coefficients. If $U\equiv V\pmod 2$
 \begin{proof}
 Every coefficient of $U-V$ is even, so every coefficient of $2U-2V=2(U-V)$ is divisible by $4$.
 \end{proof}
-In other words, \emph{to know twice a series modulo $4$, it is enough to know the series modulo $2$.} The sums in
-question are multiplied by $2$, and this is what makes the proofs below so short.
+In other words, \emph{twice a series is determined modulo $4$ by the series modulo $2$.} The sums in question are
+multiplied by $2$, so it suffices to know them modulo $2$.
 
 \section{Results}\label{sec:results}
 
@@ -323,8 +327,8 @@ number $2$ is $0$, so there the equation reads $A=1$. Hence
 \[
 A\equiv1\pmod 2 .
 \]
-Reduction modulo $2$ is compatible with all the operations in $\Sigma$, so $\Sigma(A)\equiv\Sigma(1)\pmod2$. And
-$\Sigma(1)$ is easy to compute: $Q_j(1)=(1-x^j)/(1-x^j)=1$ for every $j$, so
+Reduction modulo $2$ is compatible with all the operations in $\Sigma$, so $\Sigma(A)\equiv\Sigma(1)\pmod2$. To compute
+$\Sigma(1)$, note that $Q_j(1)=(1-x^j)/(1-x^j)=1$ for every $j$, so
 \[
 \Sigma(A)\equiv\Sigma(1)=\sum_{j\ge1}x^{j^2}\pmod 2 .
 \]
@@ -352,9 +356,8 @@ A computation can only test finitely many cases, so it is a check on the definit
 
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
-in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
-this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
-mathematics. The statements are collected in the file \texttt{lean/Entries/A380060.lean} of the repository,
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A380060.lean} of the repository,
 in the namespace \texttt{OEIS.A380060}. There the one-sided sum $\Sigma(A)$ is written out coefficient by coefficient (only the indices $j\le n$ can contribute to $x^n$), and the multiplicative inverse of a series with constant term $1$ is written \texttt{unitInv}. The folding of the two-sided sum (Lemma~\ref{lem:fold}) is proved in this paper but not in Lean. The proofs are in the file \texttt{lean/Families/ThetaRational.lean}. 
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
@@ -369,11 +372,11 @@ Theorem~\ref{thm:main}: the two statements for each $n>0$ & \texttt{a380060\_\al
 \bottomrule
 \end{tabular}
 \end{center}
-The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
-that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+The Lean project was rebuilt from source, and the axioms on which each of these theorems depends were listed with
+Lean's \texttt{\#print axioms} command. Every one depends only on the three standard axioms of Lean's logic
 (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
 exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
-so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+so the Lean definitions were also compared with the definition in the OEIS entry
 (Section~\ref{sec:sequence}).
 
 \section{Discussion}\label{sec:discussion}
@@ -387,7 +390,8 @@ described by Kotesovec's asymptotic formula in the entry.
 this changes the factor $(U-x^j)/(1-x^jU)$ from $1$ to $x^j$, and the remainders $2$ move from the squares $j^2$ to the
 numbers $2j^2$. So the same conjecture, stated in that entry, is false there.
 
-\para{A general principle.} The two proofs are instances of one observation. Reduction modulo $2$ is compatible with
+\para{A general principle.} The proof above, and the proof for the companion entry, are instances of one
+observation. Reduction modulo $2$ is compatible with
 all the operations in $\Sigma(U)$, so $\Sigma(U)$ modulo $2$ depends only on $U$ modulo $2$. By
 Lemma~\ref{lem:double}, \emph{the remainder of $1+2\Sigma(U)$ modulo $4$ depends only on the remainder of $U$ modulo
 $2$}. In particular, for every integer series $U$:
@@ -402,22 +406,22 @@ a few other choices of $U$; this general remark is not part of the Lean formaliz
 
 \section*{About this paper}\label{sec:about}
 \para{How the work was done.}
-This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
-by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+This paper is one of 29 papers on conjectures from the OEIS that came out of an AI research effort directed by
+Dev~D.~Goyal~\cite{repo}. The roles were as follows.
 \begin{itemize}
 \item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
 revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
 \item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
 searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
 of this paper.
-\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
-rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently. It rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
 Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
 written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
-terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
-theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
-places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
-the further observations in it were checked by computer and are not part of the Lean formalization.
+terms; and read every step of the proofs. It then wrote the present version of the paper, expanding the
+explanations and, in places, writing out an argument in more detail or by a more elementary route. The theorems of
+Section~\ref{sec:results} and the proof strategies are ChatGPT's. The Discussion section, including the short arguments
+in it, was written by Claude Opus~5.5; its observations were checked by computer and are not part of the Lean
+formalization.
 \end{itemize}
 Dev~D.~Goyal has verified the results and is responsible for this paper.
 

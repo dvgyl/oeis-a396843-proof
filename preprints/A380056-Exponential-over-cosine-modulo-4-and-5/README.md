@@ -1,4 +1,4 @@
-# [The coefficients of $`(e^x-1)/\cos 2x`$ modulo 4 and 5](paper.pdf)
+# [The numbers with exponential generating function $`(e^x-1)/\cos 2x`$, modulo 4 and 5](paper.pdf)
 
 *A proof of two conjectures in OEIS A380056*
 
@@ -20,7 +20,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 ```bibtex
 @misc{Goyal:A380056,
   author = {Goyal, Dev D.},
-  title = {{The coefficients of $(e^x-1)/\cos 2x$ modulo 4 and 5}},
+  title = {{The numbers with exponential generating function $(e^x-1)/\cos 2x$, modulo 4 and 5}},
   howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A380056-Exponential-over-cosine-modulo-4-and-5/paper.pdf}},
   year = {2026}
 }

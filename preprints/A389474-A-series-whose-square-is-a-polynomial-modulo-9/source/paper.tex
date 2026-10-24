@@ -39,21 +39,22 @@
 The sequence A389474 of the On-Line Encyclopedia of Integer Sequences (OEIS) lists the coefficients of the power series
 $A(x)=x+x^2+4x^3+14x^4+\cdots$ that satisfies $A\bigl(x^2+2x^3+2A(x)^2\bigr)=3A(x)^2$. Paul~D.~Hanna conjectured that
 all coefficients of the square $A(x)^2$ beyond $x^3$ are divisible by $9$, and that every coefficient of
-$A(x)^{3k}-A(x^3)^k$ is divisible by $3$. We prove both. The main result is that $A(x)^2$ leaves exactly
-$x^2+2x^3$ when its coefficients are reduced modulo $9$. We also prove that the equation has exactly one solution with
-integer coefficients, which is not obvious, because computing the coefficients from the equation requires a division by
-$2$ at every step. The proof works with the inverse series of $A$, which satisfies a simpler equation. The second
+$A(x)^{3k}-A(x^3)^k$ is divisible by $3$. We prove both. The main result is that $A(x)^2\equiv x^2+2x^3\pmod 9$. We also prove that the
+equation has exactly one solution with integer coefficients; this requires an argument, because computing the
+coefficients from the equation involves a division by $2$ at every step. The proof works with the inverse series of $A$, which satisfies a simpler equation. The second
 conjecture is an instance of a classical identity. The results have been checked by computer and proved formally in
-the Lean proof assistant. Finally, by a short argument that is not part of the formal verification, we show
-that $A(x)^2$ is congruent to a polynomial modulo every power of $3$.
+the Lean proof assistant. A short further argument, not part of the formal verification, shows that $A(x)^2$ is
+congruent to a polynomial modulo every power of $3$.
 \end{abstract}
 \begin{center}\begin{minipage}{0.88\linewidth}\small
-\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
-ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
-Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
-Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
-source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
-every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+\textbf{How this paper was produced.} This paper reports the result of an AI research effort directed by
+Dev~D.~Goyal. ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working autonomously from prompts by
+Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
+ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
+and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
 \end{minipage}\end{center}
@@ -62,7 +63,7 @@ The section ``About this paper'' at the end gives the details.
 
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
-sequences, used by mathematicians and scientists to identify sequences and to record what is known about them. Many
+sequences. Many
 entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
 
 This paper is about entry A389474~\cite{oeis}, contributed by Paul~D.~Hanna in October 2025. It defines a power series
@@ -77,12 +78,13 @@ The entry reads, in part:
 \begin{quote}\small\ttfamily\raggedright G.f. A(x) satisfies A( x\^{}2 + 2*x\^{}3 + 2*A(x)\^{}2 ) = 3*A(x)\^{}2.\par\smallskip (2) A( 2*x\^{}2 + R(x)\^{}2 + 2*R(x)\^{}3 ) = 3*x\^{}2 where A(R(x)) = x.\par\smallskip (3) [x\^{}n] A(x)\^{}2 == 0 (mod 9) for n > 3 (conjecture).\par\smallskip (4) [x\^{}n] A(x)\^{}(3*k) - A(x\^{}3)\^{}k == 0 (mod 3) for n >= 1 and k >= 1 (conjecture).\par\smallskip\hfill\textrm{--- OEIS A389474, Paul D. Hanna, October 2025}\end{quote}
 
 Here ``G.f.''\ stands for \emph{generating function}, the series whose coefficients are the terms of the sequence, and
-$[x^n]\,F$ denotes the coefficient of $x^n$ in a series $F$. In formula (2), $R$ is the compositional inverse of $A$:
-the series that undoes the substitution of $A$ (Section~\ref{sec:background}).
+$[x^n]\,F$ denotes the coefficient of $x^n$ in a series $F$. To avoid confusion with the equation numbers of this paper,
+we refer to the formulas numbered (2), (3) and (4) in the entry as (E2), (E3) and (E4). In (E2), $R$ is the
+compositional inverse of $A$: the series that undoes the substitution of $A$ (Section~\ref{sec:background}).
 
 \subsection{The question}
-Statement (3) says that the coefficients of the square $A(x)^2$ are divisible by $9$ from $x^4$ on. Statement
-(4) says that for every $k\ge1$ all coefficients of $A(x)^{3k}-A(x^3)^k$ are divisible by $3$; here $A(x)^{3k}$ is a
+Statement (E3) says that the coefficients of the square $A(x)^2$ are divisible by $9$ from $x^4$ on. Statement
+(E4) says that for every $k\ge1$ all coefficients of $A(x)^{3k}-A(x^3)^k$ are divisible by $3$; here $A(x)^{3k}$ is a
 power of $A$, and $A(x^3)$ is $A$ with $x$ replaced by $x^3$. The table shows the coefficients of $A(x)^2$ modulo $9$
 (the first terms of $A(x)^2$ are $x^2+2x^3+9x^4+36x^5+252x^6+\cdots$). The only nonzero entries, at $n=2$ and $n=3$,
 are printed in bold.
@@ -107,13 +109,13 @@ $\coeff{n}{A^2}\bmod 9$ & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
 \[
 A(x)^2\equiv x^2+2x^3\pmod 9 .
 \]
-So conjecture (3) is true. Conjecture (4) is true as well (Proposition~\ref{prop:frob}); in fact it holds for
+So conjecture (E3) is true. Conjecture (E4) is true as well (Proposition~\ref{prop:frob}); in fact it holds for
 \emph{every} power series with integer coefficients, by a classical identity. We also prove that \eqref{eq:oeis} has
 exactly one solution with integer coefficients (Theorem~\ref{thm:exist}). This needs an argument: when the coefficients
 are computed from \eqref{eq:oeis} one at a time, each new coefficient $a(n)$ first appears in degree $n+1$ with the
 factor $-2$, so each step involves a division by $2$.
 
-The key idea is to turn the equation around. Applying the inverse series $R$ to both sides of \eqref{eq:oeis} gives
+The key idea is to pass to the inverse series. Applying $R$ to both sides of \eqref{eq:oeis} gives
 $x^2+2x^3+2A(x)^2=R\bigl(3A(x)^2\bigr)$. Modulo $9$, the square of $3A(x)^2$ is $9A(x)^4\equiv0$, so all terms of $R$
 beyond the first contribute nothing, and $R\bigl(3A(x)^2\bigr)\equiv3A(x)^2$. The equation then says
 $x^2+2x^3+2A(x)^2\equiv3A(x)^2$, that is, $A(x)^2\equiv x^2+2x^3$.
@@ -122,20 +124,20 @@ Section~\ref{sec:discussion} pushes the same idea further: $A(x)^2$ is congruent
 of $3$, and $A$ itself is determined modulo $9$ by an explicit formula.
 
 \subsection{What was known}
-The entry records the equation satisfied by the inverse series $R$ (formula (2)), and statements (3) and (4) as
+The entry records the equation (E2) satisfied by the inverse series $R$, and statements (E3) and (E4) as
 conjectures. Hanna also contributed the companion entry A389475~\cite{oeisother}, whose generating function satisfies a
 closely related equation; it is treated in a companion paper with the same method. We are not aware of an earlier
-proof of conjecture (3). Statement (4) is a direct consequence of a classical identity (Lemma~\ref{lem:frobenius});
-we include its two-line proof for completeness and claim nothing new about it.
+proof of conjecture (E3). Statement (E4) follows directly from the Frobenius identity (Lemma~\ref{lem:frobenius}), as
+shown in Proposition~\ref{prop:frob}; we include the two-line proof for completeness and claim nothing new about it.
 
 \subsection{Why it is interesting}
 Equations in which an unknown series is substituted into an expression built from itself are common in
 combinatorics. The entry itself compares \eqref{eq:oeis} with the identity $C\bigl(x^2+2x\,C(x)^2\bigr)=C(x)^2$ for the
-generating series $C$ of the Catalan numbers. The coefficients of $A$ grow quickly and look irregular, yet the square
-of $A$ is extraordinarily simple modulo $9$: everything beyond $x^3$ vanishes. The proof shows two useful techniques.
+generating series $C$ of the Catalan numbers. The coefficients of $A$ grow quickly and look irregular, yet modulo $9$
+the square of $A$ is a polynomial: everything beyond $x^3$ vanishes. The proof uses two techniques of wider use.
 First, an equation that seems to require division by $2$ can still have an integer solution, if the numbers being
-divided are always even; here this follows from a simple identity modulo $2$. Second, replacing a series by its inverse
-can turn a complicated equation into one that is easy to analyse modulo a power of a prime.
+divided are always even; here this follows from an identity modulo $2$. Second, replacing a series by its inverse
+can reduce an equation to one that can be solved explicitly modulo a power of a prime.
 
 \subsection{How to read this paper}
 Section~\ref{sec:background} explains the notions we need: power series, substitution, compositional inverses, and
@@ -149,8 +151,8 @@ A \emph{formal power series} is an expression
 \[
 U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots ,
 \]
-determined by its sequence of coefficients $u_0,u_1,u_2,\dots$. No number is ever substituted for $x$, so questions
-of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
+determined by its sequence of coefficients $u_0,u_1,u_2,\dots$; see~\cite{niven,stanley}. No number is ever
+substituted for $x$, so questions of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
 when all their coefficients are equal.
 
 Series are added coefficient by coefficient and multiplied like polynomials:
@@ -160,12 +162,15 @@ Series are added coefficient by coefficient and multiplied like polynomials:
 Each coefficient of a product is a finite sum. For example, $(1-x)(1+x+x^2+x^3+\cdots)=1$, so $1+x+x^2+\cdots$ is
 the \emph{multiplicative inverse} of $1-x$, written $\frac{1}{1-x}$. More generally, every series $D$ with constant term
 $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determined one at a time by $D\cdot\frac1D=1$
-using only addition, subtraction and multiplication. Every fraction in this paper has a denominator of this kind, so it
-denotes a power series.
+using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
+denominator has constant term $1$, so the quotient is again a power series.
 
-We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
-$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
-constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
+series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+$U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
+zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
+constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
+called \emph{normalized}.
 
 \subsection{Substituting one series into another}
 If $V(x)$ has constant term $0$, we can substitute $V$ for $x$ in $U$:
@@ -204,9 +209,8 @@ $U=U\circ(V\circ W)=(U\circ V)\circ W=W$, so $V\circ U=V\circ W=x$ as well.
 
 \subsection{Remainders and congruences}
 For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
-$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
-remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
-$a$ is odd is the same as saying $a\equiv1\pmod2$.
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. The remainder of $a$ on division by
+$m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$.
 
 Addition and multiplication are compatible with congruences, so the residues $0,1,\dots,m-1$, added and multiplied
 modulo $m$, form a ring, written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we have $1+1=0$,
@@ -221,12 +225,12 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Several lemmas below hold over every \emph{commutative ring}, that is, every set with an addition,
+\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
 subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
 division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
 
-\subsection{Squaring modulo a prime}
+\subsection{The Frobenius identity}
 \begin{lemma}[Frobenius identity]\label{lem:frobenius}
 Let $p$ be a prime. For every power series $U$ with coefficients in $\F_p$, we have $U(x)^p=U(x^p)$.
 \end{lemma}
@@ -234,8 +238,9 @@ Let $p$ be a prime. For every power series $U$ with coefficients in $\F_p$, we h
 \begin{proof}
 In $\F_p$, the binomial theorem simplifies to $(a+b)^p=a^p+b^p$, because every binomial coefficient
 $\binom pi$ with $0<i<p$ is divisible by $p$. Also $c^p=c$ for every $c\in\F_p$ (Fermat's little theorem). So
-$\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. Only finitely many terms matter for any given
-coefficient, so this is a polynomial identity.
+$\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. The first equality holds for polynomials by
+repeated use of $(a+b)^p=a^p+b^p$; it holds for power series because each coefficient of $U(x)^p$ involves only finitely
+many coefficients of $U$.
 \end{proof}
 
 For $p=2$ this says that squaring a series modulo $2$ doubles every exponent: for instance,
@@ -250,7 +255,7 @@ $R$ has integer coefficients and satisfies
 R(3x^2)=2x^2+R(x)^2+2R(x)^3 .
 \]
 \end{theorem}
-(Applying $A$ to both sides of the last equation gives formula (2) of the entry.)
+(Applying $A$ to both sides of the last equation gives formula (E2) of the entry.)
 
 \begin{theorem}[The square modulo $9$]\label{thm:nine}
 $A(x)^2\equiv x^2+2x^3\pmod 9$. In particular, $\coeff{n}{A(x)^2}\equiv0\pmod 9$ for every $n>3$.
@@ -264,15 +269,15 @@ For every power series $W$ with integer coefficients and all integers $k,n\ge0$,
 \end{proposition}
 
 \begin{corollary}[Hanna's conjectures]\label{cor:conj}
-Statements (3) and (4) of the entry hold: $\coeff{n}{A(x)^2}\equiv0\pmod9$ for $n>3$, and
+Statements (E3) and (E4) of the entry hold: $\coeff{n}{A(x)^2}\equiv0\pmod9$ for $n>3$, and
 $\coeff{n}{\bigl(A(x)^{3k}-A(x^3)^k\bigr)}\equiv0\pmod3$ for all $n,k\ge1$ (indeed for all $n,k\ge0$).
 \end{corollary}
 Corollary~\ref{cor:conj} is immediate from Theorem~\ref{thm:nine} and from Proposition~\ref{prop:frob} with $W=A$.
 
 \section{Proofs}\label{sec:proofs}
 
-\para{The idea in brief.} We first study the inverse series $R$. It satisfies the equation $R(3x^2)=2x^2+R^2+2R^3$, in which the unknown is
-substituted only into the simple series $3x^2$. Lemma~\ref{lem:family} shows that this equation has exactly one integer
+\para{The idea in brief.} We first study the inverse series $R$. It satisfies the equation $R(3x^2)=2x^2+R^2+2R^3$, in which the only
+substitution is that of the simple series $3x^2$ into the unknown $R$. Lemma~\ref{lem:family} shows that this equation has exactly one integer
 solution, by checking that the division by $2$ needed at each step is always exact. Its inverse is $A$
 (Theorem~\ref{thm:exist}). Theorem~\ref{thm:nine} then follows by applying $R$ to \eqref{eq:oeis} and working
 modulo $9$, where $(3A^2)^2=9A^4$ vanishes.
@@ -286,7 +291,7 @@ R(3x^2)=2x^2+R(x)^2+2s\,R(x)^3 ,
 where $s$ is a fixed integer. Here $R(3x^2)$ is $R$ with $x$ replaced by $3x^2$, so its coefficient of $x^{2k}$ is
 $3^kr_k$, and $R(x)^2$, $R(x)^3$ are ordinary powers.
 
-\emph{Why the lemma is not obvious.} Suppose we try to compute the coefficients $r_2,r_3,\dots$ of a normalized
+\emph{Why an argument is needed.} Suppose we compute the coefficients $r_2,r_3,\dots$ of a normalized
 solution $R=x+r_2x^2+r_3x^3+\cdots$ one at a time. The coefficient $r_n$ first appears in degree $n+1$, in the square
 $R(x)^2=x^2+\cdots+2r_nx^{n+1}+\cdots$, with the factor $2$. (In $R(x)^3$ it appears only from degree $n+2$ on, and in
 $R(3x^2)$ only in degree $2n$.) So each step requires a division by $2$, and it is not clear that the result is an
@@ -323,9 +328,9 @@ $E(V)-E(U)=O(x^{r+2})$.
 $r=2$ by Step~1). Let $e$ be the coefficient of $x^{r+1}$ in $E(U)$. By Step~1, $e$ is even, so $e/2$ is an integer.
 Replace $U$ by $U-(e/2)\,x^r$. By Step~2 the new error is $E(U)-e\,x^{r+1}+O(x^{r+2})=O(x^{r+2})$, and the coefficients
 of $U$ below degree $r$ have not changed. Repeating this for $r=2,3,4,\dots$ fixes the coefficients of $U$ one at a
-time. The resulting series $R_s$ has integer coefficients, and its error vanishes: for each $r$ it agrees with the
-$r$-th approximation up to degree $r$, so by Step~2 its error agrees with that approximation's error, which is
-$O(x^{r+2})$, up to degree $r+1$.
+time. Let $U_r$ denote the series obtained after the step for degree $r$, so that $E(U_r)=O(x^{r+2})$. The
+resulting series $R_s$ has integer coefficients, and $R_s-U_r=O(x^{r+1})$ for every $r$. By Step~2,
+$E(R_s)-E(U_r)=O(x^{r+2})$, so $E(R_s)=O(x^{r+2})$ for every $r$; that is, $E(R_s)=0$.
 
 \emph{Step 4: uniqueness.} Suppose two different normalized solutions first differ in degree $r$, by $c\ne0$. Then
 $r\ge2$, and by Step~2 their errors differ by $2c\ne0$ in degree $r+1$. But both errors are $0$, a contradiction.
@@ -371,7 +376,7 @@ A mathematical proof can contain mistakes, so the results were checked in two in
 \para{Numerical check.}
 We solved \eqref{eq:oeis} coefficient by coefficient with exact rational arithmetic, up to degree $89$. All
 coefficients came out as integers, and they reproduce all 24 terms printed in the OEIS entry. Theorem~\ref{thm:nine}
-holds for every coefficient of degree below $90$, and statement (4) for $k\le6$ and every coefficient of degree below
+holds for every coefficient of degree below $90$, and statement (E4) for $k\le6$ and every coefficient of degree below
 $90$.
 The computation was done with the PARI/GP computer algebra system, using code that was written separately from the
 formal proofs (file \texttt{verification/independent\_checks.gp} in the accompanying repository~\cite{repo}).
@@ -379,9 +384,8 @@ A computation can only test finitely many cases, so it is a check on the definit
 
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
-in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
-this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
-mathematics. The statements are collected in the file \texttt{lean/Entries/A389474.lean} of the repository,
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A389474.lean} of the repository,
 in the namespace \texttt{OEIS.A389474}. Lemma~\ref{lem:family} is \texttt{integral\_family\_existence}. The constructions are in \texttt{lean/Families/CubicReversion.lean}, and the congruences use \texttt{lean/Families/CubicFrobenius.lean} and \texttt{lean/Families/CubicConsequences.lean}.
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
@@ -396,16 +400,16 @@ Proposition~\ref{prop:frob} for $W=A$ (all $n,k\ge0$) & \texttt{power\_\allowbre
 \bottomrule
 \end{tabular}
 \end{center}
-The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
-that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+The Lean project was rebuilt from source, and the axioms on which each of these theorems depends were listed with
+Lean's \texttt{\#print axioms} command. Every one depends only on the three standard axioms of Lean's logic
 (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
 exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
-so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+so the Lean definitions were also compared with the definition in the OEIS entry
 (Section~\ref{sec:sequence}).
 
 \section{Discussion}\label{sec:discussion}
 
-\para{Scope.} Corollary~\ref{cor:conj} settles both conjectures of the entry completely. Statement (4) is not special to
+\para{Scope.} Corollary~\ref{cor:conj} settles both conjectures of the entry completely. Statement (E4) is not special to
 this sequence: it holds for every power series with integer coefficients.
 
 \para{The series itself modulo $9$.} Theorem~\ref{thm:nine} determines $A$ itself modulo $9$:
@@ -416,8 +420,8 @@ Here $(1+2x)^{1/2}=\sum_n\binom{1/2}{n}(2x)^n$ is the binomial series. Its coeff
 denominators are powers of $2$, and such fractions make sense modulo $9$ because $2$ has an inverse there
 ($2\cdot5=10\equiv1$, so $\frac12\equiv5$). For example, $-\frac12\equiv4\equiv a(3)$ and $\frac12\equiv5\equiv a(4)=14$.
 \emph{Proof.} Modulo $9$, the series $W=A(x)/x$ has constant term $1$ and, by Theorem~\ref{thm:nine}, $W^2=1+2x$. The
-binomial series $W'=(1+2x)^{1/2}$ also has constant term $1$ and $W'^2=1+2x$. Then $(W-W')(W+W')=0$, and $W+W'$ has
-constant term $2$, which is invertible modulo $9$; so $W+W'$ has a multiplicative inverse, and $W=W'$. We checked this
+binomial series $Y=(1+2x)^{1/2}$ also has constant term $1$ and $Y^2=1+2x$. Then $(W-Y)(W+Y)=0$, and $W+Y$ has
+constant term $2$, which is invertible modulo $9$; so $W+Y$ has a multiplicative inverse, and $W=Y$. We checked this
 formula by computer for every coefficient of degree below $90$. It is not part of the Lean formalization.
 
 \para{Higher powers of $3$.} The square of $A$ remains a polynomial modulo every power of $3$. For example,
@@ -427,16 +431,16 @@ A(x)^2\equiv x^2+2x^3+9x^4+9x^5+9x^6\pmod{27}.
 More precisely: \emph{for every $k\ge2$, the series $A(x)^2$ is congruent modulo $3^k$ to a polynomial of degree at most
 $3k-3$.} \emph{Proof.} Keep the notation $S=A(x)^2$, $Q=x^2+2x^3$ from the proof of Theorem~\ref{thm:nine}, but now
 work over the integers, where $Q+2S=R(3S)$ holds exactly. Put $K(u)=3R(u)-2u$, a normalized series with integer
-coefficients. Then $K(3S)=3R(3S)-6S=3Q$, so $3S=K^{-1}(3Q)$, where $K^{-1}$ is the compositional inverse of $K$. Since
-$K(u)=u+3\bigl(R(u)-u\bigr)\equiv u\pmod 3$, also $K^{-1}(v)\equiv v\pmod3$, so
-$K^{-1}(v)=v+\sum_{j\ge2}3k_jv^j$ with integers $k_j$. Therefore
-$3S=3Q+\sum_{j\ge2}3^{j+1}k_jQ^j$, and dividing by $3$,
+coefficients. Then $K(3S)=3R(3S)-6S=3Q$, so $3S=\bar K(3Q)$, where $\bar K$ denotes the compositional inverse of $K$
+(Lemma~\ref{lem:inverse}). Since $K(u)=u+3\bigl(R(u)-u\bigr)\equiv u\pmod 3$, also $\bar K(v)\equiv v\pmod3$, so
+$\bar K(v)=v+\sum_{j\ge2}3c_jv^j$ with integers $c_j$. Therefore
+$3S=3Q+\sum_{j\ge2}3^{j+1}c_jQ^j$, and dividing by $3$,
 \[
-A(x)^2=S=Q+\sum_{j\ge2}3^{\,j}k_j\,Q^j .
+A(x)^2=S=Q+\sum_{j\ge2}3^{\,j}c_j\,Q^j .
 \]
 Modulo $3^k$ only the terms with $j<k$ survive, which gives a polynomial in $Q$ of degree at most $k-1$, that is, a
 polynomial in $x$ of degree at most $3k-3$. For $k=2$ this is Theorem~\ref{thm:nine} again. For $k=3$ one finds
-$k_2=1$, which gives the formula modulo $27$ above. We checked the statement by computer for $k\le7$ and every coefficient
+$c_2=1$, which gives the formula modulo $27$ above. We checked the statement by computer for $k\le7$ and every coefficient
 of degree below $90$. It is not part of the Lean formalization.
 
 \para{Open questions.} The method does not say much about the coefficients $a(n)$ of $A$ modulo higher powers of $3$,
@@ -445,22 +449,22 @@ $s=-1$); it would be interesting to understand the other members.
 
 \section*{About this paper}\label{sec:about}
 \para{How the work was done.}
-This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
-by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+This paper is one of 29 papers on conjectures from the OEIS that came out of an AI research effort directed by
+Dev~D.~Goyal~\cite{repo}. The roles were as follows.
 \begin{itemize}
 \item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
 revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
 \item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
 searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
 of this paper.
-\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
-rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently. It rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
 Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
 written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
-terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
-theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
-places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
-the further observations in it were checked by computer and are not part of the Lean formalization.
+terms; and read every step of the proofs. It then wrote the present version of the paper, expanding the
+explanations and, in places, writing out an argument in more detail or by a more elementary route. The theorems of
+Section~\ref{sec:results} and the proof strategies are ChatGPT's. The Discussion section, including the short arguments
+in it, was written by Claude Opus~5.5; its observations were checked by computer and are not part of the Lean
+formalization.
 \end{itemize}
 Dev~D.~Goyal has verified the results and is responsible for this paper.
 
