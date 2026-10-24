@@ -1,0 +1,3 @@
+theorems listed: 268; reported: 268
+axioms used overall: Classical.choice, Quot.sound, propext
+RESULT: PASS

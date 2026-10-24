@@ -22,7 +22,13 @@ A mathematical result can go wrong in three ways: the proof can contain a mistak
 
 These are the foundations that all of Mathlib uses. An unfinished proof would show up as the axiom `sorryAx`, and an extra assumption would show up under its own name. Neither occurs. The script [`check_axioms.py`](check_axioms.py) confirms this automatically: it checks that every theorem listed in `AxiomAudit.lean` appears in Lean's output and uses no other axiom.
 
-**Logs:** [`results/lean_build.log`](results/lean_build.log) (the build) and [`results/axiom_audit.txt`](results/axiom_audit.txt) (Lean's answers).
+**Result.** The whole project compiled without errors on 24 October 2026, and the audit passed: all 268 theorems (the 262 in `lean/Entries/` and 6 general theorems that the papers cite by name) depend only on the three standard axioms. The 92 restated contracts in `lean/ContractChecks.lean` also compile. A search of the sources finds no `sorry`, no `axiom` declarations, and no `native_decide` or `implemented_by`.
+
+**Logs:**
+- [`results/lean_build.log`](results/lean_build.log): the build;
+- [`results/axiom_audit.txt`](results/axiom_audit.txt): Lean's answer for each theorem;
+- [`results/axiom_audit_check.txt`](results/axiom_audit_check.txt): the verdict of `check_axioms.py`;
+- [`results/contract_checks.log`](results/contract_checks.log): the contract file.
 
 ## 2. Definitions
 
