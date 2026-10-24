@@ -100,7 +100,7 @@ The guesses are things like a simple fraction, a series with only a few nonzero 
 | Check | What it shows | Result |
 |---|---|---|
 | Lean build from source (Lean 4.19.0, Mathlib `c44e0c8`) | every formal proof is complete and correct | all 101 Lean files compile |
-| Axiom audit of the 262 theorems in `lean/Entries/` | no step is left unproved and nothing extra is assumed | only Lean's three standard axioms (`propext`, `Classical.choice`, `Quot.sound`) |
+| Axiom audit of the 262 theorems in `lean/Entries/`, plus 6 general theorems the papers cite | no step is left unproved and nothing extra is assumed | only Lean's three standard axioms (`propext`, `Classical.choice`, `Quot.sound`) |
 | Lean definitions compared with the OEIS definitions | the formal theorems are about the right sequences | checked side by side for all 34 entries; see each paper's first section |
 | Independent recomputation in PARI/GP | the definitions, indexing and claims match the published data | all published OEIS terms reproduced; 156 of 156 checks pass |
 | Every proof read in full | the human-readable arguments are correct | no errors found |

@@ -28,7 +28,7 @@ ChatGPT's original records are kept unchanged in [`history/chatgpt-collection/`]
 
 Claude Opus 5.5 is an AI model. It was used with Claude Code, a coding assistant that can read files, run programs, and edit a code repository. It worked in October 2026, after the research was finished, and it shares no code with ChatGPT's tools. Its tasks were to check the work independently and to prepare this repository. It did the following.
 
-1. **Rebuilt the formal proofs from source.** It compiled the Lean project with Lean 4.19.0 and the pinned version of Mathlib. Then it asked Lean to list the basic assumptions (axioms) behind each of the 262 theorems stated in [`lean/Entries/`](lean/Entries/). Every theorem depends only on Lean's three standard axioms, so no step is left unproved ([verification/README.md](verification/README.md)).
+1. **Rebuilt the formal proofs from source.** It compiled the Lean project with Lean 4.19.0 and the pinned version of Mathlib. Then it asked Lean to list the basic assumptions (axioms) behind each of the 262 theorems stated in [`lean/Entries/`](lean/Entries/), and behind 6 general theorems that the papers cite. Every theorem depends only on Lean's three standard axioms, so no step is left unproved ([verification/README.md](verification/README.md)).
 2. **Compared the Lean definitions with the OEIS definitions,** side by side for all 34 entries. This check matters because a formal proof is only as good as its statement.
 3. **Wrote an independent numerical check** in PARI/GP ([`verification/independent_checks.gp`](verification/independent_checks.gp)). The script recomputes every sequence from its OEIS definition. It compares the results with the terms published in the OEIS (fetched in October 2026), and it tests every stated congruence and counterexample on hundreds of terms. All 156 checks pass.
 4. **Read every proof** in the 34 papers and found no errors.
@@ -37,7 +37,7 @@ Claude Opus 5.5 is an AI model. It was used with Claude Code, a coding assistant
    - the derivation of the nested-square title of A392210 from its defining equation;
    - a short lemma, in the A195194 paper, saying that inversion preserves agreement of series up to a given degree.
 
-   The Discussion sections also mention a few small numerical observations, computed for context and marked as such.
+   The Discussion section of each paper was written during the rewrite. Some contain further observations, such as generalizations or congruences modulo higher powers. Some of these are proved in the text and others are only observed numerically, and the text says which. All were checked by computer, and none is part of the Lean formalization.
 6. **Corrected the attribution text.** It replaced "Dev Goyal" with "Dev D. Goyal", and outdated "review pending" notes with the current status. This was done in documentation and in Lean *comments* only; a check confirmed that the Lean code itself is unchanged.
 7. **Organized this repository** and wrote the README, this page, CREDITS, CITATION and the other guides.
 

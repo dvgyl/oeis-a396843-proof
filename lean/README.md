@@ -32,7 +32,7 @@ lake build           # builds the libraries Hanna, Consecutive, Related, More, R
 lake build Entries   # builds the 34 entry files
 ```
 
-To check one entry, run `lake env lean Entries/A396843.lean`. To print the axioms of all 262 entry theorems, run `lake env lean ../verification/AxiomAudit.lean`.
+To check one entry, run `lake env lean Entries/A396843.lean`. To print the axioms of all 262 entry theorems (and of 6 general theorems that the papers cite), run `lake env lean ../verification/AxiomAudit.lean`.
 
 [`ContractChecks.lean`](ContractChecks.lean) contains 92 `example`s kept from the research. They restate, with explicit types, the key definitions (for instance, that `compose` *is* `MvPowerSeries.subst`) and the main results, and check them against the implementations. It compiles with `lake env lean ContractChecks.lean`.
 

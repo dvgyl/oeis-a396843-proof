@@ -7,7 +7,7 @@
 > - It says that independent human review is pending. Dev D. Goyal has since verified the results. **No independent peer review has taken place.**
 > - Section 9 says that no new Lean build was run while the report was written. Claude Opus 5.5, used with Claude Code, has since rebuilt the Lean project from source, re-run the axiom audit, and recomputed every sequence independently; see [verification/README.md](../verification/README.md).
 >
-> The counts in this report (for example "100 first-party modules", "601 audited declarations", "141 manuscript pages") describe ChatGPT's archive. The current repository rearranges the same material (101 Lean files including the contract file; 262 entry theorems audited; rewritten papers), as described in the [README](../README.md).
+> The counts in this report (for example "100 first-party modules", "601 audited declarations", "141 manuscript pages") describe ChatGPT's archive. The current repository rearranges the same material (101 Lean files including the contract file; 262 entry theorems plus 6 cited general theorems audited; rewritten papers), as described in the [README](../README.md).
 
 **Prepared for:** Dev D. Goyal  
 **Prepared:** 24 October 2026  

@@ -6,7 +6,7 @@ A mathematical result can go wrong in three ways: the proof can contain a mistak
 
 | Check | Risk it addresses | Files | Result |
 |---|---|---|---|
-| 1. Formal proofs rebuilt and audited | a mistake in a proof | [`AxiomAudit.lean`](AxiomAudit.lean), [`check_axioms.py`](check_axioms.py), [`results/`](results/) | all 262 entry theorems fully proved |
+| 1. Formal proofs rebuilt and audited | a mistake in a proof | [`AxiomAudit.lean`](AxiomAudit.lean), [`check_axioms.py`](check_axioms.py), [`results/`](results/) | all 268 audited theorems fully proved |
 | 2. Lean definitions compared with the OEIS | a proof about the wrong sequence | each paper, Sections 1 and "Checking the results" | all 34 entries match |
 | 3. Independent numerical recomputation | a wrong definition, index or statement | [`independent_checks.gp`](independent_checks.gp), [`oeis_terms.gp`](oeis_terms.gp), [`results/independent_checks.log`](results/independent_checks.log) | 156 of 156 checks pass |
 
@@ -14,7 +14,7 @@ A mathematical result can go wrong in three ways: the proof can contain a mistak
 
 **What Lean is.** Lean is a *proof assistant*: a program in which mathematical statements and proofs are written in a precise formal language, and every step is checked mechanically down to the basic rules of logic. Mathlib is Lean's large library of formalized mathematics. If Lean accepts a proof, the only remaining questions are whether the *statement* says what was intended (check 2) and whether the basic rules (axioms) are acceptable.
 
-**What was checked.** The Lean project in [`../lean/`](../lean/) was rebuilt from source with Lean 4.19.0 and Mathlib commit `c44e0c8ee63ca166450922a373c7409c5d26b00b`. Then Lean was asked, for each of the 262 theorems stated in [`../lean/Entries/`](../lean/Entries/), which axioms the theorem ultimately depends on (the command `#print axioms`, collected in [`AxiomAudit.lean`](AxiomAudit.lean)). The answer must contain only Lean's three standard axioms:
+**What was checked.** The Lean project in [`../lean/`](../lean/) was rebuilt from source with Lean 4.19.0 and Mathlib commit `c44e0c8ee63ca166450922a373c7409c5d26b00b`. Then Lean was asked, for each of the 262 theorems stated in [`../lean/Entries/`](../lean/Entries/) and for 6 general theorems from the shared modules that the papers cite by name, which axioms the theorem ultimately depends on (the command `#print axioms`, collected in [`AxiomAudit.lean`](AxiomAudit.lean)). The answer must contain only Lean's three standard axioms:
 
 - `propext`: two statements that imply each other are equal;
 - `Classical.choice`: one may pick an element from any nonempty collection;
