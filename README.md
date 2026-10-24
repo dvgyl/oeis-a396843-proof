@@ -24,14 +24,14 @@ This repository contains proofs, and in a few cases corrections, of conjectures 
 
 **The conjectures** are about *remainders*. Examples: "a(n) is odd exactly when n is a power of 2", or "a(n) always leaves remainder 1 on division by 5". Remainders are often the first place where hidden structure in a sequence becomes visible. Explaining such a pattern is a standard way of understanding a sequence, and the explanation often shows *why* the pattern holds.
 
-**Why it matters.** Each result settles a question that the OEIS recorded as open, or corrects a pattern that turned out to be false. Taken together, the collection is a case study of autonomous AI research in mathematics. The proofs are not only written up but also machine-checked, and they were independently verified by a second AI system. The papers also show one simple, reusable method (described below) that settles many questions of this kind.
+**Why it matters.** Most of the results settle a question that the OEIS recorded as open, or correct a pattern that turned out to be false. Taken together, the collection is a case study of autonomous AI research in mathematics. The proofs are not only written up but also machine-checked, and they were independently verified by a second AI system. The papers also show one simple, reusable method (described below) that settles many questions of this kind.
 
 ## Results at a glance
 
 | | Entries | What was done |
 |---|---:|---|
-| New proofs | 22 | 38 conjectured statements proved. One of these entries, A396798, also contains a conjecture that is false as stated; it is corrected. |
-| New disproof | 1 | A380680: the conjecture is false; the correct statement is proved. |
+| Conjectures proved | 22 | 38 conjectured statements proved. One of these entries, A396798, also contains a conjecture that is false as stated; it is corrected. |
+| Conjecture disproved | 1 | A380680: the conjecture is false; the correct statement is proved. |
 | The original problem | 2 | A396843 and A396844, where the project began: one conjecture proved; two residue conjectures shown false (one had already been refuted on the OEIS) and replaced by complete, proved classifications. |
 | Known results | 8 | Proved earlier by others; here they get a short self-contained proof and a formal proof. |
 | Elementary observation | 1 | A392210: a one-line observation, proved formally. |
@@ -105,11 +105,11 @@ The guesses are things like a simple fraction, a series with only a few nonzero 
 | Independent recomputation in PARI/GP | the definitions, indexing and claims match the published data | all published OEIS terms reproduced; 156 of 156 checks pass |
 | Every proof read in full | the human-readable arguments are correct | no errors found |
 
-The last four checks were done by Claude Opus 5.5 with Claude Code, in code that shares nothing with the original research. A formal proof certifies the statement that Lean checks. A computer check tests only finitely many cases, so it is evidence, not proof. [verification/README.md](verification/README.md) explains each check and how to rerun it.
+All five checks were done by Claude Opus 5.5 with Claude Code, independently of the original research; the PARI/GP code shares nothing with ChatGPT's tools. A formal proof certifies the statement that Lean checks. A computer check tests only finitely many cases, so it is evidence, not proof. [verification/README.md](verification/README.md) explains each check and how to rerun it.
 
 ## The story of the project
 
-The project began with a single problem. In July 2026 Paul D. Hanna contributed [A396843](https://oeis.org/A396843) to the OEIS: the coefficients of the series A with A(x·A − 3x·A²) = x², together with the conjecture that all of them are odd. Dev D. Goyal asked ChatGPT (GPT-6, Pro reasoning) to solve it. ChatGPT proved the conjecture for the whole family A(x·A − m·x·A²) = x². It also found the exact remainders modulo m² and a divisibility law governed by binary digits, and it formalized everything in Lean. Two residue conjectures for this family turned out to be false. For A396843, Danial Asaria had already recorded a counterexample in the OEIS. For the companion entry A396844, the failure at n = 17 follows from the new classification. Both are replaced by complete, proved classifications. That first result was released on its own (Zenodo DOI [10.5281/zenodo.23567463](https://doi.org/10.5281/zenodo.23567463)); its files are kept in [`history/original-release/`](history/original-release/).
+The project began with a single problem. In July 2026 Paul D. Hanna contributed [A396843](https://oeis.org/A396843) to the OEIS: the coefficients of the series A with A(x·A − 3x·A²) = x², together with the conjecture that all of them are odd. Dev D. Goyal asked ChatGPT (GPT-6, Pro reasoning) to solve it. ChatGPT proved the conjecture, and more: for the whole family A(x·A − m·x·A²) = x², it determined which coefficients are odd, found their exact remainders modulo m², and proved a divisibility law governed by binary digits. It formalized everything in Lean. Two residue conjectures for this family turned out to be false. For A396843, Danial Asaria had already recorded a counterexample in the OEIS. For the companion entry A396844, the failure at n = 17 follows from the new classification. Both are replaced by complete, proved classifications. That first result was released on its own (Zenodo DOI [10.5281/zenodo.23567463](https://doi.org/10.5281/zenodo.23567463)); its files are kept in [`history/original-release/`](history/original-release/).
 
 Dev D. Goyal then asked ChatGPT to find more OEIS conjectures of the same kind and to prove them. In four further rounds, ChatGPT screened candidate entries and proved 38 conjectured statements in 22 entries. It refuted two (in A396798 and A380680), and it wrote self-contained proofs of eight results that it found had already been proved by others. At least seven candidate entries were screened out, mostly because earlier work already covered them. Several questions in the treated entries remain open, for example the sign pattern in A389537 and the radius of convergence in A378580.
 
