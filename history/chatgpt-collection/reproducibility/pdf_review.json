@@ -1,0 +1,9 @@
+{
+  "status": "rendered_and_visually_reviewed",
+  "pages": 11,
+  "source": "manuscript/compositional_congruences.tex",
+  "pdf": "manuscript/compositional_congruences.pdf",
+  "build": "Two pdfLaTeX passes; no warnings, undefined references, overfull boxes, or underfull boxes in final log.",
+  "review": "AI visual review of all pages in a contact sheet and enlarged checks of pages 1,5,7,9,10,11. Final changed verification section inspected after the last rebuild.",
+  "issues_found": []
+}

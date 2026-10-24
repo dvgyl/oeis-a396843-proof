@@ -1,0 +1,11 @@
+# Original-family consolidation review
+
+AI-assisted review of the ten per-entry manuscripts and explicit Lean interfaces for A396843, A396844, A396099, A396797, A396798, A396807, and A393856–A393859. This is not independent human peer review.
+
+All ten interfaces compiled without errors or warnings against the pinned Lean 4.19.0 library during development. They contain 80 explicit theorem declarations with stated types and proof terms. The complete preserved source implementations remain the dependencies; no earlier proof file was changed. The final collection checker will freshly compile and audit all entry interfaces together.
+
+The manuscripts repeat the necessary parameter-family proofs instead of citing a missing companion argument. The reviewed connections are the source equations, coefficient normalization, coefficientwise reduction and uniqueness, inverse meanings, residue classes and their starting indices, and scope of negative iterates. A396843 includes the original four central arguments and all sixteen acceptance-layer statements; its parameter-four specialization has a separate A396844 presentation. The A396844 missing exceptional class is identified as a correction. A396798 retains the explicit counterexample to the false starting-at-one phase and gives the corrected degree-two block. The r=3 case A396797 is explicitly credited to Shiva Priyan Shanmuga Sundaram and not described as a newly solved problem. The scaled inverse papers define the apparent division coefficientwise before reduction.
+
+The original report’s historical statement of human verification is not carried forward as verification of this new presentation. Every new paper has an explicit ChatGPT contribution disclosure and pending-human-review status. The A396843 manuscript retains Danial Asaria’s credit for his prior counterexample. Generic results are not counted as new open problems.
+
+No mathematical or source-to-formal mismatch was found during this consolidation review. Exposition may use a different elementary identity from the Lean proof. Historical priority and the completeness of literature searches are outside Lean verification. PDF QA covers all 57 pages separately, as recorded in original_pdf_qa.json.

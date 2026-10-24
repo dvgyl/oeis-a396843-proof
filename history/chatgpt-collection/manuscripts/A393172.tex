@@ -1,0 +1,230 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=26mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,longtable}
+\usepackage{microtype,multicol}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+\allowdisplaybreaks[1]
+\clubpenalty=10000
+\widowpenalty=10000
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\N}{\mathbb N}
+\newcommand{\F}{\mathbb F}
+\newcommand{\ps}[1]{#1[[x]]}
+\newcommand{\Rev}{\operatorname{Rev}}
+\newcommand{\rev}{^{\langle-1\rangle}}
+\newcommand{\Plus}{\operatorname{Plus}}
+\newcommand{\Minus}{\operatorname{Minus}}
+\newcommand{\coeff}[2]{[x^{#1}]#2}
+\newcommand{\E}{\mathcal E}
+\Urlmuskip=0mu plus 1mu
+\hypersetup{pdftitle={A393172: A Catalan substitution congruence modulo four},pdfauthor={Dev Goyal},pdfsubject={Separate manuscript with AI disclosure and Lean proof map}}
+\title{A393172\\[4pt]\large A Catalan substitution congruence modulo four}
+\author{Dev Goyal}
+\date{24 October 2026}
+\begin{document}
+\maketitle
+\begin{center}
+\fbox{\begin{minipage}{0.9\linewidth}\small
+\textbf{AI disclosure.} ChatGPT (OpenAI) generated the mathematical arguments,
+Lean proofs, and this manuscript in response to Dev Goyal's requests.
+Dev Goyal is the sole human author. The source sequence and conjecture or
+observation are credited to Paul D. Hanna.
+\textbf{Independent human review is pending.}
+\end{minipage}}
+\end{center}
+\begin{abstract}
+The unique normalized integral solution of $A(x-x^2)=x+A^2$ satisfies $A\equiv2C-x\pmod4$, where $C=x+C^2$. Hence its coefficients above degree one have residue two precisely at powers of two, and zero otherwise. The comparison satisfies the literal source equation.
+\end{abstract}
+
+\section{Source, notation, and scope}
+
+The source is Paul D. Hanna's OEIS entry A393172 \cite{oeis172},
+retrieved on 24 October 2026. Its initial sequence index is 1.
+We also retain the formal zero constant coefficient at index zero.
+
+All series are formal. The set $\N$ includes zero, and $[x^n]U$ denotes a
+coefficient. A normalized series is $x+O(x^2)$; $O(x^r)$ means divisibility
+by $x^r$, over any coefficient ring used below. We write $U\circ V=U(V(x))$
+only when $V(0)=0$. Compositional inversion, denoted $\Rev(U)$ or $U\rev$,
+is distinct from multiplicative inversion of a unit. Congruences are
+coefficientwise; ordinary products and compositional iterates are distinct.
+
+\section{Formal algebra used in the proof}
+
+\begin{lemma}[Triangular construction]\label{lem:construction}
+Let $K$ be a commutative ring. Suppose $\Phi$ preserves normalized series
+and improves agreement by one degree:
+\[
+ G-H=O(x^r)\quad\Longrightarrow\quad
+ \Phi(G)-\Phi(H)=O(x^{r+1})\qquad(r\ge2).
+\]
+Then $\Phi$ has a unique normalized fixed point. The same conclusion holds
+for a family of series if the degree-$n$ equations, at every family index,
+determine the degree-$n$ coefficients from strictly lower degrees.
+\end{lemma}
+
+\begin{proof}
+The degree-$n$ coefficient of $\Phi(G)$ depends only on coefficients of
+$G$ below degree $n$. Fix the constant and linear coefficients, and then
+define every later coefficient successively. This gives a fixed point;
+the same induction proves uniqueness. For a family, perform the induction
+on degree simultaneously at every family index. The same induction applies with only the constant coefficient prescribed,
+provided agreement is improved starting at degree one. It also applies to
+an operator on all series when agreement is improved starting at degree zero.
+For the operators used in this paper, the recurrence requires
+only ring operations, so it also constructs integral solutions when
+$K=\Z$. Equivalently, iterating $\Phi$ from any normalized initial series
+fixes one further coefficient at each step.
+\end{proof}
+
+\begin{lemma}[Inversion and transport]\label{lem:inverse}
+A normalized series over any commutative ring has a unique normalized
+two-sided compositional inverse. A constant-one series has a unique
+multiplicative inverse with constant coefficient one. These inverses and
+valid composition commute with coefficient ring homomorphisms.
+Normalized compositional inversion preserves agreement modulo $x^r$.
+\end{lemma}
+
+\begin{proof}
+For normalized $G$, the degree-$n$ equation in $G(H)=x$ determines $h_n$
+with multiplier one from earlier coefficients. Construct a right inverse
+$J$ of $H$. Associativity gives
+$G=G\circ(H\circ J)=(G\circ H)\circ J=J$, so $H\circ G=x$ as well.
+The same associativity argument proves uniqueness. Multiplicative
+inversion follows similarly from the coefficient recurrence for $UV=1$.
+
+Each coefficient of a valid composition is a finite polynomial in the
+coefficients of its arguments. Ring homomorphisms preserve these
+polynomials and the defining equations, so uniqueness gives transport of
+inversion. If $G-H=O(x^r)$, composition with any normalized series
+preserves that agreement. Composing with the respective inverses then
+shows $\Rev(G)-\Rev(H)=O(x^r)$.
+\end{proof}
+
+\begin{lemma}[Binary series and doubling]\label{lem:binary}
+There is a unique normalized integral series $C=x+C^2$. Its reduction
+modulo two is
+\[
+ P(x)=\sum_{k\ge0}x^{2^k}.
+\]
+For series $U,V$ over $\Z/4\Z$, the equality $2U=2V$ is equivalent to
+equality of their reductions modulo two.
+\end{lemma}
+
+\begin{proof}
+The operator $G\mapsto x+G^2$ improves agreement because
+$G^2-H^2=(G-H)(G+H)$ and normalized $G+H$ has zero constant coefficient.
+In characteristic two, $U(x)^2=U(x^2)$ for every formal series. Thus the
+normalized equation $U=x+U^2$ forces the coefficient at one to be one,
+every higher odd-index coefficient to be zero, and the coefficient at
+$2m$ to equal the coefficient at $m$. This gives exactly $P$.
+
+For scalar residues modulo four, $2u=2v$ holds precisely when $u$ and $v$
+have the same parity. Apply this statement coefficientwise. In
+particular, this argument does not cancel a factor of two in a ring in
+which two is a zero divisor.
+\end{proof}
+
+\section{Source construction and the modulus-four theorem}
+
+Let $C=x+C^2$ and put $N=x-x^2$. Then $N\circ C=x$, and
+Lemma~\ref{lem:inverse} also gives $C\circ N=x$. We use $A$ for the source sequence A393172 \cite{oeis172}.
+
+\begin{lemma}[A useful square equation]\label{lem:square}
+For normalized $T,P\in K[[x]]$, there is a unique normalized solution of
+\[
+ G=T+(G\circ P)^2.
+\]
+The construction commutes with coefficient ring homomorphisms.
+\end{lemma}
+
+\begin{proof}
+If $G-H=O(x^r)$, then $(G-H)\circ P=O(x^r)$. The sum
+$G\circ P+H\circ P$ has zero constant coefficient, so the difference
+of the two squares is $O(x^{r+1})$. Normalization is preserved.
+Lemma~\ref{lem:construction} gives existence and uniqueness; mapping the
+equation and using uniqueness gives transport.
+\end{proof}
+
+\begin{theorem}[A393172 modulo four]\label{thm:catalanfour}
+The unique normalized integral solution of
+\[
+ A\circ N=x+A^2 \tag{1}
+\]
+has, for every $n>1$,
+\[
+ [x^n]A\equiv
+ \begin{cases}
+ 2\pmod4,& n=2^k\text{ for some }k\ge0,\\
+ 0\pmod4,& \text{otherwise}.
+ \end{cases}
+\]
+\end{theorem}
+
+\begin{proof}
+Composing (1) with $C$ gives
+$A=C+(A\circ C)^2$. Conversely, composing this equation with $N$
+gives (1). Lemma~\ref{lem:square} therefore proves integral existence
+and uniqueness for the literal source equation.
+
+Over $\Z/4\Z$, the normalized candidate $D=2C-x$ satisfies
+\[
+ D\circ N=2x-N=x+x^2,
+ \qquad D^2=x^2+4(C^2-xC)=x^2.
+\]
+Thus $D$ solves (1), and uniqueness gives $A=2C-x$ modulo four. For
+$n>1$, the coefficient of $x$ contributes nothing and Lemma~\ref{lem:binary}
+shows that twice the coefficient of $C$ is two precisely at powers of
+two, and zero elsewhere.
+\end{proof}
+
+
+\section{Separate Lean proof and checked scope}
+
+The entry file is \nolinkurl{lean/Entries/A393172.lean}. Its explicit
+theorem statements and proof terms use the namespace
+\nolinkurl{FinalCollection.A393172}. The complete imported implementations
+and their shared mathematical dependencies are included in the collection.
+The following local theorem names give the proof map:
+
+\begin{multicols}{2}\raggedright\begin{itemize}\setlength{\itemsep}{2pt}\setlength{\parsep}{0pt}
+\item \nolinkurl{first_existence}.
+\item \nolinkurl{first_definition}.
+\item \nolinkurl{first_residue}.
+\item \nolinkurl{first_arbitrary_source}.
+\item \nolinkurl{complete_series_mod_four}.
+\item \nolinkurl{divisibility_complement}.
+\end{itemize}\end{multicols}
+
+The main implementation modules are
+\begin{quote}\raggedright
+\noindent\nolinkurl{Round4.CatalanComposition}\par
+\noindent\nolinkurl{Round4.SquareComposition}\par
+\end{quote}
+The project pins Lean 4.19.0 and Mathlib
+\nolinkurl{c44e0c8ee63ca166450922a373c7409c5d26b00b}.
+The supplied collection report records fresh source compilation and
+transitive axiom audits. All coefficient conclusions are unbounded.
+
+\paragraph{Limits and status.}
+Normalized source equation $A(x-x^2)=x+A(x)^2$ is constructed uniquely. The standard Catalan parity mechanism is not claimed as a new general result.
+No global novelty, exclusive priority, peer review, or OEIS acceptance is asserted.
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{oeis172}
+Paul D. Hanna, \emph{OEIS A393172}, 4 February 2026.
+\url{https://oeis.org/A393172}. Retrieved 24 October 2026.
+\end{thebibliography}
+\end{document}

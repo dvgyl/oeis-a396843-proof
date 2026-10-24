@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "imports": [
+    "Round4.NestedReversion"
+  ],
+  "contract_module": "Round4.NestedContracts",
+  "source_url": "https://oeis.org/A195194",
+  "source_checked_on": "2026-10-24",
+  "endpoint_groups": {
+    "round4_nested_reversion": [
+      "Round4.NestedReversion.family_existence_uniqueness",
+      "Round4.NestedReversion.source_existence_uniqueness",
+      "Round4.NestedReversion.tail_normalized",
+      "Round4.NestedReversion.tail_equation",
+      "Round4.NestedReversion.tail_right_inverse",
+      "Round4.NestedReversion.tail_left_inverse",
+      "Round4.NestedReversion.tail_is_inverse",
+      "Round4.NestedReversion.approximation_normalized",
+      "Round4.NestedReversion.approximation_succ",
+      "Round4.NestedReversion.approximation_agrees",
+      "Round4.NestedReversion.map_tail",
+      "Round4.NestedReversion.tail_of_zero_weight",
+      "Round4.NestedReversion.tail_quadratic_of_next_zero",
+      "Round4.NestedReversion.A_normalized",
+      "Round4.NestedReversion.A_source",
+      "Round4.NestedReversion.A_source_left",
+      "Round4.NestedReversion.A_mod_two_quadratic",
+      "Round4.NestedReversion.a195194_parity"
+    ]
+  },
+  "required_theorems": [
+    "Round4.NestedReversion.family_existence_uniqueness",
+    "Round4.NestedReversion.source_existence_uniqueness",
+    "Round4.NestedReversion.tail_normalized",
+    "Round4.NestedReversion.tail_equation",
+    "Round4.NestedReversion.tail_right_inverse",
+    "Round4.NestedReversion.tail_left_inverse",
+    "Round4.NestedReversion.tail_is_inverse",
+    "Round4.NestedReversion.approximation_normalized",
+    "Round4.NestedReversion.approximation_succ",
+    "Round4.NestedReversion.approximation_agrees",
+    "Round4.NestedReversion.map_tail",
+    "Round4.NestedReversion.tail_of_zero_weight",
+    "Round4.NestedReversion.tail_quadratic_of_next_zero",
+    "Round4.NestedReversion.A_normalized",
+    "Round4.NestedReversion.A_source",
+    "Round4.NestedReversion.A_source_left",
+    "Round4.NestedReversion.A_mod_two_quadratic",
+    "Round4.NestedReversion.a195194_parity"
+  ]
+}

@@ -1,0 +1,4321 @@
+{
+  "mode": "complete",
+  "status": "mechanical_checks_passed",
+  "commands": [
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lake",
+        "env",
+        "lean",
+        "--version"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 0.336,
+      "log": "toolchain.log",
+      "log_sha256": "5362a246ce2545424db10a77de8fd4694f4cf8b0170dfd43fa727acf7f7f259b"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/packages/mathlib",
+        "rev-parse",
+        "HEAD"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 0.003,
+      "log": "mathlib_revision.log",
+      "log_sha256": "7c5e5dfacfc0943447dba5f5bd28c520d15249702af49b30e242982ee4fa03fb"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/packages/mathlib",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 0.006,
+      "log": "mathlib_status.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 3.221,
+      "log": "checker_tests.log",
+      "log_sha256": "244fbffc7ea498e01a0b0f1669780d008879783e9a52b877242a581810310c4e"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_coefficients.py",
+        "--terms",
+        "40",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/coefficients_40.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 2.629,
+      "log": "coefficients_40.log",
+      "log_sha256": "e81858c83a01e48393c5a5053376eb7acd956acc715f4015bccc9ef25ae7a5e3"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_rational_parity.py",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/rational_parity_numeric.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 0.053,
+      "log": "rational_parity_numeric.log",
+      "log_sha256": "35068cb6152df566722c17cbb73c9ed540c52689db904cc9fddb4304e42f07dd"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_cubic_reversion.py",
+        "--degree",
+        "40",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/cubic_reversion_numeric.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 0.161,
+      "log": "cubic_reversion_numeric.log",
+      "log_sha256": "092e79e8b546f6be5d400821f3002cea4c84b6df67646ae480b38147cd0fe1b1"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "tests/check_inverse_iterate.py",
+        "--degree",
+        "40",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/inverse_iterate_checks.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 2.07,
+      "log": "inverse_iterate_checks.log",
+      "log_sha256": "5bf0a592dcd40bc87eceb64ce0280f294793276eb4602dcea1fca0917c9789b6"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_stirling_periodicity.py",
+        "--max-modulus",
+        "128",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/stirling_numeric.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 1.139,
+      "log": "stirling_numeric.log",
+      "log_sha256": "16c596e064c6383be7404cd40c62c63491371febb8686c63a7814046b11ebdc8"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_differential_mahler.py",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/differential_mahler_numeric.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 2.423,
+      "log": "differential_mahler_numeric.log",
+      "log_sha256": "8f8adbc1fe00a3febe56af7430757eb6ccfcea83c63a4f165a125198b372f557"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_lacunary_inverse.py",
+        "--degree",
+        "80",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/lacunary_inverse_numeric.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 1.249,
+      "log": "lacunary_inverse_numeric.log",
+      "log_sha256": "fc045f4fcb1be92dce92f6589bfe36bcb6f5d301e59794076607b4ba272b103f"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_square_reversion.py",
+        "--degree",
+        "80",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/square_reversion_numeric.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 2.272,
+      "log": "square_reversion_numeric.log",
+      "log_sha256": "718993309166ae00fb97491a5fa9a0fa12a1121321b2eec8b7b9d9b692db7fca"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_theta_substitution.py",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/theta_substitution_numeric.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 0.38,
+      "log": "theta_substitution_numeric.log",
+      "log_sha256": "9956ff3cca417d9a8a673df0fb887ec4f963440fab0801110419e7d16ba5f347"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_nested_reversion.py",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/nested_reversion_numeric.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 1.546,
+      "log": "nested_reversion_numeric.log",
+      "log_sha256": "57180d453f8e87fd0855fc0c233e86bbcf5f2ed1154360240584b0fc5ccb0b27"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_catalan_composition.py",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/catalan_composition_numeric.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 3.436,
+      "log": "catalan_composition_numeric.log",
+      "log_sha256": "ed79298634367918d06dc2e156cdab29f2bdacd159cb1d1ea67373486882b602"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_exp_cosine.py",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/exp_cosine_numeric.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 0.387,
+      "log": "exp_cosine_numeric.log",
+      "log_sha256": "7a6ac4e4178b6bc34517ce3c64018a2fc2bd685d9f13dc579504f578f1659a36"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/verify_theta_rational.py",
+        "--output",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/theta_rational_numeric.json"
+      ],
+      "working_directory": ".",
+      "exit_code": 0,
+      "elapsed_seconds": 0.173,
+      "log": "theta_rational_numeric.log",
+      "log_sha256": "648eb01d08f85f0db5dcc1749c749fa79a2b28c1702dc8398fa5440669abe6c1"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lake",
+        "clean",
+        "congruence_proofs"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 0.327,
+      "log": "clean.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lake",
+        "build"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 5.856,
+      "log": "build.log",
+      "log_sha256": "a80731aae74f1a76036dd55124cd7c41ffe051be126453e5f04da9602fb96e8c"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lake",
+        "env",
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-c",
+        "import json,os,shutil; print(json.dumps({'lean':shutil.which('lean'),'LEAN_PATH':os.environ.get('LEAN_PATH','')}))"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 0.316,
+      "log": "compiler_environment.log",
+      "log_sha256": "0de8b61b45ba5eb5d7f003c4acb9992868ff7afc6e625c50b3c7aa8f9621b43f"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Series/Basic.olean",
+        "Hanna/Series/Basic.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.901,
+      "log": "forced_source/Hanna.Series.Basic.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Series/Filtration.olean",
+        "Hanna/Series/Filtration.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.155,
+      "log": "forced_source/Hanna.Series.Filtration.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Series/Triangular.olean",
+        "Hanna/Series/Triangular.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 0.952,
+      "log": "forced_source/Hanna.Series.Triangular.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Series/Construction.olean",
+        "Hanna/Series/Construction.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.4,
+      "log": "forced_source/Hanna.Series.Construction.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Series/Inverse.olean",
+        "Hanna/Series/Inverse.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.456,
+      "log": "forced_source/Hanna.Series.Inverse.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Consecutive/Basic.olean",
+        "Consecutive/Basic.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.309,
+      "log": "forced_source/Consecutive.Basic.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Consecutive/Construction.olean",
+        "Consecutive/Construction.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.399,
+      "log": "forced_source/Consecutive.Construction.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Consecutive/Modular.olean",
+        "Consecutive/Modular.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 5.143,
+      "log": "forced_source/Consecutive.Modular.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Consecutive/Arithmetic.olean",
+        "Consecutive/Arithmetic.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.592,
+      "log": "forced_source/Consecutive.Arithmetic.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Consecutive/Coefficients.olean",
+        "Consecutive/Coefficients.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.983,
+      "log": "forced_source/Consecutive.Coefficients.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Consecutive/Acceptance.olean",
+        "Consecutive/Acceptance.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.099,
+      "log": "forced_source/Consecutive.Acceptance.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Consecutive/Related.olean",
+        "Consecutive/Related.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 4.331,
+      "log": "forced_source/Consecutive.Related.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Consecutive/IntegerIterates.olean",
+        "Consecutive/IntegerIterates.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.741,
+      "log": "forced_source/Consecutive.IntegerIterates.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Consecutive.olean",
+        "Consecutive.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.944,
+      "log": "forced_source/Consecutive.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/BinaryWeight.olean",
+        "Hanna/BinaryWeight.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.397,
+      "log": "forced_source/Hanna.BinaryWeight.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Divisibility.olean",
+        "Hanna/Divisibility.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 0.329,
+      "log": "forced_source/Hanna.Divisibility.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Canonical.olean",
+        "Hanna/Canonical.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.609,
+      "log": "forced_source/Hanna.Canonical.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Recurrences.olean",
+        "Hanna/Recurrences.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.897,
+      "log": "forced_source/Hanna.Recurrences.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/BinaryDivisibility.olean",
+        "Hanna/BinaryDivisibility.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.866,
+      "log": "forced_source/Hanna.BinaryDivisibility.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/ModSquare.olean",
+        "Hanna/ModSquare.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.792,
+      "log": "forced_source/Hanna.ModSquare.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/PrimeExponent.olean",
+        "Hanna/PrimeExponent.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.02,
+      "log": "forced_source/Hanna.PrimeExponent.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Corollaries.olean",
+        "Hanna/Corollaries.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.336,
+      "log": "forced_source/Hanna.Corollaries.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Parity.olean",
+        "Hanna/Parity.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.804,
+      "log": "forced_source/Hanna.Parity.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Acceptance.olean",
+        "Hanna/Acceptance.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.579,
+      "log": "forced_source/Hanna.Acceptance.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna.olean",
+        "Hanna.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.16,
+      "log": "forced_source/Hanna.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Related/ScaledInverse.olean",
+        "Hanna/Related/ScaledInverse.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.687,
+      "log": "forced_source/Hanna.Related.ScaledInverse.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Related/ScaledParity.olean",
+        "Hanna/Related/ScaledParity.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.623,
+      "log": "forced_source/Hanna.Related.ScaledParity.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Hanna/Related.olean",
+        "Hanna/Related.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.282,
+      "log": "forced_source/Hanna.Related.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More/RationalParity.olean",
+        "More/RationalParity.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 3.034,
+      "log": "forced_source/More.RationalParity.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More/CubicFrobenius.olean",
+        "More/CubicFrobenius.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.29,
+      "log": "forced_source/More.CubicFrobenius.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More/CubicReversion.olean",
+        "More/CubicReversion.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 4.15,
+      "log": "forced_source/More.CubicReversion.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More/CubicConsequences.olean",
+        "More/CubicConsequences.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 3.752,
+      "log": "forced_source/More.CubicConsequences.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More/StirlingNumbers.olean",
+        "More/StirlingNumbers.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.655,
+      "log": "forced_source/More.StirlingNumbers.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More/StirlingTransform.olean",
+        "More/StirlingTransform.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.133,
+      "log": "forced_source/More.StirlingTransform.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More/PowerPeriodicity.olean",
+        "More/PowerPeriodicity.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.571,
+      "log": "forced_source/More.PowerPeriodicity.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More/TailPeriodicity.olean",
+        "More/TailPeriodicity.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 0.916,
+      "log": "forced_source/More.TailPeriodicity.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More/StirlingPeriodicity.olean",
+        "More/StirlingPeriodicity.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.208,
+      "log": "forced_source/More.StirlingPeriodicity.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More/InverseIterate.olean",
+        "More/InverseIterate.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 3.653,
+      "log": "forced_source/More.InverseIterate.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More/Contracts.olean",
+        "More/Contracts.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 3.344,
+      "log": "forced_source/More.Contracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/More.olean",
+        "More.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.714,
+      "log": "forced_source/More.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Related.olean",
+        "Related.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.297,
+      "log": "forced_source/Related.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3/DifferentialParity.olean",
+        "Round3/DifferentialParity.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.969,
+      "log": "forced_source/Round3.DifferentialParity.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3/ModFour.olean",
+        "Round3/ModFour.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.098,
+      "log": "forced_source/Round3.ModFour.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3/MahlerParity.olean",
+        "Round3/MahlerParity.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 3.112,
+      "log": "forced_source/Round3.MahlerParity.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3/ElementaryContracts.olean",
+        "Round3/ElementaryContracts.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.962,
+      "log": "forced_source/Round3.ElementaryContracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3/LacunaryInverse.olean",
+        "Round3/LacunaryInverse.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 3.569,
+      "log": "forced_source/Round3.LacunaryInverse.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3/LacunaryContracts.olean",
+        "Round3/LacunaryContracts.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.807,
+      "log": "forced_source/Round3.LacunaryContracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3/SquareReversion.olean",
+        "Round3/SquareReversion.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 4.587,
+      "log": "forced_source/Round3.SquareReversion.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3/SquareContracts.olean",
+        "Round3/SquareContracts.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.999,
+      "log": "forced_source/Round3.SquareContracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3/ThetaSubstitution.olean",
+        "Round3/ThetaSubstitution.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 3.109,
+      "log": "forced_source/Round3.ThetaSubstitution.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3/ThetaContracts.olean",
+        "Round3/ThetaContracts.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.337,
+      "log": "forced_source/Round3.ThetaContracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3/Contracts.olean",
+        "Round3/Contracts.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.725,
+      "log": "forced_source/Round3.Contracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round3.olean",
+        "Round3.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.678,
+      "log": "forced_source/Round3.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4/NestedReversion.olean",
+        "Round4/NestedReversion.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 3.185,
+      "log": "forced_source/Round4.NestedReversion.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4/NestedContracts.olean",
+        "Round4/NestedContracts.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.331,
+      "log": "forced_source/Round4.NestedContracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4/SquareComposition.olean",
+        "Round4/SquareComposition.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.092,
+      "log": "forced_source/Round4.SquareComposition.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4/CatalanComposition.olean",
+        "Round4/CatalanComposition.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 3.807,
+      "log": "forced_source/Round4.CatalanComposition.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4/NestedBinomial.olean",
+        "Round4/NestedBinomial.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.602,
+      "log": "forced_source/Round4.NestedBinomial.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4/CatalanContracts.olean",
+        "Round4/CatalanContracts.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.197,
+      "log": "forced_source/Round4.CatalanContracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4/ExpCosine.olean",
+        "Round4/ExpCosine.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 3.429,
+      "log": "forced_source/Round4.ExpCosine.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4/ExpCosineContracts.olean",
+        "Round4/ExpCosineContracts.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.732,
+      "log": "forced_source/Round4.ExpCosineContracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4/ThetaRational.olean",
+        "Round4/ThetaRational.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 5.543,
+      "log": "forced_source/Round4.ThetaRational.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4/ThetaRationalContracts.olean",
+        "Round4/ThetaRationalContracts.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 2.247,
+      "log": "forced_source/Round4.ThetaRationalContracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4/Contracts.olean",
+        "Round4/Contracts.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.599,
+      "log": "forced_source/Round4.Contracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/tmp/oeis-lean-recheck-tdwfkyf7/Round4.olean",
+        "Round4.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 1.633,
+      "log": "forced_source/Round4.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "-R",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean",
+        "-o",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/ContractChecks.olean",
+        "ContractChecks.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 3.502,
+      "log": "contracts.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/GeneratedTypes.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 4.731,
+      "log": "types.log",
+      "log_sha256": "4fdda722f31e8810a8cd7578cabe12defcb77dda0ab023ebb69e19683100714f"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/reproducibility/lean_complete/GeneratedAxiomAudit.lean"
+      ],
+      "working_directory": "lean",
+      "exit_code": 0,
+      "elapsed_seconds": 97.151,
+      "log": "axioms.log",
+      "log_sha256": "3d173f5156896afb0c4ca111de8006824ea875374e9dfcdf390b6a283caf14f7"
+    }
+  ],
+  "scope": "Clean build and forced re-elaboration of every first-party source, typed contracts, full types, transitive axiom checks, and independent finite corroboration.",
+  "semantic_review": "Required: inspect definitions and typed contracts against the manuscripts.",
+  "required_theorems": [
+    "Consecutive.existence_uniqueness",
+    "Consecutive.solution_normalized",
+    "Consecutive.solution_equation",
+    "Consecutive.map_solution",
+    "Consecutive.map_iter",
+    "Consecutive.iter_solution_mod",
+    "Consecutive.map_iter_solution_mod",
+    "Consecutive.iter_solution_mod_eq_X_iff",
+    "Consecutive.iter_solution_mod_period",
+    "Consecutive.ziter_normalized",
+    "Consecutive.map_ziter",
+    "Consecutive.ziter_negative_is_inverse",
+    "Consecutive.ziter_solution_mod",
+    "Consecutive.map_ziter_solution_mod",
+    "Consecutive.integerIterateCoeff_mod",
+    "Consecutive.ziter_solution_mod_eq_X_iff",
+    "Consecutive.a396099_all_four",
+    "Consecutive.a396099_odd",
+    "Consecutive.a396099_residue",
+    "Consecutive.a396099_period",
+    "Consecutive.a396099_second_iterate_series",
+    "Consecutive.a396099_second_iterate",
+    "Consecutive.a396099_difference_series",
+    "Consecutive.a396099_difference",
+    "Consecutive.a396798_iterate_residue",
+    "Consecutive.a396798_corrected_residue",
+    "Consecutive.a396798_corrected_period",
+    "Consecutive.a396798_counterexample",
+    "Consecutive.a396798_literal_period_false",
+    "Consecutive.a396798_second_iterate",
+    "Consecutive.a396798_fourth_iterate",
+    "Consecutive.a396798_sixth_iterate",
+    "Consecutive.a396798_eighth_iterate",
+    "Consecutive.a396798_third_iterate_period",
+    "Consecutive.a396798_fifth_iterate_period",
+    "Consecutive.a396798_seventh_iterate_period",
+    "Consecutive.a396807_residue",
+    "Consecutive.a396807_iterate_residue",
+    "Consecutive.a396807_integer_iterate_congruence",
+    "Hanna.Related.ScaledInverse.existence_uniqueness",
+    "Hanna.Related.ScaledInverse.scaledSolution_normalized",
+    "Hanna.Related.ScaledInverse.scaledSolution_equation",
+    "Hanna.Related.ScaledInverse.map_scaledSolution",
+    "Hanna.Related.ScaledInverse.integer_mod_parameter_add_one",
+    "Hanna.Related.ScaledInverse.integer_coeff_odd_iff",
+    "Hanna.Related.ScaledInverse.a393856_mod_five",
+    "Hanna.Related.ScaledInverse.a393856_parity",
+    "Hanna.Related.ScaledInverse.a393857_mod_six",
+    "Hanna.Related.ScaledInverse.a393858_mod_seven",
+    "Hanna.Related.ScaledInverse.a393858_parity",
+    "Hanna.Related.ScaledInverse.a393859_mod_eight",
+    "Hanna.Acceptance.existence_uniqueness",
+    "Hanna.Acceptance.compositional_inverse",
+    "Hanna.Acceptance.coefficient_polynomial_specialization",
+    "Hanna.Acceptance.parity_odd",
+    "Hanna.Acceptance.parity_even",
+    "Hanna.Acceptance.mod_parameter_squared",
+    "Hanna.Acceptance.binary_divisibility_polynomial",
+    "Hanna.Acceptance.inverse_binary_divisibility_polynomial",
+    "Hanna.Acceptance.binary_divisibility_integer",
+    "Hanna.Acceptance.inverse_binary_divisibility_integer",
+    "Hanna.Acceptance.power_of_two_index",
+    "Hanna.Acceptance.prime_divisibility_lower_bound",
+    "Hanna.Acceptance.prime_exponent_exists_unique",
+    "Hanna.Acceptance.minimum_prime_exponent_iff",
+    "Hanna.Acceptance.residues_parameter_three",
+    "Hanna.Acceptance.residues_parameter_four",
+    "RationalParity.B_denominator",
+    "RationalParity.A_definition",
+    "RationalParity.map_A",
+    "RationalParity.third_period_denominator",
+    "RationalParity.a396093_residue",
+    "RationalParity.a396093_even_iff",
+    "RationalParity.a396093_even_indices",
+    "RationalParity.a396093_odd_indices_original",
+    "More.CubicReversion.frobenius_substitution",
+    "More.CubicReversion.existence_uniqueness",
+    "More.CubicReversion.cubicSolution_normalized",
+    "More.CubicReversion.cubicSolution_equation",
+    "More.CubicReversion.a389474_normalized",
+    "More.CubicReversion.a389474_equation",
+    "More.CubicReversion.a389474_unique",
+    "More.CubicReversion.a389474_existence_uniqueness",
+    "More.CubicReversion.a389474_square_mod_nine",
+    "More.CubicReversion.a389474_conjecture_3",
+    "More.CubicReversion.a389474_conjecture_4",
+    "More.CubicReversion.a389475_normalized",
+    "More.CubicReversion.a389475_equation",
+    "More.CubicReversion.a389475_unique",
+    "More.CubicReversion.a389475_existence_uniqueness",
+    "More.CubicReversion.a389475_cube_mod_three",
+    "More.CubicReversion.a389475_square_mod_three",
+    "More.CubicReversion.a389475_conjecture_4a",
+    "More.CubicReversion.a389475_conjecture_4b",
+    "More.PowerPeriodicity.nat_pow_totient_add_modEq",
+    "More.PowerPeriodicity.pow_totient_add_eq",
+    "More.TailPeriodicity.leastPeriod_spec",
+    "More.Stirling.transform_periodic_of_powers",
+    "More.Stirling.transform_totient_period",
+    "More.Stirling.transform_eventually_periodic",
+    "More.Stirling.transform_exact_tail_period",
+    "More.Stirling.A052895_period",
+    "More.Stirling.A064618_period",
+    "More.Stirling.A354242_period",
+    "More.Stirling.A167137_period",
+    "More.Stirling.A305550_period",
+    "More.Stirling.A306082_period",
+    "More.Stirling.A080253_period",
+    "More.Stirling.A052895_leastPeriod_dvd",
+    "More.Stirling.A064618_leastPeriod_dvd",
+    "More.Stirling.A354242_leastPeriod_dvd",
+    "More.Stirling.A167137_leastPeriod_dvd",
+    "More.Stirling.A305550_leastPeriod_dvd",
+    "More.Stirling.A306082_leastPeriod_dvd",
+    "More.Stirling.A080253_leastPeriod_dvd",
+    "InverseIterate.R_existence_uniqueness",
+    "InverseIterate.R_equation",
+    "InverseIterate.F_normalized",
+    "InverseIterate.compose_R_F",
+    "InverseIterate.compose_F_R",
+    "InverseIterate.F_original_equation",
+    "InverseIterate.F_original_existence_uniqueness",
+    "InverseIterate.F_original_unique",
+    "InverseIterate.map_F",
+    "InverseIterate.F_mod",
+    "InverseIterate.coefficient_congruence",
+    "InverseIterate.a396102_definition",
+    "InverseIterate.a396102_unique",
+    "InverseIterate.a396102_congruence",
+    "InverseIterate.iterate_coefficient_congruence",
+    "Round3.DifferentialParity.existence_uniqueness",
+    "Round3.DifferentialParity.A_normalized",
+    "Round3.DifferentialParity.A_equation",
+    "Round3.DifferentialParity.map_A",
+    "Round3.DifferentialParity.A_mod_two_quadratic",
+    "Round3.DifferentialParity.a397588_parity",
+    "Round3.DifferentialParity.A_mod_three",
+    "Round3.DifferentialParity.a397588_divisible_by_three",
+    "Round3.MahlerParity.existence_uniqueness",
+    "Round3.MahlerParity.A_normalized",
+    "Round3.MahlerParity.A_equation",
+    "Round3.MahlerParity.map_A",
+    "Round3.MahlerParity.A_mod_four",
+    "Round3.MahlerParity.a389536_residue",
+    "Round3.MahlerParity.a389536_four_dvd_iff",
+    "Round3.ElementaryContracts.differential_existence",
+    "Round3.ElementaryContracts.differential_definition",
+    "Round3.ElementaryContracts.differential_source_unique",
+    "Round3.ElementaryContracts.differential_parity",
+    "Round3.ElementaryContracts.differential_mod_three",
+    "Round3.ElementaryContracts.differential_divisible_by_three",
+    "Round3.ElementaryContracts.mahler_existence",
+    "Round3.ElementaryContracts.mahler_definition",
+    "Round3.ElementaryContracts.mahler_source_unique",
+    "Round3.ElementaryContracts.mahler_mod_four",
+    "Round3.ElementaryContracts.mahler_residue",
+    "Round3.ElementaryContracts.mahler_four_dvd_iff",
+    "Round3.ModFour.double_eq_iff",
+    "Round3.ModFour.series_double_eq_iff",
+    "Round3.ModFour.reduce_int_map",
+    "Round3.ModFour.two_mul_half",
+    "Round3.LacunaryInverse.auxiliary_existence_uniqueness",
+    "Round3.LacunaryInverse.R_normalized",
+    "Round3.LacunaryInverse.R_equation",
+    "Round3.LacunaryInverse.A_normalized",
+    "Round3.LacunaryInverse.R_A",
+    "Round3.LacunaryInverse.A_R",
+    "Round3.LacunaryInverse.map_R",
+    "Round3.LacunaryInverse.map_A",
+    "Round3.LacunaryInverse.A_equation",
+    "Round3.LacunaryInverse.inverse_source",
+    "Round3.LacunaryInverse.A_unique",
+    "Round3.LacunaryInverse.source_existence_uniqueness",
+    "Round3.LacunaryInverse.A_mod_two",
+    "Round3.LacunaryInverse.H_constantCoeff",
+    "Round3.LacunaryInverse.A_decomposition",
+    "Round3.LacunaryInverse.A_mod_four_decomposition",
+    "Round3.LacunaryInverse.H_mod_two_equation",
+    "Round3.LacunaryInverse.H_mod_two",
+    "Round3.LacunaryInverse.H_mod_two_coeff",
+    "Round3.LacunaryInverse.a389537_residue",
+    "Round3.SquareReversion.L_existence_uniqueness",
+    "Round3.SquareReversion.L_normalized",
+    "Round3.SquareReversion.L_equation",
+    "Round3.SquareReversion.R_normalized",
+    "Round3.SquareReversion.R_equation",
+    "Round3.SquareReversion.A389542_normalized",
+    "Round3.SquareReversion.compose_R_A",
+    "Round3.SquareReversion.compose_A_R",
+    "Round3.SquareReversion.source_of_inverse",
+    "Round3.SquareReversion.inverse_of_source",
+    "Round3.SquareReversion.a389542_equation",
+    "Round3.SquareReversion.inverse_equation_unique",
+    "Round3.SquareReversion.a389542_unique",
+    "Round3.SquareReversion.a389542_existence_uniqueness",
+    "Round3.SquareReversion.map_L",
+    "Round3.SquareReversion.map_R",
+    "Round3.SquareReversion.map_A389542",
+    "Round3.SquareReversion.L_quadratic_mod_two",
+    "Round3.SquareReversion.L_coeff_one_iff",
+    "Round3.SquareReversion.R_involution_mod_four",
+    "Round3.SquareReversion.A_eq_R_mod_four",
+    "Round3.SquareReversion.a389542_series_mod_four",
+    "Round3.SquareReversion.a389542_coeff_mod_four",
+    "Round3.SquareReversion.a389542_residue",
+    "Round3.SquareReversion.a389542_two_mod_four_iff",
+    "Round3.SquareReversion.a389542_four_dvd_iff",
+    "ThetaSubstitution.theta_constant",
+    "ThetaSubstitution.theta_coefficient",
+    "ThetaSubstitution.a378580_constant",
+    "ThetaSubstitution.a378581_constant",
+    "ThetaSubstitution.a378580_quotient_identity",
+    "ThetaSubstitution.a378580_source_equation",
+    "ThetaSubstitution.a378581_source_equation",
+    "ThetaSubstitution.a378580_source_uniqueness",
+    "ThetaSubstitution.a378581_source_uniqueness",
+    "ThetaSubstitution.a378580_source_existence_uniqueness",
+    "ThetaSubstitution.a378581_source_existence_uniqueness",
+    "ThetaSubstitution.a378580_series_mod_four",
+    "ThetaSubstitution.a378581_series_mod_four",
+    "ThetaSubstitution.a378580_congruence",
+    "ThetaSubstitution.a378581_congruence",
+    "ThetaSubstitution.a378580_square_iff",
+    "ThetaSubstitution.a378581_square_iff",
+    "ThetaSubstitution.a378580_four_dvd_iff",
+    "ThetaSubstitution.a378581_four_dvd_iff",
+    "Round4.NestedReversion.family_existence_uniqueness",
+    "Round4.NestedReversion.source_existence_uniqueness",
+    "Round4.NestedReversion.tail_normalized",
+    "Round4.NestedReversion.tail_equation",
+    "Round4.NestedReversion.tail_right_inverse",
+    "Round4.NestedReversion.tail_left_inverse",
+    "Round4.NestedReversion.tail_is_inverse",
+    "Round4.NestedReversion.approximation_normalized",
+    "Round4.NestedReversion.approximation_succ",
+    "Round4.NestedReversion.approximation_agrees",
+    "Round4.NestedReversion.map_tail",
+    "Round4.NestedReversion.tail_of_zero_weight",
+    "Round4.NestedReversion.tail_quadratic_of_next_zero",
+    "Round4.NestedReversion.A_normalized",
+    "Round4.NestedReversion.A_source",
+    "Round4.NestedReversion.A_source_left",
+    "Round4.NestedReversion.A_mod_two_quadratic",
+    "Round4.NestedReversion.a195194_parity",
+    "Round4.SquareComposition.existence_uniqueness",
+    "Round4.SquareComposition.map_solution",
+    "Round4.CatalanComposition.a393172_existence_uniqueness",
+    "Round4.CatalanComposition.A_normalized",
+    "Round4.CatalanComposition.A_equation",
+    "Round4.CatalanComposition.A_unique",
+    "Round4.CatalanComposition.map_A",
+    "Round4.CatalanComposition.A_mod_four",
+    "Round4.CatalanComposition.a393172_residue",
+    "Round4.CatalanComposition.a393172_four_dvd_iff",
+    "Round4.CatalanComposition.a393171_existence_uniqueness",
+    "Round4.CatalanComposition.a393171_named_existence_uniqueness",
+    "Round4.CatalanComposition.B_normalized",
+    "Round4.CatalanComposition.B_equation",
+    "Round4.CatalanComposition.B_fixed",
+    "Round4.CatalanComposition.B_composed_catalan",
+    "Round4.CatalanComposition.B_unique",
+    "Round4.CatalanComposition.map_B",
+    "Round4.CatalanComposition.A_integer_decomposition",
+    "Round4.CatalanComposition.B_mod_eight",
+    "Round4.CatalanComposition.a393171_residue",
+    "Round4.CatalanComposition.a393171_eight_dvd_iff",
+    "Round4.NestedBinomial.existence_uniqueness",
+    "Round4.NestedBinomial.A_equation",
+    "Round4.NestedBinomial.rational_argument",
+    "Round4.NestedBinomial.a392210_odd_indices",
+    "Round4.CatalanContracts.first_existence",
+    "Round4.CatalanContracts.first_definition",
+    "Round4.CatalanContracts.first_residue",
+    "Round4.CatalanContracts.first_arbitrary_source",
+    "Round4.CatalanContracts.second_existence",
+    "Round4.CatalanContracts.second_named_existence",
+    "Round4.CatalanContracts.second_definition",
+    "Round4.CatalanContracts.second_residue",
+    "Round4.CatalanContracts.second_arbitrary_source",
+    "Round4.CatalanContracts.third_existence",
+    "Round4.CatalanContracts.third_definition",
+    "Round4.CatalanContracts.third_evenness",
+    "Round4.CatalanContracts.third_arbitrary_source",
+    "Round4.ExpCosine.a_conv",
+    "Round4.ExpCosine.a_convolution_unique",
+    "Round4.ExpCosine.cosine_egf_eq",
+    "Round4.ExpCosine.A_coeff",
+    "Round4.ExpCosine.A_integral_coefficients",
+    "Round4.ExpCosine.a380056_source_equation",
+    "Round4.ExpCosine.a380056_source_quotient",
+    "Round4.ExpCosine.a380056_source_unique",
+    "Round4.ExpCosine.a380056_source_existence_uniqueness",
+    "Round4.ExpCosine.a380056_mod_four",
+    "Round4.ExpCosine.a380056_mod_five_formula",
+    "Round4.ExpCosine.a380056_mod_five_period",
+    "Round4.ExpCosine.a380056_mod_five_four_mul",
+    "Round4.ExpCosine.a380056_five_dvd",
+    "Round4.ExpCosine.a380056_mod_five_residue",
+    "Round4.ExpCosine.a380056_five_dvd_iff",
+    "Round4.ExpCosineContracts.integer_egf_definition",
+    "Round4.ExpCosineContracts.source_egf",
+    "Round4.ExpCosineContracts.literal_source_equation",
+    "Round4.ExpCosineContracts.literal_source_unique",
+    "Round4.ExpCosineContracts.integer_coefficients",
+    "Round4.ExpCosineContracts.first_source_conjecture",
+    "Round4.ExpCosineContracts.second_source_conjecture",
+    "Round4.ExpCosineContracts.exact_mod_five_pattern",
+    "Round4.ExpCosineContracts.exact_divisibility_by_five",
+    "Round4.ThetaRational.ratio_quotient",
+    "Round4.ThetaRational.sigma_coeff_finsum",
+    "Round4.ThetaRational.existence_uniqueness",
+    "Round4.ThetaRational.map_solution",
+    "Round4.ThetaRational.solution_mod_four",
+    "Round4.ThetaRational.a380060_source_equation",
+    "Round4.ThetaRational.a380060_existence_uniqueness",
+    "Round4.ThetaRational.a380060_source_uniqueness",
+    "Round4.ThetaRational.a380060_coefficient_formula",
+    "Round4.ThetaRational.a380060_series_mod_four",
+    "Round4.ThetaRational.a380060_congruence",
+    "Round4.ThetaRational.a380060_square_iff",
+    "Round4.ThetaRational.a380060_four_dvd_iff",
+    "Round4.ThetaRational.a380680_source_formula",
+    "Round4.ThetaRational.a380680_coefficient_formula",
+    "Round4.ThetaRational.a380680_series_mod_four",
+    "Round4.ThetaRational.a380680_corrected_congruence",
+    "Round4.ThetaRational.a380680_twice_square_iff",
+    "Round4.ThetaRational.a380680_four_dvd_iff",
+    "Round4.ThetaRational.a380680_coeff_one",
+    "Round4.ThetaRational.a380680_coeff_two",
+    "Round4.ThetaRational.a380680_literal_conjecture_false",
+    "Round4.ThetaRational.a380680_nonsquare_clause_false",
+    "Round4.ThetaRationalContracts.implicit_source_exists_unique",
+    "Round4.ThetaRationalContracts.implicit_actual_source",
+    "Round4.ThetaRationalContracts.explicit_actual_source",
+    "Round4.ThetaRationalContracts.a380060_statement",
+    "Round4.ThetaRationalContracts.a380680_corrected_statement",
+    "Round4.ThetaRationalContracts.a380680_counterexamples",
+    "Round4.ThetaRationalContracts.a380680_literal_statement_is_false",
+    "Round4.ThetaRationalContracts.a380680_complement_is_false"
+  ],
+  "endpoint_count": 339,
+  "requirements_sha256": "c6f4d4c4d3427e74dbdb578202a88a0afbe137872137b9febbea0669c427865f",
+  "pinned_toolchain": "leanprover/lean4:v4.19.0",
+  "previous_release_preservation": {
+    "archive": "prior_work/oeis_congruence_proofs_Dev_Goyal_v1.zip",
+    "sha256": "04f347b0e116a1c92cd7a1f21f38a37ae3dfb71c733dd5f55769accd0714489c",
+    "previous_endpoint_count": 67,
+    "retained_lean_sources": [
+      "lean/Consecutive/Acceptance.lean",
+      "lean/Consecutive/Arithmetic.lean",
+      "lean/Consecutive/Basic.lean",
+      "lean/Consecutive/Coefficients.lean",
+      "lean/Consecutive/Construction.lean",
+      "lean/Consecutive/IntegerIterates.lean",
+      "lean/Consecutive/Modular.lean",
+      "lean/Consecutive/Related.lean",
+      "lean/Consecutive.lean",
+      "lean/ContractChecks.lean",
+      "lean/Hanna/Acceptance.lean",
+      "lean/Hanna/BinaryDivisibility.lean",
+      "lean/Hanna/BinaryWeight.lean",
+      "lean/Hanna/Canonical.lean",
+      "lean/Hanna/Corollaries.lean",
+      "lean/Hanna/Divisibility.lean",
+      "lean/Hanna/ModSquare.lean",
+      "lean/Hanna/Parity.lean",
+      "lean/Hanna/PrimeExponent.lean",
+      "lean/Hanna/Recurrences.lean",
+      "lean/Hanna/Related/ScaledInverse.lean",
+      "lean/Hanna/Related/ScaledParity.lean",
+      "lean/Hanna/Related.lean",
+      "lean/Hanna/Series/Basic.lean",
+      "lean/Hanna/Series/Construction.lean",
+      "lean/Hanna/Series/Filtration.lean",
+      "lean/Hanna/Series/Inverse.lean",
+      "lean/Hanna/Series/Triangular.lean",
+      "lean/Hanna.lean",
+      "lean/Related.lean"
+    ],
+    "original_zip_preserved_verbatim": true
+  },
+  "previous_v2_release_preservation": {
+    "archive": "prior_work/oeis_proofs_complete_Dev_Goyal_v2.zip",
+    "sha256": "b28c6de12f53e862b670d37d79d8b5f11333ce3d7acd44e61cb27eb2b99dbc10",
+    "previous_endpoint_count": 130,
+    "retained_lean_sources": [
+      "lean/Consecutive/Acceptance.lean",
+      "lean/Consecutive/Arithmetic.lean",
+      "lean/Consecutive/Basic.lean",
+      "lean/Consecutive/Coefficients.lean",
+      "lean/Consecutive/Construction.lean",
+      "lean/Consecutive/IntegerIterates.lean",
+      "lean/Consecutive/Modular.lean",
+      "lean/Consecutive/Related.lean",
+      "lean/Consecutive.lean",
+      "lean/ContractChecks.lean",
+      "lean/Hanna/Acceptance.lean",
+      "lean/Hanna/BinaryDivisibility.lean",
+      "lean/Hanna/BinaryWeight.lean",
+      "lean/Hanna/Canonical.lean",
+      "lean/Hanna/Corollaries.lean",
+      "lean/Hanna/Divisibility.lean",
+      "lean/Hanna/ModSquare.lean",
+      "lean/Hanna/Parity.lean",
+      "lean/Hanna/PrimeExponent.lean",
+      "lean/Hanna/Recurrences.lean",
+      "lean/Hanna/Related/ScaledInverse.lean",
+      "lean/Hanna/Related/ScaledParity.lean",
+      "lean/Hanna/Related.lean",
+      "lean/Hanna/Series/Basic.lean",
+      "lean/Hanna/Series/Construction.lean",
+      "lean/Hanna/Series/Filtration.lean",
+      "lean/Hanna/Series/Inverse.lean",
+      "lean/Hanna/Series/Triangular.lean",
+      "lean/Hanna.lean",
+      "lean/More/Contracts.lean",
+      "lean/More/CubicConsequences.lean",
+      "lean/More/CubicFrobenius.lean",
+      "lean/More/CubicReversion.lean",
+      "lean/More/InverseIterate.lean",
+      "lean/More/PowerPeriodicity.lean",
+      "lean/More/RationalParity.lean",
+      "lean/More/StirlingNumbers.lean",
+      "lean/More/StirlingPeriodicity.lean",
+      "lean/More/StirlingTransform.lean",
+      "lean/More/TailPeriodicity.lean",
+      "lean/More.lean",
+      "lean/Related.lean"
+    ],
+    "original_zip_preserved_verbatim": true
+  },
+  "previous_v3_release_preservation": {
+    "archive": "prior_work/oeis_proofs_complete_Dev_Goyal_v3.zip",
+    "sha256": "6a0cbeb94076a90e8938627a156ed4152f6cc3fd88546d0d2e29cd9331744d41",
+    "previous_endpoint_count": 226,
+    "retained_lean_sources": [
+      "lean/Consecutive/Acceptance.lean",
+      "lean/Consecutive/Arithmetic.lean",
+      "lean/Consecutive/Basic.lean",
+      "lean/Consecutive/Coefficients.lean",
+      "lean/Consecutive/Construction.lean",
+      "lean/Consecutive/IntegerIterates.lean",
+      "lean/Consecutive/Modular.lean",
+      "lean/Consecutive/Related.lean",
+      "lean/Consecutive.lean",
+      "lean/ContractChecks.lean",
+      "lean/Hanna/Acceptance.lean",
+      "lean/Hanna/BinaryDivisibility.lean",
+      "lean/Hanna/BinaryWeight.lean",
+      "lean/Hanna/Canonical.lean",
+      "lean/Hanna/Corollaries.lean",
+      "lean/Hanna/Divisibility.lean",
+      "lean/Hanna/ModSquare.lean",
+      "lean/Hanna/Parity.lean",
+      "lean/Hanna/PrimeExponent.lean",
+      "lean/Hanna/Recurrences.lean",
+      "lean/Hanna/Related/ScaledInverse.lean",
+      "lean/Hanna/Related/ScaledParity.lean",
+      "lean/Hanna/Related.lean",
+      "lean/Hanna/Series/Basic.lean",
+      "lean/Hanna/Series/Construction.lean",
+      "lean/Hanna/Series/Filtration.lean",
+      "lean/Hanna/Series/Inverse.lean",
+      "lean/Hanna/Series/Triangular.lean",
+      "lean/Hanna.lean",
+      "lean/More/Contracts.lean",
+      "lean/More/CubicConsequences.lean",
+      "lean/More/CubicFrobenius.lean",
+      "lean/More/CubicReversion.lean",
+      "lean/More/InverseIterate.lean",
+      "lean/More/PowerPeriodicity.lean",
+      "lean/More/RationalParity.lean",
+      "lean/More/StirlingNumbers.lean",
+      "lean/More/StirlingPeriodicity.lean",
+      "lean/More/StirlingTransform.lean",
+      "lean/More/TailPeriodicity.lean",
+      "lean/More.lean",
+      "lean/Related.lean",
+      "lean/Round3/Contracts.lean",
+      "lean/Round3/DifferentialParity.lean",
+      "lean/Round3/ElementaryContracts.lean",
+      "lean/Round3/LacunaryContracts.lean",
+      "lean/Round3/LacunaryInverse.lean",
+      "lean/Round3/MahlerParity.lean",
+      "lean/Round3/ModFour.lean",
+      "lean/Round3/SquareContracts.lean",
+      "lean/Round3/SquareReversion.lean",
+      "lean/Round3/ThetaContracts.lean",
+      "lean/Round3/ThetaSubstitution.lean",
+      "lean/Round3.lean"
+    ],
+    "original_zip_preserved_verbatim": true
+  },
+  "pinned_mathlib_revision": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
+  "sources_before": {
+    "AI_DISCLOSURE.md": "dac137b7bded6e7ff9c7901c9f13160d44e33962202dfbd5de1c89a7fd012784",
+    "CITATION.cff": "6d8e5d84768ae1bc8fa115ed6422b2b2f6234c814936691654fdf8e31364bfd3",
+    "README.md": "303eb5c2f94e6545c89dac3371a56b50335a718fe981d8f9612752434704256f",
+    "docs/COVERAGE.md": "2e19a6a4f99956e6e4bf781b1b880e44ef89c885cdab59f4b8173d589a6541ee",
+    "docs/CUBIC_INDEPENDENT_REVIEW.md": "aa11d6c789818b93e0b38253e24af1ad7a35b88e481b997f31aaddf61547ef8e",
+    "docs/CUBIC_REVERSION.md": "7851c42e8b4c51a716a17a7525ef7714b436b5355e3353d99cbd559d52c00a6f",
+    "docs/DIFFERENTIAL_AND_MAHLER_PARITY.md": "2bc613b46a00e992f5b80bc0816cf0ca195485da447e6ee6f46f4d1839d2c6d2",
+    "docs/FINITE_VERIFICATION.md": "d6dcc8975e7b8d38a4394fb44b8dedda168acb767f58f137f3c7a136dcf7ca94",
+    "docs/FORMAL_REVIEW.md": "b98dc6575090097df7ccf3559c4a810ba9cf1d4c347e545861ee5d8f0099384b",
+    "docs/INTEGER_ITERATES_REVIEW.md": "e2863de77be47bdd2cfca5bd35c3905425cb1029d86d7165672bb1e02c9c0aa1",
+    "docs/INVERSE_ITERATE.md": "560880cc145cad471ccd0dbb238550d7a34e34aa03a6d7057f29f2d08ade0dd8",
+    "docs/PROVENANCE.md": "248cbdb0b8164ee605eaef7301b3cd179910971b4f35d26fe04a6036cb5e6236",
+    "docs/RATIONAL_PARITY_REVIEW.md": "a09372f35502dd52dffd07e11f3027519d9d8e5c80e28553362745295b77c251",
+    "docs/RELATED_CONJECTURES.md": "9b3a83d8eb40afda3153aae4a38bdc93265190424695ced3ddd7fa1d665e8bca",
+    "docs/ROUND2_COVERAGE.md": "364b6405a5b6cf3031df3d9354c80631801354fe7ce9f9ffc03d0daa336737ea",
+    "docs/ROUND2_REVIEW.md": "c6653fb0299f1ac83d423c199eef57c9a80d2b23f21c66cda446c080188c67c6",
+    "docs/ROUND3_COVERAGE.md": "9791f8422707211470d79a0cd1d371f2ab20afcaf32abec6e8052653fcc5b3f2",
+    "docs/ROUND3_ELEMENTARY_REVIEW.md": "295eae5355daf10646813da8553820ea4e80f922ff2fef9ad54d277c64a9eb6c",
+    "docs/ROUND3_INTEGRATION_REVIEW.md": "c7d1ee07b340d0230615593bd73c63840f3d51b54b685004ab77d35dffe269d4",
+    "docs/ROUND3_LACUNARY_INVERSE.md": "46ef4381fe598cbb27d88ef249daff332f195c220ae3811cc98ca831d76e7f2e",
+    "docs/ROUND3_LACUNARY_REVIEW.md": "7a73266e03f92eadb66584c6d78682ad28cd6768227bda90af38bdbe459d3b40",
+    "docs/ROUND3_SQUARE_REVERSION.md": "ee5f41c0bfde422b102707a9dd0db1bc8e2fdb5a31dce8a9313ef6f32faf0d00",
+    "docs/ROUND3_SQUARE_REVERSION_REVIEW.md": "578009a7222087813c2bd256ef5a1880b09ff0bab9b215b7fd4c379fcf4de0cd",
+    "docs/ROUND4_CATALAN_COMPOSITION.md": "f45355067ccc0f3fab4c0fa05430245841e4b4f3ef1aec822ffd4f521d185252",
+    "docs/ROUND4_CATALAN_INDEPENDENT_REVIEW.md": "3f8960c981892d2cba352827e3e546cac1e2e15a5ece46b980e39239647aede6",
+    "docs/ROUND4_COVERAGE.md": "061256852dcd6adcc9d3063f310bb8b6d61c31c09e7e8d3ed36872a0f338baf3",
+    "docs/ROUND4_EXP_COSINE.md": "2d321709732eb52c046f7987154c613e3f8d0eecaf15c71946863a053f5cc1ed",
+    "docs/ROUND4_EXP_COSINE_INDEPENDENT_REVIEW.md": "3e808fc9ed62e20acf6a341c15c1e7fed05212ca8da333a708c473651d56186c",
+    "docs/ROUND4_INTEGRATION_REVIEW.md": "27f4a0ce7ef54b4d7d4c59f111982dae84f11bc8299db4644efd25664f6dfc94",
+    "docs/ROUND4_NESTED_INDEPENDENT_REVIEW.md": "9e74d98bac716d1f1f7795f1ec2d0bcb04a428c9a2707a9a391e996ce7a4deec",
+    "docs/ROUND4_NESTED_REVERSION.md": "64d77fb8e72285c20ba781c75942391e754af0d9c46089250f888f48b7433ce2",
+    "docs/ROUND4_THETA_RATIONAL.md": "229928de03cbf321b80686a6db19a74fc85a99d987ef7f9f24e2ba54d2a619cc",
+    "docs/ROUND4_THETA_RATIONAL_REVIEW.md": "22fc2eb316dfd5af6d63b8dba3a7181a5eecaddb65c63ec611f82ecbca0294f1",
+    "docs/STIRLING_PERIODICITY.md": "76b2e934a6860de98c83261c986d963bd6f2495a8c225545cb764d12da4516bc",
+    "docs/THEOREM_SPEC.md": "d85261d277b9a900e6a2161f2da55202e3ea8acec2d21b886b415bebef7964db",
+    "docs/THETA_INDEPENDENT_REVIEW.md": "c8c683ef20436b10afb14a0e6945f987eb8c3ffcd365ba15e7d18cf3d6eff9bf",
+    "docs/THETA_SUBSTITUTION.md": "a5fb8b3d179b4b3a61d14d8d8324fe1d44e9765768c869ee2c554cabf284537c",
+    "lean/Consecutive.lean": "f0277a9befdf2cc3f70b278d89b6ca3e623c0653d7c5dcf22484b1e5b3ada342",
+    "lean/Consecutive/Acceptance.lean": "879ec5653dd4c52b27f19d70f080eff24904e1aeee39609768781103dd82b951",
+    "lean/Consecutive/Arithmetic.lean": "06d3ceadf894878ae2c7d170c15542cf439df6f2f1f65a7d0fa7fb00f8076138",
+    "lean/Consecutive/Basic.lean": "f8847e397da7a052c0a690197ef08367fdd088b60fe2eede3a8706cb71864f16",
+    "lean/Consecutive/Coefficients.lean": "05b922e0737ae6975b2a383fb868e50462a506cbe493bdbfc5725fb6bfae371f",
+    "lean/Consecutive/Construction.lean": "1defe4d157d8d5f111ee2e142b235aa6cbb5409683892fd834afa1718dc0ea0b",
+    "lean/Consecutive/IntegerIterates.lean": "71785797e56dadbddaceaace0e49938995907c80e7f80d5428a3487e9cb2d939",
+    "lean/Consecutive/Modular.lean": "f26c2715c46ae9877f27ef76f5d09c2cf1fce2c2e44cbfa9c2e9754c97d25f58",
+    "lean/Consecutive/Related.lean": "599322c04117e65ee7359ea1bb9939f428dccc873c794b11288dbd7a3847ff6b",
+    "lean/ContractChecks.lean": "152b951d3c77492db7dc49d17f0358ad50c654bcdf2be0aee7f1c956bb22796e",
+    "lean/Hanna.lean": "02d63ef8766b380dc96b5c40c2e5a31cbb41af23a50b5158ca085bc555fe5b4f",
+    "lean/Hanna/Acceptance.lean": "6e40816f6ae48bc06cf1419c00cf3624b3401a5cfd7e58cb54abda4b56b5b209",
+    "lean/Hanna/BinaryDivisibility.lean": "135fc2ab84354db15cf539cbb077069f1a0356a9822ef223f7857b6ba731191e",
+    "lean/Hanna/BinaryWeight.lean": "6db40277cccfff4d3d5740a5dd58e0029f385235883e1a2ffbdea98e9e70da27",
+    "lean/Hanna/Canonical.lean": "96e894fc7e6a368edc04e10c46339331acffef112f32b1ec93472f3974fd3afe",
+    "lean/Hanna/Corollaries.lean": "6ba336bb5e44ff664e146efbb69872f0821d9cecb563fccfdb299c4cde81461b",
+    "lean/Hanna/Divisibility.lean": "ab96329b9eb33f27f6765fdd945b18e7f59235619dec7f169200acbd154e6dfb",
+    "lean/Hanna/ModSquare.lean": "fe5fe056a4218a3d1ead1c71fdfc481340712bf1be0c9bb968e66cb0759a2cde",
+    "lean/Hanna/Parity.lean": "7537944b09c8b6fb107ce75022cbcad714d7c4677e064ef91fb856bfb3ccdb35",
+    "lean/Hanna/PrimeExponent.lean": "d0f3c10213a928ddc5be03fe44dbc70cdb86fb3a1a876563bc8c38a1d78cb354",
+    "lean/Hanna/Recurrences.lean": "f5d8352cf432eb515905007d43c7869d9dde0144f08c6e3c9474a516e229f1e1",
+    "lean/Hanna/Related.lean": "23df0d2b12369a48b03417e67911de399a2117fc439d104ffe3641bd1d64f304",
+    "lean/Hanna/Related/ScaledInverse.lean": "0c1f5c702d279fac8b66c1e1c3f59abe197b30f730a875bb11c79038d6050440",
+    "lean/Hanna/Related/ScaledParity.lean": "c2b139df3ca35b982d8b3d4b8a6427fc8c4eddca71b77d96ad302535ecd3e3e9",
+    "lean/Hanna/Series/Basic.lean": "fe5948059309ed57c09f0c8db0e022a5e8c2848202562eae725ff9f835d0b906",
+    "lean/Hanna/Series/Construction.lean": "f4bdeaa4e5cce2ffe57bebe26148e5b826a78bd132125b03541e2b44e6ce9756",
+    "lean/Hanna/Series/Filtration.lean": "b1521801de0629c1b4444a1c6efbc924e541c8a57a4d3e36cb63f95aca2820e4",
+    "lean/Hanna/Series/Inverse.lean": "48917e1734625f78c598a7a6929162626a916fdbcd7d2a5d37c36f2be25fe118",
+    "lean/Hanna/Series/Triangular.lean": "8c74f1f494eadfcfda535bac804fd99526bbdf402483a95d898257f502cb45f2",
+    "lean/More.lean": "9dec7196144feaddee79f036ad232b968d9383646145552b39dbfcb4b2eeab9d",
+    "lean/More/Contracts.lean": "b9831ee388b2b496b50a7bc1f5ef9cf2fc1805780c0196055a11561fa9ca5766",
+    "lean/More/CubicConsequences.lean": "d58a1dadfa103ce149baf9f45b853cef68da0a2658163d19c5987daba42a7022",
+    "lean/More/CubicFrobenius.lean": "fd6063f053d2a5603c0f832a0d59ce0bcc929bc759dc088a7f4c3975f52e17d1",
+    "lean/More/CubicReversion.lean": "62901552a2faa906bdf94786d8db5f4f45c5b9fd6e3a3d1a24f8aafec35b7e11",
+    "lean/More/InverseIterate.lean": "5e08350a61d73c1b427c2ebeb8e8b9ff8f13166e0be73cafd38c9c22d503c51f",
+    "lean/More/PowerPeriodicity.lean": "00bc60aab2d86a65694e3552ac6a0c723a602ab9069823f53af87e5a0b678e03",
+    "lean/More/RationalParity.lean": "2f63e3afe954063e62b25dac769f044938887e4ed78895b3e4c97833123bba64",
+    "lean/More/StirlingNumbers.lean": "c823ceee359a589456924c0f22dd40d3051407e59ef9eebd15a66ed0df8ed209",
+    "lean/More/StirlingPeriodicity.lean": "1760bcb9ffc4c0287ac724f96fdd7498fb3891226bd0705b781067c7a32d092c",
+    "lean/More/StirlingTransform.lean": "cebda04d4c0b6fc577a4b085a5b512f133674747cbd43ca0530f35a3fada0abd",
+    "lean/More/TailPeriodicity.lean": "1433fa86551854b02f226a3e57b62466485ef1bd649de0a9488245cbf022eb60",
+    "lean/Related.lean": "b57efd388066f3e76c5aec823c9948bc9dccf41e134c709bd3afabc459cfd33f",
+    "lean/Round3.lean": "170ab473cf50d40957099a2aa02717e9afdf0e5a2a99da51054e082edf1c3a88",
+    "lean/Round3/Contracts.lean": "f19a1691ae0ffe7228c767aa69bd0b3dd4e4d13d0f7e97c48b1cab0683aea2d4",
+    "lean/Round3/DifferentialParity.lean": "00456e037a120c48b60b6096486bb0d0b38f5a5bdd3445ad3cc7c94d872bb6cf",
+    "lean/Round3/ElementaryContracts.lean": "3a690602557d8ae7c28e16487648bc6350840c01927c8fc9da374344232fe8b6",
+    "lean/Round3/LacunaryContracts.lean": "5da688d866eb13c4ebc3aa70168b20567b1d97cba97e9f183e0b3b8a8f2e659c",
+    "lean/Round3/LacunaryInverse.lean": "abc50f89cb31775a06fc8b993629a3e88df6e1f647ab4d3fd2a28b67e96d529e",
+    "lean/Round3/MahlerParity.lean": "739d49b2db028e3411e1bb6b374b37386710a3272bb5ef6d1f9db4fa31437ea5",
+    "lean/Round3/ModFour.lean": "fdb3d99291c889dbd9b614ad39c1b8f420aa3d861efb38ef0b04433f70e8ec7f",
+    "lean/Round3/SquareContracts.lean": "0399e43cda2ac54b16f25ada91121b994591d3897afebf6021f25f03f7f70675",
+    "lean/Round3/SquareReversion.lean": "13826214bfd2f3b57395cd271c50a4764229a4c62ab4bc38c728eb89ed7a1065",
+    "lean/Round3/ThetaContracts.lean": "9c0f514db84c4bc6cc0093149818359b4f3170d165b71bfd1622d9445d7eeec3",
+    "lean/Round3/ThetaSubstitution.lean": "27e0f3dedcf1bafbcea566075f61d037cc8af3c9a2a1f7824426700b85b18824",
+    "lean/Round4.lean": "258bcde6c31ce7319dafff745699fcf9f0a94be9799671665c220c77397f881b",
+    "lean/Round4/CatalanComposition.lean": "1c3e724f94ee7d46c9a5573634ad1dd950819bf52a3945eacfccfb24abc1f2f4",
+    "lean/Round4/CatalanContracts.lean": "6be71cb602506435b014b7e49fe06fccd642e1635c26f209c30f1b95a7ff1e00",
+    "lean/Round4/Contracts.lean": "a57d84c49003035d7af9030976a532d1bea3732076c8ca7aba184e353f31ed57",
+    "lean/Round4/ExpCosine.lean": "2bed864bc0c7fb683bb0077a039ac37233f96a867d571818c10f1febdcc721db",
+    "lean/Round4/ExpCosineContracts.lean": "b43235801f4345d277623949a7edb5ac1992b9a5800a7bdeae2eb8bda0ffdbc3",
+    "lean/Round4/NestedBinomial.lean": "9b6a2cf04f32fc55e725db19cd00ff94cc0a0d21a579381442a02cc28b1ec0eb",
+    "lean/Round4/NestedContracts.lean": "023f983eb52971d26ab76e7f5bbb3a246199cf3721898d15e8d0489f531dbe0f",
+    "lean/Round4/NestedReversion.lean": "0dd32e4d02ce4a48b2254e6182e13adfc441fe7d580dc89d37fb880345cfd248",
+    "lean/Round4/SquareComposition.lean": "94af591b99ba599888ef8800d31b196390657e3336bba51f85a3fd2982fe2b0a",
+    "lean/Round4/ThetaRational.lean": "3888b23af84152036a02ac4b9a39a21354480b4398576a121cc695393c4c2f7d",
+    "lean/Round4/ThetaRationalContracts.lean": "b869d0ea7ac540d7c58842d3db838869ba8e8699835270acf8ac6ab29d96d49d",
+    "lean/lake-manifest.json": "bc1a60e6355183dfb8efa78a5d49ddcdf2108c4dbc85a3ab9bcab1904054f3ea",
+    "lean/lakefile.toml": "824e2b35061ecdfd6c5dc8192d60aa2ed0993b37c9925da99d6f138047d73467",
+    "lean/lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+    "manuscript/compositional_congruences.pdf": "1ff73fe09b05f57f64b20c65ec9e03bd89c754f690b1217905899aa4b840b677",
+    "manuscript/compositional_congruences.tex": "abe3d0eaa9db2f0b40d9af5c66f9fbbaf3b914cb81f7393bb72d98923889b201",
+    "manuscript/further_oeis_proofs.pdf": "5b68bd1bfc7d1c64428bd3e9d066775eb7873e0f4e4f52e6e636f691fc5c962e",
+    "manuscript/further_oeis_proofs.tex": "e37c0abdbeb06df531f17a8a16e27b87b91e6e7abc14cd2e2bd5a6859a458dbe",
+    "manuscript/more_oeis_proofs_and_corrections.pdf": "406dd6593325af4ef81b7ae519dd9888ef4ff1a8dd17028bbc183fec281368de",
+    "manuscript/more_oeis_proofs_and_corrections.tex": "5b9dd2c7d5ced36b45ca301e8e174e5be998d10b91e71a3a0d6e481a1a7b17f6",
+    "manuscript/six_more_oeis_proofs.pdf": "bd1e37b207bb8ef9241760bba2b9166ce86722718d2a9243752269c6dd9654fc",
+    "manuscript/six_more_oeis_proofs.tex": "3c32d5026a12ab5a7d288b044e3dd83fd93366f7da4c978996dbef0869fcdd5e",
+    "prior_work/ORIGINAL_README.md": "b58a08f634b109d29beb31e3c63141864c446aaebdd7c62a227d7dbf60534743",
+    "prior_work/hanna_congruences.tex": "2e8ac18428d43811e0c9f2f387beac81f54daf79b87e5af91098f8ff685a33df",
+    "prior_work/oeis_congruence_proofs_Dev_Goyal_v1.zip": "04f347b0e116a1c92cd7a1f21f38a37ae3dfb71c733dd5f55769accd0714489c",
+    "prior_work/oeis_proofs_complete_Dev_Goyal_v2.zip": "b28c6de12f53e862b670d37d79d8b5f11333ce3d7acd44e61cb27eb2b99dbc10",
+    "prior_work/oeis_proofs_complete_Dev_Goyal_v3.zip": "6a0cbeb94076a90e8938627a156ed4152f6cc3fd88546d0d2e29cd9331744d41",
+    "scripts/audit_axioms.py": "b01372d4ffa07cc3236ef641cc3beef90d0667ed755103fcee4cc2927d6ee89f",
+    "scripts/check_formalization.py": "7c6bf5dd92c9518ca2a304165806e37c4aa3b14829fbf781286ee185e995e1ce",
+    "scripts/package_release.py": "5eae9c77183280e0892ae85a06503eb11018a407fc67a9a3b89e09839bc4638b",
+    "scripts/verify_catalan_composition.py": "334b68315bc2102c1611240c9d2a0277facd13c094baeee904f69da48964b9fc",
+    "scripts/verify_coefficients.py": "69d821a1d06580023cbe6f1d887c27bb1eb5d154256584efeb0d761dfa50dafc",
+    "scripts/verify_cubic_reversion.py": "737c44ade3fac00b40bc732c1cd2334d56643ea85d93334613d30498a5e3a84b",
+    "scripts/verify_differential_mahler.py": "51e1c1c7cc99f77f340995cbd4b0a38f49658277b15c71b919fc75f319723e08",
+    "scripts/verify_exp_cosine.py": "6226efa273bf64cb05cfd02a1f3da625be17db06fe4596abeb5a3b62577f3d21",
+    "scripts/verify_hanna_congruences.py": "b8c3d50ead5c1cba1223ba235ad8368caed1d5f24eaf5c2bebe38d95db5162a2",
+    "scripts/verify_lacunary_inverse.py": "58df0ef7b4c766e010bc21256f77801fe74b0d0594fdc132acf8daca5db6a2d4",
+    "scripts/verify_nested_reversion.py": "bb0ac4685565c5ac5205b6774bb1bdaedc44b95c5c243feb43a618c1a48a134b",
+    "scripts/verify_rational_parity.py": "c5bdffb2d1bfad5687c8a34b486c00b2187e8a27ed3a5fc15e59644270400b89",
+    "scripts/verify_square_reversion.py": "3ac3ab9521f827ebcfe3436946d5f8eba21148aaaa33ae794061738ddc4b01ca",
+    "scripts/verify_stirling_periodicity.py": "4c97c45ceef5f419cc720af1bba90e6de943d0784d403ba6af6bb82425d66d64",
+    "scripts/verify_theta_rational.py": "6fb726ac3764c2838ff0fb5a0b11c5b18d334ab3a0e50bba045cd3c635eed140",
+    "scripts/verify_theta_substitution.py": "f42276f6fd3e6f7d7399ccefec6dd9528cd1eb308a5394fb56d794d0643b4bb6",
+    "tests/check_inverse_iterate.py": "0d066e0467862014cef0bd31801ac840c7067082aeb02abcdecde0f6d12ec1c6",
+    "tests/test_audit_axioms.py": "75d8e381633b6e59bc0d6fcc3324398addfad8ec328e56f3b229562969a387a4",
+    "tests/test_validation_requirements.py": "6d09185a545829b67393d890cd8489825f3ed01727cfd8ada41a16109f12b26f",
+    "tests/test_verify_coefficients.py": "68a254d66e453a0592e9cd3ce9497fce9341892194df705515d5985222565b74",
+    "third_party/mathlib/Apache-2.0.txt": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+    "third_party/mathlib/NOTICE.md": "6afd6a4ec1d25b3a209447497c03bd7927c3e352ea9e59f1491c20718a569008",
+    "validation/catalan_composition_numeric.json": "ed79298634367918d06dc2e156cdab29f2bdacd159cb1d1ea67373486882b602",
+    "validation/cubic_reversion_numeric.json": "960c812f317eb21861f78147e18abf3c19b64209205e513d0819e406521a325e",
+    "validation/differential_mahler_numeric.json": "8f8adbc1fe00a3febe56af7430757eb6ccfcea83c63a4f165a125198b372f557",
+    "validation/exp_cosine_numeric.json": "7a6ac4e4178b6bc34517ce3c64018a2fc2bd685d9f13dc579504f578f1659a36",
+    "validation/final_theorems.json": "c6f4d4c4d3427e74dbdb578202a88a0afbe137872137b9febbea0669c427865f",
+    "validation/inverse_iterate_checks.json": "7c66ec2cb248e303f02a57a7a4f16faf1c00cc3836b8418152f6887eb1b53105",
+    "validation/lacunary_inverse_numeric.json": "c406c579bb96b63e2e7f97241e6d9ef7f90e8584f5297c68e87b894d1a2f221d",
+    "validation/nested_reversion_numeric.json": "c7a8f392a5e984b48ef541324aed7ca3f64fb8173617e32e13397beaeae59d4c",
+    "validation/rational_parity_numeric.json": "35068cb6152df566722c17cbb73c9ed540c52689db904cc9fddb4304e42f07dd",
+    "validation/round3_elementary_axioms.json": "3061b8aed05b76146fbbbade7474a4f92aa741fd15c085fe0212b9ecfee41992",
+    "validation/round3_elementary_axioms.log": "af6a0a0c589d706970d06aaa16f4e0de823b669f9aa566ff2b7d69e916f85008",
+    "validation/round3_elementary_endpoints.json": "3515152146688e2691ccd2f7d7d943ebc95787b032e698a26e7fbc152fbfa7cc",
+    "validation/round3_lacunary_endpoints.json": "7759b2a7e9346ddb4bd8044af29ad1b46a3e1ec962a504ca0adf0fe9d2b715f6",
+    "validation/round3_lacunary_review_axioms.json": "6d79ea1452b24e301e58cfe022aee8de68bda83543a9b506a661b80a1fdc34e6",
+    "validation/round3_lacunary_review_axioms.log": "92804b2148477e743d541300f545a71382765c7284c739248e5f8e9237302262",
+    "validation/round3_square_axioms.json": "e5a9c5990e7eb244ffdcdb0a50b98f5faea1f3850252b46254ccba8ce28a6ce8",
+    "validation/round3_square_axioms.log": "fc28aa8e547abc6ccb94dd61b2d93f3ee306c13053482a212000d5ceaa62c205",
+    "validation/round3_square_endpoints.json": "59c3100bf33d63de5de8e5ced1a1bfc11b37b4990751592e8f6682ef816560e9",
+    "validation/round3_theta_endpoints.json": "88e85bd2d06ef4213c9fad1b1b7f2b6f228f45b3a539130ecaa9938f05452113",
+    "validation/round4_catalan_endpoints.json": "e8f3e2fd5c47bf378e8d760ae2e372ccc2f4d98b39b23c41990f6506d177e9c7",
+    "validation/round4_exp_cosine_endpoints.json": "d3c662ff7f4a472bf361317045e346368cdbc225ac279dc2011cff58b4fdc6e7",
+    "validation/round4_nested_endpoints.json": "ef6a533fff86728b68651a07f96e31cb06064ca20d2215363775ecdecfe3cd98",
+    "validation/round4_theta_rational_endpoints.json": "41f1e5a762e6667d19c1ce2c87ed10011b0ddb23f54cf5bd2f19dd51d34b6780",
+    "validation/square_reversion_numeric.json": "e379a53074be132f8ea6a510692d1f25949f67442553aca91337a4c8bb8f33ca",
+    "validation/stirling_numeric.json": "16c596e064c6383be7404cd40c62c63491371febb8686c63a7814046b11ebdc8",
+    "validation/theta_rational_numeric.json": "648eb01d08f85f0db5dcc1749c749fa79a2b28c1702dc8398fa5440669abe6c1",
+    "validation/theta_substitution_numeric.json": "9956ff3cca417d9a8a673df0fb887ec4f963440fab0801110419e7d16ba5f347"
+  },
+  "numeric_evidence": {
+    "coefficients_40.json": "2236dd2fcd21d7d7c2334a2b911e86e9aad222223743c1c1fad64b40fddfcf57",
+    "rational_parity_numeric.json": "35068cb6152df566722c17cbb73c9ed540c52689db904cc9fddb4304e42f07dd",
+    "cubic_reversion_numeric.json": "960c812f317eb21861f78147e18abf3c19b64209205e513d0819e406521a325e",
+    "inverse_iterate_checks.json": "50dca4438718c3e480fe9234d9018cb2ef316fe2af805c9d29f2414d7448716b",
+    "stirling_numeric.json": "16c596e064c6383be7404cd40c62c63491371febb8686c63a7814046b11ebdc8",
+    "differential_mahler_numeric.json": "8f8adbc1fe00a3febe56af7430757eb6ccfcea83c63a4f165a125198b372f557",
+    "lacunary_inverse_numeric.json": "c406c579bb96b63e2e7f97241e6d9ef7f90e8584f5297c68e87b894d1a2f221d",
+    "square_reversion_numeric.json": "e379a53074be132f8ea6a510692d1f25949f67442553aca91337a4c8bb8f33ca",
+    "theta_substitution_numeric.json": "9956ff3cca417d9a8a673df0fb887ec4f963440fab0801110419e7d16ba5f347",
+    "nested_reversion_numeric.json": "c7a8f392a5e984b48ef541324aed7ca3f64fb8173617e32e13397beaeae59d4c",
+    "catalan_composition_numeric.json": "ed79298634367918d06dc2e156cdab29f2bdacd159cb1d1ea67373486882b602",
+    "exp_cosine_numeric.json": "7a6ac4e4178b6bc34517ce3c64018a2fc2bd685d9f13dc579504f578f1659a36",
+    "theta_rational_numeric.json": "648eb01d08f85f0db5dcc1749c749fa79a2b28c1702dc8398fa5440669abe6c1"
+  },
+  "project_build_cache_cleanup": {
+    "path": "lean/.lake/build",
+    "directory_existed": false,
+    "removed_olean_count": 0,
+    "directory_absent_before_build": true,
+    "dependency_cache_path_preserved": "lean/.lake/packages"
+  },
+  "project_build_cache_cleanup_sha256": "14ce50ce4f81763e6957c151d827cc0daa920a9311f8650bc9e6ef4c06b46fc6",
+  "isolated_compiler": {
+    "executable": "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+    "fresh_project_object_directory": "/tmp/oeis-lean-recheck-tdwfkyf7",
+    "fresh_directory_initially_empty": true,
+    "old_project_object_directory_excluded": "/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/build/lib/lean",
+    "effective_lean_path": "/tmp/oeis-lean-recheck-tdwfkyf7:/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/packages/Cli/.lake/build/lib/lean:/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/packages/batteries/.lake/build/lib/lean:/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/packages/Qq/.lake/build/lib/lean:/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/packages/aesop/.lake/build/lib/lean:/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/packages/plausible/.lake/build/lib/lean:/workspace/scratch/cac44b94a8b1/oeis-congruence-proofs/lean/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/lib/lean"
+  },
+  "forced_source_reelaboration": [
+    {
+      "module": "Hanna.Series.Basic",
+      "source": "Hanna/Series/Basic.lean",
+      "source_sha256": "fe5948059309ed57c09f0c8db0e022a5e8c2848202562eae725ff9f835d0b906",
+      "object_sha256": "fd5d621c819d2255252cb055fbbb662c5a8eb6b94abcd1c64e62701b5609d6ea",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Series.Filtration",
+      "source": "Hanna/Series/Filtration.lean",
+      "source_sha256": "b1521801de0629c1b4444a1c6efbc924e541c8a57a4d3e36cb63f95aca2820e4",
+      "object_sha256": "5baf9750364b7bc380f1f7a69f72a9f24b73a79144d8a8a3e438f80e9d53f56c",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Series.Triangular",
+      "source": "Hanna/Series/Triangular.lean",
+      "source_sha256": "8c74f1f494eadfcfda535bac804fd99526bbdf402483a95d898257f502cb45f2",
+      "object_sha256": "da70a1f01e3077fd1547d8a2c1e0172b8703b7f4e74760b6c779a4135abd6bf3",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Series.Construction",
+      "source": "Hanna/Series/Construction.lean",
+      "source_sha256": "f4bdeaa4e5cce2ffe57bebe26148e5b826a78bd132125b03541e2b44e6ce9756",
+      "object_sha256": "b93b0ca1fb6243f9e0a9888b5aaa0c455702b707b5f46f4d373aa4b54e9836dc",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Series.Inverse",
+      "source": "Hanna/Series/Inverse.lean",
+      "source_sha256": "48917e1734625f78c598a7a6929162626a916fdbcd7d2a5d37c36f2be25fe118",
+      "object_sha256": "42ee9f81842c0be96ba7c630e19642814b3d58e0cf01776f663df030cf22b4f9",
+      "new_object_created": true
+    },
+    {
+      "module": "Consecutive.Basic",
+      "source": "Consecutive/Basic.lean",
+      "source_sha256": "f8847e397da7a052c0a690197ef08367fdd088b60fe2eede3a8706cb71864f16",
+      "object_sha256": "9c7db32bfdbefbd2fbfa60c09e3c5842ab0bbcf2d333a353211f19a17b32c57c",
+      "new_object_created": true
+    },
+    {
+      "module": "Consecutive.Construction",
+      "source": "Consecutive/Construction.lean",
+      "source_sha256": "1defe4d157d8d5f111ee2e142b235aa6cbb5409683892fd834afa1718dc0ea0b",
+      "object_sha256": "a179dd954e2a53b0834aac304f73a0524623565a5187530a5b4c8f27a7ee975b",
+      "new_object_created": true
+    },
+    {
+      "module": "Consecutive.Modular",
+      "source": "Consecutive/Modular.lean",
+      "source_sha256": "f26c2715c46ae9877f27ef76f5d09c2cf1fce2c2e44cbfa9c2e9754c97d25f58",
+      "object_sha256": "f37585920f741dcad5d7675b02eac793b496f1585f438e79e3706c720317047c",
+      "new_object_created": true
+    },
+    {
+      "module": "Consecutive.Arithmetic",
+      "source": "Consecutive/Arithmetic.lean",
+      "source_sha256": "06d3ceadf894878ae2c7d170c15542cf439df6f2f1f65a7d0fa7fb00f8076138",
+      "object_sha256": "07e2a06b9b26eaa63b2fa364148c8f60a80b04e9b38cb798e0932ad10cf0f8aa",
+      "new_object_created": true
+    },
+    {
+      "module": "Consecutive.Coefficients",
+      "source": "Consecutive/Coefficients.lean",
+      "source_sha256": "05b922e0737ae6975b2a383fb868e50462a506cbe493bdbfc5725fb6bfae371f",
+      "object_sha256": "384067448381e06ef25d3f44213ef1a4064040b3c3986989ade1f8b08a7befc5",
+      "new_object_created": true
+    },
+    {
+      "module": "Consecutive.Acceptance",
+      "source": "Consecutive/Acceptance.lean",
+      "source_sha256": "879ec5653dd4c52b27f19d70f080eff24904e1aeee39609768781103dd82b951",
+      "object_sha256": "afa47c6a26356e9e74f4e350118d948a70892f4df2e706c2265504ef89644f22",
+      "new_object_created": true
+    },
+    {
+      "module": "Consecutive.Related",
+      "source": "Consecutive/Related.lean",
+      "source_sha256": "599322c04117e65ee7359ea1bb9939f428dccc873c794b11288dbd7a3847ff6b",
+      "object_sha256": "a1340fc981ca000c4ed0c7406203b23e6d2ad9ee63388ba3f2e915c4ba276c31",
+      "new_object_created": true
+    },
+    {
+      "module": "Consecutive.IntegerIterates",
+      "source": "Consecutive/IntegerIterates.lean",
+      "source_sha256": "71785797e56dadbddaceaace0e49938995907c80e7f80d5428a3487e9cb2d939",
+      "object_sha256": "6a91dc15f6d7cb1ddb5d99ac63b6cf5cbc570c453987f98e42f5181e384313a3",
+      "new_object_created": true
+    },
+    {
+      "module": "Consecutive",
+      "source": "Consecutive.lean",
+      "source_sha256": "f0277a9befdf2cc3f70b278d89b6ca3e623c0653d7c5dcf22484b1e5b3ada342",
+      "object_sha256": "fb9c65be1894e6a19043ac954de78551500bc280294b4b41a3e04cb4367248a4",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.BinaryWeight",
+      "source": "Hanna/BinaryWeight.lean",
+      "source_sha256": "6db40277cccfff4d3d5740a5dd58e0029f385235883e1a2ffbdea98e9e70da27",
+      "object_sha256": "4c1e70add7f0ad1869d91d8cb33923b7485769ed72af533a6392ab3bbe4c0378",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Divisibility",
+      "source": "Hanna/Divisibility.lean",
+      "source_sha256": "ab96329b9eb33f27f6765fdd945b18e7f59235619dec7f169200acbd154e6dfb",
+      "object_sha256": "e58c5771268dba63a2c8e23cbca2785f46218b4e2f190b995c195c4354848755",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Canonical",
+      "source": "Hanna/Canonical.lean",
+      "source_sha256": "96e894fc7e6a368edc04e10c46339331acffef112f32b1ec93472f3974fd3afe",
+      "object_sha256": "fb1185a614887f263feafb1e0db5c589a15ce16d69b3664a827cccf438d50727",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Recurrences",
+      "source": "Hanna/Recurrences.lean",
+      "source_sha256": "f5d8352cf432eb515905007d43c7869d9dde0144f08c6e3c9474a516e229f1e1",
+      "object_sha256": "c4cd3ab4dc3bb070e60ef5808affa7862dfc9bc386ec3319e2f81da51749b521",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.BinaryDivisibility",
+      "source": "Hanna/BinaryDivisibility.lean",
+      "source_sha256": "135fc2ab84354db15cf539cbb077069f1a0356a9822ef223f7857b6ba731191e",
+      "object_sha256": "263084dbc25fea1f34818ae581eee408dc94635fb7a20a4be657842883f7410f",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.ModSquare",
+      "source": "Hanna/ModSquare.lean",
+      "source_sha256": "fe5fe056a4218a3d1ead1c71fdfc481340712bf1be0c9bb968e66cb0759a2cde",
+      "object_sha256": "96e7d817273dbc430cdb87ddd041139d2ea510027729fd8fe516503191c43cfd",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.PrimeExponent",
+      "source": "Hanna/PrimeExponent.lean",
+      "source_sha256": "d0f3c10213a928ddc5be03fe44dbc70cdb86fb3a1a876563bc8c38a1d78cb354",
+      "object_sha256": "7c9e28ac68a0319b15580a7d7d2d702dad6c315e0681705d7fe9eb4b21087928",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Corollaries",
+      "source": "Hanna/Corollaries.lean",
+      "source_sha256": "6ba336bb5e44ff664e146efbb69872f0821d9cecb563fccfdb299c4cde81461b",
+      "object_sha256": "276890f2767efe63d55f7433654df47992dd601b783f00cb6b496718fd2cfcd2",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Parity",
+      "source": "Hanna/Parity.lean",
+      "source_sha256": "7537944b09c8b6fb107ce75022cbcad714d7c4677e064ef91fb856bfb3ccdb35",
+      "object_sha256": "28be26fb8b61a948ddaadf1fedcc59c24766f88903b8a97176973646632c787a",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Acceptance",
+      "source": "Hanna/Acceptance.lean",
+      "source_sha256": "6e40816f6ae48bc06cf1419c00cf3624b3401a5cfd7e58cb54abda4b56b5b209",
+      "object_sha256": "b786242ea38914f99e66db57578c88e68983a6d6d8e2f5f8c12d2fccb298e1a3",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna",
+      "source": "Hanna.lean",
+      "source_sha256": "02d63ef8766b380dc96b5c40c2e5a31cbb41af23a50b5158ca085bc555fe5b4f",
+      "object_sha256": "a5fb4fa5b80bdc9217f4fba8668c21309792934dd7d8be1c8a8edf7073175571",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Related.ScaledInverse",
+      "source": "Hanna/Related/ScaledInverse.lean",
+      "source_sha256": "0c1f5c702d279fac8b66c1e1c3f59abe197b30f730a875bb11c79038d6050440",
+      "object_sha256": "7b3c5aa8dbc36c3e1419630223bfdc732e8f786a6500161bef085b0d73c926ed",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Related.ScaledParity",
+      "source": "Hanna/Related/ScaledParity.lean",
+      "source_sha256": "c2b139df3ca35b982d8b3d4b8a6427fc8c4eddca71b77d96ad302535ecd3e3e9",
+      "object_sha256": "9f1135d6bc8c54cf48f7407a747215d3aec7c68cdcef2be459b552e3220465e2",
+      "new_object_created": true
+    },
+    {
+      "module": "Hanna.Related",
+      "source": "Hanna/Related.lean",
+      "source_sha256": "23df0d2b12369a48b03417e67911de399a2117fc439d104ffe3641bd1d64f304",
+      "object_sha256": "04993f8e3f624937ac39502e2bea659e7f2abad3f317e5deaddcf4d093107b17",
+      "new_object_created": true
+    },
+    {
+      "module": "More.RationalParity",
+      "source": "More/RationalParity.lean",
+      "source_sha256": "2f63e3afe954063e62b25dac769f044938887e4ed78895b3e4c97833123bba64",
+      "object_sha256": "2917b77630d81d99a75a1eb124734bb42701044c3e35449dc2217ca8015759e5",
+      "new_object_created": true
+    },
+    {
+      "module": "More.CubicFrobenius",
+      "source": "More/CubicFrobenius.lean",
+      "source_sha256": "fd6063f053d2a5603c0f832a0d59ce0bcc929bc759dc088a7f4c3975f52e17d1",
+      "object_sha256": "95c7cd81c3ff0d6ee329c3142733085be68f5669d44488c5d845e2ec7097c9f7",
+      "new_object_created": true
+    },
+    {
+      "module": "More.CubicReversion",
+      "source": "More/CubicReversion.lean",
+      "source_sha256": "62901552a2faa906bdf94786d8db5f4f45c5b9fd6e3a3d1a24f8aafec35b7e11",
+      "object_sha256": "bc96c0bbf01383f3219643d05bcfe238f45860dbd2678cd2329e294e650c7a63",
+      "new_object_created": true
+    },
+    {
+      "module": "More.CubicConsequences",
+      "source": "More/CubicConsequences.lean",
+      "source_sha256": "d58a1dadfa103ce149baf9f45b853cef68da0a2658163d19c5987daba42a7022",
+      "object_sha256": "c70eddcfbdcbe2cdf624ba158c81abd0cbf802307bdc8e40b10ffd754de2667e",
+      "new_object_created": true
+    },
+    {
+      "module": "More.StirlingNumbers",
+      "source": "More/StirlingNumbers.lean",
+      "source_sha256": "c823ceee359a589456924c0f22dd40d3051407e59ef9eebd15a66ed0df8ed209",
+      "object_sha256": "b388dc2f5c2a64d55a56980ff4f4b458f4b6db51c5660a8745930789bc465f21",
+      "new_object_created": true
+    },
+    {
+      "module": "More.StirlingTransform",
+      "source": "More/StirlingTransform.lean",
+      "source_sha256": "cebda04d4c0b6fc577a4b085a5b512f133674747cbd43ca0530f35a3fada0abd",
+      "object_sha256": "15dd9e276609de5a2ca00e0e8ecdbb7945b8edf4c4092b6ccd9f80daa12f202c",
+      "new_object_created": true
+    },
+    {
+      "module": "More.PowerPeriodicity",
+      "source": "More/PowerPeriodicity.lean",
+      "source_sha256": "00bc60aab2d86a65694e3552ac6a0c723a602ab9069823f53af87e5a0b678e03",
+      "object_sha256": "9f7a5aae01b30bb1a8f5750402c9c740932d0e7355758a9bac0474e58007fa32",
+      "new_object_created": true
+    },
+    {
+      "module": "More.TailPeriodicity",
+      "source": "More/TailPeriodicity.lean",
+      "source_sha256": "1433fa86551854b02f226a3e57b62466485ef1bd649de0a9488245cbf022eb60",
+      "object_sha256": "4047e0e603627e5d633ec1fb51f168024a5b34614ef104b0e0197174fd21832c",
+      "new_object_created": true
+    },
+    {
+      "module": "More.StirlingPeriodicity",
+      "source": "More/StirlingPeriodicity.lean",
+      "source_sha256": "1760bcb9ffc4c0287ac724f96fdd7498fb3891226bd0705b781067c7a32d092c",
+      "object_sha256": "e9e7f2a5a0bcf8c44d9aeb4c52f36e739d7f35469c649bfaa199a3b748c0932d",
+      "new_object_created": true
+    },
+    {
+      "module": "More.InverseIterate",
+      "source": "More/InverseIterate.lean",
+      "source_sha256": "5e08350a61d73c1b427c2ebeb8e8b9ff8f13166e0be73cafd38c9c22d503c51f",
+      "object_sha256": "0a1a0dba5541cccb7f3156b411ad6b8436099ef5a51d23245ee31def6a3fe7f0",
+      "new_object_created": true
+    },
+    {
+      "module": "More.Contracts",
+      "source": "More/Contracts.lean",
+      "source_sha256": "b9831ee388b2b496b50a7bc1f5ef9cf2fc1805780c0196055a11561fa9ca5766",
+      "object_sha256": "404b914f96b4880f5bdff6165569f4489abbed2aaea8d8affea0273a2a454b91",
+      "new_object_created": true
+    },
+    {
+      "module": "More",
+      "source": "More.lean",
+      "source_sha256": "9dec7196144feaddee79f036ad232b968d9383646145552b39dbfcb4b2eeab9d",
+      "object_sha256": "77ba79906172d1d0eb85a8619e9c08ba9a83daf44eec9094a5ad2168935a1c76",
+      "new_object_created": true
+    },
+    {
+      "module": "Related",
+      "source": "Related.lean",
+      "source_sha256": "b57efd388066f3e76c5aec823c9948bc9dccf41e134c709bd3afabc459cfd33f",
+      "object_sha256": "ce6c8d6f67721388f1c6b51fdcb69136251efe1b122fdd70abaecd75fc1a4530",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3.DifferentialParity",
+      "source": "Round3/DifferentialParity.lean",
+      "source_sha256": "00456e037a120c48b60b6096486bb0d0b38f5a5bdd3445ad3cc7c94d872bb6cf",
+      "object_sha256": "770cba68115e70bf17814eb3b6fe50a25db8b14dd600412dee5c4abd5374204f",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3.ModFour",
+      "source": "Round3/ModFour.lean",
+      "source_sha256": "fdb3d99291c889dbd9b614ad39c1b8f420aa3d861efb38ef0b04433f70e8ec7f",
+      "object_sha256": "c5d0ede6d1ef347b77d93c4c362b8cae6d35856a97f81b7854ca4baf87336001",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3.MahlerParity",
+      "source": "Round3/MahlerParity.lean",
+      "source_sha256": "739d49b2db028e3411e1bb6b374b37386710a3272bb5ef6d1f9db4fa31437ea5",
+      "object_sha256": "77e82fafb2639b5accfd6365cf48f798106df46d5244cf6422ec62936566dbcd",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3.ElementaryContracts",
+      "source": "Round3/ElementaryContracts.lean",
+      "source_sha256": "3a690602557d8ae7c28e16487648bc6350840c01927c8fc9da374344232fe8b6",
+      "object_sha256": "b81c75f0e2c9252a9d7addb9d4d421c43cd880f473adcde7caf3e16107970d8e",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3.LacunaryInverse",
+      "source": "Round3/LacunaryInverse.lean",
+      "source_sha256": "abc50f89cb31775a06fc8b993629a3e88df6e1f647ab4d3fd2a28b67e96d529e",
+      "object_sha256": "496c5bcb21579065cd05bc40a249d8573181d6ab10d6136087a237dc560edbde",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3.LacunaryContracts",
+      "source": "Round3/LacunaryContracts.lean",
+      "source_sha256": "5da688d866eb13c4ebc3aa70168b20567b1d97cba97e9f183e0b3b8a8f2e659c",
+      "object_sha256": "fc42415ddacbf30c4c79b4b9fc0f3cb9a396ba21147590c9ed4a0823754e5906",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3.SquareReversion",
+      "source": "Round3/SquareReversion.lean",
+      "source_sha256": "13826214bfd2f3b57395cd271c50a4764229a4c62ab4bc38c728eb89ed7a1065",
+      "object_sha256": "4c91553f8dcf54079d6023f5cfd29efeb022e330b90370109cdf28c862c10afa",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3.SquareContracts",
+      "source": "Round3/SquareContracts.lean",
+      "source_sha256": "0399e43cda2ac54b16f25ada91121b994591d3897afebf6021f25f03f7f70675",
+      "object_sha256": "a4d03617cdde2a33824e3d3811c4d4501f1e0c74753914737db6268a3b60dad7",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3.ThetaSubstitution",
+      "source": "Round3/ThetaSubstitution.lean",
+      "source_sha256": "27e0f3dedcf1bafbcea566075f61d037cc8af3c9a2a1f7824426700b85b18824",
+      "object_sha256": "2b70f9d6f6ea0c41b9e7e99adf3e53bc8cee5d1f2c4c24d08cef01c7a715021d",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3.ThetaContracts",
+      "source": "Round3/ThetaContracts.lean",
+      "source_sha256": "9c0f514db84c4bc6cc0093149818359b4f3170d165b71bfd1622d9445d7eeec3",
+      "object_sha256": "a77bcd1d66418f6aa83df88146f250324b4c1c02443805f602b32238ebe13c9e",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3.Contracts",
+      "source": "Round3/Contracts.lean",
+      "source_sha256": "f19a1691ae0ffe7228c767aa69bd0b3dd4e4d13d0f7e97c48b1cab0683aea2d4",
+      "object_sha256": "7c275f1827e09a014a4da89e7b0b4e4f3b0bfbfd10cf8a2dd02589aa525f5098",
+      "new_object_created": true
+    },
+    {
+      "module": "Round3",
+      "source": "Round3.lean",
+      "source_sha256": "170ab473cf50d40957099a2aa02717e9afdf0e5a2a99da51054e082edf1c3a88",
+      "object_sha256": "90a7d31e904ceb20e4af1b5e327380029d2f22845fa86b807c12dd0ba9302a85",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4.NestedReversion",
+      "source": "Round4/NestedReversion.lean",
+      "source_sha256": "0dd32e4d02ce4a48b2254e6182e13adfc441fe7d580dc89d37fb880345cfd248",
+      "object_sha256": "87158787d654b40b33a3dc21aed82aa8eeb1f0538ce374837f4244e48a96e5a9",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4.NestedContracts",
+      "source": "Round4/NestedContracts.lean",
+      "source_sha256": "023f983eb52971d26ab76e7f5bbb3a246199cf3721898d15e8d0489f531dbe0f",
+      "object_sha256": "a207bf064ff88198e26f588e9ae5a00e91b546f2e1cae8fc49e82f11e0a52cce",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4.SquareComposition",
+      "source": "Round4/SquareComposition.lean",
+      "source_sha256": "94af591b99ba599888ef8800d31b196390657e3336bba51f85a3fd2982fe2b0a",
+      "object_sha256": "afa3b5223726343e9ed38df22eb8e9b73664558ef4832a923a6d0393720ef02f",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4.CatalanComposition",
+      "source": "Round4/CatalanComposition.lean",
+      "source_sha256": "1c3e724f94ee7d46c9a5573634ad1dd950819bf52a3945eacfccfb24abc1f2f4",
+      "object_sha256": "1a302e4cfb5a8532a340726575a7fe2278314c08f8e4cb47f362347d08d03477",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4.NestedBinomial",
+      "source": "Round4/NestedBinomial.lean",
+      "source_sha256": "9b6a2cf04f32fc55e725db19cd00ff94cc0a0d21a579381442a02cc28b1ec0eb",
+      "object_sha256": "20262a752c04f319fcf73f9b55f1ade9c1ffcc419acd42bc0cfb74d64bcc81d7",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4.CatalanContracts",
+      "source": "Round4/CatalanContracts.lean",
+      "source_sha256": "6be71cb602506435b014b7e49fe06fccd642e1635c26f209c30f1b95a7ff1e00",
+      "object_sha256": "9de58ffb295eae6dd7a8646ac0984a18fa691033b2f2f89e5f84fcb4b45c403e",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4.ExpCosine",
+      "source": "Round4/ExpCosine.lean",
+      "source_sha256": "2bed864bc0c7fb683bb0077a039ac37233f96a867d571818c10f1febdcc721db",
+      "object_sha256": "3c30cd57313d9774442b3011b303bf0daf37a41b17e0477b27117cdb60fa616f",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4.ExpCosineContracts",
+      "source": "Round4/ExpCosineContracts.lean",
+      "source_sha256": "b43235801f4345d277623949a7edb5ac1992b9a5800a7bdeae2eb8bda0ffdbc3",
+      "object_sha256": "18a3bd8df642b24c95a9ee2c013b429dea3033e5288a9cf6ffd9322a28c448d1",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4.ThetaRational",
+      "source": "Round4/ThetaRational.lean",
+      "source_sha256": "3888b23af84152036a02ac4b9a39a21354480b4398576a121cc695393c4c2f7d",
+      "object_sha256": "13eaedc2f1d3570f2796da928b13725e75111e98d51686ad4db0c011df861e7a",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4.ThetaRationalContracts",
+      "source": "Round4/ThetaRationalContracts.lean",
+      "source_sha256": "b869d0ea7ac540d7c58842d3db838869ba8e8699835270acf8ac6ab29d96d49d",
+      "object_sha256": "36db3668f2a4fe01c66f842a6f3c55b76127a68c989317cce03c4ab2566025e5",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4.Contracts",
+      "source": "Round4/Contracts.lean",
+      "source_sha256": "a57d84c49003035d7af9030976a532d1bea3732076c8ca7aba184e353f31ed57",
+      "object_sha256": "109504a572eea94ca4d05f9b999407d92b66e2fbd604437a9d808feccbb589d7",
+      "new_object_created": true
+    },
+    {
+      "module": "Round4",
+      "source": "Round4.lean",
+      "source_sha256": "258bcde6c31ce7319dafff745699fcf9f0a94be9799671665c220c77397f881b",
+      "object_sha256": "abf14feef59abadf955c5fb9eafaeb0bebc9a43f13d3f0fb2cb177386430f507",
+      "new_object_created": true
+    }
+  ],
+  "forced_source_module_count": 65,
+  "contract_compiled": true,
+  "contract_object_sha256": "cceba31a0eb49a53123ec9597ac0d09ed67d59c826ee09b8c150fe7e19f28fc0",
+  "axiom_dependencies": {
+    "Consecutive.existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.solution_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.solution_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.map_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.map_iter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.iter_solution_mod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.map_iter_solution_mod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.iter_solution_mod_eq_X_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.iter_solution_mod_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.ziter_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.map_ziter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.ziter_negative_is_inverse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.ziter_solution_mod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.map_ziter_solution_mod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.integerIterateCoeff_mod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.ziter_solution_mod_eq_X_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396099_all_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396099_odd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396099_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396099_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396099_second_iterate_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396099_second_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396099_difference_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396099_difference": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_iterate_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_corrected_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_corrected_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_literal_period_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_second_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_fourth_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_sixth_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_eighth_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_third_iterate_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_fifth_iterate_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396798_seventh_iterate_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396807_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396807_iterate_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Consecutive.a396807_integer_iterate_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.scaledSolution_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.scaledSolution_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.map_scaledSolution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.integer_mod_parameter_add_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.integer_coeff_odd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.a393856_mod_five": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.a393856_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.a393857_mod_six": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.a393858_mod_seven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.a393858_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Related.ScaledInverse.a393859_mod_eight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.compositional_inverse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.coefficient_polynomial_specialization": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.parity_odd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.parity_even": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.mod_parameter_squared": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.binary_divisibility_polynomial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.inverse_binary_divisibility_polynomial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.binary_divisibility_integer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.inverse_binary_divisibility_integer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.power_of_two_index": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.prime_divisibility_lower_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.prime_exponent_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.minimum_prime_exponent_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.residues_parameter_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Hanna.Acceptance.residues_parameter_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RationalParity.B_denominator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RationalParity.A_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RationalParity.map_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RationalParity.third_period_denominator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RationalParity.a396093_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RationalParity.a396093_even_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RationalParity.a396093_even_indices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "RationalParity.a396093_odd_indices_original": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.frobenius_substitution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.cubicSolution_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.cubicSolution_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389474_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389474_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389474_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389474_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389474_square_mod_nine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389474_conjecture_3": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389474_conjecture_4": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389475_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389475_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389475_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389475_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389475_cube_mod_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389475_square_mod_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389475_conjecture_4a": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.CubicReversion.a389475_conjecture_4b": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.PowerPeriodicity.nat_pow_totient_add_modEq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.PowerPeriodicity.pow_totient_add_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.TailPeriodicity.leastPeriod_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.transform_periodic_of_powers": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.transform_totient_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.transform_eventually_periodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.transform_exact_tail_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A052895_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A064618_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A354242_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A167137_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A305550_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A306082_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A080253_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A052895_leastPeriod_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A064618_leastPeriod_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A354242_leastPeriod_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A167137_leastPeriod_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A305550_leastPeriod_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A306082_leastPeriod_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "More.Stirling.A080253_leastPeriod_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.R_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.R_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.F_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.compose_R_F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.compose_F_R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.F_original_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.F_original_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.F_original_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.map_F": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.F_mod": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.coefficient_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.a396102_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.a396102_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.a396102_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "InverseIterate.iterate_coefficient_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.DifferentialParity.existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.DifferentialParity.A_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.DifferentialParity.A_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.DifferentialParity.map_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.DifferentialParity.A_mod_two_quadratic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.DifferentialParity.a397588_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.DifferentialParity.A_mod_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.DifferentialParity.a397588_divisible_by_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.MahlerParity.existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.MahlerParity.A_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.MahlerParity.A_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.MahlerParity.map_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.MahlerParity.A_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.MahlerParity.a389536_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.MahlerParity.a389536_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.differential_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.differential_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.differential_source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.differential_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.differential_mod_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.differential_divisible_by_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.mahler_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.mahler_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.mahler_source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.mahler_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.mahler_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ElementaryContracts.mahler_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ModFour.double_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ModFour.series_double_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ModFour.reduce_int_map": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ModFour.two_mul_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.auxiliary_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.R_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.R_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.A_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.R_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.A_R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.map_R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.map_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.A_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.inverse_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.A_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.A_mod_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.H_constantCoeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.A_decomposition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.A_mod_four_decomposition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.H_mod_two_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.H_mod_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.H_mod_two_coeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.a389537_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.L_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.L_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.L_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.R_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.R_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.A389542_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.compose_R_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.compose_A_R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.source_of_inverse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.inverse_of_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.inverse_equation_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.map_L": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.map_R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.map_A389542": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.L_quadratic_mod_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.L_coeff_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.R_involution_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.A_eq_R_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_coeff_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_two_mod_four_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.theta_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.theta_coefficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378580_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378581_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378580_quotient_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378580_source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378581_source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378580_source_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378581_source_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378580_source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378581_source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378580_series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378581_series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378580_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378581_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378580_square_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378581_square_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378580_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ThetaSubstitution.a378581_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.family_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.tail_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.tail_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.tail_right_inverse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.tail_left_inverse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.tail_is_inverse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.approximation_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.approximation_succ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.approximation_agrees": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.map_tail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.tail_of_zero_weight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.tail_quadratic_of_next_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.A_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.A_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.A_source_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.A_mod_two_quadratic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedReversion.a195194_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.SquareComposition.existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.SquareComposition.map_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.a393172_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.A_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.A_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.A_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.map_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.A_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.a393172_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.a393172_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.a393171_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.a393171_named_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.B_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.B_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.B_fixed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.B_composed_catalan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.B_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.map_B": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.A_integer_decomposition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.B_mod_eight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.a393171_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanComposition.a393171_eight_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedBinomial.existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedBinomial.A_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedBinomial.rational_argument": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.NestedBinomial.a392210_odd_indices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.first_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.first_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.first_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.first_arbitrary_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.second_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.second_named_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.second_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.second_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.second_arbitrary_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.third_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.third_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.third_evenness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.CatalanContracts.third_arbitrary_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a_conv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a_convolution_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.cosine_egf_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.A_coeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.A_integral_coefficients": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a380056_source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a380056_source_quotient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a380056_source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a380056_source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a380056_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a380056_mod_five_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a380056_mod_five_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a380056_mod_five_four_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a380056_five_dvd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a380056_mod_five_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosine.a380056_five_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosineContracts.integer_egf_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosineContracts.source_egf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosineContracts.literal_source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosineContracts.literal_source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosineContracts.integer_coefficients": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosineContracts.first_source_conjecture": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosineContracts.second_source_conjecture": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosineContracts.exact_mod_five_pattern": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ExpCosineContracts.exact_divisibility_by_five": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.ratio_quotient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.sigma_coeff_finsum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.map_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.solution_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380060_source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380060_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380060_source_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380060_coefficient_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380060_series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380060_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380060_square_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380060_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380680_source_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380680_coefficient_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380680_series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380680_corrected_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380680_twice_square_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380680_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380680_coeff_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380680_coeff_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380680_literal_conjecture_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRational.a380680_nonsquare_clause_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRationalContracts.implicit_source_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRationalContracts.implicit_actual_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRationalContracts.explicit_actual_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRationalContracts.a380060_statement": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRationalContracts.a380680_corrected_statement": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRationalContracts.a380680_counterexamples": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRationalContracts.a380680_literal_statement_is_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round4.ThetaRationalContracts.a380680_complement_is_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "generated_types_sha256": "def4709a6ebe3a71ecc9d080e284cd353073fe933ad1e8ea1c30c6d271b335d9",
+  "generated_axiom_audit_sha256": "a712347db698e9f4358dc24b871217402c5598e601d0398d5e0f59cd676fbb3a",
+  "sources_after": {
+    "AI_DISCLOSURE.md": "dac137b7bded6e7ff9c7901c9f13160d44e33962202dfbd5de1c89a7fd012784",
+    "CITATION.cff": "6d8e5d84768ae1bc8fa115ed6422b2b2f6234c814936691654fdf8e31364bfd3",
+    "README.md": "303eb5c2f94e6545c89dac3371a56b50335a718fe981d8f9612752434704256f",
+    "docs/COVERAGE.md": "2e19a6a4f99956e6e4bf781b1b880e44ef89c885cdab59f4b8173d589a6541ee",
+    "docs/CUBIC_INDEPENDENT_REVIEW.md": "aa11d6c789818b93e0b38253e24af1ad7a35b88e481b997f31aaddf61547ef8e",
+    "docs/CUBIC_REVERSION.md": "7851c42e8b4c51a716a17a7525ef7714b436b5355e3353d99cbd559d52c00a6f",
+    "docs/DIFFERENTIAL_AND_MAHLER_PARITY.md": "2bc613b46a00e992f5b80bc0816cf0ca195485da447e6ee6f46f4d1839d2c6d2",
+    "docs/FINITE_VERIFICATION.md": "d6dcc8975e7b8d38a4394fb44b8dedda168acb767f58f137f3c7a136dcf7ca94",
+    "docs/FORMAL_REVIEW.md": "b98dc6575090097df7ccf3559c4a810ba9cf1d4c347e545861ee5d8f0099384b",
+    "docs/INTEGER_ITERATES_REVIEW.md": "e2863de77be47bdd2cfca5bd35c3905425cb1029d86d7165672bb1e02c9c0aa1",
+    "docs/INVERSE_ITERATE.md": "560880cc145cad471ccd0dbb238550d7a34e34aa03a6d7057f29f2d08ade0dd8",
+    "docs/PROVENANCE.md": "248cbdb0b8164ee605eaef7301b3cd179910971b4f35d26fe04a6036cb5e6236",
+    "docs/RATIONAL_PARITY_REVIEW.md": "a09372f35502dd52dffd07e11f3027519d9d8e5c80e28553362745295b77c251",
+    "docs/RELATED_CONJECTURES.md": "9b3a83d8eb40afda3153aae4a38bdc93265190424695ced3ddd7fa1d665e8bca",
+    "docs/ROUND2_COVERAGE.md": "364b6405a5b6cf3031df3d9354c80631801354fe7ce9f9ffc03d0daa336737ea",
+    "docs/ROUND2_REVIEW.md": "c6653fb0299f1ac83d423c199eef57c9a80d2b23f21c66cda446c080188c67c6",
+    "docs/ROUND3_COVERAGE.md": "9791f8422707211470d79a0cd1d371f2ab20afcaf32abec6e8052653fcc5b3f2",
+    "docs/ROUND3_ELEMENTARY_REVIEW.md": "295eae5355daf10646813da8553820ea4e80f922ff2fef9ad54d277c64a9eb6c",
+    "docs/ROUND3_INTEGRATION_REVIEW.md": "c7d1ee07b340d0230615593bd73c63840f3d51b54b685004ab77d35dffe269d4",
+    "docs/ROUND3_LACUNARY_INVERSE.md": "46ef4381fe598cbb27d88ef249daff332f195c220ae3811cc98ca831d76e7f2e",
+    "docs/ROUND3_LACUNARY_REVIEW.md": "7a73266e03f92eadb66584c6d78682ad28cd6768227bda90af38bdbe459d3b40",
+    "docs/ROUND3_SQUARE_REVERSION.md": "ee5f41c0bfde422b102707a9dd0db1bc8e2fdb5a31dce8a9313ef6f32faf0d00",
+    "docs/ROUND3_SQUARE_REVERSION_REVIEW.md": "578009a7222087813c2bd256ef5a1880b09ff0bab9b215b7fd4c379fcf4de0cd",
+    "docs/ROUND4_CATALAN_COMPOSITION.md": "f45355067ccc0f3fab4c0fa05430245841e4b4f3ef1aec822ffd4f521d185252",
+    "docs/ROUND4_CATALAN_INDEPENDENT_REVIEW.md": "3f8960c981892d2cba352827e3e546cac1e2e15a5ece46b980e39239647aede6",
+    "docs/ROUND4_COVERAGE.md": "061256852dcd6adcc9d3063f310bb8b6d61c31c09e7e8d3ed36872a0f338baf3",
+    "docs/ROUND4_EXP_COSINE.md": "2d321709732eb52c046f7987154c613e3f8d0eecaf15c71946863a053f5cc1ed",
+    "docs/ROUND4_EXP_COSINE_INDEPENDENT_REVIEW.md": "3e808fc9ed62e20acf6a341c15c1e7fed05212ca8da333a708c473651d56186c",
+    "docs/ROUND4_INTEGRATION_REVIEW.md": "27f4a0ce7ef54b4d7d4c59f111982dae84f11bc8299db4644efd25664f6dfc94",
+    "docs/ROUND4_NESTED_INDEPENDENT_REVIEW.md": "9e74d98bac716d1f1f7795f1ec2d0bcb04a428c9a2707a9a391e996ce7a4deec",
+    "docs/ROUND4_NESTED_REVERSION.md": "64d77fb8e72285c20ba781c75942391e754af0d9c46089250f888f48b7433ce2",
+    "docs/ROUND4_THETA_RATIONAL.md": "229928de03cbf321b80686a6db19a74fc85a99d987ef7f9f24e2ba54d2a619cc",
+    "docs/ROUND4_THETA_RATIONAL_REVIEW.md": "22fc2eb316dfd5af6d63b8dba3a7181a5eecaddb65c63ec611f82ecbca0294f1",
+    "docs/STIRLING_PERIODICITY.md": "76b2e934a6860de98c83261c986d963bd6f2495a8c225545cb764d12da4516bc",
+    "docs/THEOREM_SPEC.md": "d85261d277b9a900e6a2161f2da55202e3ea8acec2d21b886b415bebef7964db",
+    "docs/THETA_INDEPENDENT_REVIEW.md": "c8c683ef20436b10afb14a0e6945f987eb8c3ffcd365ba15e7d18cf3d6eff9bf",
+    "docs/THETA_SUBSTITUTION.md": "a5fb8b3d179b4b3a61d14d8d8324fe1d44e9765768c869ee2c554cabf284537c",
+    "lean/Consecutive.lean": "f0277a9befdf2cc3f70b278d89b6ca3e623c0653d7c5dcf22484b1e5b3ada342",
+    "lean/Consecutive/Acceptance.lean": "879ec5653dd4c52b27f19d70f080eff24904e1aeee39609768781103dd82b951",
+    "lean/Consecutive/Arithmetic.lean": "06d3ceadf894878ae2c7d170c15542cf439df6f2f1f65a7d0fa7fb00f8076138",
+    "lean/Consecutive/Basic.lean": "f8847e397da7a052c0a690197ef08367fdd088b60fe2eede3a8706cb71864f16",
+    "lean/Consecutive/Coefficients.lean": "05b922e0737ae6975b2a383fb868e50462a506cbe493bdbfc5725fb6bfae371f",
+    "lean/Consecutive/Construction.lean": "1defe4d157d8d5f111ee2e142b235aa6cbb5409683892fd834afa1718dc0ea0b",
+    "lean/Consecutive/IntegerIterates.lean": "71785797e56dadbddaceaace0e49938995907c80e7f80d5428a3487e9cb2d939",
+    "lean/Consecutive/Modular.lean": "f26c2715c46ae9877f27ef76f5d09c2cf1fce2c2e44cbfa9c2e9754c97d25f58",
+    "lean/Consecutive/Related.lean": "599322c04117e65ee7359ea1bb9939f428dccc873c794b11288dbd7a3847ff6b",
+    "lean/ContractChecks.lean": "152b951d3c77492db7dc49d17f0358ad50c654bcdf2be0aee7f1c956bb22796e",
+    "lean/Hanna.lean": "02d63ef8766b380dc96b5c40c2e5a31cbb41af23a50b5158ca085bc555fe5b4f",
+    "lean/Hanna/Acceptance.lean": "6e40816f6ae48bc06cf1419c00cf3624b3401a5cfd7e58cb54abda4b56b5b209",
+    "lean/Hanna/BinaryDivisibility.lean": "135fc2ab84354db15cf539cbb077069f1a0356a9822ef223f7857b6ba731191e",
+    "lean/Hanna/BinaryWeight.lean": "6db40277cccfff4d3d5740a5dd58e0029f385235883e1a2ffbdea98e9e70da27",
+    "lean/Hanna/Canonical.lean": "96e894fc7e6a368edc04e10c46339331acffef112f32b1ec93472f3974fd3afe",
+    "lean/Hanna/Corollaries.lean": "6ba336bb5e44ff664e146efbb69872f0821d9cecb563fccfdb299c4cde81461b",
+    "lean/Hanna/Divisibility.lean": "ab96329b9eb33f27f6765fdd945b18e7f59235619dec7f169200acbd154e6dfb",
+    "lean/Hanna/ModSquare.lean": "fe5fe056a4218a3d1ead1c71fdfc481340712bf1be0c9bb968e66cb0759a2cde",
+    "lean/Hanna/Parity.lean": "7537944b09c8b6fb107ce75022cbcad714d7c4677e064ef91fb856bfb3ccdb35",
+    "lean/Hanna/PrimeExponent.lean": "d0f3c10213a928ddc5be03fe44dbc70cdb86fb3a1a876563bc8c38a1d78cb354",
+    "lean/Hanna/Recurrences.lean": "f5d8352cf432eb515905007d43c7869d9dde0144f08c6e3c9474a516e229f1e1",
+    "lean/Hanna/Related.lean": "23df0d2b12369a48b03417e67911de399a2117fc439d104ffe3641bd1d64f304",
+    "lean/Hanna/Related/ScaledInverse.lean": "0c1f5c702d279fac8b66c1e1c3f59abe197b30f730a875bb11c79038d6050440",
+    "lean/Hanna/Related/ScaledParity.lean": "c2b139df3ca35b982d8b3d4b8a6427fc8c4eddca71b77d96ad302535ecd3e3e9",
+    "lean/Hanna/Series/Basic.lean": "fe5948059309ed57c09f0c8db0e022a5e8c2848202562eae725ff9f835d0b906",
+    "lean/Hanna/Series/Construction.lean": "f4bdeaa4e5cce2ffe57bebe26148e5b826a78bd132125b03541e2b44e6ce9756",
+    "lean/Hanna/Series/Filtration.lean": "b1521801de0629c1b4444a1c6efbc924e541c8a57a4d3e36cb63f95aca2820e4",
+    "lean/Hanna/Series/Inverse.lean": "48917e1734625f78c598a7a6929162626a916fdbcd7d2a5d37c36f2be25fe118",
+    "lean/Hanna/Series/Triangular.lean": "8c74f1f494eadfcfda535bac804fd99526bbdf402483a95d898257f502cb45f2",
+    "lean/More.lean": "9dec7196144feaddee79f036ad232b968d9383646145552b39dbfcb4b2eeab9d",
+    "lean/More/Contracts.lean": "b9831ee388b2b496b50a7bc1f5ef9cf2fc1805780c0196055a11561fa9ca5766",
+    "lean/More/CubicConsequences.lean": "d58a1dadfa103ce149baf9f45b853cef68da0a2658163d19c5987daba42a7022",
+    "lean/More/CubicFrobenius.lean": "fd6063f053d2a5603c0f832a0d59ce0bcc929bc759dc088a7f4c3975f52e17d1",
+    "lean/More/CubicReversion.lean": "62901552a2faa906bdf94786d8db5f4f45c5b9fd6e3a3d1a24f8aafec35b7e11",
+    "lean/More/InverseIterate.lean": "5e08350a61d73c1b427c2ebeb8e8b9ff8f13166e0be73cafd38c9c22d503c51f",
+    "lean/More/PowerPeriodicity.lean": "00bc60aab2d86a65694e3552ac6a0c723a602ab9069823f53af87e5a0b678e03",
+    "lean/More/RationalParity.lean": "2f63e3afe954063e62b25dac769f044938887e4ed78895b3e4c97833123bba64",
+    "lean/More/StirlingNumbers.lean": "c823ceee359a589456924c0f22dd40d3051407e59ef9eebd15a66ed0df8ed209",
+    "lean/More/StirlingPeriodicity.lean": "1760bcb9ffc4c0287ac724f96fdd7498fb3891226bd0705b781067c7a32d092c",
+    "lean/More/StirlingTransform.lean": "cebda04d4c0b6fc577a4b085a5b512f133674747cbd43ca0530f35a3fada0abd",
+    "lean/More/TailPeriodicity.lean": "1433fa86551854b02f226a3e57b62466485ef1bd649de0a9488245cbf022eb60",
+    "lean/Related.lean": "b57efd388066f3e76c5aec823c9948bc9dccf41e134c709bd3afabc459cfd33f",
+    "lean/Round3.lean": "170ab473cf50d40957099a2aa02717e9afdf0e5a2a99da51054e082edf1c3a88",
+    "lean/Round3/Contracts.lean": "f19a1691ae0ffe7228c767aa69bd0b3dd4e4d13d0f7e97c48b1cab0683aea2d4",
+    "lean/Round3/DifferentialParity.lean": "00456e037a120c48b60b6096486bb0d0b38f5a5bdd3445ad3cc7c94d872bb6cf",
+    "lean/Round3/ElementaryContracts.lean": "3a690602557d8ae7c28e16487648bc6350840c01927c8fc9da374344232fe8b6",
+    "lean/Round3/LacunaryContracts.lean": "5da688d866eb13c4ebc3aa70168b20567b1d97cba97e9f183e0b3b8a8f2e659c",
+    "lean/Round3/LacunaryInverse.lean": "abc50f89cb31775a06fc8b993629a3e88df6e1f647ab4d3fd2a28b67e96d529e",
+    "lean/Round3/MahlerParity.lean": "739d49b2db028e3411e1bb6b374b37386710a3272bb5ef6d1f9db4fa31437ea5",
+    "lean/Round3/ModFour.lean": "fdb3d99291c889dbd9b614ad39c1b8f420aa3d861efb38ef0b04433f70e8ec7f",
+    "lean/Round3/SquareContracts.lean": "0399e43cda2ac54b16f25ada91121b994591d3897afebf6021f25f03f7f70675",
+    "lean/Round3/SquareReversion.lean": "13826214bfd2f3b57395cd271c50a4764229a4c62ab4bc38c728eb89ed7a1065",
+    "lean/Round3/ThetaContracts.lean": "9c0f514db84c4bc6cc0093149818359b4f3170d165b71bfd1622d9445d7eeec3",
+    "lean/Round3/ThetaSubstitution.lean": "27e0f3dedcf1bafbcea566075f61d037cc8af3c9a2a1f7824426700b85b18824",
+    "lean/Round4.lean": "258bcde6c31ce7319dafff745699fcf9f0a94be9799671665c220c77397f881b",
+    "lean/Round4/CatalanComposition.lean": "1c3e724f94ee7d46c9a5573634ad1dd950819bf52a3945eacfccfb24abc1f2f4",
+    "lean/Round4/CatalanContracts.lean": "6be71cb602506435b014b7e49fe06fccd642e1635c26f209c30f1b95a7ff1e00",
+    "lean/Round4/Contracts.lean": "a57d84c49003035d7af9030976a532d1bea3732076c8ca7aba184e353f31ed57",
+    "lean/Round4/ExpCosine.lean": "2bed864bc0c7fb683bb0077a039ac37233f96a867d571818c10f1febdcc721db",
+    "lean/Round4/ExpCosineContracts.lean": "b43235801f4345d277623949a7edb5ac1992b9a5800a7bdeae2eb8bda0ffdbc3",
+    "lean/Round4/NestedBinomial.lean": "9b6a2cf04f32fc55e725db19cd00ff94cc0a0d21a579381442a02cc28b1ec0eb",
+    "lean/Round4/NestedContracts.lean": "023f983eb52971d26ab76e7f5bbb3a246199cf3721898d15e8d0489f531dbe0f",
+    "lean/Round4/NestedReversion.lean": "0dd32e4d02ce4a48b2254e6182e13adfc441fe7d580dc89d37fb880345cfd248",
+    "lean/Round4/SquareComposition.lean": "94af591b99ba599888ef8800d31b196390657e3336bba51f85a3fd2982fe2b0a",
+    "lean/Round4/ThetaRational.lean": "3888b23af84152036a02ac4b9a39a21354480b4398576a121cc695393c4c2f7d",
+    "lean/Round4/ThetaRationalContracts.lean": "b869d0ea7ac540d7c58842d3db838869ba8e8699835270acf8ac6ab29d96d49d",
+    "lean/lake-manifest.json": "bc1a60e6355183dfb8efa78a5d49ddcdf2108c4dbc85a3ab9bcab1904054f3ea",
+    "lean/lakefile.toml": "824e2b35061ecdfd6c5dc8192d60aa2ed0993b37c9925da99d6f138047d73467",
+    "lean/lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+    "manuscript/compositional_congruences.pdf": "1ff73fe09b05f57f64b20c65ec9e03bd89c754f690b1217905899aa4b840b677",
+    "manuscript/compositional_congruences.tex": "abe3d0eaa9db2f0b40d9af5c66f9fbbaf3b914cb81f7393bb72d98923889b201",
+    "manuscript/further_oeis_proofs.pdf": "5b68bd1bfc7d1c64428bd3e9d066775eb7873e0f4e4f52e6e636f691fc5c962e",
+    "manuscript/further_oeis_proofs.tex": "e37c0abdbeb06df531f17a8a16e27b87b91e6e7abc14cd2e2bd5a6859a458dbe",
+    "manuscript/more_oeis_proofs_and_corrections.pdf": "406dd6593325af4ef81b7ae519dd9888ef4ff1a8dd17028bbc183fec281368de",
+    "manuscript/more_oeis_proofs_and_corrections.tex": "5b9dd2c7d5ced36b45ca301e8e174e5be998d10b91e71a3a0d6e481a1a7b17f6",
+    "manuscript/six_more_oeis_proofs.pdf": "bd1e37b207bb8ef9241760bba2b9166ce86722718d2a9243752269c6dd9654fc",
+    "manuscript/six_more_oeis_proofs.tex": "3c32d5026a12ab5a7d288b044e3dd83fd93366f7da4c978996dbef0869fcdd5e",
+    "prior_work/ORIGINAL_README.md": "b58a08f634b109d29beb31e3c63141864c446aaebdd7c62a227d7dbf60534743",
+    "prior_work/hanna_congruences.tex": "2e8ac18428d43811e0c9f2f387beac81f54daf79b87e5af91098f8ff685a33df",
+    "prior_work/oeis_congruence_proofs_Dev_Goyal_v1.zip": "04f347b0e116a1c92cd7a1f21f38a37ae3dfb71c733dd5f55769accd0714489c",
+    "prior_work/oeis_proofs_complete_Dev_Goyal_v2.zip": "b28c6de12f53e862b670d37d79d8b5f11333ce3d7acd44e61cb27eb2b99dbc10",
+    "prior_work/oeis_proofs_complete_Dev_Goyal_v3.zip": "6a0cbeb94076a90e8938627a156ed4152f6cc3fd88546d0d2e29cd9331744d41",
+    "scripts/audit_axioms.py": "b01372d4ffa07cc3236ef641cc3beef90d0667ed755103fcee4cc2927d6ee89f",
+    "scripts/check_formalization.py": "7c6bf5dd92c9518ca2a304165806e37c4aa3b14829fbf781286ee185e995e1ce",
+    "scripts/package_release.py": "5eae9c77183280e0892ae85a06503eb11018a407fc67a9a3b89e09839bc4638b",
+    "scripts/verify_catalan_composition.py": "334b68315bc2102c1611240c9d2a0277facd13c094baeee904f69da48964b9fc",
+    "scripts/verify_coefficients.py": "69d821a1d06580023cbe6f1d887c27bb1eb5d154256584efeb0d761dfa50dafc",
+    "scripts/verify_cubic_reversion.py": "737c44ade3fac00b40bc732c1cd2334d56643ea85d93334613d30498a5e3a84b",
+    "scripts/verify_differential_mahler.py": "51e1c1c7cc99f77f340995cbd4b0a38f49658277b15c71b919fc75f319723e08",
+    "scripts/verify_exp_cosine.py": "6226efa273bf64cb05cfd02a1f3da625be17db06fe4596abeb5a3b62577f3d21",
+    "scripts/verify_hanna_congruences.py": "b8c3d50ead5c1cba1223ba235ad8368caed1d5f24eaf5c2bebe38d95db5162a2",
+    "scripts/verify_lacunary_inverse.py": "58df0ef7b4c766e010bc21256f77801fe74b0d0594fdc132acf8daca5db6a2d4",
+    "scripts/verify_nested_reversion.py": "bb0ac4685565c5ac5205b6774bb1bdaedc44b95c5c243feb43a618c1a48a134b",
+    "scripts/verify_rational_parity.py": "c5bdffb2d1bfad5687c8a34b486c00b2187e8a27ed3a5fc15e59644270400b89",
+    "scripts/verify_square_reversion.py": "3ac3ab9521f827ebcfe3436946d5f8eba21148aaaa33ae794061738ddc4b01ca",
+    "scripts/verify_stirling_periodicity.py": "4c97c45ceef5f419cc720af1bba90e6de943d0784d403ba6af6bb82425d66d64",
+    "scripts/verify_theta_rational.py": "6fb726ac3764c2838ff0fb5a0b11c5b18d334ab3a0e50bba045cd3c635eed140",
+    "scripts/verify_theta_substitution.py": "f42276f6fd3e6f7d7399ccefec6dd9528cd1eb308a5394fb56d794d0643b4bb6",
+    "tests/check_inverse_iterate.py": "0d066e0467862014cef0bd31801ac840c7067082aeb02abcdecde0f6d12ec1c6",
+    "tests/test_audit_axioms.py": "75d8e381633b6e59bc0d6fcc3324398addfad8ec328e56f3b229562969a387a4",
+    "tests/test_validation_requirements.py": "6d09185a545829b67393d890cd8489825f3ed01727cfd8ada41a16109f12b26f",
+    "tests/test_verify_coefficients.py": "68a254d66e453a0592e9cd3ce9497fce9341892194df705515d5985222565b74",
+    "third_party/mathlib/Apache-2.0.txt": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+    "third_party/mathlib/NOTICE.md": "6afd6a4ec1d25b3a209447497c03bd7927c3e352ea9e59f1491c20718a569008",
+    "validation/catalan_composition_numeric.json": "ed79298634367918d06dc2e156cdab29f2bdacd159cb1d1ea67373486882b602",
+    "validation/cubic_reversion_numeric.json": "960c812f317eb21861f78147e18abf3c19b64209205e513d0819e406521a325e",
+    "validation/differential_mahler_numeric.json": "8f8adbc1fe00a3febe56af7430757eb6ccfcea83c63a4f165a125198b372f557",
+    "validation/exp_cosine_numeric.json": "7a6ac4e4178b6bc34517ce3c64018a2fc2bd685d9f13dc579504f578f1659a36",
+    "validation/final_theorems.json": "c6f4d4c4d3427e74dbdb578202a88a0afbe137872137b9febbea0669c427865f",
+    "validation/inverse_iterate_checks.json": "7c66ec2cb248e303f02a57a7a4f16faf1c00cc3836b8418152f6887eb1b53105",
+    "validation/lacunary_inverse_numeric.json": "c406c579bb96b63e2e7f97241e6d9ef7f90e8584f5297c68e87b894d1a2f221d",
+    "validation/nested_reversion_numeric.json": "c7a8f392a5e984b48ef541324aed7ca3f64fb8173617e32e13397beaeae59d4c",
+    "validation/rational_parity_numeric.json": "35068cb6152df566722c17cbb73c9ed540c52689db904cc9fddb4304e42f07dd",
+    "validation/round3_elementary_axioms.json": "3061b8aed05b76146fbbbade7474a4f92aa741fd15c085fe0212b9ecfee41992",
+    "validation/round3_elementary_axioms.log": "af6a0a0c589d706970d06aaa16f4e0de823b669f9aa566ff2b7d69e916f85008",
+    "validation/round3_elementary_endpoints.json": "3515152146688e2691ccd2f7d7d943ebc95787b032e698a26e7fbc152fbfa7cc",
+    "validation/round3_lacunary_endpoints.json": "7759b2a7e9346ddb4bd8044af29ad1b46a3e1ec962a504ca0adf0fe9d2b715f6",
+    "validation/round3_lacunary_review_axioms.json": "6d79ea1452b24e301e58cfe022aee8de68bda83543a9b506a661b80a1fdc34e6",
+    "validation/round3_lacunary_review_axioms.log": "92804b2148477e743d541300f545a71382765c7284c739248e5f8e9237302262",
+    "validation/round3_square_axioms.json": "e5a9c5990e7eb244ffdcdb0a50b98f5faea1f3850252b46254ccba8ce28a6ce8",
+    "validation/round3_square_axioms.log": "fc28aa8e547abc6ccb94dd61b2d93f3ee306c13053482a212000d5ceaa62c205",
+    "validation/round3_square_endpoints.json": "59c3100bf33d63de5de8e5ced1a1bfc11b37b4990751592e8f6682ef816560e9",
+    "validation/round3_theta_endpoints.json": "88e85bd2d06ef4213c9fad1b1b7f2b6f228f45b3a539130ecaa9938f05452113",
+    "validation/round4_catalan_endpoints.json": "e8f3e2fd5c47bf378e8d760ae2e372ccc2f4d98b39b23c41990f6506d177e9c7",
+    "validation/round4_exp_cosine_endpoints.json": "d3c662ff7f4a472bf361317045e346368cdbc225ac279dc2011cff58b4fdc6e7",
+    "validation/round4_nested_endpoints.json": "ef6a533fff86728b68651a07f96e31cb06064ca20d2215363775ecdecfe3cd98",
+    "validation/round4_theta_rational_endpoints.json": "41f1e5a762e6667d19c1ce2c87ed10011b0ddb23f54cf5bd2f19dd51d34b6780",
+    "validation/square_reversion_numeric.json": "e379a53074be132f8ea6a510692d1f25949f67442553aca91337a4c8bb8f33ca",
+    "validation/stirling_numeric.json": "16c596e064c6383be7404cd40c62c63491371febb8686c63a7814046b11ebdc8",
+    "validation/theta_rational_numeric.json": "648eb01d08f85f0db5dcc1749c749fa79a2b28c1702dc8398fa5440669abe6c1",
+    "validation/theta_substitution_numeric.json": "9956ff3cca417d9a8a673df0fb887ec4f963440fab0801110419e7d16ba5f347"
+  },
+  "completed_utc": "2026-10-24T18:15:39+00:00"
+}

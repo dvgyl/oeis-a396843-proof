@@ -1,0 +1,84 @@
+# Output of `gp -q independent_checks.gp` (PARI/GP 2.15.4), run on 24 October 2026.
+== Weighted Stirling transforms: a(n+phi(m)) == a(n) (mod m) for n >= m
+  A052895: all 18 published terms reproduced from the OEIS definition
+  A052895: period phi(m) verified for m <= 60 and m <= n < 160
+  A064618: all 18 published terms reproduced from the OEIS definition
+  A064618: period phi(m) verified for m <= 60 and m <= n < 160
+  A080253: all 18 published terms reproduced from the OEIS definition
+  A080253: period phi(m) verified for m <= 60 and m <= n < 160
+  A167137: all 22 published terms reproduced from the OEIS definition
+  A167137: period phi(m) verified for m <= 60 and m <= n < 160
+  A305550: all 22 published terms reproduced from the OEIS definition
+  A305550: period phi(m) verified for m <= 60 and m <= n < 160
+  A306082: all 21 published terms reproduced from the OEIS definition
+  A306082: period phi(m) verified for m <= 60 and m <= n < 160
+  A354242: all 18 published terms reproduced from the OEIS definition
+  A354242: period phi(m) verified for m <= 60 and m <= n < 160
+== A195194: nested reversion; a(n) odd iff n is a power of 2
+  A195194: all 20 published terms reproduced from the OEIS definition
+  parity pattern verified for n < 140
+== A378580 / A378581: theta substitutions modulo 4
+  A378580: all 24 published terms reproduced from the OEIS definition
+  A378581: all 22 published terms reproduced from the OEIS definition
+  residue 2 at squares and 0 elsewhere verified for 0 < n < 200
+== A380056: e.g.f. (exp(x)-1)/cos(2x)
+  A380056: all 22 published terms reproduced from the OEIS definition
+  verified for n < 400
+== A380060 / A380680: rational theta sums
+  A380060: all 27 published terms reproduced from the OEIS definition
+  A380680: all 36 published terms reproduced from the OEIS definition
+  verified for 0 < n < 220
+== A389474 / A389475: cubic equations modulo 9 and 3
+  A389474: all 24 published terms reproduced from the OEIS definition
+  A389475: all 23 published terms reproduced from the OEIS definition
+  verified for n < 90
+== A389536 / A389537 / A389542: residues modulo 4
+  A389536: all 34 published terms reproduced from the OEIS definition
+  A389537: all 30 published terms reproduced from the OEIS definition
+  A389542: all 22 published terms reproduced from the OEIS definition
+  verified for n < 130
+== A392210: nested squares; a(2n-1) even for n > 1
+  A392210: all 24 published terms reproduced from the OEIS definition
+  verified for 2n-1 < 200
+== A393171 / A393172: Catalan substitutions
+  A393172: all 24 published terms reproduced from the OEIS definition
+  A393171: all 24 published terms reproduced from the OEIS definition
+  verified for n < 200
+== A393856..A393859: A(x - x*A(q*x)/q) = x
+  A393856: all 15 published terms reproduced from the OEIS definition
+  A393856: verified for n < 300 (q = 4)
+  A393857: all 14 published terms reproduced from the OEIS definition
+  A393857: verified for n < 300 (q = 5)
+  A393858: all 13 published terms reproduced from the OEIS definition
+  A393858: verified for n < 300 (q = 6)
+  A393859: all 13 published terms reproduced from the OEIS definition
+  A393859: verified for n < 300 (q = 7)
+== A396093: third iterate of x/(1-x)^2
+  A396093: all 27 published terms reproduced from the OEIS definition
+  verified for n < 600
+== Consecutive iterates: A(x) = x + A^r(x) A^(r+1)(x)
+  A396099: all 21 published terms reproduced from the OEIS definition
+  A396797: all 21 published terms reproduced from the OEIS definition
+  A396798: all 20 published terms reproduced from the OEIS definition
+  A396807: all 19 published terms reproduced from the OEIS definition
+  iterate formula verified for r = 1..8, k = -4..9, n < 90
+  A396798 residues mod 8 for n = 1..16: [1, 1, 1, 5, 5, 1, 1, 5, 5, 1, 1, 5, 5, 1, 1, 5]
+  A396099/A396797/A396798/A396807 source statements verified for n < 160
+== A396102 and its family F^r = (1+x) F^(r-1)
+  A396102: all 23 published terms reproduced from the OEIS definition
+  verified for n < 70; family r = 2..7 for n < 40
+== A396843 / A396844 and the family A_m(x A_m - m x A_m^2) = x^2
+  A396843: all 23 published terms reproduced from the OEIS definition
+  A396844: all 22 published terms reproduced from the OEIS definition
+  A396844: a(17) mod 16 = 4 although 17 > 8 is not of the form 2*4^k+1
+  m = 3, 4 verified for n < 260; m = 2..12 for n < 70
+== A397588: A = x + (x A^2)'
+  A397588: all 20 published terms reproduced from the OEIS definition
+  verified for n < 299
+
+RESULT: 156 checks passed, 0 failed
+
+real	18m15.640s
+user	18m0.464s
+sys	0m1.027s
+exit 0

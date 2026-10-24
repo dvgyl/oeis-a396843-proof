@@ -1,0 +1,52 @@
+{
+  "status": "all_historical_manuscripts_preserved",
+  "archive_sha256": "d3ed94896bf191334a61efe6befb0af2a361162877f4ddf8198b4c4e9cda2b2a",
+  "files": [
+    {
+      "path": "manuscript/compositional_congruences.pdf",
+      "sha256": "1ff73fe09b05f57f64b20c65ec9e03bd89c754f690b1217905899aa4b840b677",
+      "unchanged": true
+    },
+    {
+      "path": "manuscript/compositional_congruences.tex",
+      "sha256": "abe3d0eaa9db2f0b40d9af5c66f9fbbaf3b914cb81f7393bb72d98923889b201",
+      "unchanged": true
+    },
+    {
+      "path": "manuscript/further_oeis_proofs.pdf",
+      "sha256": "5b68bd1bfc7d1c64428bd3e9d066775eb7873e0f4e4f52e6e636f691fc5c962e",
+      "unchanged": true
+    },
+    {
+      "path": "manuscript/further_oeis_proofs.tex",
+      "sha256": "e37c0abdbeb06df531f17a8a16e27b87b91e6e7abc14cd2e2bd5a6859a458dbe",
+      "unchanged": true
+    },
+    {
+      "path": "manuscript/more_oeis_proofs_and_corrections.pdf",
+      "sha256": "406dd6593325af4ef81b7ae519dd9888ef4ff1a8dd17028bbc183fec281368de",
+      "unchanged": true
+    },
+    {
+      "path": "manuscript/more_oeis_proofs_and_corrections.tex",
+      "sha256": "5b9dd2c7d5ced36b45ca301e8e174e5be998d10b91e71a3a0d6e481a1a7b17f6",
+      "unchanged": true
+    },
+    {
+      "path": "manuscript/six_more_oeis_proofs.pdf",
+      "sha256": "bd1e37b207bb8ef9241760bba2b9166ce86722718d2a9243752269c6dd9654fc",
+      "unchanged": true
+    },
+    {
+      "path": "manuscript/six_more_oeis_proofs.tex",
+      "sha256": "3c32d5026a12ab5a7d288b044e3dd83fd93366f7da4c978996dbef0869fcdd5e",
+      "unchanged": true
+    },
+    {
+      "path": "prior_work/hanna_congruences.tex",
+      "sha256": "2e8ac18428d43811e0c9f2f387beac81f54daf79b87e5af91098f8ff685a33df",
+      "unchanged": true
+    }
+  ],
+  "completed_utc": "2026-10-24T18:49:55+00:00"
+}

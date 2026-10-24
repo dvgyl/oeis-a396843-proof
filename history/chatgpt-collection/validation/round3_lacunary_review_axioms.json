@@ -1,0 +1,81 @@
+{
+  "status": "axiom_dependency_audit_passed",
+  "reviewer": "Independent ChatGPT subagent; AI review, not human peer review",
+  "checked_theorems": {
+    "Round3.LacunaryInverse.A_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.inverse_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.A_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.A_mod_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.A_decomposition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.H_mod_two_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.H_mod_two_coeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.LacunaryInverse.a389537_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ModFour.double_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ModFour.series_double_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ModFour.reduce_int_map": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ModFour.two_mul_half": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.ModFour.half_constantCoeff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "allowed_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ]
+}

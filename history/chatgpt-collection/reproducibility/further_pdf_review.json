@@ -1,0 +1,21 @@
+{
+  "status": "visual_review_passed",
+  "review": "All nine rendered pages inspected; pages 1-7 unchanged after final reference-page layout adjustment. No clipping, overlap, missing glyphs, or layout diagnostics.",
+  "method": "pdfLaTeX twice; Poppler pdftoppm at 100 dpi; visual inspection and text extraction.",
+  "pages": 9,
+  "pdf": "manuscript/further_oeis_proofs.pdf",
+  "pdf_sha256": "5b68bd1bfc7d1c64428bd3e9d066775eb7873e0f4e4f52e6e636f691fc5c962e",
+  "rendered_page_sha256": {
+    "1": "a2c889e32c72355f05668dbb399a53e63f288f85d414943e5a8b504810709dad",
+    "2": "2669b7ea13dabbfd17f5d004f962919dafc603cd33cdaea7184ba794c433d92d",
+    "3": "718f4f3c430d45cfa9dcc21a6120e0322f0f142c14dcd46e8b531a5f69c43f2f",
+    "4": "51055addf8f5e0fab97a4777df53d121880fb7ae23d693b15da8827e184bda57",
+    "5": "45bca152e085ef7d111c57a065e5d7beddfc888ff519e3e03c7a424c570ade5a",
+    "6": "a90b2637b9970b63c7f364c98bda138b20f03bcbbb3ca7278e84718b0fcade10",
+    "7": "aabf31bb6d40e922080dff35bb8d7716e6a848e645bc65a333b3522d3714defd",
+    "8": "fe1b2c6681f1d1840b6d6058dd362ce4bc11f2a40d163b3ea4e002605236e199",
+    "9": "d5eae9b0a71d6873dc294c63b0ecf7b6d49791c2e3866e9a806229addfaaaf26"
+  },
+  "reviewer": "OpenAI ChatGPT, AI-assisted review; independent human review pending",
+  "completed_utc": "2026-10-24T17:02:45+00:00"
+}

@@ -1,0 +1,46 @@
+test_allowed_axioms_and_axiom_free_theorem (test_audit_axioms.AxiomAuditTests.test_allowed_axioms_and_axiom_free_theorem) ... ok
+test_custom_mathematical_axiom_rejected (test_audit_axioms.AxiomAuditTests.test_custom_mathematical_axiom_rejected) ... ok
+test_duplicate_report_rejected (test_audit_axioms.AxiomAuditTests.test_duplicate_report_rejected) ... ok
+test_duplicate_requirements_rejected (test_audit_axioms.AxiomAuditTests.test_duplicate_requirements_rejected) ... ok
+test_empty_list_format (test_audit_axioms.AxiomAuditTests.test_empty_list_format) ... ok
+test_empty_log_rejected (test_audit_axioms.AxiomAuditTests.test_empty_log_rejected) ... ok
+test_empty_requirement_list_rejected (test_audit_axioms.AxiomAuditTests.test_empty_requirement_list_rejected) ... ok
+test_malformed_axiom_item_rejected (test_audit_axioms.AxiomAuditTests.test_malformed_axiom_item_rejected) ... ok
+test_missing_fully_qualified_name_rejected (test_audit_axioms.AxiomAuditTests.test_missing_fully_qualified_name_rejected) ... ok
+test_missing_theorem_rejected (test_audit_axioms.AxiomAuditTests.test_missing_theorem_rejected) ... ok
+test_sorry_axiom_rejected (test_audit_axioms.AxiomAuditTests.test_sorry_axiom_rejected) ... ok
+test_truncated_report_rejected (test_audit_axioms.AxiomAuditTests.test_truncated_report_rejected) ... ok
+test_unexpected_theorem_rejected (test_audit_axioms.AxiomAuditTests.test_unexpected_theorem_rejected) ... ok
+test_unlisted_standard_dependency_rejected (test_audit_axioms.AxiomAuditTests.test_unlisted_standard_dependency_rejected) ... ok
+test_warning_rejected (test_audit_axioms.AxiomAuditTests.test_warning_rejected) ... ok
+test_wrapped_axiom_list (test_audit_axioms.AxiomAuditTests.test_wrapped_axiom_list) ... ok
+test_baseline_mode_rejected (test_validation_requirements.ValidationRequirementTests.test_baseline_mode_rejected) ... ok
+test_changed_pins_rejected (test_validation_requirements.ValidationRequirementTests.test_changed_pins_rejected) ... ok
+test_changed_previous_proof_rejected (test_validation_requirements.ValidationRequirementTests.test_changed_previous_proof_rejected) ... ok
+test_changed_version_three_proof_rejected (test_validation_requirements.ValidationRequirementTests.test_changed_version_three_proof_rejected) ... ok
+test_changed_version_two_proof_rejected (test_validation_requirements.ValidationRequirementTests.test_changed_version_two_proof_rejected) ... ok
+test_complete_manifest_retains_fixed_endpoints (test_validation_requirements.ValidationRequirementTests.test_complete_manifest_retains_fixed_endpoints) ... ok
+test_complete_previous_release_is_preserved (test_validation_requirements.ValidationRequirementTests.test_complete_previous_release_is_preserved) ... ok
+test_complete_version_three_is_preserved (test_validation_requirements.ValidationRequirementTests.test_complete_version_three_is_preserved) ... ok
+test_complete_version_two_is_preserved (test_validation_requirements.ValidationRequirementTests.test_complete_version_two_is_preserved) ... ok
+test_forced_compilation_keeps_isolated_modules_and_orders_dependencies (test_validation_requirements.ValidationRequirementTests.test_forced_compilation_keeps_isolated_modules_and_orders_dependencies) ... ok
+test_forced_compilation_rejects_local_import_cycles (test_validation_requirements.ValidationRequirementTests.test_forced_compilation_rejects_local_import_cycles) ... ok
+test_missing_endpoint_rejected (test_validation_requirements.ValidationRequirementTests.test_missing_endpoint_rejected) ... ok
+test_replaced_endpoint_rejected (test_validation_requirements.ValidationRequirementTests.test_replaced_endpoint_rejected) ... ok
+test_snapshot_includes_all_previous_archives (test_validation_requirements.ValidationRequirementTests.test_snapshot_includes_all_previous_archives) ... ok
+test_snapshot_includes_root_docs_and_final_pdf (test_validation_requirements.ValidationRequirementTests.test_snapshot_includes_root_docs_and_final_pdf) ... ok
+test_snapshot_rejects_first_party_symlink (test_validation_requirements.ValidationRequirementTests.test_snapshot_rejects_first_party_symlink) ... ok
+test_substitute_contract_file_rejected (test_validation_requirements.ValidationRequirementTests.test_substitute_contract_file_rejected) ... ok
+test_weakened_imports_rejected (test_validation_requirements.ValidationRequirementTests.test_weakened_imports_rejected) ... ok
+test_cauchy_product_and_truncation (test_verify_coefficients.CoefficientVerifierTests.test_cauchy_product_and_truncation) ... ok
+test_complete_small_suite (test_verify_coefficients.CoefficientVerifierTests.test_complete_small_suite) ... ok
+test_composition_orientation (test_verify_coefficients.CoefficientVerifierTests.test_composition_orientation) ... ok
+test_inner_constant_rejected (test_verify_coefficients.CoefficientVerifierTests.test_inner_constant_rejected) ... ok
+test_invalid_parameter_ranges (test_verify_coefficients.CoefficientVerifierTests.test_invalid_parameter_ranges) ... ok
+test_q_recursion_matches_source_values (test_verify_coefficients.CoefficientVerifierTests.test_q_recursion_matches_source_values) ... ok
+test_r_recursion_matches_source_values (test_verify_coefficients.CoefficientVerifierTests.test_r_recursion_matches_source_values) ... ok
+
+----------------------------------------------------------------------
+Ran 41 tests in 0.159s
+
+OK

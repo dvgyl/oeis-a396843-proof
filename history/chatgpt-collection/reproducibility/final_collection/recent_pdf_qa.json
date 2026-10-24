@@ -1,0 +1,268 @@
+{
+  "status": "passed",
+  "completed_utc": "2026-10-24T18:40:10.200839+00:00",
+  "reviewer": "ChatGPT agent final_recent_entries; AI-assisted review, not human peer review",
+  "entry_count": 13,
+  "page_count": 45,
+  "new_theorem_count": 112,
+  "review_method": "Rendered every final page at full-page resolution; inspected contact sheets, then final changed pages and dense equation pages at individual full-page scale. Final page balancing retained complete proof text and source citations.",
+  "incorporated_precision_edits": [
+    "Restricted the ring-operation claim for an arbitrary contraction to the actual operators used in each manuscript.",
+    "A380060 existence proof now states a fixed point over K, integral when K=Z."
+  ],
+  "entries": [
+    {
+      "oeis_id": "A397588",
+      "manuscript_tex": "manuscripts/A397588.tex",
+      "manuscript_pdf": "manuscripts/A397588.pdf",
+      "lean_file": "lean/Entries/A397588.lean",
+      "pages": 3,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tex_sha256": "c5b3cb6a3133d8b7a60138247ece67b4d4bc0017c1446537885d50af946f6d87",
+      "pdf_sha256": "31ad905a11f76cdb8527841ebd55cb255756c0fbc59ef327854ef7089955192d",
+      "lean_sha256": "608f4e395ea2a9a3659840c90100fa54713d68216332988c44a3248a33d1db49",
+      "lean_theorem_count": 6,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A389536",
+      "manuscript_tex": "manuscripts/A389536.tex",
+      "manuscript_pdf": "manuscripts/A389536.pdf",
+      "lean_file": "lean/Entries/A389536.lean",
+      "pages": 3,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tex_sha256": "c37af2630243cd75bea4c1f7fc2a0964a31caaef103b4e03130567d8ba292c11",
+      "pdf_sha256": "4ba53e1d853d3cd96fd654918b6e4518d8d8a91d5f7860158d3dd30ecdb50c70",
+      "lean_sha256": "067abbf08d42fa75fa369c82bdcce8df26e45c2d67b62ca59a67218096b654fc",
+      "lean_theorem_count": 6,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A389537",
+      "manuscript_tex": "manuscripts/A389537.tex",
+      "manuscript_pdf": "manuscripts/A389537.pdf",
+      "lean_file": "lean/Entries/A389537.lean",
+      "pages": 4,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "tex_sha256": "64eb5bbc2a5bb12f2dd6ba10f9e3163aaf27f0a5e3efc5beabb19b9f3979352e",
+      "pdf_sha256": "f700f035deb5d22faea42de1169830b0f4dffa8b3e9a1889746d69551becb78b",
+      "lean_sha256": "22cb1472f872939b899ad081c62e168351cb97a2ddd1f44ad2f5bd12703fca0a",
+      "lean_theorem_count": 13,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A389542",
+      "manuscript_tex": "manuscripts/A389542.tex",
+      "manuscript_pdf": "manuscripts/A389542.pdf",
+      "lean_file": "lean/Entries/A389542.lean",
+      "pages": 4,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "tex_sha256": "9cffa337f48f72606c483f713045a496ebcbeeaf5a113415e5f350afe612a573",
+      "pdf_sha256": "43a374c8f9e52e597c4fa801d86c7847db9519b3ba9700696479a18299df64ea",
+      "lean_sha256": "8ea3c1df57ca873e8d865486d17b03ebc5798c71f4a5e6eaa6b07ebb01a38f6c",
+      "lean_theorem_count": 16,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A378580",
+      "manuscript_tex": "manuscripts/A378580.tex",
+      "manuscript_pdf": "manuscripts/A378580.pdf",
+      "lean_file": "lean/Entries/A378580.lean",
+      "pages": 4,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "tex_sha256": "070855e0488efbfe3c4eeb89f3ecc49b3b1311018982f18a7f0108b504cf335b",
+      "pdf_sha256": "86b49d2b2877c24c0a42c93cfcea87773a440841a05969c1e4554fc10f773ac3",
+      "lean_sha256": "b03358b5da36e1b2ff69b9445045dc8c0f2a0bcc5aa83d2ba5ac05bd16c60776",
+      "lean_theorem_count": 11,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A378581",
+      "manuscript_tex": "manuscripts/A378581.tex",
+      "manuscript_pdf": "manuscripts/A378581.pdf",
+      "lean_file": "lean/Entries/A378581.lean",
+      "pages": 4,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "tex_sha256": "052a77db6ca48254b5165c23f8d315c8ca15885b05c706bbdf1b35bc7dbc28f4",
+      "pdf_sha256": "4b298dad025a30c6a75ddedb0cab90f4fc1b6ebd4c0cb51556047c61e4666c78",
+      "lean_sha256": "39a9eb55b1a3bd75d6a4293ed0fa963f13f6c028f04bb69f82ee27e193975dbf",
+      "lean_theorem_count": 10,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A195194",
+      "manuscript_tex": "manuscripts/A195194.tex",
+      "manuscript_pdf": "manuscripts/A195194.pdf",
+      "lean_file": "lean/Entries/A195194.lean",
+      "pages": 4,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "tex_sha256": "89d1519da0eb49b896cc9fa3139d7742c289004e456c3d366e8301da78027ea2",
+      "pdf_sha256": "807b55bc8148c6fe12089f39fb9748772ff133e4d9bfe62246af38b052c9180a",
+      "lean_sha256": "f23490bb505d15eb78cfc032745702e50daf23e344d24e5af8f2f3754a6ede08",
+      "lean_theorem_count": 10,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A393172",
+      "manuscript_tex": "manuscripts/A393172.tex",
+      "manuscript_pdf": "manuscripts/A393172.pdf",
+      "lean_file": "lean/Entries/A393172.lean",
+      "pages": 3,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tex_sha256": "1515c59c0fda13fc3f5140965c6eaf8e3230e96963142304860c5e0f60d12663",
+      "pdf_sha256": "3d391352848f690c21bfb21791120d37bca4db22a35e0cdb23788d8b92aa7837",
+      "lean_sha256": "9f0d3ac32fac13ebb5c2ba5339ea585cab32812972ec740631b718eec5e95f88",
+      "lean_theorem_count": 6,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A393171",
+      "manuscript_tex": "manuscripts/A393171.tex",
+      "manuscript_pdf": "manuscripts/A393171.pdf",
+      "lean_file": "lean/Entries/A393171.lean",
+      "pages": 4,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "tex_sha256": "658cfbbdd262f16f2e5b06a48a65f8c64b7f715345c22765dcf01d52003fc596",
+      "pdf_sha256": "5d82e962694028e025c5500586be521b2dde33883afbacf94ea566c8aa698fd8",
+      "lean_sha256": "e3de6cec3429ac796fb86deafa75c34c90b39d37f1340d169654ab7c0c81779e",
+      "lean_theorem_count": 9,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A392210",
+      "manuscript_tex": "manuscripts/A392210.tex",
+      "manuscript_pdf": "manuscripts/A392210.pdf",
+      "lean_file": "lean/Entries/A392210.lean",
+      "pages": 3,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tex_sha256": "30c83c601acd3959e0397ce16c6dda69d0f756c81fe1ae487a95c3cb1e03f0de",
+      "pdf_sha256": "ed7112be3d14f3e151e44d0dd66bc9ed75559211431be480f8f9950f742d922a",
+      "lean_sha256": "5c4ec242be4735bf49df2debb250e1a4440aa0117c334230bec37a8a1763894f",
+      "lean_theorem_count": 4,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A380056",
+      "manuscript_tex": "manuscripts/A380056.tex",
+      "manuscript_pdf": "manuscripts/A380056.pdf",
+      "lean_file": "lean/Entries/A380056.lean",
+      "pages": 3,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tex_sha256": "721d5f76a7dd2fee9f6fc4c40db72f79b1cbf9cc5157480a2132d38bbd99df9d",
+      "pdf_sha256": "c1652af1009c32fe0cf7fba190835018b170a90b22bced6cfa9ab6d801b68538",
+      "lean_sha256": "96809d90d447a83f694c5cb80072f307c42d0b21172c324eb11f0bedede9ac07",
+      "lean_theorem_count": 11,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A380060",
+      "manuscript_tex": "manuscripts/A380060.tex",
+      "manuscript_pdf": "manuscripts/A380060.pdf",
+      "lean_file": "lean/Entries/A380060.lean",
+      "pages": 3,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tex_sha256": "75e81d30ce0371ea9d1d753ec577db2dd89318edb26d3680bd5646f4d8a41861",
+      "pdf_sha256": "392fc177189d0607195a853b480ffb6a855052eeebdf0944e723b9bad45c0418",
+      "lean_sha256": "be0300c1be8025012f384f68beae13e609148367e312e436de078ca6bc68701f",
+      "lean_theorem_count": 4,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    },
+    {
+      "oeis_id": "A380680",
+      "manuscript_tex": "manuscripts/A380680.tex",
+      "manuscript_pdf": "manuscripts/A380680.pdf",
+      "lean_file": "lean/Entries/A380680.lean",
+      "pages": 3,
+      "pages_visually_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tex_sha256": "a801f19440268806a0f97a59a8a8c84554e0b5b02d3ecac9a9bb2d526f2e39dc",
+      "pdf_sha256": "5a5f13705674c0823a2e285f6dc4dbf5d3d800b8f22233edc8a3ff4d98ed16dc",
+      "lean_sha256": "f158be4f03bd12ddbad0ab47784bcbff03acd173f3ab813a6225cfc4b539a5e9",
+      "lean_theorem_count": 6,
+      "latex_warnings": [],
+      "outside_page_text": [],
+      "visual_findings": "No clipped or overlapping text, missing glyphs, broken formulas, or unresolved references. Separate manuscripts have complete proof text, own bibliography, AI disclosure, and theorem maps."
+    }
+  ]
+}

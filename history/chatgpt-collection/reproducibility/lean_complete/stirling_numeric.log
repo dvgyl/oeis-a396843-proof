@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "python": "3.12.14",
+  "purpose": "Finite corroboration only; universal verification is the Lean build.",
+  "source_access_date": "2026-10-24",
+  "prefix_checks": {
+    "A052895": {
+      "offset": 0,
+      "terms_checked": 10,
+      "matched": true,
+      "source": "https://oeis.org/A052895"
+    },
+    "A064618": {
+      "offset": 0,
+      "terms_checked": 10,
+      "matched": true,
+      "source": "https://oeis.org/A064618"
+    },
+    "A354242": {
+      "offset": 0,
+      "terms_checked": 9,
+      "matched": true,
+      "source": "https://oeis.org/A354242"
+    },
+    "A167137": {
+      "offset": 0,
+      "terms_checked": 10,
+      "matched": true,
+      "source": "https://oeis.org/A167137"
+    },
+    "A305550": {
+      "offset": 0,
+      "terms_checked": 10,
+      "matched": true,
+      "source": "https://oeis.org/A305550"
+    },
+    "A306082": {
+      "offset": 0,
+      "terms_checked": 10,
+      "matched": true,
+      "source": "https://oeis.org/A306082"
+    },
+    "A080253": {
+      "offset": 0,
+      "terms_checked": 10,
+      "matched": true,
+      "source": "https://oeis.org/A080253"
+    }
+  },
+  "independent_inclusion_exclusion_checks": 190,
+  "moduli_checked": [
+    1,
+    128
+  ],
+  "indices_checked_per_modulus": "m <= n <= m + 2*phi(m), inclusive",
+  "maximum_generated_index": 505,
+  "periodicity_checks_by_sequence": {
+    "A052895": 10172,
+    "A064618": 10172,
+    "A354242": 10172,
+    "A167137": 10172,
+    "A305550": 10172,
+    "A306082": 10172,
+    "A080253": 10172,
+    "signed_test_weights": 10172
+  },
+  "periodicity_checks_total": 81376,
+  "power_periodicity_checks": 49920
+}

@@ -1,0 +1,2688 @@
+{
+  "status": "final_collection_verified",
+  "commands": [
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/cac44b94a8b1/oeis_final_collection_Dev_Goyal/scripts/check_formalization.py",
+        "--repo",
+        "/workspace/scratch/cac44b94a8b1/oeis_final_collection_Dev_Goyal",
+        "--lake",
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lake"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 336.899,
+      "log": "complete_check.log",
+      "log_sha256": "aa5c4ce76ea606ab4b9c2303550984ee1dcadb23a852eb0b95c687a5d2eba67e"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lake",
+        "build",
+        "Entries"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 13.24,
+      "log": "entries_build.log",
+      "log_sha256": "88f543e928c7beeae7b6799c0e2a941d4262d25b81ba39e83fa2fcf44d41cafa"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "/workspace/scratch/cac44b94a8b1/oeis_final_collection_Dev_Goyal/reproducibility/final_collection/EntryTypes.lean"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.024,
+      "log": "entry_types.log",
+      "log_sha256": "eca826c0b629fb5867e5e166d356373c94cc8a71a66be019ee8f46424e4d2aa6"
+    },
+    {
+      "command": [
+        "/workspace/scratch/cac44b94a8b1/lean-runtime/lean-4.19.0-linux/bin/lean",
+        "/workspace/scratch/cac44b94a8b1/oeis_final_collection_Dev_Goyal/reproducibility/final_collection/EntryAxioms.lean"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 73.571,
+      "log": "entry_axioms.log",
+      "log_sha256": "5d9cd1e041b5041b9f6c167035e72eab4718a5cda9d363be6e2f1c4b7e9f0244"
+    }
+  ],
+  "scope": "Final 34-entry consolidation",
+  "preservation": {
+    "baseline_sha256": "18f002efa5f66a8283e3dcb2309fd457575c94830a2bc4408ff4ba2dfefc9a4c",
+    "v4_archive_sha256": "d3ed94896bf191334a61efe6befb0af2a361162877f4ddf8198b4c4e9cda2b2a",
+    "original_lean_files_preserved": 66,
+    "original_endpoints_retained": 339
+  },
+  "manuscript_quality_checks": {
+    "record_sha256": "53ed8ce5b35c432c3ee9eac2e191ea30f14bee752189741b21d59bee7c21e075",
+    "manuscript_count": 34,
+    "total_pages": 141
+  },
+  "entry_count": 34,
+  "original_endpoint_count": 339,
+  "entry_theorem_count": 262,
+  "entry_theorems": [
+    "FinalCollection.A052895.source_formula",
+    "FinalCollection.A052895.period",
+    "FinalCollection.A052895.least_period_divides",
+    "FinalCollection.A052895.least_period_specification",
+    "FinalCollection.A064618.source_formula",
+    "FinalCollection.A064618.period",
+    "FinalCollection.A064618.least_period_divides",
+    "FinalCollection.A064618.least_period_specification",
+    "FinalCollection.A080253.source_formula",
+    "FinalCollection.A080253.period",
+    "FinalCollection.A080253.least_period_divides",
+    "FinalCollection.A080253.least_period_specification",
+    "FinalCollection.A080253.weight_zero",
+    "FinalCollection.A080253.weight_one",
+    "FinalCollection.A080253.weight_recursion",
+    "FinalCollection.A167137.source_formula",
+    "FinalCollection.A167137.period",
+    "FinalCollection.A167137.least_period_divides",
+    "FinalCollection.A167137.least_period_specification",
+    "FinalCollection.A195194.normalized_source",
+    "FinalCollection.A195194.all_tails_normalized",
+    "FinalCollection.A195194.all_tails_source",
+    "FinalCollection.A195194.nested_definition_unique",
+    "FinalCollection.A195194.first_tail_reversion",
+    "FinalCollection.A195194.finite_nest_coefficients",
+    "FinalCollection.A195194.binary_equation",
+    "FinalCollection.A195194.exact_parity",
+    "FinalCollection.A195194.arbitrary_weights_unique",
+    "FinalCollection.A195194.arbitrary_finite_depth",
+    "FinalCollection.A305550.source_formula",
+    "FinalCollection.A305550.period",
+    "FinalCollection.A305550.least_period_divides",
+    "FinalCollection.A305550.least_period_specification",
+    "FinalCollection.A306082.source_formula",
+    "FinalCollection.A306082.period",
+    "FinalCollection.A306082.least_period_divides",
+    "FinalCollection.A306082.least_period_specification",
+    "FinalCollection.A306082.square_weight_definition",
+    "FinalCollection.A354242.source_formula",
+    "FinalCollection.A354242.period",
+    "FinalCollection.A354242.least_period_divides",
+    "FinalCollection.A354242.least_period_specification",
+    "FinalCollection.A378580.theta_constant_term",
+    "FinalCollection.A378580.theta_coefficient_formula",
+    "FinalCollection.A378580.minus_constant",
+    "FinalCollection.A378580.quotient_identity",
+    "FinalCollection.A378580.minus_source",
+    "FinalCollection.A378580.minus_exists_unique",
+    "FinalCollection.A378580.minus_unique",
+    "FinalCollection.A378580.minus_series_mod_four",
+    "FinalCollection.A378580.minus_congruence",
+    "FinalCollection.A378580.minus_square_iff",
+    "FinalCollection.A378580.minus_four_dvd_iff",
+    "FinalCollection.A378581.theta_constant_term",
+    "FinalCollection.A378581.theta_coefficient_formula",
+    "FinalCollection.A378581.plus_constant",
+    "FinalCollection.A378581.plus_source",
+    "FinalCollection.A378581.plus_exists_unique",
+    "FinalCollection.A378581.plus_unique",
+    "FinalCollection.A378581.plus_series_mod_four",
+    "FinalCollection.A378581.plus_congruence",
+    "FinalCollection.A378581.plus_square_iff",
+    "FinalCollection.A378581.plus_four_dvd_iff",
+    "FinalCollection.A380056.integer_egf_definition",
+    "FinalCollection.A380056.source_egf",
+    "FinalCollection.A380056.literal_source_equation",
+    "FinalCollection.A380056.literal_source_unique",
+    "FinalCollection.A380056.integer_coefficients",
+    "FinalCollection.A380056.first_source_conjecture",
+    "FinalCollection.A380056.second_source_conjecture",
+    "FinalCollection.A380056.exact_mod_five_pattern",
+    "FinalCollection.A380056.exact_divisibility_by_five",
+    "FinalCollection.A380056.mod_five_exponential_formula",
+    "FinalCollection.A380056.mod_five_period",
+    "FinalCollection.A380060.implicit_source_exists_unique",
+    "FinalCollection.A380060.implicit_actual_source",
+    "FinalCollection.A380060.a380060_statement",
+    "FinalCollection.A380060.complete_series_mod_four",
+    "FinalCollection.A380680.explicit_actual_source",
+    "FinalCollection.A380680.a380680_corrected_statement",
+    "FinalCollection.A380680.a380680_counterexamples",
+    "FinalCollection.A380680.a380680_literal_statement_is_false",
+    "FinalCollection.A380680.a380680_complement_is_false",
+    "FinalCollection.A380680.complete_series_mod_four",
+    "FinalCollection.A389474.normalized",
+    "FinalCollection.A389474.source_equation",
+    "FinalCollection.A389474.source_unique",
+    "FinalCollection.A389474.source_existence_uniqueness",
+    "FinalCollection.A389474.integral_family_existence",
+    "FinalCollection.A389474.square_mod_nine",
+    "FinalCollection.A389474.square_coefficients",
+    "FinalCollection.A389474.power_coefficients",
+    "FinalCollection.A389475.normalized",
+    "FinalCollection.A389475.source_equation",
+    "FinalCollection.A389475.source_unique",
+    "FinalCollection.A389475.source_existence_uniqueness",
+    "FinalCollection.A389475.integral_family_existence",
+    "FinalCollection.A389475.cube_mod_three",
+    "FinalCollection.A389475.square_mod_three",
+    "FinalCollection.A389475.cube_coefficients",
+    "FinalCollection.A389475.square_coefficients",
+    "FinalCollection.A389536.mahler_existence",
+    "FinalCollection.A389536.mahler_definition",
+    "FinalCollection.A389536.mahler_source_unique",
+    "FinalCollection.A389536.mahler_mod_four",
+    "FinalCollection.A389536.mahler_residue",
+    "FinalCollection.A389536.mahler_four_dvd_iff",
+    "FinalCollection.A389537.auxiliary_exists_unique",
+    "FinalCollection.A389537.auxiliary_equation",
+    "FinalCollection.A389537.inverse_right",
+    "FinalCollection.A389537.inverse_left",
+    "FinalCollection.A389537.normalized",
+    "FinalCollection.A389537.source_equation",
+    "FinalCollection.A389537.source_exists_unique",
+    "FinalCollection.A389537.source_unique",
+    "FinalCollection.A389537.series_mod_two",
+    "FinalCollection.A389537.integer_decomposition",
+    "FinalCollection.A389537.half_equation_mod_two",
+    "FinalCollection.A389537.half_binary_support",
+    "FinalCollection.A389537.residue_mod_four",
+    "FinalCollection.A389542.auxiliary_exists_unique",
+    "FinalCollection.A389542.normalized",
+    "FinalCollection.A389542.auxiliary_definition",
+    "FinalCollection.A389542.inverse_equation",
+    "FinalCollection.A389542.inverse_right",
+    "FinalCollection.A389542.inverse_left",
+    "FinalCollection.A389542.source_equation",
+    "FinalCollection.A389542.source_exists_unique",
+    "FinalCollection.A389542.source_unique",
+    "FinalCollection.A389542.auxiliary_parity",
+    "FinalCollection.A389542.inverse_involution",
+    "FinalCollection.A389542.inverse_mod_four",
+    "FinalCollection.A389542.series_mod_four",
+    "FinalCollection.A389542.residue_mod_four",
+    "FinalCollection.A389542.exceptional_iff",
+    "FinalCollection.A389542.four_dvd_iff",
+    "FinalCollection.A392210.third_existence",
+    "FinalCollection.A392210.third_definition",
+    "FinalCollection.A392210.third_evenness",
+    "FinalCollection.A392210.third_arbitrary_source",
+    "FinalCollection.A393171.second_existence",
+    "FinalCollection.A393171.second_named_existence",
+    "FinalCollection.A393171.second_definition",
+    "FinalCollection.A393171.second_residue",
+    "FinalCollection.A393171.second_arbitrary_source",
+    "FinalCollection.A393171.link_to_first_sequence",
+    "FinalCollection.A393171.link_composed_catalan",
+    "FinalCollection.A393171.complete_series_mod_eight",
+    "FinalCollection.A393171.divisibility_complement",
+    "FinalCollection.A393172.first_existence",
+    "FinalCollection.A393172.first_definition",
+    "FinalCollection.A393172.first_residue",
+    "FinalCollection.A393172.first_arbitrary_source",
+    "FinalCollection.A393172.complete_series_mod_four",
+    "FinalCollection.A393172.divisibility_complement",
+    "FinalCollection.A393856.source_existence_uniqueness",
+    "FinalCollection.A393856.source_normalized",
+    "FinalCollection.A393856.source_equation",
+    "FinalCollection.A393856.a393856_mod_five",
+    "FinalCollection.A393856.a393856_parity",
+    "FinalCollection.A393857.source_existence_uniqueness",
+    "FinalCollection.A393857.source_normalized",
+    "FinalCollection.A393857.source_equation",
+    "FinalCollection.A393857.a393857_mod_six",
+    "FinalCollection.A393858.source_existence_uniqueness",
+    "FinalCollection.A393858.source_normalized",
+    "FinalCollection.A393858.source_equation",
+    "FinalCollection.A393858.a393858_mod_seven",
+    "FinalCollection.A393858.a393858_parity",
+    "FinalCollection.A393859.source_existence_uniqueness",
+    "FinalCollection.A393859.source_normalized",
+    "FinalCollection.A393859.source_equation",
+    "FinalCollection.A393859.a393859_mod_eight",
+    "FinalCollection.A396093.source_denominator",
+    "FinalCollection.A396093.source_composition",
+    "FinalCollection.A396093.coefficient_definition",
+    "FinalCollection.A396093.reduced_denominator",
+    "FinalCollection.A396093.complete_parity",
+    "FinalCollection.A396093.even_iff",
+    "FinalCollection.A396093.even_indices",
+    "FinalCollection.A396093.odd_indices",
+    "FinalCollection.A396099.source_existence_uniqueness",
+    "FinalCollection.A396099.source_normalized",
+    "FinalCollection.A396099.source_equation",
+    "FinalCollection.A396099.exact_composition_order",
+    "FinalCollection.A396099.a396099_all_four",
+    "FinalCollection.A396099.a396099_odd",
+    "FinalCollection.A396099.a396099_residue",
+    "FinalCollection.A396099.a396099_period",
+    "FinalCollection.A396099.a396099_second_iterate_series",
+    "FinalCollection.A396099.a396099_second_iterate",
+    "FinalCollection.A396099.a396099_difference_series",
+    "FinalCollection.A396099.a396099_difference",
+    "FinalCollection.A396102.normalized",
+    "FinalCollection.A396102.source_equation",
+    "FinalCollection.A396102.source_unique",
+    "FinalCollection.A396102.source_existence_uniqueness",
+    "FinalCollection.A396102.coefficient_congruence",
+    "FinalCollection.A396102.iterate_congruence",
+    "FinalCollection.A396102.family_source_existence",
+    "FinalCollection.A396102.family_source_equation",
+    "FinalCollection.A396102.auxiliary_source_equation",
+    "FinalCollection.A396102.inverse_right",
+    "FinalCollection.A396102.inverse_left",
+    "FinalCollection.A396102.family_coefficient_congruence",
+    "FinalCollection.A396102.family_iterate_congruence",
+    "FinalCollection.A396797.source_existence_uniqueness",
+    "FinalCollection.A396797.source_normalized",
+    "FinalCollection.A396797.source_equation",
+    "FinalCollection.A396797.integer_iterate_congruence",
+    "FinalCollection.A396797.positive_coefficients",
+    "FinalCollection.A396797.exact_composition_order",
+    "FinalCollection.A396798.source_existence_uniqueness",
+    "FinalCollection.A396798.source_normalized",
+    "FinalCollection.A396798.source_equation",
+    "FinalCollection.A396798.exact_composition_order",
+    "FinalCollection.A396798.a396798_iterate_residue",
+    "FinalCollection.A396798.a396798_corrected_residue",
+    "FinalCollection.A396798.a396798_corrected_period",
+    "FinalCollection.A396798.a396798_counterexample",
+    "FinalCollection.A396798.a396798_literal_period_false",
+    "FinalCollection.A396798.a396798_second_iterate",
+    "FinalCollection.A396798.a396798_fourth_iterate",
+    "FinalCollection.A396798.a396798_sixth_iterate",
+    "FinalCollection.A396798.a396798_eighth_iterate",
+    "FinalCollection.A396798.a396798_third_iterate_period",
+    "FinalCollection.A396798.a396798_fifth_iterate_period",
+    "FinalCollection.A396798.a396798_seventh_iterate_period",
+    "FinalCollection.A396807.source_existence_uniqueness",
+    "FinalCollection.A396807.source_normalized",
+    "FinalCollection.A396807.source_equation",
+    "FinalCollection.A396807.exact_composition_order",
+    "FinalCollection.A396807.a396807_residue",
+    "FinalCollection.A396807.a396807_iterate_residue",
+    "FinalCollection.A396807.a396807_integer_iterate_congruence",
+    "FinalCollection.A396843.existence_uniqueness",
+    "FinalCollection.A396843.compositional_inverse",
+    "FinalCollection.A396843.coefficient_polynomial_specialization",
+    "FinalCollection.A396843.parity_odd",
+    "FinalCollection.A396843.parity_even",
+    "FinalCollection.A396843.mod_parameter_squared",
+    "FinalCollection.A396843.binary_divisibility_polynomial",
+    "FinalCollection.A396843.inverse_binary_divisibility_polynomial",
+    "FinalCollection.A396843.binary_divisibility_integer",
+    "FinalCollection.A396843.inverse_binary_divisibility_integer",
+    "FinalCollection.A396843.power_of_two_index",
+    "FinalCollection.A396843.prime_divisibility_lower_bound",
+    "FinalCollection.A396843.prime_exponent_exists_unique",
+    "FinalCollection.A396843.minimum_prime_exponent_iff",
+    "FinalCollection.A396843.residues_parameter_three",
+    "FinalCollection.A396843.residues_parameter_four",
+    "FinalCollection.A396843.a396843_parity",
+    "FinalCollection.A396844.source_existence_uniqueness",
+    "FinalCollection.A396844.even_positive_tail",
+    "FinalCollection.A396844.binary_divisibility",
+    "FinalCollection.A396844.residues_parameter_four",
+    "FinalCollection.A397588.differential_existence",
+    "FinalCollection.A397588.differential_definition",
+    "FinalCollection.A397588.differential_source_unique",
+    "FinalCollection.A397588.differential_parity",
+    "FinalCollection.A397588.differential_mod_three",
+    "FinalCollection.A397588.differential_divisible_by_three"
+  ],
+  "catalogue_sha256": "d21b915437389b10d4dadfd52e9af5d716026756fbeb82283a62f85744d6bae5",
+  "sources_before": {
+    "AI_DISCLOSURE.md": "457fb3754e851f6aa2cae5c53de5d8140090f8566ea89df27c1b649cf275b1de",
+    "CITATION.cff": "360f25c3d9724bf0ac6a16a4dd3499e7c65206937d6a63eb295a25e2357e8fb6",
+    "INDEX.md": "85ad82ef95aa8ab23925cba8f44ad9de1028f8e2b4da813356ed6f44ae4f7425",
+    "README.md": "5754c1b3b2045a25abe8167d0374ea3e330b56ba16bfe7d1d40a7851057d1775",
+    "catalogue/dependency_map.json": "c883e4f4c4561f6ad9c8b949206a62a94e601ddc5586d7896d0a8e730ca6141d",
+    "catalogue/entries.json": "d21b915437389b10d4dadfd52e9af5d716026756fbeb82283a62f85744d6bae5",
+    "catalogue/original_entries.json": "c153afcb115c03f51c35403aeb6f54777042ea4e337e0f9f48725108a2203e7a",
+    "catalogue/recent_entries.json": "d7cc0f489bdf456133c74fe8a58b6e2b312baf397889b93411599068b21323a8",
+    "catalogue/second_entries.json": "f2cc3706107bf5188632bce91b8d98c28fb5b81c0fb79bfc93f2574f560d1467",
+    "catalogue/theorem_inventory.json": "775dcdbf31917d4a3d13df612cae2273bcc4be513e213c888c56fa84351d22f3",
+    "docs/COMBINED_V4_README.md": "303eb5c2f94e6545c89dac3371a56b50335a718fe981d8f9612752434704256f",
+    "docs/COVERAGE.md": "2e19a6a4f99956e6e4bf781b1b880e44ef89c885cdab59f4b8173d589a6541ee",
+    "docs/CUBIC_INDEPENDENT_REVIEW.md": "aa11d6c789818b93e0b38253e24af1ad7a35b88e481b997f31aaddf61547ef8e",
+    "docs/CUBIC_REVERSION.md": "7851c42e8b4c51a716a17a7525ef7714b436b5355e3353d99cbd559d52c00a6f",
+    "docs/DIFFERENTIAL_AND_MAHLER_PARITY.md": "2bc613b46a00e992f5b80bc0816cf0ca195485da447e6ee6f46f4d1839d2c6d2",
+    "docs/FINAL_COLLECTION_REVIEW.md": "435e74497670a7f47aff2527be6008c4a2981188d1e781bb34de4de0e0e3417f",
+    "docs/FINITE_VERIFICATION.md": "d6dcc8975e7b8d38a4394fb44b8dedda168acb767f58f137f3c7a136dcf7ca94",
+    "docs/FORMAL_REVIEW.md": "b98dc6575090097df7ccf3559c4a810ba9cf1d4c347e545861ee5d8f0099384b",
+    "docs/INTEGER_ITERATES_REVIEW.md": "e2863de77be47bdd2cfca5bd35c3905425cb1029d86d7165672bb1e02c9c0aa1",
+    "docs/INVERSE_ITERATE.md": "560880cc145cad471ccd0dbb238550d7a34e34aa03a6d7057f29f2d08ade0dd8",
+    "docs/PROVENANCE.md": "248cbdb0b8164ee605eaef7301b3cd179910971b4f35d26fe04a6036cb5e6236",
+    "docs/RATIONAL_PARITY_REVIEW.md": "a09372f35502dd52dffd07e11f3027519d9d8e5c80e28553362745295b77c251",
+    "docs/RELATED_CONJECTURES.md": "9b3a83d8eb40afda3153aae4a38bdc93265190424695ced3ddd7fa1d665e8bca",
+    "docs/ROUND2_COVERAGE.md": "364b6405a5b6cf3031df3d9354c80631801354fe7ce9f9ffc03d0daa336737ea",
+    "docs/ROUND2_REVIEW.md": "c6653fb0299f1ac83d423c199eef57c9a80d2b23f21c66cda446c080188c67c6",
+    "docs/ROUND3_COVERAGE.md": "9791f8422707211470d79a0cd1d371f2ab20afcaf32abec6e8052653fcc5b3f2",
+    "docs/ROUND3_ELEMENTARY_REVIEW.md": "295eae5355daf10646813da8553820ea4e80f922ff2fef9ad54d277c64a9eb6c",
+    "docs/ROUND3_INTEGRATION_REVIEW.md": "c7d1ee07b340d0230615593bd73c63840f3d51b54b685004ab77d35dffe269d4",
+    "docs/ROUND3_LACUNARY_INVERSE.md": "46ef4381fe598cbb27d88ef249daff332f195c220ae3811cc98ca831d76e7f2e",
+    "docs/ROUND3_LACUNARY_REVIEW.md": "7a73266e03f92eadb66584c6d78682ad28cd6768227bda90af38bdbe459d3b40",
+    "docs/ROUND3_SQUARE_REVERSION.md": "ee5f41c0bfde422b102707a9dd0db1bc8e2fdb5a31dce8a9313ef6f32faf0d00",
+    "docs/ROUND3_SQUARE_REVERSION_REVIEW.md": "578009a7222087813c2bd256ef5a1880b09ff0bab9b215b7fd4c379fcf4de0cd",
+    "docs/ROUND4_CATALAN_COMPOSITION.md": "f45355067ccc0f3fab4c0fa05430245841e4b4f3ef1aec822ffd4f521d185252",
+    "docs/ROUND4_CATALAN_INDEPENDENT_REVIEW.md": "3f8960c981892d2cba352827e3e546cac1e2e15a5ece46b980e39239647aede6",
+    "docs/ROUND4_COVERAGE.md": "061256852dcd6adcc9d3063f310bb8b6d61c31c09e7e8d3ed36872a0f338baf3",
+    "docs/ROUND4_EXP_COSINE.md": "2d321709732eb52c046f7987154c613e3f8d0eecaf15c71946863a053f5cc1ed",
+    "docs/ROUND4_EXP_COSINE_INDEPENDENT_REVIEW.md": "3e808fc9ed62e20acf6a341c15c1e7fed05212ca8da333a708c473651d56186c",
+    "docs/ROUND4_INTEGRATION_REVIEW.md": "27f4a0ce7ef54b4d7d4c59f111982dae84f11bc8299db4644efd25664f6dfc94",
+    "docs/ROUND4_NESTED_INDEPENDENT_REVIEW.md": "9e74d98bac716d1f1f7795f1ec2d0bcb04a428c9a2707a9a391e996ce7a4deec",
+    "docs/ROUND4_NESTED_REVERSION.md": "64d77fb8e72285c20ba781c75942391e754af0d9c46089250f888f48b7433ce2",
+    "docs/ROUND4_THETA_RATIONAL.md": "229928de03cbf321b80686a6db19a74fc85a99d987ef7f9f24e2ba54d2a619cc",
+    "docs/ROUND4_THETA_RATIONAL_REVIEW.md": "22fc2eb316dfd5af6d63b8dba3a7181a5eecaddb65c63ec611f82ecbca0294f1",
+    "docs/STIRLING_PERIODICITY.md": "76b2e934a6860de98c83261c986d963bd6f2495a8c225545cb764d12da4516bc",
+    "docs/THEOREM_SPEC.md": "d85261d277b9a900e6a2161f2da55202e3ea8acec2d21b886b415bebef7964db",
+    "docs/THETA_INDEPENDENT_REVIEW.md": "c8c683ef20436b10afb14a0e6945f987eb8c3ffcd365ba15e7d18cf3d6eff9bf",
+    "docs/THETA_SUBSTITUTION.md": "a5fb8b3d179b4b3a61d14d8d8324fe1d44e9765768c869ee2c554cabf284537c",
+    "lean/Consecutive.lean": "f0277a9befdf2cc3f70b278d89b6ca3e623c0653d7c5dcf22484b1e5b3ada342",
+    "lean/Consecutive/Acceptance.lean": "879ec5653dd4c52b27f19d70f080eff24904e1aeee39609768781103dd82b951",
+    "lean/Consecutive/Arithmetic.lean": "06d3ceadf894878ae2c7d170c15542cf439df6f2f1f65a7d0fa7fb00f8076138",
+    "lean/Consecutive/Basic.lean": "f8847e397da7a052c0a690197ef08367fdd088b60fe2eede3a8706cb71864f16",
+    "lean/Consecutive/Coefficients.lean": "05b922e0737ae6975b2a383fb868e50462a506cbe493bdbfc5725fb6bfae371f",
+    "lean/Consecutive/Construction.lean": "1defe4d157d8d5f111ee2e142b235aa6cbb5409683892fd834afa1718dc0ea0b",
+    "lean/Consecutive/IntegerIterates.lean": "71785797e56dadbddaceaace0e49938995907c80e7f80d5428a3487e9cb2d939",
+    "lean/Consecutive/Modular.lean": "f26c2715c46ae9877f27ef76f5d09c2cf1fce2c2e44cbfa9c2e9754c97d25f58",
+    "lean/Consecutive/Related.lean": "599322c04117e65ee7359ea1bb9939f428dccc873c794b11288dbd7a3847ff6b",
+    "lean/ContractChecks.lean": "152b951d3c77492db7dc49d17f0358ad50c654bcdf2be0aee7f1c956bb22796e",
+    "lean/Entries.lean": "867ee7a520eaecc9203a0bb78445260b67ef1bddbc1a702a8df4530f0dda6b3e",
+    "lean/Entries/A052895.lean": "198ae74be1aec15f138bf97a10634dcdc2b3e48097f428fcdfc0168018283693",
+    "lean/Entries/A064618.lean": "bda6a09cf77677bccee98fe345573262f10152f2a331f182157ea3096106659f",
+    "lean/Entries/A080253.lean": "b6e010f9fd4e61873e08e3f68705868febae235f3cc1c76c0d236746b148f03a",
+    "lean/Entries/A167137.lean": "1ebd85691c84b6721f97beb74f946d992c917d9723b82f013a78a69d9a664b27",
+    "lean/Entries/A195194.lean": "f23490bb505d15eb78cfc032745702e50daf23e344d24e5af8f2f3754a6ede08",
+    "lean/Entries/A305550.lean": "d034e67b064c8c47eda44ed63334328da0ecd66f8725aeef3914632e18e4be48",
+    "lean/Entries/A306082.lean": "96f4d19a0b01c418562f53f8767e2287ba0170a770bd136c41728341ed9347a7",
+    "lean/Entries/A354242.lean": "4cf255356753d9cefd072d42f4c4bd325265564e71390010f8305ce7cd92b596",
+    "lean/Entries/A378580.lean": "b03358b5da36e1b2ff69b9445045dc8c0f2a0bcc5aa83d2ba5ac05bd16c60776",
+    "lean/Entries/A378581.lean": "39a9eb55b1a3bd75d6a4293ed0fa963f13f6c028f04bb69f82ee27e193975dbf",
+    "lean/Entries/A380056.lean": "96809d90d447a83f694c5cb80072f307c42d0b21172c324eb11f0bedede9ac07",
+    "lean/Entries/A380060.lean": "be0300c1be8025012f384f68beae13e609148367e312e436de078ca6bc68701f",
+    "lean/Entries/A380680.lean": "f158be4f03bd12ddbad0ab47784bcbff03acd173f3ab813a6225cfc4b539a5e9",
+    "lean/Entries/A389474.lean": "c12ebaed1d27c8a020472141a6ad041fddb0823e3ccb792e2db97e8a433182ec",
+    "lean/Entries/A389475.lean": "bb03dc2f8127c2f863b935818a883fe3355a334eedcdc4e01a51c822ac6097c1",
+    "lean/Entries/A389536.lean": "067abbf08d42fa75fa369c82bdcce8df26e45c2d67b62ca59a67218096b654fc",
+    "lean/Entries/A389537.lean": "22cb1472f872939b899ad081c62e168351cb97a2ddd1f44ad2f5bd12703fca0a",
+    "lean/Entries/A389542.lean": "8ea3c1df57ca873e8d865486d17b03ebc5798c71f4a5e6eaa6b07ebb01a38f6c",
+    "lean/Entries/A392210.lean": "5c4ec242be4735bf49df2debb250e1a4440aa0117c334230bec37a8a1763894f",
+    "lean/Entries/A393171.lean": "e3de6cec3429ac796fb86deafa75c34c90b39d37f1340d169654ab7c0c81779e",
+    "lean/Entries/A393172.lean": "9f0d3ac32fac13ebb5c2ba5339ea585cab32812972ec740631b718eec5e95f88",
+    "lean/Entries/A393856.lean": "59bb4384976307072aa8ccf89cb6f9eb08936a2f08f03bd032e65bbf1e3b2722",
+    "lean/Entries/A393857.lean": "950c180286bd92d3ae64b34cd7b4da977b976a64da98077e6554753ff0a0efaf",
+    "lean/Entries/A393858.lean": "3e498a821d1a2583368dc57379d47cb24e5344c46ecd8c5d59a7da7079f6fbce",
+    "lean/Entries/A393859.lean": "60b315566033503d3d82c0303d6928a69a0b62344a7588ab7f657dba7074da3a",
+    "lean/Entries/A396093.lean": "b254fcf7b82422e10401f0ed7288e439e3f6a8a8229f1568b0d4f245486460b9",
+    "lean/Entries/A396099.lean": "eed565e3dca898a9dc230bf9d9963b81a76d42de6edf9d6d981a9200c9de5166",
+    "lean/Entries/A396102.lean": "7c0c813ab08f848f164464a174c150769753a43bc673b0093a0e775def38ae48",
+    "lean/Entries/A396797.lean": "f39b4bb2669e5b6c6bdd3ff40283fb300d99e3e68fad42f54d72282778e05999",
+    "lean/Entries/A396798.lean": "c13014b9a86cff6f252ef0a5c0b2db9e0e733e85cb4f76d6431431d0f6478979",
+    "lean/Entries/A396807.lean": "325ffd1994cb5801265fec81f09e500a7b559eab999aea0649b767d0673d234c",
+    "lean/Entries/A396843.lean": "4e4866f66eff18aea56a291f7bdaa344a5f1d131db2f577b740847ee0b47d96d",
+    "lean/Entries/A396844.lean": "5bdbcfdf7aaa759e26271e5f54181c2fe1c6bae301bc39c3a9c68fdd04f7d9ca",
+    "lean/Entries/A397588.lean": "608f4e395ea2a9a3659840c90100fa54713d68216332988c44a3248a33d1db49",
+    "lean/Hanna.lean": "02d63ef8766b380dc96b5c40c2e5a31cbb41af23a50b5158ca085bc555fe5b4f",
+    "lean/Hanna/Acceptance.lean": "6e40816f6ae48bc06cf1419c00cf3624b3401a5cfd7e58cb54abda4b56b5b209",
+    "lean/Hanna/BinaryDivisibility.lean": "135fc2ab84354db15cf539cbb077069f1a0356a9822ef223f7857b6ba731191e",
+    "lean/Hanna/BinaryWeight.lean": "6db40277cccfff4d3d5740a5dd58e0029f385235883e1a2ffbdea98e9e70da27",
+    "lean/Hanna/Canonical.lean": "96e894fc7e6a368edc04e10c46339331acffef112f32b1ec93472f3974fd3afe",
+    "lean/Hanna/Corollaries.lean": "6ba336bb5e44ff664e146efbb69872f0821d9cecb563fccfdb299c4cde81461b",
+    "lean/Hanna/Divisibility.lean": "ab96329b9eb33f27f6765fdd945b18e7f59235619dec7f169200acbd154e6dfb",
+    "lean/Hanna/ModSquare.lean": "fe5fe056a4218a3d1ead1c71fdfc481340712bf1be0c9bb968e66cb0759a2cde",
+    "lean/Hanna/Parity.lean": "7537944b09c8b6fb107ce75022cbcad714d7c4677e064ef91fb856bfb3ccdb35",
+    "lean/Hanna/PrimeExponent.lean": "d0f3c10213a928ddc5be03fe44dbc70cdb86fb3a1a876563bc8c38a1d78cb354",
+    "lean/Hanna/Recurrences.lean": "f5d8352cf432eb515905007d43c7869d9dde0144f08c6e3c9474a516e229f1e1",
+    "lean/Hanna/Related.lean": "23df0d2b12369a48b03417e67911de399a2117fc439d104ffe3641bd1d64f304",
+    "lean/Hanna/Related/ScaledInverse.lean": "0c1f5c702d279fac8b66c1e1c3f59abe197b30f730a875bb11c79038d6050440",
+    "lean/Hanna/Related/ScaledParity.lean": "c2b139df3ca35b982d8b3d4b8a6427fc8c4eddca71b77d96ad302535ecd3e3e9",
+    "lean/Hanna/Series/Basic.lean": "fe5948059309ed57c09f0c8db0e022a5e8c2848202562eae725ff9f835d0b906",
+    "lean/Hanna/Series/Construction.lean": "f4bdeaa4e5cce2ffe57bebe26148e5b826a78bd132125b03541e2b44e6ce9756",
+    "lean/Hanna/Series/Filtration.lean": "b1521801de0629c1b4444a1c6efbc924e541c8a57a4d3e36cb63f95aca2820e4",
+    "lean/Hanna/Series/Inverse.lean": "48917e1734625f78c598a7a6929162626a916fdbcd7d2a5d37c36f2be25fe118",
+    "lean/Hanna/Series/Triangular.lean": "8c74f1f494eadfcfda535bac804fd99526bbdf402483a95d898257f502cb45f2",
+    "lean/More.lean": "9dec7196144feaddee79f036ad232b968d9383646145552b39dbfcb4b2eeab9d",
+    "lean/More/Contracts.lean": "b9831ee388b2b496b50a7bc1f5ef9cf2fc1805780c0196055a11561fa9ca5766",
+    "lean/More/CubicConsequences.lean": "d58a1dadfa103ce149baf9f45b853cef68da0a2658163d19c5987daba42a7022",
+    "lean/More/CubicFrobenius.lean": "fd6063f053d2a5603c0f832a0d59ce0bcc929bc759dc088a7f4c3975f52e17d1",
+    "lean/More/CubicReversion.lean": "62901552a2faa906bdf94786d8db5f4f45c5b9fd6e3a3d1a24f8aafec35b7e11",
+    "lean/More/InverseIterate.lean": "5e08350a61d73c1b427c2ebeb8e8b9ff8f13166e0be73cafd38c9c22d503c51f",
+    "lean/More/PowerPeriodicity.lean": "00bc60aab2d86a65694e3552ac6a0c723a602ab9069823f53af87e5a0b678e03",
+    "lean/More/RationalParity.lean": "2f63e3afe954063e62b25dac769f044938887e4ed78895b3e4c97833123bba64",
+    "lean/More/StirlingNumbers.lean": "c823ceee359a589456924c0f22dd40d3051407e59ef9eebd15a66ed0df8ed209",
+    "lean/More/StirlingPeriodicity.lean": "1760bcb9ffc4c0287ac724f96fdd7498fb3891226bd0705b781067c7a32d092c",
+    "lean/More/StirlingTransform.lean": "cebda04d4c0b6fc577a4b085a5b512f133674747cbd43ca0530f35a3fada0abd",
+    "lean/More/TailPeriodicity.lean": "1433fa86551854b02f226a3e57b62466485ef1bd649de0a9488245cbf022eb60",
+    "lean/Related.lean": "b57efd388066f3e76c5aec823c9948bc9dccf41e134c709bd3afabc459cfd33f",
+    "lean/Round3.lean": "170ab473cf50d40957099a2aa02717e9afdf0e5a2a99da51054e082edf1c3a88",
+    "lean/Round3/Contracts.lean": "f19a1691ae0ffe7228c767aa69bd0b3dd4e4d13d0f7e97c48b1cab0683aea2d4",
+    "lean/Round3/DifferentialParity.lean": "00456e037a120c48b60b6096486bb0d0b38f5a5bdd3445ad3cc7c94d872bb6cf",
+    "lean/Round3/ElementaryContracts.lean": "3a690602557d8ae7c28e16487648bc6350840c01927c8fc9da374344232fe8b6",
+    "lean/Round3/LacunaryContracts.lean": "5da688d866eb13c4ebc3aa70168b20567b1d97cba97e9f183e0b3b8a8f2e659c",
+    "lean/Round3/LacunaryInverse.lean": "abc50f89cb31775a06fc8b993629a3e88df6e1f647ab4d3fd2a28b67e96d529e",
+    "lean/Round3/MahlerParity.lean": "739d49b2db028e3411e1bb6b374b37386710a3272bb5ef6d1f9db4fa31437ea5",
+    "lean/Round3/ModFour.lean": "fdb3d99291c889dbd9b614ad39c1b8f420aa3d861efb38ef0b04433f70e8ec7f",
+    "lean/Round3/SquareContracts.lean": "0399e43cda2ac54b16f25ada91121b994591d3897afebf6021f25f03f7f70675",
+    "lean/Round3/SquareReversion.lean": "13826214bfd2f3b57395cd271c50a4764229a4c62ab4bc38c728eb89ed7a1065",
+    "lean/Round3/ThetaContracts.lean": "9c0f514db84c4bc6cc0093149818359b4f3170d165b71bfd1622d9445d7eeec3",
+    "lean/Round3/ThetaSubstitution.lean": "27e0f3dedcf1bafbcea566075f61d037cc8af3c9a2a1f7824426700b85b18824",
+    "lean/Round4.lean": "258bcde6c31ce7319dafff745699fcf9f0a94be9799671665c220c77397f881b",
+    "lean/Round4/CatalanComposition.lean": "1c3e724f94ee7d46c9a5573634ad1dd950819bf52a3945eacfccfb24abc1f2f4",
+    "lean/Round4/CatalanContracts.lean": "6be71cb602506435b014b7e49fe06fccd642e1635c26f209c30f1b95a7ff1e00",
+    "lean/Round4/Contracts.lean": "a57d84c49003035d7af9030976a532d1bea3732076c8ca7aba184e353f31ed57",
+    "lean/Round4/ExpCosine.lean": "2bed864bc0c7fb683bb0077a039ac37233f96a867d571818c10f1febdcc721db",
+    "lean/Round4/ExpCosineContracts.lean": "b43235801f4345d277623949a7edb5ac1992b9a5800a7bdeae2eb8bda0ffdbc3",
+    "lean/Round4/NestedBinomial.lean": "9b6a2cf04f32fc55e725db19cd00ff94cc0a0d21a579381442a02cc28b1ec0eb",
+    "lean/Round4/NestedContracts.lean": "023f983eb52971d26ab76e7f5bbb3a246199cf3721898d15e8d0489f531dbe0f",
+    "lean/Round4/NestedReversion.lean": "0dd32e4d02ce4a48b2254e6182e13adfc441fe7d580dc89d37fb880345cfd248",
+    "lean/Round4/SquareComposition.lean": "94af591b99ba599888ef8800d31b196390657e3336bba51f85a3fd2982fe2b0a",
+    "lean/Round4/ThetaRational.lean": "3888b23af84152036a02ac4b9a39a21354480b4398576a121cc695393c4c2f7d",
+    "lean/Round4/ThetaRationalContracts.lean": "b869d0ea7ac540d7c58842d3db838869ba8e8699835270acf8ac6ab29d96d49d",
+    "lean/lake-manifest.json": "bc1a60e6355183dfb8efa78a5d49ddcdf2108c4dbc85a3ab9bcab1904054f3ea",
+    "lean/lakefile.toml": "3b4e6cfbf03806fbd1999d129085e447d83871a12565bcefc0c97a361194fc6f",
+    "lean/lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+    "manuscript/compositional_congruences.pdf": "1ff73fe09b05f57f64b20c65ec9e03bd89c754f690b1217905899aa4b840b677",
+    "manuscript/compositional_congruences.tex": "abe3d0eaa9db2f0b40d9af5c66f9fbbaf3b914cb81f7393bb72d98923889b201",
+    "manuscript/further_oeis_proofs.pdf": "5b68bd1bfc7d1c64428bd3e9d066775eb7873e0f4e4f52e6e636f691fc5c962e",
+    "manuscript/further_oeis_proofs.tex": "e37c0abdbeb06df531f17a8a16e27b87b91e6e7abc14cd2e2bd5a6859a458dbe",
+    "manuscript/more_oeis_proofs_and_corrections.pdf": "406dd6593325af4ef81b7ae519dd9888ef4ff1a8dd17028bbc183fec281368de",
+    "manuscript/more_oeis_proofs_and_corrections.tex": "5b9dd2c7d5ced36b45ca301e8e174e5be998d10b91e71a3a0d6e481a1a7b17f6",
+    "manuscript/six_more_oeis_proofs.pdf": "bd1e37b207bb8ef9241760bba2b9166ce86722718d2a9243752269c6dd9654fc",
+    "manuscript/six_more_oeis_proofs.tex": "3c32d5026a12ab5a7d288b044e3dd83fd93366f7da4c978996dbef0869fcdd5e",
+    "manuscripts/A052895.pdf": "29d5f92085e6bfb24c17af3cf7ad23ba5276dd5ec7b070f549ccee40b969bd61",
+    "manuscripts/A052895.tex": "a2684aca3b25846df25d94489aa1f47348476aa62110f10064cb800dd98ae7c3",
+    "manuscripts/A064618.pdf": "d6d544e2922f5a80fd49ae5778bc1d544111211a7e91508bbeabf9d1ed190843",
+    "manuscripts/A064618.tex": "62b3fcfccc44572c0a667e3f4fbdfe60c9b29a1310ea5337f8528651026346be",
+    "manuscripts/A080253.pdf": "1d5e93ae33c61e3e57e2fe01f544c6ee8ca4ac56ea3630dcb898d4aae38dc507",
+    "manuscripts/A080253.tex": "01618cebf3f67b435d7ec73b6599005638eb3a3e156e46e7567597a8e8402c08",
+    "manuscripts/A167137.pdf": "fdc06e1f0c54220dc17d637cde0c24b5aed35f260b1618d00fd3d7f4ce874279",
+    "manuscripts/A167137.tex": "f00470562de489ae8dc566cd399f79ceab374ae6ffd127783d69ad9e82ee13dc",
+    "manuscripts/A195194.pdf": "807b55bc8148c6fe12089f39fb9748772ff133e4d9bfe62246af38b052c9180a",
+    "manuscripts/A195194.tex": "89d1519da0eb49b896cc9fa3139d7742c289004e456c3d366e8301da78027ea2",
+    "manuscripts/A305550.pdf": "b7c298d5ce0222d334f480189ac5ed97eeaa737cf7f8004f37c18b3e072a7a08",
+    "manuscripts/A305550.tex": "0280d2ba222423efff8935ea80ec213e5c855e85d151f783cd376f31621c0d39",
+    "manuscripts/A306082.pdf": "eeb0929747390aed0354b80750e778b63eb240aaaa096d6a481a28c331fc7c0f",
+    "manuscripts/A306082.tex": "4b3bf653fe71711bcc1690e0c1d0ced30bbb0143cbc3aa87c1ef8294f92f0e1c",
+    "manuscripts/A354242.pdf": "cc130a07622d14d1da77a2ef9fa38e73242bb06416d972bd0df62eba768b16cc",
+    "manuscripts/A354242.tex": "7a6690b81bde039217ed4850a7650e4665dcb874ce4116ff2647a4ee632c44d6",
+    "manuscripts/A378580.pdf": "86b49d2b2877c24c0a42c93cfcea87773a440841a05969c1e4554fc10f773ac3",
+    "manuscripts/A378580.tex": "070855e0488efbfe3c4eeb89f3ecc49b3b1311018982f18a7f0108b504cf335b",
+    "manuscripts/A378581.pdf": "4b298dad025a30c6a75ddedb0cab90f4fc1b6ebd4c0cb51556047c61e4666c78",
+    "manuscripts/A378581.tex": "052a77db6ca48254b5165c23f8d315c8ca15885b05c706bbdf1b35bc7dbc28f4",
+    "manuscripts/A380056.pdf": "c1652af1009c32fe0cf7fba190835018b170a90b22bced6cfa9ab6d801b68538",
+    "manuscripts/A380056.tex": "721d5f76a7dd2fee9f6fc4c40db72f79b1cbf9cc5157480a2132d38bbd99df9d",
+    "manuscripts/A380060.pdf": "392fc177189d0607195a853b480ffb6a855052eeebdf0944e723b9bad45c0418",
+    "manuscripts/A380060.tex": "75e81d30ce0371ea9d1d753ec577db2dd89318edb26d3680bd5646f4d8a41861",
+    "manuscripts/A380680.pdf": "5a5f13705674c0823a2e285f6dc4dbf5d3d800b8f22233edc8a3ff4d98ed16dc",
+    "manuscripts/A380680.tex": "a801f19440268806a0f97a59a8a8c84554e0b5b02d3ecac9a9bb2d526f2e39dc",
+    "manuscripts/A389474.pdf": "646ec81fa6ef2bf938526344f46e01c1ca28c7a24f881bd6d8e3486b2e167abb",
+    "manuscripts/A389474.tex": "7fd0bff203c335a520d1170fc0c614a621105e0687853e1e69486fbef0010290",
+    "manuscripts/A389475.pdf": "9eac6226bac4b2131a3df5d4472852c280cdd867440fba659d7b356fb3a7edf4",
+    "manuscripts/A389475.tex": "ff3ebf8100f226599a2a0a555055df94e9fc3708df4e0602a73721128c2ea540",
+    "manuscripts/A389536.pdf": "4ba53e1d853d3cd96fd654918b6e4518d8d8a91d5f7860158d3dd30ecdb50c70",
+    "manuscripts/A389536.tex": "c37af2630243cd75bea4c1f7fc2a0964a31caaef103b4e03130567d8ba292c11",
+    "manuscripts/A389537.pdf": "f700f035deb5d22faea42de1169830b0f4dffa8b3e9a1889746d69551becb78b",
+    "manuscripts/A389537.tex": "64eb5bbc2a5bb12f2dd6ba10f9e3163aaf27f0a5e3efc5beabb19b9f3979352e",
+    "manuscripts/A389542.pdf": "43a374c8f9e52e597c4fa801d86c7847db9519b3ba9700696479a18299df64ea",
+    "manuscripts/A389542.tex": "9cffa337f48f72606c483f713045a496ebcbeeaf5a113415e5f350afe612a573",
+    "manuscripts/A392210.pdf": "ed7112be3d14f3e151e44d0dd66bc9ed75559211431be480f8f9950f742d922a",
+    "manuscripts/A392210.tex": "30c83c601acd3959e0397ce16c6dda69d0f756c81fe1ae487a95c3cb1e03f0de",
+    "manuscripts/A393171.pdf": "5d82e962694028e025c5500586be521b2dde33883afbacf94ea566c8aa698fd8",
+    "manuscripts/A393171.tex": "658cfbbdd262f16f2e5b06a48a65f8c64b7f715345c22765dcf01d52003fc596",
+    "manuscripts/A393172.pdf": "3d391352848f690c21bfb21791120d37bca4db22a35e0cdb23788d8b92aa7837",
+    "manuscripts/A393172.tex": "1515c59c0fda13fc3f5140965c6eaf8e3230e96963142304860c5e0f60d12663",
+    "manuscripts/A393856.pdf": "69df3cbcd6a5e38b22ac1abb25517b5e3bca699383df5d5939381418fb66b36c",
+    "manuscripts/A393856.tex": "4a33ebf81a31f4638f75bacfc4f8ef60743c901fade392ed34d79f4660ef26bf",
+    "manuscripts/A393857.pdf": "5354318492e222bc196eddf5aaffafc74928a48c47cfc5b61285a5cc698f6d6e",
+    "manuscripts/A393857.tex": "ecc800c20d25b05fdbfe84023f1aaf53218d5ef1f6d070d82c470997abc7b175",
+    "manuscripts/A393858.pdf": "fd397c3a4766be592da64421e989a8fdab5322858d1974bcdef6947148f1cdfa",
+    "manuscripts/A393858.tex": "835848b5338b18374fc17a803f450117f4d68e603a72edb8e70fca21bd7beb4e",
+    "manuscripts/A393859.pdf": "fd8e24c79823472f245466f51f16c279e0cc2dfd682196cf6cae92ed89a544eb",
+    "manuscripts/A393859.tex": "333e276000287d7ed83a96ec49e6a405051e43cb2c5d8a6ac950554999fd17f6",
+    "manuscripts/A396093.pdf": "da7984562387d72707492441cc634913e945ac7e1be52118239120efdec77c05",
+    "manuscripts/A396093.tex": "5a9a932c2d18c4fd0d0d8e248cc4d53b3719f16a232298501e6248070e58c65d",
+    "manuscripts/A396099.pdf": "8b3e3a4580fd89691804f4d1dcc9d9f49f523cca8d68e1ac36a9a9021c331d97",
+    "manuscripts/A396099.tex": "daa6ddfd7cdec7303f9cd88f348525b6631f6347d3366918a6a28ef8397a2cdb",
+    "manuscripts/A396102.pdf": "4d6d156db6a391b04ef37126b17906e038e48362d715740d5c70bc84ac25e4cf",
+    "manuscripts/A396102.tex": "f77606a4ed9da98d59c10c77bf1071c1894fa8fcfaa7d2d7da6c63e79d7748ed",
+    "manuscripts/A396797.pdf": "a05481fa99144465fc8ceb40d8ad497fb0412a4e74c4b127381b402b3c6bf773",
+    "manuscripts/A396797.tex": "34172dbb87577c6e4042c58fc040ba48b5676d8319fdb59ac8b03987e1f88b6f",
+    "manuscripts/A396798.pdf": "3b01e39f352292f13da0fdde828472bc474dee4ea407c29919d0643df6113fb1",
+    "manuscripts/A396798.tex": "33cf6ce859242b74869d7887b242fc203429cd640daf55a2672d13ff4f1fed70",
+    "manuscripts/A396807.pdf": "8dec667b64339e6f4f8a5d1e47c31e25f4bea9981192070e5765db3b9097f1c7",
+    "manuscripts/A396807.tex": "0a12f474e2be5f6b4778795905b3fb05f64b9b24653d7dbaba3c3140e16c49f9",
+    "manuscripts/A396843.pdf": "342f0d9fcdad08dd17a0e5439933c8458a57669af3ff90d2b415bb2ffe1cac25",
+    "manuscripts/A396843.tex": "c8e56137d7d49425c626810c92984abd5d2b7b64c2b2e898d982226b9bb8b090",
+    "manuscripts/A396844.pdf": "0702518963e9cb69affc6a0013c6f890a2390e7a7297fe054abe33b9a1044485",
+    "manuscripts/A396844.tex": "c509709500b3a6fa4cea33561b27bfec5b8cabaa24b1173193ec88bd7137623e",
+    "manuscripts/A397588.pdf": "31ad905a11f76cdb8527841ebd55cb255756c0fbc59ef327854ef7089955192d",
+    "manuscripts/A397588.tex": "c5b3cb6a3133d8b7a60138247ece67b4d4bc0017c1446537885d50af946f6d87",
+    "prior_work/ORIGINAL_README.md": "b58a08f634b109d29beb31e3c63141864c446aaebdd7c62a227d7dbf60534743",
+    "prior_work/hanna_congruences.tex": "2e8ac18428d43811e0c9f2f387beac81f54daf79b87e5af91098f8ff685a33df",
+    "prior_work/oeis_congruence_proofs_Dev_Goyal_v1.zip": "04f347b0e116a1c92cd7a1f21f38a37ae3dfb71c733dd5f55769accd0714489c",
+    "prior_work/oeis_proofs_complete_Dev_Goyal_v2.zip": "b28c6de12f53e862b670d37d79d8b5f11333ce3d7acd44e61cb27eb2b99dbc10",
+    "prior_work/oeis_proofs_complete_Dev_Goyal_v3.zip": "6a0cbeb94076a90e8938627a156ed4152f6cc3fd88546d0d2e29cd9331744d41",
+    "scripts/audit_axioms.py": "b01372d4ffa07cc3236ef641cc3beef90d0667ed755103fcee4cc2927d6ee89f",
+    "scripts/build_collection_index.py": "716980f2f52914780505e5a680827510c07b854e98c433869ba72d147a08f427",
+    "scripts/check_formalization.py": "7c6bf5dd92c9518ca2a304165806e37c4aa3b14829fbf781286ee185e995e1ce",
+    "scripts/check_manuscript_files.py": "2cef5c3787fd8008d98a03e3a022ec03da0107676591b0d059a4d9dbb9a62ad8",
+    "scripts/package_release.py": "0b991aac999e1e568c1e418a43849fe47b714a98f152fe267f2df495ea6fc798",
+    "scripts/verify_catalan_composition.py": "334b68315bc2102c1611240c9d2a0277facd13c094baeee904f69da48964b9fc",
+    "scripts/verify_coefficients.py": "69d821a1d06580023cbe6f1d887c27bb1eb5d154256584efeb0d761dfa50dafc",
+    "scripts/verify_cubic_reversion.py": "737c44ade3fac00b40bc732c1cd2334d56643ea85d93334613d30498a5e3a84b",
+    "scripts/verify_differential_mahler.py": "51e1c1c7cc99f77f340995cbd4b0a38f49658277b15c71b919fc75f319723e08",
+    "scripts/verify_exp_cosine.py": "6226efa273bf64cb05cfd02a1f3da625be17db06fe4596abeb5a3b62577f3d21",
+    "scripts/verify_final_collection.py": "aeabee3dd5fccf3933636300dc06c1501d2b62e694532442fc217e3ad664af47",
+    "scripts/verify_hanna_congruences.py": "b8c3d50ead5c1cba1223ba235ad8368caed1d5f24eaf5c2bebe38d95db5162a2",
+    "scripts/verify_lacunary_inverse.py": "58df0ef7b4c766e010bc21256f77801fe74b0d0594fdc132acf8daca5db6a2d4",
+    "scripts/verify_nested_reversion.py": "bb0ac4685565c5ac5205b6774bb1bdaedc44b95c5c243feb43a618c1a48a134b",
+    "scripts/verify_rational_parity.py": "c5bdffb2d1bfad5687c8a34b486c00b2187e8a27ed3a5fc15e59644270400b89",
+    "scripts/verify_square_reversion.py": "3ac3ab9521f827ebcfe3436946d5f8eba21148aaaa33ae794061738ddc4b01ca",
+    "scripts/verify_stirling_periodicity.py": "4c97c45ceef5f419cc720af1bba90e6de943d0784d403ba6af6bb82425d66d64",
+    "scripts/verify_theta_rational.py": "6fb726ac3764c2838ff0fb5a0b11c5b18d334ab3a0e50bba045cd3c635eed140",
+    "scripts/verify_theta_substitution.py": "f42276f6fd3e6f7d7399ccefec6dd9528cd1eb308a5394fb56d794d0643b4bb6",
+    "tests/check_inverse_iterate.py": "0d066e0467862014cef0bd31801ac840c7067082aeb02abcdecde0f6d12ec1c6",
+    "tests/test_audit_axioms.py": "75d8e381633b6e59bc0d6fcc3324398addfad8ec328e56f3b229562969a387a4",
+    "tests/test_validation_requirements.py": "6d09185a545829b67393d890cd8489825f3ed01727cfd8ada41a16109f12b26f",
+    "tests/test_verify_coefficients.py": "68a254d66e453a0592e9cd3ce9497fce9341892194df705515d5985222565b74",
+    "third_party/mathlib/Apache-2.0.txt": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+    "third_party/mathlib/NOTICE.md": "6afd6a4ec1d25b3a209447497c03bd7927c3e352ea9e59f1491c20718a569008",
+    "validation/catalan_composition_numeric.json": "ed79298634367918d06dc2e156cdab29f2bdacd159cb1d1ea67373486882b602",
+    "validation/consolidation_baseline.json": "18f002efa5f66a8283e3dcb2309fd457575c94830a2bc4408ff4ba2dfefc9a4c",
+    "validation/cubic_reversion_numeric.json": "960c812f317eb21861f78147e18abf3c19b64209205e513d0819e406521a325e",
+    "validation/differential_mahler_numeric.json": "8f8adbc1fe00a3febe56af7430757eb6ccfcea83c63a4f165a125198b372f557",
+    "validation/exp_cosine_numeric.json": "7a6ac4e4178b6bc34517ce3c64018a2fc2bd685d9f13dc579504f578f1659a36",
+    "validation/final_theorems.json": "c6f4d4c4d3427e74dbdb578202a88a0afbe137872137b9febbea0669c427865f",
+    "validation/inverse_iterate_checks.json": "7c66ec2cb248e303f02a57a7a4f16faf1c00cc3836b8418152f6887eb1b53105",
+    "validation/lacunary_inverse_numeric.json": "c406c579bb96b63e2e7f97241e6d9ef7f90e8584f5297c68e87b894d1a2f221d",
+    "validation/manuscript_checks.json": "53ed8ce5b35c432c3ee9eac2e191ea30f14bee752189741b21d59bee7c21e075",
+    "validation/nested_reversion_numeric.json": "c7a8f392a5e984b48ef541324aed7ca3f64fb8173617e32e13397beaeae59d4c",
+    "validation/rational_parity_numeric.json": "35068cb6152df566722c17cbb73c9ed540c52689db904cc9fddb4304e42f07dd",
+    "validation/round3_elementary_axioms.json": "3061b8aed05b76146fbbbade7474a4f92aa741fd15c085fe0212b9ecfee41992",
+    "validation/round3_elementary_axioms.log": "af6a0a0c589d706970d06aaa16f4e0de823b669f9aa566ff2b7d69e916f85008",
+    "validation/round3_elementary_endpoints.json": "3515152146688e2691ccd2f7d7d943ebc95787b032e698a26e7fbc152fbfa7cc",
+    "validation/round3_lacunary_endpoints.json": "7759b2a7e9346ddb4bd8044af29ad1b46a3e1ec962a504ca0adf0fe9d2b715f6",
+    "validation/round3_lacunary_review_axioms.json": "6d79ea1452b24e301e58cfe022aee8de68bda83543a9b506a661b80a1fdc34e6",
+    "validation/round3_lacunary_review_axioms.log": "92804b2148477e743d541300f545a71382765c7284c739248e5f8e9237302262",
+    "validation/round3_square_axioms.json": "e5a9c5990e7eb244ffdcdb0a50b98f5faea1f3850252b46254ccba8ce28a6ce8",
+    "validation/round3_square_axioms.log": "fc28aa8e547abc6ccb94dd61b2d93f3ee306c13053482a212000d5ceaa62c205",
+    "validation/round3_square_endpoints.json": "59c3100bf33d63de5de8e5ced1a1bfc11b37b4990751592e8f6682ef816560e9",
+    "validation/round3_theta_endpoints.json": "88e85bd2d06ef4213c9fad1b1b7f2b6f228f45b3a539130ecaa9938f05452113",
+    "validation/round4_catalan_endpoints.json": "e8f3e2fd5c47bf378e8d760ae2e372ccc2f4d98b39b23c41990f6506d177e9c7",
+    "validation/round4_exp_cosine_endpoints.json": "d3c662ff7f4a472bf361317045e346368cdbc225ac279dc2011cff58b4fdc6e7",
+    "validation/round4_nested_endpoints.json": "ef6a533fff86728b68651a07f96e31cb06064ca20d2215363775ecdecfe3cd98",
+    "validation/round4_theta_rational_endpoints.json": "41f1e5a762e6667d19c1ce2c87ed10011b0ddb23f54cf5bd2f19dd51d34b6780",
+    "validation/square_reversion_numeric.json": "e379a53074be132f8ea6a510692d1f25949f67442553aca91337a4c8bb8f33ca",
+    "validation/stirling_numeric.json": "16c596e064c6383be7404cd40c62c63491371febb8686c63a7814046b11ebdc8",
+    "validation/theta_rational_numeric.json": "648eb01d08f85f0db5dcc1749c749fa79a2b28c1702dc8398fa5440669abe6c1",
+    "validation/theta_substitution_numeric.json": "9956ff3cca417d9a8a673df0fb887ec4f963440fab0801110419e7d16ba5f347"
+  },
+  "complete_report_sha256": "bdc70176389a417050d4f6a4349b027d74d7de8cac70e4363c853c0f8b339c5b",
+  "forced_source_module_count": 100,
+  "numerical_suite_count": 13,
+  "entry_axiom_dependencies": {
+    "FinalCollection.A052895.source_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A052895.period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A052895.least_period_divides": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A052895.least_period_specification": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A064618.source_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A064618.period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A064618.least_period_divides": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A064618.least_period_specification": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A080253.source_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A080253.period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A080253.least_period_divides": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A080253.least_period_specification": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A080253.weight_zero": [],
+    "FinalCollection.A080253.weight_one": [],
+    "FinalCollection.A080253.weight_recursion": [],
+    "FinalCollection.A167137.source_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A167137.period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A167137.least_period_divides": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A167137.least_period_specification": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A195194.normalized_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A195194.all_tails_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A195194.all_tails_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A195194.nested_definition_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A195194.first_tail_reversion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A195194.finite_nest_coefficients": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A195194.binary_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A195194.exact_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A195194.arbitrary_weights_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A195194.arbitrary_finite_depth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A305550.source_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A305550.period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A305550.least_period_divides": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A305550.least_period_specification": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A306082.source_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A306082.period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A306082.least_period_divides": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A306082.least_period_specification": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A306082.square_weight_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A354242.source_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A354242.period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A354242.least_period_divides": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A354242.least_period_specification": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378580.theta_constant_term": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378580.theta_coefficient_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378580.minus_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378580.quotient_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378580.minus_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378580.minus_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378580.minus_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378580.minus_series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378580.minus_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378580.minus_square_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378580.minus_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378581.theta_constant_term": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378581.theta_coefficient_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378581.plus_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378581.plus_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378581.plus_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378581.plus_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378581.plus_series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378581.plus_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378581.plus_square_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A378581.plus_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380056.integer_egf_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380056.source_egf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380056.literal_source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380056.literal_source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380056.integer_coefficients": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380056.first_source_conjecture": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380056.second_source_conjecture": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380056.exact_mod_five_pattern": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380056.exact_divisibility_by_five": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380056.mod_five_exponential_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380056.mod_five_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380060.implicit_source_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380060.implicit_actual_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380060.a380060_statement": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380060.complete_series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380680.explicit_actual_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380680.a380680_corrected_statement": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380680.a380680_counterexamples": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380680.a380680_literal_statement_is_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380680.a380680_complement_is_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A380680.complete_series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389474.normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389474.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389474.source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389474.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389474.integral_family_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389474.square_mod_nine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389474.square_coefficients": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389474.power_coefficients": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389475.normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389475.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389475.source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389475.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389475.integral_family_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389475.cube_mod_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389475.square_mod_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389475.cube_coefficients": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389475.square_coefficients": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389536.mahler_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389536.mahler_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389536.mahler_source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389536.mahler_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389536.mahler_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389536.mahler_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.auxiliary_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.auxiliary_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.inverse_right": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.inverse_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.source_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.series_mod_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.integer_decomposition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.half_equation_mod_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.half_binary_support": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389537.residue_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.auxiliary_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.auxiliary_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.inverse_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.inverse_right": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.inverse_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.source_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.auxiliary_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.inverse_involution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.inverse_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.residue_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.exceptional_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A389542.four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A392210.third_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A392210.third_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A392210.third_evenness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A392210.third_arbitrary_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393171.second_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393171.second_named_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393171.second_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393171.second_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393171.second_arbitrary_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393171.link_to_first_sequence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393171.link_composed_catalan": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393171.complete_series_mod_eight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393171.divisibility_complement": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393172.first_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393172.first_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393172.first_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393172.first_arbitrary_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393172.complete_series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393172.divisibility_complement": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393856.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393856.source_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393856.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393856.a393856_mod_five": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393856.a393856_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393857.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393857.source_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393857.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393857.a393857_mod_six": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393858.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393858.source_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393858.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393858.a393858_mod_seven": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393858.a393858_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393859.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393859.source_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393859.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A393859.a393859_mod_eight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396093.source_denominator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396093.source_composition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396093.coefficient_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396093.reduced_denominator": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396093.complete_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396093.even_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396093.even_indices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396093.odd_indices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.source_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.exact_composition_order": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.a396099_all_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.a396099_odd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.a396099_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.a396099_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.a396099_second_iterate_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.a396099_second_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.a396099_difference_series": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396099.a396099_difference": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.coefficient_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.iterate_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.family_source_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.family_source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.auxiliary_source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.inverse_right": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.inverse_left": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.family_coefficient_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396102.family_iterate_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396797.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396797.source_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396797.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396797.integer_iterate_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396797.positive_coefficients": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396797.exact_composition_order": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.source_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.exact_composition_order": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_iterate_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_corrected_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_corrected_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_literal_period_false": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_second_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_fourth_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_sixth_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_eighth_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_third_iterate_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_fifth_iterate_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396798.a396798_seventh_iterate_period": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396807.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396807.source_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396807.source_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396807.exact_composition_order": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396807.a396807_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396807.a396807_iterate_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396807.a396807_integer_iterate_congruence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.compositional_inverse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.coefficient_polynomial_specialization": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.parity_odd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.parity_even": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.mod_parameter_squared": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.binary_divisibility_polynomial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.inverse_binary_divisibility_polynomial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.binary_divisibility_integer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.inverse_binary_divisibility_integer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.power_of_two_index": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.prime_divisibility_lower_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.prime_exponent_exists_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.minimum_prime_exponent_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.residues_parameter_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.residues_parameter_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396843.a396843_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396844.source_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396844.even_positive_tail": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396844.binary_divisibility": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A396844.residues_parameter_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A397588.differential_existence": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A397588.differential_definition": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A397588.differential_source_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A397588.differential_parity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A397588.differential_mod_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "FinalCollection.A397588.differential_divisible_by_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "generated_types_sha256": "096d03f61419e423719d5bddc995b6a3ffb186d81d4ea81cc9eb2083fd9fc476",
+  "generated_axiom_audit_sha256": "682b4a0184bdb376139ab07813d077cdf9b0a1a90827bdc01deea065f0700655",
+  "deliverables": {
+    "A052895": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A052895.pdf",
+        "sha256": "29d5f92085e6bfb24c17af3cf7ad23ba5276dd5ec7b070f549ccee40b969bd61"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A052895.tex",
+        "sha256": "a2684aca3b25846df25d94489aa1f47348476aa62110f10064cb800dd98ae7c3"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A052895.lean",
+        "sha256": "198ae74be1aec15f138bf97a10634dcdc2b3e48097f428fcdfc0168018283693"
+      }
+    },
+    "A064618": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A064618.pdf",
+        "sha256": "d6d544e2922f5a80fd49ae5778bc1d544111211a7e91508bbeabf9d1ed190843"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A064618.tex",
+        "sha256": "62b3fcfccc44572c0a667e3f4fbdfe60c9b29a1310ea5337f8528651026346be"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A064618.lean",
+        "sha256": "bda6a09cf77677bccee98fe345573262f10152f2a331f182157ea3096106659f"
+      }
+    },
+    "A080253": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A080253.pdf",
+        "sha256": "1d5e93ae33c61e3e57e2fe01f544c6ee8ca4ac56ea3630dcb898d4aae38dc507"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A080253.tex",
+        "sha256": "01618cebf3f67b435d7ec73b6599005638eb3a3e156e46e7567597a8e8402c08"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A080253.lean",
+        "sha256": "b6e010f9fd4e61873e08e3f68705868febae235f3cc1c76c0d236746b148f03a"
+      }
+    },
+    "A167137": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A167137.pdf",
+        "sha256": "fdc06e1f0c54220dc17d637cde0c24b5aed35f260b1618d00fd3d7f4ce874279"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A167137.tex",
+        "sha256": "f00470562de489ae8dc566cd399f79ceab374ae6ffd127783d69ad9e82ee13dc"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A167137.lean",
+        "sha256": "1ebd85691c84b6721f97beb74f946d992c917d9723b82f013a78a69d9a664b27"
+      }
+    },
+    "A195194": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A195194.pdf",
+        "sha256": "807b55bc8148c6fe12089f39fb9748772ff133e4d9bfe62246af38b052c9180a"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A195194.tex",
+        "sha256": "89d1519da0eb49b896cc9fa3139d7742c289004e456c3d366e8301da78027ea2"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A195194.lean",
+        "sha256": "f23490bb505d15eb78cfc032745702e50daf23e344d24e5af8f2f3754a6ede08"
+      }
+    },
+    "A305550": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A305550.pdf",
+        "sha256": "b7c298d5ce0222d334f480189ac5ed97eeaa737cf7f8004f37c18b3e072a7a08"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A305550.tex",
+        "sha256": "0280d2ba222423efff8935ea80ec213e5c855e85d151f783cd376f31621c0d39"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A305550.lean",
+        "sha256": "d034e67b064c8c47eda44ed63334328da0ecd66f8725aeef3914632e18e4be48"
+      }
+    },
+    "A306082": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A306082.pdf",
+        "sha256": "eeb0929747390aed0354b80750e778b63eb240aaaa096d6a481a28c331fc7c0f"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A306082.tex",
+        "sha256": "4b3bf653fe71711bcc1690e0c1d0ced30bbb0143cbc3aa87c1ef8294f92f0e1c"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A306082.lean",
+        "sha256": "96f4d19a0b01c418562f53f8767e2287ba0170a770bd136c41728341ed9347a7"
+      }
+    },
+    "A354242": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A354242.pdf",
+        "sha256": "cc130a07622d14d1da77a2ef9fa38e73242bb06416d972bd0df62eba768b16cc"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A354242.tex",
+        "sha256": "7a6690b81bde039217ed4850a7650e4665dcb874ce4116ff2647a4ee632c44d6"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A354242.lean",
+        "sha256": "4cf255356753d9cefd072d42f4c4bd325265564e71390010f8305ce7cd92b596"
+      }
+    },
+    "A378580": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A378580.pdf",
+        "sha256": "86b49d2b2877c24c0a42c93cfcea87773a440841a05969c1e4554fc10f773ac3"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A378580.tex",
+        "sha256": "070855e0488efbfe3c4eeb89f3ecc49b3b1311018982f18a7f0108b504cf335b"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A378580.lean",
+        "sha256": "b03358b5da36e1b2ff69b9445045dc8c0f2a0bcc5aa83d2ba5ac05bd16c60776"
+      }
+    },
+    "A378581": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A378581.pdf",
+        "sha256": "4b298dad025a30c6a75ddedb0cab90f4fc1b6ebd4c0cb51556047c61e4666c78"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A378581.tex",
+        "sha256": "052a77db6ca48254b5165c23f8d315c8ca15885b05c706bbdf1b35bc7dbc28f4"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A378581.lean",
+        "sha256": "39a9eb55b1a3bd75d6a4293ed0fa963f13f6c028f04bb69f82ee27e193975dbf"
+      }
+    },
+    "A380056": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A380056.pdf",
+        "sha256": "c1652af1009c32fe0cf7fba190835018b170a90b22bced6cfa9ab6d801b68538"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A380056.tex",
+        "sha256": "721d5f76a7dd2fee9f6fc4c40db72f79b1cbf9cc5157480a2132d38bbd99df9d"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A380056.lean",
+        "sha256": "96809d90d447a83f694c5cb80072f307c42d0b21172c324eb11f0bedede9ac07"
+      }
+    },
+    "A380060": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A380060.pdf",
+        "sha256": "392fc177189d0607195a853b480ffb6a855052eeebdf0944e723b9bad45c0418"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A380060.tex",
+        "sha256": "75e81d30ce0371ea9d1d753ec577db2dd89318edb26d3680bd5646f4d8a41861"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A380060.lean",
+        "sha256": "be0300c1be8025012f384f68beae13e609148367e312e436de078ca6bc68701f"
+      }
+    },
+    "A380680": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A380680.pdf",
+        "sha256": "5a5f13705674c0823a2e285f6dc4dbf5d3d800b8f22233edc8a3ff4d98ed16dc"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A380680.tex",
+        "sha256": "a801f19440268806a0f97a59a8a8c84554e0b5b02d3ecac9a9bb2d526f2e39dc"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A380680.lean",
+        "sha256": "f158be4f03bd12ddbad0ab47784bcbff03acd173f3ab813a6225cfc4b539a5e9"
+      }
+    },
+    "A389474": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A389474.pdf",
+        "sha256": "646ec81fa6ef2bf938526344f46e01c1ca28c7a24f881bd6d8e3486b2e167abb"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A389474.tex",
+        "sha256": "7fd0bff203c335a520d1170fc0c614a621105e0687853e1e69486fbef0010290"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A389474.lean",
+        "sha256": "c12ebaed1d27c8a020472141a6ad041fddb0823e3ccb792e2db97e8a433182ec"
+      }
+    },
+    "A389475": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A389475.pdf",
+        "sha256": "9eac6226bac4b2131a3df5d4472852c280cdd867440fba659d7b356fb3a7edf4"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A389475.tex",
+        "sha256": "ff3ebf8100f226599a2a0a555055df94e9fc3708df4e0602a73721128c2ea540"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A389475.lean",
+        "sha256": "bb03dc2f8127c2f863b935818a883fe3355a334eedcdc4e01a51c822ac6097c1"
+      }
+    },
+    "A389536": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A389536.pdf",
+        "sha256": "4ba53e1d853d3cd96fd654918b6e4518d8d8a91d5f7860158d3dd30ecdb50c70"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A389536.tex",
+        "sha256": "c37af2630243cd75bea4c1f7fc2a0964a31caaef103b4e03130567d8ba292c11"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A389536.lean",
+        "sha256": "067abbf08d42fa75fa369c82bdcce8df26e45c2d67b62ca59a67218096b654fc"
+      }
+    },
+    "A389537": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A389537.pdf",
+        "sha256": "f700f035deb5d22faea42de1169830b0f4dffa8b3e9a1889746d69551becb78b"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A389537.tex",
+        "sha256": "64eb5bbc2a5bb12f2dd6ba10f9e3163aaf27f0a5e3efc5beabb19b9f3979352e"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A389537.lean",
+        "sha256": "22cb1472f872939b899ad081c62e168351cb97a2ddd1f44ad2f5bd12703fca0a"
+      }
+    },
+    "A389542": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A389542.pdf",
+        "sha256": "43a374c8f9e52e597c4fa801d86c7847db9519b3ba9700696479a18299df64ea"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A389542.tex",
+        "sha256": "9cffa337f48f72606c483f713045a496ebcbeeaf5a113415e5f350afe612a573"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A389542.lean",
+        "sha256": "8ea3c1df57ca873e8d865486d17b03ebc5798c71f4a5e6eaa6b07ebb01a38f6c"
+      }
+    },
+    "A392210": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A392210.pdf",
+        "sha256": "ed7112be3d14f3e151e44d0dd66bc9ed75559211431be480f8f9950f742d922a"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A392210.tex",
+        "sha256": "30c83c601acd3959e0397ce16c6dda69d0f756c81fe1ae487a95c3cb1e03f0de"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A392210.lean",
+        "sha256": "5c4ec242be4735bf49df2debb250e1a4440aa0117c334230bec37a8a1763894f"
+      }
+    },
+    "A393171": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A393171.pdf",
+        "sha256": "5d82e962694028e025c5500586be521b2dde33883afbacf94ea566c8aa698fd8"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A393171.tex",
+        "sha256": "658cfbbdd262f16f2e5b06a48a65f8c64b7f715345c22765dcf01d52003fc596"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A393171.lean",
+        "sha256": "e3de6cec3429ac796fb86deafa75c34c90b39d37f1340d169654ab7c0c81779e"
+      }
+    },
+    "A393172": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A393172.pdf",
+        "sha256": "3d391352848f690c21bfb21791120d37bca4db22a35e0cdb23788d8b92aa7837"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A393172.tex",
+        "sha256": "1515c59c0fda13fc3f5140965c6eaf8e3230e96963142304860c5e0f60d12663"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A393172.lean",
+        "sha256": "9f0d3ac32fac13ebb5c2ba5339ea585cab32812972ec740631b718eec5e95f88"
+      }
+    },
+    "A393856": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A393856.pdf",
+        "sha256": "69df3cbcd6a5e38b22ac1abb25517b5e3bca699383df5d5939381418fb66b36c"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A393856.tex",
+        "sha256": "4a33ebf81a31f4638f75bacfc4f8ef60743c901fade392ed34d79f4660ef26bf"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A393856.lean",
+        "sha256": "59bb4384976307072aa8ccf89cb6f9eb08936a2f08f03bd032e65bbf1e3b2722"
+      }
+    },
+    "A393857": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A393857.pdf",
+        "sha256": "5354318492e222bc196eddf5aaffafc74928a48c47cfc5b61285a5cc698f6d6e"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A393857.tex",
+        "sha256": "ecc800c20d25b05fdbfe84023f1aaf53218d5ef1f6d070d82c470997abc7b175"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A393857.lean",
+        "sha256": "950c180286bd92d3ae64b34cd7b4da977b976a64da98077e6554753ff0a0efaf"
+      }
+    },
+    "A393858": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A393858.pdf",
+        "sha256": "fd397c3a4766be592da64421e989a8fdab5322858d1974bcdef6947148f1cdfa"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A393858.tex",
+        "sha256": "835848b5338b18374fc17a803f450117f4d68e603a72edb8e70fca21bd7beb4e"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A393858.lean",
+        "sha256": "3e498a821d1a2583368dc57379d47cb24e5344c46ecd8c5d59a7da7079f6fbce"
+      }
+    },
+    "A393859": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A393859.pdf",
+        "sha256": "fd8e24c79823472f245466f51f16c279e0cc2dfd682196cf6cae92ed89a544eb"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A393859.tex",
+        "sha256": "333e276000287d7ed83a96ec49e6a405051e43cb2c5d8a6ac950554999fd17f6"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A393859.lean",
+        "sha256": "60b315566033503d3d82c0303d6928a69a0b62344a7588ab7f657dba7074da3a"
+      }
+    },
+    "A396093": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A396093.pdf",
+        "sha256": "da7984562387d72707492441cc634913e945ac7e1be52118239120efdec77c05"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A396093.tex",
+        "sha256": "5a9a932c2d18c4fd0d0d8e248cc4d53b3719f16a232298501e6248070e58c65d"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A396093.lean",
+        "sha256": "b254fcf7b82422e10401f0ed7288e439e3f6a8a8229f1568b0d4f245486460b9"
+      }
+    },
+    "A396099": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A396099.pdf",
+        "sha256": "8b3e3a4580fd89691804f4d1dcc9d9f49f523cca8d68e1ac36a9a9021c331d97"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A396099.tex",
+        "sha256": "daa6ddfd7cdec7303f9cd88f348525b6631f6347d3366918a6a28ef8397a2cdb"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A396099.lean",
+        "sha256": "eed565e3dca898a9dc230bf9d9963b81a76d42de6edf9d6d981a9200c9de5166"
+      }
+    },
+    "A396102": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A396102.pdf",
+        "sha256": "4d6d156db6a391b04ef37126b17906e038e48362d715740d5c70bc84ac25e4cf"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A396102.tex",
+        "sha256": "f77606a4ed9da98d59c10c77bf1071c1894fa8fcfaa7d2d7da6c63e79d7748ed"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A396102.lean",
+        "sha256": "7c0c813ab08f848f164464a174c150769753a43bc673b0093a0e775def38ae48"
+      }
+    },
+    "A396797": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A396797.pdf",
+        "sha256": "a05481fa99144465fc8ceb40d8ad497fb0412a4e74c4b127381b402b3c6bf773"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A396797.tex",
+        "sha256": "34172dbb87577c6e4042c58fc040ba48b5676d8319fdb59ac8b03987e1f88b6f"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A396797.lean",
+        "sha256": "f39b4bb2669e5b6c6bdd3ff40283fb300d99e3e68fad42f54d72282778e05999"
+      }
+    },
+    "A396798": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A396798.pdf",
+        "sha256": "3b01e39f352292f13da0fdde828472bc474dee4ea407c29919d0643df6113fb1"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A396798.tex",
+        "sha256": "33cf6ce859242b74869d7887b242fc203429cd640daf55a2672d13ff4f1fed70"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A396798.lean",
+        "sha256": "c13014b9a86cff6f252ef0a5c0b2db9e0e733e85cb4f76d6431431d0f6478979"
+      }
+    },
+    "A396807": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A396807.pdf",
+        "sha256": "8dec667b64339e6f4f8a5d1e47c31e25f4bea9981192070e5765db3b9097f1c7"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A396807.tex",
+        "sha256": "0a12f474e2be5f6b4778795905b3fb05f64b9b24653d7dbaba3c3140e16c49f9"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A396807.lean",
+        "sha256": "325ffd1994cb5801265fec81f09e500a7b559eab999aea0649b767d0673d234c"
+      }
+    },
+    "A396843": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A396843.pdf",
+        "sha256": "342f0d9fcdad08dd17a0e5439933c8458a57669af3ff90d2b415bb2ffe1cac25"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A396843.tex",
+        "sha256": "c8e56137d7d49425c626810c92984abd5d2b7b64c2b2e898d982226b9bb8b090"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A396843.lean",
+        "sha256": "4e4866f66eff18aea56a291f7bdaa344a5f1d131db2f577b740847ee0b47d96d"
+      }
+    },
+    "A396844": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A396844.pdf",
+        "sha256": "0702518963e9cb69affc6a0013c6f890a2390e7a7297fe054abe33b9a1044485"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A396844.tex",
+        "sha256": "c509709500b3a6fa4cea33561b27bfec5b8cabaa24b1173193ec88bd7137623e"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A396844.lean",
+        "sha256": "5bdbcfdf7aaa759e26271e5f54181c2fe1c6bae301bc39c3a9c68fdd04f7d9ca"
+      }
+    },
+    "A397588": {
+      "manuscript_pdf": {
+        "path": "manuscripts/A397588.pdf",
+        "sha256": "31ad905a11f76cdb8527841ebd55cb255756c0fbc59ef327854ef7089955192d"
+      },
+      "manuscript_tex": {
+        "path": "manuscripts/A397588.tex",
+        "sha256": "c5b3cb6a3133d8b7a60138247ece67b4d4bc0017c1446537885d50af946f6d87"
+      },
+      "lean_file": {
+        "path": "lean/Entries/A397588.lean",
+        "sha256": "608f4e395ea2a9a3659840c90100fa54713d68216332988c44a3248a33d1db49"
+      }
+    }
+  },
+  "sources_after": {
+    "AI_DISCLOSURE.md": "457fb3754e851f6aa2cae5c53de5d8140090f8566ea89df27c1b649cf275b1de",
+    "CITATION.cff": "360f25c3d9724bf0ac6a16a4dd3499e7c65206937d6a63eb295a25e2357e8fb6",
+    "INDEX.md": "85ad82ef95aa8ab23925cba8f44ad9de1028f8e2b4da813356ed6f44ae4f7425",
+    "README.md": "5754c1b3b2045a25abe8167d0374ea3e330b56ba16bfe7d1d40a7851057d1775",
+    "catalogue/dependency_map.json": "c883e4f4c4561f6ad9c8b949206a62a94e601ddc5586d7896d0a8e730ca6141d",
+    "catalogue/entries.json": "d21b915437389b10d4dadfd52e9af5d716026756fbeb82283a62f85744d6bae5",
+    "catalogue/original_entries.json": "c153afcb115c03f51c35403aeb6f54777042ea4e337e0f9f48725108a2203e7a",
+    "catalogue/recent_entries.json": "d7cc0f489bdf456133c74fe8a58b6e2b312baf397889b93411599068b21323a8",
+    "catalogue/second_entries.json": "f2cc3706107bf5188632bce91b8d98c28fb5b81c0fb79bfc93f2574f560d1467",
+    "catalogue/theorem_inventory.json": "775dcdbf31917d4a3d13df612cae2273bcc4be513e213c888c56fa84351d22f3",
+    "docs/COMBINED_V4_README.md": "303eb5c2f94e6545c89dac3371a56b50335a718fe981d8f9612752434704256f",
+    "docs/COVERAGE.md": "2e19a6a4f99956e6e4bf781b1b880e44ef89c885cdab59f4b8173d589a6541ee",
+    "docs/CUBIC_INDEPENDENT_REVIEW.md": "aa11d6c789818b93e0b38253e24af1ad7a35b88e481b997f31aaddf61547ef8e",
+    "docs/CUBIC_REVERSION.md": "7851c42e8b4c51a716a17a7525ef7714b436b5355e3353d99cbd559d52c00a6f",
+    "docs/DIFFERENTIAL_AND_MAHLER_PARITY.md": "2bc613b46a00e992f5b80bc0816cf0ca195485da447e6ee6f46f4d1839d2c6d2",
+    "docs/FINAL_COLLECTION_REVIEW.md": "435e74497670a7f47aff2527be6008c4a2981188d1e781bb34de4de0e0e3417f",
+    "docs/FINITE_VERIFICATION.md": "d6dcc8975e7b8d38a4394fb44b8dedda168acb767f58f137f3c7a136dcf7ca94",
+    "docs/FORMAL_REVIEW.md": "b98dc6575090097df7ccf3559c4a810ba9cf1d4c347e545861ee5d8f0099384b",
+    "docs/INTEGER_ITERATES_REVIEW.md": "e2863de77be47bdd2cfca5bd35c3905425cb1029d86d7165672bb1e02c9c0aa1",
+    "docs/INVERSE_ITERATE.md": "560880cc145cad471ccd0dbb238550d7a34e34aa03a6d7057f29f2d08ade0dd8",
+    "docs/PROVENANCE.md": "248cbdb0b8164ee605eaef7301b3cd179910971b4f35d26fe04a6036cb5e6236",
+    "docs/RATIONAL_PARITY_REVIEW.md": "a09372f35502dd52dffd07e11f3027519d9d8e5c80e28553362745295b77c251",
+    "docs/RELATED_CONJECTURES.md": "9b3a83d8eb40afda3153aae4a38bdc93265190424695ced3ddd7fa1d665e8bca",
+    "docs/ROUND2_COVERAGE.md": "364b6405a5b6cf3031df3d9354c80631801354fe7ce9f9ffc03d0daa336737ea",
+    "docs/ROUND2_REVIEW.md": "c6653fb0299f1ac83d423c199eef57c9a80d2b23f21c66cda446c080188c67c6",
+    "docs/ROUND3_COVERAGE.md": "9791f8422707211470d79a0cd1d371f2ab20afcaf32abec6e8052653fcc5b3f2",
+    "docs/ROUND3_ELEMENTARY_REVIEW.md": "295eae5355daf10646813da8553820ea4e80f922ff2fef9ad54d277c64a9eb6c",
+    "docs/ROUND3_INTEGRATION_REVIEW.md": "c7d1ee07b340d0230615593bd73c63840f3d51b54b685004ab77d35dffe269d4",
+    "docs/ROUND3_LACUNARY_INVERSE.md": "46ef4381fe598cbb27d88ef249daff332f195c220ae3811cc98ca831d76e7f2e",
+    "docs/ROUND3_LACUNARY_REVIEW.md": "7a73266e03f92eadb66584c6d78682ad28cd6768227bda90af38bdbe459d3b40",
+    "docs/ROUND3_SQUARE_REVERSION.md": "ee5f41c0bfde422b102707a9dd0db1bc8e2fdb5a31dce8a9313ef6f32faf0d00",
+    "docs/ROUND3_SQUARE_REVERSION_REVIEW.md": "578009a7222087813c2bd256ef5a1880b09ff0bab9b215b7fd4c379fcf4de0cd",
+    "docs/ROUND4_CATALAN_COMPOSITION.md": "f45355067ccc0f3fab4c0fa05430245841e4b4f3ef1aec822ffd4f521d185252",
+    "docs/ROUND4_CATALAN_INDEPENDENT_REVIEW.md": "3f8960c981892d2cba352827e3e546cac1e2e15a5ece46b980e39239647aede6",
+    "docs/ROUND4_COVERAGE.md": "061256852dcd6adcc9d3063f310bb8b6d61c31c09e7e8d3ed36872a0f338baf3",
+    "docs/ROUND4_EXP_COSINE.md": "2d321709732eb52c046f7987154c613e3f8d0eecaf15c71946863a053f5cc1ed",
+    "docs/ROUND4_EXP_COSINE_INDEPENDENT_REVIEW.md": "3e808fc9ed62e20acf6a341c15c1e7fed05212ca8da333a708c473651d56186c",
+    "docs/ROUND4_INTEGRATION_REVIEW.md": "27f4a0ce7ef54b4d7d4c59f111982dae84f11bc8299db4644efd25664f6dfc94",
+    "docs/ROUND4_NESTED_INDEPENDENT_REVIEW.md": "9e74d98bac716d1f1f7795f1ec2d0bcb04a428c9a2707a9a391e996ce7a4deec",
+    "docs/ROUND4_NESTED_REVERSION.md": "64d77fb8e72285c20ba781c75942391e754af0d9c46089250f888f48b7433ce2",
+    "docs/ROUND4_THETA_RATIONAL.md": "229928de03cbf321b80686a6db19a74fc85a99d987ef7f9f24e2ba54d2a619cc",
+    "docs/ROUND4_THETA_RATIONAL_REVIEW.md": "22fc2eb316dfd5af6d63b8dba3a7181a5eecaddb65c63ec611f82ecbca0294f1",
+    "docs/STIRLING_PERIODICITY.md": "76b2e934a6860de98c83261c986d963bd6f2495a8c225545cb764d12da4516bc",
+    "docs/THEOREM_SPEC.md": "d85261d277b9a900e6a2161f2da55202e3ea8acec2d21b886b415bebef7964db",
+    "docs/THETA_INDEPENDENT_REVIEW.md": "c8c683ef20436b10afb14a0e6945f987eb8c3ffcd365ba15e7d18cf3d6eff9bf",
+    "docs/THETA_SUBSTITUTION.md": "a5fb8b3d179b4b3a61d14d8d8324fe1d44e9765768c869ee2c554cabf284537c",
+    "lean/Consecutive.lean": "f0277a9befdf2cc3f70b278d89b6ca3e623c0653d7c5dcf22484b1e5b3ada342",
+    "lean/Consecutive/Acceptance.lean": "879ec5653dd4c52b27f19d70f080eff24904e1aeee39609768781103dd82b951",
+    "lean/Consecutive/Arithmetic.lean": "06d3ceadf894878ae2c7d170c15542cf439df6f2f1f65a7d0fa7fb00f8076138",
+    "lean/Consecutive/Basic.lean": "f8847e397da7a052c0a690197ef08367fdd088b60fe2eede3a8706cb71864f16",
+    "lean/Consecutive/Coefficients.lean": "05b922e0737ae6975b2a383fb868e50462a506cbe493bdbfc5725fb6bfae371f",
+    "lean/Consecutive/Construction.lean": "1defe4d157d8d5f111ee2e142b235aa6cbb5409683892fd834afa1718dc0ea0b",
+    "lean/Consecutive/IntegerIterates.lean": "71785797e56dadbddaceaace0e49938995907c80e7f80d5428a3487e9cb2d939",
+    "lean/Consecutive/Modular.lean": "f26c2715c46ae9877f27ef76f5d09c2cf1fce2c2e44cbfa9c2e9754c97d25f58",
+    "lean/Consecutive/Related.lean": "599322c04117e65ee7359ea1bb9939f428dccc873c794b11288dbd7a3847ff6b",
+    "lean/ContractChecks.lean": "152b951d3c77492db7dc49d17f0358ad50c654bcdf2be0aee7f1c956bb22796e",
+    "lean/Entries.lean": "867ee7a520eaecc9203a0bb78445260b67ef1bddbc1a702a8df4530f0dda6b3e",
+    "lean/Entries/A052895.lean": "198ae74be1aec15f138bf97a10634dcdc2b3e48097f428fcdfc0168018283693",
+    "lean/Entries/A064618.lean": "bda6a09cf77677bccee98fe345573262f10152f2a331f182157ea3096106659f",
+    "lean/Entries/A080253.lean": "b6e010f9fd4e61873e08e3f68705868febae235f3cc1c76c0d236746b148f03a",
+    "lean/Entries/A167137.lean": "1ebd85691c84b6721f97beb74f946d992c917d9723b82f013a78a69d9a664b27",
+    "lean/Entries/A195194.lean": "f23490bb505d15eb78cfc032745702e50daf23e344d24e5af8f2f3754a6ede08",
+    "lean/Entries/A305550.lean": "d034e67b064c8c47eda44ed63334328da0ecd66f8725aeef3914632e18e4be48",
+    "lean/Entries/A306082.lean": "96f4d19a0b01c418562f53f8767e2287ba0170a770bd136c41728341ed9347a7",
+    "lean/Entries/A354242.lean": "4cf255356753d9cefd072d42f4c4bd325265564e71390010f8305ce7cd92b596",
+    "lean/Entries/A378580.lean": "b03358b5da36e1b2ff69b9445045dc8c0f2a0bcc5aa83d2ba5ac05bd16c60776",
+    "lean/Entries/A378581.lean": "39a9eb55b1a3bd75d6a4293ed0fa963f13f6c028f04bb69f82ee27e193975dbf",
+    "lean/Entries/A380056.lean": "96809d90d447a83f694c5cb80072f307c42d0b21172c324eb11f0bedede9ac07",
+    "lean/Entries/A380060.lean": "be0300c1be8025012f384f68beae13e609148367e312e436de078ca6bc68701f",
+    "lean/Entries/A380680.lean": "f158be4f03bd12ddbad0ab47784bcbff03acd173f3ab813a6225cfc4b539a5e9",
+    "lean/Entries/A389474.lean": "c12ebaed1d27c8a020472141a6ad041fddb0823e3ccb792e2db97e8a433182ec",
+    "lean/Entries/A389475.lean": "bb03dc2f8127c2f863b935818a883fe3355a334eedcdc4e01a51c822ac6097c1",
+    "lean/Entries/A389536.lean": "067abbf08d42fa75fa369c82bdcce8df26e45c2d67b62ca59a67218096b654fc",
+    "lean/Entries/A389537.lean": "22cb1472f872939b899ad081c62e168351cb97a2ddd1f44ad2f5bd12703fca0a",
+    "lean/Entries/A389542.lean": "8ea3c1df57ca873e8d865486d17b03ebc5798c71f4a5e6eaa6b07ebb01a38f6c",
+    "lean/Entries/A392210.lean": "5c4ec242be4735bf49df2debb250e1a4440aa0117c334230bec37a8a1763894f",
+    "lean/Entries/A393171.lean": "e3de6cec3429ac796fb86deafa75c34c90b39d37f1340d169654ab7c0c81779e",
+    "lean/Entries/A393172.lean": "9f0d3ac32fac13ebb5c2ba5339ea585cab32812972ec740631b718eec5e95f88",
+    "lean/Entries/A393856.lean": "59bb4384976307072aa8ccf89cb6f9eb08936a2f08f03bd032e65bbf1e3b2722",
+    "lean/Entries/A393857.lean": "950c180286bd92d3ae64b34cd7b4da977b976a64da98077e6554753ff0a0efaf",
+    "lean/Entries/A393858.lean": "3e498a821d1a2583368dc57379d47cb24e5344c46ecd8c5d59a7da7079f6fbce",
+    "lean/Entries/A393859.lean": "60b315566033503d3d82c0303d6928a69a0b62344a7588ab7f657dba7074da3a",
+    "lean/Entries/A396093.lean": "b254fcf7b82422e10401f0ed7288e439e3f6a8a8229f1568b0d4f245486460b9",
+    "lean/Entries/A396099.lean": "eed565e3dca898a9dc230bf9d9963b81a76d42de6edf9d6d981a9200c9de5166",
+    "lean/Entries/A396102.lean": "7c0c813ab08f848f164464a174c150769753a43bc673b0093a0e775def38ae48",
+    "lean/Entries/A396797.lean": "f39b4bb2669e5b6c6bdd3ff40283fb300d99e3e68fad42f54d72282778e05999",
+    "lean/Entries/A396798.lean": "c13014b9a86cff6f252ef0a5c0b2db9e0e733e85cb4f76d6431431d0f6478979",
+    "lean/Entries/A396807.lean": "325ffd1994cb5801265fec81f09e500a7b559eab999aea0649b767d0673d234c",
+    "lean/Entries/A396843.lean": "4e4866f66eff18aea56a291f7bdaa344a5f1d131db2f577b740847ee0b47d96d",
+    "lean/Entries/A396844.lean": "5bdbcfdf7aaa759e26271e5f54181c2fe1c6bae301bc39c3a9c68fdd04f7d9ca",
+    "lean/Entries/A397588.lean": "608f4e395ea2a9a3659840c90100fa54713d68216332988c44a3248a33d1db49",
+    "lean/Hanna.lean": "02d63ef8766b380dc96b5c40c2e5a31cbb41af23a50b5158ca085bc555fe5b4f",
+    "lean/Hanna/Acceptance.lean": "6e40816f6ae48bc06cf1419c00cf3624b3401a5cfd7e58cb54abda4b56b5b209",
+    "lean/Hanna/BinaryDivisibility.lean": "135fc2ab84354db15cf539cbb077069f1a0356a9822ef223f7857b6ba731191e",
+    "lean/Hanna/BinaryWeight.lean": "6db40277cccfff4d3d5740a5dd58e0029f385235883e1a2ffbdea98e9e70da27",
+    "lean/Hanna/Canonical.lean": "96e894fc7e6a368edc04e10c46339331acffef112f32b1ec93472f3974fd3afe",
+    "lean/Hanna/Corollaries.lean": "6ba336bb5e44ff664e146efbb69872f0821d9cecb563fccfdb299c4cde81461b",
+    "lean/Hanna/Divisibility.lean": "ab96329b9eb33f27f6765fdd945b18e7f59235619dec7f169200acbd154e6dfb",
+    "lean/Hanna/ModSquare.lean": "fe5fe056a4218a3d1ead1c71fdfc481340712bf1be0c9bb968e66cb0759a2cde",
+    "lean/Hanna/Parity.lean": "7537944b09c8b6fb107ce75022cbcad714d7c4677e064ef91fb856bfb3ccdb35",
+    "lean/Hanna/PrimeExponent.lean": "d0f3c10213a928ddc5be03fe44dbc70cdb86fb3a1a876563bc8c38a1d78cb354",
+    "lean/Hanna/Recurrences.lean": "f5d8352cf432eb515905007d43c7869d9dde0144f08c6e3c9474a516e229f1e1",
+    "lean/Hanna/Related.lean": "23df0d2b12369a48b03417e67911de399a2117fc439d104ffe3641bd1d64f304",
+    "lean/Hanna/Related/ScaledInverse.lean": "0c1f5c702d279fac8b66c1e1c3f59abe197b30f730a875bb11c79038d6050440",
+    "lean/Hanna/Related/ScaledParity.lean": "c2b139df3ca35b982d8b3d4b8a6427fc8c4eddca71b77d96ad302535ecd3e3e9",
+    "lean/Hanna/Series/Basic.lean": "fe5948059309ed57c09f0c8db0e022a5e8c2848202562eae725ff9f835d0b906",
+    "lean/Hanna/Series/Construction.lean": "f4bdeaa4e5cce2ffe57bebe26148e5b826a78bd132125b03541e2b44e6ce9756",
+    "lean/Hanna/Series/Filtration.lean": "b1521801de0629c1b4444a1c6efbc924e541c8a57a4d3e36cb63f95aca2820e4",
+    "lean/Hanna/Series/Inverse.lean": "48917e1734625f78c598a7a6929162626a916fdbcd7d2a5d37c36f2be25fe118",
+    "lean/Hanna/Series/Triangular.lean": "8c74f1f494eadfcfda535bac804fd99526bbdf402483a95d898257f502cb45f2",
+    "lean/More.lean": "9dec7196144feaddee79f036ad232b968d9383646145552b39dbfcb4b2eeab9d",
+    "lean/More/Contracts.lean": "b9831ee388b2b496b50a7bc1f5ef9cf2fc1805780c0196055a11561fa9ca5766",
+    "lean/More/CubicConsequences.lean": "d58a1dadfa103ce149baf9f45b853cef68da0a2658163d19c5987daba42a7022",
+    "lean/More/CubicFrobenius.lean": "fd6063f053d2a5603c0f832a0d59ce0bcc929bc759dc088a7f4c3975f52e17d1",
+    "lean/More/CubicReversion.lean": "62901552a2faa906bdf94786d8db5f4f45c5b9fd6e3a3d1a24f8aafec35b7e11",
+    "lean/More/InverseIterate.lean": "5e08350a61d73c1b427c2ebeb8e8b9ff8f13166e0be73cafd38c9c22d503c51f",
+    "lean/More/PowerPeriodicity.lean": "00bc60aab2d86a65694e3552ac6a0c723a602ab9069823f53af87e5a0b678e03",
+    "lean/More/RationalParity.lean": "2f63e3afe954063e62b25dac769f044938887e4ed78895b3e4c97833123bba64",
+    "lean/More/StirlingNumbers.lean": "c823ceee359a589456924c0f22dd40d3051407e59ef9eebd15a66ed0df8ed209",
+    "lean/More/StirlingPeriodicity.lean": "1760bcb9ffc4c0287ac724f96fdd7498fb3891226bd0705b781067c7a32d092c",
+    "lean/More/StirlingTransform.lean": "cebda04d4c0b6fc577a4b085a5b512f133674747cbd43ca0530f35a3fada0abd",
+    "lean/More/TailPeriodicity.lean": "1433fa86551854b02f226a3e57b62466485ef1bd649de0a9488245cbf022eb60",
+    "lean/Related.lean": "b57efd388066f3e76c5aec823c9948bc9dccf41e134c709bd3afabc459cfd33f",
+    "lean/Round3.lean": "170ab473cf50d40957099a2aa02717e9afdf0e5a2a99da51054e082edf1c3a88",
+    "lean/Round3/Contracts.lean": "f19a1691ae0ffe7228c767aa69bd0b3dd4e4d13d0f7e97c48b1cab0683aea2d4",
+    "lean/Round3/DifferentialParity.lean": "00456e037a120c48b60b6096486bb0d0b38f5a5bdd3445ad3cc7c94d872bb6cf",
+    "lean/Round3/ElementaryContracts.lean": "3a690602557d8ae7c28e16487648bc6350840c01927c8fc9da374344232fe8b6",
+    "lean/Round3/LacunaryContracts.lean": "5da688d866eb13c4ebc3aa70168b20567b1d97cba97e9f183e0b3b8a8f2e659c",
+    "lean/Round3/LacunaryInverse.lean": "abc50f89cb31775a06fc8b993629a3e88df6e1f647ab4d3fd2a28b67e96d529e",
+    "lean/Round3/MahlerParity.lean": "739d49b2db028e3411e1bb6b374b37386710a3272bb5ef6d1f9db4fa31437ea5",
+    "lean/Round3/ModFour.lean": "fdb3d99291c889dbd9b614ad39c1b8f420aa3d861efb38ef0b04433f70e8ec7f",
+    "lean/Round3/SquareContracts.lean": "0399e43cda2ac54b16f25ada91121b994591d3897afebf6021f25f03f7f70675",
+    "lean/Round3/SquareReversion.lean": "13826214bfd2f3b57395cd271c50a4764229a4c62ab4bc38c728eb89ed7a1065",
+    "lean/Round3/ThetaContracts.lean": "9c0f514db84c4bc6cc0093149818359b4f3170d165b71bfd1622d9445d7eeec3",
+    "lean/Round3/ThetaSubstitution.lean": "27e0f3dedcf1bafbcea566075f61d037cc8af3c9a2a1f7824426700b85b18824",
+    "lean/Round4.lean": "258bcde6c31ce7319dafff745699fcf9f0a94be9799671665c220c77397f881b",
+    "lean/Round4/CatalanComposition.lean": "1c3e724f94ee7d46c9a5573634ad1dd950819bf52a3945eacfccfb24abc1f2f4",
+    "lean/Round4/CatalanContracts.lean": "6be71cb602506435b014b7e49fe06fccd642e1635c26f209c30f1b95a7ff1e00",
+    "lean/Round4/Contracts.lean": "a57d84c49003035d7af9030976a532d1bea3732076c8ca7aba184e353f31ed57",
+    "lean/Round4/ExpCosine.lean": "2bed864bc0c7fb683bb0077a039ac37233f96a867d571818c10f1febdcc721db",
+    "lean/Round4/ExpCosineContracts.lean": "b43235801f4345d277623949a7edb5ac1992b9a5800a7bdeae2eb8bda0ffdbc3",
+    "lean/Round4/NestedBinomial.lean": "9b6a2cf04f32fc55e725db19cd00ff94cc0a0d21a579381442a02cc28b1ec0eb",
+    "lean/Round4/NestedContracts.lean": "023f983eb52971d26ab76e7f5bbb3a246199cf3721898d15e8d0489f531dbe0f",
+    "lean/Round4/NestedReversion.lean": "0dd32e4d02ce4a48b2254e6182e13adfc441fe7d580dc89d37fb880345cfd248",
+    "lean/Round4/SquareComposition.lean": "94af591b99ba599888ef8800d31b196390657e3336bba51f85a3fd2982fe2b0a",
+    "lean/Round4/ThetaRational.lean": "3888b23af84152036a02ac4b9a39a21354480b4398576a121cc695393c4c2f7d",
+    "lean/Round4/ThetaRationalContracts.lean": "b869d0ea7ac540d7c58842d3db838869ba8e8699835270acf8ac6ab29d96d49d",
+    "lean/lake-manifest.json": "bc1a60e6355183dfb8efa78a5d49ddcdf2108c4dbc85a3ab9bcab1904054f3ea",
+    "lean/lakefile.toml": "3b4e6cfbf03806fbd1999d129085e447d83871a12565bcefc0c97a361194fc6f",
+    "lean/lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+    "manuscript/compositional_congruences.pdf": "1ff73fe09b05f57f64b20c65ec9e03bd89c754f690b1217905899aa4b840b677",
+    "manuscript/compositional_congruences.tex": "abe3d0eaa9db2f0b40d9af5c66f9fbbaf3b914cb81f7393bb72d98923889b201",
+    "manuscript/further_oeis_proofs.pdf": "5b68bd1bfc7d1c64428bd3e9d066775eb7873e0f4e4f52e6e636f691fc5c962e",
+    "manuscript/further_oeis_proofs.tex": "e37c0abdbeb06df531f17a8a16e27b87b91e6e7abc14cd2e2bd5a6859a458dbe",
+    "manuscript/more_oeis_proofs_and_corrections.pdf": "406dd6593325af4ef81b7ae519dd9888ef4ff1a8dd17028bbc183fec281368de",
+    "manuscript/more_oeis_proofs_and_corrections.tex": "5b9dd2c7d5ced36b45ca301e8e174e5be998d10b91e71a3a0d6e481a1a7b17f6",
+    "manuscript/six_more_oeis_proofs.pdf": "bd1e37b207bb8ef9241760bba2b9166ce86722718d2a9243752269c6dd9654fc",
+    "manuscript/six_more_oeis_proofs.tex": "3c32d5026a12ab5a7d288b044e3dd83fd93366f7da4c978996dbef0869fcdd5e",
+    "manuscripts/A052895.pdf": "29d5f92085e6bfb24c17af3cf7ad23ba5276dd5ec7b070f549ccee40b969bd61",
+    "manuscripts/A052895.tex": "a2684aca3b25846df25d94489aa1f47348476aa62110f10064cb800dd98ae7c3",
+    "manuscripts/A064618.pdf": "d6d544e2922f5a80fd49ae5778bc1d544111211a7e91508bbeabf9d1ed190843",
+    "manuscripts/A064618.tex": "62b3fcfccc44572c0a667e3f4fbdfe60c9b29a1310ea5337f8528651026346be",
+    "manuscripts/A080253.pdf": "1d5e93ae33c61e3e57e2fe01f544c6ee8ca4ac56ea3630dcb898d4aae38dc507",
+    "manuscripts/A080253.tex": "01618cebf3f67b435d7ec73b6599005638eb3a3e156e46e7567597a8e8402c08",
+    "manuscripts/A167137.pdf": "fdc06e1f0c54220dc17d637cde0c24b5aed35f260b1618d00fd3d7f4ce874279",
+    "manuscripts/A167137.tex": "f00470562de489ae8dc566cd399f79ceab374ae6ffd127783d69ad9e82ee13dc",
+    "manuscripts/A195194.pdf": "807b55bc8148c6fe12089f39fb9748772ff133e4d9bfe62246af38b052c9180a",
+    "manuscripts/A195194.tex": "89d1519da0eb49b896cc9fa3139d7742c289004e456c3d366e8301da78027ea2",
+    "manuscripts/A305550.pdf": "b7c298d5ce0222d334f480189ac5ed97eeaa737cf7f8004f37c18b3e072a7a08",
+    "manuscripts/A305550.tex": "0280d2ba222423efff8935ea80ec213e5c855e85d151f783cd376f31621c0d39",
+    "manuscripts/A306082.pdf": "eeb0929747390aed0354b80750e778b63eb240aaaa096d6a481a28c331fc7c0f",
+    "manuscripts/A306082.tex": "4b3bf653fe71711bcc1690e0c1d0ced30bbb0143cbc3aa87c1ef8294f92f0e1c",
+    "manuscripts/A354242.pdf": "cc130a07622d14d1da77a2ef9fa38e73242bb06416d972bd0df62eba768b16cc",
+    "manuscripts/A354242.tex": "7a6690b81bde039217ed4850a7650e4665dcb874ce4116ff2647a4ee632c44d6",
+    "manuscripts/A378580.pdf": "86b49d2b2877c24c0a42c93cfcea87773a440841a05969c1e4554fc10f773ac3",
+    "manuscripts/A378580.tex": "070855e0488efbfe3c4eeb89f3ecc49b3b1311018982f18a7f0108b504cf335b",
+    "manuscripts/A378581.pdf": "4b298dad025a30c6a75ddedb0cab90f4fc1b6ebd4c0cb51556047c61e4666c78",
+    "manuscripts/A378581.tex": "052a77db6ca48254b5165c23f8d315c8ca15885b05c706bbdf1b35bc7dbc28f4",
+    "manuscripts/A380056.pdf": "c1652af1009c32fe0cf7fba190835018b170a90b22bced6cfa9ab6d801b68538",
+    "manuscripts/A380056.tex": "721d5f76a7dd2fee9f6fc4c40db72f79b1cbf9cc5157480a2132d38bbd99df9d",
+    "manuscripts/A380060.pdf": "392fc177189d0607195a853b480ffb6a855052eeebdf0944e723b9bad45c0418",
+    "manuscripts/A380060.tex": "75e81d30ce0371ea9d1d753ec577db2dd89318edb26d3680bd5646f4d8a41861",
+    "manuscripts/A380680.pdf": "5a5f13705674c0823a2e285f6dc4dbf5d3d800b8f22233edc8a3ff4d98ed16dc",
+    "manuscripts/A380680.tex": "a801f19440268806a0f97a59a8a8c84554e0b5b02d3ecac9a9bb2d526f2e39dc",
+    "manuscripts/A389474.pdf": "646ec81fa6ef2bf938526344f46e01c1ca28c7a24f881bd6d8e3486b2e167abb",
+    "manuscripts/A389474.tex": "7fd0bff203c335a520d1170fc0c614a621105e0687853e1e69486fbef0010290",
+    "manuscripts/A389475.pdf": "9eac6226bac4b2131a3df5d4472852c280cdd867440fba659d7b356fb3a7edf4",
+    "manuscripts/A389475.tex": "ff3ebf8100f226599a2a0a555055df94e9fc3708df4e0602a73721128c2ea540",
+    "manuscripts/A389536.pdf": "4ba53e1d853d3cd96fd654918b6e4518d8d8a91d5f7860158d3dd30ecdb50c70",
+    "manuscripts/A389536.tex": "c37af2630243cd75bea4c1f7fc2a0964a31caaef103b4e03130567d8ba292c11",
+    "manuscripts/A389537.pdf": "f700f035deb5d22faea42de1169830b0f4dffa8b3e9a1889746d69551becb78b",
+    "manuscripts/A389537.tex": "64eb5bbc2a5bb12f2dd6ba10f9e3163aaf27f0a5e3efc5beabb19b9f3979352e",
+    "manuscripts/A389542.pdf": "43a374c8f9e52e597c4fa801d86c7847db9519b3ba9700696479a18299df64ea",
+    "manuscripts/A389542.tex": "9cffa337f48f72606c483f713045a496ebcbeeaf5a113415e5f350afe612a573",
+    "manuscripts/A392210.pdf": "ed7112be3d14f3e151e44d0dd66bc9ed75559211431be480f8f9950f742d922a",
+    "manuscripts/A392210.tex": "30c83c601acd3959e0397ce16c6dda69d0f756c81fe1ae487a95c3cb1e03f0de",
+    "manuscripts/A393171.pdf": "5d82e962694028e025c5500586be521b2dde33883afbacf94ea566c8aa698fd8",
+    "manuscripts/A393171.tex": "658cfbbdd262f16f2e5b06a48a65f8c64b7f715345c22765dcf01d52003fc596",
+    "manuscripts/A393172.pdf": "3d391352848f690c21bfb21791120d37bca4db22a35e0cdb23788d8b92aa7837",
+    "manuscripts/A393172.tex": "1515c59c0fda13fc3f5140965c6eaf8e3230e96963142304860c5e0f60d12663",
+    "manuscripts/A393856.pdf": "69df3cbcd6a5e38b22ac1abb25517b5e3bca699383df5d5939381418fb66b36c",
+    "manuscripts/A393856.tex": "4a33ebf81a31f4638f75bacfc4f8ef60743c901fade392ed34d79f4660ef26bf",
+    "manuscripts/A393857.pdf": "5354318492e222bc196eddf5aaffafc74928a48c47cfc5b61285a5cc698f6d6e",
+    "manuscripts/A393857.tex": "ecc800c20d25b05fdbfe84023f1aaf53218d5ef1f6d070d82c470997abc7b175",
+    "manuscripts/A393858.pdf": "fd397c3a4766be592da64421e989a8fdab5322858d1974bcdef6947148f1cdfa",
+    "manuscripts/A393858.tex": "835848b5338b18374fc17a803f450117f4d68e603a72edb8e70fca21bd7beb4e",
+    "manuscripts/A393859.pdf": "fd8e24c79823472f245466f51f16c279e0cc2dfd682196cf6cae92ed89a544eb",
+    "manuscripts/A393859.tex": "333e276000287d7ed83a96ec49e6a405051e43cb2c5d8a6ac950554999fd17f6",
+    "manuscripts/A396093.pdf": "da7984562387d72707492441cc634913e945ac7e1be52118239120efdec77c05",
+    "manuscripts/A396093.tex": "5a9a932c2d18c4fd0d0d8e248cc4d53b3719f16a232298501e6248070e58c65d",
+    "manuscripts/A396099.pdf": "8b3e3a4580fd89691804f4d1dcc9d9f49f523cca8d68e1ac36a9a9021c331d97",
+    "manuscripts/A396099.tex": "daa6ddfd7cdec7303f9cd88f348525b6631f6347d3366918a6a28ef8397a2cdb",
+    "manuscripts/A396102.pdf": "4d6d156db6a391b04ef37126b17906e038e48362d715740d5c70bc84ac25e4cf",
+    "manuscripts/A396102.tex": "f77606a4ed9da98d59c10c77bf1071c1894fa8fcfaa7d2d7da6c63e79d7748ed",
+    "manuscripts/A396797.pdf": "a05481fa99144465fc8ceb40d8ad497fb0412a4e74c4b127381b402b3c6bf773",
+    "manuscripts/A396797.tex": "34172dbb87577c6e4042c58fc040ba48b5676d8319fdb59ac8b03987e1f88b6f",
+    "manuscripts/A396798.pdf": "3b01e39f352292f13da0fdde828472bc474dee4ea407c29919d0643df6113fb1",
+    "manuscripts/A396798.tex": "33cf6ce859242b74869d7887b242fc203429cd640daf55a2672d13ff4f1fed70",
+    "manuscripts/A396807.pdf": "8dec667b64339e6f4f8a5d1e47c31e25f4bea9981192070e5765db3b9097f1c7",
+    "manuscripts/A396807.tex": "0a12f474e2be5f6b4778795905b3fb05f64b9b24653d7dbaba3c3140e16c49f9",
+    "manuscripts/A396843.pdf": "342f0d9fcdad08dd17a0e5439933c8458a57669af3ff90d2b415bb2ffe1cac25",
+    "manuscripts/A396843.tex": "c8e56137d7d49425c626810c92984abd5d2b7b64c2b2e898d982226b9bb8b090",
+    "manuscripts/A396844.pdf": "0702518963e9cb69affc6a0013c6f890a2390e7a7297fe054abe33b9a1044485",
+    "manuscripts/A396844.tex": "c509709500b3a6fa4cea33561b27bfec5b8cabaa24b1173193ec88bd7137623e",
+    "manuscripts/A397588.pdf": "31ad905a11f76cdb8527841ebd55cb255756c0fbc59ef327854ef7089955192d",
+    "manuscripts/A397588.tex": "c5b3cb6a3133d8b7a60138247ece67b4d4bc0017c1446537885d50af946f6d87",
+    "prior_work/ORIGINAL_README.md": "b58a08f634b109d29beb31e3c63141864c446aaebdd7c62a227d7dbf60534743",
+    "prior_work/hanna_congruences.tex": "2e8ac18428d43811e0c9f2f387beac81f54daf79b87e5af91098f8ff685a33df",
+    "prior_work/oeis_congruence_proofs_Dev_Goyal_v1.zip": "04f347b0e116a1c92cd7a1f21f38a37ae3dfb71c733dd5f55769accd0714489c",
+    "prior_work/oeis_proofs_complete_Dev_Goyal_v2.zip": "b28c6de12f53e862b670d37d79d8b5f11333ce3d7acd44e61cb27eb2b99dbc10",
+    "prior_work/oeis_proofs_complete_Dev_Goyal_v3.zip": "6a0cbeb94076a90e8938627a156ed4152f6cc3fd88546d0d2e29cd9331744d41",
+    "scripts/audit_axioms.py": "b01372d4ffa07cc3236ef641cc3beef90d0667ed755103fcee4cc2927d6ee89f",
+    "scripts/build_collection_index.py": "716980f2f52914780505e5a680827510c07b854e98c433869ba72d147a08f427",
+    "scripts/check_formalization.py": "7c6bf5dd92c9518ca2a304165806e37c4aa3b14829fbf781286ee185e995e1ce",
+    "scripts/check_manuscript_files.py": "2cef5c3787fd8008d98a03e3a022ec03da0107676591b0d059a4d9dbb9a62ad8",
+    "scripts/package_release.py": "0b991aac999e1e568c1e418a43849fe47b714a98f152fe267f2df495ea6fc798",
+    "scripts/verify_catalan_composition.py": "334b68315bc2102c1611240c9d2a0277facd13c094baeee904f69da48964b9fc",
+    "scripts/verify_coefficients.py": "69d821a1d06580023cbe6f1d887c27bb1eb5d154256584efeb0d761dfa50dafc",
+    "scripts/verify_cubic_reversion.py": "737c44ade3fac00b40bc732c1cd2334d56643ea85d93334613d30498a5e3a84b",
+    "scripts/verify_differential_mahler.py": "51e1c1c7cc99f77f340995cbd4b0a38f49658277b15c71b919fc75f319723e08",
+    "scripts/verify_exp_cosine.py": "6226efa273bf64cb05cfd02a1f3da625be17db06fe4596abeb5a3b62577f3d21",
+    "scripts/verify_final_collection.py": "aeabee3dd5fccf3933636300dc06c1501d2b62e694532442fc217e3ad664af47",
+    "scripts/verify_hanna_congruences.py": "b8c3d50ead5c1cba1223ba235ad8368caed1d5f24eaf5c2bebe38d95db5162a2",
+    "scripts/verify_lacunary_inverse.py": "58df0ef7b4c766e010bc21256f77801fe74b0d0594fdc132acf8daca5db6a2d4",
+    "scripts/verify_nested_reversion.py": "bb0ac4685565c5ac5205b6774bb1bdaedc44b95c5c243feb43a618c1a48a134b",
+    "scripts/verify_rational_parity.py": "c5bdffb2d1bfad5687c8a34b486c00b2187e8a27ed3a5fc15e59644270400b89",
+    "scripts/verify_square_reversion.py": "3ac3ab9521f827ebcfe3436946d5f8eba21148aaaa33ae794061738ddc4b01ca",
+    "scripts/verify_stirling_periodicity.py": "4c97c45ceef5f419cc720af1bba90e6de943d0784d403ba6af6bb82425d66d64",
+    "scripts/verify_theta_rational.py": "6fb726ac3764c2838ff0fb5a0b11c5b18d334ab3a0e50bba045cd3c635eed140",
+    "scripts/verify_theta_substitution.py": "f42276f6fd3e6f7d7399ccefec6dd9528cd1eb308a5394fb56d794d0643b4bb6",
+    "tests/check_inverse_iterate.py": "0d066e0467862014cef0bd31801ac840c7067082aeb02abcdecde0f6d12ec1c6",
+    "tests/test_audit_axioms.py": "75d8e381633b6e59bc0d6fcc3324398addfad8ec328e56f3b229562969a387a4",
+    "tests/test_validation_requirements.py": "6d09185a545829b67393d890cd8489825f3ed01727cfd8ada41a16109f12b26f",
+    "tests/test_verify_coefficients.py": "68a254d66e453a0592e9cd3ce9497fce9341892194df705515d5985222565b74",
+    "third_party/mathlib/Apache-2.0.txt": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+    "third_party/mathlib/NOTICE.md": "6afd6a4ec1d25b3a209447497c03bd7927c3e352ea9e59f1491c20718a569008",
+    "validation/catalan_composition_numeric.json": "ed79298634367918d06dc2e156cdab29f2bdacd159cb1d1ea67373486882b602",
+    "validation/consolidation_baseline.json": "18f002efa5f66a8283e3dcb2309fd457575c94830a2bc4408ff4ba2dfefc9a4c",
+    "validation/cubic_reversion_numeric.json": "960c812f317eb21861f78147e18abf3c19b64209205e513d0819e406521a325e",
+    "validation/differential_mahler_numeric.json": "8f8adbc1fe00a3febe56af7430757eb6ccfcea83c63a4f165a125198b372f557",
+    "validation/exp_cosine_numeric.json": "7a6ac4e4178b6bc34517ce3c64018a2fc2bd685d9f13dc579504f578f1659a36",
+    "validation/final_theorems.json": "c6f4d4c4d3427e74dbdb578202a88a0afbe137872137b9febbea0669c427865f",
+    "validation/inverse_iterate_checks.json": "7c66ec2cb248e303f02a57a7a4f16faf1c00cc3836b8418152f6887eb1b53105",
+    "validation/lacunary_inverse_numeric.json": "c406c579bb96b63e2e7f97241e6d9ef7f90e8584f5297c68e87b894d1a2f221d",
+    "validation/manuscript_checks.json": "53ed8ce5b35c432c3ee9eac2e191ea30f14bee752189741b21d59bee7c21e075",
+    "validation/nested_reversion_numeric.json": "c7a8f392a5e984b48ef541324aed7ca3f64fb8173617e32e13397beaeae59d4c",
+    "validation/rational_parity_numeric.json": "35068cb6152df566722c17cbb73c9ed540c52689db904cc9fddb4304e42f07dd",
+    "validation/round3_elementary_axioms.json": "3061b8aed05b76146fbbbade7474a4f92aa741fd15c085fe0212b9ecfee41992",
+    "validation/round3_elementary_axioms.log": "af6a0a0c589d706970d06aaa16f4e0de823b669f9aa566ff2b7d69e916f85008",
+    "validation/round3_elementary_endpoints.json": "3515152146688e2691ccd2f7d7d943ebc95787b032e698a26e7fbc152fbfa7cc",
+    "validation/round3_lacunary_endpoints.json": "7759b2a7e9346ddb4bd8044af29ad1b46a3e1ec962a504ca0adf0fe9d2b715f6",
+    "validation/round3_lacunary_review_axioms.json": "6d79ea1452b24e301e58cfe022aee8de68bda83543a9b506a661b80a1fdc34e6",
+    "validation/round3_lacunary_review_axioms.log": "92804b2148477e743d541300f545a71382765c7284c739248e5f8e9237302262",
+    "validation/round3_square_axioms.json": "e5a9c5990e7eb244ffdcdb0a50b98f5faea1f3850252b46254ccba8ce28a6ce8",
+    "validation/round3_square_axioms.log": "fc28aa8e547abc6ccb94dd61b2d93f3ee306c13053482a212000d5ceaa62c205",
+    "validation/round3_square_endpoints.json": "59c3100bf33d63de5de8e5ced1a1bfc11b37b4990751592e8f6682ef816560e9",
+    "validation/round3_theta_endpoints.json": "88e85bd2d06ef4213c9fad1b1b7f2b6f228f45b3a539130ecaa9938f05452113",
+    "validation/round4_catalan_endpoints.json": "e8f3e2fd5c47bf378e8d760ae2e372ccc2f4d98b39b23c41990f6506d177e9c7",
+    "validation/round4_exp_cosine_endpoints.json": "d3c662ff7f4a472bf361317045e346368cdbc225ac279dc2011cff58b4fdc6e7",
+    "validation/round4_nested_endpoints.json": "ef6a533fff86728b68651a07f96e31cb06064ca20d2215363775ecdecfe3cd98",
+    "validation/round4_theta_rational_endpoints.json": "41f1e5a762e6667d19c1ce2c87ed10011b0ddb23f54cf5bd2f19dd51d34b6780",
+    "validation/square_reversion_numeric.json": "e379a53074be132f8ea6a510692d1f25949f67442553aca91337a4c8bb8f33ca",
+    "validation/stirling_numeric.json": "16c596e064c6383be7404cd40c62c63491371febb8686c63a7814046b11ebdc8",
+    "validation/theta_rational_numeric.json": "648eb01d08f85f0db5dcc1749c749fa79a2b28c1702dc8398fa5440669abe6c1",
+    "validation/theta_substitution_numeric.json": "9956ff3cca417d9a8a673df0fb887ec4f963440fab0801110419e7d16ba5f347"
+  },
+  "completed_utc": "2026-10-24T18:52:39+00:00"
+}

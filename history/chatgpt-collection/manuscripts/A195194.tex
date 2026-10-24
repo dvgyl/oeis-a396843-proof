@@ -1,0 +1,251 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=26mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,longtable}
+\usepackage{microtype,multicol}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+\allowdisplaybreaks[1]
+\clubpenalty=10000
+\widowpenalty=10000
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\N}{\mathbb N}
+\newcommand{\F}{\mathbb F}
+\newcommand{\ps}[1]{#1[[x]]}
+\newcommand{\Rev}{\operatorname{Rev}}
+\newcommand{\rev}{^{\langle-1\rangle}}
+\newcommand{\Plus}{\operatorname{Plus}}
+\newcommand{\Minus}{\operatorname{Minus}}
+\newcommand{\coeff}[2]{[x^{#1}]#2}
+\newcommand{\E}{\mathcal E}
+\Urlmuskip=0mu plus 1mu
+\hypersetup{pdftitle={A195194: Parity of an infinite nested reversion},pdfauthor={Dev Goyal},pdfsubject={Separate manuscript with AI disclosure and Lean proof map}}
+\title{A195194\\[4pt]\large Parity of an infinite nested reversion}
+\author{Dev Goyal}
+\date{24 October 2026}
+\begin{document}
+\maketitle
+\begin{center}
+\fbox{\begin{minipage}{0.9\linewidth}\small
+\textbf{AI disclosure.} ChatGPT (OpenAI) generated the mathematical arguments,
+Lean proofs, and this manuscript in response to Dev Goyal's requests.
+Dev Goyal is the sole human author. The source sequence and conjecture or
+observation are credited to Paul D. Hanna.
+\textbf{Independent human review is pending.}
+\end{minipage}}
+\end{center}
+\begin{abstract}
+For arbitrary weights in a commutative ring, we construct a unique infinite family of normalized nested reversions and prove finite-depth coefficient stabilization. For weights $1,2,3,\ldots$, the first tail has odd coefficients exactly at powers of two. This is a statement about formal series, independent of analytic convergence.
+\end{abstract}
+
+\section{Source, notation, and scope}
+
+The source is Paul D. Hanna's OEIS entry A195194 \cite{oeis194},
+retrieved on 24 October 2026. Its initial sequence index is 1.
+We also retain the formal zero constant coefficient at index zero.
+
+All series are formal. The set $\N$ includes zero, and $[x^n]U$ denotes a
+coefficient. A normalized series is $x+O(x^2)$; $O(x^r)$ means divisibility
+by $x^r$, over any coefficient ring used below. We write $U\circ V=U(V(x))$
+only when $V(0)=0$. Compositional inversion, denoted $\Rev(U)$ or $U\rev$,
+is distinct from multiplicative inversion of a unit. Congruences are
+coefficientwise; ordinary products and compositional iterates are distinct.
+
+\section{Formal algebra used in the proof}
+
+\begin{lemma}[Triangular construction]\label{lem:construction}
+Let $K$ be a commutative ring. Suppose $\Phi$ preserves normalized series
+and improves agreement by one degree:
+\[
+ G-H=O(x^r)\quad\Longrightarrow\quad
+ \Phi(G)-\Phi(H)=O(x^{r+1})\qquad(r\ge2).
+\]
+Then $\Phi$ has a unique normalized fixed point. The same conclusion holds
+for a family of series if the degree-$n$ equations, at every family index,
+determine the degree-$n$ coefficients from strictly lower degrees.
+\end{lemma}
+
+\begin{proof}
+The degree-$n$ coefficient of $\Phi(G)$ depends only on coefficients of
+$G$ below degree $n$. Fix the constant and linear coefficients, and then
+define every later coefficient successively. This gives a fixed point;
+the same induction proves uniqueness. For a family, perform the induction
+on degree simultaneously at every family index. The same induction applies with only the constant coefficient prescribed,
+provided agreement is improved starting at degree one. It also applies to
+an operator on all series when agreement is improved starting at degree zero.
+For the operators used in this paper, the recurrence requires
+only ring operations, so it also constructs integral solutions when
+$K=\Z$. Equivalently, iterating $\Phi$ from any normalized initial series
+fixes one further coefficient at each step.
+\end{proof}
+
+\begin{lemma}[Inversion and transport]\label{lem:inverse}
+A normalized series over any commutative ring has a unique normalized
+two-sided compositional inverse. A constant-one series has a unique
+multiplicative inverse with constant coefficient one. These inverses and
+valid composition commute with coefficient ring homomorphisms.
+Normalized compositional inversion preserves agreement modulo $x^r$.
+\end{lemma}
+
+\begin{proof}
+For normalized $G$, the degree-$n$ equation in $G(H)=x$ determines $h_n$
+with multiplier one from earlier coefficients. Construct a right inverse
+$J$ of $H$. Associativity gives
+$G=G\circ(H\circ J)=(G\circ H)\circ J=J$, so $H\circ G=x$ as well.
+The same associativity argument proves uniqueness. Multiplicative
+inversion follows similarly from the coefficient recurrence for $UV=1$.
+
+Each coefficient of a valid composition is a finite polynomial in the
+coefficients of its arguments. Ring homomorphisms preserve these
+polynomials and the defining equations, so uniqueness gives transport of
+inversion. If $G-H=O(x^r)$, composition with any normalized series
+preserves that agreement. Composing with the respective inverses then
+shows $\Rev(G)-\Rev(H)=O(x^r)$.
+\end{proof}
+
+\begin{lemma}[Binary series and doubling]\label{lem:binary}
+There is a unique normalized integral series $C=x+C^2$. Its reduction
+modulo two is
+\[
+ P(x)=\sum_{k\ge0}x^{2^k}.
+\]
+For series $U,V$ over $\Z/4\Z$, the equality $2U=2V$ is equivalent to
+equality of their reductions modulo two.
+\end{lemma}
+
+\begin{proof}
+The operator $G\mapsto x+G^2$ improves agreement because
+$G^2-H^2=(G-H)(G+H)$ and normalized $G+H$ has zero constant coefficient.
+In characteristic two, $U(x)^2=U(x^2)$ for every formal series. Thus the
+normalized equation $U=x+U^2$ forces the coefficient at one to be one,
+every higher odd-index coefficient to be zero, and the coefficient at
+$2m$ to equal the coefficient at $m$. This gives exactly $P$.
+
+For scalar residues modulo four, $2u=2v$ holds precisely when $u$ and $v$
+have the same parity. Apply this statement coefficientwise. In
+particular, this argument does not cancel a factor of two in a ring in
+which two is a zero divisor.
+\end{proof}
+
+\section{A195194: infinite nested reversion}
+
+The title of A195194 is an infinite sequence of nested reversions
+\cite{oeis194}. It is useful to construct the more general family with
+arbitrary weights before specializing to $1,2,3,\ldots$.
+
+\begin{theorem}[Canonical nested tails]\label{thm:tails}
+For every sequence $(w_j)_{j\ge0}$ in a commutative ring $K$, there is a
+unique family of normalized series satisfying
+\[
+ F_j=\Rev(x-w_jxF_{j+1})\qquad(j\ge0). \tag{1}
+\]
+If the finite nests are defined by $F_j^{[0]}=x$ and
+\[
+ F_j^{[d+1]}=\Rev(x-w_jxF_{j+1}^{[d]}),
+\]
+then $F_j^{[d]}-F_j=O(x^{d+2})$ for every $d,j\ge0$.
+\end{theorem}
+
+\begin{proof}
+The right inverse identity in (1) is equivalent to
+\[
+ F_j=x+w_jF_j\,F_{j+1}(F_j). \tag{2}
+\]
+Both factors in the nontrivial term start in degree one. Consequently its
+degree-$n$ coefficient depends only on coefficients below degree $n$ of
+$F_j$ and $F_{j+1}$. Lemma~\ref{lem:construction} constructs the unique
+family over $K$. No boundary condition at infinity is assumed.
+Since $x-w_jxF_{j+1}$ is normalized, Lemma~\ref{lem:inverse} turns the
+right inverse equation into both inverse identities, proving (1).
+
+At depth zero both the approximation and the true tail start with $x$,
+so they agree modulo $x^2$. Multiplication by $x$ improves the agreement
+of their next tails by one degree, and compositional inversion preserves
+that improved agreement. Induction on $d$ gives the stated bound. Thus
+the finite nested expressions agree with the canonical family through
+degree $d+1$; their formal infinite limit is unambiguous.
+\end{proof}
+
+\begin{theorem}[A195194 parity]\label{thm:nestedparity}
+Let $w_j=j+1$, and let $A=F_0$ in Theorem~\ref{thm:tails}, over $\Z$.
+For every $n\in\N$,
+\[
+ [x^n]A\text{ is odd}\quad\Longleftrightarrow\quad
+ n=2^k\text{ for some }k\in\N.
+\]
+\end{theorem}
+
+\begin{proof}
+Map the family to $\F_2[[x]]$ and write a bar for reduction. The second
+weight is two, so (2) gives $\overline F_1=x$. The first weight is one,
+and therefore
+\[
+ \overline A=x+\overline A\,\overline F_1(\overline A)
+             =x+\overline A^2.
+\]
+Lemma~\ref{lem:binary} identifies $\overline A$ with $P$. The conclusion
+also holds at $n=0$, where the coefficient is zero and the index is not a
+power of two.
+\end{proof}
+
+The formal implementation constructs the simultaneous family using the
+coefficient ring $\N\to K$, with its shift endomorphism. Evaluation at an
+index recovers (2). The theorem \texttt{source\_existence\_uniqueness}
+states the general source result using both inverse identities;
+\texttt{approximation\_agrees} supplies the finite-depth bound, and
+\texttt{a195194\_parity} gives the infinite parity statement. All are in
+\texttt{Round4.NestedReversion}.
+
+
+\section{Separate Lean proof and checked scope}
+
+The entry file is \nolinkurl{lean/Entries/A195194.lean}. Its explicit
+theorem statements and proof terms use the namespace
+\nolinkurl{FinalCollection.A195194}. The complete imported implementations
+and their shared mathematical dependencies are included in the collection.
+The following local theorem names give the proof map:
+
+\begin{multicols}{2}\raggedright\begin{itemize}\setlength{\itemsep}{2pt}\setlength{\parsep}{0pt}
+\item \nolinkurl{normalized_source}.
+\item \nolinkurl{all_tails_normalized}.
+\item \nolinkurl{all_tails_source}.
+\item \nolinkurl{nested_definition_unique}.
+\item \nolinkurl{first_tail_reversion}.
+\item \nolinkurl{finite_nest_coefficients}.
+\item \nolinkurl{binary_equation}.
+\item \nolinkurl{exact_parity}.
+\item \nolinkurl{arbitrary_weights_unique}.
+\item \nolinkurl{arbitrary_finite_depth}.
+\end{itemize}\end{multicols}
+
+The main implementation module is \nolinkurl{Round4.NestedReversion}.
+The catalogue records the full original endpoint names and the new entry
+theorems. The project pins Lean 4.19.0 and Mathlib revision
+\nolinkurl{c44e0c8ee63ca166450922a373c7409c5d26b00b}. The collection
+report records source recompilation and transitive axiom checks. Accepted
+axioms are propositional extensionality, classical choice, and quotient
+soundness. All index conclusions above are unbounded; exact finite
+coefficient checks in the package provide separate corroboration.
+
+\paragraph{Limits and status.}
+Convergence means coefficient stabilization of formal series, with no analytic assertion. The source starts at n=1.
+The manuscript consolidates completed results; it does not assert global
+novelty, exclusive priority, peer review, OEIS acceptance, or a new submission.
+Standard algebraic ingredients are not claimed as new discoveries.
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{oeis194}
+Paul D. Hanna, \emph{OEIS A195194}, 11 September 2011.
+\url{https://oeis.org/A195194}. Retrieved 24 October 2026.
+\end{thebibliography}
+\end{document}

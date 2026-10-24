@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "python": "3.12.14",
+  "purpose": "Finite corroboration only; the all-index proofs are verified in Lean.",
+  "source_access_date": "2026-10-24",
+  "A397588": {
+    "source": "https://oeis.org/A397588",
+    "offset": 1,
+    "source_prefix_terms_matched": 20,
+    "literal_differential_equation_indices": [
+      0,
+      500
+    ],
+    "parity_indices": [
+      0,
+      500
+    ],
+    "divisibility_by_three_indices": [
+      2,
+      500
+    ],
+    "odd_indices": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ]
+  },
+  "A389536": {
+    "source": "https://oeis.org/A389536",
+    "offset": 1,
+    "source_prefix_terms_matched": 34,
+    "literal_composition_equation_coefficients": [
+      0,
+      81
+    ],
+    "complete_residue_pattern_indices": [
+      2,
+      2050
+    ],
+    "catalan_comparison_indices": [
+      2,
+      2050
+    ],
+    "residue_two_indices": [
+      2,
+      3,
+      5,
+      9,
+      17,
+      33,
+      65,
+      129,
+      257,
+      513,
+      1025,
+      2049
+    ]
+  }
+}

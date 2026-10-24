@@ -1,0 +1,615 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=26mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,longtable}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Further OEIS proofs and formalizations},pdfauthor={Dev Goyal},pdfsubject={AI-generated proofs, Lean 4 formalization, and precise prior-art accounting}}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\N}{\mathbb N}
+\newcommand{\F}{\mathbb F}
+\newcommand{\ps}[1]{#1[[x]]}
+\newcommand{\ord}{\operatorname{ord}_x}
+\title{Further OEIS proofs and formalizations\\\large Expanded proof package, version 2}
+\author{Dev Goyal}
+\date{24 October 2026}
+\begin{document}
+\maketitle
+
+\begin{center}
+\fbox{\begin{minipage}{0.90\linewidth}
+\textbf{AI disclosure and review status.}
+ChatGPT (OpenAI) generated the new proofs, exposition, Lean formalization,
+verification programs, and AI-assisted reviews in response to Dev Goyal's
+requests. Dev Goyal is the sole human author and initiated the work.
+\textbf{Independent human review is pending.} Upstream code and earlier
+mathematical results are credited separately. This document does not claim
+OEIS acceptance, peer review, or exclusive priority.
+\end{minipage}}
+\end{center}
+
+\begin{abstract}
+We give formally checked proofs of seven statements labeled as conjectures
+in four retrieved OEIS entries: two parity assertions for A396093, two
+congruences each for A389474 and A389475, and the coefficient congruence
+for A396102. Two of the cubic assertions are direct instances of the
+standard Frobenius identity. The sequence-specific arguments give a complete
+period-ten parity classification, an identity for an entire square modulo
+nine, and a general family of inverse-iterate congruences. We construct the
+implicit integer series and prove their source equations and uniqueness.
+We also formalize a totient-period theorem for all factorial-weighted
+Stirling transforms and seven named applications. The latter are already
+covered by Danesh's 2026 theorem, with a stronger Carmichael bound, and
+are not counted as newly solved open problems. The archive retains all
+previous proofs, the previous manuscript, and the previous ZIP verbatim.
+\end{abstract}
+
+\section{Scope, notation, and historical status}
+
+All series in this paper are formal. A normalized series means
+$U=x+O(x^2)$. We distinguish ordinary powers $U^k$ from compositional
+iterates $U^{\circ k}$, with $U^{\circ0}=x$. A congruence of series is
+coefficientwise, and $\N$ includes zero. In particular, no convergence
+assumption is required for any statement below.
+
+The source pages were consulted on 24 October 2026. The four entries in
+Table~\ref{tab:new} explicitly labeled the indicated statements as
+conjectures \cite{oeis093,oeis474,oeis475,oeis102}. That label is evidence
+about the retrieved entry, not a guarantee that no proof exists elsewhere.
+Our contribution is a reproducible proof package with exact mathematical
+scope. We make no global novelty claim. The two Frobenius consequences
+are standard algebra applied to the stated sequences.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}lp{0.68\linewidth}r@{}}
+\toprule
+Entry & Statements addressed & Count\\
+\midrule
+A396093 & Even coefficients at even indices; exact condition for evenness at odd indices & 2\\
+A389474 & Square coefficients above degree three vanish modulo nine; cube-power congruence modulo three & 2\\
+A389475 & Cube substitution and the associated square identity modulo three & 2\\
+A396102 & Every positive-index coefficient is one modulo three & 1\\
+\bottomrule
+\end{tabular}
+\caption{Seven newly added proofs of statements marked conjectural in the retrieved entries.}\label{tab:new}
+\end{table}
+
+The seven additional periodicity applications in Section~\ref{sec:stirling}
+have a different historical status. Danesh's Theorem~4.1 and
+Corollary~4.2 already imply them \cite{danesh}. They are included as
+formalizations and recovered corollaries of known mathematics. The package
+does not inflate its open-problem count by treating those seven cases,
+their general theorem, or its intermediate lemmas as new discoveries.
+
+\section{A396093: a complete parity classification}
+
+The original definition is
+\[
+B(x)=\frac{x}{(1-x)^2},\qquad A=B\circ B\circ B,
+\qquad a_n=[x^n]A\in\Z.
+\]
+The offset is zero, so $a_0=0$. These definitions, rather than a conjectured
+coefficient pattern, are the starting point of the Lean construction.
+
+\begin{theorem}\label{thm:parity}
+For every $n\ge0$,
+\[
+a_n\equiv
+\begin{cases}
+1\pmod2,&n\equiv1,3,7,9\pmod{10},\\
+0\pmod2,&\text{otherwise}.
+\end{cases}
+\]
+Consequently $a_{2n}$ is even for every $n\ge0$. For $n\ge1$,
+\[
+a_{2n-1}\text{ is even}
+\quad\Longleftrightarrow\quad n\equiv3\pmod5
+\quad\Longleftrightarrow\quad n=5k-2\text{ for some }k\ge1.
+\]
+\end{theorem}
+
+\begin{proof}
+Reduce coefficients to $\F_2$. In characteristic two,
+$B(x)=x/(1+x^2)$. If $T=P/D$ has zero constant coefficient and $D(0)=1$,
+then
+\[
+B(T)=\frac{PD}{D^2+P^2}.
+\]
+Every denominator has constant coefficient one and is therefore an
+invertible formal series. Applying this identity gives
+\[
+\begin{array}{c|c|c}
+j & \text{numerator of }B^{\circ j} & \text{denominator}\\ \hline
+1 & x & 1+x^2\\
+2 & x+x^3 & 1+x^2+x^4\\
+3 & x+x^7 & 1+x^2+x^4+x^6+x^8.
+\end{array}
+\]
+Multiplication of the last numerator and denominator by $1+x^2$ gives
+the exact identity
+\begin{equation}\label{eq:parityrational}
+A(x)(1+x^{10})=x+x^3+x^7+x^9\qquad\text{in }\ps{\F_2}.
+\end{equation}
+Since $(1+x^{10})^{-1}=\sum_{j\ge0}x^{10j}$ in this ring,
+\eqref{eq:parityrational} yields precisely the four stated residue classes.
+Substitute $2n$ and $2n-1$ to obtain the two original assertions. For
+the latter, $2n-1$ is the omitted odd residue class $5$ modulo ten
+exactly when $n\equiv3\pmod5$.
+\end{proof}
+
+The formal proof works with the integral series $x(\sum_{n\ge0}x^n)^2$
+and its actual third composition. It proves that reduction commutes with
+composition. The denominator cancellation in
+\eqref{eq:parityrational} uses a constructed unit inverse; it does not
+assume cancellation in an arbitrary ring. The final Lean statements
+retain the source's $n\ge1$ and $k\ge1$ restrictions where subtraction
+of natural numbers occurs.
+
+\section{The two cubic series: existence before congruences}
+
+\subsection{A canonical integral family}
+
+\begin{theorem}\label{thm:cubicexist}
+For every $s\in\Z$, there is a unique normalized series
+$R_s\in\ps{\Z}$ satisfying
+\begin{equation}\label{eq:cubicfamily}
+R_s(3x^2)=2x^2+R_s(x)^2+2sR_s(x)^3.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For any normalized integral series $U$, define its residual by
+\[
+E_s(U)=U^2+2sU^3-U(3x^2)+2x^2.
+\]
+Every coefficient of $E_s(U)$ is even. Indeed, after reduction modulo
+two, Frobenius gives $U(x)^2=U(x^2)$ and $3x^2=x^2$, so the residual
+vanishes. Also $E_s(U)=O(x^3)$ for every normalized $U$.
+
+Suppose $V-U=cx^r+O(x^{r+1})$, with $r\ge2$. The quadratic difference
+has leading term $2cx^{r+1}$; the cubic difference has order at least
+$r+2$; and $(V-U)(3x^2)$ has order at least $2r\ge r+2$.
+Consequently
+\begin{equation}\label{eq:triangular}
+E_s(V)-E_s(U)=2cx^{r+1}+O(x^{r+2}).
+\end{equation}
+Starting with $U=x$, choose its degree-$r$ coefficient to cancel the
+degree-$(r+1)$ coefficient of the residual. The needed division by two
+is exact by the preceding parity argument. Equation~\eqref{eq:triangular}
+shows that earlier cancellations remain valid. Each degree is thus
+determined by finitely many earlier coefficients, and the resulting
+integral series has zero residual in every degree.
+
+For uniqueness, take the first degree $r\ge2$ where two candidate
+solutions differ. Equation~\eqref{eq:triangular} would give a nonzero
+degree-$(r+1)$ difference of residuals, because $2c\ne0$ in $\Z$.
+This contradicts both residuals being zero.
+\end{proof}
+
+The proof formalizes divisibility of the residual by two before using
+integer division. Thus the construction does not assume the existence
+or integrality of an OEIS sequence. The names used below denote the
+uniquely constructed series.
+
+\subsection{A389474 and a square-zero substitution}
+
+Let $R=R_1$ and let $U$ be its compositional inverse. Such an inverse
+exists over $\Z$ for every normalized series: its degree-$n$ coefficient
+is determined with leading multiplier one, recursively. Both inverse
+identities are proved in the reused formal-series infrastructure.
+Substituting $U(x)$ in \eqref{eq:cubicfamily} gives
+\[
+R(3U(x)^2)=2U(x)^2+x^2+2x^3.
+\]
+Applying $U$ proves the original A389474 equation
+\begin{equation}\label{eq:474}
+U\bigl(x^2+2x^3+2U(x)^2\bigr)=3U(x)^2.
+\end{equation}
+Conversely, if a normalized $U$ satisfies \eqref{eq:474}, substitute its
+inverse $R$ and then apply $R$ to recover \eqref{eq:cubicfamily} for
+$s=1$. Therefore Theorem~\ref{thm:cubicexist} also gives existence and
+uniqueness for the literal A389474 source equation.
+
+\begin{theorem}\label{thm:modnine}
+The A389474 series satisfies
+\[
+U(x)^2\equiv x^2+2x^3\pmod9.
+\]
+In particular, $[x^n]U(x)^2$ is divisible by nine for every $n>3$.
+\end{theorem}
+
+\begin{proof}
+Work in $(\Z/9\Z)[[x]]$ and put $S=U^2$, $Q=x^2+2x^3$.
+The source equation becomes $U(Q+2S)=3S$. Let $V$ be the genuine
+normalized compositional inverse of $U$ over this ring. Apply $V$ to
+obtain
+\[
+Q+2S=V(3S).
+\]
+The series $3S$ has zero constant coefficient and is square-zero:
+$(3S)^2=9S^2=0$. A normalized series has the form
+$V(t)=t+t^2H(t)$, so $V(3S)=3S$. It follows that $Q+2S=3S$, hence
+$S=Q$, as required. No division by three is used.
+\end{proof}
+
+This establishes a full formal-series identity, including the low-degree
+terms, and hence strengthens the source's statement restricted to
+degrees above three.
+
+\subsection{Frobenius and A389475}
+
+For any $W\in\ps{\Z}$, prime $p$, and coefficientwise reduction
+$\overline W\in\ps{\F_p}$, the standard Frobenius identity is
+\begin{equation}\label{eq:frobenius}
+\overline W(x)^p=\overline W(x^p).
+\end{equation}
+One may prove it degree by degree: truncate $W$ above the degree in
+question, apply the polynomial identity in characteristic $p$, and
+use $a^p=a$ in $\F_p$. The formal proof follows this finite-truncation
+argument. In particular, for every $k\ge0$,
+\[
+U(x)^{3k}\equiv U(x^3)^k\pmod3.
+\]
+This proves A389474's second conjecture, including the otherwise
+unneeded cases $k=0$ and coefficient index zero. It is a universal
+algebraic fact, not a special property newly discovered for A389474.
+
+Now let $V=R_{-1}$, which is the A389475 series. It satisfies
+\begin{equation}\label{eq:475}
+V(3x^2)=2x^2+V^2-2V^3.
+\end{equation}
+Frobenius directly proves the first requested identity
+$V^3\equiv V(x^3)\pmod3$. Since $V(0)=0$, reduction of
+\eqref{eq:475} modulo three gives
+\[
+0=2x^2+V^2-2V^3,
+\]
+or $V^2=x^2+2V^3$ in $\ps{\F_3}$. Substitution of the Frobenius
+identity proves the second:
+\begin{equation}\label{eq:475square}
+V(x)^2\equiv x^2+2V(x^3)\pmod3.
+\end{equation}
+These are exactly the two assertions labeled (4.a) and (4.b) in the
+retrieved A389475 entry. The formal development also supplies the
+literal source-equation existence and uniqueness theorem.
+
+\section{A396102 and the inverse-iterate family}
+
+For each positive integer $r$, consider the normalized series equation
+\begin{equation}\label{eq:inverseoriginal}
+F_r^{\circ r}(x)=(1+x)F_r^{\circ(r-1)}(x).
+\end{equation}
+The case $r=3$ is the original A396102 equation. We construct it through
+an auxiliary series, rather than assuming that a solution exists.
+
+\begin{lemma}\label{lem:inverseconstruct}
+For every $r\ge0$ and every commutative coefficient ring, there is a
+unique normalized series $R_r$ satisfying
+\begin{equation}\label{eq:inverseaux}
+R_r=x-R_r R_r^{\circ r}.
+\end{equation}
+If $r\ge1$, its compositional inverse $F_r$ is the unique normalized
+solution of \eqref{eq:inverseoriginal}.
+\end{lemma}
+
+\begin{proof}
+Define $T_r(G)=x-GG^{\circ r}$. It preserves normalization. If two
+normalized series agree through degree $n-1$, their iterates do also.
+The difference of the two products $GG^{\circ r}$ and $HH^{\circ r}$
+has one factor divisible by $x^n$ and another divisible by $x$ in
+each term. Thus
+\[
+G-H=O(x^n)\quad\Longrightarrow\quad
+T_r(G)-T_r(H)=O(x^{n+1}).
+\]
+Starting at $x$ and iterating $T_r$, every coefficient stabilizes after
+finitely many steps. The stabilized coefficients give a fixed point;
+the same order-increase implication proves uniqueness. This is a
+purely coefficientwise construction and works over arbitrary
+commutative rings.
+
+Take the genuine compositional inverse $F_r$ of $R_r$. Substitute
+$F_r^{\circ r}(x)$ into \eqref{eq:inverseaux}. Inverse cancellation
+gives
+\[
+F_r^{\circ(r-1)}=F_r^{\circ r}-xF_r^{\circ(r-1)},
+\]
+which is \eqref{eq:inverseoriginal}. Conversely, substitute
+$R^{\circ r}$ into \eqref{eq:inverseoriginal}, where $R=F^{-1}$.
+This gives $x=(1+R^{\circ r})R$, hence \eqref{eq:inverseaux}.
+Uniqueness of $R_r$ now implies uniqueness of $F_r$.
+\end{proof}
+
+\begin{theorem}\label{thm:inversemod}
+For every $r\ge1$,
+\[
+R_r(x)\equiv\frac{x}{1+x}\pmod r,\qquad
+F_r(x)\equiv\frac{x}{1-x}\pmod r.
+\]
+Consequently, for $n\ge1$ and $k\ge0$,
+\begin{equation}\label{eq:iteratemod}
+[x^n]F_r^{\circ k}(x)\equiv k^{n-1}\pmod r.
+\end{equation}
+Here $0^0=1$, consistently with the degree-one coefficient of the
+zeroth compositional iterate $x$.
+\end{theorem}
+
+\begin{proof}
+Write $M_c(x)=x/(1-cx)$. Direct substitution gives
+$M_a\circ M_b=M_{a+b}$ over any commutative ring. Therefore
+$M_{-1}^{\circ r}=M_{-r}=x$ over $\Z/r\Z$. Moreover
+\[
+x-M_{-1}(x)x=M_{-1}(x),
+\]
+so $M_{-1}$ satisfies the auxiliary fixed-point equation modulo $r$.
+The coefficientwise uniqueness in Lemma~\ref{lem:inverseconstruct}
+identifies it with the reduction of $R_r$. Its actual inverse is
+$M_1$, identifying the reduction of $F_r$. Finally,
+$M_1^{\circ k}=M_k=x/(1-kx)$, whose degree-$n$ coefficient is
+$k^{n-1}$ for $n\ge1$.
+\end{proof}
+
+For $r=3$ and $k=1$, this proves the A396102 conjecture
+\[
+[x^n]F_3(x)\equiv1\pmod3\qquad(n\ge1).
+\]
+The formal proof includes both directions of the correspondence with
+the original triple-composition equation, not merely a congruence for
+an auxiliary series. The formal parameterization uses $r+1$ when
+stating the original equation so that its predecessor iterate is
+always a natural number. The coefficient theorem itself also has a
+well-defined $r=0$ version in \texttt{ZMod 0}; no such extension is
+needed to settle the stated OEIS problem.
+
+\section{Known Stirling periodicity, now formalized}\label{sec:stirling}
+
+Let $S(n,k)$ be the Stirling numbers of the second kind, defined by
+$S(0,0)=1$, zero on the other boundary entries, and
+\[
+S(n+1,k+1)=(k+1)S(n,k+1)+S(n,k).
+\]
+For an arbitrary sequence of integers $c_0,c_1,\ldots$, put
+\begin{equation}\label{eq:transform}
+b_n=\sum_{k=0}^n c_k k!S(n,k).
+\end{equation}
+No positivity, boundedness, or recurrence condition is imposed on the
+weights. The usual formal exponential identity in $\Q[[x]]$ identifies
+\eqref{eq:transform} as the coefficient sequence of
+\[
+\sum_{n\ge0}b_n\frac{x^n}{n!}=G(e^x-1),\qquad
+G(t)=\sum_{k\ge0}c_kt^k\in\Z[[t]].
+\]
+
+\begin{theorem}\label{thm:stirling}
+For every $m>0$ and $n\ge m$,
+\[
+b_{n+\varphi(m)}\equiv b_n\pmod m.
+\]
+The least positive period of the tail beginning at index $m$ exists
+and divides $\varphi(m)$.
+\end{theorem}
+
+\begin{proof}
+We first show that every natural base $a$ satisfies
+\begin{equation}\label{eq:powerperiod}
+a^{n+\varphi(m)}\equiv a^n\pmod m\qquad(n\ge m).
+\end{equation}
+It suffices to check each prime power $p^e$ dividing $m$. If $p$ divides
+$a$, then $e\le p^e\le m\le n$, so both powers vanish modulo $p^e$.
+If $p$ does not divide $a$, Euler's theorem applies modulo $p^e$,
+and $\varphi(p^e)$ divides $\varphi(m)$. This proves
+\eqref{eq:powerperiod} by prime-power divisibility.
+
+The power expansion is
+\begin{equation}\label{eq:powerexp}
+a^n=\sum_{k=0}^{a}\binom ak k!S(n,k)\qquad(a\le n).
+\end{equation}
+It follows from the Stirling recurrence and the usual recurrence for
+falling factorials. Fix $n\ge m$. Strong induction on $k<m$ shows
+that $k!S(n+\varphi(m),k)$ and $k!S(n,k)$ are congruent modulo $m$:
+apply \eqref{eq:powerexp} at $a=k$ to the two exponents, cancel all
+terms with index below $k$ using the induction hypothesis, and note
+that $\binom kk=1$. This argument makes no division by $k!$ modulo
+$m$.
+
+For $k\ge m$, the factor $k!$ is divisible by $m$. Thus
+\eqref{eq:transform} reduces to the fixed finite sum with $k<m$.
+The preceding columnwise congruence proves the claimed period for
+arbitrary integral weights. Since $\varphi(m)>0$, the tail has at
+least one positive period.
+
+For completeness, let $d$ be its least positive period and write any
+period $p=qd+r$, $0\le r<d$. Repeated use of the $d$-periodicity
+shows that $r$ is also a period. Minimality forces $r=0$, so $d$ divides
+$p$. Apply this with $p=\varphi(m)$. In Lean this last step uses the
+standard minimal-period theorem for the shift map on the entire tail.
+\end{proof}
+
+\paragraph{Prior work and exact formal scope.}
+Danesh's 26 August 2026 preprint proves the general integral-substitution
+result with the stronger eventual period $\lambda(m)$, the Carmichael
+function \cite{danesh}. It therefore already covers Theorem~\ref{thm:stirling}
+as an eventual-period assertion and all seven applications below.
+Our displayed bound $n\ge m$ is explicit; no priority claim is made
+for this elementary threshold. Schreyer earlier treated Fubini and
+$r$-Fubini numbers with a Carmichael bound \cite{schreyer}.
+
+The Lean theorem is the fully quantified finite-sum statement
+\eqref{eq:transform}, with exact definitions for every named weight.
+The identity involving the formal exponential series is explained
+mathematically here and is \emph{not separately claimed as a Lean
+theorem}. For the named applications, the OEIS entries provide the
+same Stirling-transform formulas or equivalent partition generating
+functions. Numerical prefix checks further corroborate their indexing.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Entry & Weight $c_k$ in \eqref{eq:transform}\\
+\midrule
+A052895 & Catalan number $\frac1{k+1}\binom{2k}{k}$\\
+A064618 & $k!$\\
+A354242 & $\binom{2k}{k}$\\
+A167137 & Number of integer partitions of $k$\\
+A305550 & Number of partitions of $k$ into distinct parts\\
+A306082 & Number of partitions of $k$ into square parts\\
+A080253 & $1,3,7,17,\ldots$, with $c_{k+2}=2c_{k+1}+c_k$\\
+\bottomrule
+\end{tabular}
+\caption{Seven credited applications of an already proved general theorem.}
+\end{table}
+
+The partition weights in Lean are actual finite cardinalities of
+\texttt{Nat.Partition}, with distinctness or square-part restrictions
+where appropriate. The Pell weight is an explicit recurrence. No named
+weight is left as an unspecified function assumed to match an OEIS
+sequence. We do not address the separate continued-fraction conjecture
+in A354242 or the separate power/logarithm integrality conjecture in
+A167137.
+
+\section{Formal verification and reproducibility}
+
+The combined package pins Lean 4.19.0 and Mathlib revision
+\begin{center}\small\ttfamily
+c44e0c8ee63ca166450922a373c7409c5d26b00b.
+\end{center}
+The additional results reside in \texttt{lean/More/}. The principal
+module groups are:
+\begin{itemize}
+\item \texttt{RationalParity.lean}: the actual third composition,
+characteristic-two denominator identity, and exact parity conclusions.
+\item \texttt{CubicFrobenius.lean}, \texttt{CubicReversion.lean}, and
+\texttt{CubicConsequences.lean}: Frobenius, integral construction,
+source-equation equivalence, and all four cubic congruences.
+\item \texttt{InverseIterate.lean}: the auxiliary fixed point,
+genuine inverse, original source equation, uniqueness, and congruences.
+\item The Stirling, power-periodicity, and tail-periodicity modules:
+the finite transform theorem, actual named weights, and least periods.
+\end{itemize}
+
+The release checker has a fixed list of \textbf{130 theorem endpoints}:
+the original 67 and 63 added endpoints, including construction and
+transport results as well as named consequences. This is a proof-audit
+count, not a count of open problems. The checker removes the first-party
+build cache, rebuilds the project, compiles explicit semantic contracts,
+prints fully elaborated theorem types, and checks every endpoint's
+transitive axiom dependencies. The only permitted axioms are
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
+No \texttt{sorry}, \texttt{admit}, \texttt{native\_decide}, or custom
+mathematical axiom is used in the proof sources.
+
+\texttt{More/Contracts.lean} states the source equations, definitions,
+coefficient domains, and unbounded conclusions independently of the
+exported theorem types. The old contracts are retained unchanged within
+the expanded contract file. Mechanical success establishes the stated
+Lean propositions relative to Lean's foundations; checking the
+translation from OEIS prose to those propositions is a separate
+semantic responsibility. AI reviewers examined those correspondences,
+and the package records their findings. Independent human review
+remains pending.
+
+\paragraph{Finite calculations.}
+Independent exact-integer scripts construct coefficients from the
+original equations, rather than from the desired modular patterns.
+The cubic check runs through degree 40 and tests both equations through
+degree 41. The inverse-iterate check covers parameters $1$ through $8$
+and iterates $0$ through $8$ through degree 40. The parity check uses
+direct composition, a separate coefficient formula, and the rational
+recurrence, including parity through degree 2000. The Stirling check
+covers moduli $1$ through $128$, signed as well as positive weights,
+and 81,376 period comparisons. JSON files record their exact scopes.
+These calculations are corroboration; the Lean proofs establish the
+claims for every allowed index.
+
+\paragraph{Reproduction.}
+With the pinned Lean toolchain and Python 3.11 or later installed, run
+the following from the extracted directory:
+\begin{verbatim}
+cd lean
+lake exe cache get
+lake build
+cd ..
+python3 scripts/check_formalization.py
+\end{verbatim}
+The checker rejects missing endpoints, changed dependency pins,
+warning/error output, extra axioms, and first-party source changes
+during validation. It also verifies the previous archive's fixed
+SHA-256 and the unchanged previous Lean proof modules. The generated
+report and logs in \texttt{reproducibility/lean\_complete/} are the
+authoritative record of the delivered run.
+
+\section{What the combined archive retains}
+
+The previous package's compositional-congruence manuscript and all
+of its Lean modules are included. Those cover all four A396099 claims;
+the A396798 iterate assertions and the correction of a false starting
+phase; A396807 including integer iterates; the A393856--A393859
+scaled-inverse assertions; and the original A396843-family acceptance
+theorems. Their complete proofs remain in the previous manuscript and
+source. This new document adds to that work rather than revising its
+mathematical conclusions.
+
+For exact preservation, the archive also contains the original ZIP at
+\begin{center}\small
+\path{prior_work/oeis_congruence_proofs_Dev_Goyal_v1.zip}.
+\end{center}
+Its SHA-256 is
+\begin{center}\small\ttfamily
+04f347b0e116a1c92cd7a1f21f38a37ae3d\\
+fb71c733dd5f55769accd0714489c
+\end{center}
+The line break is typographical; the checksum is one 64-character string
+in the validation manifest. The package preserves the author details
+from the supplied repository and does not reuse the earlier work's DOI
+as a DOI for this expanded release.
+
+The general Stirling recurrence and part of its power-expansion proof
+were adapted from a later Apache-2.0 Mathlib module. Its copyright,
+original authors, exact revision, license, and change notice are
+retained under \texttt{third\_party/mathlib/}. This upstream reuse is
+separate from the AI-generated modular transfer and sequence-specific
+proofs.
+
+\clearpage
+\begin{thebibliography}{20}
+\raggedright
+\bibitem{oeis093} P. D. Hanna, OEIS A396093,
+\url{https://oeis.org/A396093}. Accessed 24 October 2026.
+\bibitem{oeis474} P. D. Hanna, OEIS A389474,
+\url{https://oeis.org/A389474}. Accessed 24 October 2026.
+\bibitem{oeis475} P. D. Hanna, OEIS A389475,
+\url{https://oeis.org/A389475}. Accessed 24 October 2026.
+\bibitem{oeis102} P. D. Hanna, OEIS A396102,
+\url{https://oeis.org/A396102}. Accessed 24 October 2026.
+\bibitem{danesh} P. Danesh, \emph{Eventual periodicity of weighted
+Stirling transforms and two conjectures of Bala}, version 1,
+26 August 2026, Theorem 4.1 and Corollary 4.2.
+\url{https://doi.org/10.33774/coe-2026-4d6jr}.
+Preprint; not peer-reviewed by Cambridge University Press at posting.
+\bibitem{schreyer} B. Schreyer, \emph{Rigged Horse Numbers and their
+Modular Periodicity}, arXiv:2409.03799v2, 3 December 2024.
+\url{https://arxiv.org/abs/2409.03799}.
+\bibitem{oeisstirling} OEIS entries A052895, A064618, A354242,
+A167137, A305550, A306082, and A080253. Each is available at
+\texttt{https://oeis.org/} followed by its identifier. Accessed
+24 October 2026; precise formulas and status are in the source ledger.
+\bibitem{repo} D. Goyal, \emph{oeis-a396843-proof}, supplied source
+repository, revision \texttt{995e55adcbe06b2a913e24f12ff73a7faf362f06}.
+\url{https://github.com/dvgyl/oeis-a396843-proof}.
+\bibitem{mathlib} Mathlib contributors, formal proof library for Lean.
+Pinned dependency and adapted upstream module revisions are recorded
+in \texttt{lean/lake-manifest.json} and
+\texttt{third\_party/mathlib/NOTICE.md}, respectively.
+\end{thebibliography}
+\end{document}

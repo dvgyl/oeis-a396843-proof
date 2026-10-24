@@ -1,0 +1,4 @@
+import Round3.ElementaryContracts
+import Round3.LacunaryContracts
+import Round3.SquareContracts
+import Round3.ThetaContracts

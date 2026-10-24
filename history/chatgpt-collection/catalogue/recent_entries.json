@@ -1,0 +1,644 @@
+[
+  {
+    "oeis_id": "A397588",
+    "title": "Binary parity for a differential power series",
+    "status": "proved conjecture and additional source assertion",
+    "source_url": "https://oeis.org/A397588",
+    "manuscript_tex": "manuscripts/A397588.tex",
+    "manuscript_pdf": "manuscripts/A397588.pdf",
+    "lean_file": "lean/Entries/A397588.lean",
+    "imported_modules": [
+      "Round3.ElementaryContracts"
+    ],
+    "original_endpoints": [
+      "Round3.DifferentialParity.existence_uniqueness",
+      "Round3.DifferentialParity.A_normalized",
+      "Round3.DifferentialParity.A_equation",
+      "Round3.DifferentialParity.map_A",
+      "Round3.DifferentialParity.A_mod_two_quadratic",
+      "Round3.DifferentialParity.a397588_parity",
+      "Round3.DifferentialParity.A_mod_three",
+      "Round3.DifferentialParity.a397588_divisible_by_three",
+      "Round3.ElementaryContracts.differential_existence",
+      "Round3.ElementaryContracts.differential_definition",
+      "Round3.ElementaryContracts.differential_source_unique",
+      "Round3.ElementaryContracts.differential_parity",
+      "Round3.ElementaryContracts.differential_mod_three",
+      "Round3.ElementaryContracts.differential_divisible_by_three"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A397588.differential_existence",
+      "FinalCollection.A397588.differential_definition",
+      "FinalCollection.A397588.differential_source_unique",
+      "FinalCollection.A397588.differential_parity",
+      "FinalCollection.A397588.differential_mod_three",
+      "FinalCollection.A397588.differential_divisible_by_three"
+    ],
+    "summary": "For all n>=0, [x^n]A is odd iff n is a power of two. Also A=x modulo 3, so 3 divides every coefficient above degree one.",
+    "qualifications": [
+      "The source conjecture begins at n=1. Divisibility by three was already stated without a conjecture label. Analytic asymptotics are not proved."
+    ],
+    "implementation_modules": [
+      "Round3.DifferentialParity"
+    ]
+  },
+  {
+    "oeis_id": "A389536",
+    "title": "A sparse residue pattern for a Mahler substitution equation",
+    "status": "proved conjecture",
+    "source_url": "https://oeis.org/A389536",
+    "manuscript_tex": "manuscripts/A389536.tex",
+    "manuscript_pdf": "manuscripts/A389536.pdf",
+    "lean_file": "lean/Entries/A389536.lean",
+    "imported_modules": [
+      "Round3.ElementaryContracts"
+    ],
+    "original_endpoints": [
+      "Round3.MahlerParity.existence_uniqueness",
+      "Round3.MahlerParity.A_normalized",
+      "Round3.MahlerParity.A_equation",
+      "Round3.MahlerParity.map_A",
+      "Round3.MahlerParity.A_mod_four",
+      "Round3.MahlerParity.a389536_residue",
+      "Round3.MahlerParity.a389536_four_dvd_iff",
+      "Round3.ElementaryContracts.mahler_existence",
+      "Round3.ElementaryContracts.mahler_definition",
+      "Round3.ElementaryContracts.mahler_source_unique",
+      "Round3.ElementaryContracts.mahler_mod_four",
+      "Round3.ElementaryContracts.mahler_residue",
+      "Round3.ElementaryContracts.mahler_four_dvd_iff"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A389536.mahler_existence",
+      "FinalCollection.A389536.mahler_definition",
+      "FinalCollection.A389536.mahler_source_unique",
+      "FinalCollection.A389536.mahler_mod_four",
+      "FinalCollection.A389536.mahler_residue",
+      "FinalCollection.A389536.mahler_four_dvd_iff"
+    ],
+    "summary": "For n>1 the residue modulo 4 is 2 exactly at n=2^k+1, and 0 elsewhere; A=x+2xC modulo 4, C=x+C^2.",
+    "qualifications": [
+      "The source quotient by x is expressed by the equivalent division-free equation. Analytic claims in the entry are outside scope."
+    ],
+    "implementation_modules": [
+      "Round3.MahlerParity"
+    ]
+  },
+  {
+    "oeis_id": "A389537",
+    "title": "Residues of the inverse of an alternating lacunary series",
+    "status": "proved conjecture",
+    "source_url": "https://oeis.org/A389537",
+    "manuscript_tex": "manuscripts/A389537.tex",
+    "manuscript_pdf": "manuscripts/A389537.pdf",
+    "lean_file": "lean/Entries/A389537.lean",
+    "imported_modules": [
+      "Round3.LacunaryInverse"
+    ],
+    "original_endpoints": [
+      "Round3.ModFour.double_eq_iff",
+      "Round3.ModFour.series_double_eq_iff",
+      "Round3.ModFour.reduce_int_map",
+      "Round3.ModFour.two_mul_half",
+      "Round3.LacunaryInverse.auxiliary_existence_uniqueness",
+      "Round3.LacunaryInverse.R_normalized",
+      "Round3.LacunaryInverse.R_equation",
+      "Round3.LacunaryInverse.A_normalized",
+      "Round3.LacunaryInverse.R_A",
+      "Round3.LacunaryInverse.A_R",
+      "Round3.LacunaryInverse.map_R",
+      "Round3.LacunaryInverse.map_A",
+      "Round3.LacunaryInverse.A_equation",
+      "Round3.LacunaryInverse.inverse_source",
+      "Round3.LacunaryInverse.A_unique",
+      "Round3.LacunaryInverse.source_existence_uniqueness",
+      "Round3.LacunaryInverse.A_mod_two",
+      "Round3.LacunaryInverse.H_constantCoeff",
+      "Round3.LacunaryInverse.A_decomposition",
+      "Round3.LacunaryInverse.A_mod_four_decomposition",
+      "Round3.LacunaryInverse.H_mod_two_equation",
+      "Round3.LacunaryInverse.H_mod_two",
+      "Round3.LacunaryInverse.H_mod_two_coeff",
+      "Round3.LacunaryInverse.a389537_residue"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A389537.auxiliary_exists_unique",
+      "FinalCollection.A389537.auxiliary_equation",
+      "FinalCollection.A389537.inverse_right",
+      "FinalCollection.A389537.inverse_left",
+      "FinalCollection.A389537.normalized",
+      "FinalCollection.A389537.source_equation",
+      "FinalCollection.A389537.source_exists_unique",
+      "FinalCollection.A389537.source_unique",
+      "FinalCollection.A389537.series_mod_two",
+      "FinalCollection.A389537.integer_decomposition",
+      "FinalCollection.A389537.half_equation_mod_two",
+      "FinalCollection.A389537.half_binary_support",
+      "FinalCollection.A389537.residue_mod_four"
+    ],
+    "summary": "For n>2 the residue modulo 4 is 2 exactly at n=3*2^k, and 0 elsewhere. The integer series is the unique normalized solution of A(A-x)=A^2.",
+    "qualifications": [
+      "The separate empirical sign-run observation is not proved. Integer halving precedes reduction modulo four."
+    ],
+    "implementation_modules": [
+      "Round3.LacunaryInverse"
+    ]
+  },
+  {
+    "oeis_id": "A389542",
+    "title": "A reversion that becomes an involution modulo four",
+    "status": "proved conjecture",
+    "source_url": "https://oeis.org/A389542",
+    "manuscript_tex": "manuscripts/A389542.tex",
+    "manuscript_pdf": "manuscripts/A389542.pdf",
+    "lean_file": "lean/Entries/A389542.lean",
+    "imported_modules": [
+      "Round3.SquareReversion"
+    ],
+    "original_endpoints": [
+      "Round3.ModFour.double_eq_iff",
+      "Round3.ModFour.series_double_eq_iff",
+      "Round3.ModFour.reduce_int_map",
+      "Round3.ModFour.two_mul_half",
+      "Round3.SquareReversion.L_existence_uniqueness",
+      "Round3.SquareReversion.L_normalized",
+      "Round3.SquareReversion.L_equation",
+      "Round3.SquareReversion.R_normalized",
+      "Round3.SquareReversion.R_equation",
+      "Round3.SquareReversion.A389542_normalized",
+      "Round3.SquareReversion.compose_R_A",
+      "Round3.SquareReversion.compose_A_R",
+      "Round3.SquareReversion.source_of_inverse",
+      "Round3.SquareReversion.inverse_of_source",
+      "Round3.SquareReversion.a389542_equation",
+      "Round3.SquareReversion.inverse_equation_unique",
+      "Round3.SquareReversion.a389542_unique",
+      "Round3.SquareReversion.a389542_existence_uniqueness",
+      "Round3.SquareReversion.map_L",
+      "Round3.SquareReversion.map_R",
+      "Round3.SquareReversion.map_A389542",
+      "Round3.SquareReversion.L_quadratic_mod_two",
+      "Round3.SquareReversion.L_coeff_one_iff",
+      "Round3.SquareReversion.R_involution_mod_four",
+      "Round3.SquareReversion.A_eq_R_mod_four",
+      "Round3.SquareReversion.a389542_series_mod_four",
+      "Round3.SquareReversion.a389542_coeff_mod_four",
+      "Round3.SquareReversion.a389542_residue",
+      "Round3.SquareReversion.a389542_two_mod_four_iff",
+      "Round3.SquareReversion.a389542_four_dvd_iff"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A389542.auxiliary_exists_unique",
+      "FinalCollection.A389542.normalized",
+      "FinalCollection.A389542.auxiliary_definition",
+      "FinalCollection.A389542.inverse_equation",
+      "FinalCollection.A389542.inverse_right",
+      "FinalCollection.A389542.inverse_left",
+      "FinalCollection.A389542.source_equation",
+      "FinalCollection.A389542.source_exists_unique",
+      "FinalCollection.A389542.source_unique",
+      "FinalCollection.A389542.auxiliary_parity",
+      "FinalCollection.A389542.inverse_involution",
+      "FinalCollection.A389542.inverse_mod_four",
+      "FinalCollection.A389542.series_mod_four",
+      "FinalCollection.A389542.residue_mod_four",
+      "FinalCollection.A389542.exceptional_iff",
+      "FinalCollection.A389542.four_dvd_iff"
+    ],
+    "summary": "For n>1 the residue modulo 4 is 2 iff n=2^k+1, and 0 otherwise, for the unique normalized integer solution of A(A^2-x^2)=4A^3.",
+    "qualifications": [
+      "Source uniqueness is proved over the integers, not over arbitrary rings with two-torsion. No analytic value or radius statement is claimed."
+    ],
+    "implementation_modules": [
+      "Round3.SquareReversion"
+    ]
+  },
+  {
+    "oeis_id": "A378580",
+    "title": "Square-index residues for theta quotient substitution",
+    "status": "proved conjecture",
+    "source_url": "https://oeis.org/A378580",
+    "manuscript_tex": "manuscripts/A378580.tex",
+    "manuscript_pdf": "manuscripts/A378580.pdf",
+    "lean_file": "lean/Entries/A378580.lean",
+    "imported_modules": [
+      "Round3.ThetaSubstitution"
+    ],
+    "original_endpoints": [
+      "Round3.ModFour.double_eq_iff",
+      "Round3.ModFour.series_double_eq_iff",
+      "Round3.ModFour.reduce_int_map",
+      "Round3.ModFour.two_mul_half",
+      "ThetaSubstitution.theta_constant",
+      "ThetaSubstitution.theta_coefficient",
+      "ThetaSubstitution.a378580_constant",
+      "ThetaSubstitution.a378580_quotient_identity",
+      "ThetaSubstitution.a378580_source_equation",
+      "ThetaSubstitution.a378580_source_uniqueness",
+      "ThetaSubstitution.a378580_source_existence_uniqueness",
+      "ThetaSubstitution.a378580_series_mod_four",
+      "ThetaSubstitution.a378580_congruence",
+      "ThetaSubstitution.a378580_square_iff",
+      "ThetaSubstitution.a378580_four_dvd_iff"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A378580.theta_constant_term",
+      "FinalCollection.A378580.theta_coefficient_formula",
+      "FinalCollection.A378580.minus_constant",
+      "FinalCollection.A378580.quotient_identity",
+      "FinalCollection.A378580.minus_source",
+      "FinalCollection.A378580.minus_exists_unique",
+      "FinalCollection.A378580.minus_unique",
+      "FinalCollection.A378580.minus_series_mod_four",
+      "FinalCollection.A378580.minus_congruence",
+      "FinalCollection.A378580.minus_square_iff",
+      "FinalCollection.A378580.minus_four_dvd_iff"
+    ],
+    "summary": "The unique constant-one integer solution of A(x/A)=Theta is Theta modulo 4. At n>0 its residue is 2 iff n is a square, and 0 otherwise.",
+    "qualifications": [
+      "The multiplicative unit inverse and compositional inverse are distinct. Analytic convergence and real special values are not proved."
+    ],
+    "implementation_modules": [
+      "Round3.ThetaSubstitution"
+    ]
+  },
+  {
+    "oeis_id": "A378581",
+    "title": "Square-index residues for theta product substitution",
+    "status": "proved conjecture",
+    "source_url": "https://oeis.org/A378581",
+    "manuscript_tex": "manuscripts/A378581.tex",
+    "manuscript_pdf": "manuscripts/A378581.pdf",
+    "lean_file": "lean/Entries/A378581.lean",
+    "imported_modules": [
+      "Round3.ThetaSubstitution"
+    ],
+    "original_endpoints": [
+      "Round3.ModFour.double_eq_iff",
+      "Round3.ModFour.series_double_eq_iff",
+      "Round3.ModFour.reduce_int_map",
+      "Round3.ModFour.two_mul_half",
+      "ThetaSubstitution.theta_constant",
+      "ThetaSubstitution.theta_coefficient",
+      "ThetaSubstitution.a378581_constant",
+      "ThetaSubstitution.a378581_source_equation",
+      "ThetaSubstitution.a378581_source_uniqueness",
+      "ThetaSubstitution.a378581_source_existence_uniqueness",
+      "ThetaSubstitution.a378581_series_mod_four",
+      "ThetaSubstitution.a378581_congruence",
+      "ThetaSubstitution.a378581_square_iff",
+      "ThetaSubstitution.a378581_four_dvd_iff"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A378581.theta_constant_term",
+      "FinalCollection.A378581.theta_coefficient_formula",
+      "FinalCollection.A378581.plus_constant",
+      "FinalCollection.A378581.plus_source",
+      "FinalCollection.A378581.plus_exists_unique",
+      "FinalCollection.A378581.plus_unique",
+      "FinalCollection.A378581.plus_series_mod_four",
+      "FinalCollection.A378581.plus_congruence",
+      "FinalCollection.A378581.plus_square_iff",
+      "FinalCollection.A378581.plus_four_dvd_iff"
+    ],
+    "summary": "The unique constant-one integer solution of A(xA)=Theta is Theta modulo 4. At n>0 its residue is 2 iff n is a square, and 0 otherwise.",
+    "qualifications": [
+      "The multiplicative unit inverse and compositional inverse are distinct. Analytic convergence and real special values are not proved."
+    ],
+    "implementation_modules": [
+      "Round3.ThetaSubstitution"
+    ]
+  },
+  {
+    "oeis_id": "A195194",
+    "title": "Parity and convergence of an infinite nested reversion",
+    "status": "proved conjecture with general construction",
+    "source_url": "https://oeis.org/A195194",
+    "manuscript_tex": "manuscripts/A195194.tex",
+    "manuscript_pdf": "manuscripts/A195194.pdf",
+    "lean_file": "lean/Entries/A195194.lean",
+    "imported_modules": [
+      "Round4.NestedContracts"
+    ],
+    "original_endpoints": [
+      "Round4.NestedReversion.family_existence_uniqueness",
+      "Round4.NestedReversion.source_existence_uniqueness",
+      "Round4.NestedReversion.tail_normalized",
+      "Round4.NestedReversion.tail_equation",
+      "Round4.NestedReversion.tail_right_inverse",
+      "Round4.NestedReversion.tail_left_inverse",
+      "Round4.NestedReversion.tail_is_inverse",
+      "Round4.NestedReversion.approximation_normalized",
+      "Round4.NestedReversion.approximation_succ",
+      "Round4.NestedReversion.approximation_agrees",
+      "Round4.NestedReversion.map_tail",
+      "Round4.NestedReversion.tail_of_zero_weight",
+      "Round4.NestedReversion.tail_quadratic_of_next_zero",
+      "Round4.NestedReversion.A_normalized",
+      "Round4.NestedReversion.A_source",
+      "Round4.NestedReversion.A_source_left",
+      "Round4.NestedReversion.A_mod_two_quadratic",
+      "Round4.NestedReversion.a195194_parity"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A195194.normalized_source",
+      "FinalCollection.A195194.all_tails_normalized",
+      "FinalCollection.A195194.all_tails_source",
+      "FinalCollection.A195194.nested_definition_unique",
+      "FinalCollection.A195194.first_tail_reversion",
+      "FinalCollection.A195194.finite_nest_coefficients",
+      "FinalCollection.A195194.binary_equation",
+      "FinalCollection.A195194.exact_parity",
+      "FinalCollection.A195194.arbitrary_weights_unique",
+      "FinalCollection.A195194.arbitrary_finite_depth"
+    ],
+    "summary": "For every n>=0 the coefficient is odd iff n=2^k. Arbitrarily weighted infinite normalized tails exist uniquely over every commutative ring, and a depth-d nest agrees through degree d+1.",
+    "qualifications": [
+      "Convergence means coefficient stabilization of formal series, with no analytic assertion. The source starts at n=1."
+    ],
+    "implementation_modules": [
+      "Round4.NestedReversion"
+    ]
+  },
+  {
+    "oeis_id": "A393172",
+    "title": "Powers of two in a Catalan substitution congruence",
+    "status": "proved conjecture",
+    "source_url": "https://oeis.org/A393172",
+    "manuscript_tex": "manuscripts/A393172.tex",
+    "manuscript_pdf": "manuscripts/A393172.pdf",
+    "lean_file": "lean/Entries/A393172.lean",
+    "imported_modules": [
+      "Round4.CatalanContracts"
+    ],
+    "original_endpoints": [
+      "Round4.SquareComposition.existence_uniqueness",
+      "Round4.SquareComposition.map_solution",
+      "Round4.CatalanComposition.a393172_existence_uniqueness",
+      "Round4.CatalanComposition.A_normalized",
+      "Round4.CatalanComposition.A_equation",
+      "Round4.CatalanComposition.A_unique",
+      "Round4.CatalanComposition.A_mod_four",
+      "Round4.CatalanComposition.a393172_residue",
+      "Round4.CatalanComposition.a393172_four_dvd_iff",
+      "Round4.CatalanComposition.A_integer_decomposition",
+      "Round4.CatalanContracts.first_existence",
+      "Round4.CatalanContracts.first_definition",
+      "Round4.CatalanContracts.first_residue",
+      "Round4.CatalanContracts.first_arbitrary_source"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A393172.first_existence",
+      "FinalCollection.A393172.first_definition",
+      "FinalCollection.A393172.first_residue",
+      "FinalCollection.A393172.first_arbitrary_source",
+      "FinalCollection.A393172.complete_series_mod_four",
+      "FinalCollection.A393172.divisibility_complement"
+    ],
+    "summary": "For n>1 the residue modulo 4 is 2 iff n is a power of two, and 0 otherwise; the complete series is 2C-x modulo 4.",
+    "qualifications": [
+      "Normalized source equation A(x-x^2)=x+A(x)^2 is constructed uniquely. The standard Catalan parity mechanism is not claimed as a new general result."
+    ],
+    "implementation_modules": [
+      "Round4.CatalanComposition",
+      "Round4.SquareComposition"
+    ]
+  },
+  {
+    "oeis_id": "A393171",
+    "title": "A modulus-eight lift for a Catalan substitution sequence",
+    "status": "proved conjecture",
+    "source_url": "https://oeis.org/A393171",
+    "manuscript_tex": "manuscripts/A393171.tex",
+    "manuscript_pdf": "manuscripts/A393171.pdf",
+    "lean_file": "lean/Entries/A393171.lean",
+    "imported_modules": [
+      "Round4.CatalanContracts"
+    ],
+    "original_endpoints": [
+      "Round4.SquareComposition.existence_uniqueness",
+      "Round4.SquareComposition.map_solution",
+      "Round4.CatalanComposition.a393171_existence_uniqueness",
+      "Round4.CatalanComposition.a393171_named_existence_uniqueness",
+      "Round4.CatalanComposition.B_normalized",
+      "Round4.CatalanComposition.B_equation",
+      "Round4.CatalanComposition.B_fixed",
+      "Round4.CatalanComposition.B_composed_catalan",
+      "Round4.CatalanComposition.B_unique",
+      "Round4.CatalanComposition.A_integer_decomposition",
+      "Round4.CatalanComposition.B_mod_eight",
+      "Round4.CatalanComposition.a393171_residue",
+      "Round4.CatalanComposition.a393171_eight_dvd_iff",
+      "Round4.CatalanContracts.second_existence",
+      "Round4.CatalanContracts.second_named_existence",
+      "Round4.CatalanContracts.second_definition",
+      "Round4.CatalanContracts.second_residue",
+      "Round4.CatalanContracts.second_arbitrary_source"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A393171.second_existence",
+      "FinalCollection.A393171.second_named_existence",
+      "FinalCollection.A393171.second_definition",
+      "FinalCollection.A393171.second_residue",
+      "FinalCollection.A393171.second_arbitrary_source",
+      "FinalCollection.A393171.link_to_first_sequence",
+      "FinalCollection.A393171.link_composed_catalan",
+      "FinalCollection.A393171.complete_series_mod_eight",
+      "FinalCollection.A393171.divisibility_complement"
+    ],
+    "summary": "For n>2 the residue modulo 8 is 4 iff n=2^k or 2^k+1 with k>=1, and 0 otherwise. Source identities link B=x+B(C)^2 to A(x-x^2)=x+A^2.",
+    "qualifications": [
+      "The exact integral decomposition A=2C-x+4K is proved before reducing modulo eight."
+    ],
+    "implementation_modules": [
+      "Round4.CatalanComposition",
+      "Round4.SquareComposition"
+    ]
+  },
+  {
+    "oeis_id": "A392210",
+    "title": "Odd-index evenness in a nested binomial equation",
+    "status": "elementary observed pattern formalized",
+    "source_url": "https://oeis.org/A392210",
+    "manuscript_tex": "manuscripts/A392210.tex",
+    "manuscript_pdf": "manuscripts/A392210.pdf",
+    "lean_file": "lean/Entries/A392210.lean",
+    "imported_modules": [
+      "Round4.CatalanContracts"
+    ],
+    "original_endpoints": [
+      "Round4.SquareComposition.existence_uniqueness",
+      "Round4.SquareComposition.map_solution",
+      "Round4.NestedBinomial.existence_uniqueness",
+      "Round4.NestedBinomial.A_equation",
+      "Round4.NestedBinomial.rational_argument",
+      "Round4.NestedBinomial.a392210_odd_indices",
+      "Round4.CatalanContracts.third_existence",
+      "Round4.CatalanContracts.third_definition",
+      "Round4.CatalanContracts.third_evenness",
+      "Round4.CatalanContracts.third_arbitrary_source"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A392210.third_existence",
+      "FinalCollection.A392210.third_definition",
+      "FinalCollection.A392210.third_evenness",
+      "FinalCollection.A392210.third_arbitrary_source"
+    ],
+    "summary": "The unique normalized integer solution of D=x+D(x/(1-x))^2 has even coefficient at degree 2n-1 for every n>1.",
+    "qualifications": [
+      "This is the source apparent pattern and a direct characteristic-two square consequence. No analytic interpretation of the nested title is claimed."
+    ],
+    "implementation_modules": [
+      "Round4.NestedBinomial",
+      "Round4.SquareComposition"
+    ]
+  },
+  {
+    "oeis_id": "A380056",
+    "title": "Congruences for exponential coefficients of (exp(x)-1)/cos(2x)",
+    "status": "two proved conjectures and stronger classification",
+    "source_url": "https://oeis.org/A380056",
+    "manuscript_tex": "manuscripts/A380056.tex",
+    "manuscript_pdf": "manuscripts/A380056.pdf",
+    "lean_file": "lean/Entries/A380056.lean",
+    "imported_modules": [
+      "Round4.ExpCosineContracts"
+    ],
+    "original_endpoints": [
+      "Round4.ExpCosine.a_conv",
+      "Round4.ExpCosine.a_convolution_unique",
+      "Round4.ExpCosine.cosine_egf_eq",
+      "Round4.ExpCosine.A_coeff",
+      "Round4.ExpCosine.A_integral_coefficients",
+      "Round4.ExpCosine.a380056_source_equation",
+      "Round4.ExpCosine.a380056_source_quotient",
+      "Round4.ExpCosine.a380056_source_unique",
+      "Round4.ExpCosine.a380056_source_existence_uniqueness",
+      "Round4.ExpCosine.a380056_mod_four",
+      "Round4.ExpCosine.a380056_mod_five_formula",
+      "Round4.ExpCosine.a380056_mod_five_period",
+      "Round4.ExpCosine.a380056_mod_five_four_mul",
+      "Round4.ExpCosine.a380056_five_dvd",
+      "Round4.ExpCosine.a380056_mod_five_residue",
+      "Round4.ExpCosine.a380056_five_dvd_iff",
+      "Round4.ExpCosineContracts.integer_egf_definition",
+      "Round4.ExpCosineContracts.source_egf",
+      "Round4.ExpCosineContracts.literal_source_equation",
+      "Round4.ExpCosineContracts.literal_source_unique",
+      "Round4.ExpCosineContracts.integer_coefficients",
+      "Round4.ExpCosineContracts.first_source_conjecture",
+      "Round4.ExpCosineContracts.second_source_conjecture",
+      "Round4.ExpCosineContracts.exact_mod_five_pattern",
+      "Round4.ExpCosineContracts.exact_divisibility_by_five"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A380056.integer_egf_definition",
+      "FinalCollection.A380056.source_egf",
+      "FinalCollection.A380056.literal_source_equation",
+      "FinalCollection.A380056.literal_source_unique",
+      "FinalCollection.A380056.integer_coefficients",
+      "FinalCollection.A380056.first_source_conjecture",
+      "FinalCollection.A380056.second_source_conjecture",
+      "FinalCollection.A380056.exact_mod_five_pattern",
+      "FinalCollection.A380056.exact_divisibility_by_five",
+      "FinalCollection.A380056.mod_five_exponential_formula",
+      "FinalCollection.A380056.mod_five_period"
+    ],
+    "summary": "For n>=1, a(n)=1 modulo 4. For all n>=0, a(n)=2*2^n+3*4^n modulo 5, so 5 divides a(n) iff 4 divides n.",
+    "qualifications": [
+      "These are exponential coefficients n![x^n]A, not ordinary rational coefficients. The literal rational EGF and its uniqueness are formally proved. Modular convolution does not divide by factorials in finite characteristic."
+    ],
+    "implementation_modules": [
+      "Round4.ExpCosine"
+    ]
+  },
+  {
+    "oeis_id": "A380060",
+    "title": "Square support in an implicit rational theta equation",
+    "status": "proved conjecture",
+    "source_url": "https://oeis.org/A380060",
+    "manuscript_tex": "manuscripts/A380060.tex",
+    "manuscript_pdf": "manuscripts/A380060.pdf",
+    "lean_file": "lean/Entries/A380060.lean",
+    "imported_modules": [
+      "Round4.ThetaRationalContracts"
+    ],
+    "original_endpoints": [
+      "Round4.ThetaRational.ratio_quotient",
+      "Round4.ThetaRational.sigma_coeff_finsum",
+      "Round4.ThetaRational.existence_uniqueness",
+      "Round4.ThetaRational.map_solution",
+      "Round4.ThetaRational.solution_mod_four",
+      "Round4.ThetaRational.a380060_source_equation",
+      "Round4.ThetaRational.a380060_existence_uniqueness",
+      "Round4.ThetaRational.a380060_source_uniqueness",
+      "Round4.ThetaRational.a380060_coefficient_formula",
+      "Round4.ThetaRational.a380060_series_mod_four",
+      "Round4.ThetaRational.a380060_congruence",
+      "Round4.ThetaRational.a380060_square_iff",
+      "Round4.ThetaRational.a380060_four_dvd_iff",
+      "Round4.ThetaRationalContracts.implicit_source_exists_unique",
+      "Round4.ThetaRationalContracts.implicit_actual_source",
+      "Round4.ThetaRationalContracts.a380060_statement"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A380060.implicit_source_exists_unique",
+      "FinalCollection.A380060.implicit_actual_source",
+      "FinalCollection.A380060.a380060_statement",
+      "FinalCollection.A380060.complete_series_mod_four"
+    ],
+    "summary": "The unique implicit integer solution has residue 2 modulo 4 exactly at positive square indices and 0 elsewhere.",
+    "qualifications": [
+      "The formal source is the explicit positive-index formula (2) in OEIS. A separate formal Laurent-series equivalence to the bilateral title is not claimed. No convergence or real special-value assertion is proved."
+    ],
+    "implementation_modules": [
+      "Round4.ThetaRational"
+    ]
+  },
+  {
+    "oeis_id": "A380680",
+    "title": "Twice-square support: a corrected rational theta conjecture",
+    "status": "false conjecture refuted and corrected theorem proved",
+    "source_url": "https://oeis.org/A380680",
+    "manuscript_tex": "manuscripts/A380680.tex",
+    "manuscript_pdf": "manuscripts/A380680.pdf",
+    "lean_file": "lean/Entries/A380680.lean",
+    "imported_modules": [
+      "Round4.ThetaRationalContracts"
+    ],
+    "original_endpoints": [
+      "Round4.ThetaRational.ratio_quotient",
+      "Round4.ThetaRational.sigma_coeff_finsum",
+      "Round4.ThetaRational.a380680_source_formula",
+      "Round4.ThetaRational.a380680_coefficient_formula",
+      "Round4.ThetaRational.a380680_series_mod_four",
+      "Round4.ThetaRational.a380680_corrected_congruence",
+      "Round4.ThetaRational.a380680_twice_square_iff",
+      "Round4.ThetaRational.a380680_four_dvd_iff",
+      "Round4.ThetaRational.a380680_coeff_one",
+      "Round4.ThetaRational.a380680_coeff_two",
+      "Round4.ThetaRational.a380680_literal_conjecture_false",
+      "Round4.ThetaRational.a380680_nonsquare_clause_false",
+      "Round4.ThetaRationalContracts.explicit_actual_source",
+      "Round4.ThetaRationalContracts.a380680_corrected_statement",
+      "Round4.ThetaRationalContracts.a380680_counterexamples",
+      "Round4.ThetaRationalContracts.a380680_literal_statement_is_false",
+      "Round4.ThetaRationalContracts.a380680_complement_is_false"
+    ],
+    "new_endpoints": [
+      "FinalCollection.A380680.explicit_actual_source",
+      "FinalCollection.A380680.a380680_corrected_statement",
+      "FinalCollection.A380680.a380680_counterexamples",
+      "FinalCollection.A380680.a380680_literal_statement_is_false",
+      "FinalCollection.A380680.a380680_complement_is_false",
+      "FinalCollection.A380680.complete_series_mod_four"
+    ],
+    "summary": "For n>0 the residue modulo 4 is 2 exactly at twice-square indices, and 0 otherwise. The original square-support claim is false: a(1)=4, a(2)=6.",
+    "qualifications": [
+      "The formal source is the explicit positive-index formula (2) in OEIS. A separate formal Laurent-series equivalence to the bilateral title is not claimed. No convergence or real special-value assertion is proved."
+    ],
+    "implementation_modules": [
+      "Round4.ThetaRational"
+    ]
+  }
+]

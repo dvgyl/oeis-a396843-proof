@@ -1,0 +1,212 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=26mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{3em}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\F}{\mathbb F}
+\newcommand{\ps}[1]{#1[[x]]}
+\hypersetup{pdftitle={A354242: Central-binomial Stirling periodicity},pdfauthor={Dev Goyal}}
+\title{A354242\\[3pt]Central-binomial Stirling periodicity}
+\author{Dev Goyal}
+\date{24 October 2026}
+\begin{document}
+\maketitle
+\begin{center}
+\fbox{\begin{minipage}{0.91\linewidth}\small
+\textbf{AI contribution and review status.}
+ChatGPT (OpenAI) generated the mathematical exposition, proof development,
+Lean interfaces, and checks for this collection in response to Dev Goyal's
+prompts. Dev Goyal is the sole human author. Independent human review is
+pending. Original sequence authors, known mathematical results, and adapted
+upstream code retain their separate credits. This document makes no claim
+of publication, OEIS acceptance, or worldwide priority.
+\end{minipage}}
+\end{center}
+\begin{abstract}
+For the explicitly defined factorial Stirling transform corresponding to A354242, we give a self-contained proof of eventual periodicity modulo every positive integer. The tail beginning at the modulus has period dividing Euler's totient. This is a formalization and specialization of known mathematics, credited to the prior work below.
+\end{abstract}
+\section{Exact sequence and result}
+Let $S(n,k)$ be the Stirling numbers of the second kind. Their initial
+values are $S(0,0)=1$, $S(0,k)=0$ for $k>0$, and $S(n,0)=0$ for
+$n>0$; their recurrence is
+\[
+S(n+1,k+1)=(k+1)S(n,k+1)+S(n,k).
+\]
+The finite source formula for A354242 \cite{oeis} is
+\[
+a_n=\sum_{k=0}^n c_k k!S(n,k),\qquad c_k=\binom{2k}{k}.
+\]
+The source offset is zero. The weight is the central binomial coefficient, with $c_0=1$. Equivalently $G(t)=(1-4t)^{-1/2}$ in $\Q[[t]]$; its coefficients are integers.
+
+For every $m\ge1$ and $n\ge m$, we prove
+$a_{n+\varphi(m)}\equiv a_n\pmod m$. We also prove that the least
+positive period of $t\mapsto a_{m+t}\bmod m$ exists, is itself a
+period, and divides $\varphi(m)$.
+
+The separate continued-fraction conjecture in this entry is outside the completed result set.
+\section{The universal finite-transform theorem}
+For an arbitrary sequence of integers $(c_k)_{k\ge0}$, write
+\[
+T_c(n)=\sum_{k=0}^n c_k k!S(n,k).
+\]
+No growth, sign, positivity, or recurrence hypothesis is needed.
+\begin{theorem}\label{thm:period}
+For every $m\ge1$ and $n\ge m$,
+\[
+T_c(n+\varphi(m))\equiv T_c(n)\pmod m.
+\]
+The tail $t\mapsto T_c(m+t)\bmod m$ has a least positive period $d$;
+this $d$ is itself a period and divides $\varphi(m)$.
+\end{theorem}
+\begin{proof}
+If $m=1$ every residue is zero, so the assertions hold with $d=1$.
+Suppose $m>1$. First, for every natural number $a$ and $n\ge m$,
+\begin{equation}\label{eq:powers}
+a^{n+\varphi(m)}\equiv a^n\pmod m.
+\end{equation}
+Check each maximal prime-power factor $p^e$ of $m$. If $p\mid a$,
+then $e\le p^e\le m\le n$, so $p^e$ divides both powers. If
+$p\nmid a$, Euler's theorem gives period $\varphi(p^e)$ for powers
+of $a$ modulo $p^e$. The prime-power product formula for $\varphi$
+shows that $\varphi(p^e)\mid\varphi(m)$. Thus the congruence holds
+modulo every prime-power factor, and hence modulo $m$.
+
+The Stirling recurrence gives the falling-factorial expansion
+\begin{equation}\label{eq:triangular-power}
+a^n=\sum_{k=0}^{a}\binom ak k!S(n,k)\qquad(a\le n).
+\end{equation}
+For completeness, it follows by counting all functions from an
+$n$-element set to an $a$-element set: their $k$ nonempty fibers
+partition the domain in $S(n,k)$ ways, and the fibers may be assigned
+distinct target values in $a(a-1)\cdots(a-k+1)=\binom ak k!$ ways.
+Equivalently, both sides satisfy the induction obtained from the
+Stirling recurrence, including $n=0$.
+
+Fix $n\ge m$. Strong induction on $k<m$ now proves
+\[
+k!S(n+\varphi(m),k)\equiv k!S(n,k)\pmod m.
+\]
+Apply \eqref{eq:triangular-power} with $a=k$ to the two exponents.
+Their left sides are congruent by \eqref{eq:powers}. Each term with
+index below $k$ cancels by induction; the remaining multiplier is
+$\binom kk=1$. No division by $k!$ modulo $m$ is involved.
+
+For every $k\ge m$, the factor $k!$ is divisible by $m$. The two
+transforms therefore reduce to the same fixed finite range $k<m$;
+the columnwise congruence just proved gives their equality modulo $m$.
+
+Since $\varphi(m)>0$, at least one positive tail period exists.
+Let $d$ be the least such period and let $p$ be any other period.
+Write $p=qd+r$ with $0\le r<d$. If $f(t)=T_c(m+t)\bmod m$, then
+$f(t+r)=f(t+r+qd)=f(t+p)=f(t)$ for all $t\ge0$.
+Thus $r$ is a period, and minimality forces $r=0$.
+Taking $p=\varphi(m)$ proves $d\mid\varphi(m)$.
+\end{proof}
+
+\section{Generating functions and the application}
+The preceding theorem directly applies to the finite formula defining
+the sequence in this document. It proves both its totient period and
+the existence and divisibility property of its least tail period.
+
+The usual exponential-generating-function interpretation is also
+mathematically valid. In $\Q[[x]]$ one has
+\[
+(e^x-1)^k=k!\sum_{n\ge k}S(n,k)\frac{x^n}{n!}.
+\]
+Indeed, expanding $(e^x-1)^k$ coefficientwise counts ways to distribute
+$n$ labeled elements among $k$ labeled nonempty boxes. These are
+surjections, whose number is $k!S(n,k)$. At any fixed degree all
+coefficient operations are finite. Consequently, for
+$G(t)=\sum_{k\ge0}c_kt^k$,
+\[
+G(e^x-1)=\sum_{n\ge0}T_c(n)\frac{x^n}{n!}.
+\]
+This explanation identifies the source's generating-function description
+with its finite transform. \textbf{The formal-exponential substitution
+identity itself is not separately formalized in this collection.}
+The Lean theorems instead start from the explicit finite Stirling sum,
+with the exact integer weight specified above. No unproved EGF bridge is
+used as a Lean axiom or hypothesis.
+
+\section{Prior result and attribution}
+The periodicity is known mathematics, not a newly solved open problem.
+Danesh's Theorem 4.1 and Corollary 4.2 \cite{danesh} already give a
+stronger universal eventual Carmichael period $\lambda(m)$ for integral
+substitutions $G(e^x-1)$. This covers the present totient-period
+conclusion as an eventual-period statement. The explicit threshold
+$n\ge m$ used here is sufficient; optimality or priority for that
+threshold is not asserted. Earlier Fubini and $r$-Fubini work by
+Schreyer is also relevant \cite{schreyer}. The formal result here
+proves the totient bound; it does not assert a Lean proof of the
+stronger Carmichael bound.
+
+The Stirling recurrence and part of the power-expansion implementation
+were adapted from Apache-2.0 Mathlib source \cite{mathlib}.
+The original copyright, authors, license, and change notice are retained.
+The modular transfer and named specialization proofs were generated
+for this project. This AI disclosure does not claim authorship of
+the adapted upstream code.
+\section{Lean proof and exact scope}
+The dedicated entry file is \path{lean/Entries/A354242.lean}. Its declarations lie in namespace \texttt{FinalCollection.A354242}. The principal checked endpoints are:
+\begin{itemize}[nosep]
+\item \texttt{source\_formula}: the actual finite sum with the stated weight.
+\item \texttt{period}: the unbounded congruence for every $m\ge1$ and $n\ge m$.
+\item \texttt{least\_period\_divides}: divisibility of the least positive tail period.
+\item \texttt{least\_period\_specification}: positivity, periodicity, divisibility, and minimality together.
+\end{itemize}
+The full implementations are in \path{lean/More/StirlingPeriodicity.lean}.
+This entry formalizes a known periodicity result with an explicit sufficient onset. The actual finite integer weight and sum are included in the source formula; no undefined external sequence is assumed to agree with the OEIS entry. The EGF identity is proved in prose above but is not a separate Lean endpoint. The separate continued-fraction conjecture in this entry is outside the completed result set. 
+
+The companion is a separate, explicitly typed Lean entry file. Its proofs
+invoke the preserved implementation modules; the complete dependency source
+is included in the same archive. Shared lemmas are reused rather than
+assumed. The entry file is not a self-contained replacement for Mathlib or
+the supplied common library.
+
+The project pins Lean 4.19.0 and Mathlib revision
+\begin{center}\small\ttfamily
+c44e0c8ee63ca166450922a373c7409c5d26b00b.
+\end{center}
+The collection checker recompiles the proof sources and audits the
+theorems' transitive axiom dependencies. Only \texttt{propext},
+\texttt{Classical.choice}, and \texttt{Quot.sound} are permitted.
+The delivered verification reports record the actual successful runs.
+Finite numerical checks are corroboration; the displayed conclusions are
+unbounded theorems. An AI review of source correspondence does not replace
+independent human review.
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{oeis} OEIS Foundation, entry A354242,
+\url{https://oeis.org/A354242}. Source checked 24 October 2026.
+\bibitem{danesh} P. Danesh, \emph{Eventual periodicity of weighted
+Stirling transforms and two conjectures of Bala}, version 1,
+26 August 2026, Theorem 4.1 and Corollary 4.2.
+\url{https://doi.org/10.33774/coe-2026-4d6jr}.
+\bibitem{schreyer} B. Schreyer, \emph{Rigged Horse Numbers and their
+Modular Periodicity}, arXiv:2409.03799v2, 3 December 2024.
+\url{https://arxiv.org/abs/2409.03799}.
+\bibitem{mathlib} Mathlib contributors. The adapted Stirling source is
+\texttt{Mathlib.Combinatorics.Enumerative.Stirling} at revision
+\path{4ed598f443601d8b5abccc2a14e3ba408ae47056}, copyright 2025 Beibei Xiong;
+authors Beibei Xiong, Yu Shao, Weijie Jiang, and Zhengfeng Yang.
+Apache-2.0 attribution and license are preserved in
+\path{third_party/mathlib/NOTICE.md} and the accompanying license file.
+\bibitem{repo} D. Goyal, supplied reference repository,
+\url{https://github.com/dvgyl/oeis-a396843-proof}.
+This separate presentation belongs to the final collected proof package;
+no earlier DOI is reassigned to it.
+\end{thebibliography}
+\end{document}

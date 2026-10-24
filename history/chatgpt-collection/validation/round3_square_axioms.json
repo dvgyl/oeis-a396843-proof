@@ -1,0 +1,141 @@
+{
+  "status": "axiom_dependency_audit_passed",
+  "allowed_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "checked_theorems": {
+    "Round3.SquareReversion.L_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.L_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.L_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.R_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.R_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.A389542_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.compose_R_A": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.compose_A_R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.source_of_inverse": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.inverse_of_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.inverse_equation_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_existence_uniqueness": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.map_L": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.map_R": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.map_A389542": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.L_quadratic_mod_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.L_coeff_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.R_involution_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.A_eq_R_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_series_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_coeff_mod_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_residue": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_two_mod_four_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Round3.SquareReversion.a389542_four_dvd_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "scope": "Dependencies only; theorem meanings and typed contracts require review."
+}

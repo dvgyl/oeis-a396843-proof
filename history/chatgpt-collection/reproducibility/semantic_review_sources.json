@@ -1,0 +1,97 @@
+{
+  "files": [
+    {
+      "path": "docs/FINITE_VERIFICATION.md",
+      "sha256": "d6dcc8975e7b8d38a4394fb44b8dedda168acb767f58f137f3c7a136dcf7ca94"
+    },
+    {
+      "path": "docs/RELATED_CONJECTURES.md",
+      "sha256": "9b3a83d8eb40afda3153aae4a38bdc93265190424695ced3ddd7fa1d665e8bca"
+    },
+    {
+      "path": "docs/THEOREM_SPEC.md",
+      "sha256": "d85261d277b9a900e6a2161f2da55202e3ea8acec2d21b886b415bebef7964db"
+    },
+    {
+      "path": "lean/Consecutive/Acceptance.lean",
+      "sha256": "879ec5653dd4c52b27f19d70f080eff24904e1aeee39609768781103dd82b951"
+    },
+    {
+      "path": "lean/Consecutive/Arithmetic.lean",
+      "sha256": "06d3ceadf894878ae2c7d170c15542cf439df6f2f1f65a7d0fa7fb00f8076138"
+    },
+    {
+      "path": "lean/Consecutive/Basic.lean",
+      "sha256": "f8847e397da7a052c0a690197ef08367fdd088b60fe2eede3a8706cb71864f16"
+    },
+    {
+      "path": "lean/Consecutive/Coefficients.lean",
+      "sha256": "05b922e0737ae6975b2a383fb868e50462a506cbe493bdbfc5725fb6bfae371f"
+    },
+    {
+      "path": "lean/Consecutive/Construction.lean",
+      "sha256": "1defe4d157d8d5f111ee2e142b235aa6cbb5409683892fd834afa1718dc0ea0b"
+    },
+    {
+      "path": "lean/Consecutive/IntegerIterates.lean",
+      "sha256": "71785797e56dadbddaceaace0e49938995907c80e7f80d5428a3487e9cb2d939"
+    },
+    {
+      "path": "lean/Consecutive/Modular.lean",
+      "sha256": "f26c2715c46ae9877f27ef76f5d09c2cf1fce2c2e44cbfa9c2e9754c97d25f58"
+    },
+    {
+      "path": "lean/Consecutive/Related.lean",
+      "sha256": "599322c04117e65ee7359ea1bb9939f428dccc873c794b11288dbd7a3847ff6b"
+    },
+    {
+      "path": "lean/ContractChecks.lean",
+      "sha256": "74a6592af36ecca0eefe2ee343994fc81304442cdd5fe73ea75da817925d15b9"
+    },
+    {
+      "path": "lean/Hanna/Related/ScaledInverse.lean",
+      "sha256": "0c1f5c702d279fac8b66c1e1c3f59abe197b30f730a875bb11c79038d6050440"
+    },
+    {
+      "path": "lean/Hanna/Related/ScaledParity.lean",
+      "sha256": "c2b139df3ca35b982d8b3d4b8a6427fc8c4eddca71b77d96ad302535ecd3e3e9"
+    },
+    {
+      "path": "lean/Hanna/Series/Basic.lean",
+      "sha256": "fe5948059309ed57c09f0c8db0e022a5e8c2848202562eae725ff9f835d0b906"
+    },
+    {
+      "path": "lean/Hanna/Series/Construction.lean",
+      "sha256": "f4bdeaa4e5cce2ffe57bebe26148e5b826a78bd132125b03541e2b44e6ce9756"
+    },
+    {
+      "path": "lean/Hanna/Series/Filtration.lean",
+      "sha256": "b1521801de0629c1b4444a1c6efbc924e541c8a57a4d3e36cb63f95aca2820e4"
+    },
+    {
+      "path": "lean/Hanna/Series/Inverse.lean",
+      "sha256": "48917e1734625f78c598a7a6929162626a916fdbcd7d2a5d37c36f2be25fe118"
+    },
+    {
+      "path": "lean/Hanna/Series/Triangular.lean",
+      "sha256": "8c74f1f494eadfcfda535bac804fd99526bbdf402483a95d898257f502cb45f2"
+    },
+    {
+      "path": "manuscript/compositional_congruences.tex",
+      "sha256": "abe3d0eaa9db2f0b40d9af5c66f9fbbaf3b914cb81f7393bb72d98923889b201"
+    },
+    {
+      "path": "scripts/verify_coefficients.py",
+      "sha256": "69d821a1d06580023cbe6f1d887c27bb1eb5d154256584efeb0d761dfa50dafc"
+    },
+    {
+      "path": "tests/test_verify_coefficients.py",
+      "sha256": "68a254d66e453a0592e9cd3ce9497fce9341892194df705515d5985222565b74"
+    }
+  ],
+  "review_date": "2026-10-24",
+  "review_document": "docs/FORMAL_REVIEW.md",
+  "review_type": "AI development semantic review; independent human review pending",
+  "schema_version": 1,
+  "scope": "Source snapshot inspected for definitions, equation equivalence, unbounded theorem types, canonical reductions, signed iterates, and noncircular finite construction. Not a build certificate."
+}

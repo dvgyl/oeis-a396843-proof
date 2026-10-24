@@ -1,0 +1,407 @@
+{
+  "arithmetic": "Python arbitrary-precision integers; no floating point",
+  "coefficient_checks": 6416,
+  "construction": {
+    "q_family": "Triangular coefficient recursion from G(X-X*L_q(G))=X",
+    "r_family": "Triangular coefficient recursion from F=X+F^(circ r)*F^(circ(r+1))",
+    "uses_residue_candidates_to_construct_coefficients": false
+  },
+  "degree": 40,
+  "elapsed_seconds": 2.482808,
+  "q_family": [
+    {
+      "coefficient_checks": 163,
+      "coefficient_sha256": "bcbe32d51371808fda9ec67f8a38643d60a8b683cb0d40a2de109bea249505c5",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        3,
+        13,
+        69,
+        419,
+        2809,
+        20353
+      ],
+      "named_checks": [
+        "all_coefficients_one_mod_2"
+      ],
+      "oeis_prefix": null,
+      "parameter": 1
+    },
+    {
+      "coefficient_checks": 163,
+      "coefficient_sha256": "bc48680fc58648e053b1f5f6fed4356abb70858fa9bc353899a56e24e5791e2f",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        4,
+        31,
+        412,
+        9322,
+        370792,
+        26998435
+      ],
+      "named_checks": [
+        "all_coefficients_one_mod_3"
+      ],
+      "oeis_prefix": null,
+      "parameter": 2
+    },
+    {
+      "coefficient_checks": 163,
+      "coefficient_sha256": "e3893a25c4524f8106eb822873e015c84c9ef3f0463113cacf265b6bf0fd300b",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        5,
+        65,
+        2129,
+        187485,
+        47070033,
+        34738190385
+      ],
+      "named_checks": [
+        "all_coefficients_one_mod_4"
+      ],
+      "oeis_prefix": null,
+      "parameter": 3
+    },
+    {
+      "coefficient_checks": 171,
+      "coefficient_sha256": "0f33a937ffb05ee7b3f5cf33b7d35af1c2bf2fa33f7c2e52608d5fa003473dce",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        6,
+        121,
+        8466,
+        2227706,
+        2299117036,
+        9437900978761
+      ],
+      "named_checks": [
+        "all_coefficients_one_mod_5",
+        "odd_iff_power_of_two"
+      ],
+      "oeis_prefix": {
+        "sequence": "A393856",
+        "source": "https://oeis.org/A393856",
+        "terms_matched": 8
+      },
+      "parameter": 4
+    },
+    {
+      "coefficient_checks": 171,
+      "coefficient_sha256": "d0cb91d30874e6909d8d3abcafe843095d46eb28f3c0770df3d8968bf5d8e4b5",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        7,
+        205,
+        26869,
+        16984687,
+        53213653657,
+        831942602359489
+      ],
+      "named_checks": [
+        "all_coefficients_one_mod_6"
+      ],
+      "oeis_prefix": {
+        "sequence": "A393857",
+        "source": "https://oeis.org/A393857",
+        "terms_matched": 8
+      },
+      "parameter": 5
+    },
+    {
+      "coefficient_checks": 171,
+      "coefficient_sha256": "2b8319492f0e0f41c7d878ce94816da4388ad9658c9d0a98b9b737980f37121f",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        8,
+        323,
+        71744,
+        93490314,
+        727730885904,
+        33959564479215663
+      ],
+      "named_checks": [
+        "all_coefficients_one_mod_7",
+        "odd_iff_power_of_two"
+      ],
+      "oeis_prefix": {
+        "sequence": "A393858",
+        "source": "https://oeis.org/A393858",
+        "terms_matched": 8
+      },
+      "parameter": 6
+    },
+    {
+      "coefficient_checks": 171,
+      "coefficient_sha256": "9e98fa2acdb395fc6567fadcacd25c593f1d1f52e4f2ffde7a7b1a37af81d5c3",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        9,
+        481,
+        167937,
+        404407577,
+        6800120127457,
+        800088549123479905
+      ],
+      "named_checks": [
+        "all_coefficients_one_mod_8"
+      ],
+      "oeis_prefix": {
+        "sequence": "A393859",
+        "source": "https://oeis.org/A393859",
+        "terms_matched": 8
+      },
+      "parameter": 7
+    },
+    {
+      "coefficient_checks": 163,
+      "coefficient_sha256": "d74db23405a7fca48ca20b54c0ab43d14584a37365df03cbdecf20370e2ff52a",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        10,
+        685,
+        354934,
+        1456320970,
+        47732393198548,
+        12513190141619621605
+      ],
+      "named_checks": [
+        "all_coefficients_one_mod_9"
+      ],
+      "oeis_prefix": null,
+      "parameter": 8
+    }
+  ],
+  "r_family": [
+    {
+      "coefficient_checks": 286,
+      "coefficient_sha256": "bcbe32d51371808fda9ec67f8a38643d60a8b683cb0d40a2de109bea249505c5",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        3,
+        13,
+        69,
+        419,
+        2809,
+        20353
+      ],
+      "named_checks": [],
+      "natural_iterates_checked": [
+        0,
+        4
+      ],
+      "oeis_prefix": null,
+      "parameter": 1
+    },
+    {
+      "coefficient_checks": 492,
+      "coefficient_sha256": "0200399c4bbe071a4f1c392724e2d5dd07bc2708fa023e14bb0bee64dd7b359e",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        5,
+        39,
+        383,
+        4357,
+        55057,
+        754223
+      ],
+      "named_checks": [
+        "all_odd",
+        "residue_cycle",
+        "second_iterate_tail",
+        "cancellation_tail"
+      ],
+      "natural_iterates_checked": [
+        0,
+        6
+      ],
+      "oeis_prefix": {
+        "sequence": "A396099",
+        "source": "https://oeis.org/A396099",
+        "terms_matched": 8
+      },
+      "parameter": 2
+    },
+    {
+      "coefficient_checks": 458,
+      "coefficient_sha256": "832fcefcb78e4d65c993e3637ce681d2738383023b14ac1cf3c044dc11bfef34",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        7,
+        79,
+        1135,
+        18985,
+        353677,
+        7153189
+      ],
+      "named_checks": [],
+      "natural_iterates_checked": [
+        0,
+        8
+      ],
+      "oeis_prefix": {
+        "sequence": "A396797",
+        "source": "https://oeis.org/A396797",
+        "terms_matched": 8
+      },
+      "parameter": 3
+    },
+    {
+      "coefficient_checks": 848,
+      "coefficient_sha256": "2a787139ec90db9c2b2243736ea1613de42d19566946114d1c47a06991eaa92f",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        9,
+        133,
+        2517,
+        55609,
+        1370321,
+        36691293
+      ],
+      "named_checks": [
+        "corrected_coefficient_phase",
+        "counterexample_to_source_phase",
+        "iterate_2_tail",
+        "iterate_4_tail",
+        "iterate_6_tail",
+        "iterate_8_tail",
+        "iterate_3_cycle",
+        "iterate_5_cycle",
+        "iterate_7_cycle"
+      ],
+      "natural_iterates_checked": [
+        0,
+        10
+      ],
+      "oeis_prefix": {
+        "sequence": "A396798",
+        "source": "https://oeis.org/A396798",
+        "terms_matched": 8
+      },
+      "parameter": 4
+    },
+    {
+      "coefficient_checks": 662,
+      "coefficient_sha256": "76739749db549958e0c09cfebdec7ec017b5e21b08d4076c7471f5356d4b2d13",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        11,
+        201,
+        4721,
+        129671,
+        3976201,
+        132554541
+      ],
+      "named_checks": [
+        "all_coefficients_one_mod_ten",
+        "natural_iterates_in_checked_range"
+      ],
+      "natural_iterates_checked": [
+        0,
+        12
+      ],
+      "oeis_prefix": {
+        "sequence": "A396807",
+        "source": "https://oeis.org/A396807",
+        "terms_matched": 8
+      },
+      "parameter": 5
+    },
+    {
+      "coefficient_checks": 696,
+      "coefficient_sha256": "1c8fe15e425a89b45487896ada6d576b91f56f53a0957a080e02a964a3de3aa0",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        13,
+        283,
+        7939,
+        260749,
+        9566929,
+        381758659
+      ],
+      "named_checks": [],
+      "natural_iterates_checked": [
+        0,
+        14
+      ],
+      "oeis_prefix": null,
+      "parameter": 6
+    },
+    {
+      "coefficient_checks": 778,
+      "coefficient_sha256": "b4f9767efa2b947dddf89df9c4a6daf2820c6b798d33c544cbb5245713bdc0c6",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        15,
+        379,
+        12363,
+        472557,
+        20187357,
+        938195105
+      ],
+      "named_checks": [],
+      "natural_iterates_checked": [
+        0,
+        16
+      ],
+      "oeis_prefix": null,
+      "parameter": 7
+    },
+    {
+      "coefficient_checks": 860,
+      "coefficient_sha256": "d9c696d7e4214ce2aaf2fc95bda8e244f7b2cfd79d13ec8ee84ad746287f64b7",
+      "degree": 40,
+      "initial_coefficients": [
+        1,
+        1,
+        17,
+        489,
+        18185,
+        792945,
+        38656417,
+        2050605337
+      ],
+      "named_checks": [],
+      "natural_iterates_checked": [
+        0,
+        18
+      ],
+      "oeis_prefix": null,
+      "parameter": 8
+    }
+  ],
+  "result": "pass",
+  "schema_version": 1,
+  "scope": "Exact finite checks only; not an all-index proof or a Lean build",
+  "script_sha256": "69d821a1d06580023cbe6f1d887c27bb1eb5d154256584efeb0d761dfa50dafc"
+}

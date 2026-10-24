@@ -1,0 +1,211 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,enumitem}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Congruences for the scaled inverse series A393858},pdfauthor={Dev Goyal},pdfsubject={A393858; formal power series and Lean proofs}}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{3em}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\F}{\mathbb F}
+\newcommand{\coeff}[2]{[x^{#1}]#2}
+\title{Congruences for the scaled inverse series A393858}
+\author{Dev Goyal}
+\date{24 October 2026}
+\begin{document}
+\maketitle
+\begin{center}\fbox{\begin{minipage}{0.91\linewidth}
+\textbf{AI disclosure and review status.}
+ChatGPT (OpenAI) generated the mathematical arguments, formal proof code,
+and this manuscript from Dev Goyal's prompts. Dev Goyal is the sole human
+author and initiated the investigation. This consolidated presentation is
+AI-generated; independent human review of this presentation is pending.
+Source conjectures and prior results retain the credits given below.
+\end{minipage}}\end{center}
+
+\begin{abstract}
+For the scaled inverse series A393858 we prove that every
+positive-index coefficient is one modulo 7.
+We also prove that a coefficient is odd exactly when its index is a power of two.
+The source equation, coefficientwise interpretation of its quotient,
+existence, uniqueness, and the all-index proof are given explicitly.
+\end{abstract}
+\section{Source equation and theorem}
+For a positive integer $q$, consider the normalized series $G_q$ satisfying
+\begin{equation}\label{eq:scaled-source}
+ G_q\left(x-\frac{xG_q(qx)}q\right)=x,
+ \qquad G_q=x+O(x^2).
+\end{equation}
+The source A393858 of Paul D. Hanna is the case $q=6$
+\cite{oeis}. Put $a_n=[x^n]G_{6}$. Its source indices
+start at one and $a_0=0$. We prove
+\[
+ a_n\equiv1\pmod{7}\qquad(n\ge1).
+\]
+
+For every $n\ge0$ we also prove
+\[
+ a_n\text{ is odd}\quad\Longleftrightarrow\quad
+ n=2^j\text{ for some }j\ge0.
+\]
+Thus the parity statement includes $n=0$ and the initial term $n=1$.
+
+All series are formal: equality and congruence are coefficientwise, and
+composition $U(V)=\sum_{j\ge0}u_jV^j$ is used only when $V(0)=0$.
+Every coefficient then receives finitely many contributions.
+A series with constant coefficient one is a multiplicative unit:
+if $W(0)=0$, its inverse is $\sum_{j\ge0}(-W)^j$.
+This justifies the rational comparison series below without analytic
+convergence or division in a residue ring.
+\subsection{Removing the apparent division}
+
+If $U(x)=\sum_{n\ge1}u_nx^n$, define
+\[
+L_q(U)(x)=\sum_{n\ge1}q^{n-1}u_nx^n.
+\]
+For a nonzero integer $q$, this is exactly $U(qx)/q$. The coefficient
+definition makes sense over every commutative ring, without requiring
+that $q$ be invertible. Equation~\eqref{eq:scaled-source} therefore
+means
+\begin{equation}\label{eq:scaled-nodiv}
+G_q\bigl(x-xL_q(G_q)(x)\bigr)=x.
+\end{equation}
+
+\begin{lemma}\label{lem:scaled-unique}
+For any commutative ring $R$ with identity and any $q\in R$, equation
+\eqref{eq:scaled-nodiv} has a unique normalized solution in $R[[x]]$.
+Its construction commutes with ring homomorphisms.
+\end{lemma}
+
+\begin{proof}
+Write $G=x+\sum_{n\ge2}g_nx^n$ and
+$V=x-xL_q(G)$. The series $V$ is normalized. The coefficient $g_n$
+inside $V$ first occurs in degree $n+1$, because of the initial
+factor $x$. Thus the coefficient of degree $n$ in $V$ depends
+only on $g_2,\ldots,g_{n-1}$.
+
+In $G(V)=V+\sum_{j\ge2}g_jV^j$, the term $g_nV^n$ contributes
+exactly $g_n$ in degree $n$. The terms with $j<n$ depend only on
+earlier coefficients, and those with $j>n$ contribute nothing in
+that degree. Therefore the equation in degree $n$ has the form
+$g_n+P_n=0$, with $P_n$ determined by earlier coefficients and $q$.
+This gives existence and uniqueness by recursion, without division.
+It also shows that applying a ring homomorphism to the coefficients
+preserves the equation; uniqueness identifies the resulting solution.
+\end{proof}
+
+\subsection{The congruence and parity theorems}
+
+\begin{theorem}\label{thm:scaled-congruence}
+For every positive integer $q$,
+\[
+G_q(x)\equiv\frac{x}{1-x}\pmod{q+1}.
+\]
+In particular, every coefficient of positive degree is congruent to
+one modulo $q+1$.
+\end{theorem}
+
+\begin{proof}
+Work in $R=\Z/(q+1)\Z$, where $q=-1$. For $T=x/(1-x)$,
+\[
+L_{-1}(T)=x-x^2+x^3-\cdots=\frac{x}{1+x}.
+\]
+Hence
+\[
+x-xL_{-1}(T)=x-\frac{x^2}{1+x}=\frac{x}{1+x},
+\]
+and direct substitution gives
+\[
+T\left(\frac{x}{1+x}\right)
+=\frac{x/(1+x)}{1-x/(1+x)}=x.
+\]
+Thus $T$ is the normalized solution of the reduced equation.
+Lemma~\ref{lem:scaled-unique} identifies it with the reduction of
+$G_q$. This argument also covers composite moduli such as six
+and eight.
+\end{proof}
+
+\begin{theorem}\label{thm:scaled-parity}
+If $q$ is a positive even integer, then
+\[
+G_q(x)\equiv\sum_{j\ge0}x^{2^j}\pmod2.
+\]
+Equivalently, its coefficient of degree $n\ge0$ is odd if and only
+if $n$ is a power of two. If $q$ is odd, all positive-index
+coefficients of $G_q$ are odd.
+\end{theorem}
+
+\begin{proof}
+For even $q$, reduction modulo two gives $L_q(U)=x$ for every
+normalized $U$: all factors $q^{n-1}$ with $n\ge2$ vanish.
+Therefore the reduced equation is
+\[
+G_q(x+x^2)=x.
+\]
+Let $S(x)=\sum_{j\ge0}x^{2^j}$ over $\Z/2\Z$.
+The strictly increasing exponents make this a well-defined formal
+series. Repeated squaring in characteristic two gives
+$(x+x^2)^{2^j}=x^{2^j}+x^{2^{j+1}}$, and hence
+\[
+S(x+x^2)
+=\sum_{j\ge0}\bigl(x^{2^j}+x^{2^{j+1}}\bigr)=x.
+\]
+Every term beyond the first occurs twice and cancels. By uniqueness,
+the reduction of $G_q$ is $S$. Its support is exactly the powers
+of two, including $1=2^0$ and excluding zero.
+
+If $q$ is odd, then $q+1$ is even, so
+Theorem~\ref{thm:scaled-congruence} already gives oddness of every
+positive-index coefficient.
+\end{proof}
+
+
+\section{Application to A393858}
+Take $q=6$ in Theorem~\ref{thm:scaled-congruence}.
+Its modulus is $q+1=7$, so every positive-index
+coefficient has the asserted residue. The parameter is even, so Theorem~\ref{thm:scaled-parity}
+gives the precise power-of-two support modulo two. These are both
+source assertions, with no upper index bound.
+
+\section{Formal proof and scope}
+The accompanying entry file is \path{lean/Entries/A393858.lean}.
+It states the results with explicit Lean types and supplies proof terms
+using the complete shared implementation included in the collection.
+The manuscript is self-contained mathematically; the Lean entry file uses
+those ordinary library imports rather than duplicating the full foundation.
+
+The entry's named theorem interfaces are listed below. The namespace of
+each is \path{FinalCollection.A393858}.
+\begin{itemize}[leftmargin=1.5em,itemsep=1pt]
+\item \path{source_existence_uniqueness}
+\item \path{source_normalized}
+\item \path{source_equation}
+\item \path{a393858_mod_seven}
+\item \path{a393858_parity}
+\end{itemize}
+The preserved dependencies also contain all supporting constructions,
+coefficient identities, map-compatibility results, and inverse proofs.
+The collection pins Lean 4.19.0 and Mathlib revision
+\path{c44e0c8ee63ca166450922a373c7409c5d26b00b}.
+The verification report records fresh compilation and the transitive axiom
+audit. Finite numerical checks corroborate the definitions and indexing;
+the universally quantified Lean theorems establish the all-index claims.
+No assertion of worldwide novelty, OEIS acceptance, publication, or completed
+human review follows from these checks. The prose may use elementary
+identities that the formal proof establishes by a different algebraic route.
+
+\begin{thebibliography}{9}\raggedright
+\bibitem{oeis} P. D. Hanna, \emph{A393858}, The On-Line Encyclopedia of Integer
+Sequences. \url{https://oeis.org/A393858}. Source recorded in the retained
+proof collection, 24 October 2026.
+\bibitem{repo} D. Goyal, \emph{OEIS A396843 proof repository}.
+\url{https://github.com/dvgyl/oeis-a396843-proof}.
+Reference revision \path{995e55adcbe06b2a913e24f12ff73a7faf362f06}.
+\end{thebibliography}
+\end{document}

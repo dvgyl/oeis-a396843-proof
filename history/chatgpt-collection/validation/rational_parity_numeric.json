@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "python": "3.12.14",
+  "purpose": "Independent finite source-definition and parity corroboration; universal proof is in Lean.",
+  "source": "https://oeis.org/A396093",
+  "source_access_date": "2026-10-24",
+  "offset": 0,
+  "source_prefix_terms_matched": 27,
+  "direct_third_composition_indices": [
+    0,
+    80
+  ],
+  "independent_double_binomial_indices": [
+    0,
+    30
+  ],
+  "polynomial_identity_coefficients_checked": 18,
+  "complete_parity_pattern_indices": [
+    0,
+    2000
+  ],
+  "conjecture_1_parameter_indices": [
+    1,
+    1000
+  ],
+  "conjecture_2_parameter_indices": [
+    1,
+    1000
+  ],
+  "odd_residues_mod_10": [
+    1,
+    3,
+    7,
+    9
+  ]
+}

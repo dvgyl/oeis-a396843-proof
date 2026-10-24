@@ -1,0 +1,424 @@
+[
+  {
+    "oeis_id": "A396843",
+    "exit_code": 0,
+    "warnings": [],
+    "pages": 9,
+    "page_checks": [
+      {
+        "page": 1,
+        "word_count": 350,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 2,
+        "word_count": 451,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 3,
+        "word_count": 532,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 4,
+        "word_count": 420,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 5,
+        "word_count": 417,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 6,
+        "word_count": 359,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 7,
+        "word_count": 463,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 8,
+        "word_count": 294,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 9,
+        "word_count": 100,
+        "out_of_page_words": 0
+      }
+    ],
+    "contact_sheets": [
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396843/contact-1.png",
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396843/contact-2.png",
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396843/contact-3.png"
+    ],
+    "sha256_pdf": "342f0d9fcdad08dd17a0e5439933c8458a57669af3ff90d2b415bb2ffe1cac25",
+    "sha256_tex": "c8e56137d7d49425c626810c92984abd5d2b7b64c2b2e898d982226b9bb8b090"
+  },
+  {
+    "oeis_id": "A396844",
+    "exit_code": 0,
+    "warnings": [],
+    "pages": 8,
+    "page_checks": [
+      {
+        "page": 1,
+        "word_count": 395,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 2,
+        "word_count": 451,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 3,
+        "word_count": 532,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 4,
+        "word_count": 420,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 5,
+        "word_count": 417,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 6,
+        "word_count": 359,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 7,
+        "word_count": 463,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 8,
+        "word_count": 386,
+        "out_of_page_words": 0
+      }
+    ],
+    "contact_sheets": [
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396844/contact-1.png",
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396844/contact-2.png"
+    ],
+    "sha256_pdf": "0702518963e9cb69affc6a0013c6f890a2390e7a7297fe054abe33b9a1044485",
+    "sha256_tex": "c509709500b3a6fa4cea33561b27bfec5b8cabaa24b1173193ec88bd7137623e"
+  },
+  {
+    "oeis_id": "A396099",
+    "exit_code": 0,
+    "warnings": [],
+    "pages": 7,
+    "page_checks": [
+      {
+        "page": 1,
+        "word_count": 346,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 2,
+        "word_count": 453,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 3,
+        "word_count": 444,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 4,
+        "word_count": 372,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 5,
+        "word_count": 549,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 6,
+        "word_count": 331,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 7,
+        "word_count": 136,
+        "out_of_page_words": 0
+      }
+    ],
+    "contact_sheets": [
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396099/contact-1.png",
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396099/contact-2.png"
+    ],
+    "sha256_pdf": "8b3e3a4580fd89691804f4d1dcc9d9f49f523cca8d68e1ac36a9a9021c331d97",
+    "sha256_tex": "daa6ddfd7cdec7303f9cd88f348525b6631f6347d3366918a6a28ef8397a2cdb"
+  },
+  {
+    "oeis_id": "A396798",
+    "exit_code": 0,
+    "warnings": [],
+    "pages": 7,
+    "page_checks": [
+      {
+        "page": 1,
+        "word_count": 363,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 2,
+        "word_count": 453,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 3,
+        "word_count": 444,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 4,
+        "word_count": 372,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 5,
+        "word_count": 549,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 6,
+        "word_count": 311,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 7,
+        "word_count": 152,
+        "out_of_page_words": 0
+      }
+    ],
+    "contact_sheets": [
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396798/contact-1.png",
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396798/contact-2.png"
+    ],
+    "sha256_pdf": "3b01e39f352292f13da0fdde828472bc474dee4ea407c29919d0643df6113fb1",
+    "sha256_tex": "33cf6ce859242b74869d7887b242fc203429cd640daf55a2672d13ff4f1fed70"
+  },
+  {
+    "oeis_id": "A396807",
+    "exit_code": 0,
+    "warnings": [],
+    "pages": 7,
+    "page_checks": [
+      {
+        "page": 1,
+        "word_count": 348,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 2,
+        "word_count": 453,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 3,
+        "word_count": 444,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 4,
+        "word_count": 372,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 5,
+        "word_count": 549,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 6,
+        "word_count": 340,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 7,
+        "word_count": 29,
+        "out_of_page_words": 0
+      }
+    ],
+    "contact_sheets": [
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396807/contact-1.png",
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396807/contact-2.png"
+    ],
+    "sha256_pdf": "8dec667b64339e6f4f8a5d1e47c31e25f4bea9981192070e5765db3b9097f1c7",
+    "sha256_tex": "0a12f474e2be5f6b4778795905b3fb05f64b9b24653d7dbaba3c3140e16c49f9"
+  },
+  {
+    "oeis_id": "A396797",
+    "exit_code": 0,
+    "warnings": [],
+    "pages": 7,
+    "page_checks": [
+      {
+        "page": 1,
+        "word_count": 367,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 2,
+        "word_count": 453,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 3,
+        "word_count": 444,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 4,
+        "word_count": 372,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 5,
+        "word_count": 549,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 6,
+        "word_count": 358,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 7,
+        "word_count": 52,
+        "out_of_page_words": 0
+      }
+    ],
+    "contact_sheets": [
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396797/contact-1.png",
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A396797/contact-2.png"
+    ],
+    "sha256_pdf": "a05481fa99144465fc8ceb40d8ad497fb0412a4e74c4b127381b402b3c6bf773",
+    "sha256_tex": "34172dbb87577c6e4042c58fc040ba48b5676d8319fdb59ac8b03987e1f88b6f"
+  },
+  {
+    "oeis_id": "A393856",
+    "exit_code": 0,
+    "warnings": [],
+    "pages": 3,
+    "page_checks": [
+      {
+        "page": 1,
+        "word_count": 335,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 2,
+        "word_count": 482,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 3,
+        "word_count": 246,
+        "out_of_page_words": 0
+      }
+    ],
+    "contact_sheets": [
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A393856/contact-1.png"
+    ],
+    "sha256_pdf": "69df3cbcd6a5e38b22ac1abb25517b5e3bca699383df5d5939381418fb66b36c",
+    "sha256_tex": "4a33ebf81a31f4638f75bacfc4f8ef60743c901fade392ed34d79f4660ef26bf"
+  },
+  {
+    "oeis_id": "A393857",
+    "exit_code": 0,
+    "warnings": [],
+    "pages": 3,
+    "page_checks": [
+      {
+        "page": 1,
+        "word_count": 313,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 2,
+        "word_count": 454,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 3,
+        "word_count": 260,
+        "out_of_page_words": 0
+      }
+    ],
+    "contact_sheets": [
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A393857/contact-1.png"
+    ],
+    "sha256_pdf": "5354318492e222bc196eddf5aaffafc74928a48c47cfc5b61285a5cc698f6d6e",
+    "sha256_tex": "ecc800c20d25b05fdbfe84023f1aaf53218d5ef1f6d070d82c470997abc7b175"
+  },
+  {
+    "oeis_id": "A393858",
+    "exit_code": 0,
+    "warnings": [],
+    "pages": 3,
+    "page_checks": [
+      {
+        "page": 1,
+        "word_count": 335,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 2,
+        "word_count": 482,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 3,
+        "word_count": 246,
+        "out_of_page_words": 0
+      }
+    ],
+    "contact_sheets": [
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A393858/contact-1.png"
+    ],
+    "sha256_pdf": "fd397c3a4766be592da64421e989a8fdab5322858d1974bcdef6947148f1cdfa",
+    "sha256_tex": "835848b5338b18374fc17a803f450117f4d68e603a72edb8e70fca21bd7beb4e"
+  },
+  {
+    "oeis_id": "A393859",
+    "exit_code": 0,
+    "warnings": [],
+    "pages": 3,
+    "page_checks": [
+      {
+        "page": 1,
+        "word_count": 313,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 2,
+        "word_count": 454,
+        "out_of_page_words": 0
+      },
+      {
+        "page": 3,
+        "word_count": 260,
+        "out_of_page_words": 0
+      }
+    ],
+    "contact_sheets": [
+      "/workspace/scratch/cac44b94a8b1/tmp/pdfs/final_original/A393859/contact-1.png"
+    ],
+    "sha256_pdf": "fd8e24c79823472f245466f51f16c279e0cc2dfd682196cf6cae92ed89a544eb",
+    "sha256_tex": "333e276000287d7ed83a96ec49e6a405051e43cb2c5d8a6ac950554999fd17f6"
+  }
+]

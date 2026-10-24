@@ -1,0 +1,143 @@
+{
+  "status": "passed",
+  "review_type": "AI visual and semantic review; independent human review pending",
+  "completed_utc": "2026-10-24T18:42:37.436234+00:00",
+  "pdf_count": 11,
+  "total_pages": 39,
+  "entries": [
+    {
+      "oeis_id": "A396093",
+      "pages": 2,
+      "pdf_sha256": "da7984562387d72707492441cc634913e945ac7e1be52118239120efdec77c05",
+      "tex_sha256": "5a9a932c2d18c4fd0d0d8e248cc4d53b3719f16a232298501e6248070e58c65d",
+      "lean_sha256": "b254fcf7b82422e10401f0ed7288e439e3f6a8a8229f1568b0d4f245486460b9",
+      "all_pages_visually_inspected": true,
+      "page_bounds_check": "passed",
+      "new_theorem_count": 8,
+      "out_of_page_words": 0,
+      "source_id_and_disclosure_present": true
+    },
+    {
+      "oeis_id": "A389474",
+      "pages": 3,
+      "pdf_sha256": "646ec81fa6ef2bf938526344f46e01c1ca28c7a24f881bd6d8e3486b2e167abb",
+      "tex_sha256": "7fd0bff203c335a520d1170fc0c614a621105e0687853e1e69486fbef0010290",
+      "lean_sha256": "c12ebaed1d27c8a020472141a6ad041fddb0823e3ccb792e2db97e8a433182ec",
+      "all_pages_visually_inspected": true,
+      "page_bounds_check": "passed",
+      "new_theorem_count": 8,
+      "out_of_page_words": 0,
+      "source_id_and_disclosure_present": true
+    },
+    {
+      "oeis_id": "A389475",
+      "pages": 3,
+      "pdf_sha256": "9eac6226bac4b2131a3df5d4472852c280cdd867440fba659d7b356fb3a7edf4",
+      "tex_sha256": "ff3ebf8100f226599a2a0a555055df94e9fc3708df4e0602a73721128c2ea540",
+      "lean_sha256": "bb03dc2f8127c2f863b935818a883fe3355a334eedcdc4e01a51c822ac6097c1",
+      "all_pages_visually_inspected": true,
+      "page_bounds_check": "passed",
+      "new_theorem_count": 9,
+      "out_of_page_words": 0,
+      "source_id_and_disclosure_present": true
+    },
+    {
+      "oeis_id": "A396102",
+      "pages": 3,
+      "pdf_sha256": "4d6d156db6a391b04ef37126b17906e038e48362d715740d5c70bc84ac25e4cf",
+      "tex_sha256": "f77606a4ed9da98d59c10c77bf1071c1894fa8fcfaa7d2d7da6c63e79d7748ed",
+      "lean_sha256": "7c0c813ab08f848f164464a174c150769753a43bc673b0093a0e775def38ae48",
+      "all_pages_visually_inspected": true,
+      "page_bounds_check": "passed",
+      "new_theorem_count": 13,
+      "out_of_page_words": 0,
+      "source_id_and_disclosure_present": true
+    },
+    {
+      "oeis_id": "A052895",
+      "pages": 4,
+      "pdf_sha256": "29d5f92085e6bfb24c17af3cf7ad23ba5276dd5ec7b070f549ccee40b969bd61",
+      "tex_sha256": "a2684aca3b25846df25d94489aa1f47348476aa62110f10064cb800dd98ae7c3",
+      "lean_sha256": "198ae74be1aec15f138bf97a10634dcdc2b3e48097f428fcdfc0168018283693",
+      "all_pages_visually_inspected": true,
+      "page_bounds_check": "passed",
+      "new_theorem_count": 4,
+      "out_of_page_words": 0,
+      "source_id_and_disclosure_present": true
+    },
+    {
+      "oeis_id": "A064618",
+      "pages": 4,
+      "pdf_sha256": "d6d544e2922f5a80fd49ae5778bc1d544111211a7e91508bbeabf9d1ed190843",
+      "tex_sha256": "62b3fcfccc44572c0a667e3f4fbdfe60c9b29a1310ea5337f8528651026346be",
+      "lean_sha256": "bda6a09cf77677bccee98fe345573262f10152f2a331f182157ea3096106659f",
+      "all_pages_visually_inspected": true,
+      "page_bounds_check": "passed",
+      "new_theorem_count": 4,
+      "out_of_page_words": 0,
+      "source_id_and_disclosure_present": true
+    },
+    {
+      "oeis_id": "A354242",
+      "pages": 4,
+      "pdf_sha256": "cc130a07622d14d1da77a2ef9fa38e73242bb06416d972bd0df62eba768b16cc",
+      "tex_sha256": "7a6690b81bde039217ed4850a7650e4665dcb874ce4116ff2647a4ee632c44d6",
+      "lean_sha256": "4cf255356753d9cefd072d42f4c4bd325265564e71390010f8305ce7cd92b596",
+      "all_pages_visually_inspected": true,
+      "page_bounds_check": "passed",
+      "new_theorem_count": 4,
+      "out_of_page_words": 0,
+      "source_id_and_disclosure_present": true
+    },
+    {
+      "oeis_id": "A167137",
+      "pages": 4,
+      "pdf_sha256": "fdc06e1f0c54220dc17d637cde0c24b5aed35f260b1618d00fd3d7f4ce874279",
+      "tex_sha256": "f00470562de489ae8dc566cd399f79ceab374ae6ffd127783d69ad9e82ee13dc",
+      "lean_sha256": "1ebd85691c84b6721f97beb74f946d992c917d9723b82f013a78a69d9a664b27",
+      "all_pages_visually_inspected": true,
+      "page_bounds_check": "passed",
+      "new_theorem_count": 4,
+      "out_of_page_words": 0,
+      "source_id_and_disclosure_present": true
+    },
+    {
+      "oeis_id": "A305550",
+      "pages": 4,
+      "pdf_sha256": "b7c298d5ce0222d334f480189ac5ed97eeaa737cf7f8004f37c18b3e072a7a08",
+      "tex_sha256": "0280d2ba222423efff8935ea80ec213e5c855e85d151f783cd376f31621c0d39",
+      "lean_sha256": "d034e67b064c8c47eda44ed63334328da0ecd66f8725aeef3914632e18e4be48",
+      "all_pages_visually_inspected": true,
+      "page_bounds_check": "passed",
+      "new_theorem_count": 4,
+      "out_of_page_words": 0,
+      "source_id_and_disclosure_present": true
+    },
+    {
+      "oeis_id": "A306082",
+      "pages": 4,
+      "pdf_sha256": "eeb0929747390aed0354b80750e778b63eb240aaaa096d6a481a28c331fc7c0f",
+      "tex_sha256": "4b3bf653fe71711bcc1690e0c1d0ced30bbb0143cbc3aa87c1ef8294f92f0e1c",
+      "lean_sha256": "96f4d19a0b01c418562f53f8767e2287ba0170a770bd136c41728341ed9347a7",
+      "all_pages_visually_inspected": true,
+      "page_bounds_check": "passed",
+      "new_theorem_count": 5,
+      "out_of_page_words": 0,
+      "source_id_and_disclosure_present": true
+    },
+    {
+      "oeis_id": "A080253",
+      "pages": 4,
+      "pdf_sha256": "1d5e93ae33c61e3e57e2fe01f544c6ee8ca4ac56ea3630dcb898d4aae38dc507",
+      "tex_sha256": "01618cebf3f67b435d7ec73b6599005638eb3a3e156e46e7567597a8e8402c08",
+      "lean_sha256": "b6e010f9fd4e61873e08e3f68705868febae235f3cc1c76c0d236746b148f03a",
+      "all_pages_visually_inspected": true,
+      "page_bounds_check": "passed",
+      "new_theorem_count": 7,
+      "out_of_page_words": 0,
+      "source_id_and_disclosure_present": true
+    }
+  ],
+  "visual_method": "All 39 pages rendered and inspected in contact sheets at 1.25 scale. After the first final prose clarification, 14 changed pages were rerendered and visually reinspected; the other 25 page rasters were byte-identical. A subsequent independent semantic review suggested exposition improvements in A396102 and A052895; their latest 7 pages were rebuilt, rerendered, and visually reinspected. No clipping, overlap, missing glyphs, or mathematical typesetting defects observed. All final PDF words lie within their page bounds.",
+  "latex_warnings": []
+}

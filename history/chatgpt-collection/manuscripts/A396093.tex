@@ -1,0 +1,146 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=26mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{3em}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\F}{\mathbb F}
+\newcommand{\ps}[1]{#1[[x]]}
+\hypersetup{pdftitle={A396093: A complete parity classification},pdfauthor={Dev Goyal}}
+\title{A396093\\[3pt]A complete parity classification}
+\author{Dev Goyal}
+\date{24 October 2026}
+\begin{document}
+\maketitle
+\begin{center}
+\fbox{\begin{minipage}{0.91\linewidth}\small
+\textbf{AI contribution and review status.}
+ChatGPT (OpenAI) generated the mathematical exposition, proof development,
+Lean interfaces, and checks for this collection in response to Dev Goyal's
+prompts. Dev Goyal is the sole human author. Independent human review is
+pending. Original sequence authors, known mathematical results, and adapted
+upstream code retain their separate credits. This document makes no claim
+of publication, OEIS acceptance, or worldwide priority.
+\end{minipage}}
+\end{center}
+\begin{abstract}
+The third compositional iterate of $x/(1-x)^2$ has odd coefficients exactly at indices congruent to $1,3,7,9$ modulo ten. We prove this full classification and both parity assertions recorded in the source entry. The proof reduces an actual integral rational composition to a characteristic-two denominator identity.
+\end{abstract}
+\section{A396093: a complete parity classification}
+
+The original definition is
+\[
+B(x)=\frac{x}{(1-x)^2},\qquad A=B\circ B\circ B,
+\qquad a_n=[x^n]A\in\Z.
+\]
+The offset is zero, so $a_0=0$. These definitions, rather than a conjectured
+coefficient pattern, are the starting point of the Lean construction.
+
+\begin{theorem}\label{thm:parity}
+For every $n\ge0$,
+\[
+a_n\equiv
+\begin{cases}
+1\pmod2,&n\equiv1,3,7,9\pmod{10},\\
+0\pmod2,&\text{otherwise}.
+\end{cases}
+\]
+Consequently $a_{2n}$ is even for every $n\ge0$. For $n\ge1$,
+\[
+a_{2n-1}\text{ is even}
+\quad\Longleftrightarrow\quad n\equiv3\pmod5
+\quad\Longleftrightarrow\quad n=5k-2\text{ for some }k\ge1.
+\]
+\end{theorem}
+
+\begin{proof}
+Reduce coefficients to $\F_2$. In characteristic two,
+$B(x)=x/(1+x^2)$. If $T=P/D$ has zero constant coefficient and $D(0)=1$,
+then
+\[
+B(T)=\frac{PD}{D^2+P^2}.
+\]
+Every denominator has constant coefficient one and is therefore an
+invertible formal series. Applying this identity gives
+\[
+\begin{array}{c|c|c}
+j & \text{numerator of }B^{\circ j} & \text{denominator}\\ \hline
+1 & x & 1+x^2\\
+2 & x+x^3 & 1+x^2+x^4\\
+3 & x+x^7 & 1+x^2+x^4+x^6+x^8.
+\end{array}
+\]
+Multiplication of the last numerator and denominator by $1+x^2$ gives
+the exact identity
+\begin{equation}\label{eq:parityrational}
+A(x)(1+x^{10})=x+x^3+x^7+x^9\qquad\text{in }\ps{\F_2}.
+\end{equation}
+Since $(1+x^{10})^{-1}=\sum_{j\ge0}x^{10j}$ in this ring,
+\eqref{eq:parityrational} yields precisely the four stated residue classes.
+Substitute $2n$ and $2n-1$ to obtain the two original assertions. For
+the latter, $2n-1$ is the omitted odd residue class $5$ modulo ten
+exactly when $n\equiv3\pmod5$.
+\end{proof}
+
+The formal proof works with the integral series $x(\sum_{n\ge0}x^n)^2$
+and its actual third composition. It proves that reduction commutes with
+composition. The denominator cancellation in
+\eqref{eq:parityrational} uses a constructed unit inverse; it does not
+assume cancellation in an arbitrary ring. The final Lean statements
+retain the source's $n\ge1$ and $k\ge1$ restrictions where subtraction
+of natural numbers occurs.
+
+\section{Lean proof and exact scope}
+The dedicated entry file is \path{lean/Entries/A396093.lean}. Its declarations lie in namespace \texttt{FinalCollection.A396093}. The principal checked endpoints are:
+\begin{itemize}[nosep]
+\item \texttt{source\_denominator}: the literal rational denominator identity.
+\item \texttt{source\_composition}: the threefold composition defining the sequence.
+\item \texttt{reduced\_denominator}: the characteristic-two period identity.
+\item \texttt{complete\_parity}: the all-index residue classification.
+\item \texttt{even\_iff}: the equivalent integer-evenness characterization.
+\item \texttt{even\_indices}: the first source assertion, including index zero.
+\item \texttt{odd\_indices}: the exact positive-index source formulation.
+\end{itemize}
+The full implementations are in \path{lean/More/RationalParity.lean}.
+The source offset is zero. The coefficient statement concerns the actual third iterate, not a separately postulated periodic sequence. The two source assertions were labeled conjectures in the retrieved entry; the full result here includes every $n\ge0$.
+
+The companion is a separate, explicitly typed Lean entry file. Its proofs
+invoke the preserved implementation modules; the complete dependency source
+is included in the same archive. Shared lemmas are reused rather than
+assumed. The entry file is not a self-contained replacement for Mathlib or
+the supplied common library.
+
+The project pins Lean 4.19.0 and Mathlib revision
+\begin{center}\small\ttfamily
+c44e0c8ee63ca166450922a373c7409c5d26b00b.
+\end{center}
+The collection checker recompiles the proof sources and audits the
+theorems' transitive axiom dependencies. Only \texttt{propext},
+\texttt{Classical.choice}, and \texttt{Quot.sound} are permitted.
+The delivered verification reports record the actual successful runs.
+Finite numerical checks are corroboration; the displayed conclusions are
+unbounded theorems. An AI review of source correspondence does not replace
+independent human review.
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{oeis} OEIS Foundation, entry A396093,
+\url{https://oeis.org/A396093}. Source checked 24 October 2026.
+The source sequence and selected conjectures are credited to Paul D. Hanna.
+\bibitem{repo} D. Goyal, supplied reference repository,
+\url{https://github.com/dvgyl/oeis-a396843-proof}.
+This separate presentation belongs to the final collected proof package;
+no earlier DOI is reassigned to it.
+\end{thebibliography}
+\end{document}

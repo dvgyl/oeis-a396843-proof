@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "python": "3.12.14",
+  "purpose": "Finite corroboration only; all-index results are separate Lean theorems.",
+  "source_access_date": "2026-10-24",
+  "A380056": {
+    "source": "https://oeis.org/A380056",
+    "offset": 1,
+    "source_prefix_terms_matched": 22,
+    "integer_binomial_convolution_indices": [
+      0,
+      400
+    ],
+    "independent_rational_quotient_and_literal_equation_degrees": [
+      0,
+      80
+    ],
+    "modulo_four_indices": [
+      1,
+      400
+    ],
+    "modulo_five_formula_and_exact_divisibility_indices": [
+      0,
+      400
+    ],
+    "modulo_five_period": 4,
+    "modulo_five_residues_by_index_mod_four": [
+      0,
+      1,
+      1,
+      3
+    ],
+    "first_twelve_terms": [
+      1,
+      1,
+      13,
+      25,
+      441,
+      1261,
+      30213,
+      115025,
+      3529201,
+      16792021,
+      629401213,
+      3593565625
+    ]
+  }
+}
