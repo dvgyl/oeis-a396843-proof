@@ -18,7 +18,7 @@ The formalization was written by ChatGPT (OpenAI, GPT-6 with Pro reasoning).
 | [`Hanna/`](Hanna/) | The family $`A_m(xA_m-mxA_m^2)=x^2`$: parity, residues modulo $`m^2`$, binary-digit divisibility and prime exponents (A396843, A396844). |
 | [`Hanna/Related/`](Hanna/Related/) | Scaled inverses $`A(x-x\,A(qx)/q)=x`$ (A393856–A393859). |
 | [`Consecutive/`](Consecutive/) | Consecutive iterates $`F=x+F^{\circ r}F^{\circ(r+1)}`$ modulo $`2r`$, including negative iterates (A396099, A396798, A396807). |
-| [`Families/`](Families/) | The remaining families: theta substitutions and rational theta sums (A378580, A378581, A380060, A380680), Catalan-type equations (A393171, A393172, A392210, A389536, A397588, A195194), reversions with an exact halving step (A389474, A389475, A389537, A389542), and A396093, A396102, A380056. |
+| [`Families/`](Families/) | The remaining families: theta substitutions, rational theta sums and the bilateral theta-type equation (A378580, A378581, A380060, A380680, A355872), Catalan-type equations (A393171, A393172, A392210, A389536, A397588, A195194), reversions with an exact halving step (A389474, A389475, A389537, A389542), and A396093, A396102, A380056, A397346, A394576. |
 
 ## Building
 
@@ -27,14 +27,14 @@ Install [elan](https://github.com/leanprover/elan), which selects the pinned Lea
 ```sh
 lake exe cache get   # optional: download prebuilt Mathlib instead of compiling it
 lake build           # the libraries Hanna, Consecutive, Related and Families
-lake build Entries   # the 26 entry files
+lake build Entries   # the 29 entry files
 ```
 
 To check a single entry, run `lake env lean Entries/A396843.lean`.
 
 ## Axiom audit
 
-[`../verification/AxiomAudit.lean`](../verification/AxiomAudit.lean) asks Lean for the axioms behind each of the 224 theorems in `Entries/` and 5 general theorems cited in the papers:
+[`../verification/AxiomAudit.lean`](../verification/AxiomAudit.lean) asks Lean for the axioms behind each of the 244 theorems in `Entries/` and 5 general theorems cited in the papers:
 
 ```sh
 lake env lean ../verification/AxiomAudit.lean > ../verification/results/axiom_audit.txt

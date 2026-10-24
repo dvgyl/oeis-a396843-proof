@@ -1,0 +1,384 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+\setlist{itemsep=2pt,topsep=3pt}
+\raggedbottom
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\ps}[1]{#1[[x]]}
+\newcommand{\coeff}[2]{[x^{#1}]\,#2}
+\newcommand{\hl}[1]{\textbf{#1}}
+\newcommand{\para}[1]{\par\medskip\noindent\textbf{#1}\enspace}
+\hypersetup{pdftitle={Residues modulo 8 for a series defined by a self-referential exponential},pdfauthor={Dev D. Goyal},pdfsubject={OEIS A397346}}
+\title{Residues modulo $8$ for a series defined by a self-referential exponential\\[6pt]\large A proof of the conjecture in OEIS A397346}
+\author{Dev D. Goyal}
+\date{October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The sequence A397346 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Paul~D.~Hanna, lists the
+coefficients of the power series $A(x)=\sum_{n\ge0}a(n)x^n=1+x+4x^2+66x^3+2248x^4+\cdots$ determined by
+$A(x)=\exp\bigl(x+\sum_{n\ge2}\frac{2n^2-1}{2n^2}a(n)x^n\bigr)$. The entry conjectures that, from $n=2$ on, the
+remainders of $a(n)$ on division by $8$ repeat the block $4,2,0,2$. We prove this. We first show that the equation is
+equivalent to a recurrence recorded in the entry, which shows that $a(n)$ is an integer divisible by $n$. For the
+quotients $b(n)=a(n)/n$ we prove the stronger statement that $b(n)\equiv6\pmod8$ when $n\equiv3\pmod4$ and
+$b(n)\equiv2\pmod8$ otherwise, for $n\ge2$. The results have been checked by computer, and the recurrence and the
+congruences are proved formally in the Lean proof assistant.
+\end{abstract}
+\begin{center}\begin{minipage}{0.88\linewidth}\small
+\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
+ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
+Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
+every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
+The section ``About this paper'' at the end gives the details.
+\end{minipage}\end{center}
+
+\section{Introduction}
+
+\subsection{The sequence}\label{sec:sequence}
+The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a public database of integer sequences.
+Many entries record \emph{conjectures}: patterns observed in the data that the contributor could not prove. This paper
+concerns entry A397346~\cite{oeis}, contributed by Paul~D.~Hanna in 2026, which reads in part:
+\begin{quote}\small\ttfamily\raggedright O.g.f. satisfies A(x) = exp( x + Sum\_\{n>=2\} (2*n\^{}2-1) * a(n)*x\^{}n / (2*n\^{}2) ).\par\smallskip Conjecture: a(n) == [4,2,0,2] repeating (mod 8) for n >= 2.\par\smallskip (7) a(n) = 2*n*a(n-1) + n*Sum\_\{k=1..n-2\} (2*(k+1)\^{}2-1)/(k+1) * a(k+1)*a(n-k-1) for n > 1, with a(0) = a(1) = 1.\par\smallskip\hfill\textrm{--- OEIS A397346, Paul D. Hanna, June 2026}\end{quote}
+
+Here ``O.g.f.''\ stands for \emph{ordinary generating function}, the series $A(x)=\sum_{n\ge0}a(n)x^n$. Thus
+\begin{equation}\label{eq:source}
+A(x)=\exp H(x),\qquad H(x)=x+\sum_{n\ge2}\frac{2n^2-1}{2n^2}\,a(n)\,x^n .
+\end{equation}
+The equation is self-referential: the unknown coefficients $a(n)$ appear on both sides. The third line quoted is formula
+(7) of the entry, a recurrence for $a(n)$; Lemma~\ref{lem:equiv} below proves that it is equivalent to
+\eqref{eq:source}. The first terms are 1, 1, 4, 66, 2248, 121690, 9370716, 966649250, \dots{} (from $n=0$).
+
+\subsection{The question}
+The conjecture says that from $n=2$ on, $a(n)$ modulo $8$ repeats $4,2,0,2$. The table shows the first terms; the
+indices in bold are $n\equiv3\pmod4$. The last row shows the remainders of the quotients $b(n)=a(n)/n$, which turn out
+to be simpler.
+\begin{center}\small\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{5.4em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & 2 & \hl{3} & 4 & 5 & 6 & \hl{7} & 8 & 9 & 10 & \hl{11} & 12 & 13 & 14 & \hl{15} & 16 & 17 \\ \midrule
+$a(n)\bmod 8$ & 4 & \hl{2} & 0 & 2 & 4 & \hl{2} & 0 & 2 & 4 & \hl{2} & 0 & 2 & 4 & \hl{2} & 0 & 2 \\
+$\frac{a(n)}{n}\bmod 8$ & 2 & \hl{6} & 2 & 2 & 2 & \hl{6} & 2 & 2 & 2 & \hl{6} & 2 & 2 & 2 & \hl{6} & 2 & 2 \\
+\bottomrule
+\end{tabular}
+\\[4pt]
+\begin{tabular}{>{\raggedright\arraybackslash}p{5.4em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & 18 & \hl{19} & 20 & 21 & 22 & \hl{23} & 24 & 25 & 26 & \hl{27} & 28 & 29 & 30 & \hl{31} & 32 & 33 \\ \midrule
+$a(n)\bmod 8$ & 4 & \hl{2} & 0 & 2 & 4 & \hl{2} & 0 & 2 & 4 & \hl{2} & 0 & 2 & 4 & \hl{2} & 0 & 2 \\
+$\frac{a(n)}{n}\bmod 8$ & 2 & \hl{6} & 2 & 2 & 2 & \hl{6} & 2 & 2 & 2 & \hl{6} & 2 & 2 & 2 & \hl{6} & 2 & 2 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{What this paper proves}
+\textbf{Main result} (Theorem~\ref{thm:main}). \emph{Equation \eqref{eq:source} has exactly one solution. Its
+coefficients $a(n)$ are integers, $n$ divides $a(n)$ for every $n\ge1$, and for $n\ge2$ the quotient $b(n)=a(n)/n$
+satisfies}
+\[
+b(n)\equiv\begin{cases}6\pmod8,&n\equiv3\pmod4,\\2\pmod8,&\text{otherwise}.\end{cases}
+\]
+Multiplying by $n$ gives the conjecture of the entry (Corollary~\ref{cor:conj}).
+
+\subsection{What was known}
+The entry records several equivalent formulas for $A(x)$, including the recurrence quoted above, and an observation that
+$a(n)/(2^n\,n!^2)$ appears to tend to a nonzero limit. When the entry was checked on 24~October~2026, the congruence was
+still labelled as a conjecture. We are not aware of an earlier proof.
+
+\subsection{Why it is interesting}
+Equations in which a generating function is defined through its own coefficients are a recurring theme in the OEIS, and
+the coefficients they produce grow very quickly (here roughly like $2^n\,n!^2$). Divisibility and congruence properties
+of such numbers are not visible from the definition, which involves the fractions $\frac{2n^2-1}{2n^2}$ and an
+exponential. The proof shows how to remove the denominators: first pass to an equivalent recurrence, then divide out the
+factor $n$, and only then reduce modulo $8$.
+
+\subsection{How to read this paper}
+Section~\ref{sec:background} recalls power series, the formal derivative and the formal exponential.
+Section~\ref{sec:results} states the results and Section~\ref{sec:proofs} proves them. Section~\ref{sec:checks}
+describes the computer checks and the formal proof, including what is proved in Lean and what only on paper, and
+Section~\ref{sec:discussion} discusses the scope of the result.
+\section{Background}\label{sec:background}
+This section collects the definitions and facts used later. Readers who know formal power series and congruences can skip it and return when needed.
+\subsection{Formal power series}
+A \emph{formal power series} is an expression
+\[
+U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots ,
+\]
+determined by its sequence of coefficients $u_0,u_1,u_2,\dots$. No number is ever substituted for $x$, so questions
+of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
+when all their coefficients are equal.
+
+Series are added coefficient by coefficient and multiplied like polynomials:
+\[
+\coeff{n}{(UV)}=u_0v_n+u_1v_{n-1}+\cdots+u_nv_0 .
+\]
+Each coefficient of a product is a finite sum. For example, $(1-x)(1+x+x^2+x^3+\cdots)=1$, so $1+x+x^2+\cdots$ is
+the \emph{multiplicative inverse} of $1-x$, written $\frac{1}{1-x}$. More generally, every series $D$ with constant term
+$1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determined one at a time by $D\cdot\frac1D=1$
+using only addition, subtraction and multiplication. Every fraction in this paper has a denominator of this kind, so it
+denotes a power series.
+
+We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
+$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
+constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+
+\subsection{The formal derivative and the formal exponential}
+The \emph{formal derivative} of $U=\sum_nu_nx^n$ is $U'=\sum_{n\ge1}nu_nx^{n-1}$. It obeys the usual rules
+$(U+V)'=U'+V'$ and $(UV)'=U'V+UV'$, which are checked coefficient by coefficient.
+
+If $H$ has rational coefficients and constant term $0$, the \emph{formal exponential}
+\[
+\exp H=\sum_{r\ge0}\frac{H^r}{r!}
+\]
+is a well-defined power series: $H^r$ has no terms below degree $r$, so each coefficient is a finite sum. Since
+$(H^r)'=rH^{r-1}H'$, differentiating term by term gives $(\exp H)'=H'\exp H$, and $\exp H$ has constant term $1$.
+
+\begin{lemma}\label{lem:ode}
+Let $H$ have rational coefficients and constant term $0$. Then $\exp H$ is the only series $F$ with rational coefficients
+such that $F(0)=1$ and $F'=FH'$.
+\end{lemma}
+
+\begin{proof}
+Write $F=\sum_nf_nx^n$ and $H'=\sum_ih_ix^i$. Comparing the coefficients of $x^n$ in $F'=FH'$ gives
+$(n+1)f_{n+1}=\sum_{k=0}^{n}f_k\,h_{n-k}$, where the right side involves only $f_0,\dots,f_n$.
+So $f_{n+1}$ is determined by the earlier coefficients (we may divide by $n+1$ because the coefficients are rational),
+and $f_0=1$ is given. Hence there is at most one such $F$, and $\exp H$ is one.
+\end{proof}
+
+\subsection{Remainders and congruences}
+For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $22\equiv6\pmod8$, since both leave remainder $6$. The
+remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
+$a$ is odd is the same as saying $a\equiv1\pmod2$.
+
+Addition and multiplication are compatible with congruences, so the residues $0,1,\dots,m-1$, added and multiplied
+modulo $m$, form a ring, written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we have $1+1=0$,
+so addition and subtraction coincide.
+
+For power series with integer coefficients, $U\equiv V\pmod m$ means that \emph{every} coefficient of $U-V$ is
+divisible by $m$. Equivalently, the two series become equal when every coefficient is replaced by its residue; we call
+this \emph{reducing} the series modulo $m$. The key fact is the following.
+
+\emph{Reduction modulo $m$ is compatible with all the operations above.} To reduce a sum, a product, a substitution, or
+an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. This holds because every
+coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
+multiplying, and these operations are compatible with remainders.
+
+\section{Results}\label{sec:results}
+
+\begin{theorem}\label{thm:main}
+There is exactly one sequence of rational numbers $a(0),a(1),\dots$ satisfying \eqref{eq:source}. Its terms are
+integers, $a(0)=a(1)=1$, and $n$ divides $a(n)$ for every $n\ge1$. The quotients $b(n)=a(n)/n$ satisfy, for every $n\ge2$,
+\begin{equation}\label{eq:bres}
+b(n)\equiv\begin{cases}6\pmod8,&n\equiv3\pmod4,\\2\pmod8,&n\not\equiv3\pmod4.\end{cases}
+\end{equation}
+\end{theorem}
+
+\begin{corollary}[Hanna's conjecture]\label{cor:conj}
+For every $k\ge0$,
+\[
+a(4k+2)\equiv4,\qquad a(4k+3)\equiv2,\qquad a(4k+4)\equiv0,\qquad a(4k+5)\equiv2\pmod8 .
+\]
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:main}, $a(n)=n\,b(n)$. For $n=4k+2$: $(4k+2)\cdot2\equiv4$. For $n=4k+3$: $(4k+3)\cdot6=24k+18\equiv2$.
+For $n=4k+4$: $(4k+4)\cdot2\equiv0$. For $n=4k+5$: $(4k+5)\cdot2\equiv2$. All congruences are modulo $8$.
+\end{proof}
+
+\section{Proofs}\label{sec:proofs}
+
+\para{The idea in brief.} Differentiating \eqref{eq:source} turns it into a recurrence for $a(n)$ (formula (7) of the
+entry), which contains only the fractions $\frac{2j^2-1}{j}$. Writing $a(n)=n\,b(n)$ removes these fractions, and gives a
+recurrence for $b(n)$ with integer coefficients. Modulo $8$, every product $b(j)\,b(n-j)$ of two terms with $j,n-j\ge2$ is
+$4$, and the recurrence collapses to $b(n)\equiv-b(n-1)+(\text{an explicit correction})$, which can be checked in the four
+classes of $n$ modulo $4$.
+
+\begin{lemma}\label{lem:equiv}
+A sequence of rational numbers satisfies \eqref{eq:source} if and only if $a(0)=a(1)=1$ and, for every $n\ge2$,
+\begin{equation}\label{eq:rec}
+a(n)=2n\,a(n-1)+n\sum_{j=2}^{n-1}\frac{2j^2-1}{j}\,a(j)\,a(n-j).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Suppose \eqref{eq:source} holds. The constant term gives $a(0)=1$, and differentiating gives $A'=AH'$. Here
+$H'=1+\sum_{j\ge2}\frac{2j^2-1}{2j}a(j)x^{j-1}$. The constant term of $A'=AH'$ gives $a(1)=a(0)=1$. For $n\ge2$, the
+coefficient of $x^{n-1}$ gives
+\begin{equation}\label{eq:coef}
+n\,a(n)=a(n-1)+\sum_{j=2}^{n-1}\frac{2j^2-1}{2j}\,a(j)\,a(n-j)+\frac{2n^2-1}{2n}\,a(n),
+\end{equation}
+where the last term is the summand $j=n$ (with $a(0)=1$). Moving it to the left, the coefficient of $a(n)$ becomes
+$n-\frac{2n^2-1}{2n}=\frac1{2n}$; multiplying by $2n$ gives \eqref{eq:rec}.
+
+Conversely, suppose $a(0)=a(1)=1$ and \eqref{eq:rec} holds. Reading the computation backwards gives \eqref{eq:coef} for
+every $n\ge2$, and together with $a(1)=a(0)$ this says $A'=AH'$, where $H$ is defined from the sequence as in
+\eqref{eq:source}. Since $A(0)=1$, Lemma~\ref{lem:ode} gives $A=\exp H$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+\emph{Existence, uniqueness and integrality.} Recurrence \eqref{eq:rec} determines $a(n)$ from $a(0),\dots,a(n-1)$, so it
+has exactly one solution, and by Lemma~\ref{lem:equiv} so does \eqref{eq:source}. Define integers $b(n)$ by $b(1)=1$ and,
+for $n\ge2$,
+\begin{equation}\label{eq:brec}
+b(n)=2(n-1)\,b(n-1)+\sum_{j=2}^{n-1}(2j^2-1)(n-j)\,b(j)\,b(n-j).
+\end{equation}
+Put $a(0)=1$ and $a(n)=n\,b(n)$ for $n\ge1$. Substituting $a(j)=j\,b(j)$ into \eqref{eq:rec} and dividing by $n$ gives
+exactly \eqref{eq:brec}, so this sequence satisfies \eqref{eq:rec}. By uniqueness it is the solution, which is therefore
+integral with $n\mid a(n)$.
+
+\emph{The residues.} We prove \eqref{eq:bres} by strong induction on $n\ge2$; note $b(2)=2$. Let $n\ge3$. The summand
+$j=n-1$ of \eqref{eq:brec} is $(2(n-1)^2-1)\,b(n-1)$, because $b(1)=1$. Combining it with the first term,
+\begin{equation}\label{eq:split}
+b(n)=\bigl(2n(n-1)-1\bigr)\,b(n-1)+\sum_{j=2}^{n-2}(2j^2-1)(n-j)\,b(j)\,b(n-j).
+\end{equation}
+In the remaining sum, both $j$ and $n-j$ lie between $2$ and $n-2$, so by induction $b(j)$ and $b(n-j)$ are each $2$ or
+$6$ modulo $8$, and their product is $4$ modulo $8$ (as $2\cdot2$, $2\cdot6$ and $6\cdot6$ all are). Since $2j^2-1$ is odd,
+each summand is $\equiv4(n-j)\pmod8$. Also $2n(n-1)$ is divisible by $4$ and $b(n-1)$ is even, so the first term is
+$\equiv-b(n-1)$. Using $\sum_{j=2}^{n-2}(n-j)=\sum_{i=2}^{n-2}i=\frac{(n-2)(n-1)}2-1$, we obtain
+\[
+b(n)\equiv-b(n-1)+2(n-2)(n-1)-4\pmod 8 .
+\]
+(For $n=3$ the sum is empty and the correction $2\cdot1\cdot2-4$ is $0$, so the formula holds there too.) The four cases:
+\begin{center}\small\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{cccc}
+\toprule
+$n\bmod4$ & $b(n-1)\bmod8$ (induction) & $2(n-2)(n-1)-4\bmod8$ & $b(n)\bmod8$\\
+\midrule
+$0$ & $6$ & $0$ & $2$\\
+$1$ & $2$ & $4$ & $2$\\
+$2$ & $2$ & $4$ & $2$\\
+$3$ & $2$ & $0$ & $6$\\
+\bottomrule
+\end{tabular}
+\end{center}
+(For $n=3$ the value $b(2)=2$ is used directly.) This is \eqref{eq:bres}, which completes the induction.
+\end{proof}
+
+\section{Checking the results}\label{sec:checks}
+
+A mathematical proof can contain mistakes, so the results were checked in two independent ways.
+
+\para{Numerical check.}
+We computed $a(n)$ directly from the definition \eqref{eq:source}, with exact rational arithmetic, for $n<61$:
+the coefficient of $x^n$ in $\log A$ must equal $\frac{2n^2-1}{2n^2}a(n)$, which determines $a(n)$ from the earlier
+terms. This reproduces all 18 terms printed in the OEIS entry, and confirms that the terms are integers. We then computed
+$a(n)$ from \eqref{eq:rec} for $n\le400$; the two computations agree for $n<61$, and the computation confirms
+$n\mid a(n)$, the residues of Corollary~\ref{cor:conj}, and \eqref{eq:bres} throughout that range.
+The computation was done with the PARI/GP computer algebra system, using code that was written separately from the
+formal proofs (file \texttt{verification/independent\_checks.gp} in the accompanying repository~\cite{repo}).
+A computation can only test finitely many cases, so it is a check on the definitions and on the indexing, not a proof.
+
+\para{Formal proof in Lean.}
+Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
+this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
+mathematics. The statements are collected in the file \texttt{lean/Entries/A397346.lean} of the repository,
+in the namespace \texttt{OEIS.A397346}. In Lean the sequence is defined by the recurrence \eqref{eq:rec}, formula (7) of the OEIS entry, and the
+identity $A'=AH'$ is proved for it. The last step of Lemma~\ref{lem:equiv}, from $A'=AH'$ to $A=\exp H$
+(Lemma~\ref{lem:ode}), is proved in this paper but not in Lean. The proofs are in
+\texttt{lean/Families/ExpRecurrence.lean} (namespace \texttt{Families.ExpRecurrence}).
+The table lists where each result of this paper is proved.
+\begin{center}\small\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
+\toprule
+Statement in this paper & Lean theorem(s)\\
+\midrule
+The sequence satisfies \eqref{eq:rec} and has the initial values $a(0)=a(1)=1$ & \texttt{canonical\_\allowbreak{}literal\_\allowbreak{}recurrence}, \texttt{displayed\_\allowbreak{}initial\_\allowbreak{}values} \\
+\eqref{eq:rec} has exactly one rational solution & \texttt{literal\_\allowbreak{}recurrence\_\allowbreak{}existence\_\allowbreak{}uniqueness} \\
+Every rational solution of \eqref{eq:rec} is integral, $n\mid a(n)$, and Corollary~\ref{cor:conj} holds & \texttt{every\_\allowbreak{}source\_\allowbreak{}solution\_\allowbreak{}is\_\allowbreak{}integer\_\allowbreak{}and\_\allowbreak{}has\_\allowbreak{}the\_\allowbreak{}conjectured\_\allowbreak{}residues} \\
+Corollary~\ref{cor:conj} & \texttt{original\_\allowbreak{}all\_\allowbreak{}index\_\allowbreak{}conjecture} \\
+Theorem~\ref{thm:main}, the residues \eqref{eq:bres} & \texttt{stronger\_\allowbreak{}quotient\_\allowbreak{}congruence} \\
+The differential equation $A'=AH'$ of Lemma~\ref{lem:equiv} & \texttt{exact\_\allowbreak{}source\_\allowbreak{}differential\_\allowbreak{}identity} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
+that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+(\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
+exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
+so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+(Section~\ref{sec:sequence}).
+
+\section{Discussion}\label{sec:discussion}
+
+\para{Scope.} Theorem~\ref{thm:main} settles the congruence conjecture of the entry. It does not address the observed
+limit of $a(n)/(2^n\,n!^2)$, which concerns the size of $a(n)$.
+
+\para{Modulo $16$.} A computer calculation suggests that the pattern continues one level further: for $2\le n<200$, the
+remainders of $a(n)$ modulo $16$ repeat $4,2,8,10,12,2,0,2$ with period $8$, and those of $b(n)$ repeat
+$2,6,2,2,10,14,2,2$. The argument above would need to keep track of the products $b(j)\,b(n-j)$ modulo $16$, which are no
+longer constant.
+
+\para{The role of the factor $n$.} The fractions in \eqref{eq:source} have denominators $2n^2$, and those in
+\eqref{eq:rec} have denominators $j$. Both disappear for the quotients $b(n)=a(n)/n$, which satisfy a recurrence with
+integer coefficients. Passing to such an integral normalization before reducing modulo a prime power is the main
+technical point of the proof.
+
+\section*{About this paper}\label{sec:about}
+\para{How the work was done.}
+This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
+by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+\begin{itemize}
+\item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
+revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
+\item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
+searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
+of this paper.
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
+rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
+written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
+terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
+theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
+places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
+the further observations in it were checked by computer and are not part of the Lean formalization.
+\end{itemize}
+Dev~D.~Goyal has verified the results and is responsible for this paper.
+
+\para{Review status.} This paper has not been peer reviewed, and it has not been submitted to a journal or to the OEIS.
+
+\para{Priority.} An OEIS entry that labels a statement as a conjecture shows only that its contributor did not know
+a proof; it does not show that no proof existed. During the research only limited searches for earlier work were
+made. No claim of priority is made.
+
+\para{Corrections.} Please report any error in the issue tracker of the repository~\cite{repo}, where the Lean sources and the numerical checks are also
+available.
+
+\section*{Acknowledgements}
+The sequence, its conjecture and the recurrence used here are due to Paul~D.~Hanna~\cite{oeis}.
+
+\begin{thebibliography}{99}\small
+\raggedright
+\bibitem{oeis} P.~D.~Hanna, entry A397346 (O.g.f.\ satisfies $A(x)=\exp\bigl(x+\sum_{n\ge2}(2n^2-1)a(n)x^n/(2n^2)\bigr)$), \emph{The On-Line Encyclopedia of Integer Sequences}, June 2026. \url{https://oeis.org/A397346}. Text as of October 2026.
+\bibitem{oeisdb} N.~J.~A.~Sloane and The OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences}. \url{https://oeis.org}.
+\bibitem{stanley} R.~P.~Stanley, \emph{Enumerative Combinatorics}, Volume~2, Cambridge University Press, 1999. (Chapter~5 treats formal power series, composition and compositional inverses.)
+\bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
+\bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
+\bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\end{thebibliography}
+\end{document}

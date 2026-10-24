@@ -1,6 +1,6 @@
 # Manuscript collection
 
-**26 papers on conjectures from the OEIS, in 7 families.**
+**29 papers on conjectures from the OEIS, in 7 families.**
 
 [**Read the overview PDF**](overview.pdf).
 
@@ -74,9 +74,9 @@ Every coefficient is $`1`$ modulo $`q+1`$; for even $`q`$, the odd coefficients 
 
 > The sequence A393859 of the On-Line Encyclopedia of Integer Sequences (OEIS) lists the coefficients of the power series $`A(x)=x+x^2+9x^3+481x^4+\cdots`$ defined by the equation $`A\bigl(x-x\,A(7x)/7\bigr)=x`$. The unknown series $`A`$ appears on both sides of this equation, and its coefficients grow very fast. Paul D. Hanna conjectured that every coefficient leaves remainder $`1`$ on division by $`8`$. We prove this. In fact we prove that, with $`7`$ replaced by any positive integer $`q`$, the series becomes $`x+x^2+x^3+\cdots`$ once its coefficients are reduced modulo $`q+1`$. The key observation is that in arithmetic modulo $`q+1`$ the number $`q`$ behaves like $`-1`$, and for $`q=-1`$ the equation can be solved by hand. The results have also been checked by computer and proved formally in the Lean proof assistant.
 
-## 4. Theta series modulo 4
+## 4. Theta series and theta-type equations
 
-Series built from the Jacobi theta series $`\theta_3`$ whose coefficients are $`2`$ modulo $`4`$ exactly at squares (or twice squares) and divisible by $`4`$ elsewhere.
+Series built from the Jacobi theta series $`\theta_3`$ or defined by theta-type sums, whose coefficients follow simple patterns modulo 4 or 16.
 
 &emsp;**[Remainders modulo $`4`$ for the series with $`A\bigl(x/A(x)\bigr)=\theta_3(x)`$](preprints/A378580-Theta-quotient-substitution-modulo-4/paper.pdf)** ([A378580](https://oeis.org/A378580), proved)
 
@@ -101,6 +101,12 @@ Series built from the Jacobi theta series $`\theta_3`$ whose coefficients are $`
 &emsp;The square conjecture is false ($`a(1)=4`$, $`a(2)=6`$); in fact $`a(n)\equiv2\pmod4`$ exactly when $`n=2k^2`$.
 
 > The OEIS entry A380680, contributed by Paul D. Hanna, is the power series $`A(x)=\sum_{n=-\infty}^{\infty}x^{n^2}\bigl((2-x^n)/(1-2x^n)\bigr)^n=1+4x+6x^2+12x^3+32x^4+\cdots`$, a variant of the classical theta series $`\theta(x)=\sum_nx^{n^2}`$. The entry conjectures that, for $`n>0`$, the coefficient $`a(n)`$ leaves remainder $`2`$ on division by $`4`$ exactly when $`n`$ is a perfect square, and is divisible by $`4`$ otherwise. We show that this conjecture is false: $`a(1)=4`$ and $`a(2)=6`$, as the published terms already show. We then prove the correct statement: for $`n>0`$, $`a(n)`$ leaves remainder $`2`$ exactly when $`n`$ is twice a perfect square ($`n=2,8,18,32,\dots`$), and $`a(n)`$ is divisible by $`4`$ otherwise. Equivalently, $`A(x)\equiv\theta(x^2)\pmod 4`$. The proof takes a few lines. The results have also been checked by computer and proved formally in the Lean proof assistant.
+
+&emsp;**[Residues modulo $`16`$ for a series defined by a bilateral theta-type equation](preprints/A355872-Residues-modulo-16-for-a-bilateral-theta-type-equation/paper.pdf)** ([A355872](https://oeis.org/A355872), proved)
+
+&emsp;$`a(n)\equiv2(-1)^{n-1}\pmod{16}`$ for all $`n\ge1`$, which implies the three conjectured congruences modulo 4 and 8.
+
+> The sequence A355872 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Paul D. Hanna, lists the coefficients $`a(n)`$ of the power series $`A(x)=\sum_{n\ge1}a(n)x^{4n-3}=2x+14x^5+434x^9+\cdots`$ determined by the equation $`x=\sum_{j\in\mathbb{Z}}(-x)^{j^2}A(x)^{(j-1)^2}`$, a sum over all integers $`j`$. The entry conjectures that every $`a(n)`$ is $`2`$ modulo $`4`$, and that $`a(n)`$ is $`2`$ or $`6`$ modulo $`8`$ according as $`n`$ is odd or even. We prove the stronger statement $`a(n)\equiv2(-1)^{n-1}\pmod{16}`$ for every $`n\ge1`$. The proof first shows that the equation has exactly one solution over every commutative ring and that only the degrees $`4n-3`$ occur. Modulo $`16`$ the series $`2x/(1+x^4)`$ satisfies the equation, because its fourth power vanishes and only three terms of the infinite sum survive. The results have been checked by computer and proved formally in the Lean proof assistant.
 
 ## 5. Catalan-type equations
 
@@ -172,7 +178,7 @@ Equations whose coefficient recursion appears to divide by 2; the division is sh
 
 ## 7. Other results
 
-Three further entries, each with its own method.
+Further entries, each with its own method.
 
 &emsp;**[When are the coefficients of $`B(B(B(x)))`$ odd?](preprints/A396093-Odd-coefficients-of-the-third-iterate/paper.pdf)** ([A396093](https://oeis.org/A396093), proved)
 
@@ -191,3 +197,15 @@ Three further entries, each with its own method.
 &emsp;$`a(n)\equiv1\pmod4`$, and $`a(n)\equiv2\cdot2^n+3\cdot4^n\pmod5`$, so $`5\mid a(n)`$ exactly when $`4\mid n`$.
 
 > The OEIS entry A380056, contributed by Paul D. Hanna, lists the numbers $`a(n)`$ defined by the exponential generating function $`(e^x-1)/\cos 2x`$; that is, $`a(n)/n!`$ is the coefficient of $`x^n`$ in the power series of this function. The first terms are $`1,1,13,25,441,1261,\dots`$. Hanna conjectured that $`a(n)`$ leaves remainder $`1`$ on division by $`4`$ for every $`n\ge1`$, and that $`a(4n)`$ is divisible by $`5`$. We prove both, and more: modulo $`5`$, $`a(n)\equiv2\cdot2^n+3\cdot4^n`$, so the remainders repeat in the cycle $`1,1,3,0`$, and $`a(n)`$ is divisible by $`5`$ exactly when $`n`$ is a multiple of $`4`$. The proof first rewrites the definition as a recurrence that uses only whole numbers, and then solves this recurrence modulo $`4`$ and modulo $`5`$. Modulo $`5`$ the solution is a combination of two geometric sequences, because there $`\cos 2x`$ behaves like $`(e^x+e^{-x})/2`$. The results have also been checked by computer and proved formally in the Lean proof assistant.
+
+&emsp;**[Residues modulo $`8`$ for a series defined by a self-referential exponential](preprints/A397346-Residues-modulo-8-for-a-self-referential-exponential/paper.pdf)** ([A397346](https://oeis.org/A397346), proved)
+
+&emsp;From $`n=2`$ on, $`a(n)\bmod 8`$ repeats $`4,2,0,2`$; more precisely, $`a(n)/n\equiv6\pmod8`$ if $`n\equiv3\pmod4`$ and $`a(n)/n\equiv2\pmod8`$ otherwise.
+
+> The sequence A397346 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Paul D. Hanna, lists the coefficients of the power series $`A(x)=\sum_{n\ge0}a(n)x^n=1+x+4x^2+66x^3+2248x^4+\cdots`$ determined by $`A(x)=\exp\bigl(x+\sum_{n\ge2}\frac{2n^2-1}{2n^2}a(n)x^n\bigr)`$. The entry conjectures that, from $`n=2`$ on, the remainders of $`a(n)`$ on division by $`8`$ repeat the block $`4,2,0,2`$. We prove this. We first show that the equation is equivalent to a recurrence recorded in the entry, which shows that $`a(n)`$ is an integer divisible by $`n`$. For the quotients $`b(n)=a(n)/n`$ we prove the stronger statement that $`b(n)\equiv6\pmod8`$ when $`n\equiv3\pmod4`$ and $`b(n)\equiv2\pmod8`$ otherwise, for $`n\ge2`$. The results have been checked by computer, and the recurrence and the congruences are proved formally in the Lean proof assistant.
+
+&emsp;**[A greedy sequence that avoids sums of three consecutive terms](preprints/A394576-A-greedy-sequence-avoiding-sums-of-three-consecutive-terms/paper.pdf)** ([A394576](https://oeis.org/A394576), proved)
+
+&emsp;$`\lfloor(4n-3)/3\rfloor\le a(n)\le\lfloor(4n-1)/3\rfloor`$ for all $`n\ge1`$; in particular $`a(3k)=4k-1`$.
+
+> The sequence A394576 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Hoang Xuan Thanh, starts with $`a(1)=1`$ and then always takes the smallest integer larger than the previous term that is not a sum $`a(k)+a(k+1)+a(k+2)`$ of three consecutive earlier terms. Its first conjecture is the bound $`a(n)\le\lfloor(4n-1)/3\rfloor`$. We prove the two-sided bound $`\lfloor(4n-3)/3\rfloor\le a(n)\le\lfloor(4n-1)/3\rfloor`$ for every $`n\ge1`$. Since the two bounds differ by at most one, $`a(n)`$ is always within $`1`$ of the upper bound, and $`a(3k)=4k-1`$ exactly. The proof constructs the sequence in blocks of three: each interval $`\{4k,4k+1,4k+2,4k+3\}`$ contains exactly one forbidden sum, and the other three numbers are the next three terms. We then prove that this construction satisfies the greedy rule, and that the rule has only one solution. The results have been checked by computer and proved formally in the Lean proof assistant.

@@ -1,4 +1,4 @@
-\\ Numerical checks of the claims made in the Discussion sections of the 26 papers.
+\\ Numerical checks of the claims made in the Discussion sections of the 29 papers.
 \\
 \\ A companion to independent_checks.gp.  That script tests the main theorems; this one tests
 \\ the further observations in each paper's Discussion section (the text between
@@ -621,6 +621,57 @@ info(Str("smallest n0 with 3^e | a(n) for all n0 <= n < ", N - 1, ", e = 1..12: 
 }
 
 \\ ===========================================================================
+\\ ===========================================================================
+print("== A355872: Discussion (modulo 32 and 64)");
+{
+bil2(M, N) =
+  my(one = Mod(1, M), A = O(x^N), R, J = sqrtint(N) + 1);
+  for(it = 1, N,
+    R = one*x + O(x^N);
+    for(j = -J, J, if(j != 0 && j^2 < N, R -= (-x)^(j^2) * A^((j - 1)^2)));
+    A = R);
+  A;
+}
+A32 = bil2(32, 4*200); A64 = bil2(64, 4*200);
+ok("A355872: a(n) mod 32 repeats 2,14,18,30 from n = 1 (n < 200)", prod(n = 1, 199, lift(c(A32, 4*n - 3)) == [2, 14, 18, 30][(n - 1) % 4 + 1]));
+ok("A355872: a(n) mod 64 repeats 2,14,50,62 from n = 1 (n < 200)", prod(n = 1, 199, lift(c(A64, 4*n - 3)) == [2, 14, 50, 62][(n - 1) % 4 + 1]));
+
+\\ ===========================================================================
+print("== A394576: Discussion (the skipped numbers; the blocks)");
+{
+greedy2(M) =
+  my(a = vector(M), forb = vector(4*M + 10), t);
+  a[1] = 1;
+  for(n = 1, M - 1,
+    t = a[n] + 1; while(forb[t], t++);
+    a[n + 1] = t;
+    if(n >= 2, forb[a[n - 1] + a[n] + a[n + 1]] = 1));
+  a;
+}
+M = 30000; g = greedy2(M); bs = vector(M - 2, k, g[k] + g[k + 1] + g[k + 2]);
+ok("A394576: the first sums b(k) are 6, 9, 12, 16, 20", bs[1..5] == [6, 9, 12, 16, 20]);
+ok("A394576: b(k) lies in {4k, 4k+1, 4k+2} (k <= 9998)", prod(k = 1, (M - 3)\3, bs[k] >= 4*k && bs[k] <= 4*k + 2));
+Tg = Set(g); Tb = Set(bs);
+ok("A394576: the terms and the b(k) partition {1, ..., a(30000)}", #setintersect(Tg, Tb) == 0 && prod(m = 1, g[M], setsearch(Tg, m) || setsearch(Tb, m)));
+{
+my(good = 1, s, d);
+for(k = 1, (M - 3)\3,
+  s = bs[k] - 4*k;
+  d = vector(3, r, (4*(3*k + r) - 1)\3 - g[3*k + r]);
+  if(d != [[0, 0, 0], [1, 0, 0], [1, 1, 0]][s + 1], good = 0));
+ok("A394576: U(n) - a(n) on block k is (0,0,0), (1,0,0), (1,1,0) for s = 0, 1, 2 (3k+3 <= 30000)", good);
+}
+
+\\ ===========================================================================
+print("== A397346: Discussion (modulo 16)");
+{
+rec7b(N) = my(a = vector(N + 1)); a[1] = 1; a[2] = 1;
+  for(n = 2, N, a[n + 1] = 2*n*a[n] + n*sum(k = 1, n - 2, (2*(k + 1)^2 - 1)/(k + 1) * a[k + 2] * a[n - k])); a;
+}
+r = rec7b(200);
+ok("A397346: a(n) mod 16 repeats 4,2,8,10,12,2,0,2 from n = 2 (n < 200)", prod(n = 2, 199, r[n + 1] % 16 == [4, 2, 8, 10, 12, 2, 0, 2][(n - 2) % 8 + 1]));
+ok("A397346: a(n)/n mod 16 repeats 2,6,2,2,10,14,2,2 from n = 2 (n < 200)", prod(n = 2, 199, (r[n + 1]/n) % 16 == [2, 6, 2, 2, 10, 14, 2, 2][(n - 2) % 8 + 1]));
+
 print("");
 printf("RESULT: %d checks passed, %d failed\n", NPASS, NFAIL);
 quit(NFAIL > 0);

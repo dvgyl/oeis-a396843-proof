@@ -1,7 +1,7 @@
 \\ Independent numerical checks for the OEIS proof collection.
 \\
 \\ An independent cross-check that shares no code with the Lean development.
-\\ For each of the 26 entries this script
+\\ For each of the 29 entries this script
 \\   1. recomputes the sequence from the definition printed in its OEIS entry,
 \\   2. compares the first terms with the published OEIS terms (oeis_terms.gp),
 \\   3. re-verifies the defining equation to the working precision, and
@@ -343,6 +343,81 @@ oeis("A397588", OEIS_A397588, n -> c(A, n));
 ok("A397588 a(n) odd iff n is a power of 2", prod(n = 0, N - 2, (c(A, n) % 2 == 1) == ispow2(n)));
 ok("A397588 3 | a(n) for n > 1", prod(n = 2, N - 2, c(A, n) % 3 == 0));
 print("  verified for n < ", N - 1);
+
+\\ ===========================================================================
+print("== A355872: x = Sum_{j in Z} (-x)^(j^2) A(x)^((j-1)^2)");
+\\ Each coefficient involves only finitely many j: the factor (-x)^(j^2) has degree j^2.
+\\ The j = 0 term is A itself, so A = x - Sum_{j != 0} (...), solved by fixed-point iteration.
+{
+bil(M, N) =
+  my(one = if(M, Mod(1, M), 1), A = O(x^N), R, J = sqrtint(N) + 1);
+  for(it = 1, N,
+    R = one*x + O(x^N);
+    for(j = -J, J, if(j != 0 && j^2 < N, R -= (-x)^(j^2) * A^((j - 1)^2)));
+    A = R);
+  A;
+}
+N = 121; A = bil(0, N);
+ok("A355872 equation", vanish(sum(j = -12, 12, if(j^2 < N, (-x)^(j^2) * A^((j - 1)^2), 0)) - x, N));
+ok("A355872 only degrees 4n-3 occur", prod(d = 0, N - 1, d % 4 == 1 || c(A, d) == 0));
+oeis("A355872", OEIS_A355872, n -> c(A, 4*n - 3));
+ok("A355872 a(n) == 2*(-1)^(n-1) mod 16, n <= 30", prod(n = 1, 30, (c(A, 4*n - 3) - 2*(-1)^(n - 1)) % 16 == 0));
+ok("A355872 conjectures: a(n) == 2 mod 4; a(2n-1) == 2, a(2n) == 6 mod 8", prod(n = 1, 30, my(t = c(A, 4*n - 3)); t % 4 == 2 && t % 8 == if(n % 2, 2, 6)));
+N = 1201; Am = bil(16, N);
+ok("A355872 modular run agrees with exact", prod(d = 0, 120, c(Am, d) == Mod(c(A, d), 16)));
+ok("A355872 reduction mod 16 equals 2x/(1+x^4), degree < 1201", vanish(Am - Mod(2, 16)*x/(1 + x^4), N));
+print("  verified exactly for n <= 30 and modulo 16 for n <= 300");
+
+\\ ===========================================================================
+print("== A394576: greedy, avoiding sums of three consecutive terms");
+{
+greedy(M) =
+  my(a = vector(M), forb = vector(4*M + 10), t);
+  a[1] = 1;
+  for(n = 1, M - 1,
+    t = a[n] + 1; while(forb[t], t++);
+    a[n + 1] = t;
+    if(n >= 2, my(s = a[n - 1] + a[n] + a[n + 1]); if(s <= #forb, forb[s] = 1)));
+  a;
+}
+M = 100000; a = greedy(M);
+oeis("A394576", OEIS_A394576, n -> a[n]);
+ok("A394576 floor((4n-3)/3) <= a(n) <= floor((4n-1)/3), n <= 100000", prod(n = 1, M, (4*n - 3)\3 <= a[n] && a[n] <= (4*n - 1)\3));
+ok("A394576 a(3k) = 4k-1, 3k <= 100000", prod(k = 1, M\3, a[3*k] == 4*k - 1));
+SA = Set(a);
+ok("A394576 no term is a sum of three consecutive terms", prod(k = 1, M - 2, !setsearch(SA, a[k] + a[k + 1] + a[k + 2])));
+print("  verified for n <= ", M);
+
+\\ ===========================================================================
+print("== A397346: A(x) = exp(x + Sum_{n>=2} (2n^2-1)/(2n^2) a(n) x^n)");
+\\ From the definition: [x^n] log A = (2n^2-1)/(2n^2) a(n) for n >= 2.  With
+\\ a(n) unknown, [x^n] log A = a(n) + q, where q is computed from a(0..n-1);
+\\ hence a(n) = -2 n^2 q.
+{
+expdef(N) =
+  my(A = 1 + x + O(x^2), q);
+  for(n = 2, N - 1,
+    q = c(log(truncate(A) + O(x^(n + 1))), n);
+    A = truncate(A) - 2*n^2*q*x^n + O(x^(n + 1)));
+  A;
+}
+N = 61; A = expdef(N);
+ok("A397346 coefficients are integers", prod(n = 0, N - 1, type(c(A, n)) == "t_INT"));
+ok("A397346 definition holds", vanish(A - exp(x + sum(n = 2, N - 1, (2*n^2 - 1)/(2*n^2)*c(A, n)*x^n) + O(x^N)), N));
+oeis("A397346", OEIS_A397346, n -> c(A, n));
+\\ The printed recurrence (7), run further.
+{
+rec7(N) =
+  my(a = vector(N + 1)); a[1] = 1; a[2] = 1;
+  for(n = 2, N, a[n + 1] = 2*n*a[n] + n*sum(k = 1, n - 2, (2*(k + 1)^2 - 1)/(k + 1) * a[k + 2] * a[n - k]));
+  a;
+}
+NR = 400; r = rec7(NR);
+ok("A397346 recurrence (7) agrees with the definition, n < 61", prod(n = 0, N - 1, r[n + 1] == c(A, n)));
+ok("A397346 n divides a(n), n <= 400", prod(n = 1, NR, type(r[n + 1]) == "t_INT" && r[n + 1] % n == 0));
+ok("A397346 a(n) mod 8 repeats [4,2,0,2] from n = 2, n <= 400", prod(n = 2, NR, r[n + 1] % 8 == [4, 2, 0, 2][(n - 2) % 4 + 1]));
+ok("A397346 a(n)/n mod 8 is 6 if n == 3 mod 4, else 2 (2 <= n <= 400)", prod(n = 2, NR, (r[n + 1]/n) % 8 == if(n % 4 == 3, 6, 2)));
+print("  definition verified for n < 61; residues for n <= ", NR);
 
 \\ ===========================================================================
 print("");

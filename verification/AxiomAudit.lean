@@ -1,5 +1,5 @@
 /-
-Axiom audit for the 26 entry files (independent check).
+Axiom audit for the 29 entry files (independent check).
 
 Run from the `lean/` folder after `lake build Entries`:
 
@@ -287,6 +287,32 @@ import Entries
 #print axioms OEIS.A397588.differential_parity
 #print axioms OEIS.A397588.differential_mod_three
 #print axioms OEIS.A397588.differential_divisible_by_three
+
+-- A355872
+#print axioms OEIS.A355872.literal_source_iff
+#print axioms OEIS.A355872.source_existence_uniqueness
+#print axioms OEIS.A355872.canonical_literal_source
+#print axioms OEIS.A355872.canonical_sparse_support
+#print axioms OEIS.A355872.source_mod_sixteen
+#print axioms OEIS.A355872.source_all_three
+
+-- A394576
+#print axioms OEIS.A394576.source_existence_uniqueness
+#print axioms OEIS.A394576.canonical_source
+#print axioms OEIS.A394576.canonical_bounds
+#print axioms OEIS.A394576.source_implies_bound
+#print axioms OEIS.A394576.exact_every_third
+#print axioms OEIS.A394576.bounded_error
+#print axioms OEIS.A394576.complementary_ranges
+
+-- A397346
+#print axioms OEIS.A397346.canonical_literal_recurrence
+#print axioms OEIS.A397346.literal_recurrence_existence_uniqueness
+#print axioms OEIS.A397346.every_source_solution_is_integer_and_has_the_conjectured_residues
+#print axioms OEIS.A397346.original_all_index_conjecture
+#print axioms OEIS.A397346.stronger_quotient_congruence
+#print axioms OEIS.A397346.exact_source_differential_identity
+#print axioms OEIS.A397346.displayed_initial_values
 
 -- General theorems from the shared modules that the papers cite directly
 -- (the entry theorems above depend on them, so they are also covered indirectly)

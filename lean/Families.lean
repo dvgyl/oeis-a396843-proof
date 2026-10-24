@@ -1,3 +1,4 @@
+import Families.BilateralTheta
 import Families.CatalanComposition
 import Families.CatalanStatements
 import Families.CubicConsequences
@@ -7,6 +8,8 @@ import Families.DifferentialParity
 import Families.ElementaryStatements
 import Families.ExpCosine
 import Families.ExpCosineStatements
+import Families.ExpRecurrence
+import Families.GreedyTriple
 import Families.InverseIterate
 import Families.LacunaryInverse
 import Families.MahlerParity

@@ -26,7 +26,7 @@ for name in re.findall(r"'([^']+)' does not depend on any axioms", text):
 
 missing = [n for n in expected if n not in found]
 bad = {n: sorted(found[n] - ALLOWED) for n in expected if n in found and found[n] - ALLOWED}
-errors = [l for l in text.splitlines() if "error" in l.lower()]
+errors = [l for l in text.splitlines() if re.match(r"^(\S+:\d+:\d+: )?error\b", l)]
 
 print(f"theorems listed: {len(expected)}; reported: {sum(n in found for n in expected)}")
 used = set().union(*found.values()) if found else set()

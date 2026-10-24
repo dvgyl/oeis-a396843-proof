@@ -25,7 +25,7 @@ The theorems and the proof strategies in the papers are ChatGPT's.
 - read every proof;
 - wrote the papers in their present form, expanding the exposition and, in places, writing out an argument in more detail or by a more elementary route;
 - wrote the Discussion section of each paper. The further observations there were checked numerically and are not part of the Lean formalization;
-- renamed Lean modules and namespaces and edited comments. The proofs themselves are unchanged.
+- renamed Lean modules and namespaces, edited comments, and replaced `import Mathlib` by the specific Mathlib modules needed in two files. The proofs themselves are unchanged.
 
 ## Review status
 
@@ -37,11 +37,12 @@ A Lean proof certifies the statement that Lean checks; whether that statement ma
 
 ## Credits and priority
 
-All 26 sequences and the conjectures treated here were contributed to the OEIS by Paul D. Hanna. Earlier work credited in the papers:
+The sequences and the conjectures treated here were contributed to the OEIS by Paul D. Hanna, except A394576, which was contributed by Hoang Xuan Thanh. Earlier work credited in the papers:
 
 - Danial Asaria recorded a counterexample to the conjecture modulo 9 in A396843.
 - Shiva Priyan Shanmuga Sundaram proved the conjectures of A396797, the member $`r=3`$ of the family treated in the papers on A396099, A396798 and A396807.
 - Amol Bhave's comment in A196523 proves congruences for a related family by a comparison of the same kind as in the paper on A396102.
+- Hoang Xuan Thanh deposited software that computes A394576 and related sequences.
 
 An OEIS entry that labels a statement as a conjecture shows only that its contributor did not know a proof. Only limited searches for earlier work were made, and no priority is claimed.
 

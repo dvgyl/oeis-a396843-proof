@@ -1,0 +1,380 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+\setlist{itemsep=2pt,topsep=3pt}
+\raggedbottom
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\ps}[1]{#1[[x]]}
+\newcommand{\coeff}[2]{[x^{#1}]\,#2}
+\newcommand{\hl}[1]{\textbf{#1}}
+\newcommand{\para}[1]{\par\medskip\noindent\textbf{#1}\enspace}
+\hypersetup{pdftitle={Residues modulo 16 for a series defined by a bilateral theta-type equation},pdfauthor={Dev D. Goyal},pdfsubject={OEIS A355872}}
+\title{Residues modulo $16$ for a series defined by a bilateral theta-type equation\\[6pt]\large A proof of three conjectures in OEIS A355872}
+\author{Dev D. Goyal}
+\date{October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The sequence A355872 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Paul~D.~Hanna, lists the
+coefficients $a(n)$ of the power series $A(x)=\sum_{n\ge1}a(n)x^{4n-3}=2x+14x^5+434x^9+\cdots$ determined by the
+equation $x=\sum_{j\in\Z}(-x)^{j^2}A(x)^{(j-1)^2}$, a sum over all integers $j$. The entry conjectures that every $a(n)$ is
+$2$ modulo $4$, and that $a(n)$ is $2$ or $6$ modulo $8$ according as $n$ is odd or even. We prove the stronger statement
+$a(n)\equiv2(-1)^{n-1}\pmod{16}$ for every $n\ge1$. The proof first shows that the equation has exactly one solution over
+every commutative ring and that only the degrees $4n-3$ occur. Modulo $16$ the series $2x/(1+x^4)$ satisfies the
+equation, because its fourth power vanishes and only three terms of the infinite sum survive. The results have been
+checked by computer and proved formally in the Lean proof assistant.
+\end{abstract}
+\begin{center}\begin{minipage}{0.88\linewidth}\small
+\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
+ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
+Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
+every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
+The section ``About this paper'' at the end gives the details.
+\end{minipage}\end{center}
+
+\section{Introduction}
+
+\subsection{The sequence}\label{sec:sequence}
+The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a public database of integer sequences.
+Besides the terms, many entries record formulas and \emph{conjectures}: patterns observed in the data that the
+contributor could not prove. This paper concerns entry A355872~\cite{oeis}, contributed by Paul~D.~Hanna in 2022, which
+reads in part:
+\begin{quote}\small\ttfamily\raggedright G.f. A(x) satisfies: x = Sum\_\{n=-oo..+oo\} (-x)\^{}(n\^{}2) * A(x)\^{}((n-1)\^{}2).\par\smallskip Conjecture: a(n) == 2 (mod 4) for n >= 1.\par\smallskip Conjecture: a(2*n-1) == 2 (mod 8) for n >= 1.\par\smallskip Conjecture: a(2*n) == 6 (mod 8) for n >= 1.\par\smallskip G.f. A(x) = Sum\_\{n>=1\} a(n) * x\^{}(4*n-3) satisfies: ...\par\smallskip\hfill\textrm{--- OEIS A355872, Paul D. Hanna, August 2022}\end{quote}
+
+Here ``G.f.''\ stands for \emph{generating function}, the power series whose coefficients are the terms of the
+sequence. Written with $j$ for the summation index, the defining equation is
+\begin{equation}\label{eq:source}
+x=\sum_{j\in\Z}(-x)^{j^2}A(x)^{(j-1)^2},\qquad A(x)=\sum_{n\ge1}a(n)\,x^{4n-3}.
+\end{equation}
+The sum runs over \emph{all} integers $j$, positive and negative; such a sum is called \emph{bilateral}. It has the
+shape of the classical theta series $\sum_{j\in\Z}q^{j^2}$, which is why equations of this kind are called
+theta-type. The first terms of the sequence are 2, 14, 434, 17662, 829314, 42293582, \dots{} (from $n=1$).
+Section~\ref{sec:background} explains why the infinite sum in \eqref{eq:source} makes sense and why it determines $A$.
+
+\subsection{The question}
+The three conjectures concern the remainders of $a(n)$ on division by $4$ and by $8$. The table shows the remainders
+modulo $8$ and modulo $16$ for the first $32$ terms; the indices in bold are the odd ones.
+\begin{center}\small\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.4em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & \hl{1} & 2 & \hl{3} & 4 & \hl{5} & 6 & \hl{7} & 8 & \hl{9} & 10 & \hl{11} & 12 & \hl{13} & 14 & \hl{15} & 16 \\ \midrule
+$a(n)\bmod 8$ & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 \\
+$a(n)\bmod 16$ & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 \\
+\bottomrule
+\end{tabular}
+\\[4pt]
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.4em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & \hl{17} & 18 & \hl{19} & 20 & \hl{21} & 22 & \hl{23} & 24 & \hl{25} & 26 & \hl{27} & 28 & \hl{29} & 30 & \hl{31} & 32 \\ \midrule
+$a(n)\bmod 8$ & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 & \hl{2} & 6 \\
+$a(n)\bmod 16$ & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 & \hl{2} & 14 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Modulo $16$ the remainders alternate between $2$ and $14$, and this is what we prove.
+
+\subsection{What this paper proves}
+\textbf{Main result} (Theorem~\ref{thm:main}). \emph{Equation \eqref{eq:source} has exactly one solution, only the
+degrees $4n-3$ occur in it, and for every $n\ge1$}
+\[
+a(n)\equiv2\,(-1)^{n-1}\pmod{16}.
+\]
+Reducing modulo $8$ and modulo $4$ gives all three conjectures of the entry (Corollary~\ref{cor:conj}). The key step is
+the identity
+\[
+A(x)\equiv\frac{2x}{1+x^4}=2x-2x^5+2x^9-\cdots\pmod{16}.
+\]
+
+\subsection{What was known}
+The entry records an asymptotic formula for $a(n)$ (due to Vaclav Kotesovec) and two product formulas obtained from the
+Jacobi triple product identity. When the entry was checked on 24~October~2026, the three congruences were still labelled
+as conjectures. We are not aware of an earlier proof.
+
+\subsection{Why it is interesting}
+Theta-type sums such as $\sum_{j\in\Z}q^{j^2}z^j$ are among the most studied objects in combinatorics and number theory;
+through the Jacobi triple product identity they are connected with partitions and with sums of squares. Here such a sum
+is used to define a power series implicitly, and the coefficients that result grow quickly (roughly like $70^n$). The
+congruences show that, modulo $16$, all of this complexity collapses to a two-term periodic pattern. The proof
+illustrates a mechanism that works in other settings: modulo a power of $2$, a series all of whose coefficients are
+even has a power equal to zero, so an infinite sum can reduce to finitely many terms.
+
+\subsection{How to read this paper}
+Section~\ref{sec:background} recalls power series, congruences and bilateral sums. Section~\ref{sec:results} states the
+results and Section~\ref{sec:proofs} proves them. Section~\ref{sec:checks} describes the computer checks and the formal
+proof, and Section~\ref{sec:discussion} discusses the scope of the result.
+\section{Background}\label{sec:background}
+This section collects the definitions and facts used later. Readers who know formal power series and congruences can skip it and return when needed.
+\subsection{Formal power series}
+A \emph{formal power series} is an expression
+\[
+U(x)=u_0+u_1x+u_2x^2+u_3x^3+\cdots ,
+\]
+determined by its sequence of coefficients $u_0,u_1,u_2,\dots$. No number is ever substituted for $x$, so questions
+of convergence do not arise. We write $\coeff{n}{U}=u_n$ for the coefficient of $x^n$ in $U$; two series are equal
+when all their coefficients are equal.
+
+Series are added coefficient by coefficient and multiplied like polynomials:
+\[
+\coeff{n}{(UV)}=u_0v_n+u_1v_{n-1}+\cdots+u_nv_0 .
+\]
+Each coefficient of a product is a finite sum. For example, $(1-x)(1+x+x^2+x^3+\cdots)=1$, so $1+x+x^2+\cdots$ is
+the \emph{multiplicative inverse} of $1-x$, written $\frac{1}{1-x}$. More generally, every series $D$ with constant term
+$1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determined one at a time by $D\cdot\frac1D=1$
+using only addition, subtraction and multiplication. Every fraction in this paper has a denominator of this kind, so it
+denotes a power series.
+
+We write $U=O(x^d)$ when all coefficients of $U$ below degree $d$ are zero. So
+$U-V=O(x^d)$ means that $U$ and $V$ agree up to degree $d-1$. A series of the form $x+u_2x^2+u_3x^3+\cdots$, with
+constant term $0$ and coefficient of $x$ equal to $1$, is called \emph{normalized}.
+
+\subsection{Remainders and congruences}
+For an integer $m\ge2$ we write $a\equiv b\pmod m$ (``$a$ is congruent to $b$ modulo $m$'') when $a-b$ is divisible by
+$m$, that is, when $a$ and $b$ leave the same remainder after division by $m$. For example, $17\equiv5\pmod 4$, since both leave remainder $1$, and $-3\equiv1\pmod4$. The
+remainder of $a$ on division by $m$ is called its \emph{residue} modulo $m$; it is one of $0,1,\dots,m-1$. Saying that
+$a$ is odd is the same as saying $a\equiv1\pmod2$.
+
+Addition and multiplication are compatible with congruences, so the residues $0,1,\dots,m-1$, added and multiplied
+modulo $m$, form a ring, written $\Z/m\Z$. When $m=p$ is a prime we also write $\F_p$. In $\F_2=\{0,1\}$ we have $1+1=0$,
+so addition and subtraction coincide.
+
+For power series with integer coefficients, $U\equiv V\pmod m$ means that \emph{every} coefficient of $U-V$ is
+divisible by $m$. Equivalently, the two series become equal when every coefficient is replaced by its residue; we call
+this \emph{reducing} the series modulo $m$. The key fact is the following.
+
+\emph{Reduction modulo $m$ is compatible with all the operations above.} To reduce a sum, a product, a substitution, or
+an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. This holds because every
+coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
+multiplying, and these operations are compatible with remainders.
+
+\para{Rings.} Several lemmas below hold over every \emph{commutative ring}, that is, every set with an addition,
+subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
+division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
+$\Z/4\Z$).
+
+\subsection{Sums over all integers}
+For a series $F$ with coefficients in a commutative ring $R$ and an integer $j$, put
+\[
+T_j(F)=(-x)^{j^2}F^{(j-1)^2}.
+\]
+Both exponents are nonnegative integers, so $T_j(F)$ is a power series. Because of the factor $(-x)^{j^2}$, its
+coefficients of degree less than $j^2$ are zero. Hence a given coefficient of degree $d$ receives contributions only
+from the finitely many $j$ with $j^2\le d$, and the bilateral sum
+\[
+\Theta(F)=\sum_{j\in\Z}T_j(F)
+\]
+is well defined coefficient by coefficient. Equation \eqref{eq:source} says that $\Theta(A)=x$. No question of
+convergence arises: every coefficient of $\Theta(F)$ is a finite sum.
+
+The entry also gives the equation with $(j+1)^2$ in place of $(j-1)^2$; replacing $j$ by $-j$ shows that the two forms
+are the same.
+
+\section{Results}\label{sec:results}
+
+\begin{theorem}\label{thm:main}
+\begin{enumerate}[label=(\alph*)]
+\item Over every commutative ring $R$ there is exactly one power series $A_R$ with $\Theta(A_R)=x$.
+\item The integer solution $A=A_\Z$ has nonzero coefficients only in degrees $4n-3$, $n\ge1$; so
+$A(x)=\sum_{n\ge1}a(n)x^{4n-3}$ as in \eqref{eq:source}.
+\item Modulo $16$,
+\[
+A(x)\equiv\frac{2x}{1+x^4}\pmod{16},\qquad\text{equivalently}\qquad a(n)\equiv2\,(-1)^{n-1}\pmod{16}\quad(n\ge1).
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{corollary}[Hanna's conjectures]\label{cor:conj}
+For every $n\ge1$: $a(n)\equiv2\pmod4$, $a(2n-1)\equiv2\pmod8$, and $a(2n)\equiv6\pmod8$.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:main}(c), $a(n)$ leaves remainder $2$ on division by $16$ when $n$ is odd and remainder $14$ when $n$
+is even. Reducing, the remainder modulo $8$ is $2$ for odd $n$ and $6$ for even $n$, and modulo $4$ it is $2$ in both
+cases.
+\end{proof}
+
+\section{Proofs}\label{sec:proofs}
+
+\para{The idea in brief.} The term with $j=0$ in the bilateral sum is $A$ itself. Moving all other terms to the other
+side expresses $A$ through terms that each carry at least one extra factor of $x$, so the equation determines the
+coefficients one at a time, over every ring. Modulo $16$, the series $P=2x/(1+x^4)$ has all coefficients even, so
+$P^4=0$; in $\Theta(P)$ only the terms with $(j-1)^2<4$, that is $j=0,1,2$, survive, and they add up to $x$.
+
+Throughout, $R$ is a commutative ring and $\Phi(F)=x-\bigl(\Theta(F)-F\bigr)$, so that $\Theta(F)=x$ is equivalent to
+$F=\Phi(F)$.
+
+\begin{lemma}\label{lem:contract}
+Let $r\ge0$ and $F,G\in\ps{R}$. If $F-G=O(x^r)$, then $\Phi(F)-\Phi(G)=O(x^{r+1})$.
+\end{lemma}
+
+\begin{proof}
+For every $e\ge0$, $F^e-G^e=(F-G)(F^{e-1}+F^{e-2}G+\cdots+G^{e-1})$ is a multiple of $F-G$, hence $O(x^r)$. For
+$j\neq0$ we have $j^2\ge1$, so $T_j(F)-T_j(G)=(-x)^{j^2}\bigl(F^{(j-1)^2}-G^{(j-1)^2}\bigr)=O(x^{r+1})$. The term
+$j=0$, which equals $F-G$, does not occur in $\Phi(F)-\Phi(G)$. Each coefficient of $\Phi(F)-\Phi(G)$ is a finite sum of
+coefficients of the differences $T_j(F)-T_j(G)$ with $j\ne0$, which proves the claim.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(a)]
+By Lemma~\ref{lem:contract}, the coefficient of $x^d$ in $\Phi(F)$ depends only on the coefficients of $F$ of degree
+below $d$. Choosing the coefficients of $A_R$ one at a time so that $A_R=\Phi(A_R)$ holds in each degree therefore gives
+a solution, and two solutions must agree in every degree. Equivalently, starting from $F_0=0$ and putting
+$F_{k+1}=\Phi(F_k)$, Lemma~\ref{lem:contract} gives $A_R-F_k=O(x^k)$, so each coefficient of $F_k$ is constant from
+some $k$ on and equals the corresponding coefficient of $A_R$.
+\end{proof}
+
+No division was used, so reducing the integer solution modulo $m$ gives a solution over $\Z/m\Z$, and by uniqueness it
+is the solution there (Section~\ref{sec:background}).
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(b)]
+Say that a series is \emph{supported in class $1$} if its only nonzero coefficients are in degrees $\equiv1\pmod4$. If
+$F$ is supported in class $1$, then $F^e$ is supported in degrees $\equiv e\pmod4$, and $T_j(F)$ in degrees
+$\equiv j^2+(j-1)^2\pmod4$. Of the two consecutive integers $j-1$ and $j$, one is even and one is odd, so
+$j^2+(j-1)^2\equiv0+1=1\pmod4$. Hence $\Theta(F)$, and therefore $\Phi(F)$, is again supported in class $1$. All the
+approximations $F_k$ from the proof of part (a) are thus supported in class $1$, and so is their limit $A$. This also
+shows that $A$ has constant term $0$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(c)]
+Work over $R=\Z/16\Z$ and put
+\[
+P(x)=\frac{2x}{1+x^4}=2\sum_{k\ge0}(-1)^kx^{4k+1}.
+\]
+Every coefficient of $P$ is even, so every coefficient of $P^4$ is divisible by $2^4=16$; that is, $P^4=0$ in $\ps{R}$,
+and then $P^e=0$ for all $e\ge4$. Now $(j-1)^2\ge4$ unless $j\in\{0,1,2\}$, so all terms of $\Theta(P)$ vanish except
+\[
+T_0(P)=P,\qquad T_1(P)=-x,\qquad T_2(P)=(-x)^4P=x^4P .
+\]
+Hence
+\[
+\Theta(P)=P-x+x^4P=(1+x^4)P-x=2x-x=x .
+\]
+By part (a), $P$ is the unique solution over $\Z/16\Z$, so it is the reduction of $A$ modulo $16$. The coefficient of
+$x^{4n-3}=x^{4(n-1)+1}$ in $P$ is $2(-1)^{n-1}$, which gives the formula for $a(n)$.
+\end{proof}
+
+\section{Checking the results}\label{sec:checks}
+
+A mathematical proof can contain mistakes, so the results were checked in two independent ways.
+
+\para{Numerical check.}
+We computed the solution of \eqref{eq:source} by the fixed-point iteration of the proof, exactly up to degree $120$
+(that is, $n\le30$) and modulo $16$ up to degree $1200$. The computation reproduces all 17 terms printed in the OEIS
+entry, confirms that only the degrees $4n-3$ occur, and confirms $a(n)\equiv2(-1)^{n-1}\pmod{16}$ for $n\le300$.
+The computation was done with the PARI/GP computer algebra system, using code that was written separately from the
+formal proofs (file \texttt{verification/independent\_checks.gp} in the accompanying repository~\cite{repo}).
+A computation can only test finitely many cases, so it is a check on the definitions and on the indexing, not a proof.
+
+\para{Formal proof in Lean.}
+Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
+this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
+mathematics. The statements are collected in the file \texttt{lean/Entries/A355872.lean} of the repository,
+in the namespace \texttt{OEIS.A355872}. The construction over an arbitrary commutative ring, its compatibility with reduction of coefficients,
+and the congruence for the whole series modulo $16$ are in \texttt{lean/Families/BilateralTheta.lean} (namespace
+\texttt{Families.BilateralTheta}). The hypotheses of the theorems in the table are the literal equation
+\eqref{eq:source}; no residue is assumed.
+The table lists where each result of this paper is proved.
+\begin{center}\small\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
+\toprule
+Statement in this paper & Lean theorem(s)\\
+\midrule
+Equation~\eqref{eq:source}, written coefficient by coefficient, is equivalent to $\Theta(A)=x$ & \texttt{literal\_\allowbreak{}source\_\allowbreak{}iff} \\
+Theorem~\ref{thm:main}(a) over $\Z$ & \texttt{source\_\allowbreak{}existence\_\allowbreak{}uniqueness}, \texttt{canonical\_\allowbreak{}literal\_\allowbreak{}source} \\
+Theorem~\ref{thm:main}(b) & \texttt{canonical\_\allowbreak{}sparse\_\allowbreak{}support} \\
+Theorem~\ref{thm:main}(c), for every integer series satisfying \eqref{eq:source} & \texttt{source\_\allowbreak{}mod\_\allowbreak{}sixteen} \\
+Corollary~\ref{cor:conj} & \texttt{source\_\allowbreak{}all\_\allowbreak{}three} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
+that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+(\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
+exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
+so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+(Section~\ref{sec:sequence}).
+
+\section{Discussion}\label{sec:discussion}
+
+\para{Scope.} Theorem~\ref{thm:main} determines every coefficient modulo $16$, so it settles the three conjectures of the
+entry completely. It says nothing about the size of $a(n)$; the asymptotic formula and the product formulas recorded in
+the entry are not addressed.
+
+\para{Higher powers of $2$.} The same mechanism does not immediately give more: modulo $32$ the fourth power of $P$ is
+no longer zero, and more terms of the bilateral sum survive. A computer calculation suggests that the residues remain
+periodic with period $4$: for $n<200$, $a(n)$ modulo $32$ repeats $2,14,18,30$, and modulo $64$ it repeats
+$2,14,50,62$, both from $n=1$. It would be interesting to describe $a(n)$ modulo every power of $2$.
+
+\para{Related equations.} The argument of this paper applies to any bilateral equation in which, as here, the term
+with $j=0$ is the unknown series and all other terms carry a positive power of $x$: existence and uniqueness then hold
+over every ring, and congruences can be found by exhibiting a solution of the reduced equation.
+
+\section*{About this paper}\label{sec:about}
+\para{How the work was done.}
+This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
+by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+\begin{itemize}
+\item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
+revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
+\item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
+searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
+of this paper.
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
+rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
+written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
+terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
+theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
+places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
+the further observations in it were checked by computer and are not part of the Lean formalization.
+\end{itemize}
+Dev~D.~Goyal has verified the results and is responsible for this paper.
+
+\para{Review status.} This paper has not been peer reviewed, and it has not been submitted to a journal or to the OEIS.
+
+\para{Priority.} An OEIS entry that labels a statement as a conjecture shows only that its contributor did not know
+a proof; it does not show that no proof existed. During the research only limited searches for earlier work were
+made. No claim of priority is made.
+
+\para{Corrections.} Please report any error in the issue tracker of the repository~\cite{repo}, where the Lean sources and the numerical checks are also
+available.
+
+\section*{Acknowledgements}
+The sequence and its conjectures are due to Paul~D.~Hanna~\cite{oeis}. The asymptotic formula mentioned in the
+introduction was added to the entry by Vaclav~Kotesovec.
+
+\begin{thebibliography}{99}\small
+\raggedright
+\bibitem{oeis} P.~D.~Hanna, entry A355872 (G.f.\ $A(x)$ satisfies: $x=\sum_{n\in\Z}(-x)^{n^2}A(x)^{(n-1)^2}$), \emph{The On-Line Encyclopedia of Integer Sequences}, August 2022. \url{https://oeis.org/A355872}. Text as of October 2026.
+\bibitem{oeisdb} N.~J.~A.~Sloane and The OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences}. \url{https://oeis.org}.
+\bibitem{stanley} R.~P.~Stanley, \emph{Enumerative Combinatorics}, Volume~2, Cambridge University Press, 1999. (Chapter~5 treats formal power series, composition and compositional inverses.)
+\bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
+\bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
+\bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\end{thebibliography}
+\end{document}

@@ -4,7 +4,7 @@ version: "v0.4"
 
 project:
   name: "Proofs and corrections of OEIS conjectures"
-  description: "Lean 4 formalizations accompanying 26 papers on conjectures from the On-Line Encyclopedia of Integer Sequences."
+  description: "Lean 4 formalizations accompanying 29 papers on conjectures from the On-Line Encyclopedia of Integer Sequences."
   authors: ["Dev D. Goyal"]
   license: "NOASSERTION"
 
@@ -87,6 +87,12 @@ sources:
     type: article
     relationship: formalizes
 
+  - title: "Residues modulo 16 for a series defined by a bilateral theta-type equation"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A355872-Residues-modulo-16-for-a-bilateral-theta-type-equation/paper.pdf
+    type: article
+    relationship: formalizes
+
   - title: "The Catalan numbers inside the equation A(x - x²) = x + A(x)²"
     authors: ["Dev D. Goyal"]
     id: ../preprints/A393172-The-Catalan-numbers-inside-a-functional-equation/paper.pdf
@@ -162,6 +168,18 @@ sources:
   - title: "The coefficients of (exp(x)-1)/cos(2x) modulo 4 and 5"
     authors: ["Dev D. Goyal"]
     id: ../preprints/A380056-Exponential-over-cosine-modulo-4-and-5/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Residues modulo 8 for a series defined by a self-referential exponential"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A397346-Residues-modulo-8-for-a-self-referential-exponential/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "A greedy sequence that avoids sums of three consecutive terms"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A394576-A-greedy-sequence-avoiding-sums-of-three-consecutive-terms/paper.pdf
     type: article
     relationship: formalizes
 
@@ -332,6 +350,21 @@ status:
 
     - declaration: OEIS.A380680.a380680_complement_is_false
       file: Entries/A380680.lean
+
+    - declaration: OEIS.A355872.source_existence_uniqueness
+      file: Entries/A355872.lean
+
+    - declaration: OEIS.A355872.canonical_literal_source
+      file: Entries/A355872.lean
+
+    - declaration: OEIS.A355872.canonical_sparse_support
+      file: Entries/A355872.lean
+
+    - declaration: OEIS.A355872.source_mod_sixteen
+      file: Entries/A355872.lean
+
+    - declaration: OEIS.A355872.source_all_three
+      file: Entries/A355872.lean
 
     - declaration: OEIS.A393172.first_existence
       file: Entries/A393172.lean
@@ -549,11 +582,34 @@ status:
     - declaration: OEIS.A380056.mod_five_period
       file: Entries/A380056.lean
 
+    - declaration: OEIS.A397346.original_all_index_conjecture
+      file: Entries/A397346.lean
+
+    - declaration: OEIS.A397346.stronger_quotient_congruence
+      file: Entries/A397346.lean
+
+    - declaration: OEIS.A394576.canonical_bounds
+      file: Entries/A394576.lean
+
+    - declaration: OEIS.A394576.source_implies_bound
+      file: Entries/A394576.lean
+
+    - declaration: OEIS.A394576.complementary_ranges
+      file: Entries/A394576.lean
+
+    - declaration: OEIS.A394576.bounded_error
+      file: Entries/A394576.lean
+
+    - declaration: OEIS.A394576.exact_every_third
+      file: Entries/A394576.lean
+
 fidelity:
   divergences: >-
     For A380060 and A380680 the Lean definition uses the one-sided form of the theta-type sum; the papers
     prove that it equals the two-sided sum in the OEIS titles. For A392210 the Lean definition is the
-    functional equation; the papers derive the nested-square title from it. All other entries are
+    functional equation; the papers derive the nested-square title from it. For A397346 the Lean
+    definition is formula (7) of the entry and Lean proves the identity A' = A H'; the final step to
+    A = exp(H) is proved in the paper. All other entries are
     defined in Lean by the defining equation or formula of the OEIS entry.
 
 automation:

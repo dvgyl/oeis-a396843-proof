@@ -1,0 +1,335 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}
+\setlist{itemsep=2pt,topsep=3pt}
+\raggedbottom
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\ps}[1]{#1[[x]]}
+\newcommand{\coeff}[2]{[x^{#1}]\,#2}
+\newcommand{\hl}[1]{\textbf{#1}}
+\newcommand{\para}[1]{\par\medskip\noindent\textbf{#1}\enspace}
+\hypersetup{pdftitle={A greedy sequence that avoids sums of three consecutive terms},pdfauthor={Dev D. Goyal},pdfsubject={OEIS A394576}}
+\title{A greedy sequence that avoids sums of three consecutive terms\\[6pt]\large A proof of the first conjecture in OEIS A394576}
+\author{Dev D. Goyal}
+\date{October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The sequence A394576 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Hoang Xuan Thanh, starts
+with $a(1)=1$ and then always takes the smallest integer larger than the previous term that is not a sum
+$a(k)+a(k+1)+a(k+2)$ of three consecutive earlier terms. Its first conjecture is the bound
+$a(n)\le\lfloor(4n-1)/3\rfloor$. We prove the two-sided bound
+$\lfloor(4n-3)/3\rfloor\le a(n)\le\lfloor(4n-1)/3\rfloor$ for every $n\ge1$. Since the two bounds differ by at most
+one, $a(n)$ is always within $1$ of the upper bound, and $a(3k)=4k-1$ exactly. The proof constructs the sequence in
+blocks of three: each interval $\{4k,4k+1,4k+2,4k+3\}$ contains exactly one forbidden sum, and the other three numbers
+are the next three terms. We then prove that this construction satisfies the greedy rule, and that the rule has only one
+solution. The results have been checked by computer and proved formally in the Lean proof assistant.
+\end{abstract}
+\begin{center}\begin{minipage}{0.88\linewidth}\small
+\textbf{How this paper was produced.} This paper reports the result of an autonomous AI research effort.
+ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning and working from prompts by Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first draft of the paper.
+Dev~D.~Goyal chose the problems and asked for checks and revisions, but did not supply proof ideas.
+Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
+source and confirmed that they rely on no unproved assumptions, recomputed the sequence from its definition and tested
+every claim against the published data, and read every step of the proofs. It also rewrote this paper for clarity.
+Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
+The section ``About this paper'' at the end gives the details.
+\end{minipage}\end{center}
+
+\section{Introduction}
+
+\subsection{The sequence}\label{sec:sequence}
+The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a public database of integer sequences.
+Many entries record \emph{conjectures}: patterns observed in the data that the contributor could not prove. This paper
+concerns entry A394576~\cite{oeis}, contributed by Hoang Xuan Thanh in 2026, which reads in part:
+\begin{quote}\small\ttfamily\raggedright a(1) = 1; a(n+1) is the smallest positive integer greater than a(n) that avoids violating the condition a(k) + a(k+1) + a(k+2) is not a term.\par\smallskip Conjecture 1: a(n) <= floor((4*n-1)/3).\par\smallskip\hfill\textrm{--- OEIS A394576, Hoang Xuan Thanh, May 2026}\end{quote}
+
+In other words, the sequence is built one term at a time, and the rule is that no sum of three consecutive terms may itself be
+a term. When $a(n+1)$ is chosen, the sums $a(k)+a(k+1)+a(k+2)$ with $k+2\le n$ are already known, and $a(n+1)$ must avoid
+them. A sum that involves the new term is larger than every term chosen so far, so it can only be avoided by later terms.
+Precisely, the rule is: $a(1)=1$, and for $n\ge1$,
+\begin{equation}\label{eq:rule}
+a(n+1)=\min\bigl\{t>a(n):\ t\ne a(k)+a(k+1)+a(k+2)\ \text{for all }k\ge1\text{ with }k+2\le n\bigr\}.
+\end{equation}
+The first terms are 1, 2, 3, 4, 5, 7, 8, 10, 11, 13, 14, 15, 17, 18, 19, 21, 22, 23, 24, 26, \dots{} For instance, $a(6)=7$ because
+$a(1)+a(2)+a(3)=6$ is forbidden.
+
+\subsection{The question}
+The first conjecture of the entry says that $a(n)\le\lfloor(4n-1)/3\rfloor$, where $\lfloor y\rfloor$ denotes the
+largest integer not exceeding $y$. The table compares the first $32$ terms with this bound and with the lower bound
+$\lfloor(4n-3)/3\rfloor$ proved below. The indices in bold are the multiples of $3$, where the two bounds coincide.
+\begin{center}\small\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.6em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & 1 & 2 & \hl{3} & 4 & 5 & \hl{6} & 7 & 8 & \hl{9} & 10 & 11 & \hl{12} & 13 & 14 & \hl{15} & 16 \\ \midrule
+$\lfloor\frac{4n-3}3\rfloor$ & 0 & 1 & \hl{3} & 4 & 5 & \hl{7} & 8 & 9 & \hl{11} & 12 & 13 & \hl{15} & 16 & 17 & \hl{19} & 20 \\
+$a(n)$ & 1 & 2 & \hl{3} & 4 & 5 & \hl{7} & 8 & 10 & \hl{11} & 13 & 14 & \hl{15} & 17 & 18 & \hl{19} & 21 \\
+$\lfloor\frac{4n-1}3\rfloor$ & 1 & 2 & \hl{3} & 5 & 6 & \hl{7} & 9 & 10 & \hl{11} & 13 & 14 & \hl{15} & 17 & 18 & \hl{19} & 21 \\
+\bottomrule
+\end{tabular}
+\\[4pt]
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.6em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}>{\centering\arraybackslash}p{1.15em}}
+\toprule
+$n$ & 17 & \hl{18} & 19 & 20 & \hl{21} & 22 & 23 & \hl{24} & 25 & 26 & \hl{27} & 28 & 29 & \hl{30} & 31 & 32 \\ \midrule
+$\lfloor\frac{4n-3}3\rfloor$ & 21 & \hl{23} & 24 & 25 & \hl{27} & 28 & 29 & \hl{31} & 32 & 33 & \hl{35} & 36 & 37 & \hl{39} & 40 & 41 \\
+$a(n)$ & 22 & \hl{23} & 24 & 26 & \hl{27} & 28 & 30 & \hl{31} & 32 & 33 & \hl{35} & 36 & 37 & \hl{39} & 40 & 41 \\
+$\lfloor\frac{4n-1}3\rfloor$ & 22 & \hl{23} & 25 & 26 & \hl{27} & 29 & 30 & \hl{31} & 33 & 34 & \hl{35} & 37 & 38 & \hl{39} & 41 & 42 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The upper bound $\lfloor(4n-1)/3\rfloor$ is the $n$-th positive integer not divisible by $4$ (OEIS A042968): the
+sequence follows the numbers $1,2,3,5,6,7,9,\dots$ closely, but occasionally falls one step behind.
+
+\subsection{What this paper proves}
+\textbf{Main result} (Theorem~\ref{thm:main}). \emph{For every $n\ge1$,}
+\[
+\Bigl\lfloor\frac{4n-3}{3}\Bigr\rfloor\le a(n)\le\Bigl\lfloor\frac{4n-1}{3}\Bigr\rfloor .
+\]
+The upper bound is Conjecture~1 of the entry. The two bounds differ by at most $1$ and agree when $n$ is a multiple of
+$3$, so $a(3k)=4k-1$ for every $k\ge1$ (Corollary~\ref{cor:error}).
+
+\subsection{What was known}
+The entry records further conjectures (Conjectures~2 and~3) describing in detail where $a(n)$ equals the upper bound and
+where it falls one short; they are not proved here. Thanh has deposited software that computes the sequence and its
+generalizations~\cite{algorithm}. When the entry was checked on 24~October~2026, the bound was still labelled as a
+conjecture, and we are not aware of an earlier proof.
+
+\subsection{Why it is interesting}
+Greedy sequences that avoid a forbidden pattern are a classical source of hard problems: the rule is simple, but the
+global behaviour of the sequence is often irregular and difficult to predict. Here the behaviour turns out to be very
+regular. The forbidden sums fall exactly one into each block $\{4k,4k+1,4k+2,4k+3\}$, so the sequence takes three out
+of every four integers, and it has density $3/4$ in the positive integers. The proof shows how a greedy definition can
+be replaced by an explicit construction, and how to prove that the two agree.
+
+\subsection{How to read this paper}
+Section~\ref{sec:background} fixes the notation. Section~\ref{sec:results} states the results.
+Section~\ref{sec:proofs} gives the block construction and proves that it is the greedy sequence.
+Section~\ref{sec:checks} describes the computer checks and the formal proof, and Section~\ref{sec:discussion} discusses
+the remaining conjectures.
+\section{Background}\label{sec:background}
+\subsection{Notation}
+For a real number $y$, $\lfloor y\rfloor$ is the largest integer not exceeding $y$. We write
+\[
+L(n)=\Bigl\lfloor\frac{4n-3}{3}\Bigr\rfloor,\qquad U(n)=\Bigl\lfloor\frac{4n-1}{3}\Bigr\rfloor\qquad(n\ge1).
+\]
+Writing $n=3k+r$ with $r\in\{1,2,3\}$, one finds
+\begin{equation}\label{eq:LU}
+\begin{array}{c|ccc}
+n&3k+1&3k+2&3k+3\\ \hline
+L(n)&4k&4k+1&4k+3\\
+U(n)&4k+1&4k+2&4k+3
+\end{array}
+\end{equation}
+for every $k\ge0$. In particular $0\le U(n)-L(n)\le1$, with equality $L(n)=U(n)$ when $3\mid n$.
+
+\subsection{Greedy definitions}
+A sequence defined by a rule of the form \eqref{eq:rule}, in which each new term is the least admissible integer, is
+called \emph{greedy}. Two sequences that satisfy \eqref{eq:rule} and agree up to index $n$ have the same forbidden sums
+at that stage, hence the same least admissible next term; by induction, \eqref{eq:rule} has exactly one solution. The
+difficulty in proving properties of greedy sequences is that the rule is local, while statements such as a bound for
+$a(n)$ are global. The proof below replaces the rule by an explicit construction.
+
+\section{Results}\label{sec:results}
+
+\begin{theorem}\label{thm:main}
+The rule \eqref{eq:rule} has exactly one solution, and for every $n\ge1$,
+\[
+L(n)\le a(n)\le U(n).
+\]
+Moreover, the terms of the sequence and the sums $a(k)+a(k+1)+a(k+2)$, $k\ge1$, are disjoint sets whose union is the set
+of all positive integers.
+\end{theorem}
+
+\begin{corollary}\label{cor:error}
+For every $n\ge1$, $U(n)-a(n)\in\{0,1\}$; in particular Conjecture~1 of the entry holds. For every $k\ge1$,
+$a(3k)=4k-1$.
+\end{corollary}
+
+\begin{proof}
+This follows from Theorem~\ref{thm:main} and the table \eqref{eq:LU}.
+\end{proof}
+
+\section{Proofs}\label{sec:proofs}
+
+\para{The idea in brief.} We build a sequence $A$ in blocks of three. The first block is $1,2,3$. At stage $k\ge1$ the
+sum $b(k)=A(k)+A(k+1)+A(k+2)$ is already known, and the next three terms are the elements of
+$\{4k,4k+1,4k+2,4k+3\}$ other than $b(k)$. The bounds $L\le A\le U$ show that $b(k)$ always lies in this block, so the
+construction never fails. Finally, every integer that the construction skips is one of the sums $b(k)$, which shows that
+$A$ obeys the greedy rule.
+
+\subsection{The block construction}
+Put $A(1)=1$, $A(2)=2$, $A(3)=3$. Suppose $A(1),\dots,A(3k)$ have been defined, with $k\ge1$. Since $k+2\le3k$, the number
+\begin{equation}\label{eq:b}
+b(k)=A(k)+A(k+1)+A(k+2)
+\end{equation}
+is known. Let $A(3k+1)<A(3k+2)<A(3k+3)$ be the elements of $\{4k,4k+1,4k+2,4k+3\}\setminus\{b(k)\}$, listed in
+increasing order (if $b(k)$ is not in the block, take its three smallest elements; Lemma~\ref{lem:bounds} shows that this
+case never occurs). For example, $b(1)=6$ gives the block $4,5,7$, and then $b(2)=2+3+4=9$ gives $8,10,11$.
+
+\begin{lemma}\label{lem:sums}
+For every $k\ge1$, $L(k)+L(k+1)+L(k+2)=4k$ and $U(k)+U(k+1)+U(k+2)=4k+2$.
+\end{lemma}
+
+\begin{proof}
+The three numbers $4k-3$, $4k+1$, $4k+5$ have the three different remainders $0,1,2$ modulo $3$, in some order.
+Subtracting these remainders and dividing by $3$ gives $L(k)+L(k+1)+L(k+2)=\frac{(12k+3)-3}{3}=4k$. The same argument
+with $4k-1$, $4k+3$, $4k+7$ gives $U(k)+U(k+1)+U(k+2)=\frac{(12k+9)-3}{3}=4k+2$.
+\end{proof}
+
+\begin{lemma}\label{lem:bounds}
+For every $n\ge1$, $L(n)\le A(n)\le U(n)$, and for every $k\ge1$, $4k\le b(k)\le4k+2$.
+\end{lemma}
+
+\begin{proof}
+The bounds hold for $n=1,2,3$ by \eqref{eq:LU}. Suppose they hold up to $n=3k$. Since $k+2\le3k$, Lemma~\ref{lem:sums}
+gives $4k\le b(k)\le4k+2$. Write $b(k)=4k+s$ with $s\in\{0,1,2\}$. Removing $4k+s$ from $\{4k,\dots,4k+3\}$ leaves a
+smallest element in $\{4k,4k+1\}$, a middle element in $\{4k+1,4k+2\}$, and the largest element $4k+3$. By
+\eqref{eq:LU} these are exactly the ranges $[L(n),U(n)]$ for $n=3k+1,3k+2,3k+3$. This completes the induction.
+\end{proof}
+
+\begin{lemma}\label{lem:partition}
+The sequence $A$ is strictly increasing. Its terms and the numbers $b(k)$, $k\ge1$, form two disjoint sets whose union is
+the set of positive integers.
+\end{lemma}
+
+\begin{proof}
+The first block is $\{1,2,3\}$. By Lemma~\ref{lem:bounds}, the block of stage $k$ consists of the four integers
+$4k,\dots,4k+3$ except $b(k)$, listed in increasing order. These intervals cover the integers from $4$ on without
+overlap, each contains exactly one $b(k)$, and different $k$ give different intervals.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+We show that $A$ satisfies \eqref{eq:rule}. Fix $n\ge1$. First, $A(n+1)>A(n)$, and $A(n+1)$ is not equal to any $b(k)$,
+by Lemma~\ref{lem:partition}; so $A(n+1)$ is admissible. Next, let $t$ be an integer with $A(n)<t<A(n+1)$. By
+Lemma~\ref{lem:partition}, $t=b(k)$ for some $k\ge1$. Since all terms are positive, $A(k+2)<b(k)=t<A(n+1)$, and since $A$
+is increasing, $k+2<n+1$, that is $k+2\le n$. So $t$ is one of the sums forbidden at stage $n$, and $A(n+1)$ is the least
+admissible integer. Hence $A$ satisfies \eqref{eq:rule}. As explained in Section~\ref{sec:background}, \eqref{eq:rule}
+has only one solution, so $A=a$. The bounds now follow from Lemma~\ref{lem:bounds}, and the last statement from
+Lemma~\ref{lem:partition}.
+\end{proof}
+
+\section{Checking the results}\label{sec:checks}
+
+A mathematical proof can contain mistakes, so the results were checked in two independent ways.
+
+\para{Numerical check.}
+We computed the sequence directly from the greedy rule \eqref{eq:rule}, for $n\le100{,}000$. This reproduces all
+75 terms printed in the OEIS entry, and confirms the bounds of Theorem~\ref{thm:main}, the values $a(3k)=4k-1$, and that
+no term is a sum of three consecutive terms, throughout that range.
+The computation was done with the PARI/GP computer algebra system, using code that was written separately from the
+formal proofs (file \texttt{verification/independent\_checks.gp} in the accompanying repository~\cite{repo}).
+A computation can only test finitely many cases, so it is a check on the definitions and on the indexing, not a proof.
+
+\para{Formal proof in Lean.}
+Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. All results of
+this paper are proved in Lean~4 (version 4.19.0) on top of Mathlib~\cite{mathlib}, Lean's library of formalized
+mathematics. The statements are collected in the file \texttt{lean/Entries/A394576.lean} of the repository,
+in the namespace \texttt{OEIS.A394576}. There the sequence is indexed from $0$: \texttt{sequence n} is $a(n+1)$, and the rule is written out
+explicitly in the statement of \texttt{source\_existence\_uniqueness}. The construction and its properties are in
+\texttt{lean/Families/GreedyTriple.lean} (namespace \texttt{Families.GreedyTriple}).
+The table lists where each result of this paper is proved.
+\begin{center}\small\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
+\toprule
+Statement in this paper & Lean theorem(s)\\
+\midrule
+The rule \eqref{eq:rule} has exactly one solution & \texttt{source\_\allowbreak{}existence\_\allowbreak{}uniqueness} \\
+The block construction satisfies \eqref{eq:rule} & \texttt{canonical\_\allowbreak{}source} \\
+Theorem~\ref{thm:main}, the bounds & \texttt{canonical\_\allowbreak{}bounds}, \texttt{source\_\allowbreak{}implies\_\allowbreak{}bound} \\
+Theorem~\ref{thm:main}, the partition of the positive integers & \texttt{complementary\_\allowbreak{}ranges} \\
+Corollary~\ref{cor:error} & \texttt{bounded\_\allowbreak{}error}, \texttt{exact\_\allowbreak{}every\_\allowbreak{}third} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The Lean project was rebuilt from source for this paper, and Lean was asked to list the basic assumptions (axioms)
+that each of these theorems ultimately depends on. Every one depends only on the three standard axioms of Lean's logic
+(\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
+exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
+so the Lean definitions were also compared, side by side, with the definition in the OEIS entry
+(Section~\ref{sec:sequence}).
+
+\section{Discussion}\label{sec:discussion}
+
+\para{Scope.} Theorem~\ref{thm:main} proves Conjecture~1 of the entry and a matching lower bound. It does not prove
+Conjectures~2 and~3, which describe exactly where $a(n)=U(n)$ and where $a(n)=U(n)-1$. In the language of this paper,
+they describe the position $s=b(k)-4k\in\{0,1,2\}$ of the forbidden sum in each block: by the proof of
+Lemma~\ref{lem:bounds}, the differences $U(n)-a(n)$ for $n=3k+1,3k+2,3k+3$ are $(0,0,0)$, $(1,0,0)$ or $(1,1,0)$ according as
+$s=0$, $1$ or $2$. The words $(1,0,0)$ and $(1,1,0)$ are the building blocks $X$ and $Y$ of Conjecture~3.
+
+\para{The skipped numbers.} By Theorem~\ref{thm:main}, the positive integers not in the sequence are exactly the sums
+$b(k)=a(k)+a(k+1)+a(k+2)$, $k\ge1$: $6,9,12,16,20,\dots$, one in each interval $\{4k,\dots,4k+3\}$. A finer description of
+the numbers $b(k)-4k$ would give Conjectures~2 and~3.
+
+\para{Sums of more terms.} The entry refers to the analogous sequence A394676, in which sums of four consecutive terms
+are forbidden. A block argument of the same kind would require an interval that contains exactly one forbidden sum, and
+it would be interesting to know whether such a structure exists there.
+
+\section*{About this paper}\label{sec:about}
+\para{How the work was done.}
+This paper is one of 29 papers on conjectures from the OEIS that came out of an autonomous AI research effort directed
+by Dev~D.~Goyal~\cite{repo}. The roles were as follows.
+\begin{itemize}
+\item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and
+revisions, and decided what to publish. Dev~D.~Goyal did not supply proof strategies or intermediate arguments.
+\item \emph{ChatGPT} (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from those prompts. It
+searched the OEIS for suitable conjectures, found the proofs, wrote the Lean~4 formalization, and wrote a first draft
+of this paper.
+\item \emph{Claude Opus~5.5}, used with Claude Code, checked the work independently and then rewrote this paper. It
+rebuilt the Lean project from source and confirmed that the theorems listed in Section~\ref{sec:checks} rely only on
+Lean's standard axioms; compared the Lean definitions with the OEIS definition; recomputed the sequence with separately
+written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
+terms; and read every step of the proofs. It then rewrote the text to make it self-contained and readable. The
+theorems and the proof strategies are ChatGPT's. In rewriting, Claude Opus~5.5 expanded the explanations and, in
+places, wrote out an argument in more detail or by a more elementary route. The Discussion section was added by Claude Opus~5.5;
+the further observations in it were checked by computer and are not part of the Lean formalization.
+\end{itemize}
+Dev~D.~Goyal has verified the results and is responsible for this paper.
+
+\para{Review status.} This paper has not been peer reviewed, and it has not been submitted to a journal or to the OEIS.
+
+\para{Priority.} An OEIS entry that labels a statement as a conjecture shows only that its contributor did not know
+a proof; it does not show that no proof existed. During the research only limited searches for earlier work were
+made. No claim of priority is made.
+
+\para{Corrections.} Please report any error in the issue tracker of the repository~\cite{repo}, where the Lean sources and the numerical checks are also
+available.
+
+\section*{Acknowledgements}
+The sequence and its conjectures are due to Hoang~Xuan~Thanh~\cite{oeis}, who also deposited software that computes the
+sequence~\cite{algorithm}.
+
+\begin{thebibliography}{99}\small
+\raggedright
+\bibitem{oeis} H.~X.~Thanh, entry A394576 ($a(n+1)$ is the smallest integer greater than $a(n)$ avoiding sums of three consecutive terms), \emph{The On-Line Encyclopedia of Integer Sequences}, May 2026. \url{https://oeis.org/A394576}. Text as of October 2026.
+\bibitem{algorithm} H.~X.~Thanh, \emph{Algorithm for OEIS A394576, A394676 and generalized forbidden sums}, software deposit, Zenodo, 2026. \url{https://doi.org/10.5281/zenodo.22674326}.
+\bibitem{oeisdb} N.~J.~A.~Sloane and The OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences}. \url{https://oeis.org}.
+\bibitem{stanley} R.~P.~Stanley, \emph{Enumerative Combinatorics}, Volume~2, Cambridge University Press, 1999. (Chapter~5 treats formal power series, composition and compositional inverses.)
+\bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
+\bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
+\bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\end{thebibliography}
+\end{document}

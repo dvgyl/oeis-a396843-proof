@@ -4,69 +4,22 @@
 # 'lake build Entries --no-build' both reported that every module is up to date.
 # Modules whose sources had not changed since an earlier build in this environment were replayed and are not listed.
 
-✔ [2838/2866] Built Hanna.Statements
-✔ [2846/2869] Built Families.SquareComposition
-✔ [2849/2869] Built Hanna
-✔ [2852/2887] Built Families.CubicFrobenius
-✔ [2855/2887] Built Families.ModFour
-✔ [2857/2887] Built Consecutive.Statements
-✔ [2858/2887] Built Families.NestedBinomial
-✔ [2861/2887] Built Families.InverseIterate
-✔ [2862/2887] Built Families.CubicReversion
-✔ [2863/2887] Built Families.RationalParity
-✔ [2864/2887] Built Families.NestedReversion
-✔ [2865/2887] Built Consecutive
-✔ [2868/2887] Built Families.LacunaryInverse
-✔ [2872/2887] Built Families.MahlerParity
-✔ [2873/2887] Built Families.NestedStatements
-✔ [2874/2887] Built Families.CatalanComposition
-✔ [2876/2887] Built Families.CubicConsequences
-✔ [2877/2887] Built Families.ThetaSubstitution
-✔ [2878/2887] Built Families.DifferentialParity
-✔ [2879/2887] Built Families.ExpCosine
-✔ [2880/2887] Built Families.CatalanStatements
-✔ [2881/2887] Built Families.ElementaryStatements
-✔ [2882/2887] Built Families.ExpCosineStatements
-✔ [2883/2887] Built Families.ThetaRational
-✔ [2884/2887] Built Families.SquareReversion
-✔ [2885/2887] Built Families.ThetaRationalStatements
-✔ [2886/2887] Built Families
-Build completed successfully.
+✔ [2886/2890] Built Families.GreedyTriple
+✔ [2887/2890] Built Families.BilateralTheta
+✔ [2888/2890] Built Families.ExpRecurrence
+✔ [2889/2890] Built Families
 
-real	5m33.508s
-user	4m4.404s
-sys	0m46.062s
+real	0m25.915s
+user	1m2.628s
+sys	0m13.550s
 default-targets exit: 0
-✔ [2844/2853] Built Entries.A378581
-✔ [2848/2853] Built Entries.A378580
-✔ [2849/2858] Built Entries.A195194
-✔ [2853/2858] Built Entries.A380056
-✔ [2854/2868] Built Entries.A380060
-✔ [2862/2875] Built Entries.A380680
-✔ [2863/2875] Built Entries.A389475
-✔ [2864/2883] Built Entries.A389474
-✔ [2871/2883] Built Entries.A389537
-✔ [2872/2883] Built Entries.A389542
-✔ [2873/2883] Built Entries.A389536
-✔ [2874/2883] Built Entries.A393172
-✔ [2875/2883] Built Entries.A393859
-✔ [2876/2883] Built Entries.A393171
-✔ [2877/2884] Built Entries.A392210
-✔ [2881/2894] Built Entries.A393858
-✔ [2886/2894] Built Entries.A393857
-✔ [2888/2894] Built Entries.A393856
-✔ [2889/2894] Built Entries.A396093
-✔ [2891/2908] Built Entries.A396099
-✔ [2900/2908] Built Entries.A396798
-✔ [2902/2908] Built Entries.A396807
-✔ [2903/2908] Built Entries.A396102
-✔ [2904/2908] Built Entries.A396844
-✔ [2905/2908] Built Entries.A397588
-✔ [2906/2908] Built Entries.A396843
-✔ [2907/2908] Built Entries
-Build completed successfully.
+✔ [2910/2914] Built Entries.A394576
+✔ [2911/2914] Built Entries.A355872
+✔ [2912/2914] Built Entries.A397346
+✔ [2913/2914] Built Entries
 
-real	1m2.115s
-user	1m29.550s
-sys	0m30.366s
+real	0m10.373s
+user	0m13.561s
+sys	0m6.704s
 entries exit: 0
+Build completed successfully.
