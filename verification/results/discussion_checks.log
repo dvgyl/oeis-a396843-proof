@@ -256,6 +256,17 @@
   ok    9 divides a(n) for 5 <= n < 299
   ok    3^12 divides a(n) for 35 <= n < 299
   info  smallest n0 with 3^e | a(n) for all n0 <= n < 299, e = 1..12: [2, 5, 8, 10, 13, 15, 19, 22, 23, 28, 32, 35]
+== A355872: Discussion (modulo 32 and 64)
+  ok    A355872: a(n) mod 32 repeats 2,14,18,30 from n = 1 (n < 200)
+  ok    A355872: a(n) mod 64 repeats 2,14,50,62 from n = 1 (n < 200)
+== A394576: Discussion (the skipped numbers; the blocks)
+  ok    A394576: the first sums b(k) are 6, 9, 12, 16, 20
+  ok    A394576: b(k) lies in {4k, 4k+1, 4k+2} (k <= 9998)
+  ok    A394576: the terms and the b(k) partition {1, ..., a(30000)}
+  ok    A394576: U(n) - a(n) on block k is (0,0,0), (1,0,0), (1,1,0) for s = 0, 1, 2 (3k+3 <= 30000)
+== A397346: Discussion (modulo 16)
+  ok    A397346: a(n) mod 16 repeats 4,2,8,10,12,2,0,2 from n = 2 (n < 200)
+  ok    A397346: a(n)/n mod 16 repeats 2,6,2,2,10,14,2,2 from n = 2 (n < 200)
 
-RESULT: 199 checks passed, 0 failed
+RESULT: 207 checks passed, 0 failed
 exit 0

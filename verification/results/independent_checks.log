@@ -59,6 +59,15 @@
 == A397588: A = x + (x A^2)'
   A397588: all 20 published terms reproduced from the OEIS definition
   verified for n < 299
+== A355872: x = Sum_{j in Z} (-x)^(j^2) A(x)^((j-1)^2)
+  A355872: all 17 published terms reproduced from the OEIS definition
+  verified exactly for n <= 30 and modulo 16 for n <= 300
+== A394576: greedy, avoiding sums of three consecutive terms
+  A394576: all 75 published terms reproduced from the OEIS definition
+  verified for n <= 100000
+== A397346: A(x) = exp(x + Sum_{n>=2} (2n^2-1)/(2n^2) a(n) x^n)
+  A397346: all 18 published terms reproduced from the OEIS definition
+  definition verified for n < 61; residues for n <= 400
 
-RESULT: 138 checks passed, 0 failed
+RESULT: 156 checks passed, 0 failed
 exit 0
