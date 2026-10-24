@@ -2,19 +2,19 @@
 
 This repository contains 26 papers on conjectures recorded in the [On-Line Encyclopedia of Integer Sequences](https://oeis.org) (OEIS), together with Lean 4 formalizations of all their theorems.
 
-Most of the sequences are coefficients of formal power series defined by functional equations, and most of the conjectures concern their residues modulo small integers. In most entries the conjectured statements are proved. In four entries (A380680, A396798, A396843 and A396844) a conjectured statement is false; the papers give counterexamples and prove the correct statements.
+## Background
 
-The results were obtained in an autonomous AI research effort directed by Dev D. Goyal (see [How the results were produced](#how-the-results-were-produced)). They have not been peer reviewed.
+I directed this project as an autonomous AI research effort. ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning, worked from my prompts: it searched the OEIS for suitable conjectures, found the proofs and counterexamples, and wrote the Lean formalization. I chose which problems to pursue and asked for proofs, formal verification and revisions, but I did not supply proof ideas. I then used Claude Opus 5.5 with Claude Code to check the work independently and to write the papers in their present form.
 
-## Navigating the collection
+I have verified the results. They have not been peer reviewed. An OEIS entry that labels a statement as a conjecture shows only that its contributor did not know a proof; I made only limited searches for earlier work, and I claim no priority. Earlier results that bear on these entries are credited in the papers. The precise attribution of each contribution is in [AUTHORSHIP.md](AUTHORSHIP.md).
 
-The 26 papers are organized into 7 families of related results.
+— Dev D. Goyal
 
-- Start with the [overview](overview.pdf) for a description of every result.
-- Use the [manuscript map](CONTENTS.md) to find individual papers, their abstracts and their status.
-- The [`preprints/`](preprints/) directory contains, for each paper, the PDF, the LaTeX source and a BibTeX citation.
-- The [Lean library](lean/README.md), the [formalization catalogue](lean/formalization.yaml) and the [per-paper notes](lean/docs/) describe the formal proofs and the declarations corresponding to each paper.
-- The [`verification/`](verification/README.md) directory contains independent numerical checks against the published OEIS data and the axiom audit of the formal proofs.
+## Results
+
+Most of the sequences are coefficients of formal power series defined by functional equations, and most of the conjectures concern their residues modulo small integers. In 21 entries every conjectured statement is proved, and in A392210 an observation recorded in the entry is proved. In the remaining four entries (A380680, A396798, A396843 and A396844) a conjectured statement is false; the papers give counterexamples and prove the correct statements, and in A396798 and A396843 the other conjectured statements are proved.
+
+The 26 papers form 7 families of related results:
 
 | Family | Papers |
 |---|---|
@@ -26,22 +26,22 @@ The 26 papers are organized into 7 families of related results.
 | Reversions with an exact halving step | A389537, A389542, A389474, A389475 |
 | Other results | A396093, A396102, A380056 |
 
-## How the results were produced
+## Navigating the collection
 
-- **ChatGPT** (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from prompts by Dev D. Goyal. It selected the conjectures, found the proofs and counterexamples, and wrote the Lean formalization.
-- **Claude Opus 5.5**, used with Claude Code, checked the work independently. It rebuilt the Lean project from source and audited its axioms, compared the Lean definitions with the OEIS definitions, recomputed every sequence in separately written PARI/GP code, and read every proof. It then wrote the papers in their present form, including the remarks in their Discussion sections.
-- **Dev D. Goyal** chose the problems, directed the work and has verified the results. Dev D. Goyal did not supply proof ideas.
-
-An OEIS entry that labels a statement as a conjecture shows only that its contributor did not know a proof. Only limited searches for earlier work were made, and no priority is claimed. Earlier results that bear on these entries are credited in the papers.
+- The [overview](overview.pdf) describes every result.
+- The [manuscript map](CONTENTS.md) lists the papers by family, with the result, status and abstract of each.
+- The [`preprints/`](preprints/) directory contains, for each paper, the PDF, the LaTeX source and a BibTeX citation.
+- The [Lean library](lean/README.md), the [formalization catalogue](lean/formalization.yaml) and the [per-paper notes](lean/docs/) describe the formal proofs and the declarations corresponding to each paper.
+- The [`verification/`](verification/README.md) directory contains the axiom audit of the formal proofs and the numerical checks against the published OEIS data.
 
 ## Verification
 
-- **Formal proofs.** The Lean project builds from source with Lean 4.19.0 and Mathlib (commit `c44e0c8`). The 224 theorems stated in [`lean/Entries/`](lean/Entries/), and 5 general theorems that the papers cite by name, depend only on Lean's standard axioms `propext`, `Classical.choice` and `Quot.sound`. The sources contain no `sorry`.
-- **Definitions.** For each entry, the Lean definition of the sequence was compared with the definition in the OEIS entry. Where the formal statement uses an equivalent form, the paper proves the equivalence; these cases are listed in the [formalization catalogue](lean/formalization.yaml).
-- **Numerical checks.** Every sequence is recomputed from its OEIS definition and compared with the published terms, and every theorem and every observation in the Discussion sections is tested over a range of indices. All checks pass; see [`verification/`](verification/README.md).
+- **Formal proofs.** The Lean project builds from source with Lean 4.19.0 and Mathlib (commit `c44e0c8`). The 224 theorems stated in [`lean/Entries/`](lean/Entries/), and 5 general theorems cited in the papers, depend only on Lean's standard axioms `propext`, `Classical.choice` and `Quot.sound`. The sources contain no `sorry`.
+- **Definitions.** For each entry, the Lean definition of the sequence has been compared with the definition in the OEIS entry. Where the formal statement uses an equivalent form, the paper proves the equivalence; these cases are listed in the [formalization catalogue](lean/formalization.yaml).
+- **Numerical checks.** Each sequence is recomputed from its OEIS definition and compared with the published terms, and each theorem and each observation in the Discussion sections is tested over a range of indices. All 337 checks pass; see [`verification/`](verification/README.md).
 
 ## Citations
 
-To cite an individual paper, use the BibTeX block in its directory under [`preprints/`](preprints/). All 26 sequences and the conjectures treated here were contributed to the OEIS by Paul D. Hanna; when citing a result, please also cite the corresponding OEIS entry.
+Each paper's directory under [`preprints/`](preprints/) contains a BibTeX entry. All 26 sequences and the conjectures treated here were contributed to the OEIS by Paul D. Hanna; when citing a result, please also cite the corresponding OEIS entry.
 
 OEIS text quoted in the papers is © The OEIS Foundation Inc. and is used under CC BY-SA 4.0.

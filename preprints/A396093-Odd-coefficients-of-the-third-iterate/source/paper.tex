@@ -66,7 +66,7 @@ This paper is about entry A396093~\cite{oeis}, contributed by Paul~D.~Hanna. It 
 \[
 B(x)=\frac{x}{(1-x)^2}=x+2x^2+3x^3+4x^4+\cdots,
 \]
-whose coefficient of $x^n$ is simply $n$. Substituting $B$ into itself twice gives a new series,
+whose coefficient of $x^n$ is $n$. Substituting $B$ into itself twice gives a new series,
 \[
 A(x)=B\bigl(B(B(x))\bigr)=\sum_{n\ge0}a(n)\,x^n=x+6x^2+33x^3+174x^4+892x^5+\cdots .
 \]
@@ -201,7 +201,7 @@ $\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. Only fini
 coefficient, so this is a polynomial identity.
 \end{proof}
 
-For $p=2$ this says that squaring a series modulo $2$ just doubles every exponent: for instance,
+For $p=2$ this says that squaring a series modulo $2$ doubles every exponent: for instance,
 $(x+x^3)^2\equiv x^2+x^6\pmod2$. In particular, the square of any series has, modulo $2$, no terms of odd degree.
 
 \section{Results}\label{sec:results}

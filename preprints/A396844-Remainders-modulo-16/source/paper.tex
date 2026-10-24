@@ -76,7 +76,7 @@ A\bigl(x\,A(x)-4\,x\,A(x)^2\bigr)=x^2 .
 \end{equation}
 To read the left side, first form the series $T(x)=x\,A(x)-4\,x\,A(x)^2$, which begins with $x^2$, and
 then substitute $T(x)$ for $x$ in $A$. (Section~\ref{sec:background} explains what substituting one series into another
-means.) The equation says that the result is simply $x^2$. The entry reads:
+means.) The equation says that the result is $x^2$. The entry reads:
 \begin{quote}\small\ttfamily\raggedright G.f. A(x) satisfies A( x*A(x) - 4*x*A(x)\^{}2 ) = x\^{}2.\par\smallskip Conjecture: for n > 8, a(n) == 12 (mod 16) iff n is of the form 2*4\^{}k+1 otherwise a(n) is divisible by 16.\par\smallskip\hfill\textrm{--- OEIS A396844, Paul D. Hanna, July 2026}\end{quote}
 
 Here ``G.f.''\ stands for \emph{generating function}, the series whose coefficients are the terms of the sequence.
@@ -283,7 +283,7 @@ $\bigl(\sum_nu_nx^n\bigr)^p=\sum_nu_n^px^{pn}=\sum_nu_nx^{pn}=U(x^p)$. Only fini
 coefficient, so this is a polynomial identity.
 \end{proof}
 
-For $p=2$ this says that squaring a series modulo $2$ just doubles every exponent: for instance,
+For $p=2$ this says that squaring a series modulo $2$ doubles every exponent: for instance,
 $(x+x^3)^2\equiv x^2+x^6\pmod2$. In particular, the square of any series has, modulo $2$, no terms of odd degree.
 
 \subsection{Binary digits}
@@ -395,7 +395,7 @@ at $n=17,65,257,\dots$, so the clause ``otherwise $a(n)$ is divisible by $16$'' 
 \para{The idea in brief.} Each theorem has its own short idea.
 \emph{Parity:} modulo $2$, the equation is solved by $x/(1+x)=x+x^2+x^3+\cdots$ when $m$ is odd, and by $x$ when $m$ is
 even; since the solution is unique, this is the reduction of $A_m$.
-\emph{Remainders modulo $m^2$:} modulo $m$ the solution is just $x$, so $A_m=x+m\,C$ for some integer series $C$.
+\emph{Remainders modulo $m^2$:} modulo $m$ the solution is $x$, so $A_m=x+m\,C$ for some integer series $C$.
 Putting this into the equation and discarding multiples of $m^2$ leaves the simple linear equation
 $x\,C(x)+C(x^2)\equiv x^3\pmod m$, whose solution has nonzero terms only in the degrees $2^j+1$.
 \emph{Binary digits:} substituting the inverse series into the equation gives an identity that expresses each
