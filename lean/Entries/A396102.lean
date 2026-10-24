@@ -1,16 +1,14 @@
-import More.InverseIterate
+import Families.InverseIterate
 
 /-!
-# A396102: separate formal entry in the final collection
+# OEIS A396102
 
-AI disclosure: ChatGPT (OpenAI) generated this explicitly typed presentation
-for Dev D. Goyal. Review status: see AUTHORSHIP.md. Complete mathematical
-implementations are preserved in the imported modules. Source and historical
-scope are documented in papers/A396102.tex (ChatGPT's original draft:
-history/chatgpt-collection/manuscripts/A396102.tex).
+Statements of the results in the accompanying paper (listed in `CONTENTS.md` at the
+repository root), proved using the shared libraries of this project.
+Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
 
-namespace FinalCollection.A396102
+namespace OEIS.A396102
 
 open PowerSeries Hanna.Series
 
@@ -78,4 +76,4 @@ theorem family_iterate_congruence (r k n : ℕ) (hn : 1 ≤ n) :
   InverseIterate.iterate_coefficient_congruence r k n hn
 
 end
-end FinalCollection.A396102
+end OEIS.A396102

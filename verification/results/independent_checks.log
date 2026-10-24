@@ -1,19 +1,4 @@
 # Output of `gp -q independent_checks.gp` (PARI/GP 2.15.4), run on 24 October 2026.
-== Weighted Stirling transforms: a(n+phi(m)) == a(n) (mod m) for n >= m
-  A052895: all 18 published terms reproduced from the OEIS definition
-  A052895: period phi(m) verified for m <= 60 and m <= n < 160
-  A064618: all 18 published terms reproduced from the OEIS definition
-  A064618: period phi(m) verified for m <= 60 and m <= n < 160
-  A080253: all 18 published terms reproduced from the OEIS definition
-  A080253: period phi(m) verified for m <= 60 and m <= n < 160
-  A167137: all 22 published terms reproduced from the OEIS definition
-  A167137: period phi(m) verified for m <= 60 and m <= n < 160
-  A305550: all 22 published terms reproduced from the OEIS definition
-  A305550: period phi(m) verified for m <= 60 and m <= n < 160
-  A306082: all 21 published terms reproduced from the OEIS definition
-  A306082: period phi(m) verified for m <= 60 and m <= n < 160
-  A354242: all 18 published terms reproduced from the OEIS definition
-  A354242: period phi(m) verified for m <= 60 and m <= n < 160
 == A195194: nested reversion; a(n) odd iff n is a power of 2
   A195194: all 20 published terms reproduced from the OEIS definition
   parity pattern verified for n < 140
@@ -58,12 +43,11 @@
   verified for n < 600
 == Consecutive iterates: A(x) = x + A^r(x) A^(r+1)(x)
   A396099: all 21 published terms reproduced from the OEIS definition
-  A396797: all 21 published terms reproduced from the OEIS definition
   A396798: all 20 published terms reproduced from the OEIS definition
   A396807: all 19 published terms reproduced from the OEIS definition
   iterate formula verified for r = 1..8, k = -4..9, n < 90
   A396798 residues mod 8 for n = 1..16: [1, 1, 1, 5, 5, 1, 1, 5, 5, 1, 1, 5, 5, 1, 1, 5]
-  A396099/A396797/A396798/A396807 source statements verified for n < 160
+  A396099/A396798/A396807 source statements verified for n < 160
 == A396102 and its family F^r = (1+x) F^(r-1)
   A396102: all 23 published terms reproduced from the OEIS definition
   verified for n < 70; family r = 2..7 for n < 40
@@ -76,9 +60,5 @@
   A397588: all 20 published terms reproduced from the OEIS definition
   verified for n < 299
 
-RESULT: 156 checks passed, 0 failed
-
-real	18m15.640s
-user	18m0.464s
-sys	0m1.027s
+RESULT: 138 checks passed, 0 failed
 exit 0

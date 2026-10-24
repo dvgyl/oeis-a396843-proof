@@ -1,13 +1,14 @@
 import Related
 
 /-!
-Separate typed proof interface for OEIS A393859.
-The complete implementation is in the imported, preserved libraries.
-AI disclosure: ChatGPT (OpenAI) generated this presentation for Dev D. Goyal.
-Review status: see AUTHORSHIP.md.
+# OEIS A393859
+
+Statements of the results in the accompanying paper (listed in `CONTENTS.md` at the
+repository root), proved using the shared libraries of this project.
+Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
 
-namespace FinalCollection.A393859
+namespace OEIS.A393859
 
 open PowerSeries Hanna.Series Hanna.Related.ScaledInverse
 
@@ -28,4 +29,4 @@ theorem a393859_mod_eight (n : ℕ) (hn : 1 ≤ n) :
     ((coeff ℤ n (scaledSolution (7 : ℤ)) : ℤ) : ZMod 8) = 1 := by
   exact Hanna.Related.ScaledInverse.a393859_mod_eight n hn
 
-end FinalCollection.A393859
+end OEIS.A393859

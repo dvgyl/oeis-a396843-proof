@@ -1,33 +1,34 @@
-import Hanna.Acceptance
+import Hanna.Statements
 
 /-!
-Separate typed proof interface for OEIS A396844.
-The complete implementation is in the imported, preserved libraries.
-AI disclosure: ChatGPT (OpenAI) generated this presentation for Dev D. Goyal.
-Review status: see AUTHORSHIP.md.
+# OEIS A396844
+
+Statements of the results in the accompanying paper (listed in `CONTENTS.md` at the
+repository root), proved using the shared libraries of this project.
+Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
 
-namespace FinalCollection.A396844
+namespace OEIS.A396844
 
 open PowerSeries Hanna
 
 theorem source_existence_uniqueness (R : Type*) [CommRing R] :
     ∃! U : PowerSeries R, Series.Normalized U ∧ Series.Psi (4 : R) U = X^2 := by
-  exact Hanna.Acceptance.existence_uniqueness R 4
+  exact Hanna.Statements.existence_uniqueness R 4
 
 theorem even_positive_tail :
     a 4 1 = 1 ∧ ∀ n ≥ 2, (2 : ℤ) ∣ a 4 n := by
-  exact Hanna.Acceptance.parity_even 4 (by decide)
+  exact Hanna.Statements.parity_even 4 (by decide)
 
 theorem binary_divisibility (n : ℕ) (hn : 1 ≤ n) :
     (4 : ℤ)^binaryWeight (n-1) ∣ a 4 n := by
-  exact Hanna.Acceptance.binary_divisibility_integer 4 (by decide) n hn
+  exact Hanna.Statements.binary_divisibility_integer 4 (by decide) n hn
 
 theorem residues_parameter_four :
     (∀ k : ℕ, (16:ℤ) ∣ a 4 (4^k+1) - 4) ∧
     (∀ k : ℕ, (16:ℤ) ∣ a 4 (2*4^k+1) - 12) ∧
     (∀ n : ℕ, 2 ≤ n → (¬∃ k : ℕ, n = 4^k+1) →
       (¬∃ k : ℕ, n = 2*4^k+1) → (16:ℤ) ∣ a 4 n) := by
-  exact Hanna.Acceptance.residues_parameter_four
+  exact Hanna.Statements.residues_parameter_four
 
-end FinalCollection.A396844
+end OEIS.A396844

@@ -1,13 +1,14 @@
 import Consecutive
 
 /-!
-Separate typed proof interface for OEIS A396099.
-The complete implementation is in the imported, preserved libraries.
-AI disclosure: ChatGPT (OpenAI) generated this presentation for Dev D. Goyal.
-Review status: see AUTHORSHIP.md.
+# OEIS A396099
+
+Statements of the results in the accompanying paper (listed in `CONTENTS.md` at the
+repository root), proved using the shared libraries of this project.
+Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
 
-namespace FinalCollection.A396099
+namespace OEIS.A396099
 
 open PowerSeries Consecutive
 open Hanna.Series (Normalized compose compose_X_right)
@@ -70,4 +71,4 @@ theorem a396099_difference (n : ℕ) (hn : 2<n) :
     (coeff ℤ n (solution (R:=ℤ) 2-X*iter (solution (R:=ℤ) 2) 3):ZMod 4)=2 := by
   exact Consecutive.a396099_difference n hn
 
-end FinalCollection.A396099
+end OEIS.A396099

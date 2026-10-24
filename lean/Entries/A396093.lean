@@ -1,16 +1,14 @@
-import More.RationalParity
+import Families.RationalParity
 
 /-!
-# A396093: separate formal entry in the final collection
+# OEIS A396093
 
-AI disclosure: ChatGPT (OpenAI) generated this explicitly typed presentation
-for Dev D. Goyal. Review status: see AUTHORSHIP.md. Complete mathematical
-implementations are preserved in the imported modules. Source and historical
-scope are documented in papers/A396093.tex (ChatGPT's original draft:
-history/chatgpt-collection/manuscripts/A396093.tex).
+Statements of the results in the accompanying paper (listed in `CONTENTS.md` at the
+repository root), proved using the shared libraries of this project.
+Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
 
-namespace FinalCollection.A396093
+namespace OEIS.A396093
 
 open PowerSeries Hanna.Series
 
@@ -50,4 +48,4 @@ theorem odd_indices (n : ℕ) (hn : 1 ≤ n) :
   RationalParity.a396093_odd_indices_original n hn
 
 end
-end FinalCollection.A396093
+end OEIS.A396093

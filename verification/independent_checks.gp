@@ -1,8 +1,7 @@
 \\ Independent numerical checks for the OEIS proof collection.
 \\
-\\ Written by Claude Opus 5.5 (used with Claude Code) as a cross-check that shares no code with the
-\\ Lean development or with the Python checkers produced during the original
-\\ research.  For each of the 34 entries this script
+\\ An independent cross-check that shares no code with the Lean development.
+\\ For each of the 26 entries this script
 \\   1. recomputes the sequence from the definition printed in its OEIS entry,
 \\   2. compares the first terms with the published OEIS terms (oeis_terms.gp),
 \\   3. re-verifies the defining equation to the working precision, and
@@ -82,31 +81,6 @@ solvecoef(eqf, A0, n0, N, s) =
 isintpoly(A) = prod(i = 0, poldegree(A), type(c(A, i)) == "t_INT");
 \\ The equation holds through degree N-1+s.
 holds(eqf, A, N, s) = vanish(eqf(A + O(x^(N + s)), N + s), N + s);
-
-\\ ===========================================================================
-print("== Weighted Stirling transforms: a(n+phi(m)) == a(n) (mod m) for n >= m");
-NS = 220; MS = 60;
-E = exp(x + O(x^(NS + 2))); Y = E - 1;
-egf(S) = vector(NS, i, (i - 1)! * c(S, i - 1));
-{
-stir = [
-  ["A052895", egf((1 - sqrt(5 - 4*E)) / (2*(E - 1)))],
-  ["A064618", vector(NS, i, sum(k = 0, i - 1, stirling(i - 1, k, 2) * k!^2))],
-  ["A080253", egf(E / (2 - E^2))],
-  ["A167137", egf(prod(k = 1, NS, 1 / (1 - Y^k)))],
-  ["A305550", egf(prod(k = 1, NS, 1 + Y^k))],
-  ["A306082", egf(prod(k = 1, sqrtint(NS), 1 / (1 - Y^(k^2))))],
-  ["A354242", egf(1 / sqrt(5 - 4*E))]
-];
-}
-{
-for(t = 1, #stir,
-  my(id = stir[t][1], a = stir[t][2], good = 1, p);
-  oeis(id, eval(Str("OEIS_", id)), n -> a[n + 1]);
-  for(m = 1, MS, p = eulerphi(m); for(n = m, NS - 1 - p, if((a[n + p + 1] - a[n + 1]) % m, good = 0)));
-  ok(Str(id, " totient period"), good);
-  printf("  %s: period phi(m) verified for m <= %d and m <= n < %d\n", id, MS, NS - 60));
-}
 
 \\ ===========================================================================
 print("== A195194: nested reversion; a(n) odd iff n is a power of 2");
@@ -261,12 +235,12 @@ consec(r, N, M) =
   for(i = 1, N, A = one*x + iter(A, r, N) * iter(A, r + 1, N));
   A;
 }
-idr = ["A396099", "A396797", "A396798", "A396807"];
+idr = [[2, "A396099"], [4, "A396798"], [5, "A396807"]];
 {
-for(r = 2, 5,
-  my(A = consec(r, 24, 0));
-  ok(Str(idr[r - 1], " equation"), vanish(A - x - iter(A, r, 24)*iter(A, r + 1, 24), 24));
-  oeis(idr[r - 1], eval(Str("OEIS_", idr[r - 1])), n -> c(A, n)));
+foreach(idr, t,
+  my(r = t[1], id = t[2], A = consec(r, 24, 0));
+  ok(Str(id, " equation"), vanish(A - x - iter(A, r, 24)*iter(A, r + 1, 24), 24));
+  oeis(id, eval(Str("OEIS_", id)), n -> c(A, n)));
 }
 \\ General theorem: modulo 2r, A^k == x/(1-kx) + r*[r even and k odd]*x^4/(1-x)^3.
 N = 90;
@@ -287,9 +261,6 @@ ok("A396099 all odd", prod(n = 1, N - 1, lift(c(A, n)) % 2 == 1));
 ok("A396099 [1,3,3,1] mod 4 for n > 2", prod(n = 3, N - 1, lift(c(A, n)) % 4 == [1, 3, 3, 1][(n - 3) % 4 + 1]));
 ok("A396099 [x^n]A(A(x)) == 0 mod 4, n > 2", prod(n = 3, N - 1, lift(c(A2, n)) % 4 == 0));
 ok("A396099 [x^n](A - x A^3) == 2 mod 4, n > 2", prod(n = 3, N - 1, lift(c(A - x*A3, n)) % 4 == 2));
-A = consec(3, N, 6);
-ok("A396797 a(n) == 1 mod 6", prod(n = 1, N - 1, lift(c(A, n)) == 1));
-ok("A396797 iterates: [x^n]A^k == k^(n-1) mod 6, -6 <= k <= 12", prod(k = -6, 12, my(G = iter(A, k, N)); prod(n = 1, N - 1, c(G, n) == Mod(k, 6)^(n - 1))));
 A = consec(5, N, 10);
 ok("A396807 a(n) == 1 mod 10", prod(n = 1, N - 1, lift(c(A, n)) == 1));
 ok("A396807 iterates: [x^n]A^k == k^(n-1) mod 10, -6 <= k <= 12", prod(k = -6, 12, my(G = iter(A, k, N)); prod(n = 1, N - 1, c(G, n) == Mod(k, 10)^(n - 1))));
@@ -305,7 +276,7 @@ ok("A396798 A^5: [5,1,1,5] for n > 1", prod(n = 2, N - 1, lift(c(it(5), n)) == [
 ok("A396798 A^6: 0 mod 8 for n > 3", prod(n = 4, N - 1, c(it(6), n) == 0));
 ok("A396798 A^7: [7,1,3,5] for n > 1", prod(n = 2, N - 1, lift(c(it(7), n)) == [7, 1, 3, 5][(n - 2) % 4 + 1]));
 ok("A396798 A^8: 0 mod 8 for n > 1", prod(n = 2, N - 1, c(it(8), n) == 0));
-print("  A396099/A396797/A396798/A396807 source statements verified for n < ", N);
+print("  A396099/A396798/A396807 source statements verified for n < ", N);
 
 \\ ===========================================================================
 print("== A396102 and its family F^r = (1+x) F^(r-1)");

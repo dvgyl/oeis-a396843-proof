@@ -2,6 +2,6 @@ import Consecutive.Construction
 import Consecutive.Modular
 import Consecutive.Arithmetic
 import Consecutive.Coefficients
-import Consecutive.Acceptance
+import Consecutive.Statements
 import Consecutive.Related
 import Consecutive.IntegerIterates

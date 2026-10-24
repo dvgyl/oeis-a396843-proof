@@ -1,13 +1,14 @@
 import Related
 
 /-!
-Separate typed proof interface for OEIS A393858.
-The complete implementation is in the imported, preserved libraries.
-AI disclosure: ChatGPT (OpenAI) generated this presentation for Dev D. Goyal.
-Review status: see AUTHORSHIP.md.
+# OEIS A393858
+
+Statements of the results in the accompanying paper (listed in `CONTENTS.md` at the
+repository root), proved using the shared libraries of this project.
+Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
 
-namespace FinalCollection.A393858
+namespace OEIS.A393858
 
 open PowerSeries Hanna.Series Hanna.Related.ScaledInverse
 
@@ -32,4 +33,4 @@ theorem a393858_parity (n : ℕ) :
     Odd (coeff ℤ n (scaledSolution (6 : ℤ))) ↔ ∃ k : ℕ, n = 2^k := by
   exact Hanna.Related.ScaledInverse.a393858_parity n
 
-end FinalCollection.A393858
+end OEIS.A393858

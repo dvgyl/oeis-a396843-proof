@@ -1,7 +1,6 @@
-\\ Numerical checks of the claims made in the Discussion sections of the 34 papers.
+\\ Numerical checks of the claims made in the Discussion sections of the 26 papers.
 \\
-\\ Written by Claude Opus 5.5 (used with Claude Code), as a companion to
-\\ independent_checks.gp.  That script tests the main theorems; this one tests
+\\ A companion to independent_checks.gp.  That script tests the main theorems; this one tests
 \\ the further observations in each paper's Discussion section (the text between
 \\ \section{Discussion} and \section*{About this paper}): generalizations,
 \\ congruences modulo higher powers, periods found by computer, agreement with
@@ -133,64 +132,6 @@ fixpt(step, A0, n0, N) =
 
 \\ Random integer series with coefficients in [-B, B] in degrees lo..hi.
 rser(lo, hi, B) = sum(k = lo, hi, (random(2*B + 1) - B) * x^k);
-
-\\ ===========================================================================
-print("== Common to the seven periodicity papers (A052895, A064618, A080253, A167137, A305550, A306082, A354242)");
-\\ Carmichael's function, computed from its definition: the lcm of the
-\\ multiplicative orders of the units modulo m.
-{
-carm(m) =
-  my(L = 1);
-  if(m <= 2, return(1));
-  for(a = 1, m - 1, if(gcd(a, m) == 1, L = lcm(L, znorder(Mod(a, m)))));
-  L;
-}
-ok("lambda(16) = 4 while phi(16) = 8", carm(16) == 4 && eulerphi(16) == 8);
-NS = 220; MS = 60;
-bell = vector(NS, i, sum(k = 0, i - 1, stirling(i - 1, k, 2)));
-ok(Str("Bell numbers mod 2 are 1,1,0,1,1,0,... (n < ", NS, ")"), prod(n = 0, NS - 1, bell[n + 1] % 2 == (n % 3 != 2)));
-ok("Bell numbers mod 2: smallest period 3, which does not divide phi(2) = 1", evper(bell, 2)[1] == 3 && eulerphi(2) % 3 != 0);
-ok(Str("Bell numbers: a(n+phi(2)) == a(n) mod 2 fails for n >= 2 (so they are not covered)"), !perfrom(bell[3 .. NS], 2, eulerphi(2), 0));
-E = exp(x + O(x^(NS + 2))); Y = E - 1;
-egf(S) = vector(NS, i, (i - 1)! * c(S, i - 1));
-{
-stirdisc(id, a, m, P, s) =
-  my(good = 1, L);
-  oeis(id, eval(Str("OEIS_", id)), n -> a[n + 1]);
-  for(mm = 1, MS, L = carm(mm); if(!perfrom(a, mm, L, mm), good = 0; print("  lambda period fails for m = ", mm)));
-  ok(Str(id, ": a(n+lambda(m)) == a(n) mod m for m <= ", MS, ", m <= n < ", NS, " - lambda(m)  [Danesh]"), good);
-  perclaim(id, a, m, P, s, NS);
-}
-
-\\ ===========================================================================
-print("== A052895: Discussion");
-stirdisc("A052895", egf((1 - sqrt(5 - 4*E)) / (2*(E - 1))), 10, 0, 1);
-
-\\ ===========================================================================
-print("== A064618: Discussion");
-stirdisc("A064618", vector(NS, i, sum(k = 0, i - 1, stirling(i - 1, k, 2) * k!^2)), 10, 0, 0);
-
-\\ ===========================================================================
-print("== A080253: Discussion");
-stirdisc("A080253", egf(E / (2 - E^2)), 7, 0, 1);
-
-\\ ===========================================================================
-print("== A167137: Discussion");
-stirdisc("A167137", egf(prod(k = 1, NS, 1 / (1 - Y^k))), 16, 2, 4);
-info("Hanna's second conjecture in A167137 (integrality for all powers a(n)^m) is not treated by the paper; not tested");
-
-\\ ===========================================================================
-print("== A305550: Discussion");
-stirdisc("A305550", egf(prod(k = 1, NS, 1 + Y^k)), 16, 4, 4);
-
-\\ ===========================================================================
-print("== A306082: Discussion");
-stirdisc("A306082", egf(prod(k = 1, sqrtint(NS), 1 / (1 - Y^(k^2)))), 7, 0, 1);
-
-\\ ===========================================================================
-print("== A354242: Discussion");
-stirdisc("A354242", egf(1 / sqrt(5 - 4*E)), 16, 2, 3);
-info("Bala's continued fraction in A354242 is not treated by the paper; not tested");
 
 \\ ===========================================================================
 print("== A195194: Discussion (the tower modulo a prime p)");
@@ -562,8 +503,8 @@ my(good = 1, F);
 for(r = 1, 8, F = if(r <= 5, Fr[r], gensol(r, r + 1, N, 2*r)); if(!prod(n = 1, N - 1, lift(c(F, n)) % 2 == 1), good = 0));
 ok(Str("every coefficient of F_r is odd, r = 1..8 (n < ", N, ")"), good);
 }
-idr = ["A396099", "A396797", "A396798", "A396807"];
-ok("the runs modulo 4r agree with the published terms (r = 2..5)", prod(r = 2, 5, my(t = eval(Str("OEIS_", idr[r - 1]))[2]); prod(n = 1, #t, c(Fr[r], n) == Mod(t[n], 4*r))));
+idr = [[2, "A396099"], [4, "A396798"], [5, "A396807"]];
+ok("the runs modulo 4r agree with the published terms (r = 2, 4, 5)", prod(i = 1, #idr, my(r = idr[i][1], t = eval(Str("OEIS_", idr[i][2]))[2]); prod(n = 1, #t, c(Fr[r], n) == Mod(t[n], 4*r))));
 perclaim("F_1 (r = 1)", coefs(Fr[1], N), 4, 3, 1, N);
 perclaim("A396099 (r = 2)", coefs(Fr[2], N), 8, 4, 4, N);
 {
@@ -581,9 +522,8 @@ ok("F_r has order exactly 2r under composition modulo 2r, r = 1..8 (n < 60)", go
 }
 
 \\ ===========================================================================
-print("== A396797: Discussion (r = 3)");
-perclaim("A396797 (r = 3)", coefs(Fr[3], N), 12, 6, 1, N);
-info("the claims shared with A396099 (odd coefficients, F = x + F^r F^s, order 2r) are checked in that section");
+print("== The member r = 3 of the family (Discussion of A396099, A396798, A396807)");
+perclaim("F_3 (r = 3)", coefs(Fr[3], N), 12, 6, 1, N);
 
 \\ ===========================================================================
 print("== A396798: Discussion (r = 4)");

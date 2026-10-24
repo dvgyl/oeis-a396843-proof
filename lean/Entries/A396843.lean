@@ -1,12 +1,16 @@
-import Hanna.Acceptance
+import Hanna.Statements
 import Hanna.Corollaries
 import Hanna.Parity
 
-/-! Separate typed interface for A396843 and its proved parameter family.
-The original proof terms and complete library dependencies are retained.
-AI-generated consolidation for Dev D. Goyal. Review status: see AUTHORSHIP.md. -/
+/-!
+# OEIS A396843
 
-namespace FinalCollection.A396843
+Statements of the results in the accompanying paper (listed in `CONTENTS.md` at the
+repository root), proved using the shared libraries of this project.
+Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
+-/
+
+namespace OEIS.A396843
 
 open PowerSeries Hanna
 
@@ -84,6 +88,6 @@ theorem residues_parameter_four :
   Hanna.residues_parameter_four
 
 theorem a396843_parity (n : ℕ) (hn : 1 ≤ n) : Odd (a 3 n) := by
-  exact Hanna.Acceptance.parity_odd 3 (by decide) n hn
+  exact Hanna.Statements.parity_odd 3 (by decide) n hn
 
-end FinalCollection.A396843
+end OEIS.A396843

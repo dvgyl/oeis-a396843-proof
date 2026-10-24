@@ -1,13 +1,14 @@
 import Consecutive
 
 /-!
-Separate typed proof interface for OEIS A396798.
-The complete implementation is in the imported, preserved libraries.
-AI disclosure: ChatGPT (OpenAI) generated this presentation for Dev D. Goyal.
-Review status: see AUTHORSHIP.md.
+# OEIS A396798
+
+Statements of the results in the accompanying paper (listed in `CONTENTS.md` at the
+repository root), proved using the shared libraries of this project.
+Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
 
-namespace FinalCollection.A396798
+namespace OEIS.A396798
 
 open PowerSeries Consecutive
 open Hanna.Series (Normalized compose compose_X_right)
@@ -89,4 +90,4 @@ theorem a396798_seventh_iterate_period (j : ℕ) :
     (iterateCoeff 4 7 (4*j+5):ZMod 8)=5 := by
   exact Consecutive.a396798_seventh_iterate_period j
 
-end FinalCollection.A396798
+end OEIS.A396798

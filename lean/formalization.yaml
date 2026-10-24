@@ -1,0 +1,573 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# Catalogue of the papers and their Lean formalizations. Paths are relative to lean/.
+version: "v0.4"
+
+project:
+  name: "Proofs and corrections of OEIS conjectures"
+  description: "Lean 4 formalizations accompanying 26 papers on conjectures from the On-Line Encyclopedia of Integer Sequences."
+  authors: ["Dev D. Goyal"]
+  license: "NOASSERTION"
+
+sources:
+  - title: "Odd coefficients, remainders modulo 9, and binary digits for the series of OEIS A396843"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A396843-Odd-coefficients-remainders-modulo-9-and-binary-digits/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Remainders modulo 16 for the series of OEIS A396844"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A396844-Remainders-modulo-16/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "The iterates of a self-referential power series modulo 4"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A396099-Iterates-of-a-self-referential-series-modulo-4/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "The iterates of a self-referential power series modulo 8"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A396798-Iterates-of-a-self-referential-series-modulo-8/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "The iterates of a self-referential power series modulo 10"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A396807-Iterates-of-a-self-referential-series-modulo-10/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Congruences for the series A with A(x - x A(4x)/4) = x"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A393856-Congruences-for-a-scaled-inverse-series-q-4/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Congruences for the series A with A(x - x A(5x)/5) = x"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A393857-Congruences-for-a-scaled-inverse-series-q-5/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Congruences for the series A with A(x - x A(6x)/6) = x"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A393858-Congruences-for-a-scaled-inverse-series-q-6/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Congruences for the series A with A(x - x A(7x)/7) = x"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A393859-Congruences-for-a-scaled-inverse-series-q-7/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Remainders modulo 4 for the series with A(x/A(x)) = theta3(x)"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A378580-Theta-quotient-substitution-modulo-4/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Remainders modulo 4 for the series with A(x A(x)) = theta3(x)"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A378581-Theta-product-substitution-modulo-4/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Square indices and remainders modulo 4 in a theta-type series"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A380060-Square-indices-in-a-theta-type-series/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Twice the squares, not the squares"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A380680-Twice-the-squares-not-the-squares/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "The Catalan numbers inside the equation A(x - x²) = x + A(x)²"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A393172-The-Catalan-numbers-inside-a-functional-equation/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Remainders modulo 8 of a series built from the Catalan numbers"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A393171-Remainders-modulo-8-from-the-Catalan-numbers/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "The odd-indexed terms of a nested square are even"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A392210-Odd-indexed-terms-of-a-nested-square/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Remainders modulo 4 for the equation A(x² + 2x³) = x A(x)"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A389536-Remainders-modulo-4-for-a-Mahler-type-equation/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Odd coefficients at powers of two for A = x + (x A²)'"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A397588-Odd-coefficients-at-powers-of-two/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Parity of an infinitely nested series reversion"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A195194-Parity-of-an-infinitely-nested-series-reversion/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Congruences modulo 4 for the series of OEIS A389537"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A389537-Congruences-modulo-4-for-a-sparse-reversion/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Congruences modulo 4 for the series of OEIS A389542"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A389542-Congruences-modulo-4-for-a-square-reversion/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "A power series whose square is x² + 2x³ modulo 9"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A389474-A-series-whose-square-is-a-polynomial-modulo-9/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Two congruences modulo 3 for the series of OEIS A389475"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A389475-Two-congruences-modulo-3/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "When are the coefficients of B(B(B(x))) odd? A proof of two conjectures in OEIS A396093"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A396093-Odd-coefficients-of-the-third-iterate/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "Every coefficient is 1 modulo 3"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A396102-Every-coefficient-is-1-modulo-3/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "The coefficients of (exp(x)-1)/cos(2x) modulo 4 and 5"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A380056-Exponential-over-cosine-modulo-4-and-5/paper.pdf
+    type: article
+    relationship: formalizes
+
+related_formalizations:
+  - id: https://github.com/leanprover-community/mathlib4
+    relationship: builds-on
+    note: "Mathlib commit c44e0c8ee63ca166450922a373c7409c5d26b00b, Lean 4.19.0."
+
+status:
+  scope: "Every theorem stated in the papers is formalized. Observations in the Discussion sections are not."
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Classical.choice, Quot.sound]
+  # Entries use fully qualified declaration names and the files containing them.
+  main_results:
+    - declaration: OEIS.A396843.parity_odd
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.parity_even
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.mod_parameter_squared
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.binary_divisibility_integer
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.inverse_binary_divisibility_integer
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.binary_divisibility_polynomial
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.inverse_binary_divisibility_polynomial
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.power_of_two_index
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.prime_divisibility_lower_bound
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.prime_exponent_exists_unique
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.minimum_prime_exponent_iff
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.a396843_parity
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.residues_parameter_three
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396843.residues_parameter_four
+      file: Entries/A396843.lean
+
+    - declaration: OEIS.A396844.even_positive_tail
+      file: Entries/A396844.lean
+
+    - declaration: OEIS.A396844.binary_divisibility
+      file: Entries/A396844.lean
+
+    - declaration: OEIS.A396844.residues_parameter_four
+      file: Entries/A396844.lean
+
+    - declaration: OEIS.A396099.a396099_all_four
+      file: Entries/A396099.lean
+
+    - declaration: OEIS.A396099.a396099_odd
+      file: Entries/A396099.lean
+
+    - declaration: OEIS.A396099.a396099_residue
+      file: Entries/A396099.lean
+
+    - declaration: OEIS.A396099.a396099_period
+      file: Entries/A396099.lean
+
+    - declaration: OEIS.A396099.a396099_second_iterate_series
+      file: Entries/A396099.lean
+
+    - declaration: OEIS.A396099.a396099_second_iterate
+      file: Entries/A396099.lean
+
+    - declaration: OEIS.A396099.a396099_difference_series
+      file: Entries/A396099.lean
+
+    - declaration: OEIS.A396099.a396099_difference
+      file: Entries/A396099.lean
+
+    - declaration: Consecutive.ziter_solution_mod
+      file: Consecutive/IntegerIterates.lean
+
+    - declaration: Consecutive.ziter_solution_mod_eq_X_iff
+      file: Consecutive/IntegerIterates.lean
+
+    - declaration: OEIS.A393856.source_existence_uniqueness
+      file: Entries/A393856.lean
+
+    - declaration: OEIS.A393856.a393856_mod_five
+      file: Entries/A393856.lean
+
+    - declaration: OEIS.A393856.a393856_parity
+      file: Entries/A393856.lean
+
+    - declaration: OEIS.A393857.source_existence_uniqueness
+      file: Entries/A393857.lean
+
+    - declaration: OEIS.A393857.a393857_mod_six
+      file: Entries/A393857.lean
+
+    - declaration: OEIS.A393858.source_existence_uniqueness
+      file: Entries/A393858.lean
+
+    - declaration: OEIS.A393858.a393858_mod_seven
+      file: Entries/A393858.lean
+
+    - declaration: OEIS.A393858.a393858_parity
+      file: Entries/A393858.lean
+
+    - declaration: OEIS.A393859.source_existence_uniqueness
+      file: Entries/A393859.lean
+
+    - declaration: OEIS.A393859.a393859_mod_eight
+      file: Entries/A393859.lean
+
+    - declaration: OEIS.A378580.minus_series_mod_four
+      file: Entries/A378580.lean
+
+    - declaration: OEIS.A378580.minus_congruence
+      file: Entries/A378580.lean
+
+    - declaration: OEIS.A378580.minus_square_iff
+      file: Entries/A378580.lean
+
+    - declaration: OEIS.A378580.minus_four_dvd_iff
+      file: Entries/A378580.lean
+
+    - declaration: OEIS.A378581.plus_series_mod_four
+      file: Entries/A378581.lean
+
+    - declaration: OEIS.A378581.plus_congruence
+      file: Entries/A378581.lean
+
+    - declaration: OEIS.A378581.plus_square_iff
+      file: Entries/A378581.lean
+
+    - declaration: OEIS.A378581.plus_four_dvd_iff
+      file: Entries/A378581.lean
+
+    - declaration: OEIS.A380060.complete_series_mod_four
+      file: Entries/A380060.lean
+
+    - declaration: OEIS.A380060.a380060_statement
+      file: Entries/A380060.lean
+
+    - declaration: OEIS.A380680.complete_series_mod_four
+      file: Entries/A380680.lean
+
+    - declaration: OEIS.A380680.a380680_corrected_statement
+      file: Entries/A380680.lean
+
+    - declaration: OEIS.A380680.a380680_counterexamples
+      file: Entries/A380680.lean
+
+    - declaration: OEIS.A380680.a380680_literal_statement_is_false
+      file: Entries/A380680.lean
+
+    - declaration: OEIS.A380680.a380680_complement_is_false
+      file: Entries/A380680.lean
+
+    - declaration: OEIS.A393172.first_existence
+      file: Entries/A393172.lean
+
+    - declaration: OEIS.A393172.first_definition
+      file: Entries/A393172.lean
+
+    - declaration: OEIS.A393172.complete_series_mod_four
+      file: Entries/A393172.lean
+
+    - declaration: OEIS.A393172.first_residue
+      file: Entries/A393172.lean
+
+    - declaration: OEIS.A393172.divisibility_complement
+      file: Entries/A393172.lean
+
+    - declaration: OEIS.A393172.first_arbitrary_source
+      file: Entries/A393172.lean
+
+    - declaration: OEIS.A393171.second_named_existence
+      file: Entries/A393171.lean
+
+    - declaration: OEIS.A393171.second_existence
+      file: Entries/A393171.lean
+
+    - declaration: OEIS.A393171.second_definition
+      file: Entries/A393171.lean
+
+    - declaration: OEIS.A393171.link_to_first_sequence
+      file: Entries/A393171.lean
+
+    - declaration: OEIS.A393171.link_composed_catalan
+      file: Entries/A393171.lean
+
+    - declaration: OEIS.A393171.complete_series_mod_eight
+      file: Entries/A393171.lean
+
+    - declaration: OEIS.A393171.second_residue
+      file: Entries/A393171.lean
+
+    - declaration: OEIS.A393171.divisibility_complement
+      file: Entries/A393171.lean
+
+    - declaration: OEIS.A393171.second_arbitrary_source
+      file: Entries/A393171.lean
+
+    - declaration: OEIS.A392210.third_existence
+      file: Entries/A392210.lean
+
+    - declaration: OEIS.A392210.third_evenness
+      file: Entries/A392210.lean
+
+    - declaration: OEIS.A392210.third_arbitrary_source
+      file: Entries/A392210.lean
+
+    - declaration: OEIS.A389536.mahler_existence
+      file: Entries/A389536.lean
+
+    - declaration: OEIS.A389536.mahler_definition
+      file: Entries/A389536.lean
+
+    - declaration: OEIS.A389536.mahler_source_unique
+      file: Entries/A389536.lean
+
+    - declaration: OEIS.A389536.mahler_mod_four
+      file: Entries/A389536.lean
+
+    - declaration: OEIS.A389536.mahler_residue
+      file: Entries/A389536.lean
+
+    - declaration: OEIS.A389536.mahler_four_dvd_iff
+      file: Entries/A389536.lean
+
+    - declaration: OEIS.A397588.differential_existence
+      file: Entries/A397588.lean
+
+    - declaration: OEIS.A397588.differential_definition
+      file: Entries/A397588.lean
+
+    - declaration: OEIS.A397588.differential_source_unique
+      file: Entries/A397588.lean
+
+    - declaration: OEIS.A397588.differential_parity
+      file: Entries/A397588.lean
+
+    - declaration: OEIS.A397588.differential_mod_three
+      file: Entries/A397588.lean
+
+    - declaration: OEIS.A397588.differential_divisible_by_three
+      file: Entries/A397588.lean
+
+    - declaration: OEIS.A195194.arbitrary_weights_unique
+      file: Entries/A195194.lean
+
+    - declaration: OEIS.A195194.arbitrary_finite_depth
+      file: Entries/A195194.lean
+
+    - declaration: OEIS.A195194.binary_equation
+      file: Entries/A195194.lean
+
+    - declaration: OEIS.A195194.exact_parity
+      file: Entries/A195194.lean
+
+    - declaration: OEIS.A389537.source_equation
+      file: Entries/A389537.lean
+
+    - declaration: OEIS.A389537.source_exists_unique
+      file: Entries/A389537.lean
+
+    - declaration: OEIS.A389537.source_unique
+      file: Entries/A389537.lean
+
+    - declaration: OEIS.A389537.residue_mod_four
+      file: Entries/A389537.lean
+
+    - declaration: OEIS.A389542.source_equation
+      file: Entries/A389542.lean
+
+    - declaration: OEIS.A389542.source_exists_unique
+      file: Entries/A389542.lean
+
+    - declaration: OEIS.A389542.source_unique
+      file: Entries/A389542.lean
+
+    - declaration: OEIS.A389542.residue_mod_four
+      file: Entries/A389542.lean
+
+    - declaration: OEIS.A389542.exceptional_iff
+      file: Entries/A389542.lean
+
+    - declaration: OEIS.A389542.four_dvd_iff
+      file: Entries/A389542.lean
+
+    - declaration: OEIS.A389474.normalized
+      file: Entries/A389474.lean
+
+    - declaration: OEIS.A389474.source_equation
+      file: Entries/A389474.lean
+
+    - declaration: OEIS.A389474.source_unique
+      file: Entries/A389474.lean
+
+    - declaration: OEIS.A389474.source_existence_uniqueness
+      file: Entries/A389474.lean
+
+    - declaration: OEIS.A389474.square_mod_nine
+      file: Entries/A389474.lean
+
+    - declaration: OEIS.A389474.square_coefficients
+      file: Entries/A389474.lean
+
+    - declaration: OEIS.A389475.normalized
+      file: Entries/A389475.lean
+
+    - declaration: OEIS.A389475.source_equation
+      file: Entries/A389475.lean
+
+    - declaration: OEIS.A389475.source_unique
+      file: Entries/A389475.lean
+
+    - declaration: OEIS.A389475.source_existence_uniqueness
+      file: Entries/A389475.lean
+
+    - declaration: OEIS.A389475.cube_mod_three
+      file: Entries/A389475.lean
+
+    - declaration: OEIS.A389475.cube_coefficients
+      file: Entries/A389475.lean
+
+    - declaration: OEIS.A389475.square_mod_three
+      file: Entries/A389475.lean
+
+    - declaration: OEIS.A389475.square_coefficients
+      file: Entries/A389475.lean
+
+    - declaration: OEIS.A396093.complete_parity
+      file: Entries/A396093.lean
+
+    - declaration: OEIS.A396093.even_iff
+      file: Entries/A396093.lean
+
+    - declaration: OEIS.A396093.even_indices
+      file: Entries/A396093.lean
+
+    - declaration: OEIS.A396093.odd_indices
+      file: Entries/A396093.lean
+
+    - declaration: OEIS.A396102.coefficient_congruence
+      file: Entries/A396102.lean
+
+    - declaration: OEIS.A396102.iterate_congruence
+      file: Entries/A396102.lean
+
+    - declaration: OEIS.A396102.family_coefficient_congruence
+      file: Entries/A396102.lean
+
+    - declaration: OEIS.A396102.family_iterate_congruence
+      file: Entries/A396102.lean
+
+    - declaration: OEIS.A380056.first_source_conjecture
+      file: Entries/A380056.lean
+
+    - declaration: OEIS.A380056.second_source_conjecture
+      file: Entries/A380056.lean
+
+    - declaration: OEIS.A380056.mod_five_exponential_formula
+      file: Entries/A380056.lean
+
+    - declaration: OEIS.A380056.exact_mod_five_pattern
+      file: Entries/A380056.lean
+
+    - declaration: OEIS.A380056.exact_divisibility_by_five
+      file: Entries/A380056.lean
+
+    - declaration: OEIS.A380056.mod_five_period
+      file: Entries/A380056.lean
+
+fidelity:
+  divergences: >-
+    For A380060 and A380680 the Lean definition uses the one-sided form of the theta-type sum; the papers
+    prove that it equals the two-sided sum in the OEIS titles. For A392210 the Lean definition is the
+    functional equation; the papers derive the nested-square title from it. All other entries are
+    defined in Lean by the defining equation or formula of the OEIS entry.
+
+automation:
+  methods:
+    - method: autonomous
+      models: ["GPT-6 (ChatGPT, Pro reasoning)"]
+      framework: "ChatGPT"
+
+review:
+  status: author-verified
+  notes: >-
+    Verified by the author. Independently rebuilt from source and audited (axioms, definitions
+    against the OEIS entries) with Claude Opus 5.5 in Claude Code. Not peer reviewed.
+
+acknowledgements: >-
+  Thanks to the authors of Lean 4 and Mathlib, and to the contributors of the OEIS entries and
+  conjectures treated here.

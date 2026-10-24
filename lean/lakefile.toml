@@ -1,6 +1,6 @@
 name = "congruence_proofs"
 version = "1.0.0"
-defaultTargets = ["Hanna", "Consecutive", "Related", "More", "Round3", "Round4"]
+defaultTargets = ["Hanna", "Consecutive", "Related", "Families"]
 
 [[require]]
 name = "mathlib"
@@ -17,13 +17,7 @@ name = "Consecutive"
 name = "Related"
 
 [[lean_lib]]
-name = "More"
-
-[[lean_lib]]
-name = "Round3"
-
-[[lean_lib]]
-name = "Round4"
+name = "Families"
 
 [[lean_lib]]
 name = "Entries"

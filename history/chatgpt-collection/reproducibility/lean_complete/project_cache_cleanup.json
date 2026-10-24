@@ -1,7 +1,0 @@
-{
-  "path": "lean/.lake/build",
-  "directory_existed": false,
-  "removed_olean_count": 0,
-  "directory_absent_before_build": true,
-  "dependency_cache_path_preserved": "lean/.lake/packages"
-}

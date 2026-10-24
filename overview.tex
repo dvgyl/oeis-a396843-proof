@@ -1,0 +1,87 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{fancyhdr,lastpage}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Proofs and corrections of OEIS conjectures: overview},pdfauthor={Dev D. Goyal}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\raggedbottom
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\scshape Proofs and corrections of OEIS conjectures}
+\fancyhead[R]{\footnotesize\scshape Dev D. Goyal}
+\fancyfoot[R]{\footnotesize\thepage\,/\,\pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\fancypagestyle{firstpage}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[R]{\footnotesize\thepage\,/\,\pageref*{LastPage}}}
+\newcommand{\entry}[5]{\par\medskip\noindent\begin{minipage}{\linewidth}\raggedright
+{\bfseries #1.}\enspace #2\par\vspace{2pt}
+{\small #3\enspace\emph{(#4.)}\par}
+\vspace{1pt}{\footnotesize\href{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/#5/paper.pdf}{Paper}
+\enspace\textperiodcentered\enspace\href{https://oeis.org/#1}{OEIS #1}\enspace\textperiodcentered\enspace
+\href{https://github.com/dvgyl/oeis-a396843-proof/blob/main/lean/Entries/#1.lean}{Lean}\par}
+\end{minipage}\par}
+\begin{document}
+\thispagestyle{firstpage}
+{\LARGE\bfseries Proofs and corrections of OEIS conjectures\par}
+\vspace{4pt}
+{\large 26 papers in 7 families\par}
+\vspace{6pt}
+Dev D. Goyal \enspace\textperiodcentered\enspace October 2026
+\par\bigskip
+This collection settles conjectures recorded in 26 entries of the On-Line Encyclopedia of Integer Sequences (OEIS).
+Most of the sequences are coefficients of formal power series defined by functional equations, and most of the
+conjectures concern their residues modulo small integers. In most entries the conjectured statements are proved. In
+four entries (A380680, A396798, A396843 and A396844) a conjectured statement is false; the papers give
+counterexamples and prove the correct statements. Each paper is self-contained, and
+every theorem in it is formalized in Lean~4 with Mathlib; the formal proofs use only Lean's standard axioms. All
+statements were also checked numerically against the published OEIS data.
+
+The results were obtained in an autonomous AI research effort directed by Dev~D.~Goyal: ChatGPT (OpenAI, GPT-6 with
+Pro reasoning) found the proofs and wrote the Lean formalization from Dev~D.~Goyal's prompts, and Claude Opus~5.5,
+used with Claude Code, checked the work independently and wrote the papers in their present form. Dev~D.~Goyal has
+verified the results. The papers have not been peer reviewed.
+\section*{1. The family $A_m(xA_m-mxA_m^2)=x^2$}
+Parity, residues modulo $m^2$ and binary-digit divisibility for the unique normalized solution of $A_m(xA_m-mxA_m^2)=x^2$, with corrected residue classifications for the two entries.
+\entry{A396843}{Odd coefficients, remainders modulo $9$, and binary digits for the series $A(xA-3xA^2)=x^2$}{Every coefficient is odd; the exact residues modulo 9 (correcting the entry's second conjecture); $3^{s_2(n-1)}$ divides $a(n)$, where $s_2$ is the binary digit sum.}{proved; one statement corrected}{A396843-Odd-coefficients-remainders-modulo-9-and-binary-digits}
+\entry{A396844}{Remainders modulo $16$ for the series $A(xA-4xA^2)=x^2$}{The exact residues modulo 16; the conjecture fails first at $n=17$.}{corrected}{A396844-Remainders-modulo-16}
+\section*{2. Consecutive iterates $F=x+F^{\circ r}\,F^{\circ(r+1)}$}
+For every integer $k$, the $k$-th iterate of $F_r$ modulo $2r$ is $x/(1-kx)$ when $r$ is odd, with an explicit correction term when $r$ is even.
+\entry{A396099}{The iterates of a self-referential power series modulo $4$}{All four conjectured congruences modulo 4 for the series and its iterates.}{proved}{A396099-Iterates-of-a-self-referential-series-modulo-4}
+\entry{A396798}{The iterates of a self-referential power series modulo $8$}{Seven of the eight conjectured congruences modulo 8; the remaining one holds from $n=2$, not from $n=1$ as stated.}{proved; one statement corrected}{A396798-Iterates-of-a-self-referential-series-modulo-8}
+\entry{A396807}{The iterates of a self-referential power series modulo $10$}{For every integer $k$, the coefficients of the $k$-th iterate satisfy $[x^n]\,A^{\circ k}\equiv k^{n-1}\pmod{10}$.}{proved}{A396807-Iterates-of-a-self-referential-series-modulo-10}
+\section*{3. Scaled inverses $A(x-x\,A(qx)/q)=x$}
+Every coefficient is $1$ modulo $q+1$; for even $q$, the odd coefficients sit exactly at the powers of $2$.
+\entry{A393856}{Congruences for the series $A$ with $A\bigl(x-x\,A(4x)/4\bigr)=x$}{$a(n)\equiv1\pmod 5$, and $a(n)$ is odd exactly when $n$ is a power of 2.}{proved}{A393856-Congruences-for-a-scaled-inverse-series-q-4}
+\entry{A393857}{Congruences for the series $A$ with $A\bigl(x-x\,A(5x)/5\bigr)=x$}{$a(n)\equiv1\pmod 6$.}{proved}{A393857-Congruences-for-a-scaled-inverse-series-q-5}
+\entry{A393858}{Congruences for the series $A$ with $A\bigl(x-x\,A(6x)/6\bigr)=x$}{$a(n)\equiv1\pmod 7$, and $a(n)$ is odd exactly when $n$ is a power of 2.}{proved}{A393858-Congruences-for-a-scaled-inverse-series-q-6}
+\entry{A393859}{Congruences for the series $A$ with $A\bigl(x-x\,A(7x)/7\bigr)=x$}{$a(n)\equiv1\pmod 8$.}{proved}{A393859-Congruences-for-a-scaled-inverse-series-q-7}
+\section*{4. Theta series modulo 4}
+Series built from the Jacobi theta series $\theta_3$ whose coefficients are $2$ modulo $4$ exactly at squares (or twice squares) and divisible by $4$ elsewhere.
+\entry{A378580}{Remainders modulo $4$ for the series with $A\bigl(x/A(x)\bigr)=\theta_3(x)$}{$A(x/A(x))=\theta_3$: for $n>0$, $a(n)\equiv2\pmod4$ if $n$ is a square, and $4\mid a(n)$ otherwise.}{proved}{A378580-Theta-quotient-substitution-modulo-4}
+\entry{A378581}{Remainders modulo $4$ for the series with $A\bigl(x\,A(x)\bigr)=\theta_3(x)$}{$A(x\,A(x))=\theta_3$: the same square pattern.}{proved}{A378581-Theta-product-substitution-modulo-4}
+\entry{A380060}{Square indices and remainders modulo 4 in a theta-type series}{For $n>0$, $a(n)\equiv2\pmod4$ if $n$ is a square, and $4\mid a(n)$ otherwise.}{proved}{A380060-Square-indices-in-a-theta-type-series}
+\entry{A380680}{Twice the squares, not the squares: remainders modulo 4 in a theta-type series}{The square conjecture is false ($a(1)=4$, $a(2)=6$); in fact $a(n)\equiv2\pmod4$ exactly when $n=2k^2$.}{conjecture disproved; corrected statement proved}{A380680-Twice-the-squares-not-the-squares}
+\section*{5. Catalan-type equations}
+Equations whose solutions reduce, modulo 4 or 8, to expressions in the Catalan series, whose coefficients are odd exactly at powers of 2.
+\entry{A393172}{The Catalan numbers inside the equation $A(x-x^2)=x+A(x)^2$}{For $n>1$, $a(n)\equiv2\pmod4$ if $n=2^k$, and $4\mid a(n)$ otherwise.}{proved}{A393172-The-Catalan-numbers-inside-a-functional-equation}
+\entry{A393171}{Remainders modulo $8$ of a series built from the Catalan numbers}{For $n>2$, $a(n)\equiv4\pmod8$ if $n=2^k$ or $2^k+1$, and $8\mid a(n)$ otherwise.}{proved}{A393171-Remainders-modulo-8-from-the-Catalan-numbers}
+\entry{A392210}{The odd-indexed terms of a nested square are even}{$a(2n-1)$ is even for $n>1$ (an elementary observation recorded in the entry).}{proved}{A392210-Odd-indexed-terms-of-a-nested-square}
+\entry{A389536}{Remainders modulo $4$ for the equation $A(x^2+2x^3)=x\,A(x)$}{For $n>1$, $a(n)\equiv2\pmod4$ if $n=2^k+1$, and $4\mid a(n)$ otherwise.}{proved}{A389536-Remainders-modulo-4-for-a-Mahler-type-equation}
+\entry{A397588}{Odd coefficients at powers of two for $A=x+(xA^2)'$}{$a(n)$ is odd exactly when $n$ is a power of 2, and $3\mid a(n)$ for $n>1$.}{proved}{A397588-Odd-coefficients-at-powers-of-two}
+\entry{A195194}{Parity of an infinitely nested series reversion}{The infinitely nested reversion is well defined, and $a(n)$ is odd exactly when $n$ is a power of 2.}{proved}{A195194-Parity-of-an-infinitely-nested-series-reversion}
+\section*{6. Reversions with an exact halving step}
+Equations whose coefficient recursion appears to divide by 2; the division is shown to be exact before reducing.
+\entry{A389537}{Congruences modulo $4$ for the series with $A\bigl(A(x)-x\bigr)=A(x)^2$}{For $n>2$, $a(n)\equiv2\pmod4$ if $n=3\cdot2^k$, and $4\mid a(n)$ otherwise.}{proved}{A389537-Congruences-modulo-4-for-a-sparse-reversion}
+\entry{A389542}{Congruences modulo $4$ for the series with $A\bigl(A(x)^2-x^2\bigr)=4A(x)^3$}{For $n>1$, $a(n)\equiv2\pmod4$ if $n=2^k+1$, and $4\mid a(n)$ otherwise.}{proved}{A389542-Congruences-modulo-4-for-a-square-reversion}
+\entry{A389474}{A power series whose square is $x^2+2x^3$ modulo $9$}{$A^2\equiv x^2+2x^3\pmod 9$, and $A^{3k}\equiv A(x^3)^k\pmod 3$.}{proved}{A389474-A-series-whose-square-is-a-polynomial-modulo-9}
+\entry{A389475}{Two congruences modulo $3$ for the series with $A(3x^2)=2x^2+A^2-2A^3$}{$A^3\equiv A(x^3)$ and $A^2\equiv x^2+2A(x^3)\pmod 3$.}{proved}{A389475-Two-congruences-modulo-3}
+\section*{7. Other results}
+Three further entries, each with its own method.
+\entry{A396093}{When are the coefficients of $B(B(B(x)))$ odd?}{$a(n)$ is odd exactly when $n\equiv1,3,7,9\pmod{10}$.}{proved}{A396093-Odd-coefficients-of-the-third-iterate}
+\entry{A396102}{Every coefficient is $1$ modulo $3$: the series with $A(A(A(x)))=(1+x)\,A(A(x))$}{$a(n)\equiv1\pmod 3$, together with a theorem for the whole family $F^{\circ r}=(1+x)F^{\circ(r-1)}$.}{proved}{A396102-Every-coefficient-is-1-modulo-3}
+\entry{A380056}{The coefficients of $(e^x-1)/\cos 2x$ modulo 4 and 5}{$a(n)\equiv1\pmod4$, and $a(n)\equiv2\cdot2^n+3\cdot4^n\pmod5$, so $5\mid a(n)$ exactly when $4\mid n$.}{proved}{A380056-Exponential-over-cosine-modulo-4-and-5}
+\end{document}

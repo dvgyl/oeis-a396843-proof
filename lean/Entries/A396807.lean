@@ -1,13 +1,14 @@
 import Consecutive
 
 /-!
-Separate typed proof interface for OEIS A396807.
-The complete implementation is in the imported, preserved libraries.
-AI disclosure: ChatGPT (OpenAI) generated this presentation for Dev D. Goyal.
-Review status: see AUTHORSHIP.md.
+# OEIS A396807
+
+Statements of the results in the accompanying paper (listed in `CONTENTS.md` at the
+repository root), proved using the shared libraries of this project.
+Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
 
-namespace FinalCollection.A396807
+namespace OEIS.A396807
 
 open PowerSeries Consecutive
 open Hanna.Series (Normalized compose compose_X_right)
@@ -40,4 +41,4 @@ theorem a396807_integer_iterate_congruence (k : ℤ) (n : ℕ) (hn : 1 ≤ n) :
     (integerIterateCoeff 5 k n : ZMod 10) = (k : ZMod 10)^(n-1) := by
   exact Consecutive.a396807_integer_iterate_congruence k n hn
 
-end FinalCollection.A396807
+end OEIS.A396807

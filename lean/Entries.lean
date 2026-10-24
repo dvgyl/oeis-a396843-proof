@@ -1,11 +1,4 @@
-import Entries.A052895
-import Entries.A064618
-import Entries.A080253
-import Entries.A167137
 import Entries.A195194
-import Entries.A305550
-import Entries.A306082
-import Entries.A354242
 import Entries.A378580
 import Entries.A378581
 import Entries.A380056
@@ -26,11 +19,10 @@ import Entries.A393859
 import Entries.A396093
 import Entries.A396099
 import Entries.A396102
-import Entries.A396797
 import Entries.A396798
 import Entries.A396807
 import Entries.A396843
 import Entries.A396844
 import Entries.A397588
 
-/-! All 34 individually named OEIS proof interfaces. See ../INDEX.md. -/
+/-! All 26 entry files. -/
