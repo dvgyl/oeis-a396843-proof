@@ -37,7 +37,7 @@ Claude Opus 5.5 is an AI model. It was used with Claude Code, a coding assistant
    - the derivation of the nested-square title of A392210 from its defining equation;
    - a short lemma, in the A195194 paper, saying that inversion preserves agreement of series up to a given degree.
 
-   The Discussion section of each paper was written during the rewrite. Some contain further observations, such as generalizations or congruences modulo higher powers. Some of these are proved in the text and others are only observed numerically, and the text says which. All were checked by computer, and none is part of the Lean formalization.
+   The Discussion section of each paper was written during the rewrite. Some contain further observations, such as generalizations or congruences modulo higher powers. Some of these are proved in the text and others are only observed numerically, and the text says which. All were checked by computer (224 checks, in [`verification/discussion_checks.gp`](verification/discussion_checks.gp)), and none is part of the Lean formalization.
 6. **Corrected the attribution text.** It replaced "Dev Goyal" with "Dev D. Goyal", and outdated "review pending" notes with the current status. This was done in documentation and in Lean *comments* only; a check confirmed that the Lean code itself is unchanged.
 7. **Organized this repository** and wrote the README, this page, CREDITS, CITATION and the other guides.
 

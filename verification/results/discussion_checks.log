@@ -1,0 +1,308 @@
+# Output of `gp -q discussion_checks.gp` (PARI/GP 2.15.4), run on 24 October 2026.
+== Common to the seven periodicity papers (A052895, A064618, A080253, A167137, A305550, A306082, A354242)
+  ok    lambda(16) = 4 while phi(16) = 8
+  ok    Bell numbers mod 2 are 1,1,0,1,1,0,... (n < 220)
+  ok    Bell numbers mod 2: smallest period 3, which does not divide phi(2) = 1
+  ok    Bell numbers: a(n+phi(2)) == a(n) mod 2 fails for n >= 2 (so they are not covered)
+== A052895: Discussion
+  ok    A052895: all 18 published terms reproduced
+  ok    A052895: a(n+lambda(m)) == a(n) mod m for m <= 60, m <= n < 220 - lambda(m)  [Danesh]
+  ok    A052895: residues mod 10 periodic with period 4 from n = 1 (n < 220)
+  info  A052895 mod 10: smallest period 4, earliest start n = 1 (computed for n < 220)
+== A064618: Discussion
+  ok    A064618: all 18 published terms reproduced
+  ok    A064618: a(n+lambda(m)) == a(n) mod m for m <= 60, m <= n < 220 - lambda(m)  [Danesh]
+  ok    A064618: residues mod 10 periodic with period 4 from n = 0 (n < 220)
+  info  A064618 mod 10: smallest period 4, earliest start n = 0 (computed for n < 220)
+== A080253: Discussion
+  ok    A080253: all 18 published terms reproduced
+  ok    A080253: a(n+lambda(m)) == a(n) mod m for m <= 60, m <= n < 220 - lambda(m)  [Danesh]
+  ok    A080253: residues mod 7 periodic with period 6 from n = 1 (n < 220)
+  info  A080253 mod 7: smallest period 6, earliest start n = 1 (computed for n < 220)
+== A167137: Discussion
+  ok    A167137: all 22 published terms reproduced
+  ok    A167137: a(n+lambda(m)) == a(n) mod m for m <= 60, m <= n < 220 - lambda(m)  [Danesh]
+  ok    A167137: residues mod 16 periodic with period 2 from n = 4 (n < 220)
+  info  A167137 mod 16: smallest period 2, earliest start n = 4 (computed for n < 220)
+  info  Hanna's second conjecture in A167137 (integrality for all powers a(n)^m) is not treated by the paper; not tested
+== A305550: Discussion
+  ok    A305550: all 22 published terms reproduced
+  ok    A305550: a(n+lambda(m)) == a(n) mod m for m <= 60, m <= n < 220 - lambda(m)  [Danesh]
+  ok    A305550: residues mod 16 periodic with period 4 from n = 4 (n < 220)
+  info  A305550 mod 16: smallest period 4, earliest start n = 4 (computed for n < 220)
+== A306082: Discussion
+  ok    A306082: all 21 published terms reproduced
+  ok    A306082: a(n+lambda(m)) == a(n) mod m for m <= 60, m <= n < 220 - lambda(m)  [Danesh]
+  ok    A306082: residues mod 7 periodic with period 6 from n = 1 (n < 220)
+  info  A306082 mod 7: smallest period 6, earliest start n = 1 (computed for n < 220)
+== A354242: Discussion
+  ok    A354242: all 18 published terms reproduced
+  ok    A354242: a(n+lambda(m)) == a(n) mod m for m <= 60, m <= n < 220 - lambda(m)  [Danesh]
+  ok    A354242: residues mod 16 periodic with period 2 from n = 3 (n < 220)
+  info  A354242 mod 16: smallest period 2, earliest start n = 3 (computed for n < 220)
+  info  Bala's continued fraction in A354242 is not treated by the paper; not tested
+== A195194: Discussion (the tower modulo a prime p)
+  ok    A195194: all 20 published terms reproduced
+  ok    p = 2: F_0 mod p equals the finite tower INV(x - x INV(x - 2x ... INV(x - (p-1)x^2))) (n < 140)
+  ok    p = 3: F_0 mod p equals the finite tower INV(x - x INV(x - 2x ... INV(x - (p-1)x^2))) (n < 140)
+  ok    p = 5: F_0 mod p equals the finite tower INV(x - x INV(x - 2x ... INV(x - (p-1)x^2))) (n < 140)
+  ok    p = 7: F_0 mod p equals the finite tower INV(x - x INV(x - 2x ... INV(x - (p-1)x^2))) (n < 140)
+  ok    p = 11: F_0 mod p equals the finite tower INV(x - x INV(x - 2x ... INV(x - (p-1)x^2))) (n < 140)
+  ok    p = 13: F_0 mod p equals the finite tower INV(x - x INV(x - 2x ... INV(x - (p-1)x^2))) (n < 140)
+  ok    p = 3: the constructed Q(x,y) is a nonzero polynomial mod p, Q(x, F_0) == 0 (n < 140), and Q(x, F_0 + x^20) != 0
+  info  p = 3: deg_x Q = 2, deg_y Q = 3, valuation of dQ/dy(x, F_0) = 1
+  ok    p = 5: the constructed Q(x,y) is a nonzero polynomial mod p, Q(x, F_0) == 0 (n < 140), and Q(x, F_0 + x^20) != 0
+  info  p = 5: deg_x Q = 5, deg_y Q = 8, valuation of dQ/dy(x, F_0) = 7
+  ok    p = 7: the constructed Q(x,y) is a nonzero polynomial mod p, Q(x, F_0) == 0 (n < 140), and Q(x, F_0 + x^20) != 0
+  info  p = 7: deg_x Q = 13, deg_y Q = 21, valuation of dQ/dy(x, F_0) = 26
+  ok    p = 11: the constructed Q(x,y) is a nonzero polynomial mod p, Q(x, F_0) == 0 (n < 300), and Q(x, F_0 + x^20) != 0
+  info  p = 11: deg_x Q = 89, deg_y Q = 144, valuation of dQ/dy(x, F_0) = 221
+  info  p-automaticity of a(n) mod p (Christol's theorem) is a qualitative statement; not tested
+== A378580: Discussion (generalization; the two entries agree modulo 8)
+  ok    A378580 and A378581: defining equations hold
+  ok    A378580: all 24 published terms reproduced
+  ok    A378581: all 22 published terms reproduced
+  ok    a(2) = 4 (A378580) and a(2) = -4 (A378581), while [x^2] theta = 0: neither is == theta mod 8
+  ok    A378580 == A378581 mod 8 for every n < 160
+  ok    A378580 and A378581 are not congruent mod 16: a(2) differ by 8
+  ok    20 random targets T = 1 + 2S: both solutions exist with integer coefficients (degree <= 59)
+  ok    20 random targets T = 1 + 2S: both solutions == T mod 4 (degree <= 59)
+  ok    20 random targets T = 1 + 2S: the two solutions agree mod 8 (degree <= 59)
+== A378581: Discussion
+  info  the Discussion is the same as for A378580; all its claims are checked in that section
+== A380056: Discussion (other moduli)
+  ok    A380056: all 22 published terms reproduced
+  ok    A380056: residues mod 3 periodic with period 8 from n = 1 (n < 400)
+  info  A380056 mod 3: smallest period 8, earliest start n = 1 (computed for n < 400)
+  ok    A380056: residues mod 7 periodic with period 48 from n = 1 (n < 400)
+  info  A380056 mod 7: smallest period 48, earliest start n = 1 (computed for n < 400)
+  ok    A380056: residues mod 8 periodic with period 4 from n = 3 (n < 400)
+  info  A380056 mod 8: smallest period 4, earliest start n = 3 (computed for n < 400)
+  ok    A380056: a(n) mod 8 = 5, 1, 1, 5 for n == 3, 0, 1, 2 mod 4, n >= 3 (n < 400)
+  ok    A380056: residues mod 16 periodic with period 8 from n = 3 (n < 400)
+  info  A380056 mod 16: smallest period 8, earliest start n = 3 (computed for n < 400)
+  ok    -4 is a square mod 5 (-4 == 1 = 1^2), but not mod 3 or mod 7
+  ok    8 = 3^2 - 1 and 48 = 7^2 - 1
+== A380060: Discussion (mod 8; the general principle for 1 + 2 Sigma(U))
+  ok    A380060: A = 1 + 2 Sigma(A) holds
+  ok    A380060: all 27 published terms reproduced
+  ok    A380060: a(2) = 4 while [x^2] theta = 0, so the theorem does not extend to mod 8
+  ok    Q_j(1) = 1 and Q_j(0) = -x^j for j <= 10
+  ok    U = A (A380060) is == 1 mod 2 and 1 + 2 Sigma(A) == theta(x) mod 4 (n < 100)
+  ok    U = 2 (A380680) gives 1 + 2 Sigma(2) == theta(x^2) mod 4 (n < 100)
+  ok    10 random U == 1 mod 2: 1 + 2 Sigma(U) == theta(x) mod 4 (n < 100)
+  ok    10 random U == 0 mod 2: 1 + 2 Sigma(U) == theta(x^2) mod 4 (n < 100)
+  ok    10 random pairs U == V mod 2: 1 + 2 Sigma(U) == 1 + 2 Sigma(V) mod 4 (n < 100)
+== A380680: Discussion
+  ok    published terms contradict the conjecture, first at n = 1 (a(1) = 4)
+  info  published indices contradicting the residue-2-at-squares conjecture: [1, 2, 4, 8, 9, 16, 18, 25, 32]
+  info  the general principle for 1 + 2 Sigma(U) is checked in the A380060 section
+== A389474: Discussion (A modulo 9; A^2 modulo powers of 3)
+  ok    A389474: integral solution of the defining equation
+  ok    A389474: all 24 published terms reproduced
+  ok    statement (4) for 5 random integer series W: [x^n](W^(3k) - W(x^3)^k) == 0 mod 3, k <= 6, n < 90
+  ok    x (1+2x)^(1/2) = x + x^2 - x^3/2 + x^4/2 - 5x^5/8 + ...
+  ok    2*5 = 10 == 1 mod 9; -1/2 == 4 == a(3) and 1/2 == 5 == a(4) = 14 mod 9
+  ok    A == x (1+2x)^(1/2) mod 9 (degree < 90)
+  ok    A^2 == x^2 + 2x^3 + 9x^4 + 9x^5 + 9x^6 mod 27 (degree < 90)
+  ok    A^2 is == mod 3^k to a polynomial of degree <= 3k-3, for 2 <= k <= 7 (degree < 90)
+  ok    Q + 2S = R(3S) exactly, with S = A^2, Q = x^2 + 2x^3, R the inverse of A
+  ok    K(u) = 3R(u) - 2u has integer coefficients, K(3S) = 3Q, and K^(-1)(v) == v mod 3 with integer coefficients
+  ok    k_2 = 1
+  info  k_2..k_8 = [1, 8, 74, 816, 9448, 115323, 1451955]
+  ok    A^2 = Q + sum_{j>=2} 3^j k_j Q^j exactly (degree < 90)
+== A389475: Discussion (A modulo 9; the family R(3x^2) = 2x^2 + R^2 + 2sR^3)
+  ok    A389475: integral solution of the defining equation
+  ok    A389475: all 23 published terms reproduced
+  ok    statement (a) for 5 random integer series W: W^3 == W(x^3) mod 3 (n < 90)
+  ok    A(3x^2) == 3x^2 mod 9 (degree < 90)
+  ok    A^2 - 2A^3 == x^2 mod 9 (degree < 90)
+  ok    a(2) = 1 and A^2 - 2A^3 == x^2 + 9x^4 mod 27 (degree < 90)
+  ok    V = x (1-2x)^(1/2) satisfies V^2 = x^2 - 2x^3
+  ok    A == compositional inverse of x (1-2x)^(1/2) mod 9 (degree < 90)
+  ok    family: integer solution R_s for every s in [-6, 6]; R_{-1} = A389475 and R_1 = inverse of A389474 (degree < 40)
+== A389536: Discussion (modulo 8)
+  ok    A389536: defining equation holds
+  ok    A389536: all 34 published terms reproduced
+  ok    a(n) mod 8 = 2 if n-1 = 2^k, 4 if n-1 = 2^i + 2^j with i >= j+2, else 0 (1 < n < 129)
+  ok    the residue-4 indices begin 6, 10, 11, 18, 19, 21, 34
+== A389537: Discussion (signs; A == x + x^2 mod 2)
+  ok    A389537: defining equation holds
+  ok    A389537: all 30 published terms reproduced
+  ok    A == x + x^2 mod 2 (n < 300)
+  ok    entry's observation: for n > 7 the signs come in runs of length 9 or 10 (31 complete runs, n < 300)
+  info  run lengths from n = 8: [9, 10, 9, 9, 10, 9, 9, 10, 9, 9, 10, 9, 9, 10, 9, 9, 10, 9, 10, 9, 9, 10, 9, 9, 10, 9, 9, 10, 9, 9, 10]
+== A389542: Discussion (modulo 8)
+  ok    A389542: integral solution of the defining equation
+  ok    A389542: all 22 published terms reproduced
+  ok    a(n) mod 8 = 2 if n-1 in {1,2}, 6 if n-1 = 2^k (k >= 2), 4 if n-1 = 2^j + 2^k (1 <= j < k), else 0 (2 <= n < 130)
+== A392210: Discussion (even-indexed terms; identities of the same shape)
+  ok    A392210: A = x + A(x/(1-x))^2 holds
+  ok    A392210: all 24 published terms reproduced
+  ok    A == x + A(x^2/(1-x^2)) mod 2 (n < 200)
+  ok    a(2m) == sum_{k=1}^m binomial(m-1,k-1) a(k) mod 2 for 2m < 130
+  info  the same parity rule also holds for 2m < 200: 1
+  ok    A(x/g) = x/g + A(x/(g-x))^2 for 5 random integer series g with g(0) = 1 (degree < 100)
+  ok    entry formula (5), A(x/(1-nx)) = x/(1-nx) + A(x/(1-(n+1)x))^2, for -3 <= n <= 6 (degree < 100)
+== A393172: Discussion (modulo 8)
+  ok    A393172: defining equation holds
+  ok    A393172: all 24 published terms reproduced
+  ok    a(n) mod 8 = 2 if n = 2^k, 4 if n = 2^k (4^j+1) with j >= 1, else 0 (1 < n < 200)
+  ok    the residue-4 indices begin 5, 10, 17, 20, 34, 40, 65, 68, 80
+  info  the consequence for A393171 modulo 16 is checked in the next section
+== A393171: Discussion (squaring gains a power of 2; B modulo 16)
+  ok    A393171: B = x + B(C)^2 holds
+  ok    A393171: all 24 published terms reproduced
+  ok    A = D + 2^k K implies A^2 == D^2 mod 2^(k+1): 5 random D, K and k <= 4
+  ok    B == x + (A393172 reduced mod 8)^2 mod 16 (n < 200)
+  ok    the conjectured mod-8 rule for A393172 gives B mod 16: B == x + D^2 mod 16 (n < 200)
+== A393856: Discussion (G_q modulo q; the rest of the family)
+  ok    Catalan C(n-1) odd iff n is a power of 2 (1 <= n < 300)
+  ok    q = 4: modular run agrees with the exact series for n < 16
+  ok    q = 4: [x^n] G_q == Catalan C(n-1) = binomial(2n-2,n-1)/n mod q (1 <= n < 300)
+  ok    q = 4: [x^n] G_q == 1 mod q+1 (1 <= n < 300)
+  ok    q = 4: G_q mod q(q+1) = 20 is CRT(Catalan mod q, 1 mod q+1) (1 <= n < 300)
+  ok    q = 4: [x^n] G_q odd iff n is a power of 2 (1 <= n < 300)
+  ok    A393856: all 15 published terms reproduced
+  ok    example q = 4, n = 5: a(5) = 8466 and Catalan 14 both leave remainder 2 mod 4
+  ok    q = 2: modular run agrees with the exact series for n < 16
+  ok    q = 2: [x^n] G_q == Catalan C(n-1) = binomial(2n-2,n-1)/n mod q (1 <= n < 300)
+  ok    q = 2: [x^n] G_q == 1 mod q+1 (1 <= n < 300)
+  ok    q = 2: G_q mod q(q+1) = 6 is CRT(Catalan mod q, 1 mod q+1) (1 <= n < 300)
+  ok    q = 2: [x^n] G_q odd iff n is a power of 2 (1 <= n < 300)
+  ok    q = 3: modular run agrees with the exact series for n < 16
+  ok    q = 3: [x^n] G_q == Catalan C(n-1) = binomial(2n-2,n-1)/n mod q (1 <= n < 300)
+  ok    q = 3: [x^n] G_q == 1 mod q+1 (1 <= n < 300)
+  ok    q = 3: G_q mod q(q+1) = 12 is CRT(Catalan mod q, 1 mod q+1) (1 <= n < 300)
+  ok    A088714 (= G_1 shifted by one): all 21 published terms reproduced
+  ok    A195195 (= G_2): all 17 published terms reproduced
+  ok    A195196 (= G_3): all 15 published terms reproduced
+  ok    A195195: every published term == 1 mod 3, and odd iff its index is a power of 2
+  ok    q = 1: modular run agrees with the exact series for n < 16
+  ok    q = 1: [x^n] G_q == 1 mod q+1 (1 <= n < 300)
+  info  q = 2 and q = 3 above cover A195195 and A195196 for n < 300
+  ok    q = 8: modular run agrees with the exact series for n < 16
+  ok    q = 8: [x^n] G_q == Catalan C(n-1) = binomial(2n-2,n-1)/n mod q (1 <= n < 100)
+  ok    q = 8: [x^n] G_q == 1 mod q+1 (1 <= n < 100)
+  ok    q = 8: G_q mod q(q+1) = 72 is CRT(Catalan mod q, 1 mod q+1) (1 <= n < 100)
+  ok    q = 8: [x^n] G_q odd iff n is a power of 2 (1 <= n < 100)
+  ok    q = 9: modular run agrees with the exact series for n < 16
+  ok    q = 9: [x^n] G_q == Catalan C(n-1) = binomial(2n-2,n-1)/n mod q (1 <= n < 100)
+  ok    q = 9: [x^n] G_q == 1 mod q+1 (1 <= n < 100)
+  ok    q = 9: G_q mod q(q+1) = 90 is CRT(Catalan mod q, 1 mod q+1) (1 <= n < 100)
+  ok    q = 10: modular run agrees with the exact series for n < 16
+  ok    q = 10: [x^n] G_q == Catalan C(n-1) = binomial(2n-2,n-1)/n mod q (1 <= n < 100)
+  ok    q = 10: [x^n] G_q == 1 mod q+1 (1 <= n < 100)
+  ok    q = 10: G_q mod q(q+1) = 110 is CRT(Catalan mod q, 1 mod q+1) (1 <= n < 100)
+  ok    q = 10: [x^n] G_q odd iff n is a power of 2 (1 <= n < 100)
+  ok    q = 11: modular run agrees with the exact series for n < 16
+  ok    q = 11: [x^n] G_q == Catalan C(n-1) = binomial(2n-2,n-1)/n mod q (1 <= n < 100)
+  ok    q = 11: [x^n] G_q == 1 mod q+1 (1 <= n < 100)
+  ok    q = 11: G_q mod q(q+1) = 132 is CRT(Catalan mod q, 1 mod q+1) (1 <= n < 100)
+  ok    q = 12: modular run agrees with the exact series for n < 16
+  ok    q = 12: [x^n] G_q == Catalan C(n-1) = binomial(2n-2,n-1)/n mod q (1 <= n < 100)
+  ok    q = 12: [x^n] G_q == 1 mod q+1 (1 <= n < 100)
+  ok    q = 12: G_q mod q(q+1) = 156 is CRT(Catalan mod q, 1 mod q+1) (1 <= n < 100)
+  ok    q = 12: [x^n] G_q odd iff n is a power of 2 (1 <= n < 100)
+== A393857: Discussion (q = 5)
+  ok    q = 5: modular run agrees with the exact series for n < 16
+  ok    q = 5: [x^n] G_q == Catalan C(n-1) = binomial(2n-2,n-1)/n mod q (1 <= n < 300)
+  ok    q = 5: [x^n] G_q == 1 mod q+1 (1 <= n < 300)
+  ok    q = 5: G_q mod q(q+1) = 30 is CRT(Catalan mod q, 1 mod q+1) (1 <= n < 300)
+  ok    A393857: all 14 published terms reproduced
+  ok    example q = 5, n = 5: a(5) = 26869 and Catalan 14 both leave remainder 4 mod 5
+  info  the family members q = 1, 2, 3 and q = 8..12 are checked in the A393856 section
+== A393858: Discussion (q = 6)
+  ok    q = 6: modular run agrees with the exact series for n < 16
+  ok    q = 6: [x^n] G_q == Catalan C(n-1) = binomial(2n-2,n-1)/n mod q (1 <= n < 300)
+  ok    q = 6: [x^n] G_q == 1 mod q+1 (1 <= n < 300)
+  ok    q = 6: G_q mod q(q+1) = 42 is CRT(Catalan mod q, 1 mod q+1) (1 <= n < 300)
+  ok    q = 6: [x^n] G_q odd iff n is a power of 2 (1 <= n < 300)
+  ok    A393858: all 13 published terms reproduced
+  ok    example q = 6, n = 5: a(5) = 71744 and Catalan 14 both leave remainder 2 mod 6
+  info  the family members q = 1, 2, 3 and q = 8..12 are checked in the A393856 section
+== A393859: Discussion (q = 7)
+  ok    q = 7: modular run agrees with the exact series for n < 16
+  ok    q = 7: [x^n] G_q == Catalan C(n-1) = binomial(2n-2,n-1)/n mod q (1 <= n < 300)
+  ok    q = 7: [x^n] G_q == 1 mod q+1 (1 <= n < 300)
+  ok    q = 7: G_q mod q(q+1) = 56 is CRT(Catalan mod q, 1 mod q+1) (1 <= n < 300)
+  ok    A393859: all 13 published terms reproduced
+  ok    example q = 7, n = 5: a(5) = 167937 and Catalan 14 both leave remainder 0 mod 7
+  info  the family members q = 1, 2, 3 and q = 8..12 are checked in the A393856 section
+== A396093: Discussion (other iterates; modulo 4)
+  ok    A396093: all 27 published terms reproduced
+  ok    B == x/(1+x^2) mod 2 (n < 600)
+  ok    B(B(x)) == (x+x^5)/(1+x^6) mod 2 (n < 600)
+  ok    A030267 (= B(B(x))): all 28 published terms reproduced
+  ok    [x^n] B(B(x)) odd iff n == 1 or 5 mod 6 (n < 600, and all published terms of A030267)
+  ok    B(B(B(B(x)))): residues mod 2 periodic with period 34 from n = 0 (n < 600)
+  info  B(B(B(B(x)))) mod 2: smallest period 34, earliest start n = 0 (computed for n < 600)
+  ok    A396093: residues mod 4 periodic with period 20 from n = 1 (n < 600)
+  info  A396093 mod 4: smallest period 20, earliest start n = 0 (computed for n < 600)
+== A396099: Discussion (all coefficients odd; modulo 4r; the equation F = x + F^r F^s)
+  ok    every coefficient of F_r is odd, r = 1..8 (n < 130)
+  ok    the runs modulo 4r agree with the published terms (r = 2..5)
+  ok    F_1 (r = 1): residues mod 4 periodic with period 3 from n = 1 (n < 130)
+  info  F_1 (r = 1) mod 4: smallest period 3, earliest start n = 1 (computed for n < 130)
+  ok    A396099 (r = 2): residues mod 8 periodic with period 4 from n = 4 (n < 130)
+  info  A396099 (r = 2) mod 8: smallest period 4, earliest start n = 4 (computed for n < 130)
+  ok    pairs r <= 7, s <= 8 with m = gcd(r+s-1, rs) > 1: there are 38
+  ok    F = x + F^r F^s: every iterate F^k == x/(1-kx) mod gcd(r+s-1, rs), 38 pairs, -3 <= k <= 6, n < 50
+  ok    F_r has order exactly 2r under composition modulo 2r, r = 1..8 (n < 60)
+== A396797: Discussion (r = 3)
+  ok    A396797 (r = 3): residues mod 12 periodic with period 6 from n = 1 (n < 130)
+  info  A396797 (r = 3) mod 12: smallest period 6, earliest start n = 1 (computed for n < 130)
+  info  the claims shared with A396099 (odd coefficients, F = x + F^r F^s, order 2r) are checked in that section
+== A396798: Discussion (r = 4)
+  ok    A396798 (r = 4): residues mod 16 periodic with period 8 from n = 2 (n < 130)
+  info  A396798 (r = 4) mod 16: smallest period 8, earliest start n = 2 (computed for n < 130)
+  info  the claims shared with A396099 (odd coefficients, F = x + F^r F^s, order 2r) are checked in that section
+== A396807: Discussion (r = 5)
+  ok    A396807 (r = 5): residues mod 20 periodic with period 3 from n = 1 (n < 130)
+  info  A396807 (r = 5) mod 20: smallest period 3, earliest start n = 1 (computed for n < 130)
+  info  the claims shared with A396099 (odd coefficients, F = x + F^r F^s, order 2r) are checked in that section
+== A396102: Discussion (signs; A140094 and A067145; iterates of x/(1-x))
+  ok    A396102: integral solution of F^3 = (1+x) F^2
+  ok    A396102: all 23 published terms reproduced
+  ok    the terms alternate in sign from n = 2 on (2 <= n < 60)
+  ok    S(x) = -R(-x), R the inverse of A396102, satisfies S = x + S S^3 and S = x/(1 - S^3) (n < 60)
+  ok    S equals the series defined by A140094 (n < 60)
+  ok    A140094: all 23 published terms reproduced
+  ok    A140094: the entry prints 23 terms and every one is == 1 mod 3
+  ok    S == x/(1-x) mod 3 (n < 60)
+  ok    for r = 2..8, the solution of S = x/(1 - S^r) is == x/(1-x) mod r (n < 60)
+  ok    A067145: F_2 is integral and F(F(x)) = (1+x) F(x)
+  ok    A067145 (= F_2): all 23 published terms reproduced
+  ok    A067145 shifts left under reversion: INV(F) = F/x - 1 (n < 39)
+  ok    A067145: the entry prints 23 terms and every one is odd; F_2 is odd for n < 40
+  ok    iterates of x/(1-x): M_1^k = x/(1-kx) for -5 <= k <= 10, so M_1^r == x mod r
+== A396843: Discussion (modulo m^3; the members m = 1, 2, 5)
+  ok    the series for m = 1..5 satisfy A(xA - mxA^2) = x^2 (n < 260)
+  ok    A396843: all 23 published terms reproduced
+  ok    mod m^3 the nonzero residues occur only at n = 1, 2^i+1, 2^i+2^j+1 (m = 3, 4: n < 260; m = 2..12: n < 70)
+  ok    A265940 (m = 1): all 36 published terms reproduced
+  ok    m = 1: every coefficient is odd (n < 260, and all published terms)
+  ok    A271958 (m = 2): all 29 published terms reproduced
+  ok    m = 2: a(n) == +-2 mod 4 for n = 2^j+1, == 0 mod 4 for the other n >= 2 (n < 260, and all published terms)
+  ok    A396845 (m = 5): all 21 published terms reproduced
+  ok    m = 5: a(n) mod 25 is 5 at n = 4^k+1, 20 at n = 2*4^k+1, 0 elsewhere (2 <= n < 260, and all published terms)
+== A396844: Discussion (where the conjecture fails)
+  ok    A396844: all 22 published terms reproduced
+  ok    the literal conjecture (n > 8) fails exactly at n = 17, 65, 257 for n < 260 (first 17, next 65; none for 8 < n < 17)
+  info  the claims shared with A396843 (modulo m^3; m = 1, 2, 5) are checked in that section
+== A397588: Discussion (higher powers of 3)
+  ok    A397588: A = x + (x A^2)' holds
+  ok    A397588: all 20 published terms reproduced
+  ok    a(n) = (n+1) s(n) with s(n) = sum_k a(k) a(n-k), so n+1 divides a(n) (2 <= n < 299)
+  ok    s(n) = 2 a(n-1) + sum_{k=2}^{n-2} a(k) a(n-k) (3 <= n < 299)
+  ok    a(5) = 4284 = 9*476
+  ok    9 divides a(n) for 5 <= n < 299
+  ok    3^12 divides a(n) for 35 <= n < 299
+  info  smallest n0 with 3^e | a(n) for all n0 <= n < 299, e = 1..12: [2, 5, 8, 10, 13, 15, 19, 22, 23, 28, 32, 35]
+
+RESULT: 224 checks passed, 0 failed
+
+real	7m19.039s
+user	7m13.856s
+sys	0m1.221s
+exit 0

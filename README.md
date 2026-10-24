@@ -103,9 +103,10 @@ The guesses are things like a simple fraction, a series with only a few nonzero 
 | Axiom audit of the 262 theorems in `lean/Entries/`, plus 6 general theorems the papers cite | no step is left unproved and nothing extra is assumed | only Lean's three standard axioms (`propext`, `Classical.choice`, `Quot.sound`) |
 | Lean definitions compared with the OEIS definitions | the formal theorems are about the right sequences | checked side by side for all 34 entries; see each paper's first section |
 | Independent recomputation in PARI/GP | the definitions, indexing and claims match the published data | all published OEIS terms reproduced; 156 of 156 checks pass |
+| Numerical check of every observation in the papers' Discussion sections | the side remarks are right too | 224 of 224 checks pass |
 | Every proof read in full | the human-readable arguments are correct | no errors found |
 
-All five checks were done by Claude Opus 5.5 with Claude Code, independently of the original research; the PARI/GP code shares nothing with ChatGPT's tools. A formal proof certifies the statement that Lean checks. A computer check tests only finitely many cases, so it is evidence, not proof. [verification/README.md](verification/README.md) explains each check and how to rerun it.
+All six checks were done by Claude Opus 5.5 with Claude Code, independently of the original research; the PARI/GP code shares nothing with ChatGPT's tools. A formal proof certifies the statement that Lean checks. A computer check tests only finitely many cases, so it is evidence, not proof. [verification/README.md](verification/README.md) explains each check and how to rerun it.
 
 ## The story of the project
 
@@ -143,6 +144,7 @@ python3 ../verification/check_axioms.py ../verification/results/axiom_audit.txt
 # Numerical checks (needs PARI/GP 2.15 or later; about 20 minutes)
 cd ../verification
 gp -q independent_checks.gp < /dev/null
+gp -q discussion_checks.gp < /dev/null     # about 8 minutes
 ```
 
 ## Citing

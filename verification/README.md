@@ -2,13 +2,14 @@
 
 This folder contains the independent checks of the results in this repository. They were written and run by **Claude Opus 5.5, used with Claude Code**, in October 2026, after the research was finished. They share no code with the tools that ChatGPT wrote during the research. (See [../AUTHORSHIP.md](../AUTHORSHIP.md) for who did what.)
 
-A mathematical result can go wrong in three ways: the proof can contain a mistake; the proof can be correct but about a slightly different sequence than the one in the OEIS (for example, shifted by one index); or the statement can be mistyped. The three checks below target these three risks.
+A mathematical result can go wrong in three ways: the proof can contain a mistake; the proof can be correct but about a slightly different sequence than the one in the OEIS (for example, shifted by one index); or the statement can be mistyped. The first three checks below target these three risks. The fourth covers the further remarks in the papers' Discussion sections.
 
 | Check | Risk it addresses | Files | Result |
 |---|---|---|---|
 | 1. Formal proofs rebuilt and audited | a mistake in a proof | [`AxiomAudit.lean`](AxiomAudit.lean), [`check_axioms.py`](check_axioms.py), [`results/`](results/) | all 268 audited theorems fully proved |
 | 2. Lean definitions compared with the OEIS | a proof about the wrong sequence | each paper, Sections 1 and "Checking the results" | all 34 entries match |
 | 3. Independent numerical recomputation | a wrong definition, index or statement | [`independent_checks.gp`](independent_checks.gp), [`oeis_terms.gp`](oeis_terms.gp), [`results/independent_checks.log`](results/independent_checks.log) | 156 of 156 checks pass |
+| 4. Numerical check of the Discussion sections | a wrong side remark or observation | [`discussion_checks.gp`](discussion_checks.gp), [`discussion_terms.gp`](discussion_terms.gp), [`results/discussion_checks.log`](results/discussion_checks.log) | 224 of 224 checks pass |
 
 ## 1. Formal proofs
 
@@ -71,6 +72,12 @@ In every entry, all published OEIS terms were reproduced. The full output is in 
 
 A computer check can only test finitely many cases, so it is not a proof. Its job is to catch mistakes in definitions, indexing and statements, which a formal proof cannot catch on its own.
 
+## 4. The Discussion sections
+
+Each paper ends its mathematical part with a Discussion section. These sections were written when the papers were rewritten, and many contain further observations beyond the main theorems. Examples are generalizations, congruences modulo higher powers, periods found by computer, agreement with other OEIS entries, and sign patterns. Some are proved in the text; others are only observed. None is part of the Lean formalization.
+
+The script [`discussion_checks.gp`](discussion_checks.gp) recomputes and tests every concrete claim of this kind, over at least the range that the paper states. It prints one line per claim. Published terms of the other OEIS entries that the Discussions mention are in [`discussion_terms.gp`](discussion_terms.gp), from the same OEIS data source. All 224 checks pass; the output is in [`results/discussion_checks.log`](results/discussion_checks.log). A few qualitative statements cannot be tested by computation. One example is the remark in A195194 that the remainders modulo a prime p are "p-automatic"; it rests on a classical theorem. The log marks these as `info`.
+
 ## Rerunning the checks
 
 ```sh
@@ -83,6 +90,7 @@ python3 ../verification/check_axioms.py ../verification/results/axiom_audit.txt
 # Numerical checks: from this folder (needs PARI/GP 2.15 or later; about 20 minutes)
 cd ../verification
 gp -q independent_checks.gp < /dev/null
+gp -q discussion_checks.gp < /dev/null    # about 8 minutes
 ```
 
-Both `check_axioms.py` and `independent_checks.gp` exit with a nonzero status if any check fails.
+`check_axioms.py`, `independent_checks.gp` and `discussion_checks.gp` all exit with a nonzero status if any check fails.
