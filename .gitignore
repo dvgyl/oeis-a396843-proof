@@ -4,3 +4,7 @@ dist/
 __pycache__/
 *.pyc
 .DS_Store
+papers/*.aux
+papers/*.log
+papers/*.out
+papers/*.toc
