@@ -17,7 +17,7 @@ Original license: Apache License, Version 2.0. Its full text is included as
 that license, irrespective of the license applied to other original files in
 this package.
 
-Changes made by OpenAI ChatGPT for Dev Goyal on 24 October 2026:
+Changes made by OpenAI ChatGPT for Dev D. Goyal on 24 October 2026:
 
 - Retained only the needed second-kind Stirling recurrence and lemmas.
 - Changed the namespace to `More.Stirling` and renamed declarations to avoid
