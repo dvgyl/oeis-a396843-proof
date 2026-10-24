@@ -6,7 +6,8 @@ import More.StirlingPeriodicity
 AI disclosure: ChatGPT (OpenAI) generated this explicitly typed presentation
 for Dev D. Goyal. Review status: see AUTHORSHIP.md. Complete mathematical
 implementations are preserved in the imported modules. Source and historical
-scope are documented in manuscripts/A305550.tex.
+scope are documented in papers/A305550.tex (ChatGPT's original draft:
+history/chatgpt-collection/manuscripts/A305550.tex).
 -/
 
 namespace FinalCollection.A305550

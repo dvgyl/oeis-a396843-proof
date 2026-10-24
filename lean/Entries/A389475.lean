@@ -6,7 +6,8 @@ import More.CubicConsequences
 AI disclosure: ChatGPT (OpenAI) generated this explicitly typed presentation
 for Dev D. Goyal. Review status: see AUTHORSHIP.md. Complete mathematical
 implementations are preserved in the imported modules. Source and historical
-scope are documented in manuscripts/A389475.tex.
+scope are documented in papers/A389475.tex (ChatGPT's original draft:
+history/chatgpt-collection/manuscripts/A389475.tex).
 -/
 
 namespace FinalCollection.A389475
