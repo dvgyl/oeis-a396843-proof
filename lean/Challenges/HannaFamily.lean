@@ -70,8 +70,10 @@ theorem modEq_sq (m : ℤ) (hm : 2 ≤ m) (U : PowerSeries ℤ) (h0 : coeff 0 U 
 
 /-- For every integer `m` and `n ≥ 1`, `m^s` divides `a(n)`, where `s` is the number of ones
 in the binary expansion of `n - 1`. This is the statement about `a(n)` in the theorem on binary
-digits of the paper on A396843; the companion statement for the coefficients of the inverse
-series is proved in `Entries/A396843.lean` but is not compared here. -/
+digits of the paper on A396843: part (a) of that theorem states it for `m ≥ 2`, and part (b),
+which shows that `a(n)` is a polynomial in `m` with no terms of degree below `s`, gives it for
+every integer `m`. The companion statement for the coefficients of the inverse series is
+proved in `Entries/A396843.lean` but is not compared here. -/
 theorem pow_digitSum_dvd (m : ℤ) (U : PowerSeries ℤ) (h0 : coeff 0 U = 0)
     (h1 : coeff 1 U = 1) (hU : U.subst (X * U - C m * X * U ^ 2) = X ^ 2)
     (n : ℕ) (hn : 1 ≤ n) :

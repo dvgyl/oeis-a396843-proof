@@ -1,4 +1,4 @@
-\\ Numerical checks of the claims made in the Discussion sections of the 29 papers.
+\\ Numerical checks of the claims made in the Discussion sections of the 28 papers.
 \\
 \\ A companion to independent_checks.gp.  That script tests the main theorems; this one tests
 \\ the further observations in each paper's Discussion section (the text between

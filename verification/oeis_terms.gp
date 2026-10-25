@@ -1,4 +1,4 @@
-\\ Published terms of the 29 OEIS entries, used by independent_checks.gp.
+\\ Published terms of the 28 OEIS entries, used by independent_checks.gp.
 \\
 \\ Source: the OEIS data repository https://github.com/oeis/oeisdata (files seq/Axxx/Axxxxxx.seq),
 \\ fetched on 24 October 2026. The %S/%T/%U lines of each entry were concatenated.

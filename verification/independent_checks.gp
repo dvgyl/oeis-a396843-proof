@@ -1,7 +1,7 @@
 \\ Independent numerical checks for the OEIS proof collection.
 \\
 \\ An independent cross-check that shares no code with the Lean development.
-\\ For each of the 29 entries this script
+\\ For each of the 28 entries this script
 \\   1. recomputes the sequence from the definition printed in its OEIS entry,
 \\   2. compares the first terms with the published OEIS terms (oeis_terms.gp),
 \\   3. re-verifies the defining equation to the working precision, and

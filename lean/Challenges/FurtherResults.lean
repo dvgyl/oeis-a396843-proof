@@ -21,8 +21,8 @@ has the form `x + a(2)x² + ⋯`.
   `a(0) = a(1) = 1`, `a(n+2) = 2(n+2)a(n+1) + (n+2)∑_{i<n} (2(i+2)²-1)/(i+2)·a(i+2)·a(n-i)`.
   `a397346_exp_iff` shows that the entry's equation has exactly one solution, the generating
   function of the solution of the recurrence; the other theorems concern that solution: it
-  consists of integers with `n ∣ a(n)`, and `a(n)/n ≡ 6 (mod 8)` if `n ≡ 3 (mod 4)` and
-  `≡ 2 (mod 8)` otherwise.
+  consists of integers with `n ∣ a(n)`, and for `n ≥ 2`, `a(n)/n ≡ 6 (mod 8)` if
+  `n ≡ 3 (mod 4)` and `≡ 2 (mod 8)` otherwise.
 * **A394576.** `a(1) = 1`, and `a(n+1)` is the least integer greater than `a(n)` that is not a
   sum `a(k) + a(k+1) + a(k+2)` of three consecutive earlier terms. Conjectured:
   `a(n) ≤ ⌊(4n-1)/3⌋`. Proved: `⌊(4n-3)/3⌋ ≤ a(n) ≤ ⌊(4n-1)/3⌋`, so `a(3k) = 4k - 1`. In Lean

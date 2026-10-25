@@ -20,9 +20,9 @@ substitution `A(B(x))` of a power series `B` with zero constant term into `A`.
 The OEIS entries A393856, A393857, A393858 and A393859 (Paul D. Hanna) are the cases
 `q = 4, 5, 6, 7`. They conjecture that every coefficient `a(n)` with `n ≥ 1` leaves remainder
 `1` on division by `q + 1`, and, for `q = 4` and `q = 6`, that `a(n)` is odd exactly when
-`n` is a power of `2`. The theorems below prove these statements for every `q`
-(respectively for every even `q`), after showing that the equation has exactly one
-solution of the form `x + ⋯`.
+`n` is a power of `2`. The theorems below prove these statements for every natural number `q`
+(respectively for every even integer `q`), after showing that, for every integer `q`, the
+equation has exactly one solution of the form `x + ⋯`.
 
 Context: these are congruences for the coefficients of power series defined by functional
 equations. Results of this kind are known, for example, for the Catalan and Motzkin numbers
