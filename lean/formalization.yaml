@@ -105,12 +105,6 @@ sources:
     type: article
     relationship: formalizes
 
-  - title: "The odd-indexed terms of a nested square are even after the first term"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A392210-Odd-indexed-terms-of-a-nested-square/paper.pdf
-    type: article
-    relationship: formalizes
-
   - title: "Remainders modulo 4 for the equation A(x² + 2x³) = x A(x)"
     authors: ["Dev D. Goyal"]
     id: ../preprints/A389536-Remainders-modulo-4-for-a-Mahler-type-equation/paper.pdf
@@ -156,6 +150,12 @@ sources:
   - title: "When are the coefficients of B(B(B(x))) odd? A proof of two conjectures in OEIS A396093"
     authors: ["Dev D. Goyal"]
     id: ../preprints/A396093-Odd-coefficients-of-the-third-iterate/paper.pdf
+    type: article
+    relationship: formalizes
+
+  - title: "The odd-indexed terms of a nested square are even after the first term"
+    authors: ["Dev D. Goyal"]
+    id: ../preprints/A392210-Odd-indexed-terms-of-a-nested-square/paper.pdf
     type: article
     relationship: formalizes
 
@@ -411,15 +411,6 @@ status:
     - declaration: OEIS.A393171.second_arbitrary_source
       file: Entries/A393171.lean
 
-    - declaration: OEIS.A392210.third_existence
-      file: Entries/A392210.lean
-
-    - declaration: OEIS.A392210.third_evenness
-      file: Entries/A392210.lean
-
-    - declaration: OEIS.A392210.third_arbitrary_source
-      file: Entries/A392210.lean
-
     - declaration: OEIS.A389536.mahler_existence
       file: Entries/A389536.lean
 
@@ -551,6 +542,15 @@ status:
 
     - declaration: OEIS.A396093.odd_indices
       file: Entries/A396093.lean
+
+    - declaration: OEIS.A392210.third_existence
+      file: Entries/A392210.lean
+
+    - declaration: OEIS.A392210.third_evenness
+      file: Entries/A392210.lean
+
+    - declaration: OEIS.A392210.third_arbitrary_source
+      file: Entries/A392210.lean
 
     - declaration: OEIS.A396102.coefficient_congruence
       file: Entries/A396102.lean

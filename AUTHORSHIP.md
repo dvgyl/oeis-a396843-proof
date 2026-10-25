@@ -6,7 +6,7 @@ The results in this repository were obtained in an AI research effort directed b
 
 ## Contributions
 
-**Dev D. Goyal** initiated and directed the project: Dev D. Goyal chose which of the proposed problems to pursue, requested proofs, formal verification and revisions, verified the results, and decided what to publish, but did not supply proof strategies or intermediate mathematical arguments. Dev D. Goyal is responsible for the contents of this repository.
+**Dev D. Goyal** initiated and directed the project, choosing which of the proposed problems to pursue, requesting proofs, formal verification and revisions, verifying the results and deciding what to publish, but did not supply proof strategies or intermediate mathematical arguments. Dev D. Goyal is responsible for the contents of this repository.
 
 **ChatGPT** (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from Dev D. Goyal's prompts. It:
 
@@ -25,7 +25,7 @@ The theorems stated in Section 3 ("Results") of each paper, and their proof stra
 - read every proof;
 - wrote the papers in their present form, expanding the exposition and, in places, writing out an argument in more detail or by a more elementary route;
 - wrote the Discussion section of each paper, including the short arguments given there; these are checked numerically and are not part of the Lean formalization;
-- renamed Lean modules and namespaces, edited comments, and replaced `import Mathlib` by the specific Mathlib modules needed in two files. The proofs themselves are unchanged.
+- renamed Lean modules and namespaces, edited comments, and, in two files, replaced `import Mathlib` by imports of the specific modules needed. The proofs themselves are unchanged.
 
 ## Review status
 
@@ -37,7 +37,7 @@ A Lean proof certifies the statement that Lean checks; whether that statement ma
 
 ## Credits and priority
 
-The sequences and the conjectures treated here were contributed to the OEIS by Paul D. Hanna, except A394576, which was contributed by Hoang Xuan Thanh. Formulas in the entries that the papers use or mention were contributed by Vaclav Kotesovec and Seiichi Manyama, and the related entry A067145 (used in the paper on A396102) by Christian G. Bower. Earlier work credited in the papers:
+The sequences and the conjectures treated here were contributed to the OEIS by Paul D. Hanna, except A394576, which was contributed by Hoang Xuan Thanh. Some of the formulas in the entries that the papers use or mention were contributed by Vaclav Kotesovec and Seiichi Manyama, and the related entry A067145 (used in the paper on A396102) by Christian G. Bower. Earlier work credited in the papers:
 
 - Danial Asaria recorded a counterexample to the conjecture modulo 9 in A396843.
 - Shiva Priyan Shanmuga Sundaram proved the conjectures of A396797, the member $`r=3`$ of the family treated in the papers on A396099, A396798 and A396807.

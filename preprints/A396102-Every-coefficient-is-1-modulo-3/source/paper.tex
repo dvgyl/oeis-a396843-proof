@@ -53,7 +53,7 @@ Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first
 Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
 ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
 source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
-and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+compared it with the published terms and tested every claim numerically, and read every step of the proofs. It also wrote the present
 version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
@@ -64,7 +64,7 @@ The section ``About this paper'' at the end gives the details.
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
 sequences. Many
-entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
+entries also record \emph{conjectures}: patterns that the contributor observed in the data but did not prove.
 
 This paper is about entry A396102~\cite{oeis}, contributed by Paul~D.~Hanna in June 2026. Its name is:
 \begin{quote}\small\ttfamily\raggedright G.f. A(x) satisfies A(A(A(x))) = (1+x) * A(A(x)).\par\smallskip\hfill\textrm{--- OEIS A396102, Paul D. Hanna, June 2026}\end{quote}
@@ -125,7 +125,7 @@ For $r=3$ this proves Hanna's conjecture (Corollary~\ref{cor:conj}). We also ded
 $1$ modulo $3$ and every term of A067145 is odd (Section~\ref{sec:discussion}).
 
 \subsection{What was known}
-The equation for the inverse series $R$ recorded in the entry (its formula~(5)) is the starting point of our proof; we
+The equation for the inverse series $R$ recorded in the entry (formula~(5) in its list of formulas) is the starting point of our proof; we
 prove it from the definition (Lemma~\ref{lem:aux}). In October 2026, Amol Bhave added to OEIS A196523~\cite{oeisB} a
 proof of a congruence for a different family: for every $\ell\ge2$, the coefficients of the solution of
 $A(x)=x+x\cdot A^{\circ\ell}(x)$, where $A^{\circ\ell}$ is the $\ell$-th iterate of $A$, are all $1$ modulo $\ell-1$. The
@@ -134,7 +134,7 @@ consecutive iterates, and the
 comparison works for the inverse series rather than for $A$ itself. We are not aware of an earlier proof of the
 conjecture of A396102.
 
-\subsection{Why it is interesting}
+\subsection{Motivation}
 Equations that involve iterates of an unknown series, such as $A(A(A(x)))=(1+x)A(A(x))$, are hard to study: there is
 no general method for solving them, and the coefficients of the solutions are usually large and irregular. In this
 example the remainders are explained by a single series, $x/(1-x)$, whose iterates are $x/(1-kx)$. The proof works with
@@ -168,8 +168,10 @@ $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determ
 using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
 denominator has constant term $1$, so the quotient is again a power series.
 
-For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
-series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+A \emph{commutative ring} is a set with an addition, a subtraction and a multiplication that satisfy the usual rules
+of arithmetic; examples are $\Z$, $\Q$ and the integers modulo $m$. For a commutative ring $R$ we write $\ps{R}$ for
+the set of power series with coefficients in $R$; for instance, writing $\F_2$ for the integers modulo $2$, $\ps{\F_2}$
+consists of the series with coefficients modulo $2$. We write
 $U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
 zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
 constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
@@ -228,13 +230,12 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
-subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
-division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
+\para{Rings.} Some statements below hold over every commutative ring, for example $\Z$, $\Q$ and $\Z/m\Z$. No
+division is used in them; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
 
 \subsection{The method}
-Almost every proof in this paper follows the same three steps.
+The main proofs follow three steps.
 \begin{enumerate}
 \item \emph{Uniqueness.} Show that the defining equation determines the coefficients one at a time, using only
 addition, subtraction and multiplication. Then the equation has exactly one solution of the required shape, in every
@@ -242,7 +243,7 @@ commutative ring, including $\Z/r\Z$.
 \item \emph{Reduction.} Reducing the integer solution modulo $r$ gives a solution of the reduced equation,
 because reduction is compatible with all operations.
 \item \emph{A candidate solution.} Find an explicit series that satisfies the reduced equation. By uniqueness, it is
-the reduction of the sequence, and its coefficients can be read off.
+the reduction of the integer solution, and its coefficients can be read off.
 \end{enumerate}
 Finding the candidate in step~3 is usually the main difficulty.
 \subsection{The series \texorpdfstring{$x/(1-cx)$}{x/(1-cx)}}
@@ -377,7 +378,7 @@ A computation can only test finitely many cases, so it is a check on the definit
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
-Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A396102.lean} of the repository,
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; the steps proved only on paper are identified below. The statements are collected in the file \texttt{lean/Entries/A396102.lean} of the repository,
 in the namespace \texttt{OEIS.A396102}. In Lean, \texttt{family\_source\_existence r} and \texttt{family\_source\_equation r} state the case $r+1$ of~\eqref{eq:family}, so that $r=0$ in Lean corresponds to $r=1$ in this paper; the other declarations use the same $r$ as the paper. The proofs are in the file \texttt{lean/Families/InverseIterate.lean}. The consequences for OEIS A140094 and A067145 in Section~\ref{sec:discussion} are not part of the Lean formalization.
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
@@ -403,7 +404,7 @@ so the Lean definitions were also compared with the definition in the OEIS entry
 
 \para{Scope.} Theorem~\ref{thm:main} determines every coefficient of every member of the family modulo $r$, and every
 coefficient of every iterate. It says nothing about higher powers of $r$: modulo $9$ the coefficients of A396102 show no
-evident pattern (see the table in Section~\ref{sec:sequence}). It also says nothing about the signs. The computed
+evident pattern (see the table in the Introduction). It also says nothing about the signs. The computed
 terms $a(2),a(3),\dots,a(59)$ of A396102 alternate in sign; we have not proved that this continues.
 
 \para{Two related entries.} The theorem has consequences for two older OEIS entries, which we checked against their
@@ -423,7 +424,7 @@ $x$ turns this into $F(F(x))=(1+x)F(x)$, as noted in that entry; this is~\eqref{
 and by Theorem~\ref{thm:main} \emph{every term of A067145 is odd.} The 23 terms printed in the entry agree with this.
 \end{itemize}
 
-\para{Why $x/(1-x)$?} The series $M_1=x/(1-x)$ is special because its iterates are so simple: $M_1^{\circ k}=x/(1-kx)$.
+\para{Why $x/(1-x)$?} The series $M_1=x/(1-x)$ is special because its iterates have the explicit form $M_1^{\circ k}=x/(1-kx)$.
 Modulo $r$, the $r$-th iterate is $x$ again. So in any equation in which the number of iterations matters only modulo
 $r$, the series $x/(1-x)$ or $x/(1+x)$ is a natural candidate for a solution modulo $r$. The same observation underlies Bhave's proof
 for A196523~\cite{oeisB}. It would be interesting to know which other iterative equations in the OEIS can be treated
@@ -475,6 +476,6 @@ A196523~\cite{oeisB}. OEIS A067145 was contributed by Christian~G.~Bower.
 \bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
 \bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
 \bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
-\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
 \end{thebibliography}
 \end{document}

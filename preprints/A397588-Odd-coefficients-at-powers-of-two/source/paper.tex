@@ -37,7 +37,7 @@
 \maketitle
 \begin{abstract}
 The sequence A397588 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Paul D.~Hanna, consists of
-the coefficients of the power series $A(x)=x+3x^2+24x^3+285x^4+\cdots$ determined by the differential equation
+the coefficients $a(n)$ of the power series $A(x)=x+3x^2+24x^3+285x^4+\cdots$ determined by the differential equation
 $A=x+(x\,A^2)'$, where the prime denotes the derivative. Hanna conjectured that $a(n)$ is odd exactly when $n$ is a power
 of $2$. The entry also states that $a(n)$ is divisible by $3$ for every $n>1$. We prove both statements. Modulo $2$ the
 derivative term simplifies, and the equation becomes the Catalan equation $A=x+A^2$, whose solution modulo $2$ is
@@ -51,7 +51,7 @@ Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first
 Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
 ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
 source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
-and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+compared it with the published terms and tested every claim numerically, and read every step of the proofs. It also wrote the present
 version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
@@ -62,12 +62,12 @@ The section ``About this paper'' at the end gives the details.
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
 sequences. Many
-entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
+entries also record \emph{conjectures}: patterns that the contributor observed in the data but did not prove.
 
 This paper is about entry A397588~\cite{oeis}, contributed by Paul~D.~Hanna in July 2026. The entry reads, in part:
 \begin{quote}\small\ttfamily\raggedright G.f. A(x) satisfies A(x) = x + (x*A(x)\^{}2)'.\par\smallskip Conjecture: a(n) is odd iff n is a power of 2 for n >= 1.\par\smallskip a(n) divisible by 3 for n > 1.\par\smallskip a(1) = 1; a(n) = (n+1) * Sum\_\{k=1..n-1\} a(k)*a(n-k). - Seiichi Manyama, Jul 03 2026\par\smallskip\hfill\textrm{--- OEIS A397588, Paul D. Hanna, July 2026; the last line by Seiichi Manyama}\end{quote}
 
-Here ``G.f.''\ stands for \emph{generating function}: the terms $a(1),a(2),a(3),\dots$ of the sequence are stored as the
+Here ``G.f.''\ stands for \emph{generating function}: the terms $a(1),a(2),a(3),\dots$ of the sequence are the
 coefficients of the power series $A(x)=a(1)\,x+a(2)\,x^2+a(3)\,x^3+\cdots$. The prime $'$ denotes the derivative.
 For power series no limits are needed: the derivative is defined term by term by the familiar rule for powers,
 \[
@@ -120,17 +120,18 @@ equation~\eqref{eq:def} turns into this Catalan equation.
 \subsection{What was known}
 The entry records several equivalent forms of the equation, the recurrence above (Seiichi~Manyama), and the growth rate
 of $a(n)$ (Vaclav~Kotesovec). The divisibility by $3$ is stated in the entry without proof. Its proof
-(Theorem~\ref{thm:main}(c)) takes one line, and the contributor may well have known it; we include it for completeness
+(Theorem~\ref{thm:main}(c)) takes one line; we include it for completeness
 and do not claim it as a new result. The parity of
 the Catalan numbers is classical; see for example~\cite{deutschsagan}. We are not aware of an earlier proof of the parity
 conjecture.
 
-\subsection{Why it is interesting}
+\subsection{Motivation}
 Equations that combine an unknown power series with its derivative are \emph{differential equations}, and the OEIS
 contains many sequences defined by them. This example shows a
 special feature of derivatives in modular arithmetic. The derivative multiplies the coefficient of $x^n$ by $n$, so modulo
-a prime $p$ it annihilates every power $x^{n}$ with $n$ divisible by $p$. Both results of this paper come from this effect: modulo
-$2$ one term of the equation disappears, and modulo $3$ the derivative of $x^3$ disappears.
+a prime $p$ it annihilates every power $x^{n}$ with $n$ divisible by $p$. Both results
+come from the factor $n$ in the derivative: modulo $2$ the term $2xAA'$ of $(xA^2)'=A^2+2xAA'$ vanishes, and modulo $3$
+the derivative of $x^3$ vanishes.
 
 \subsection{How to read this paper}
 Section~\ref{sec:background} explains the notions we need: power series and their derivatives, remainders, and the
@@ -158,8 +159,10 @@ $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determ
 using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
 denominator has constant term $1$, so the quotient is again a power series.
 
-For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
-series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+A \emph{commutative ring} is a set with an addition, a subtraction and a multiplication that satisfy the usual rules
+of arithmetic; examples are $\Z$, $\Q$ and the integers modulo $m$. For a commutative ring $R$ we write $\ps{R}$ for
+the set of power series with coefficients in $R$; for instance, writing $\F_2$ for the integers modulo $2$, $\ps{\F_2}$
+consists of the series with coefficients modulo $2$. We write
 $U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
 zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
 constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
@@ -193,13 +196,12 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
-subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
-division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
+\para{Rings.} Some statements below hold over every commutative ring, for example $\Z$, $\Q$ and $\Z/m\Z$. No
+division is used in them; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
 
 \subsection{The method}
-Almost every proof in this paper follows the same three steps.
+The main proofs follow three steps.
 \begin{enumerate}
 \item \emph{Uniqueness.} Show that the defining equation determines the coefficients one at a time, using only
 addition, subtraction and multiplication. Then the equation has exactly one solution of the required shape, in every
@@ -207,7 +209,7 @@ commutative ring, including $\Z/m\Z$.
 \item \emph{Reduction.} Reducing the integer solution modulo $m$ gives a solution of the reduced equation,
 because reduction is compatible with all operations.
 \item \emph{A candidate solution.} Find an explicit series that satisfies the reduced equation. By uniqueness, it is
-the reduction of the sequence, and its coefficients can be read off.
+the reduction of the integer solution, and its coefficients can be read off.
 \end{enumerate}
 Finding the candidate in step~3 is usually the main difficulty.
 \subsection{The Frobenius identity}
@@ -306,7 +308,7 @@ A computation can only test finitely many cases, so it is a check on the definit
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
-Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A397588.lean} of the repository,
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements are collected in the file \texttt{lean/Entries/A397588.lean} of the repository,
 in the namespace \texttt{OEIS.A397588}. There the derivative $U'$ of an integer series $U$ is Mathlib's formal derivative of power series, written \texttt{derivative} applied to $U$; it is defined coefficientwise by the formula of Section~\ref{sec:background}. The proofs are in the module \texttt{lean/Families/DifferentialParity.lean}.
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
@@ -387,6 +389,6 @@ entry was contributed by Seiichi~Manyama, and the asymptotic formula by Vaclav~K
 \bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
 \bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
 \bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
-\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
 \end{thebibliography}
 \end{document}

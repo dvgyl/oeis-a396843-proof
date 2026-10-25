@@ -28,7 +28,7 @@
 \thispagestyle{firstpage}
 {\LARGE\bfseries Proofs and corrections of OEIS conjectures\par}
 \vspace{4pt}
-{\large 29 papers in 7 families\par}
+{\large 29 papers in six families and a group of other results\par}
 \vspace{6pt}
 Dev D. Goyal \enspace\textperiodcentered\enspace October 2026
 \par\bigskip
@@ -70,12 +70,11 @@ Series built from the Jacobi theta series $\theta_3$ or defined by theta-type su
 Equations whose solutions reduce, modulo 2, 4 or 8, to expressions in the series $\sum_{n\ge1}C_{n-1}x^n$ of Catalan numbers, whose $n$-th coefficient is odd exactly when $n$ is a power of 2.
 \entry{A393172}{The Catalan numbers inside the equation $A(x-x^2)=x+A(x)^2$}{For $n>1$, $a(n)\equiv2\pmod4$ if $n=2^k$, and $4\mid a(n)$ otherwise.}{proved}{A393172-The-Catalan-numbers-inside-a-functional-equation}
 \entry{A393171}{Remainders modulo $8$ of a series built from the Catalan numbers}{For $n>2$, $a(n)\equiv4\pmod8$ if $n=2^k$ or $2^k+1$, and $8\mid a(n)$ otherwise.}{proved}{A393171-Remainders-modulo-8-from-the-Catalan-numbers}
-\entry{A392210}{The odd-indexed terms of a nested square are even after the first term}{$a(2n-1)$ is even for $n>1$ (an elementary observation recorded in the entry).}{proved}{A392210-Odd-indexed-terms-of-a-nested-square}
 \entry{A389536}{Remainders modulo $4$ for the equation $A(x^2+2x^3)=x\,A(x)$}{For $n>1$, $a(n)\equiv2\pmod4$ if $n=2^k+1$, and $4\mid a(n)$ otherwise.}{proved}{A389536-Remainders-modulo-4-for-a-Mahler-type-equation}
 \entry{A397588}{Odd coefficients at powers of two for $A=x+(xA^2)'$}{$a(n)$ is odd exactly when $n$ is a power of 2, and $3\mid a(n)$ for $n>1$.}{proved}{A397588-Odd-coefficients-at-powers-of-two}
 \entry{A195194}{Parity of an infinitely nested series reversion}{The infinitely nested reversion is well defined, and $a(n)$ is odd exactly when $n$ is a power of 2.}{proved}{A195194-Parity-of-an-infinitely-nested-series-reversion}
-\section*{6. Reversions with an exact halving step}
-Equations whose coefficient recursion appears to divide by 2; the division is shown to be exact before reducing.
+\section*{6. Equations with an exact halving step}
+Equations whose analysis divides by 2: in A389474, A389475 and A389542 the coefficient recursion divides by 2, and the division is shown to be exact; in A389537 the series $(A-x-x^2)/2$ is shown to have integer coefficients and is studied modulo 2.
 \entry{A389537}{Congruences modulo $4$ for the series with $A\bigl(A(x)-x\bigr)=A(x)^2$}{For $n>2$, $a(n)\equiv2\pmod4$ if $n=3\cdot2^k$, and $4\mid a(n)$ otherwise.}{proved}{A389537-Congruences-modulo-4-for-a-sparse-reversion}
 \entry{A389542}{Congruences modulo $4$ for the series with $A\bigl(A(x)^2-x^2\bigr)=4A(x)^3$}{For $n>1$, $a(n)\equiv2\pmod4$ if $n=2^k+1$, and $4\mid a(n)$ otherwise.}{proved}{A389542-Congruences-modulo-4-for-a-square-reversion}
 \entry{A389474}{A power series whose square is $x^2+2x^3$ modulo $9$}{$A^2\equiv x^2+2x^3\pmod 9$, and $A^{3k}\equiv A(x^3)^k\pmod 3$.}{proved}{A389474-A-series-whose-square-is-a-polynomial-modulo-9}
@@ -83,6 +82,7 @@ Equations whose coefficient recursion appears to divide by 2; the division is sh
 \section*{7. Other results}
 Further entries, each with its own method.
 \entry{A396093}{When are the coefficients of $B(B(B(x)))$ odd?}{$a(n)$ is odd exactly when $n\equiv1,3,7,9\pmod{10}$.}{proved}{A396093-Odd-coefficients-of-the-third-iterate}
+\entry{A392210}{The odd-indexed terms of a nested square are even after the first term}{$a(2n-1)$ is even for $n>1$ (an elementary observation recorded in the entry).}{proved}{A392210-Odd-indexed-terms-of-a-nested-square}
 \entry{A396102}{Every coefficient is $1$ modulo $3$: the series with $A(A(A(x)))=(1+x)\,A(A(x))$}{$a(n)\equiv1\pmod 3$, together with a theorem for the whole family $F^{\circ r}=(1+x)F^{\circ(r-1)}$.}{proved}{A396102-Every-coefficient-is-1-modulo-3}
 \entry{A380056}{The numbers with exponential generating function $(e^x-1)/\cos 2x$, modulo 4 and 5}{$a(n)\equiv1\pmod4$, and $a(n)\equiv2\cdot2^n+3\cdot4^n\pmod5$, so $5\mid a(n)$ exactly when $4\mid n$.}{proved}{A380056-Exponential-over-cosine-modulo-4-and-5}
 \entry{A397346}{Residues modulo $8$ for a series defined by a self-referential exponential}{From $n=2$ on, $a(n)\bmod 8$ repeats $4,2,0,2$; more precisely, $a(n)/n\equiv6\pmod8$ if $n\equiv3\pmod4$ and $a(n)/n\equiv2\pmod8$ otherwise.}{proved}{A397346-Residues-modulo-8-for-a-self-referential-exponential}

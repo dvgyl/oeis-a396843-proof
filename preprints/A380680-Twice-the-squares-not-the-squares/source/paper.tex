@@ -50,7 +50,7 @@ Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first
 Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
 ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
 source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
-and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+compared it with the published terms and tested every claim numerically, and read every step of the proofs. It also wrote the present
 version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
@@ -61,7 +61,7 @@ The section ``About this paper'' at the end gives the details.
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
 sequences. Many
-entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
+entries also record \emph{conjectures}: patterns that the contributor observed in the data but did not prove.
 
 This paper is about entry A380680~\cite{oeis}, contributed by Paul~D.~Hanna in February 2025. It reads:
 \begin{quote}\small\ttfamily\raggedright G.f. A(x) = Sum\_\{n=-oo..+oo\} x\^{}(n\^{}2) * (2 - x\^{}n)\^{}n/(1 - 2*x\^{}n)\^{}n.\par\smallskip The term x\^{}(n\^{}2) * (2 - x\^{}n)\^{}n/(1 - 2*x\^{}n)\^{}n is invariant under sign reversal of n.\par\smallskip\hfill\textrm{--- OEIS A380680, Paul D. Hanna, February 2025}\end{quote}
@@ -138,17 +138,17 @@ The key observation is that, modulo $2$, the factor $(2-x^j)/(1-2x^j)$ is $x^j$,
 $j$-th term $x^{j^2}\bigl((2-x^j)/(1-2x^j)\bigr)^j$ becomes $x^{j^2}\cdot x^{j^2}=x^{2j^2}$: the exponents are doubled.
 
 \subsection{What was known}
-The entry records the folded form of the sum (formula~(2) of the entry; see Lemma~\ref{lem:fold}) and two further
+The entry records the folded form of the sum (formula~(2) in its list of formulas; see Lemma~\ref{lem:fold}) and two further
 rewritings of it. The entry does not note that its own data contradict the conjecture. We are not aware of an earlier proof or disproof of the conjecture.
 
-\subsection{Why it is interesting}
+\subsection{Motivation}
 The theta series is a classical object of number theory, and Hanna's sums are deformations of it: each term
 $x^{n^2}$ is multiplied by a further factor. One may ask how much of the arithmetic of the theta series survives the
-deformation. For the two entries treated here, the sums reduce modulo $4$ to theta series
+deformation. For this entry and its companion A380060, the sums reduce modulo $4$ to theta series
 (Section~\ref{sec:discussion}).
-The two companion entries also form an instructive pair. Their definitions differ only in one symbol, their
+The definitions of the two entries differ in only one symbol, their
 conjectures are stated in the same words, and yet the conjecture is true for A380060 and false for A380680. The proofs show exactly where the
-difference comes from: replacing $A$ by $2$ inside the sum changes the factor $(U-x^j)/(1-x^jU)$, modulo $2$, from $1$
+difference comes from: replacing $A$ by $2$ inside the sum changes each factor $(A-x^j)/(1-x^jA)$, modulo $2$, from $1$
 to $x^j$.
 
 \subsection{How to read this paper}
@@ -178,8 +178,10 @@ $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determ
 using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
 denominator has constant term $1$, so the quotient is again a power series.
 
-For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
-series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+A \emph{commutative ring} is a set with an addition, a subtraction and a multiplication that satisfy the usual rules
+of arithmetic; examples are $\Z$, $\Q$ and the integers modulo $m$. For a commutative ring $R$ we write $\ps{R}$ for
+the set of power series with coefficients in $R$; for instance, writing $\F_2$ for the integers modulo $2$, $\ps{\F_2}$
+consists of the series with coefficients modulo $2$. We write
 $U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
 zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
 constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
@@ -266,7 +268,7 @@ sum is a well-defined power series.
 \end{proof}
 
 The OEIS entry notes the symmetry of Lemma~\ref{lem:fold} (``invariant under sign reversal of $n$'') and records the
-folded form as formula~(2) of the entry. In the one-sided form no negative powers occur, and the only division is by a
+folded form as formula~(2) in its list of formulas. In the one-sided form no negative powers occur, and the only division is by a
 series with constant term $1$; so it makes sense with coefficients in any commutative ring, including $\Z/4\Z$.
 
 \subsection{Doubling modulo 4}
@@ -338,7 +340,7 @@ $a(2)=6$, which contradict the two parts of the conjecture as stated.
 
 (b) For $n>0$ the conjecture predicts remainder $2$ at the squares and $0$ elsewhere; by Theorem~\ref{thm:main} the
 truth is remainder $2$ at the numbers $2j^2$ and $0$ elsewhere. No positive integer is both a square and twice a
-square: if $j^2=2k^2$ with $j,k\ge1$, then $\sqrt2=j/k$ would be a fraction, but $\sqrt2$ is irrational. So the two
+square: if $j^2=2k^2$ with $j,k\ge1$, then $\sqrt2=j/k$ would be rational, contradicting the irrationality of $\sqrt2$. So the two
 descriptions disagree exactly at the squares and at the numbers $2j^2$, and agree everywhere else.
 \end{proof}
 
@@ -357,7 +359,7 @@ A computation can only test finitely many cases, so it is a check on the definit
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
-Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A380680.lean} of the repository,
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; the steps proved only on paper are identified below. The statements are collected in the file \texttt{lean/Entries/A380680.lean} of the repository,
 in the namespace \texttt{OEIS.A380680}. There the one-sided sum $\Sigma(2)$ is written out coefficient by coefficient (only the indices $j\le n$ can contribute to $x^n$), and the multiplicative inverse of a series with constant term $1$ is written \texttt{unitInv}. The folding of the two-sided sum (Lemma~\ref{lem:fold}) is proved in this paper but not in Lean. The proofs are in the file \texttt{lean/Families/ThetaRational.lean}. Part~(b) of Corollary~\ref{cor:false} is a direct consequence of the theorem and is not stated separately in Lean.
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
@@ -381,7 +383,7 @@ so the Lean definitions were also compared with the definition in the OEIS entry
 
 \section{Discussion}\label{sec:discussion}
 
-\para{How the conjecture went wrong.} The conjecture in A380680 is word for word the conjecture of the companion entry
+\para{Why the conjecture fails.} The conjecture in A380680 is word for word the conjecture of the companion entry
 A380060, which was contributed on the same day and in which the conjecture is true (see the companion
 paper~\cite{repo}). Replacing the series $A$ by the constant $2$ inside the sum looks like a small change, but
 modulo $2$ it is not: the factor $(U-x^j)/(1-x^jU)$ is $1$ when $U\equiv1\pmod2$, and $x^j$ when $U\equiv0\pmod2$.
@@ -448,6 +450,6 @@ A380060~\cite{oeisother}.
 \bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
 \bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
 \bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
-\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
 \end{thebibliography}
 \end{document}

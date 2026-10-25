@@ -13,12 +13,12 @@ The formalization was written by ChatGPT (OpenAI, GPT-6 with Pro reasoning). Mod
 
 | Path | Contents |
 |---|---|
-| [`Entries/`](Entries/) | One file per OEIS entry, in the namespace `OEIS.Axxxxxx`. Each file states the definition of the sequence, as in the OEIS entry or in an equivalent form, the uniqueness of its solution, and every result of the paper with explicit types. |
+| [`Entries/`](Entries/) | One file per OEIS entry, in the namespace `OEIS.Axxxxxx`. Each file states the definition of the sequence, as in the OEIS entry or in an equivalent form; where the definition is an equation, the existence and uniqueness of its solution; and the main results of the paper, with explicit types. Steps proved only on paper are listed under `fidelity` in [`formalization.yaml`](formalization.yaml). |
 | [`Hanna/Series/`](Hanna/Series/) | Foundations: composition of formal power series (Mathlib's `MvPowerSeries.subst`) and its coefficient formula, normalized series, coefficient-by-coefficient constructions, and compositional inverses. |
 | [`Hanna/`](Hanna/) | The family $`A_m(xA_m-mxA_m^2)=x^2`$: parity, residues modulo $`m^2`$, binary-digit divisibility and prime exponents (A396843, A396844). |
 | [`Hanna/Related/`](Hanna/Related/) | Scaled inverses $`A(x-x\,A(qx)/q)=x`$ (A393856–A393859). These files form the library `Related` (root file [`Related.lean`](Related.lean)). |
 | [`Consecutive/`](Consecutive/) | Consecutive iterates $`F=x+F^{\circ r}F^{\circ(r+1)}`$ modulo $`2r`$, including negative iterates (A396099, A396798, A396807). |
-| [`Families/`](Families/) | The remaining families: theta substitutions, rational theta sums and the bilateral theta-type equation (A378580, A378581, A380060, A380680, A355872), Catalan-type equations (A393171, A393172, A392210, A389536, A397588, A195194), reversions with an exact halving step (A389474, A389475, A389537, A389542), and A396093, A396102, A380056, A397346, A394576. |
+| [`Families/`](Families/) | The remaining families: theta substitutions, rational theta sums and the bilateral theta-type equation (A378580, A378581, A380060, A380680, A355872), Catalan-type equations (A393171, A393172, A389536, A397588, A195194), equations with an exact halving step (A389474, A389475, A389537, A389542), and A396093, A392210, A396102, A380056, A397346, A394576. |
 
 ## Building
 

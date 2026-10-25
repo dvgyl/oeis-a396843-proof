@@ -53,7 +53,7 @@ Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first
 Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
 ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
 source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
-and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+compared it with the published terms and tested every claim numerically, and read every step of the proofs. It also wrote the present
 version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
@@ -64,7 +64,7 @@ The section ``About this paper'' at the end gives the details.
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
 sequences. Many
-entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
+entries also record \emph{conjectures}: patterns that the contributor observed in the data but did not prove.
 
 This paper is about entry A380060~\cite{oeis}, contributed by Paul~D.~Hanna in February 2025. It reads:
 \begin{quote}\small\ttfamily\raggedright G.f. A(x) satisfies A(x) = Sum\_\{n=-oo..+oo\} x\^{}(n\^{}2) * (A(x) - x\^{}n)\^{}n/(1 - x\^{}n*A(x))\^{}n.\par\smallskip The term x\^{}(n\^{}2) * (A - x\^{}n)\^{}n/(1 - x\^{}n*A)\^{}n is invariant under sign reversal of n.\par\smallskip\hfill\textrm{--- OEIS A380060, Paul D. Hanna, February 2025}\end{quote}
@@ -77,7 +77,7 @@ Using the symmetry noted in the entry, the sum over all integers can be folded i
 A=1+2\,\Sigma(A),\qquad\text{where}\qquad
 \Sigma(A)=\sum_{j\ge1}x^{j^2}\Bigl(\frac{A-x^j}{1-x^jA}\Bigr)^{j}.
 \end{equation}
-This one-sided form is formula~(2) of the entry (not to be confused with equation~\eqref{eq:fold} of this
+This one-sided form is formula~(2) in the entry's list of formulas (not to be confused with equation~\eqref{eq:fold} of this
 paper), and it is the definition we work with. Lemma~\ref{lem:exist} shows
 that it determines $A$ completely.
 
@@ -131,15 +131,15 @@ by $2$. Second, when $1$ is put in place of $A$, each factor $(A-x^j)/(1-x^jA)$ 
 turns into the theta series itself.
 
 \subsection{What was known}
-The entry records the folded form of the sum (formula~(2) of the entry; see Lemma~\ref{lem:fold}) and two further
+The entry records the folded form of the sum (formula~(2) in its list of formulas; see Lemma~\ref{lem:fold}) and two further
 rewritings of it. Vaclav Kotesovec added an asymptotic formula for the size of $a(n)$. We are not aware of an earlier proof or disproof of the conjecture.
 
-\subsection{Why it is interesting}
+\subsection{Motivation}
 The theta series is a classical object of number theory, and Hanna's sums are deformations of it: each term
 $x^{n^2}$ is multiplied by a further factor. One may ask how much of the arithmetic of the theta series survives the
-deformation. For the two entries treated here, the sums reduce modulo $4$ to theta series
+deformation. For this entry and its companion A380680, the sums reduce modulo $4$ to theta series
 (Section~\ref{sec:discussion}).
-The two companion entries also form an instructive pair. Their definitions differ only in one symbol, their
+The definitions of the two entries differ in only one symbol, their
 conjectures are stated in the same words, and yet the conjecture is true for A380060 and false for A380680. The proofs show exactly where the
 difference comes from.
 
@@ -170,8 +170,10 @@ $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determ
 using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
 denominator has constant term $1$, so the quotient is again a power series.
 
-For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
-series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+A \emph{commutative ring} is a set with an addition, a subtraction and a multiplication that satisfy the usual rules
+of arithmetic; examples are $\Z$, $\Q$ and the integers modulo $m$. For a commutative ring $R$ we write $\ps{R}$ for
+the set of power series with coefficients in $R$; for instance, writing $\F_2$ for the integers modulo $2$, $\ps{\F_2}$
+consists of the series with coefficients modulo $2$. We write
 $U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
 zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
 constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
@@ -195,9 +197,8 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
-subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
-division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
+\para{Rings.} Some statements below hold over every commutative ring, for example $\Z$, $\Q$ and $\Z/m\Z$. No
+division is used in them; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
 
 \subsection{The theta series}
@@ -263,7 +264,7 @@ sum is a well-defined power series.
 \end{proof}
 
 The OEIS entry notes the symmetry of Lemma~\ref{lem:fold} (``invariant under sign reversal of $n$'') and records the
-folded form as formula~(2) of the entry. In the one-sided form no negative powers occur, and the only division is by a
+folded form as formula~(2) in its list of formulas. In the one-sided form no negative powers occur, and the only division is by a
 series with constant term $1$; so it makes sense with coefficients in any commutative ring, including $\Z/4\Z$.
 
 \subsection{Doubling modulo 4}
@@ -308,17 +309,17 @@ Reducing the integer solution modulo $m$ gives the solution over $\Z/m\Z$.
 
 \begin{proof}
 We show that the coefficient of $x^n$ on the right-hand side of~\eqref{eq:def} depends only on the coefficients of $A$
-below degree $n$. Then the equation determines $A$ one coefficient at a time. The constant term is $1$, because every
-term of $\Sigma(A)$ contains a factor $x^{j^2}$ with $j\ge1$. Each later coefficient is computed from the earlier ones
-by additions, subtractions and multiplications. This gives exactly one solution in every commutative ring. Reduction
-modulo $m$ is compatible with these operations, so it maps the integer solution to the solution over $\Z/m\Z$.
-
-So suppose that two series $U$ and $V$ agree below degree $r$, that is, $U-V=O(x^r)$. Then the numerators $U-x^j$ and
+below degree $n$. To prove this, suppose that two series $U$ and $V$ agree below degree $r$, that is, $U-V=O(x^r)$. Then the numerators $U-x^j$ and
 $V-x^j$ agree below degree $r$, and so do the denominators $D=1-x^jU$ and $E=1-x^jV$. Their inverses also agree below
 degree $r$, because $\frac1D-\frac1E=\frac{E-D}{DE}$. Products of series that agree below degree $r$ again agree below
 degree $r$ (since $UW-VZ=U(W-Z)+(U-V)Z$), so $Q_j(U)^j$ and $Q_j(V)^j$ agree below degree $r$. After multiplication by
 $x^{j^2}$, with $j^2\ge1$, they agree below degree $r+1$. Hence $\Sigma(U)$ and $\Sigma(V)$ agree below degree $r+1$.
-Taking $r=n$ gives the claim.
+Taking $r=n$ proves the claim.
+
+It follows that the equation determines $A$ one coefficient at a time. The constant term is $1$, because every term of
+$\Sigma(A)$ contains a factor $x^{j^2}$ with $j\ge1$. Each later coefficient is computed from the earlier ones by
+additions, subtractions and multiplications. This gives exactly one solution in every commutative ring. Reduction
+modulo $m$ is compatible with these operations, so it maps the integer solution to the solution over $\Z/m\Z$.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
@@ -357,7 +358,7 @@ A computation can only test finitely many cases, so it is a check on the definit
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
-Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A380060.lean} of the repository,
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; the steps proved only on paper are identified below. The statements are collected in the file \texttt{lean/Entries/A380060.lean} of the repository,
 in the namespace \texttt{OEIS.A380060}. There the one-sided sum $\Sigma(A)$ is written out coefficient by coefficient (only the indices $j\le n$ can contribute to $x^n$), and the multiplicative inverse of a series with constant term $1$ is written \texttt{unitInv}. The folding of the two-sided sum (Lemma~\ref{lem:fold}) is proved in this paper but not in Lean. The proofs are in the file \texttt{lean/Families/ThetaRational.lean}. 
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
@@ -449,6 +450,6 @@ Vaclav~Kotesovec.
 \bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
 \bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
 \bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
-\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
 \end{thebibliography}
 \end{document}

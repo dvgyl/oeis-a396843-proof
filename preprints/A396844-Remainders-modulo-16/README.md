@@ -1,6 +1,6 @@
 # [Remainders modulo $`16`$ for the series $`A(xA-4xA^2)=x^2`$](paper.pdf)
 
-*The correct form of a conjecture in OEIS A396844*
+*A disproof of a conjecture in OEIS A396844, and the corrected statement*
 
 Dev D. Goyal  
 October 2026

@@ -54,7 +54,7 @@ Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first
 Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
 ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
 source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
-and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+compared it with the published terms and tested every claim numerically, and read every step of the proofs. It also wrote the present
 version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
@@ -64,7 +64,7 @@ The section ``About this paper'' at the end gives the details.
 
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a public database of integer sequences.
-Many entries record \emph{conjectures}: patterns observed in the data that the contributor could not prove. This paper
+Many entries record \emph{conjectures}: patterns observed in the data that the contributor did not prove. This paper
 concerns entry A394576~\cite{oeis}, contributed by Hoang Xuan Thanh in 2026, which reads in part:
 \begin{quote}\small\ttfamily\raggedright a(1) = 1; a(n+1) is the smallest positive integer greater than a(n) that avoids violating the condition a(k) + a(k+1) + a(k+2) is not a term.\par\smallskip Conjecture 1: a(n) <= floor((4*n-1)/3).\par\smallskip\hfill\textrm{--- OEIS A394576, Hoang Xuan Thanh, May 2026}\end{quote}
 
@@ -123,9 +123,9 @@ $B_k$, $C_k$. These two conjectures are not proved here. Thanh has deposited sof
 generalizations~\cite{algorithm}. When the entry was checked on 24~October~2026, the bound was still labelled as a
 conjecture, and we are not aware of an earlier proof.
 
-\subsection{Why it is interesting}
-Greedy sequences that avoid a forbidden pattern are a classical source of hard problems: the rule is simple, but the
-global behavior of the sequence is often irregular and difficult to predict. Here the behavior turns out to be very
+\subsection{Motivation}
+Greedy sequences that avoid a forbidden pattern are a source of difficult problems: the rule is simple, but the
+global behavior of the sequence is often irregular and difficult to predict. Here the behavior is very
 regular: for each $k\ge1$, exactly one of the four integers $4k,\dots,4k+3$ is a forbidden sum and the other three are
 terms, so the sequence has density $3/4$ in the positive integers. The proof shows how a greedy definition can
 be replaced by an explicit construction, and how to prove that the two agree.
@@ -149,7 +149,7 @@ L(n)&4k&4k+1&4k+3\\
 U(n)&4k+1&4k+2&4k+3
 \end{array}
 \end{equation}
-for every $k\ge0$. In particular $0\le U(n)-L(n)\le1$, with equality $L(n)=U(n)$ when $3\mid n$. For $k\ge1$ we
+for every $k\ge0$. In particular $0\le U(n)-L(n)\le1$, and $L(n)=U(n)$ when $3\mid n$. For $k\ge1$ we
 write $I_k=\{4k,4k+1,4k+2,4k+3\}$; these intervals are disjoint, and together they cover the integers from $4$ on.
 
 \subsection{Greedy definitions}
@@ -254,7 +254,7 @@ A computation can only test finitely many cases, so it is a check on the definit
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
-Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A394576.lean} of the repository,
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements are collected in the file \texttt{lean/Entries/A394576.lean} of the repository,
 in the namespace \texttt{OEIS.A394576}. There the sequence is indexed from $0$: \texttt{sequence n} is $a(n+1)$, and the rule is written out
 explicitly in the statement of \texttt{source\_existence\_uniqueness}. The construction and its properties are in
 \texttt{lean/Families/GreedyTriple.lean} (namespace \texttt{Families.GreedyTriple}).
@@ -336,6 +336,6 @@ sequence~\cite{algorithm}.
 \bibitem{oeisdb} N.~J.~A.~Sloane and The OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences}. \url{https://oeis.org}.
 \bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
 \bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
-\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
 \end{thebibliography}
 \end{document}

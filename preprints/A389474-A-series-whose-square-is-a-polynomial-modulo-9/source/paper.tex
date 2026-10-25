@@ -40,7 +40,7 @@ The sequence A389474 of the On-Line Encyclopedia of Integer Sequences (OEIS) lis
 $A(x)=x+x^2+4x^3+14x^4+\cdots$ that satisfies $A\bigl(x^2+2x^3+2A(x)^2\bigr)=3A(x)^2$. Paul~D.~Hanna conjectured that
 all coefficients of the square $A(x)^2$ beyond $x^3$ are divisible by $9$, and that every coefficient of
 $A(x)^{3k}-A(x^3)^k$ is divisible by $3$. We prove both. The main result is that $A(x)^2\equiv x^2+2x^3\pmod 9$. We also prove that the
-equation has exactly one solution with integer coefficients; this requires an argument, because computing the
+equation has exactly one normalized solution with integer coefficients; this is not immediate, because computing the
 coefficients from the equation involves a division by $2$ at every step. The proof works with the inverse series of $A$, which satisfies a simpler equation. The second
 conjecture is an instance of a classical identity. The results have been checked by computer and proved formally in
 the Lean proof assistant. A short further argument, not part of the formal verification, shows that $A(x)^2$ is
@@ -53,7 +53,7 @@ Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first
 Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
 ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
 source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
-and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+compared it with the published terms and tested every claim numerically, and read every step of the proofs. It also wrote the present
 version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
@@ -64,7 +64,7 @@ The section ``About this paper'' at the end gives the details.
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
 sequences. Many
-entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
+entries also record \emph{conjectures}: patterns that the contributor observed in the data but did not prove.
 
 This paper is about entry A389474~\cite{oeis}, contributed by Paul~D.~Hanna in October 2025. It defines a power series
 $A(x)=a(1)\,x+a(2)\,x^2+a(3)\,x^3+\cdots$ with integer coefficients and $a(1)=1$ by the equation
@@ -111,7 +111,7 @@ A(x)^2\equiv x^2+2x^3\pmod 9 .
 \]
 So conjecture (E3) is true. Conjecture (E4) is true as well (Proposition~\ref{prop:frob}); in fact it holds for
 \emph{every} power series with integer coefficients, by a classical identity. We also prove that \eqref{eq:oeis} has
-exactly one solution with integer coefficients (Theorem~\ref{thm:exist}). This needs an argument: when the coefficients
+exactly one normalized solution with integer coefficients (Theorem~\ref{thm:exist}). This needs an argument: when the coefficients
 are computed from \eqref{eq:oeis} one at a time, each new coefficient $a(n)$ first appears in degree $n+1$ with the
 factor $-2$, so each step involves a division by $2$.
 
@@ -130,11 +130,11 @@ closely related equation; it is treated in a companion paper with the same metho
 proof of conjecture (E3). Statement (E4) follows directly from the Frobenius identity (Lemma~\ref{lem:frobenius}), as
 shown in Proposition~\ref{prop:frob}; we include the two-line proof for completeness and claim nothing new about it.
 
-\subsection{Why it is interesting}
+\subsection{Motivation}
 Equations in which an unknown series is substituted into an expression built from itself are common in
 combinatorics. The entry itself compares \eqref{eq:oeis} with the identity $C\bigl(x^2+2x\,C(x)^2\bigr)=C(x)^2$ for the
 generating series $C$ of the Catalan numbers. The coefficients of $A$ grow quickly and look irregular, yet modulo $9$
-the square of $A$ is a polynomial: everything beyond $x^3$ vanishes. The proof uses two techniques of wider use.
+the square of $A$ is a polynomial: everything beyond $x^3$ vanishes. The proof uses two techniques with wider application.
 First, an equation that seems to require division by $2$ can still have an integer solution, if the numbers being
 divided are always even; here this follows from an identity modulo $2$. Second, replacing a series by its inverse
 can reduce an equation to one that can be solved explicitly modulo a power of a prime.
@@ -165,8 +165,10 @@ $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determ
 using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
 denominator has constant term $1$, so the quotient is again a power series.
 
-For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
-series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+A \emph{commutative ring} is a set with an addition, a subtraction and a multiplication that satisfy the usual rules
+of arithmetic; examples are $\Z$, $\Q$ and the integers modulo $m$. For a commutative ring $R$ we write $\ps{R}$ for
+the set of power series with coefficients in $R$; for instance, writing $\F_2$ for the integers modulo $2$, $\ps{\F_2}$
+consists of the series with coefficients modulo $2$. We write
 $U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
 zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
 constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
@@ -225,9 +227,8 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
-subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
-division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
+\para{Rings.} Some statements below hold over every commutative ring, for example $\Z$, $\Q$ and $\Z/m\Z$. No
+division is used in them; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
 
 \subsection{The Frobenius identity}
@@ -277,7 +278,7 @@ Corollary~\ref{cor:conj} is immediate from Theorem~\ref{thm:nine} and from Propo
 \section{Proofs}\label{sec:proofs}
 
 \para{The idea in brief.} We first study the inverse series $R$. It satisfies the equation $R(3x^2)=2x^2+R^2+2R^3$, in which the only
-substitution is that of the simple series $3x^2$ into the unknown $R$. Lemma~\ref{lem:family} shows that this equation has exactly one integer
+substitution is that of the monomial $3x^2$ into the unknown $R$. Lemma~\ref{lem:family} shows that this equation has exactly one integer
 solution, by checking that the division by $2$ needed at each step is always exact. Its inverse is $A$
 (Theorem~\ref{thm:exist}). Theorem~\ref{thm:nine} then follows by applying $R$ to \eqref{eq:oeis} and working
 modulo $9$, where $(3A^2)^2=9A^4$ vanishes.
@@ -385,7 +386,7 @@ A computation can only test finitely many cases, so it is a check on the definit
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
-Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A389474.lean} of the repository,
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements are collected in the file \texttt{lean/Entries/A389474.lean} of the repository,
 in the namespace \texttt{OEIS.A389474}. Lemma~\ref{lem:family} is \texttt{integral\_family\_existence}. The constructions are in \texttt{lean/Families/CubicReversion.lean}, and the congruences use \texttt{lean/Families/CubicFrobenius.lean} and \texttt{lean/Families/CubicConsequences.lean}.
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
@@ -479,7 +480,7 @@ available.
 
 \section*{Acknowledgements}
 The sequence and the conjectures are due to Paul~D.~Hanna~\cite{oeis}, who also contributed the companion entry
-A389475~\cite{oeisother}. Statement (4) is an instance of the classical Frobenius identity and is not claimed as new.
+A389475~\cite{oeisother}. Statement (E4) is an instance of the classical Frobenius identity and is not claimed as new.
 
 \begin{thebibliography}{99}\small
 \raggedright
@@ -490,6 +491,6 @@ A389475~\cite{oeisother}. Statement (4) is an instance of the classical Frobeniu
 \bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
 \bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
 \bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
-\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
 \end{thebibliography}
 \end{document}

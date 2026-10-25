@@ -14,7 +14,7 @@ I have verified the results. They have not been peer reviewed. An OEIS entry tha
 
 Most of the sequences are coefficients of formal power series defined by functional equations, and most of the conjectures concern their residues modulo small integers. In 24 entries the conjectures treated are proved, and in A392210 an observation recorded in the entry is proved. In four entries (A380680, A396798, A396843 and A396844) a conjectured statement is false; the papers give counterexamples and prove the correct statements, and in A396798 and A396843 the other conjectured statements are proved. Where an entry records further conjectures that are not treated, the paper says so.
 
-The papers form 7 families of related results:
+The papers form six families of related results and a group of other results:
 
 | Family | Papers |
 |---|---|
@@ -22,9 +22,9 @@ The papers form 7 families of related results:
 | Consecutive iterates $`F=x+F^{\circ r}F^{\circ(r+1)}`$ | A396099, A396798, A396807 |
 | Scaled inverses $`A(x-x\,A(qx)/q)=x`$ | A393856, A393857, A393858, A393859 |
 | Theta series and theta-type equations | A378580, A378581, A380060, A380680, A355872 |
-| Catalan-type equations | A393172, A393171, A392210, A389536, A397588, A195194 |
-| Reversions with an exact halving step | A389537, A389542, A389474, A389475 |
-| Other results | A396093, A396102, A380056, A397346, A394576 |
+| Catalan-type equations | A393172, A393171, A389536, A397588, A195194 |
+| Equations with an exact halving step | A389537, A389542, A389474, A389475 |
+| Other results | A396093, A392210, A396102, A380056, A397346, A394576 |
 
 ## Navigating the collection
 

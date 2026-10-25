@@ -38,7 +38,7 @@
 \begin{abstract}
 The sequence A393859 of the On-Line Encyclopedia of Integer Sequences (OEIS) lists the coefficients of the power
 series $A(x)=x+x^2+9x^3+481x^4+\cdots$ defined by the equation
-$A\bigl(x-x\,A(7x)/7\bigr)=x$. The unknown series $A$ appears on both sides of this equation, and its coefficients grow very fast.
+$A\bigl(x-x\,A(7x)/7\bigr)=x$. The unknown series $A$ occurs both as the outer function and inside its own argument, and its coefficients grow rapidly.
 Paul~D.~Hanna conjectured that every coefficient leaves remainder $1$ on division by $8$. We prove this. In fact we prove that, with $7$ replaced by any positive integer $q$, the series becomes $x+x^2+x^3+\cdots$ once its coefficients are reduced modulo $q+1$. The proof rests on the congruence $q\equiv-1\pmod{q+1}$: for $q=-1$ the equation
 has an explicit solution. The results have also been checked by computer and proved formally in the
 Lean proof assistant.
@@ -50,7 +50,7 @@ Dev~D.~Goyal, found the proof, wrote its Lean~4 formalization, and wrote a first
 Dev~D.~Goyal chose the problems and asked for proofs, formal verification and revisions, but did not supply proof
 ideas. Claude Opus~5.5, used with Claude Code, then checked the work independently: it rebuilt the formal proofs from
 source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
-and tested every claim against the published data, and read every step of the proofs. It also wrote the present
+compared it with the published terms and tested every claim numerically, and read every step of the proofs. It also wrote the present
 version of this paper.
 Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
@@ -61,7 +61,7 @@ The section ``About this paper'' at the end gives the details.
 \subsection{The sequence}\label{sec:sequence}
 The \emph{On-Line Encyclopedia of Integer Sequences} (OEIS)~\cite{oeisdb} is a large public database of integer
 sequences. Many
-entries also record \emph{conjectures}: patterns that the contributor observed in the data but could not prove.
+entries also record \emph{conjectures}: patterns that the contributor observed in the data but did not prove.
 
 This paper is about entry A393859~\cite{oeis}, contributed by Paul~D.~Hanna in March 2026. It defines a power series
 \[
@@ -76,10 +76,10 @@ $7^n\,a(n)$. Dividing by $7$ gives the series whose coefficients are
 $7^{\,n-1}a(n)$, which are still integers. The left side of \eqref{eq:oeis} means: substitute the series
 $x-x\,A(7x)/7$ into $A$. (Section~\ref{sec:background} explains what substituting one
 series into another means.) So the equation says that $A$ undoes a substitution that is itself built from $A$. Because
-$A$ appears on both sides, it is not obvious that the equation has a solution, or only one; Theorem~\ref{thm:exist}
+$A$ occurs inside its own argument, it is not obvious that the equation has a solution, or only one; Theorem~\ref{thm:exist}
 shows that it has exactly one solution of the form $x+(\text{higher powers of }x)$.
 
-The first terms, starting at $n=1$, are 1, 1, 9, 481, 167937, 404407577, 6800120127457, \dots{} They grow very fast: $a(15)$
+The first terms, starting at $n=1$, are 1, 1, 9, 481, 167937, 404407577, 6800120127457, \dots{} They grow rapidly: $a(15)$
 already has 78 digits. The entry reads:
 \begin{quote}\small\ttfamily\raggedright G.f. A(x) satisfies A( x - x*A(7*x)/7 ) = x.\par\smallskip Conjecture: a(n) == 1 (mod 8) for n >= 1.\par\smallskip\hfill\textrm{--- OEIS A393859, Paul D. Hanna, March 2026}\end{quote}
 
@@ -126,7 +126,7 @@ $A(x-x^2)=x$; its solution is the generating series of the Catalan numbers (A000
 A088714, A195195 and A195196. We are not aware of an earlier proof of the conjectures. The tools we use, formal power
 series and their reduction modulo an integer, are standard; see~\cite{niven,stanley}.
 
-\subsection{Why it is interesting}
+\subsection{Motivation}
 Equations in which an unknown series is substituted into an expression built from itself are common in
 combinatorics, where they describe structures defined recursively, such as trees. The Catalan numbers, the case $q=0$
 of this family, are the classic example. Hanna has contributed many such equations to the OEIS. For $q\ge1$ the
@@ -162,8 +162,10 @@ $1$ has a unique multiplicative inverse $\frac1D$, whose coefficients are determ
 using only addition, subtraction and multiplication. Whenever a quotient of power series appears in this paper, its
 denominator has constant term $1$, so the quotient is again a power series.
 
-For a commutative ring $R$, such as $\Z$, $\Q$ or the integers modulo $m$, we write $\ps{R}$ for the set of power
-series with coefficients in $R$; for instance $\ps{\F_2}$ consists of the series with coefficients modulo $2$. We write
+A \emph{commutative ring} is a set with an addition, a subtraction and a multiplication that satisfy the usual rules
+of arithmetic; examples are $\Z$, $\Q$ and the integers modulo $m$. For a commutative ring $R$ we write $\ps{R}$ for
+the set of power series with coefficients in $R$; for instance, writing $\F_2$ for the integers modulo $2$, $\ps{\F_2}$
+consists of the series with coefficients modulo $2$. We write
 $U(0)$ for the constant term $u_0$ of $U$, and $U=O(x^d)$ when the coefficients of $1,x,\dots,x^{d-1}$ in $U$ are all
 zero. Thus $U-V=O(x^d)$ means that $U$ and $V$ have the same coefficient of $x^n$ for every $n<d$. A series with
 constant term $0$ and coefficient of $x$ equal to $1$, that is, a series of the form $x+u_2x^2+u_3x^3+\cdots$, is
@@ -222,13 +224,12 @@ an inverse, we may reduce the ingredients first and then compute in $\Z/m\Z$. Th
 coefficient of the result is obtained from finitely many coefficients of the ingredients by adding, subtracting and
 multiplying, and these operations are compatible with remainders.
 
-\para{Rings.} Some statements below hold over every \emph{commutative ring}, that is, every set with an addition,
-subtraction and multiplication satisfying the usual rules of arithmetic (for example $\Z$, $\Q$ and $\Z/m\Z$). No
-division is used; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
+\para{Rings.} Some statements below hold over every commutative ring, for example $\Z$, $\Q$ and $\Z/m\Z$. No
+division is used in them; this matters because in $\Z/m\Z$ division is not always possible (for instance, $2$ has no inverse in
 $\Z/4\Z$).
 
 \subsection{The method}
-Almost every proof in this paper follows the same three steps.
+The main proofs follow three steps.
 \begin{enumerate}
 \item \emph{Uniqueness.} Show that the defining equation determines the coefficients one at a time, using only
 addition, subtraction and multiplication. Then the equation has exactly one solution of the required shape, in every
@@ -236,7 +237,7 @@ commutative ring, including $\Z/m\Z$.
 \item \emph{Reduction.} Reducing the integer solution modulo $m$ gives a solution of the reduced equation,
 because reduction is compatible with all operations.
 \item \emph{A candidate solution.} Find an explicit series that satisfies the reduced equation. By uniqueness, it is
-the reduction of the sequence, and its coefficients can be read off.
+the reduction of the integer solution, and its coefficients can be read off.
 \end{enumerate}
 Finding the candidate in step~3 is usually the main difficulty.
 
@@ -363,7 +364,7 @@ A computation can only test finitely many cases, so it is a check on the definit
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
-Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; any step proved only on paper is stated below. The statements are collected in the file \texttt{lean/Entries/A393859.lean} of the repository,
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements are collected in the file \texttt{lean/Entries/A393859.lean} of the repository,
 in the namespace \texttt{OEIS.A393859}. In Lean, the operation $L_q$ of \eqref{eq:L} is called \texttt{scaleTail q}. The general theorems for every $q$ are \texttt{integer\_mod\_parameter\_add\_one} (Theorem~\ref{thm:mod}) and \texttt{integer\_coeff\_odd\_iff} (Theorem~\ref{thm:parity} for even $q$), in the namespace \texttt{Hanna.\allowbreak Related.\allowbreak ScaledInverse}, in the files \texttt{lean/\allowbreak Hanna/\allowbreak Related/\allowbreak ScaledInverse.lean} and \texttt{ScaledParity.lean} of the same folder.
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
@@ -404,7 +405,7 @@ this congruence by computer for $q=2,3,\dots,7$ and every $n<300$. It is not par
 \para{The rest of the family.} The theorems hold for every $q\ge1$. The OEIS lists the members $q=1,2,3$ as A088714,
 A195195 and A195196; we checked that their published terms agree with the coefficients of $G_1$, $G_2$ and $G_3$ (for
 A088714 after shifting the index by one). For instance, A195195 is defined by the case $q=2$ of
-\eqref{eq:oeis}, so our results show that all its terms leave remainder $1$ on division by $3$, and that a term is odd
+the family equation \eqref{eq:def}, so our results show that all its terms leave remainder $1$ on division by $3$, and that a term is odd
 exactly when its index is a power of $2$.
 
 \para{Open questions.} We have not studied the remainders modulo other numbers, such as $64=(q+1)^2$
@@ -452,6 +453,6 @@ the entries A393856--A393859 ($q=4,5,6,7$), as well as the earlier members A0887
 \bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
 \bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
 \bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
-\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures, with Lean~4 formalizations}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
 \end{thebibliography}
 \end{document}
