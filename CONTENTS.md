@@ -1,6 +1,6 @@
 # Manuscript collection
 
-**29 papers on conjectures from the OEIS, in six families and a group of other results.**
+**28 papers on conjectures from the OEIS, in six families and a group of other results.**
 
 [**Read the overview PDF**](overview.pdf).
 
@@ -135,12 +135,6 @@ Equations whose solutions reduce, modulo 2, 4 or 8, to expressions in the series
 &emsp;For $`n>1`$, $`a(n)\equiv2\pmod4`$ if $`n=2^k+1`$, and $`4\mid a(n)`$ otherwise.
 
 > There is exactly one power series $`A(x)=x+2x^2+2x^3+8x^4+10x^5+\cdots`$ that satisfies the equation $`A(x^2+2x^3)=x\,A(x)`$. Its coefficients $`a(n)`$ form the sequence A389536 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Paul D. Hanna. Hanna conjectured that, for $`n>1`$, the coefficient $`a(n)`$ leaves remainder $`2`$ on division by $`4`$ when $`n-1`$ is a power of $`2`$, and is divisible by $`4`$ otherwise. We prove this conjecture. The key observation is that, once every coefficient is replaced by its remainder modulo $`4`$, the series $`A(x)`$ becomes $`x+2x\,C(x)`$, where $`C(x)=x+x^2+2x^3+5x^4+\cdots`$ is the generating function of the Catalan numbers. The conjecture then follows from the classical fact that the coefficient of $`x^n`$ in $`C(x)`$ is odd exactly when $`n`$ is a power of $`2`$. The result has also been checked by computer and proved formally in the Lean proof assistant.
-
-&emsp;**[Odd coefficients at powers of two for $`A=x+(xA^2)'`$](preprints/A397588-Odd-coefficients-at-powers-of-two/paper.pdf)** ([A397588](https://oeis.org/A397588), proved)
-
-&emsp;$`a(n)`$ is odd exactly when $`n`$ is a power of 2, and $`3\mid a(n)`$ for $`n>1`$.
-
-> The sequence A397588 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Paul D. Hanna, consists of the coefficients $`a(n)`$ of the power series $`A(x)=x+3x^2+24x^3+285x^4+\cdots`$ determined by the differential equation $`A=x+(x\,A^2)'`$, where the prime denotes the derivative. Hanna conjectured that $`a(n)`$ is odd exactly when $`n`$ is a power of $`2`$. The entry also states that $`a(n)`$ is divisible by $`3`$ for every $`n>1`$. We prove both statements. Modulo $`2`$ the derivative term simplifies, and the equation becomes the Catalan equation $`A=x+A^2`$, whose solution modulo $`2`$ is $`x+x^2+x^4+x^8+\cdots`$. Modulo $`3`$, the series $`x`$ itself is a solution. The results have also been checked by computer and proved formally in the Lean proof assistant.
 
 &emsp;**[Parity of an infinitely nested series reversion](preprints/A195194-Parity-of-an-infinitely-nested-series-reversion/paper.pdf)** ([A195194](https://oeis.org/A195194), proved)
 

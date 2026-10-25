@@ -25,6 +25,16 @@ for every integer `k` and `n ≥ 1`, the coefficient of `x^n` in `F^{∘k}` is c
 of `F`, the series with `G(F(x)) = x`. The conjectures of A396807 are the case `r = 5`, and the
 seven conjectures of A396798 about the iterates `F^{∘2}, …, F^{∘8}` are the case `r = 4`. The
 conjectures of A396099 and the corrected first conjecture of A396798 are stated separately.
+
+The case `r = 3` (OEIS A396797) was proved earlier, in September 2026, by Shiva Priyan
+Shanmuga Sundaram; the proof here is independent and covers every `r ≥ 1`. A396797 has no paper
+of its own in this collection.
+
+Context: these are congruences for the coefficients of power series defined by functional
+equations. Results of this kind are known, for example, for the Catalan and Motzkin numbers
+(Deutsch and Sagan, J. Number Theory 117 (2006); Eu, Liu and Yeh, European J. Combin. 29
+(2008)), and Kauers, Krattenthaler and Müller (Electron. J. Combin. 18(2) (2012), P37) give a
+method for the behaviour modulo powers of `2` of recursively defined sequences.
 -/
 
 public section

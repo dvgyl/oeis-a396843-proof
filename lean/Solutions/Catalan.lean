@@ -7,8 +7,8 @@ public import Families
 # Solution for the Catalan-type equations
 
 Each statement of `Challenges.Catalan` is derived from the libraries
-`Families.CatalanComposition` (A393172, A393171), `Families.MahlerParity` (A389536),
-`Families.DifferentialParity` (A397588) and `Families.NestedReversion` (A195194).
+`Families.CatalanComposition` (A393172, A393171), `Families.MahlerParity` (A389536) and
+`Families.NestedReversion` (A195194).
 -/
 
 public section
@@ -85,26 +85,51 @@ theorem a389536_coeff (F : PowerSeries ℤ) (h0 : coeff 0 F = 0) (h1 : coeff 1 F
   rw [modEq_four]
   exact ⟨by simpa [MahlerParity.a] using h2, MahlerParity.a389536_four_dvd_iff n hn⟩
 
-theorem a397588_existsUnique :
-    ∃! F : PowerSeries ℤ, coeff 0 F = 0 ∧ coeff 1 F = 1 ∧ F = X + derivative (X * F ^ 2) := by
-  obtain ⟨F, ⟨⟨h0, h1⟩, hF⟩, huniq⟩ := DifferentialParity.existence_uniqueness (R := ℤ)
-  exact ⟨F, ⟨h0, h1, hF⟩, fun G ⟨g0, g1, gG⟩ => huniq G ⟨⟨g0, g1⟩, gG⟩⟩
-
-theorem a397588_coeff (F : PowerSeries ℤ) (h0 : coeff 0 F = 0) (h1 : coeff 1 F = 1)
-    (hF : F = X + derivative (X * F ^ 2)) :
-    (∀ n : ℕ, Odd (coeff n F) ↔ ∃ k : ℕ, n = 2 ^ k) ∧
-      (∀ n : ℕ, 1 < n → (3 : ℤ) ∣ coeff n F) := by
-  have hFeq : F = DifferentialParity.A :=
-    DifferentialParity.solution_unique ⟨h0, h1⟩ DifferentialParity.A_normalized hF
-      DifferentialParity.A_equation
-  rw [hFeq]
-  exact ⟨DifferentialParity.a397588_parity, DifferentialParity.a397588_divisible_by_three⟩
-
 theorem a195194_existsUnique :
     ∃! F : ℕ → PowerSeries ℤ, (∀ j, coeff 0 (F j) = 0 ∧ coeff 1 (F j) = 1) ∧
       ∀ j, (X - C ((j + 1 : ℕ) : ℤ) * X * F (j + 1)).subst (F j) = X ∧
         (F j).subst (X - C ((j + 1 : ℕ) : ℤ) * X * F (j + 1)) = X :=
   NestedReversion.source_existence_uniqueness (NestedReversion.weights ℤ)
+
+/-- The towers of finite depth of the Challenge are the approximations of the library. -/
+theorem tower_eq_approximation (G : ℕ → ℕ → PowerSeries ℤ) (hG0 : ∀ j, G 0 j = X)
+    (hG : ∀ d j, coeff 0 (G (d + 1) j) = 0 ∧ coeff 1 (G (d + 1) j) = 1 ∧
+      (X - C ((j + 1 : ℕ) : ℤ) * X * G d (j + 1)).subst (G (d + 1) j) = X ∧
+      (G (d + 1) j).subst (X - C ((j + 1 : ℕ) : ℤ) * X * G d (j + 1)) = X)
+    (d j : ℕ) :
+    G d j = NestedReversion.approximation (NestedReversion.weights ℤ) d j := by
+  induction d generalizing j with
+  | zero => exact hG0 j
+  | succ d ih =>
+    obtain ⟨_, _, _, hleft⟩ := hG d j
+    have hleft' : compose (G (d + 1) j) (NestedReversion.pre (NestedReversion.weights ℤ j)
+        (NestedReversion.approximation (NestedReversion.weights ℤ) d (j + 1))) = X := by
+      rw [← ih (j + 1)]
+      exact hleft
+    rw [NestedReversion.approximation_succ]
+    exact inverse_unique (NestedReversion.pre_normalized _
+      (NestedReversion.approximation_normalized _ d (j + 1))) (inverse_normalized _ _) hleft'
+      (compose_inverse_right _ _)
+
+theorem a195194_finite_tower (F : ℕ → PowerSeries ℤ)
+    (hF0 : ∀ j, coeff 0 (F j) = 0 ∧ coeff 1 (F j) = 1)
+    (hF : ∀ j, (X - C ((j + 1 : ℕ) : ℤ) * X * F (j + 1)).subst (F j) = X ∧
+      (F j).subst (X - C ((j + 1 : ℕ) : ℤ) * X * F (j + 1)) = X)
+    (G : ℕ → ℕ → PowerSeries ℤ) (hG0 : ∀ j, G 0 j = X)
+    (hG : ∀ d j, coeff 0 (G (d + 1) j) = 0 ∧ coeff 1 (G (d + 1) j) = 1 ∧
+      (X - C ((j + 1 : ℕ) : ℤ) * X * G d (j + 1)).subst (G (d + 1) j) = X ∧
+      (G (d + 1) j).subst (X - C ((j + 1 : ℕ) : ℤ) * X * G d (j + 1)) = X)
+    (d n : ℕ) (hn : n ≤ d + 1) :
+    coeff n (G d 0) = coeff n (F 0) := by
+  have hFeq : F = NestedReversion.tail (NestedReversion.weights ℤ) :=
+    (NestedReversion.source_existence_uniqueness (NestedReversion.weights ℤ)).unique
+      ⟨hF0, hF⟩ ⟨NestedReversion.tail_normalized _, fun j =>
+        ⟨NestedReversion.tail_right_inverse _ j, NestedReversion.tail_left_inverse _ j⟩⟩
+  rw [hFeq, tower_eq_approximation G hG0 hG d 0]
+  have h := X_pow_dvd_iff.mp (NestedReversion.approximation_agrees (NestedReversion.weights ℤ) d 0)
+    n (by omega)
+  rw [map_sub] at h
+  exact sub_eq_zero.mp h
 
 theorem a195194_coeff (F : ℕ → PowerSeries ℤ) (hF0 : ∀ j, coeff 0 (F j) = 0 ∧ coeff 1 (F j) = 1)
     (hF : ∀ j, (X - C ((j + 1 : ℕ) : ℤ) * X * F (j + 1)).subst (F j) = X ∧

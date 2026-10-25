@@ -1,6 +1,6 @@
 # Proofs and corrections of OEIS conjectures
 
-A collection of proofs, disproofs and corrections of conjectures recorded in the [On-Line Encyclopedia of Integer Sequences](https://oeis.org) (OEIS), each with a self-contained paper and a Lean 4 formalization of its main theorems. The collection currently contains 29 papers.
+A collection of proofs, disproofs and corrections of conjectures recorded in the [On-Line Encyclopedia of Integer Sequences](https://oeis.org) (OEIS), each with a self-contained paper and a Lean 4 formalization of its main theorems. The collection currently contains 28 papers.
 
 ## Background
 
@@ -12,7 +12,7 @@ I have personally reviewed the AI-generated proofs to the best of my mathematica
 
 ## Results
 
-Most of the sequences are coefficients of formal power series defined by functional equations, and most of the conjectures concern their residues modulo small integers. In 24 entries the conjectures treated are proved, and in A392210 an observation recorded in the entry is proved. In four entries (A380680, A396798, A396843 and A396844) a conjectured statement is false; the papers give counterexamples and prove the correct statements, and in A396798 and A396843 the other conjectured statements are proved. Where an entry records further conjectures that are not treated, the paper says so.
+Most of the sequences are coefficients of formal power series defined by functional equations, and most of the conjectures concern their residues modulo small integers. In 23 entries the conjectures treated are proved, and in A392210 an observation recorded in the entry is proved. In four entries (A380680, A396798, A396843 and A396844) a conjectured statement is false; the papers give counterexamples and prove the correct statements, and in A396798 and A396843 the other conjectured statements are proved. Where an entry records further conjectures that are not treated, the paper says so.
 
 The papers form six families of related results and a group of other results:
 
@@ -22,7 +22,7 @@ The papers form six families of related results and a group of other results:
 | Consecutive iterates $`F=x+F^{\circ r}F^{\circ(r+1)}`$ | A396099, A396798, A396807 |
 | Scaled inverses $`A(x-x\,A(qx)/q)=x`$ | A393856, A393857, A393858, A393859 |
 | Theta series and theta-type equations | A378580, A378581, A380060, A380680, A355872 |
-| Catalan-type equations | A393172, A393171, A389536, A397588, A195194 |
+| Catalan-type equations | A393172, A393171, A389536, A195194 |
 | Equations with an exact halving step | A389537, A389542, A389474, A389475 |
 | Other results | A396093, A392210, A396102, A380056, A397346, A394576 |
 
@@ -36,10 +36,10 @@ The papers form six families of related results and a group of other results:
 
 ## Verification
 
-- **Formal proofs.** The Lean project builds from source with Lean 4.35.0 and Mathlib v4.35.0. The 244 theorems stated in [`lean/Entries/`](lean/Entries/), 5 general theorems cited in the papers, and the 56 theorems compared with the Challenge statements depend only on Lean's standard axioms `propext`, `Classical.choice` and `Quot.sound`. Apart from the deliberate placeholders in the Challenge files, the sources contain no `sorry`.
-- **Challenge statements.** For each of the seven families, [Comparator](https://github.com/leanprover/comparator) confirms that the proved theorems have exactly the statements in [`lean/Challenges/`](lean/Challenges/), and the proofs are accepted by Lean's kernel and by the independent NanoDa and con-ron kernels.
+- **Formal proofs.** The Lean project builds from source with Lean 4.35.0 and Mathlib v4.35.0. The 240 theorems stated in [`lean/Entries/`](lean/Entries/), 5 general theorems cited in the papers, and the 56 theorems compared with the Challenge statements depend only on Lean's standard axioms `propext`, `Classical.choice` and `Quot.sound`. Apart from the deliberate placeholders in the Challenge files, the sources contain no `sorry`.
+- **Challenge statements.** For each of the eight Comparator configurations (one for each family, and two for the other results), [Comparator](https://github.com/leanprover/comparator) confirms that the proved theorems have exactly the statements in [`lean/Challenges/`](lean/Challenges/), and the proofs are accepted by Lean's kernel and by the independent NanoDa and con-ron kernels.
 - **Definitions.** For each entry, the Lean definition of the sequence has been compared with the definition in the OEIS entry. Where the formal statement uses an equivalent form, the paper proves the equivalence; these cases are listed in the [formalization metadata](lean/formalization.yaml).
-- **Numerical checks.** Each sequence is recomputed from its OEIS definition and compared with the published terms, and each theorem and each observation in the Discussion sections is tested over a range of indices. All 363 checks pass; see [`verification/`](verification/README.md).
+- **Numerical checks.** Each sequence is recomputed from its OEIS definition and compared with the published terms, and each theorem and each observation in the Discussion sections is tested over a range of indices. All 352 checks pass; see [`verification/`](verification/README.md).
 
 ## Citations
 

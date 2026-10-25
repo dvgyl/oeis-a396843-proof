@@ -21,7 +21,8 @@ import all Solutions.ScaledInverses
 import all Solutions.Theta
 import all Solutions.Catalan
 import all Solutions.Halving
-import all Solutions.OtherResults
+import all Solutions.FurtherResults
+import all Solutions.ShortResults
 
 -- A195194
 #print axioms OEIS.A195194.normalized_source
@@ -291,14 +292,6 @@ import all Solutions.OtherResults
 #print axioms OEIS.A396844.binary_divisibility
 #print axioms OEIS.A396844.residues_parameter_four
 
--- A397588
-#print axioms OEIS.A397588.differential_existence
-#print axioms OEIS.A397588.differential_definition
-#print axioms OEIS.A397588.differential_source_unique
-#print axioms OEIS.A397588.differential_parity
-#print axioms OEIS.A397588.differential_mod_three
-#print axioms OEIS.A397588.differential_divisible_by_three
-
 -- A355872
 #print axioms OEIS.A355872.literal_source_iff
 #print axioms OEIS.A355872.source_existence_uniqueness
@@ -323,6 +316,8 @@ import all Solutions.OtherResults
 #print axioms OEIS.A397346.original_all_index_conjecture
 #print axioms OEIS.A397346.stronger_quotient_congruence
 #print axioms OEIS.A397346.exact_source_differential_identity
+#print axioms OEIS.A397346.exponential_equation_existence_uniqueness
+#print axioms OEIS.A397346.exponential_equation_solution
 #print axioms OEIS.A397346.displayed_initial_values
 
 -- General theorems from the shared modules that the papers cite directly
@@ -370,30 +365,31 @@ import all Solutions.OtherResults
 #print axioms OEISProofs.Catalan.a393171_coeff
 #print axioms OEISProofs.Catalan.a389536_existsUnique
 #print axioms OEISProofs.Catalan.a389536_coeff
-#print axioms OEISProofs.Catalan.a397588_existsUnique
-#print axioms OEISProofs.Catalan.a397588_coeff
 #print axioms OEISProofs.Catalan.a195194_existsUnique
+#print axioms OEISProofs.Catalan.a195194_finite_tower
 #print axioms OEISProofs.Catalan.a195194_coeff
 -- Halving
 #print axioms OEISProofs.Halving.a389537_existsUnique
 #print axioms OEISProofs.Halving.a389537_coeff
 #print axioms OEISProofs.Halving.a389542_existsUnique
 #print axioms OEISProofs.Halving.a389542_coeff
+#print axioms OEISProofs.Halving.cubic_family_existsUnique
 #print axioms OEISProofs.Halving.a389474_existsUnique
 #print axioms OEISProofs.Halving.a389474_coeff
 #print axioms OEISProofs.Halving.a389475_existsUnique
 #print axioms OEISProofs.Halving.a389475_coeff
--- OtherResults
-#print axioms OEISProofs.OtherResults.a396093_coeff
-#print axioms OEISProofs.OtherResults.a392210_existsUnique
-#print axioms OEISProofs.OtherResults.a392210_coeff
-#print axioms OEISProofs.OtherResults.a396102_existsUnique
-#print axioms OEISProofs.OtherResults.a396102_coeff
-#print axioms OEISProofs.OtherResults.a380056_existsUnique
-#print axioms OEISProofs.OtherResults.a380056_integral
-#print axioms OEISProofs.OtherResults.a380056_coeff
-#print axioms OEISProofs.OtherResults.a397346_existsUnique
-#print axioms OEISProofs.OtherResults.a397346_coeff
-#print axioms OEISProofs.OtherResults.a397346_derivative
-#print axioms OEISProofs.OtherResults.a394576_existsUnique
-#print axioms OEISProofs.OtherResults.a394576_bounds
+-- FurtherResults
+#print axioms OEISProofs.FurtherResults.a396102_existsUnique
+#print axioms OEISProofs.FurtherResults.a396102_coeff
+#print axioms OEISProofs.FurtherResults.a397346_existsUnique
+#print axioms OEISProofs.FurtherResults.a397346_coeff
+#print axioms OEISProofs.FurtherResults.a397346_exp_iff
+#print axioms OEISProofs.FurtherResults.a394576_existsUnique
+#print axioms OEISProofs.FurtherResults.a394576_bounds
+-- ShortResults
+#print axioms OEISProofs.ShortResults.a396093_coeff
+#print axioms OEISProofs.ShortResults.a392210_existsUnique
+#print axioms OEISProofs.ShortResults.a392210_coeff
+#print axioms OEISProofs.ShortResults.a380056_existsUnique
+#print axioms OEISProofs.ShortResults.a380056_integral
+#print axioms OEISProofs.ShortResults.a380056_coeff

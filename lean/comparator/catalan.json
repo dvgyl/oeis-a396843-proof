@@ -8,9 +8,8 @@
     "OEISProofs.Catalan.a393171_coeff",
     "OEISProofs.Catalan.a389536_existsUnique",
     "OEISProofs.Catalan.a389536_coeff",
-    "OEISProofs.Catalan.a397588_existsUnique",
-    "OEISProofs.Catalan.a397588_coeff",
     "OEISProofs.Catalan.a195194_existsUnique",
+    "OEISProofs.Catalan.a195194_finite_tower",
     "OEISProofs.Catalan.a195194_coeff"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]

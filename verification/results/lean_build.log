@@ -1,4 +1,4 @@
-⚠ [1/66] Replayed Hanna.BinaryWeight
+⚠ [1/42] Replayed Hanna.BinaryWeight
 warning: Hanna/BinaryWeight.lean:33:22: `if_neg` has been deprecated: Use `ite_eq_right` instead
 
 Hint: Replace the deprecated name:
@@ -10,7 +10,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp [Nat.mul_comm, Nat.mul_left_comm]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [2/66] Replayed Hanna.Divisibility
+⚠ [2/42] Replayed Hanna.Divisibility
 warning: Hanna/Divisibility.lean:39:8: This simp argument is unused:
   Int.mul_assoc
 
@@ -18,14 +18,14 @@ Hint: Omit it from the simp argument list.
   [apply] simp [Int.mul_comm, Int.mul_left_comm]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [1705/1758] Replayed Hanna.Series.Basic
+⚠ [1705/1852] Replayed Hanna.Series.Basic
 warning: Hanna/Series/Basic.lean:79:55: Variable name `hB` is not explicitly referenced.
 
 Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
   [apply] _hB
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-⚠ [1711/1758] Replayed Hanna.Series.Construction
+⚠ [1711/1852] Replayed Hanna.Series.Construction
 warning: Hanna/Series/Construction.lean:30:10: This simp argument is unused:
   Nat.succ_eq_add_one
 
@@ -44,7 +44,7 @@ warning: Hanna/Series/Construction.lean:94:25: `if_neg` has been deprecated: Use
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [1714/1758] Replayed Hanna.Recurrences
+⚠ [1714/1852] Replayed Hanna.Recurrences
 warning: Hanna/Recurrences.lean:66:44: `if_pos` has been deprecated: Use `ite_eq_left` instead
 
 Hint: Replace the deprecated name:
@@ -53,7 +53,7 @@ warning: Hanna/Recurrences.lean:138:25: `if_neg` has been deprecated: Use `ite_e
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [1755/1758] Replayed Consecutive.Basic
+⚠ [1755/1852] Replayed Consecutive.Basic
 warning: Consecutive/Basic.lean:63:69: This simp argument is unused:
   hb.constantCoeff
 
@@ -61,7 +61,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp [step, coeff_zero_eq_constantCoeff_apply, ha.constantCoeff]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [1757/1758] Replayed Consecutive.Modular
+⚠ [1757/1852] Replayed Consecutive.Modular
 warning: Consecutive/Modular.lean:425:34: `if_false` has been deprecated: Use `ite_false` instead
 
 Hint: Replace the deprecated name:
@@ -74,7 +74,7 @@ warning: Consecutive/Modular.lean:432:39: `if_false` has been deprecated: Use `i
 
 Hint: Replace the deprecated name:
   i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
-⚠ [3179/3232] Replayed Consecutive.Coefficients
+⚠ [3179/3190] Replayed Consecutive.Coefficients
 warning: Consecutive/Coefficients.lean:51:8: `if_pos` has been deprecated: Use `ite_eq_left` instead
 
 Hint: Replace the deprecated name:
@@ -87,7 +87,7 @@ warning: Consecutive/Coefficients.lean:155:41: `if_pos` has been deprecated: Use
 
 Hint: Replace the deprecated name:
   i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
-⚠ [3181/3232] Replayed Consecutive.Related
+⚠ [3181/3190] Replayed Consecutive.Related
 warning: Consecutive/Related.lean:27:8: `if_pos` has been deprecated: Use `ite_eq_left` instead
 
 Hint: Replace the deprecated name:
@@ -132,7 +132,7 @@ warning: Consecutive/Related.lean:130:27: `if_true` has been deprecated: Use `it
 
 Hint: Replace the deprecated name:
   i̵f̵_̵t̵r̵u̵e̵i̲t̲e̲_̲t̲r̲u̲e̲
-⚠ [3182/3232] Replayed Consecutive.IntegerIterates
+⚠ [3182/3190] Replayed Consecutive.IntegerIterates
 warning: Consecutive/IntegerIterates.lean:226:6: `if_pos` has been deprecated: Use `ite_eq_left` instead
 
 Hint: Replace the deprecated name:
@@ -145,7 +145,7 @@ warning: Consecutive/IntegerIterates.lean:241:19: `if_pos` has been deprecated: 
 
 Hint: Replace the deprecated name:
   i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
-⚠ [3185/3232] Replayed Hanna.Related.ScaledInverse
+⚠ [3185/3190] Replayed Hanna.Related.ScaledInverse
 warning: Hanna/Related/ScaledInverse.lean:230:51: This simp argument is unused:
   show n + 1 + 1 ≠ 1 by omega
 
@@ -153,7 +153,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp [scaleTail, geometric, pow_succ, coeff_X]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3186/3232] Replayed Hanna.Related.ScaledParity
+⚠ [3186/3190] Replayed Hanna.Related.ScaledParity
 warning: Hanna/Related/ScaledParity.lean:31:19: This simp argument is unused:
   show n + 1 + 1 ≠ 1 by omega
 
@@ -177,7 +177,7 @@ warning: Hanna/Related/ScaledParity.lean:86:10: `if_neg` has been deprecated: Us
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3190/3232] Replayed Families.BilateralTheta
+⚠ [3191/3281] Replayed Families.BilateralTheta
 warning: Families/BilateralTheta.lean:179:14: `if_neg` has been deprecated: Use `ite_eq_right` instead
 
 Hint: Replace the deprecated name:
@@ -214,7 +214,7 @@ warning: Families/BilateralTheta.lean:418:8: `if_neg` has been deprecated: Use `
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3193/3232] Replayed Families.CatalanComposition
+⚠ [3194/3281] Replayed Families.CatalanComposition
 warning: Families/CatalanComposition.lean:69:8: Unused tactic linter: `dsimp only at hc` does nothing.
 
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
@@ -239,7 +239,7 @@ warning: Families/CatalanComposition.lean:315:28: `if_neg` has been deprecated: 
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3194/3232] Replayed Families.NestedBinomial
+⚠ [3195/3281] Replayed Families.NestedBinomial
 warning: Families/NestedBinomial.lean:56:6: `if_neg` has been deprecated: Use `ite_eq_right` instead
 
 Hint: Replace the deprecated name:
@@ -248,7 +248,7 @@ warning: Families/NestedBinomial.lean:56:17: `if_neg` has been deprecated: Use `
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3196/3232] Replayed Families.CubicFrobenius
+⚠ [3197/3281] Replayed Families.CubicFrobenius
 warning: Families/CubicFrobenius.lean:28:8: `if_pos` has been deprecated: Use `ite_eq_left` instead
 
 Hint: Replace the deprecated name:
@@ -273,7 +273,7 @@ warning: Families/CubicFrobenius.lean:65:36: `if_pos` has been deprecated: Use `
 
 Hint: Replace the deprecated name:
   i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
-⚠ [3198/3232] Replayed Families.CubicConsequences
+⚠ [3199/3281] Replayed Families.CubicConsequences
 warning: Families/CubicConsequences.lean:47:42: This simp argument is unused:
   compose_natCast _ _ hA.constantCoeff
 
@@ -300,12 +300,72 @@ warning: Families/CubicConsequences.lean:180:32: `if_neg` has been deprecated: U
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3211/3232] Replayed Families.MahlerParity
+⚠ [3200/3281] Replayed Families.MahlerParity
 warning: Families/MahlerParity.lean:195:33: `if_neg` has been deprecated: Use `ite_eq_right` instead
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3214/3232] Replayed Families.GreedyTriple
+⚠ [3217/3281] Replayed Families.ExpCosine
+warning: Families/ExpCosine.lean:51:9: `dif_neg` has been deprecated: Use `dite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵n̵e̵g̵d̲i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: Families/ExpCosine.lean:64:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: Families/ExpCosine.lean:95:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: Families/ExpCosine.lean:107:32: `if_false` has been deprecated: Use `ite_false` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
+warning: Families/ExpCosine.lean:114:27: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: Families/ExpCosine.lean:126:23: This simp argument is unused:
+  Even.mul_left
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [cosineCoeff, pow_mul, show (4 : ZMod 5) ^ 2 = 1 by decide, show (-4 : ZMod 5) = 1 by decide]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Families/ExpCosine.lean:171:42: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: Families/ExpCosine.lean:171:42: This simp argument is unused:
+  if_pos rfl
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [hn, pow_zero, mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Families/ExpCosine.lean:251:58: `if_true` has been deprecated: Use `ite_true` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵t̵r̵u̵e̵i̲t̲e̲_̲t̲r̲u̲e̲
+⚠ [3219/3281] Replayed Families.ExpRecurrence
+warning: Families/ExpRecurrence.lean:52:15: `Fin.coe_castSucc` has been deprecated: Use `Fin.val_castSucc` instead
+
+Hint: Replace the deprecated name:
+  F̵i̵n̵.̵c̵o̵e̵_̵c̵a̵s̵t̵S̵u̵c̵c̵F̲i̲n̲.̲v̲a̲l̲_̲c̲a̲s̲t̲S̲u̲c̲c̲
+warning: Families/ExpRecurrence.lean:125:15: `Fin.coe_castSucc` has been deprecated: Use `Fin.val_castSucc` instead
+
+Hint: Replace the deprecated name:
+  F̵i̵n̵.̵c̵o̵e̵_̵c̵a̵s̵t̵S̵u̵c̵c̵F̲i̲n̲.̲v̲a̲l̲_̲c̲a̲s̲t̲S̲u̲c̲c̲
+warning: Families/ExpRecurrence.lean:248:25: `if_false` has been deprecated: Use `ite_false` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
+warning: Families/ExpRecurrence.lean:269:20: `Fin.coe_castSucc` has been deprecated: Use `Fin.val_castSucc` instead
+
+Hint: Replace the deprecated name:
+  F̵i̵n̵.̵c̵o̵e̵_̵c̵a̵s̵t̵S̵u̵c̵c̵F̲i̲n̲.̲v̲a̲l̲_̲c̲a̲s̲t̲S̲u̲c̲c̲
+⚠ [3221/3281] Replayed Families.GreedyTriple
 warning: Families/GreedyTriple.lean:42:35: `if_false` has been deprecated: Use `ite_false` instead
 
 Hint: Replace the deprecated name:
@@ -321,7 +381,7 @@ warning: Families/GreedyTriple.lean:220:6: `if_neg` has been deprecated: Use `it
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3216/3232] Replayed Families.LacunaryInverse
+⚠ [3223/3281] Replayed Families.LacunaryInverse
 warning: Families/LacunaryInverse.lean:32:16: This simp argument is unused:
   coeff_compose_X_power _ 2 0 (by omega)
 
@@ -373,7 +433,7 @@ warning: Families/LacunaryInverse.lean:311:21: `if_neg` has been deprecated: Use
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3218/3232] Replayed Families.RationalParity
+⚠ [3226/3281] Replayed Families.RationalParity
 warning: Families/RationalParity.lean:157:15: `if_pos` has been deprecated: Use `ite_eq_left` instead
 
 Hint: Replace the deprecated name:
@@ -394,7 +454,7 @@ warning: Families/RationalParity.lean:159:31: `if_neg` has been deprecated: Use 
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3219/3232] Replayed Families.SquareReversion
+⚠ [3227/3281] Replayed Families.SquareReversion
 warning: Families/SquareReversion.lean:331:53: `if_neg` has been deprecated: Use `ite_eq_right` instead
 
 Hint: Replace the deprecated name:
@@ -413,94 +473,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp_all [show (2 : ZMod 4) ≠ 0 by decide]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [3221/3280] Replayed Families.DifferentialParity
-warning: Families/DifferentialParity.lean:132:13: This simp argument is unused:
-  smul_zero
-
-Hint: Omit it from the simp argument list.
-  [apply] simp only [zero_add, smul_eq_mul, mul_one] at he
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-warning: Families/DifferentialParity.lean:132:24: This simp argument is unused:
-  zero_add
-
-Hint: Omit it from the simp argument list.
-  [apply] simp only [smul_zero, smul_eq_mul, mul_one] at he
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-warning: Families/DifferentialParity.lean:143:10: `if_pos` has been deprecated: Use `ite_eq_left` instead
-
-Hint: Replace the deprecated name:
-  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
-warning: Families/DifferentialParity.lean:147:10: `if_neg` has been deprecated: Use `ite_eq_right` instead
-
-Hint: Replace the deprecated name:
-  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-warning: Families/DifferentialParity.lean:168:39: `if_neg` has been deprecated: Use `ite_eq_right` instead
-
-Hint: Replace the deprecated name:
-  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3224/3280] Replayed Families.ExpCosine
-warning: Families/ExpCosine.lean:51:9: `dif_neg` has been deprecated: Use `dite_eq_right` instead
-
-Hint: Replace the deprecated name:
-  d̵i̵f̵_̵n̵e̵g̵d̲i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-warning: Families/ExpCosine.lean:64:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
-
-Hint: Replace the deprecated name:
-  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-warning: Families/ExpCosine.lean:95:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
-
-Hint: Replace the deprecated name:
-  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-warning: Families/ExpCosine.lean:107:32: `if_false` has been deprecated: Use `ite_false` instead
-
-Hint: Replace the deprecated name:
-  i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
-warning: Families/ExpCosine.lean:114:27: `if_neg` has been deprecated: Use `ite_eq_right` instead
-
-Hint: Replace the deprecated name:
-  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-warning: Families/ExpCosine.lean:126:23: This simp argument is unused:
-  Even.mul_left
-
-Hint: Omit it from the simp argument list.
-  [apply] simp [cosineCoeff, pow_mul, show (4 : ZMod 5) ^ 2 = 1 by decide, show (-4 : ZMod 5) = 1 by decide]
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-warning: Families/ExpCosine.lean:171:42: `if_pos` has been deprecated: Use `ite_eq_left` instead
-
-Hint: Replace the deprecated name:
-  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
-warning: Families/ExpCosine.lean:171:42: This simp argument is unused:
-  if_pos rfl
-
-Hint: Omit it from the simp argument list.
-  [apply] simp only [hn, pow_zero, mul_one]
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-warning: Families/ExpCosine.lean:251:58: `if_true` has been deprecated: Use `ite_true` instead
-
-Hint: Replace the deprecated name:
-  i̵f̵_̵t̵r̵u̵e̵i̲t̲e̲_̲t̲r̲u̲e̲
-⚠ [3226/3280] Replayed Families.ExpRecurrence
-warning: Families/ExpRecurrence.lean:52:15: `Fin.coe_castSucc` has been deprecated: Use `Fin.val_castSucc` instead
-
-Hint: Replace the deprecated name:
-  F̵i̵n̵.̵c̵o̵e̵_̵c̵a̵s̵t̵S̵u̵c̵c̵F̲i̲n̲.̲v̲a̲l̲_̲c̲a̲s̲t̲S̲u̲c̲c̲
-warning: Families/ExpRecurrence.lean:125:15: `Fin.coe_castSucc` has been deprecated: Use `Fin.val_castSucc` instead
-
-Hint: Replace the deprecated name:
-  F̵i̵n̵.̵c̵o̵e̵_̵c̵a̵s̵t̵S̵u̵c̵c̵F̲i̲n̲.̲v̲a̲l̲_̲c̲a̲s̲t̲S̲u̲c̲c̲
-warning: Families/ExpRecurrence.lean:248:25: `if_false` has been deprecated: Use `ite_false` instead
-
-Hint: Replace the deprecated name:
-  i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
-warning: Families/ExpRecurrence.lean:269:20: `Fin.coe_castSucc` has been deprecated: Use `Fin.val_castSucc` instead
-
-Hint: Replace the deprecated name:
-  F̵i̵n̵.̵c̵o̵e̵_̵c̵a̵s̵t̵S̵u̵c̵c̵F̲i̲n̲.̲v̲a̲l̲_̲c̲a̲s̲t̲S̲u̲c̲c̲
-⚠ [3228/3280] Replayed Families.ThetaSubstitution
+⚠ [3228/3281] Replayed Families.ThetaSubstitution
 warning: Families/ThetaSubstitution.lean:180:56: This simp argument is unused:
   Nat.succ_eq_add_one
 
@@ -523,7 +496,7 @@ warning: Families/ThetaSubstitution.lean:450:15: `if_neg` has been deprecated: U
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3229/3280] Replayed Families.ThetaRational
+⚠ [3229/3281] Replayed Families.ThetaRational
 warning: Families/ThetaRational.lean:241:8: `if_pos` has been deprecated: Use `ite_eq_left` instead
 
 Hint: Replace the deprecated name:
@@ -550,70 +523,71 @@ warning: Families/ThetaRational.lean:372:18: `if_neg` has been deprecated: Use `
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-⚠ [3264/3280] Replayed Challenges.Theta
-warning: Challenges/Theta.lean:45:8: declaration uses `sorry`
-warning: Challenges/Theta.lean:53:8: declaration uses `sorry`
-warning: Challenges/Theta.lean:63:8: declaration uses `sorry`
-warning: Challenges/Theta.lean:71:8: declaration uses `sorry`
-warning: Challenges/Theta.lean:81:8: declaration uses `sorry`
-warning: Challenges/Theta.lean:89:8: declaration uses `sorry`
-warning: Challenges/Theta.lean:101:8: declaration uses `sorry`
-warning: Challenges/Theta.lean:113:8: declaration uses `sorry`
+⚠ [3263/3281] Replayed Challenges.Theta
+warning: Challenges/Theta.lean:52:8: declaration uses `sorry`
+warning: Challenges/Theta.lean:60:8: declaration uses `sorry`
+warning: Challenges/Theta.lean:70:8: declaration uses `sorry`
+warning: Challenges/Theta.lean:78:8: declaration uses `sorry`
+warning: Challenges/Theta.lean:88:8: declaration uses `sorry`
+warning: Challenges/Theta.lean:96:8: declaration uses `sorry`
+warning: Challenges/Theta.lean:108:8: declaration uses `sorry`
 warning: Challenges/Theta.lean:120:8: declaration uses `sorry`
-⚠ [3265/3280] Replayed Challenges.ScaledInverses
-warning: Challenges/ScaledInverses.lean:36:8: declaration uses `sorry`
-warning: Challenges/ScaledInverses.lean:44:8: declaration uses `sorry`
-warning: Challenges/ScaledInverses.lean:53:8: declaration uses `sorry`
-⚠ [3266/3280] Replayed Challenges.HannaFamily
-warning: Challenges/HannaFamily.lean:36:8: declaration uses `sorry`
+warning: Challenges/Theta.lean:127:8: declaration uses `sorry`
+⚠ [3264/3281] Replayed Challenges.ScaledInverses
+warning: Challenges/ScaledInverses.lean:42:8: declaration uses `sorry`
+warning: Challenges/ScaledInverses.lean:50:8: declaration uses `sorry`
+warning: Challenges/ScaledInverses.lean:59:8: declaration uses `sorry`
+⚠ [3265/3281] Replayed Challenges.HannaFamily
 warning: Challenges/HannaFamily.lean:43:8: declaration uses `sorry`
 warning: Challenges/HannaFamily.lean:50:8: declaration uses `sorry`
-warning: Challenges/HannaFamily.lean:58:8: declaration uses `sorry`
-warning: Challenges/HannaFamily.lean:66:8: declaration uses `sorry`
+warning: Challenges/HannaFamily.lean:57:8: declaration uses `sorry`
+warning: Challenges/HannaFamily.lean:65:8: declaration uses `sorry`
 warning: Challenges/HannaFamily.lean:75:8: declaration uses `sorry`
-warning: Challenges/HannaFamily.lean:87:8: declaration uses `sorry`
-warning: Challenges/HannaFamily.lean:97:8: declaration uses `sorry`
-⚠ [3267/3280] Replayed Challenges.ConsecutiveIterates
-warning: Challenges/ConsecutiveIterates.lean:39:8: declaration uses `sorry`
-warning: Challenges/ConsecutiveIterates.lean:47:8: declaration uses `sorry`
-warning: Challenges/ConsecutiveIterates.lean:60:8: declaration uses `sorry`
-warning: Challenges/ConsecutiveIterates.lean:74:8: declaration uses `sorry`
-warning: Challenges/ConsecutiveIterates.lean:85:8: declaration uses `sorry`
-⚠ [3268/3280] Replayed Challenges.Catalan
-warning: Challenges/Catalan.lean:41:8: declaration uses `sorry`
-warning: Challenges/Catalan.lean:47:8: declaration uses `sorry`
-warning: Challenges/Catalan.lean:55:8: declaration uses `sorry`
-warning: Challenges/Catalan.lean:61:8: declaration uses `sorry`
-warning: Challenges/Catalan.lean:69:8: declaration uses `sorry`
-warning: Challenges/Catalan.lean:76:8: declaration uses `sorry`
-warning: Challenges/Catalan.lean:83:8: declaration uses `sorry`
-warning: Challenges/Catalan.lean:88:8: declaration uses `sorry`
-warning: Challenges/Catalan.lean:96:8: declaration uses `sorry`
-warning: Challenges/Catalan.lean:104:8: declaration uses `sorry`
-⚠ [3269/3280] Replayed Challenges.OtherResults
-warning: Challenges/OtherResults.lean:56:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:65:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:71:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:78:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:86:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:94:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:99:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:106:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:114:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:124:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:138:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:150:8: declaration uses `sorry`
-warning: Challenges/OtherResults.lean:161:8: declaration uses `sorry`
-⚠ [3270/3280] Replayed Challenges.Halving
-warning: Challenges/Halving.lean:35:8: declaration uses `sorry`
-warning: Challenges/Halving.lean:41:8: declaration uses `sorry`
-warning: Challenges/Halving.lean:48:8: declaration uses `sorry`
-warning: Challenges/Halving.lean:55:8: declaration uses `sorry`
-warning: Challenges/Halving.lean:62:8: declaration uses `sorry`
-warning: Challenges/Halving.lean:70:8: declaration uses `sorry`
-warning: Challenges/Halving.lean:77:8: declaration uses `sorry`
-warning: Challenges/Halving.lean:84:8: declaration uses `sorry`
-⚠ [3273/3280] Replayed Solutions.Theta
+warning: Challenges/HannaFamily.lean:84:8: declaration uses `sorry`
+warning: Challenges/HannaFamily.lean:96:8: declaration uses `sorry`
+warning: Challenges/HannaFamily.lean:106:8: declaration uses `sorry`
+⚠ [3266/3281] Replayed Challenges.ConsecutiveIterates
+warning: Challenges/ConsecutiveIterates.lean:49:8: declaration uses `sorry`
+warning: Challenges/ConsecutiveIterates.lean:57:8: declaration uses `sorry`
+warning: Challenges/ConsecutiveIterates.lean:70:8: declaration uses `sorry`
+warning: Challenges/ConsecutiveIterates.lean:84:8: declaration uses `sorry`
+warning: Challenges/ConsecutiveIterates.lean:95:8: declaration uses `sorry`
+⚠ [3267/3281] Replayed Challenges.Catalan
+warning: Challenges/Catalan.lean:46:8: declaration uses `sorry`
+warning: Challenges/Catalan.lean:52:8: declaration uses `sorry`
+warning: Challenges/Catalan.lean:60:8: declaration uses `sorry`
+warning: Challenges/Catalan.lean:66:8: declaration uses `sorry`
+warning: Challenges/Catalan.lean:74:8: declaration uses `sorry`
+warning: Challenges/Catalan.lean:81:8: declaration uses `sorry`
+warning: Challenges/Catalan.lean:89:8: declaration uses `sorry`
+warning: Challenges/Catalan.lean:99:8: declaration uses `sorry`
+warning: Challenges/Catalan.lean:113:8: declaration uses `sorry`
+⚠ [3268/3281] Replayed Challenges.ShortResults
+warning: Challenges/ShortResults.lean:44:8: declaration uses `sorry`
+warning: Challenges/ShortResults.lean:53:8: declaration uses `sorry`
+warning: Challenges/ShortResults.lean:59:8: declaration uses `sorry`
+warning: Challenges/ShortResults.lean:65:8: declaration uses `sorry`
+warning: Challenges/ShortResults.lean:70:8: declaration uses `sorry`
+warning: Challenges/ShortResults.lean:77:8: declaration uses `sorry`
+⚠ [3269/3281] Replayed Challenges.Halving
+warning: Challenges/Halving.lean:45:8: declaration uses `sorry`
+warning: Challenges/Halving.lean:51:8: declaration uses `sorry`
+warning: Challenges/Halving.lean:58:8: declaration uses `sorry`
+warning: Challenges/Halving.lean:65:8: declaration uses `sorry`
+warning: Challenges/Halving.lean:74:8: declaration uses `sorry`
+warning: Challenges/Halving.lean:80:8: declaration uses `sorry`
+warning: Challenges/Halving.lean:88:8: declaration uses `sorry`
+warning: Challenges/Halving.lean:95:8: declaration uses `sorry`
+warning: Challenges/Halving.lean:102:8: declaration uses `sorry`
+⚠ [3270/3281] Replayed Challenges.FurtherResults
+warning: Challenges/FurtherResults.lean:47:8: declaration uses `sorry`
+warning: Challenges/FurtherResults.lean:55:8: declaration uses `sorry`
+warning: Challenges/FurtherResults.lean:63:8: declaration uses `sorry`
+warning: Challenges/FurtherResults.lean:73:8: declaration uses `sorry`
+warning: Challenges/FurtherResults.lean:88:8: declaration uses `sorry`
+warning: Challenges/FurtherResults.lean:102:8: declaration uses `sorry`
+warning: Challenges/FurtherResults.lean:113:8: declaration uses `sorry`
+⚠ [3280/3281] Replayed Solutions.Theta
 warning: Solutions/Theta.lean:31:23: `if_pos` has been deprecated: Use `ite_eq_left` instead
 
 Hint: Replace the deprecated name:
@@ -622,4 +596,4 @@ warning: Solutions/Theta.lean:32:23: `if_neg` has been deprecated: Use `ite_eq_r
 
 Hint: Replace the deprecated name:
   i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
-Build completed successfully (3280 jobs).
+Build completed successfully (3281 jobs).

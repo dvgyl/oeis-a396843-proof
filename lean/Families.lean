@@ -6,10 +6,10 @@ public import Families.CatalanStatements
 public import Families.CubicConsequences
 public import Families.CubicFrobenius
 public import Families.CubicReversion
-public import Families.DifferentialParity
 public import Families.ElementaryStatements
 public import Families.ExpCosine
 public import Families.ExpCosineStatements
+public import Families.ExpEquation
 public import Families.ExpRecurrence
 public import Families.GreedyTriple
 public import Families.InverseIterate

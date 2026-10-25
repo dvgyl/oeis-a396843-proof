@@ -1,6 +1,7 @@
 module
 
 public import Families.ExpRecurrence
+public import Families.ExpEquation
 
 /-!
 Independent type statements for the exact finite recurrence and original
@@ -65,6 +66,14 @@ theorem exact_source_differential_identity :
           if n=0 then 0 else if n=1 then 1 else
             (2*(n : ℚ)^2-1)/(2*(n : ℚ)^2)*(a n : ℚ)) :=
   a_differential_equation
+
+theorem exponential_equation_existence_uniqueness :
+    ∃! A : PowerSeries ℚ, Families.ExpEquation.Equation A :=
+  Families.ExpEquation.existence_uniqueness
+
+theorem exponential_equation_solution (A : PowerSeries ℚ) :
+    Families.ExpEquation.Equation A ↔ A = PowerSeries.mk fun n => (a n : ℚ) :=
+  Families.ExpEquation.equation_iff A
 
 theorem displayed_initial_values :
     a 0=1 ∧ a 1=1 ∧ a 2=4 ∧ a 3=66 ∧ a 4=2248 :=

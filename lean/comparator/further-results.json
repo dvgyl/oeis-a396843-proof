@@ -1,0 +1,14 @@
+{
+  "challenge_module": "Challenges.FurtherResults",
+  "solution_module": "Solutions.FurtherResults",
+  "theorem_names": [
+    "OEISProofs.FurtherResults.a396102_existsUnique",
+    "OEISProofs.FurtherResults.a396102_coeff",
+    "OEISProofs.FurtherResults.a397346_existsUnique",
+    "OEISProofs.FurtherResults.a397346_coeff",
+    "OEISProofs.FurtherResults.a397346_exp_iff",
+    "OEISProofs.FurtherResults.a394576_existsUnique",
+    "OEISProofs.FurtherResults.a394576_bounds"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

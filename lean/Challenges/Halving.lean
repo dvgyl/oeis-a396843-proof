@@ -23,6 +23,16 @@ solution with integer coefficients is part of the results.
   by `3`. The first is proved in the stronger form `A(x)² ≡ x² + 2x³ (mod 9)`.
 * **A389475.** `A(3x²) = 2x² + A(x)² - 2A(x)³`. Conjectured: `A(x)³ ≡ A(x³)` and
   `A(x)² ≡ x² + 2A(x³)` modulo `3`, coefficientwise.
+
+The last two entries belong to one family, `R(3x²) = 2x² + R(x)² + 2s·R(x)³` with an integer
+parameter `s`, whose integrality is `cubic_family_existsUnique`: A389475 is the case `s = -1`,
+and for A389474 the compositional inverse of `A` is the case `s = 1`.
+
+Context: these are congruences for the coefficients of power series defined by functional
+equations. Results of this kind are known, for example, for the Catalan and Motzkin numbers
+(Deutsch and Sagan, J. Number Theory 117 (2006); Eu, Liu and Yeh, European J. Combin. 29
+(2008)), and Kauers, Krattenthaler and Müller (Electron. J. Combin. 18(2) (2012), P37) give a
+method for the behaviour modulo powers of `2` of recursively defined sequences.
 -/
 
 public section
@@ -56,6 +66,14 @@ theorem a389542_coeff (A : PowerSeries ℤ) (h0 : coeff 0 A = 0) (h1 : coeff 1 A
     (hA : A.subst (A ^ 2 - X ^ 2) = 4 * A ^ 3) (n : ℕ) (hn : 1 < n) :
     (coeff n A ≡ 2 [ZMOD 4] ↔ ∃ k : ℕ, n = 2 ^ k + 1) ∧
       ((4 : ℤ) ∣ coeff n A ↔ ¬∃ k : ℕ, n = 2 ^ k + 1) := by
+  sorry
+
+/-- For every integer `s`, the equation `R(3x²) = 2x² + R(x)² + 2s·R(x)³` has exactly one
+normalized solution with integer coefficients, although computing its coefficients one at a
+time involves a division by `2`. -/
+theorem cubic_family_existsUnique (s : ℤ) :
+    ∃! R : PowerSeries ℤ, coeff 0 R = 0 ∧ coeff 1 R = 1 ∧
+      R.subst (3 * X ^ 2 : PowerSeries ℤ) = 2 * X ^ 2 + R ^ 2 + 2 * C s * R ^ 3 := by
   sorry
 
 /-- A389474: the equation `A(x² + 2x³ + 2A²) = 3A²` has exactly one normalized solution. -/

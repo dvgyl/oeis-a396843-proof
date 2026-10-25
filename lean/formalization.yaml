@@ -4,7 +4,7 @@ version: "v0.4"
 
 project:
   name: "Proofs and corrections of OEIS conjectures"
-  description: "Machine-checked proofs of conjectures recorded in 29 entries of the On-Line Encyclopedia of Integer Sequences (OEIS), together with corrections of the four conjectured statements that turn out to be false. Most of the sequences are coefficients of formal power series defined by functional equations, and most of the results describe their residues modulo small integers. The results form six families and a group of further results: the equation A(x*A - m*x*A^2) = x^2 (parity, residues modulo m^2, binary-digit divisibility and prime exponents for every m, with corrected residue classifications modulo 9 and 16 for A396843 and A396844); consecutive iterates F = x + F^{o r}*F^{o(r+1)} (every integer iterate modulo 2r, A396099, A396798, A396807); scaled inverses A(x - x*A(qx)/q) = x (every coefficient is 1 modulo q+1, and for even q the odd coefficients are exactly at the powers of 2, A393856-A393859); theta-series substitutions and theta-type sums (square patterns modulo 4, corrected for A380680, and a congruence modulo 16 for A355872); Catalan-type equations (residues modulo 2, 4 and 8 governed by powers of 2, A393172, A393171, A389536, A397588, A195194); equations with an exact halving step (residues modulo 4, 9 and 3, A389537, A389542, A389474, A389475); and further results on A396093, A392210, A396102 and its family F^{o r} = (1+x)*F^{o(r-1)}, A380056, A397346 and the greedy sequence A394576. Each family has its own Comparator configuration, and each OEIS entry has a self-contained paper in the repository."
+  description: "Machine-checked proofs of conjectures recorded in 28 entries of the On-Line Encyclopedia of Integer Sequences (OEIS), together with corrections of the four conjectured statements that turn out to be false. Most of the sequences are coefficients of formal power series defined by functional equations, and most of the results describe their residues modulo small integers. The results form six families and a group of further results: the equation A(x*A - m*x*A^2) = x^2 (parity for every integer m; residues modulo m^2 and prime exponents for m >= 2; binary-digit divisibility for every m; with corrected residue classifications modulo 9 and 16 for A396843 and A396844); consecutive iterates F = x + F^{o r}*F^{o(r+1)} (every integer iterate modulo 2r, A396099, A396798, A396807); scaled inverses A(x - x*A(qx)/q) = x (every coefficient is 1 modulo q+1, and for even q the odd coefficients are exactly at the powers of 2, A393856-A393859); theta-series substitutions and theta-type sums (square patterns modulo 4, corrected for A380680, and a congruence modulo 16 for A355872); Catalan-type equations (residues modulo 2, 4 and 8 governed by powers of 2, A393172, A393171, A389536, A195194); equations with an exact halving step (residues modulo 4, 9 and 3, A389537, A389542, A389474, A389475, and the integrality of the family R(3x^2) = 2x^2 + R^2 + 2sR^3); and further results on A396102 and its family F^{o r} = (1+x)*F^{o(r-1)}, on A397346, defined by a self-referential exponential, and on the greedy sequence A394576, and short results on A396093, A392210 and A380056. For A380060, A380680 and A392210 the Lean statements concern an equivalent form of the OEIS definition; the equivalence is proved in the accompanying papers. Context: these are congruences for the coefficients of power series defined by functional equations, a topic studied for example for the Catalan and Motzkin numbers by Deutsch and Sagan (J. Number Theory 117, 2006) and by Eu, Liu and Yeh (European J. Combin. 29, 2008); Kauers, Krattenthaler and Müller (Electron. J. Combin. 18(2), 2012, P37) give a method for the behaviour modulo powers of 2 of recursively defined sequences. The results are grouped into eight Comparator configurations, one for each family and two for the further results, and each OEIS entry has a self-contained paper in the repository."
   authors: ["Dev D. Goyal"]
   responsible_maintainers: ["Dev D. Goyal"]
   license: "Apache-2.0"
@@ -14,12 +14,12 @@ classification:
   msc2020: [11B50, 05A15, 13F25, 11B83, 68V15]
 
 sources:
-  - title: "Proofs and corrections of conjectures recorded in 29 OEIS entries, presented in the papers of this repository"
+  - title: "Proofs and corrections of conjectures recorded in 28 OEIS entries, presented in the papers of this repository"
     type: original-proof
     authors: ["Dev D. Goyal"]
     location: "https://github.com/dvgyl/oeis-proofs/tree/main/preprints"
     relationship: other
-    note: "The results are first presented in this repository, in one self-contained paper per OEIS entry; the papers have not been peer reviewed. The proofs were found by an AI system (see automation). Novelty has not been established beyond limited searches for earlier work, and no priority is claimed."
+    note: "The results are first presented in this repository, in one self-contained paper per OEIS entry; the papers have not been peer reviewed. The proofs were found by an AI system (see automation). Novelty has not been established beyond limited searches for earlier work, and no priority is claimed. The searches covered the OEIS entries and the work linked from them, the literature cited in the papers, and two collections of Lean formalizations of OEIS statements: google-deepmind/formal-conjectures (commit 37f0808, 24 October 2026) and VictorLiwentao/lean-oeis-proofs (commit 9d4a205, 11 October 2026). Neither has a file for any of the 28 entries; an entry that was found there, with an earlier proof, was removed from the collection."
 
   - title: "OEIS A396843: G.f. A(x) satisfies A(x*A(x) - 3*x*A(x)^2) = x^2"
     type: other
@@ -208,17 +208,6 @@ sources:
     license: CC-BY-SA-4.0
     author_endorsement: not-contacted
 
-  - title: "OEIS A397588: G.f. A(x) satisfies A(x) = x + (x*A(x)^2)'"
-    type: other
-    id: "https://oeis.org/A397588"
-    contributors:
-      - name: "Paul D. Hanna"
-        role: "contributed the sequence and the statements treated (conjecture modulo 2 and the stated divisibility by 3)"
-    relationship: other
-    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
-    license: CC-BY-SA-4.0
-    author_endorsement: not-contacted
-
   - title: "OEIS A195194: G.f. A(x) = Series_Reversion(x - x*Series_Reversion(x - 2*x*Series_Reversion(x - 3*x*...)))"
     type: other
     id: "https://oeis.org/A195194"
@@ -350,7 +339,7 @@ sources:
     authors: ["Shiva Priyan Shanmuga Sundaram"]
     id: "https://oeis.org/A396797"
     relationship: background
-    note: "Proves the member r = 3 of the family of consecutive iterates; A396797 is not part of this collection."
+    note: "Earlier proof (September 2026) of the conjectures of A396797, the case r = 3 of the compared theorems iterate_coeff_modEq and inverse_iterate_coeff_modEq; the present proof is independent and covers every r >= 1. A396797 has no paper of its own in this collection."
 
   - title: "Comment in OEIS A196523 on congruences for a related family"
     authors: ["Amol Bhave"]
@@ -364,17 +353,35 @@ sources:
     relationship: background
     note: "Software that computes A394576; used for comparison only."
 
+  - title: "Congruences for Catalan and Motzkin numbers and related sequences"
+    authors: ["Emeric Deutsch", "Bruce E. Sagan"]
+    id: "https://doi.org/10.1016/j.jnt.2005.06.005"
+    relationship: background
+    note: "J. Number Theory 117 (2006) 191-215. Research context: congruences for the coefficients of algebraic power series such as the Catalan series."
+
+  - title: "Catalan and Motzkin numbers modulo 4 and 8"
+    authors: ["Sen-Peng Eu", "Shu-Chung Liu", "Yeong-Nan Yeh"]
+    id: "https://doi.org/10.1016/j.ejc.2007.06.019"
+    relationship: background
+    note: "European J. Combin. 29(6) (2008) 1449-1466. Research context: the residues of the Catalan numbers modulo 4 and 8, to which the Catalan-type equations reduce."
+
+  - title: "A method for determining the mod-2^k behaviour of recursive sequences, with applications to subgroup counting"
+    authors: ["Manuel Kauers", "Christian Krattenthaler", "Thomas W. Müller"]
+    id: "https://doi.org/10.37236/2433"
+    relationship: background
+    note: "Electron. J. Combin. 18(2) (2012), P37; arXiv:1107.2015. Research context: a general method for congruences modulo powers of 2 of series defined by functional equations."
+
 related_formalizations: []
 
 status:
   scope: >-
     The theorems listed under alignment are stated in Challenges/ using Mathlib alone and are proved
-    in Solutions/ from the library in Hanna/, Consecutive/ and Families/; Entries/ restates the results
-    of each paper in the notation of the library. Three steps are proved only in the accompanying
-    papers: that the one-sided theta-type sums used for A380060 and A380680 equal the two-sided sums
-    of the OEIS entries; that the nested square in the name of A392210 defines the solution of
-    formula (1) of the entry; and, for A397346, the passage from A' = A*H' and A(0) = 1 to
-    A = exp(H). Observations in the Discussion sections of the papers are not formalized.
+    in Solutions/ from the library in Hanna/, Consecutive/ and Families/ and from Entries/A355872.lean
+    and Entries/A394576.lean; Entries/ restates the results of each paper in the notation of the
+    library. Two steps are proved only in the accompanying papers: that the one-sided theta-type sums
+    used for A380060 and A380680 equal the two-sided sums of the OEIS entries, and that the nested
+    square in the name of A392210 defines the solution of formula (1) of the entry. Observations in
+    the Discussion sections of the papers are not formalized.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
@@ -383,11 +390,15 @@ fidelity:
   divergences: >-
     A380060 and A380680 are formalized with the one-sided form of the theta-type sum, and A392210
     with formula (1) of its entry; the papers prove the equivalence with the OEIS definitions. A397346
-    is formalized through formula (7) of its entry together with the identity A' = A*H'. A393171 is
-    stated with the Catalan series characterized by C = x + C^2 and C(0) = 0; A378580 and A378581 with
-    the theta series characterized by its coefficients; A380056 over the rationals, with
-    a(n) = n!*[x^n]A; and A394576 with the index shifted by one. All other entries use the defining
-    equation of the OEIS entry.
+    is stated both through its defining equation A = exp(H_A), with Mathlib's PowerSeries.exp, and
+    through formula (7) of its entry, and Lean proves that the two agree. A195194, an infinite nest of
+    series reversions, is formalized as the unique sequence of normalized series F_j such that F_j and
+    x - (j+1)*x*F_{j+1} are mutually inverse; the compared theorem a195194_finite_tower shows that the
+    nest cut off after d reversions gives the coefficients up to degree d + 1. A393171 is stated with
+    the Catalan series characterized by C = x + C^2 and C(0) = 0; A378580 and A378581 with the theta
+    series characterized by its coefficients; A380056 over the rationals, with a(n) = n!*[x^n]A; and
+    A394576 with the index shifted by one. All other entries use the defining equation of the OEIS
+    entry.
 
 automation:
   methods:
@@ -398,13 +409,13 @@ automation:
     - method: agent
       models: ["Claude Opus 5.5"]
       framework: "Claude Code"
-      tool_setup: "Rebuilt the Lean project from source, audited the axioms, compared the Lean definitions with the OEIS entries, wrote the numerical checks in verification/, ported the project to Lean 4.35.0 and the module system, wrote the Challenge and Solution modules and the Comparator configurations, and wrote the papers in their present form."
+      tool_setup: "Rebuilt the Lean project from source, audited the axioms, compared the Lean definitions with the OEIS entries, wrote the numerical checks in verification/, ported the project to Lean 4.35.0 and the module system, wrote the Challenge and Solution modules, the Comparator configurations and Families/ExpEquation.lean (the exponential equation of A397346), and wrote the papers in their present form."
   notes: "Dev D. Goyal directed the project, chose the problems, requested proofs, formal verification and revisions, and reviewed the results, but did not supply proof strategies. AUTHORSHIP.md at the repository root records each contribution."
 
 review:
   status: agent-reviewed
   reviewers: ["Claude Opus 5.5 (Claude Code)", "Dev D. Goyal"]
-  notes: "An agent separate from the one that wrote the proofs rebuilt the formalization, checked that every theorem depends only on the standard axioms, compared each Lean definition with its OEIS entry, recomputed every sequence from its OEIS definition and tested the results numerically, and read the proofs in the papers. Dev D. Goyal reviewed the proofs; this review is not an independent expert validation. The papers have not been peer reviewed."
+  notes: "An agent separate from the one that wrote the proofs rebuilt the formalization, checked that every theorem depends only on the standard axioms, compared each Lean definition with its OEIS entry, recomputed every sequence from its OEIS definition and tested the results numerically, and read the proofs in the papers. The Challenge statements and their docstrings were written by Claude Opus 5.5 and checked against the OEIS entries by that agent and by a second, separate Claude Opus 5.5 agent acting as a referee; no human expert has reviewed them. Dev D. Goyal reviewed the proofs; this review is not an independent expert validation. The papers have not been peer reviewed."
 
 alignment:
   namespace: "OEISProofs"
@@ -433,7 +444,7 @@ alignment:
       lean: "OEISProofs.HannaFamily.pow_digitSum_dvd"
       module: "Challenges.HannaFamily"
       status: "proved"
-      note: "m^s divides a(n), s the binary digit sum of n - 1."
+      note: "m^s divides a(n), s the binary digit sum of n - 1, for every integer m."
     - source: "Paper on A396843, prime exponents"
       lean: "OEISProofs.HannaFamily.prime_pow_dvd"
       module: "Challenges.HannaFamily"
@@ -448,7 +459,7 @@ alignment:
       lean: "OEISProofs.HannaFamily.residues_mod_sixteen"
       module: "Challenges.HannaFamily"
       status: "disproved and corrected"
-      note: "The conjectured classification fails from n = 17; this is the correct one."
+      note: "The conjectured classification fails exactly at n = 4^k + 1 with k >= 2 (n = 17, 65, 257, ...); this is the correct one."
     - source: "A396099, A396798, A396807 (definition)"
       lean: "OEISProofs.ConsecutiveIterates.existsUnique"
       module: "Challenges.ConsecutiveIterates"
@@ -551,19 +562,16 @@ alignment:
       lean: "OEISProofs.Catalan.a389536_coeff"
       module: "Challenges.Catalan"
       status: "proved"
-    - source: "A397588 (definition)"
-      lean: "OEISProofs.Catalan.a397588_existsUnique"
-      module: "Challenges.Catalan"
-      status: "proved"
-    - source: "A397588, conjecture modulo 2 and divisibility by 3"
-      lean: "OEISProofs.Catalan.a397588_coeff"
-      module: "Challenges.Catalan"
-      status: "proved"
     - source: "A195194 (definition)"
       lean: "OEISProofs.Catalan.a195194_existsUnique"
       module: "Challenges.Catalan"
       status: "proved"
       note: "The infinite nest is formalized as a sequence of mutually inverse normalized series."
+    - source: "A195194 (definition, finite nests)"
+      lean: "OEISProofs.Catalan.a195194_finite_tower"
+      module: "Challenges.Catalan"
+      status: "proved"
+      note: "The nest cut off after d reversions has the same coefficients as A up to degree d + 1."
     - source: "A195194, conjecture modulo 2"
       lean: "OEISProofs.Catalan.a195194_coeff"
       module: "Challenges.Catalan"
@@ -584,6 +592,11 @@ alignment:
       lean: "OEISProofs.Halving.a389542_coeff"
       module: "Challenges.Halving"
       status: "proved"
+    - source: "Papers on A389474 and A389475, the family R(3x^2) = 2x^2 + R^2 + 2sR^3"
+      lean: "OEISProofs.Halving.cubic_family_existsUnique"
+      module: "Challenges.Halving"
+      status: "proved"
+      note: "Integrality for every integer s; A389475 is s = -1, and the inverse of A389474 is s = 1."
     - source: "A389474 (definition)"
       lean: "OEISProofs.Halving.a389474_existsUnique"
       module: "Challenges.Halving"
@@ -601,64 +614,64 @@ alignment:
       lean: "OEISProofs.Halving.a389475_coeff"
       module: "Challenges.Halving"
       status: "proved"
-    - source: "A396093, two parity conjectures"
-      lean: "OEISProofs.OtherResults.a396093_coeff"
-      module: "Challenges.OtherResults"
-      status: "proved"
-    - source: "A392210 (formula (1) of the entry)"
-      lean: "OEISProofs.OtherResults.a392210_existsUnique"
-      module: "Challenges.OtherResults"
-      status: "proved"
-      note: "That the nested square of the entry's name defines this series is proved only in the paper."
-    - source: "A392210, parity observation"
-      lean: "OEISProofs.OtherResults.a392210_coeff"
-      module: "Challenges.OtherResults"
-      status: "proved"
     - source: "A396102 (definition, r = 3) and its family"
-      lean: "OEISProofs.OtherResults.a396102_existsUnique"
-      module: "Challenges.OtherResults"
+      lean: "OEISProofs.FurtherResults.a396102_existsUnique"
+      module: "Challenges.FurtherResults"
       status: "proved"
     - source: "A396102, conjecture modulo 3, and its family"
-      lean: "OEISProofs.OtherResults.a396102_coeff"
-      module: "Challenges.OtherResults"
+      lean: "OEISProofs.FurtherResults.a396102_coeff"
+      module: "Challenges.FurtherResults"
       status: "proved"
-    - source: "A380056 (definition)"
-      lean: "OEISProofs.OtherResults.a380056_existsUnique"
-      module: "Challenges.OtherResults"
-      status: "proved"
-    - source: "A380056 (integrality of the terms)"
-      lean: "OEISProofs.OtherResults.a380056_integral"
-      module: "Challenges.OtherResults"
-      status: "proved"
-    - source: "A380056, conjectures modulo 4 and 5"
-      lean: "OEISProofs.OtherResults.a380056_coeff"
-      module: "Challenges.OtherResults"
-      status: "proved"
-      note: "Also the exact residues modulo 5."
     - source: "A397346, recurrence (7) of the entry"
-      lean: "OEISProofs.OtherResults.a397346_existsUnique"
-      module: "Challenges.OtherResults"
+      lean: "OEISProofs.FurtherResults.a397346_existsUnique"
+      module: "Challenges.FurtherResults"
       status: "proved"
     - source: "A397346, conjecture modulo 8"
-      lean: "OEISProofs.OtherResults.a397346_coeff"
-      module: "Challenges.OtherResults"
+      lean: "OEISProofs.FurtherResults.a397346_coeff"
+      module: "Challenges.FurtherResults"
       status: "proved"
       note: "Also integrality, n | a(n) and the residues of a(n)/n modulo 8."
     - source: "A397346 (definition)"
-      lean: "OEISProofs.OtherResults.a397346_derivative"
-      module: "Challenges.OtherResults"
+      lean: "OEISProofs.FurtherResults.a397346_exp_iff"
+      module: "Challenges.FurtherResults"
       status: "proved"
-      note: "A' = A*H'; the step to A = exp(H) is proved only in the paper."
+      note: "The entry's equation A = exp(H_A), with Mathlib's exponential, has exactly one solution: the generating function of the solution of recurrence (7)."
     - source: "A394576 (definition)"
-      lean: "OEISProofs.OtherResults.a394576_existsUnique"
-      module: "Challenges.OtherResults"
+      lean: "OEISProofs.FurtherResults.a394576_existsUnique"
+      module: "Challenges.FurtherResults"
       status: "proved"
       note: "Indexed from 0."
     - source: "A394576, first conjecture"
-      lean: "OEISProofs.OtherResults.a394576_bounds"
-      module: "Challenges.OtherResults"
+      lean: "OEISProofs.FurtherResults.a394576_bounds"
+      module: "Challenges.FurtherResults"
       status: "proved"
       note: "Also the matching lower bound and the partition of the positive integers."
+    - source: "A396093, two parity conjectures"
+      lean: "OEISProofs.ShortResults.a396093_coeff"
+      module: "Challenges.ShortResults"
+      status: "proved"
+    - source: "A392210 (formula (1) of the entry)"
+      lean: "OEISProofs.ShortResults.a392210_existsUnique"
+      module: "Challenges.ShortResults"
+      status: "proved"
+      note: "That the nested square of the entry's name defines this series is proved only in the paper."
+    - source: "A392210, parity observation"
+      lean: "OEISProofs.ShortResults.a392210_coeff"
+      module: "Challenges.ShortResults"
+      status: "proved"
+    - source: "A380056 (definition)"
+      lean: "OEISProofs.ShortResults.a380056_existsUnique"
+      module: "Challenges.ShortResults"
+      status: "proved"
+    - source: "A380056 (integrality of the terms)"
+      lean: "OEISProofs.ShortResults.a380056_integral"
+      module: "Challenges.ShortResults"
+      status: "proved"
+    - source: "A380056, conjectures modulo 4 and 5"
+      lean: "OEISProofs.ShortResults.a380056_coeff"
+      module: "Challenges.ShortResults"
+      status: "proved"
+      note: "Also the exact residues modulo 5."
 
 acknowledgements: >-
   Thanks to the developers of Lean 4 and Mathlib, and to Paul D. Hanna and Hoang Xuan Thanh, who

@@ -121,8 +121,8 @@ factor $n$, and only then reduce modulo $8$.
 \subsection{How to read this paper}
 Section~\ref{sec:background} recalls power series, the formal derivative and the formal exponential.
 Section~\ref{sec:results} states the results and Section~\ref{sec:proofs} proves them. Section~\ref{sec:checks}
-describes the computer checks and the formal proof, including what is proved in Lean and what only on paper, and
-Section~\ref{sec:discussion} discusses the scope of the result.
+describes the computer checks and the formal proof, and Section~\ref{sec:discussion} discusses the scope of the
+result.
 \section{Background}\label{sec:background}
 This section collects the definitions and facts used later. Readers who know formal power series and congruences can skip it and return when needed.
 \subsection{Formal power series}
@@ -302,11 +302,12 @@ A computation can only test finitely many cases, so it is a check on the definit
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.35.0) on top of
-Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; the steps proved only on paper are identified below. The statements are collected in the file \texttt{lean/Entries/A397346.lean} of the repository,
+Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements are collected in the file \texttt{lean/Entries/A397346.lean} of the repository,
 in the namespace \texttt{OEIS.A397346}. In Lean the sequence is defined by the recurrence \eqref{eq:rec}, formula (7) of the OEIS entry, and the
-identity $A'=AH'$ is proved for it. The last step of Lemma~\ref{lem:equiv}, from $A'=AH'$ to $A=\exp H$
-(Lemma~\ref{lem:ode}), is proved in this paper but not in Lean. The proofs are in
-\texttt{lean/Families/ExpRecurrence.lean} (namespace \texttt{Families.ExpRecurrence}).
+identity $A'=AH'$ is proved for it. Lemma~\ref{lem:equiv} is proved in Lean as well, with the formal exponential of
+Mathlib: equation \eqref{eq:source} has exactly one solution, the generating function of that sequence. The proofs are in
+\texttt{lean/Families/ExpRecurrence.lean} and \texttt{lean/Families/ExpEquation.lean} (namespaces
+\texttt{Families.ExpRecurrence} and \texttt{Families.ExpEquation}).
 The table lists where each result of this paper is proved.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
@@ -319,6 +320,7 @@ Every rational solution of \eqref{eq:rec} is integral, $n\mid a(n)$, and Corolla
 Corollary~\ref{cor:conj} & \texttt{original\_\allowbreak{}all\_\allowbreak{}index\_\allowbreak{}conjecture} \\
 Theorem~\ref{thm:main}, the residues \eqref{eq:bres} & \texttt{stronger\_\allowbreak{}quotient\_\allowbreak{}congruence} \\
 The differential equation $A'=AH'$ of Lemma~\ref{lem:equiv} & \texttt{exact\_\allowbreak{}source\_\allowbreak{}differential\_\allowbreak{}identity} \\
+Lemma~\ref{lem:equiv}: \eqref{eq:source} has exactly one solution, the generating function of the solution of \eqref{eq:rec} & \texttt{exponential\_\allowbreak{}equation\_\allowbreak{}existence\_\allowbreak{}uniqueness}, \texttt{exponential\_\allowbreak{}equation\_\allowbreak{}solution} \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -328,7 +330,7 @@ Lean's \texttt{\#print axioms} command. Every one depends only on the three stan
 exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
 so the Lean definitions were also compared with the definition in the OEIS entry
 (Section~\ref{sec:sequence}). The principal theorems are stated once more, using only Mathlib's definitions, in the
-file \texttt{lean/Challenges/OtherResults.lean}, and Lean's Comparator tool confirms that the
+file \texttt{lean/Challenges/FurtherResults.lean}, and Lean's Comparator tool confirms that the
 proved theorems have exactly these statements.
 
 \section{Discussion}\label{sec:discussion}
@@ -348,7 +350,7 @@ modulo $8$.
 
 \section*{About this paper}\label{sec:about}
 \para{How the work was done.}
-This paper is one of 29 papers on conjectures from the OEIS that came out of an AI research effort directed by
+This paper is one of 28 papers on conjectures from the OEIS that came out of an AI research effort directed by
 Dev~D.~Goyal~\cite{repo}. The roles were as follows.
 \begin{itemize}
 \item \emph{Dev~D.~Goyal} started the project, chose which problems to pursue, asked for proofs, formal verification and

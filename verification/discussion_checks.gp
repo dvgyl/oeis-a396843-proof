@@ -604,22 +604,6 @@ ok(Str("the literal conjecture (n > 8) fails exactly at n = 17, 65, 257 for n < 
 info("the claims shared with A396843 (modulo m^3; m = 1, 2, 5) are checked in that section");
 
 \\ ===========================================================================
-print("== A397588: Discussion (higher powers of 3)");
-N = 300;
-A = x + O(x^N); for(i = 1, N, A = x + deriv(x*A^2));
-ok("A397588: A = x + (x A^2)' holds", vanish(A - x - deriv(x*A^2), N - 1)); oeis("A397588", OEIS_A397588, n -> c(A, n));
-A2 = A^2;
-sn(n) = c(A2, n);
-ok(Str("a(n) = (n+1) s(n) with s(n) = sum_k a(k) a(n-k), so n+1 divides a(n) (2 <= n < ", N - 1, ")"), prod(n = 2, N - 2, c(A, n) == (n + 1)*sn(n) && c(A, n) % (n + 1) == 0));
-ok(Str("s(n) = 2 a(n-1) + sum_{k=2}^{n-2} a(k) a(n-k) (3 <= n < ", N - 1, ")"), prod(n = 3, N - 2, sn(n) == 2*c(A, n - 1) + sum(k = 2, n - 2, c(A, k)*c(A, n - k))));
-ok("a(5) = 4284 = 9*476", c(A, 5) == 4284 && 4284 == 9*476);
-ok(Str("9 divides a(n) for 5 <= n < ", N - 1), prod(n = 5, N - 2, c(A, n) % 9 == 0));
-ok(Str("3^12 divides a(n) for 35 <= n < ", N - 1), prod(n = 35, N - 2, c(A, n) % 3^12 == 0));
-{
-my(st = vector(12, e, my(n0 = N - 2); while(n0 > 1 && c(A, n0 - 1) % 3^e == 0, n0--); n0));
-info(Str("smallest n0 with 3^e | a(n) for all n0 <= n < ", N - 1, ", e = 1..12: ", st));
-}
-
 \\ ===========================================================================
 \\ ===========================================================================
 print("== A355872: Discussion (modulo 32 and 64)");

@@ -4,16 +4,16 @@ This directory contains the independent checks of the results: an axiom audit of
 
 | Check | Files | Result |
 |---|---|---|
-| Axiom audit of the formal proofs | [`AxiomAudit.lean`](AxiomAudit.lean), [`check_axioms.py`](check_axioms.py) | 305 of 305 theorems use only the standard axioms |
-| Challenge statements against their proofs | [`../lean/comparator/`](../lean/comparator/), [`../lean/scripts/verify-comparator.sh`](../lean/scripts/verify-comparator.sh) | 7 of 7 configurations accepted by the Lean, NanoDa and con-ron kernels |
-| Main results against the OEIS data | [`independent_checks.gp`](independent_checks.gp), [`oeis_terms.gp`](oeis_terms.gp) | 156 of 156 checks pass |
-| Observations in the Discussion sections | [`discussion_checks.gp`](discussion_checks.gp), [`discussion_terms.gp`](discussion_terms.gp) | 207 of 207 checks pass |
+| Axiom audit of the formal proofs | [`AxiomAudit.lean`](AxiomAudit.lean), [`check_axioms.py`](check_axioms.py) | 301 of 301 theorems use only the standard axioms |
+| Challenge statements against their proofs | [`../lean/comparator/`](../lean/comparator/), [`../lean/scripts/verify-comparator.sh`](../lean/scripts/verify-comparator.sh) | 8 of 8 configurations accepted by the Lean, NanoDa and con-ron kernels |
+| Main results against the OEIS data | [`independent_checks.gp`](independent_checks.gp), [`oeis_terms.gp`](oeis_terms.gp) | 152 of 152 checks pass |
+| Observations in the Discussion sections | [`discussion_checks.gp`](discussion_checks.gp), [`discussion_terms.gp`](discussion_terms.gp) | 200 of 200 checks pass |
 
 The outputs are in [`results/`](results/).
 
 ## Axiom audit
 
-The Lean project in [`../lean/`](../lean/) was built from source with Lean 4.35.0 and Mathlib v4.35.0, commit `56a005855ea17e0b0958f73ec801ae140b0a1679` ([`results/lean_build.log`](results/lean_build.log)). [`AxiomAudit.lean`](AxiomAudit.lean) runs `#print axioms` on the 244 theorems stated in [`../lean/Entries/`](../lean/Entries/), on 5 general theorems that the papers cite by name, and on the 56 theorems in [`../lean/Solutions/`](../lean/Solutions/) that are compared with the Challenge statements. [`check_axioms.py`](check_axioms.py) confirms that every listed theorem is reported and depends only on `propext`, `Classical.choice` and `Quot.sound`; an unfinished proof would appear as `sorryAx`. The output is in [`results/axiom_audit.txt`](results/axiom_audit.txt) and the verdict in [`results/axiom_audit_check.txt`](results/axiom_audit_check.txt).
+The Lean project in [`../lean/`](../lean/) was built from source with Lean 4.35.0 and Mathlib v4.35.0, commit `56a005855ea17e0b0958f73ec801ae140b0a1679` ([`results/lean_build.log`](results/lean_build.log)). [`AxiomAudit.lean`](AxiomAudit.lean) runs `#print axioms` on the 240 theorems stated in [`../lean/Entries/`](../lean/Entries/), on 5 general theorems that the papers cite by name, and on the 56 theorems in [`../lean/Solutions/`](../lean/Solutions/) that are compared with the Challenge statements. [`check_axioms.py`](check_axioms.py) confirms that every listed theorem is reported and depends only on `propext`, `Classical.choice` and `Quot.sound`; an unfinished proof would appear as `sorryAx`. The output is in [`results/axiom_audit.txt`](results/axiom_audit.txt) and the verdict in [`results/axiom_audit_check.txt`](results/axiom_audit_check.txt).
 
 A formal proof certifies the statement that Lean checks. For each entry, the Lean definition of the sequence was also compared with the definition in the OEIS entry. Where Lean uses an equivalent form of the definition, the paper proves the equivalence; these cases are listed under `fidelity` in [`../lean/formalization.yaml`](../lean/formalization.yaml).
 
@@ -49,7 +49,6 @@ The published terms were taken from the [OEIS data repository](https://github.co
 | A396099, A396798, A396807 | $`n<160`$; the general theorem for $`r\le8`$, $`-4\le k\le9`$, $`n<90`$ |
 | A396102 | $`n<70`$; the family $`r=2,\dots,7`$ for $`n<40`$ |
 | A396843, A396844 | $`m=3,4`$ for $`n<260`$; $`m=2,\dots,12`$ for $`n<70`$ |
-| A397588 | $`n<299`$ |
 | A355872 | exactly for $`n\le30`$; modulo 16 for $`n\le300`$ |
 | A394576 | $`n\le100000`$ |
 | A397346 | from the definition for $`n<61`$; from the recurrence in the entry for $`n\le400`$ |

@@ -1,4 +1,4 @@
-# Output of `gp -q independent_checks.gp` (PARI/GP 2.15.4), run on 24 October 2026.
+# Output of `gp -q independent_checks.gp` (PARI/GP 2.15.4), run on 25 October 2026.
 == A195194: nested reversion; a(n) odd iff n is a power of 2
   A195194: all 20 published terms reproduced from the OEIS definition
   parity pattern verified for n < 140
@@ -56,9 +56,6 @@
   A396844: all 22 published terms reproduced from the OEIS definition
   A396844: a(17) mod 16 = 4 although 17 > 8 is not of the form 2*4^k+1
   m = 3, 4 verified for n < 260; m = 2..12 for n < 70
-== A397588: A = x + (x A^2)'
-  A397588: all 20 published terms reproduced from the OEIS definition
-  verified for n < 299
 == A355872: x = Sum_{j in Z} (-x)^(j^2) A(x)^((j-1)^2)
   A355872: all 17 published terms reproduced from the OEIS definition
   verified exactly for n <= 30 and modulo 16 for n <= 300
@@ -69,5 +66,5 @@
   A397346: all 18 published terms reproduced from the OEIS definition
   definition verified for n < 61; residues for n <= 400
 
-RESULT: 156 checks passed, 0 failed
+RESULT: 152 checks passed, 0 failed
 exit 0

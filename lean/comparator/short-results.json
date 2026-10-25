@@ -1,0 +1,13 @@
+{
+  "challenge_module": "Challenges.ShortResults",
+  "solution_module": "Solutions.ShortResults",
+  "theorem_names": [
+    "OEISProofs.ShortResults.a396093_coeff",
+    "OEISProofs.ShortResults.a392210_existsUnique",
+    "OEISProofs.ShortResults.a392210_coeff",
+    "OEISProofs.ShortResults.a380056_existsUnique",
+    "OEISProofs.ShortResults.a380056_integral",
+    "OEISProofs.ShortResults.a380056_coeff"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

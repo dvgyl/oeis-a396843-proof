@@ -27,7 +27,8 @@ The theorems stated in Section 3 ("Results") of each paper, and their proof stra
 - wrote the Discussion section of each paper, including the short arguments given there; these are checked numerically and are not part of the Lean formalization;
 - renamed Lean modules and namespaces and edited comments;
 - ported the formalization from Lean 4.19.0 to Lean 4.35.0 and Lean's module system, adapting proofs where Mathlib's names or lemmas had changed; the mathematical arguments of the proofs are unchanged;
-- wrote the Challenge and Solution modules in [`lean/Challenges/`](lean/Challenges/) and [`lean/Solutions/`](lean/Solutions/), which restate the principal theorems using Mathlib's definitions only and derive them from the library, and checked them with Comparator.
+- wrote the Challenge and Solution modules in [`lean/Challenges/`](lean/Challenges/) and [`lean/Solutions/`](lean/Solutions/), which restate the principal theorems using Mathlib's definitions only and derive them from the library, and checked them with Comparator;
+- wrote [`lean/Families/ExpEquation.lean`](lean/Families/ExpEquation.lean), which proves that the exponential equation defining A397346 has exactly one solution, the generating function of the recurrence used in the paper; this step had been proved only on paper.
 
 ## Review status
 

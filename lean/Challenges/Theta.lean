@@ -24,6 +24,7 @@ a series `B` with constant term `1`.
 * **The explicit theta-type sum (A380680).** `A = 1 + 2∑_{k≥1} x^(k²)·((2 - x^k)/(1 - 2x^k))^k`,
   again written in the OEIS as a two-sided sum. The entry conjectures the same square pattern,
   which is false (`a(1) = 4`, `a(2) = 6`); the correct pattern uses `n = 2j²` instead of `n = j²`.
+  Both entries themselves record that the summand is invariant under `k ↦ -k`.
 * **The bilateral equation (A355872).** `x = ∑_{m∈ℤ} (-x)^(m²)·A(x)^((m-1)²)`, written below
   coefficientwise with `finsum` (each coefficient involves only finitely many `m`). The entry
   records three congruences for `a(n)`, the coefficient of `x^(4n-3)` (the only nonzero ones);
@@ -32,6 +33,12 @@ a series `B` with constant term `1`.
 In each infinite sum over `k ≥ 1` below, the coefficient of `x^n` is the finite sum over
 `k = 1, …, n + 1` (written with `k + 1` in place of `k`), since `x^(k²)` has no terms below
 degree `k²`.
+
+Context: these are congruences for the coefficients of power series defined by functional
+equations. Results of this kind are known, for example, for the Catalan and Motzkin numbers
+(Deutsch and Sagan, J. Number Theory 117 (2006); Eu, Liu and Yeh, European J. Combin. 29
+(2008)), and Kauers, Krattenthaler and Müller (Electron. J. Combin. 18(2) (2012), P37) give a
+method for the behaviour modulo powers of `2` of recursively defined sequences.
 -/
 
 public section

@@ -59,12 +59,12 @@ theorem modEq_sq (m : ℤ) (hm : 2 ≤ m) (U : PowerSeries ℤ) (h0 : coeff 0 U 
   obtain ⟨hpow, hrest⟩ := Statements.mod_parameter_squared m hm
   exact ⟨fun j => (Int.modEq_iff_dvd.2 (hpow j)).symm, hrest⟩
 
-theorem pow_digitSum_dvd (m : ℤ) (hm : 2 ≤ m) (U : PowerSeries ℤ) (h0 : coeff 0 U = 0)
+theorem pow_digitSum_dvd (m : ℤ) (U : PowerSeries ℤ) (h0 : coeff 0 U = 0)
     (h1 : coeff 1 U = 1) (hU : U.subst (X * U - C m * X * U ^ 2) = X ^ 2)
     (n : ℕ) (hn : 1 ≤ n) :
     m ^ (Nat.digits 2 (n - 1)).sum ∣ coeff n U := by
   rw [eq_A m U h0 h1 hU, ← binaryWeight_eq_digits_sum]
-  exact Statements.binary_divisibility_integer m hm n hn
+  exact Hanna.binary_divisibility_integer m n hn
 
 theorem prime_pow_dvd (m : ℤ) (hm : 2 ≤ m) (p : ℕ) (hp : p.Prime) (hpm : (p : ℤ) ∣ m)
     (e : ℕ) (he : (p : ℤ) ^ e ∣ m ∧ ¬(p : ℤ) ^ (e + 1) ∣ m)

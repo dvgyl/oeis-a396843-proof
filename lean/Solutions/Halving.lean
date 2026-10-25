@@ -7,8 +7,9 @@ public import Families
 # Solution for the equations with an exact halving step
 
 Each statement of `Challenges.Halving` is derived from the libraries
-`Families.LacunaryInverse` (A389537), `Families.SquareReversion` (A389542) and
-`Families.CubicReversion` (A389474, A389475).
+`Families.LacunaryInverse` (A389537), `Families.SquareReversion` (A389542),
+`Families.CubicReversion` (the family `R(3x²) = 2x² + R² + 2s·R³`) and
+`Families.CubicConsequences` (A389474, A389475).
 -/
 
 public section
@@ -44,6 +45,12 @@ theorem a389542_coeff (A : PowerSeries ℤ) (h0 : coeff 0 A = 0) (h1 : coeff 1 A
   push_cast
   exact ⟨SquareReversion.a389542_two_mod_four_iff n hn,
     SquareReversion.a389542_four_dvd_iff n hn⟩
+
+theorem cubic_family_existsUnique (s : ℤ) :
+    ∃! R : PowerSeries ℤ, coeff 0 R = 0 ∧ coeff 1 R = 1 ∧
+      R.subst (3 * X ^ 2 : PowerSeries ℤ) = 2 * X ^ 2 + R ^ 2 + 2 * C s * R ^ 3 := by
+  obtain ⟨R, ⟨⟨h0, h1⟩, hR⟩, huniq⟩ := CubicReversion.existence_uniqueness s
+  exact ⟨R, ⟨h0, h1, hR⟩, fun G ⟨g0, g1, gG⟩ => huniq G ⟨⟨g0, g1⟩, gG⟩⟩
 
 theorem a389474_existsUnique :
     ∃! A : PowerSeries ℤ, coeff 0 A = 0 ∧ coeff 1 A = 1 ∧

@@ -21,8 +21,15 @@ OEIS A396843 (Paul D. Hanna) is the case `m = 3`. Its first conjecture says that
 coefficient `a(n)` with `n ≥ 1` is odd (`odd_coeff`). Its second conjecture lists the
 residues of `a(n)` modulo `9`; it is false as stated, and `residues_mod_nine` gives the
 correct classification. OEIS A396844 is the case `m = 4`; its conjectured residues modulo
-`16` are false from `n = 17` on, and `residues_mod_sixteen` gives the correct
-classification. The remaining theorems hold for every `m` and are proved in the same paper.
+`16` fail exactly at `n = 4^k + 1` with `k ≥ 2` (`n = 17, 65, 257, …`), and
+`residues_mod_sixteen` gives the correct classification. The remaining theorems concern the
+whole family, for every `m` or for `m ≥ 2` as stated, and are proved in the paper on A396843.
+
+Context: these are congruences for the coefficients of power series defined by functional
+equations. Results of this kind are known, for example, for the Catalan and Motzkin numbers
+(Deutsch and Sagan, J. Number Theory 117 (2006); Eu, Liu and Yeh, European J. Combin. 29
+(2008)), and Kauers, Krattenthaler and Müller (Electron. J. Combin. 18(2) (2012), P37) give a
+method for the behaviour modulo powers of `2` of recursively defined sequences.
 -/
 
 public section
@@ -61,9 +68,11 @@ theorem modEq_sq (m : ℤ) (hm : 2 ≤ m) (U : PowerSeries ℤ) (h0 : coeff 0 U 
       (∀ n : ℕ, 2 ≤ n → (¬∃ j : ℕ, n = 2 ^ j + 1) → m ^ 2 ∣ coeff n U) := by
   sorry
 
-/-- For `m ≥ 2` and `n ≥ 1`, `m^s` divides `a(n)`, where `s` is the number of ones in the
-binary expansion of `n - 1`. For `m = 3` this is the third result on A396843. -/
-theorem pow_digitSum_dvd (m : ℤ) (hm : 2 ≤ m) (U : PowerSeries ℤ) (h0 : coeff 0 U = 0)
+/-- For every integer `m` and `n ≥ 1`, `m^s` divides `a(n)`, where `s` is the number of ones
+in the binary expansion of `n - 1`. This is the statement about `a(n)` in the theorem on binary
+digits of the paper on A396843; the companion statement for the coefficients of the inverse
+series is proved in `Entries/A396843.lean` but is not compared here. -/
+theorem pow_digitSum_dvd (m : ℤ) (U : PowerSeries ℤ) (h0 : coeff 0 U = 0)
     (h1 : coeff 1 U = 1) (hU : U.subst (X * U - C m * X * U ^ 2) = X ^ 2)
     (n : ℕ) (hn : 1 ≤ n) :
     m ^ (Nat.digits 2 (n - 1)).sum ∣ coeff n U := by

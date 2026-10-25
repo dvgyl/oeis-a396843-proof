@@ -335,16 +335,6 @@ for(m = 2, 12,
 print("  m = 3, 4 verified for n < ", N, "; m = 2..12 for n < 70");
 
 \\ ===========================================================================
-print("== A397588: A = x + (x A^2)'");
-N = 300;
-A = x + O(x^N); for(i = 1, N, A = x + deriv(x*A^2));
-ok("A397588 equation", vanish(A - x - deriv(x*A^2), N - 1));
-oeis("A397588", OEIS_A397588, n -> c(A, n));
-ok("A397588 a(n) odd iff n is a power of 2", prod(n = 0, N - 2, (c(A, n) % 2 == 1) == ispow2(n)));
-ok("A397588 3 | a(n) for n > 1", prod(n = 2, N - 2, c(A, n) % 3 == 0));
-print("  verified for n < ", N - 1);
-
-\\ ===========================================================================
 print("== A355872: x = Sum_{j in Z} (-x)^(j^2) A(x)^((j-1)^2)");
 \\ Each coefficient involves only finitely many j: the factor (-x)^(j^2) has degree j^2.
 \\ The j = 0 term is A itself, so A = x - Sum_{j != 0} (...), solved by fixed-point iteration.
