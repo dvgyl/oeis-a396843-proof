@@ -17,7 +17,7 @@ sources:
   - title: "Proofs and corrections of conjectures recorded in 28 OEIS entries, presented in the papers of this repository"
     type: original-proof
     authors: ["Dev D. Goyal"]
-    location: "https://github.com/dvgyl/oeis-proofs/tree/main/preprints"
+    location: "https://github.com/dvgyl/oeis-proofs/tree/f4c7a89e7dd079fd4b8d967c0731c8996601fe01/preprints"
     relationship: other
     note: "The results are first presented in this repository, in one self-contained paper per OEIS entry; the papers have not been peer reviewed. The proofs were found by an AI system (see automation). Novelty has not been established beyond limited searches for earlier work, and no priority is claimed. The searches covered the OEIS entries and the work linked from them, the literature cited in the papers, and two collections of Lean formalizations of OEIS statements: google-deepmind/formal-conjectures (commit 37f0808, 24 October 2026) and VictorLiwentao/lean-oeis-proofs (commit 9d4a205, 11 October 2026). Neither has a file for any of the 28 entries; an entry that was found there, with an earlier proof, was removed from the collection."
 
