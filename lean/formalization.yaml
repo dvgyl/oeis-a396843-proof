@@ -1,629 +1,665 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
-# Catalogue of the papers and their Lean formalizations. Paths are relative to lean/.
+# Metadata for the Lean project in this directory, in the formalization.yaml v0.4 format used by Palomar.
 version: "v0.4"
 
 project:
   name: "Proofs and corrections of OEIS conjectures"
-  description: "Lean 4 formalizations accompanying 29 papers on conjectures from the On-Line Encyclopedia of Integer Sequences."
+  description: "Machine-checked proofs of conjectures recorded in 29 entries of the On-Line Encyclopedia of Integer Sequences (OEIS), together with corrections of the four conjectured statements that turn out to be false. Most of the sequences are coefficients of formal power series defined by functional equations, and most of the results describe their residues modulo small integers. The results form six families and a group of further results: the equation A(x*A - m*x*A^2) = x^2 (parity, residues modulo m^2, binary-digit divisibility and prime exponents for every m, with corrected residue classifications modulo 9 and 16 for A396843 and A396844); consecutive iterates F = x + F^{o r}*F^{o(r+1)} (every integer iterate modulo 2r, A396099, A396798, A396807); scaled inverses A(x - x*A(qx)/q) = x (every coefficient is 1 modulo q+1, and for even q the odd coefficients are exactly at the powers of 2, A393856-A393859); theta-series substitutions and theta-type sums (square patterns modulo 4, corrected for A380680, and a congruence modulo 16 for A355872); Catalan-type equations (residues modulo 2, 4 and 8 governed by powers of 2, A393172, A393171, A389536, A397588, A195194); equations with an exact halving step (residues modulo 4, 9 and 3, A389537, A389542, A389474, A389475); and further results on A396093, A392210, A396102 and its family F^{o r} = (1+x)*F^{o(r-1)}, A380056, A397346 and the greedy sequence A394576. Each family has its own Comparator configuration, and each OEIS entry has a self-contained paper in the repository."
   authors: ["Dev D. Goyal"]
-  license: "NOASSERTION"
+  responsible_maintainers: ["Dev D. Goyal"]
+  license: "Apache-2.0"
+
+classification:
+  arxiv: [math.NT, math.CO]
+  msc2020: [11B50, 05A15, 13F25, 11B83, 68V15]
 
 sources:
-  - title: "Odd coefficients, remainders modulo 9, and binary digits for the series of OEIS A396843"
+  - title: "Proofs and corrections of conjectures recorded in 29 OEIS entries, presented in the papers of this repository"
+    type: original-proof
     authors: ["Dev D. Goyal"]
-    id: ../preprints/A396843-Odd-coefficients-remainders-modulo-9-and-binary-digits/paper.pdf
-    type: article
-    relationship: formalizes
+    location: "https://github.com/dvgyl/oeis-proofs/tree/main/preprints"
+    relationship: other
+    note: "The results are first presented in this repository, in one self-contained paper per OEIS entry; the papers have not been peer reviewed. The proofs were found by an AI system (see automation). Novelty has not been established beyond limited searches for earlier work, and no priority is claimed."
 
-  - title: "Remainders modulo 16 for the series of OEIS A396844"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A396844-Remainders-modulo-16/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A396843: G.f. A(x) satisfies A(x*A(x) - 3*x*A(x)^2) = x^2"
+    type: other
+    id: "https://oeis.org/A396843"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjectures on parity and residues modulo 9)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "The iterates of a self-referential power series modulo 4"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A396099-Iterates-of-a-self-referential-series-modulo-4/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A396844: G.f. A(x) satisfies A(x*A(x) - 4*x*A(x)^2) = x^2"
+    type: other
+    id: "https://oeis.org/A396844"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture on residues modulo 16)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "The iterates of a self-referential power series modulo 8"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A396798-Iterates-of-a-self-referential-series-modulo-8/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A396099: G.f. satisfies A(x) = x + A^2(x)*A^3(x) (compositional iterates)"
+    type: other
+    id: "https://oeis.org/A396099"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (four conjectures modulo 4)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "The iterates of a self-referential power series modulo 10"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A396807-Iterates-of-a-self-referential-series-modulo-10/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A396798: G.f. satisfies A(x) = x + A^4(x)*A^5(x) (compositional iterates)"
+    type: other
+    id: "https://oeis.org/A396798"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (eight conjectures modulo 8)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Congruences for the series A with A(x - x A(4x)/4) = x"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A393856-Congruences-for-a-scaled-inverse-series-q-4/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A396807: G.f. satisfies A(x) = x + A^5(x)*A^6(x) (compositional iterates)"
+    type: other
+    id: "https://oeis.org/A396807"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjectures modulo 10)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Congruences for the series A with A(x - x A(5x)/5) = x"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A393857-Congruences-for-a-scaled-inverse-series-q-5/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A393856: G.f. A(x) satisfies A(x - x*A(4*x)/4) = x"
+    type: other
+    id: "https://oeis.org/A393856"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjectures modulo 5 and modulo 2)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Congruences for the series A with A(x - x A(6x)/6) = x"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A393858-Congruences-for-a-scaled-inverse-series-q-6/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A393857: G.f. A(x) satisfies A(x - x*A(5*x)/5) = x"
+    type: other
+    id: "https://oeis.org/A393857"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 6)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Congruences for the series A with A(x - x A(7x)/7) = x"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A393859-Congruences-for-a-scaled-inverse-series-q-7/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A393858: G.f. A(x) satisfies A(x - x*A(6*x)/6) = x"
+    type: other
+    id: "https://oeis.org/A393858"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjectures modulo 7 and modulo 2)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Remainders modulo 4 for the series with A(x/A(x)) = theta3(x)"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A378580-Theta-quotient-substitution-modulo-4/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A393859: G.f. A(x) satisfies A(x - x*A(7*x)/7) = x"
+    type: other
+    id: "https://oeis.org/A393859"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 8)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Remainders modulo 4 for the series with A(x A(x)) = theta3(x)"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A378581-Theta-product-substitution-modulo-4/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A378580: G.f. A(x) satisfies A(x/A(x)) = theta_3(x)"
+    type: other
+    id: "https://oeis.org/A378580"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 4)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Square indices and remainders modulo 4 in a theta-type series"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A380060-Square-indices-in-a-theta-type-series/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A378581: G.f. A(x) satisfies A(x*A(x)) = theta_3(x)"
+    type: other
+    id: "https://oeis.org/A378581"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 4)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Twice the squares, not the squares"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A380680-Twice-the-squares-not-the-squares/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A380060: G.f. A(x) satisfies A(x) = Sum_{n=-oo..oo} x^(n^2)*(A(x) - x^n)^n/(1 - x^n*A(x))^n"
+    type: other
+    id: "https://oeis.org/A380060"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 4)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Residues modulo 16 for a series defined by a bilateral theta-type equation"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A355872-Residues-modulo-16-for-a-bilateral-theta-type-equation/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A380680: G.f. A(x) = Sum_{n=-oo..oo} x^(n^2)*(2 - x^n)^n/(1 - 2*x^n)^n"
+    type: other
+    id: "https://oeis.org/A380680"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 4 (false; corrected))"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "The Catalan numbers inside the equation A(x - x²) = x + A(x)²"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A393172-The-Catalan-numbers-inside-a-functional-equation/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A355872: G.f. A(x) satisfies x = Sum_{n=-oo..oo} (-x)^(n^2)*A(x)^((n-1)^2)"
+    type: other
+    id: "https://oeis.org/A355872"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (three congruences modulo 4 and 8)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Remainders modulo 8 of a series built from the Catalan numbers"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A393171-Remainders-modulo-8-from-the-Catalan-numbers/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A393172: G.f. A(x) satisfies A(x - x^2) = x + A(x)^2"
+    type: other
+    id: "https://oeis.org/A393172"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 4)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Remainders modulo 4 for the equation A(x² + 2x³) = x A(x)"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A389536-Remainders-modulo-4-for-a-Mahler-type-equation/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A393171: G.f. satisfies A(x) = x + A(C(x))^2, where C(x) = x + C(x)^2"
+    type: other
+    id: "https://oeis.org/A393171"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 8)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Odd coefficients at powers of two for A = x + (x A²)'"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A397588-Odd-coefficients-at-powers-of-two/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A389536: G.f. A(x) satisfies A(x) = A(x^2 + 2*x^3)/x"
+    type: other
+    id: "https://oeis.org/A389536"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 4)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Parity of an infinitely nested series reversion"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A195194-Parity-of-an-infinitely-nested-series-reversion/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A397588: G.f. A(x) satisfies A(x) = x + (x*A(x)^2)'"
+    type: other
+    id: "https://oeis.org/A397588"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 2 and the stated divisibility by 3)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Congruences modulo 4 for the series of OEIS A389537"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A389537-Congruences-modulo-4-for-a-sparse-reversion/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A195194: G.f. A(x) = Series_Reversion(x - x*Series_Reversion(x - 2*x*Series_Reversion(x - 3*x*...)))"
+    type: other
+    id: "https://oeis.org/A195194"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 2)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Congruences modulo 4 for the series of OEIS A389542"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A389542-Congruences-modulo-4-for-a-square-reversion/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A389537: G.f. A(x) satisfies A(A(x) - x) = A(x)^2"
+    type: other
+    id: "https://oeis.org/A389537"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 4)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "A power series whose square is x² + 2x³ modulo 9"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A389474-A-series-whose-square-is-a-polynomial-modulo-9/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A389542: G.f. A(x) satisfies A(A(x)^2 - x^2) = 4*A(x)^3"
+    type: other
+    id: "https://oeis.org/A389542"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 4)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Two congruences modulo 3 for the series of OEIS A389475"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A389475-Two-congruences-modulo-3/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A389474: G.f. A(x) satisfies A(x^2 + 2*x^3 + 2*A(x)^2) = 3*A(x)^2"
+    type: other
+    id: "https://oeis.org/A389474"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjectures modulo 9 and modulo 3)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "When are the coefficients of B(B(B(x))) odd? A proof of two conjectures in OEIS A396093"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A396093-Odd-coefficients-of-the-third-iterate/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A389475: G.f. A(x) satisfies A(3*x^2) = 2*x^2 + A(x)^2 - 2*A(x)^3"
+    type: other
+    id: "https://oeis.org/A389475"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (two conjectures modulo 3)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "The odd-indexed terms of a nested square are even after the first term"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A392210-Odd-indexed-terms-of-a-nested-square/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A396093: Third iteration of x/(1-x)^2"
+    type: other
+    id: "https://oeis.org/A396093"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (two parity conjectures)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Every coefficient is 1 modulo 3"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A396102-Every-coefficient-is-1-modulo-3/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A392210: G.f.: x + sq(x/(1-x) + sq(x/(1-2*x) + sq(x/(1-3*x) + ...))), an infinitely nested square"
+    type: other
+    id: "https://oeis.org/A392210"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (parity observation)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "The numbers with exponential generating function (exp(x)-1)/cos(2x), modulo 4 and 5"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A380056-Exponential-over-cosine-modulo-4-and-5/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A396102: G.f. A(x) satisfies A(A(A(x))) = (1+x)*A(A(x))"
+    type: other
+    id: "https://oeis.org/A396102"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 3)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "Residues modulo 8 for a series defined by a self-referential exponential"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A397346-Residues-modulo-8-for-a-self-referential-exponential/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A380056: E.g.f. (exp(x) - 1)/cos(2*x)"
+    type: other
+    id: "https://oeis.org/A380056"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjectures modulo 4 and 5)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-  - title: "A greedy sequence that avoids sums of three consecutive terms"
-    authors: ["Dev D. Goyal"]
-    id: ../preprints/A394576-A-greedy-sequence-avoiding-sums-of-three-consecutive-terms/paper.pdf
-    type: article
-    relationship: formalizes
+  - title: "OEIS A397346: O.g.f. satisfies A(x) = exp(x + Sum_{n>=2} (2*n^2-1)*a(n)*x^n/(2*n^2))"
+    type: other
+    id: "https://oeis.org/A397346"
+    contributors:
+      - name: "Paul D. Hanna"
+        role: "contributed the sequence and the statements treated (conjecture modulo 8)"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
 
-related_formalizations:
-  - id: https://github.com/leanprover-community/mathlib4
-    relationship: builds-on
-    note: "Mathlib commit c44e0c8ee63ca166450922a373c7409c5d26b00b, Lean 4.19.0."
+  - title: "OEIS A394576: a(1) = 1; a(n+1) is the smallest integer greater than a(n) that is not a sum of three consecutive terms"
+    type: other
+    id: "https://oeis.org/A394576"
+    contributors:
+      - name: "Hoang Xuan Thanh"
+        role: "contributed the sequence and the statements treated (first conjecture (upper bound))"
+    relationship: other
+    note: "Entry of the On-Line Encyclopedia of Integer Sequences that records the conjecture or observation proved or corrected here (the problem source)."
+    license: CC-BY-SA-4.0
+    author_endorsement: not-contacted
+
+  - title: "Counterexample to the conjecture modulo 9, recorded in OEIS A396843"
+    authors: ["Danial Asaria"]
+    id: "https://oeis.org/A396843"
+    relationship: background
+    note: "A comment in the entry gives a counterexample to the second conjecture; the formalization proves the corrected statement."
+
+  - title: "Proof of the conjectures of OEIS A396797"
+    authors: ["Shiva Priyan Shanmuga Sundaram"]
+    id: "https://oeis.org/A396797"
+    relationship: background
+    note: "Proves the member r = 3 of the family of consecutive iterates; A396797 is not part of this collection."
+
+  - title: "Comment in OEIS A196523 on congruences for a related family"
+    authors: ["Amol Bhave"]
+    id: "https://oeis.org/A196523"
+    relationship: background
+    note: "Proves congruences for a different family by a comparison of the same kind as in the paper on A396102."
+
+  - title: "Algorithm for OEIS A394576, A394676 and generalized forbidden sums"
+    authors: ["Hoang Xuan Thanh"]
+    id: "https://doi.org/10.5281/zenodo.22674326"
+    relationship: background
+    note: "Software that computes A394576; used for comparison only."
+
+related_formalizations: []
 
 status:
-  scope: "Every theorem stated in the papers is formalized. Observations in the Discussion sections are not."
+  scope: >-
+    The theorems listed under alignment are stated in Challenges/ using Mathlib alone and are proved
+    in Solutions/ from the library in Hanna/, Consecutive/ and Families/; Entries/ restates the results
+    of each paper in the notation of the library. Three steps are proved only in the accompanying
+    papers: that the one-sided theta-type sums used for A380060 and A380680 equal the two-sided sums
+    of the OEIS entries; that the nested square in the name of A392210 defines the solution of
+    formula (1) of the entry; and, for A397346, the passage from A' = A*H' and A(0) = 1 to
+    A = exp(H). Observations in the Discussion sections of the papers are not formalized.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
-  # Entries use fully qualified declaration names and the files containing them.
-  main_results:
-    - declaration: OEIS.A396843.parity_odd
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.parity_even
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.mod_parameter_squared
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.binary_divisibility_integer
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.inverse_binary_divisibility_integer
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.binary_divisibility_polynomial
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.inverse_binary_divisibility_polynomial
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.power_of_two_index
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.prime_divisibility_lower_bound
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.prime_exponent_exists_unique
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.minimum_prime_exponent_iff
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.a396843_parity
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.residues_parameter_three
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396843.residues_parameter_four
-      file: Entries/A396843.lean
-
-    - declaration: OEIS.A396844.even_positive_tail
-      file: Entries/A396844.lean
-
-    - declaration: OEIS.A396844.binary_divisibility
-      file: Entries/A396844.lean
-
-    - declaration: OEIS.A396844.residues_parameter_four
-      file: Entries/A396844.lean
-
-    - declaration: OEIS.A396099.a396099_all_four
-      file: Entries/A396099.lean
-
-    - declaration: OEIS.A396099.a396099_odd
-      file: Entries/A396099.lean
-
-    - declaration: OEIS.A396099.a396099_residue
-      file: Entries/A396099.lean
-
-    - declaration: OEIS.A396099.a396099_period
-      file: Entries/A396099.lean
-
-    - declaration: OEIS.A396099.a396099_second_iterate_series
-      file: Entries/A396099.lean
-
-    - declaration: OEIS.A396099.a396099_second_iterate
-      file: Entries/A396099.lean
-
-    - declaration: OEIS.A396099.a396099_difference_series
-      file: Entries/A396099.lean
-
-    - declaration: OEIS.A396099.a396099_difference
-      file: Entries/A396099.lean
-
-    - declaration: Consecutive.ziter_solution_mod
-      file: Consecutive/IntegerIterates.lean
-
-    - declaration: Consecutive.ziter_solution_mod_eq_X_iff
-      file: Consecutive/IntegerIterates.lean
-
-    - declaration: OEIS.A393856.source_existence_uniqueness
-      file: Entries/A393856.lean
-
-    - declaration: OEIS.A393856.a393856_mod_five
-      file: Entries/A393856.lean
-
-    - declaration: OEIS.A393856.a393856_parity
-      file: Entries/A393856.lean
-
-    - declaration: OEIS.A393857.source_existence_uniqueness
-      file: Entries/A393857.lean
-
-    - declaration: OEIS.A393857.a393857_mod_six
-      file: Entries/A393857.lean
-
-    - declaration: OEIS.A393858.source_existence_uniqueness
-      file: Entries/A393858.lean
-
-    - declaration: OEIS.A393858.a393858_mod_seven
-      file: Entries/A393858.lean
-
-    - declaration: OEIS.A393858.a393858_parity
-      file: Entries/A393858.lean
-
-    - declaration: OEIS.A393859.source_existence_uniqueness
-      file: Entries/A393859.lean
-
-    - declaration: OEIS.A393859.a393859_mod_eight
-      file: Entries/A393859.lean
-
-    - declaration: OEIS.A378580.minus_series_mod_four
-      file: Entries/A378580.lean
-
-    - declaration: OEIS.A378580.minus_congruence
-      file: Entries/A378580.lean
-
-    - declaration: OEIS.A378580.minus_square_iff
-      file: Entries/A378580.lean
-
-    - declaration: OEIS.A378580.minus_four_dvd_iff
-      file: Entries/A378580.lean
-
-    - declaration: OEIS.A378581.plus_series_mod_four
-      file: Entries/A378581.lean
-
-    - declaration: OEIS.A378581.plus_congruence
-      file: Entries/A378581.lean
-
-    - declaration: OEIS.A378581.plus_square_iff
-      file: Entries/A378581.lean
-
-    - declaration: OEIS.A378581.plus_four_dvd_iff
-      file: Entries/A378581.lean
-
-    - declaration: OEIS.A380060.complete_series_mod_four
-      file: Entries/A380060.lean
-
-    - declaration: OEIS.A380060.a380060_statement
-      file: Entries/A380060.lean
-
-    - declaration: OEIS.A380680.complete_series_mod_four
-      file: Entries/A380680.lean
-
-    - declaration: OEIS.A380680.a380680_corrected_statement
-      file: Entries/A380680.lean
-
-    - declaration: OEIS.A380680.a380680_counterexamples
-      file: Entries/A380680.lean
-
-    - declaration: OEIS.A380680.a380680_literal_statement_is_false
-      file: Entries/A380680.lean
-
-    - declaration: OEIS.A380680.a380680_complement_is_false
-      file: Entries/A380680.lean
-
-    - declaration: OEIS.A355872.source_existence_uniqueness
-      file: Entries/A355872.lean
-
-    - declaration: OEIS.A355872.canonical_literal_source
-      file: Entries/A355872.lean
-
-    - declaration: OEIS.A355872.canonical_sparse_support
-      file: Entries/A355872.lean
-
-    - declaration: OEIS.A355872.source_mod_sixteen
-      file: Entries/A355872.lean
-
-    - declaration: OEIS.A355872.source_all_three
-      file: Entries/A355872.lean
-
-    - declaration: OEIS.A393172.first_existence
-      file: Entries/A393172.lean
-
-    - declaration: OEIS.A393172.first_definition
-      file: Entries/A393172.lean
-
-    - declaration: OEIS.A393172.complete_series_mod_four
-      file: Entries/A393172.lean
-
-    - declaration: OEIS.A393172.first_residue
-      file: Entries/A393172.lean
-
-    - declaration: OEIS.A393172.divisibility_complement
-      file: Entries/A393172.lean
-
-    - declaration: OEIS.A393172.first_arbitrary_source
-      file: Entries/A393172.lean
-
-    - declaration: OEIS.A393171.second_named_existence
-      file: Entries/A393171.lean
-
-    - declaration: OEIS.A393171.second_existence
-      file: Entries/A393171.lean
-
-    - declaration: OEIS.A393171.second_definition
-      file: Entries/A393171.lean
-
-    - declaration: OEIS.A393171.link_to_first_sequence
-      file: Entries/A393171.lean
-
-    - declaration: OEIS.A393171.link_composed_catalan
-      file: Entries/A393171.lean
-
-    - declaration: OEIS.A393171.complete_series_mod_eight
-      file: Entries/A393171.lean
-
-    - declaration: OEIS.A393171.second_residue
-      file: Entries/A393171.lean
-
-    - declaration: OEIS.A393171.divisibility_complement
-      file: Entries/A393171.lean
-
-    - declaration: OEIS.A393171.second_arbitrary_source
-      file: Entries/A393171.lean
-
-    - declaration: OEIS.A389536.mahler_existence
-      file: Entries/A389536.lean
-
-    - declaration: OEIS.A389536.mahler_definition
-      file: Entries/A389536.lean
-
-    - declaration: OEIS.A389536.mahler_source_unique
-      file: Entries/A389536.lean
-
-    - declaration: OEIS.A389536.mahler_mod_four
-      file: Entries/A389536.lean
-
-    - declaration: OEIS.A389536.mahler_residue
-      file: Entries/A389536.lean
-
-    - declaration: OEIS.A389536.mahler_four_dvd_iff
-      file: Entries/A389536.lean
-
-    - declaration: OEIS.A397588.differential_existence
-      file: Entries/A397588.lean
-
-    - declaration: OEIS.A397588.differential_definition
-      file: Entries/A397588.lean
-
-    - declaration: OEIS.A397588.differential_source_unique
-      file: Entries/A397588.lean
-
-    - declaration: OEIS.A397588.differential_parity
-      file: Entries/A397588.lean
-
-    - declaration: OEIS.A397588.differential_mod_three
-      file: Entries/A397588.lean
-
-    - declaration: OEIS.A397588.differential_divisible_by_three
-      file: Entries/A397588.lean
-
-    - declaration: OEIS.A195194.arbitrary_weights_unique
-      file: Entries/A195194.lean
-
-    - declaration: OEIS.A195194.arbitrary_finite_depth
-      file: Entries/A195194.lean
-
-    - declaration: OEIS.A195194.binary_equation
-      file: Entries/A195194.lean
-
-    - declaration: OEIS.A195194.exact_parity
-      file: Entries/A195194.lean
-
-    - declaration: OEIS.A389537.source_equation
-      file: Entries/A389537.lean
-
-    - declaration: OEIS.A389537.source_exists_unique
-      file: Entries/A389537.lean
-
-    - declaration: OEIS.A389537.source_unique
-      file: Entries/A389537.lean
-
-    - declaration: OEIS.A389537.residue_mod_four
-      file: Entries/A389537.lean
-
-    - declaration: OEIS.A389542.source_equation
-      file: Entries/A389542.lean
-
-    - declaration: OEIS.A389542.source_exists_unique
-      file: Entries/A389542.lean
-
-    - declaration: OEIS.A389542.source_unique
-      file: Entries/A389542.lean
-
-    - declaration: OEIS.A389542.residue_mod_four
-      file: Entries/A389542.lean
-
-    - declaration: OEIS.A389542.exceptional_iff
-      file: Entries/A389542.lean
-
-    - declaration: OEIS.A389542.four_dvd_iff
-      file: Entries/A389542.lean
-
-    - declaration: OEIS.A389474.normalized
-      file: Entries/A389474.lean
-
-    - declaration: OEIS.A389474.source_equation
-      file: Entries/A389474.lean
-
-    - declaration: OEIS.A389474.source_unique
-      file: Entries/A389474.lean
-
-    - declaration: OEIS.A389474.source_existence_uniqueness
-      file: Entries/A389474.lean
-
-    - declaration: OEIS.A389474.square_mod_nine
-      file: Entries/A389474.lean
-
-    - declaration: OEIS.A389474.square_coefficients
-      file: Entries/A389474.lean
-
-    - declaration: OEIS.A389475.normalized
-      file: Entries/A389475.lean
-
-    - declaration: OEIS.A389475.source_equation
-      file: Entries/A389475.lean
-
-    - declaration: OEIS.A389475.source_unique
-      file: Entries/A389475.lean
-
-    - declaration: OEIS.A389475.source_existence_uniqueness
-      file: Entries/A389475.lean
-
-    - declaration: OEIS.A389475.cube_mod_three
-      file: Entries/A389475.lean
-
-    - declaration: OEIS.A389475.cube_coefficients
-      file: Entries/A389475.lean
-
-    - declaration: OEIS.A389475.square_mod_three
-      file: Entries/A389475.lean
-
-    - declaration: OEIS.A389475.square_coefficients
-      file: Entries/A389475.lean
-
-    - declaration: OEIS.A396093.complete_parity
-      file: Entries/A396093.lean
-
-    - declaration: OEIS.A396093.even_iff
-      file: Entries/A396093.lean
-
-    - declaration: OEIS.A396093.even_indices
-      file: Entries/A396093.lean
-
-    - declaration: OEIS.A396093.odd_indices
-      file: Entries/A396093.lean
-
-    - declaration: OEIS.A392210.third_existence
-      file: Entries/A392210.lean
-
-    - declaration: OEIS.A392210.third_evenness
-      file: Entries/A392210.lean
-
-    - declaration: OEIS.A392210.third_arbitrary_source
-      file: Entries/A392210.lean
-
-    - declaration: OEIS.A396102.coefficient_congruence
-      file: Entries/A396102.lean
-
-    - declaration: OEIS.A396102.iterate_congruence
-      file: Entries/A396102.lean
-
-    - declaration: OEIS.A396102.family_coefficient_congruence
-      file: Entries/A396102.lean
-
-    - declaration: OEIS.A396102.family_iterate_congruence
-      file: Entries/A396102.lean
-
-    - declaration: OEIS.A380056.first_source_conjecture
-      file: Entries/A380056.lean
-
-    - declaration: OEIS.A380056.second_source_conjecture
-      file: Entries/A380056.lean
-
-    - declaration: OEIS.A380056.mod_five_exponential_formula
-      file: Entries/A380056.lean
-
-    - declaration: OEIS.A380056.exact_mod_five_pattern
-      file: Entries/A380056.lean
-
-    - declaration: OEIS.A380056.exact_divisibility_by_five
-      file: Entries/A380056.lean
-
-    - declaration: OEIS.A380056.mod_five_period
-      file: Entries/A380056.lean
-
-    - declaration: OEIS.A397346.original_all_index_conjecture
-      file: Entries/A397346.lean
-
-    - declaration: OEIS.A397346.stronger_quotient_congruence
-      file: Entries/A397346.lean
-
-    - declaration: OEIS.A394576.canonical_bounds
-      file: Entries/A394576.lean
-
-    - declaration: OEIS.A394576.source_implies_bound
-      file: Entries/A394576.lean
-
-    - declaration: OEIS.A394576.complementary_ranges
-      file: Entries/A394576.lean
-
-    - declaration: OEIS.A394576.bounded_error
-      file: Entries/A394576.lean
-
-    - declaration: OEIS.A394576.exact_every_third
-      file: Entries/A394576.lean
 
 fidelity:
   divergences: >-
-    For A380060 and A380680 the Lean definition uses the one-sided form of the theta-type sum; the papers
-    prove that it equals the two-sided sum in the OEIS titles. For A392210 the Lean definition is the
-    functional equation; the papers derive the nested-square title from it. For A397346 the Lean
-    definition is formula (7) of the entry and Lean proves the identity A' = A H'; the final step to
-    A = exp(H) is proved in the paper. All other entries are
-    defined in Lean by the defining equation or formula of the OEIS entry.
+    A380060 and A380680 are formalized with the one-sided form of the theta-type sum, and A392210
+    with formula (1) of its entry; the papers prove the equivalence with the OEIS definitions. A397346
+    is formalized through formula (7) of its entry together with the identity A' = A*H'. A393171 is
+    stated with the Catalan series characterized by C = x + C^2 and C(0) = 0; A378580 and A378581 with
+    the theta series characterized by its coefficients; A380056 over the rationals, with
+    a(n) = n!*[x^n]A; and A394576 with the index shifted by one. All other entries use the defining
+    equation of the OEIS entry.
 
 automation:
   methods:
     - method: autonomous
       models: ["GPT-6 (ChatGPT, Pro reasoning)"]
       framework: "ChatGPT"
+      tool_setup: "Working autonomously from prompts by Dev D. Goyal, searched the OEIS for candidate conjectures, found the proofs, counterexamples and corrected statements, and wrote the Lean library (Hanna/, Consecutive/, Families/, Entries/) and first drafts of the papers."
+    - method: agent
+      models: ["Claude Opus 5.5"]
+      framework: "Claude Code"
+      tool_setup: "Rebuilt the Lean project from source, audited the axioms, compared the Lean definitions with the OEIS entries, wrote the numerical checks in verification/, ported the project to Lean 4.35.0 and the module system, wrote the Challenge and Solution modules and the Comparator configurations, and wrote the papers in their present form."
+  notes: "Dev D. Goyal directed the project, chose the problems, requested proofs, formal verification and revisions, and reviewed the results, but did not supply proof strategies. AUTHORSHIP.md at the repository root records each contribution."
 
 review:
-  status: author-verified
-  notes: >-
-    Verified by the author. Independently rebuilt from source and audited (axioms, definitions
-    against the OEIS entries) with Claude Opus 5.5 in Claude Code. Not peer reviewed.
+  status: agent-reviewed
+  reviewers: ["Claude Opus 5.5 (Claude Code)", "Dev D. Goyal"]
+  notes: "An agent separate from the one that wrote the proofs rebuilt the formalization, checked that every theorem depends only on the standard axioms, compared each Lean definition with its OEIS entry, recomputed every sequence from its OEIS definition and tested the results numerically, and read the proofs in the papers. Dev D. Goyal reviewed the proofs; this review is not an independent expert validation. The papers have not been peer reviewed."
+
+alignment:
+  namespace: "OEISProofs"
+  statements:
+    - source: "A396843, A396844 (definition)"
+      lean: "OEISProofs.HannaFamily.existsUnique"
+      module: "Challenges.HannaFamily"
+      status: "proved"
+      note: "Existence and uniqueness of the normalized solution for every integer m."
+    - source: "A396843, first conjecture (m = 3)"
+      lean: "OEISProofs.HannaFamily.odd_coeff"
+      module: "Challenges.HannaFamily"
+      status: "proved"
+      note: "Odd m: every coefficient a(n), n >= 1, is odd."
+    - source: "Paper on A396843, parity for even m"
+      lean: "OEISProofs.HannaFamily.even_coeff"
+      module: "Challenges.HannaFamily"
+      status: "proved"
+      note: "Even m: a(n) is even for n >= 2."
+    - source: "Paper on A396843, residues modulo m^2"
+      lean: "OEISProofs.HannaFamily.modEq_sq"
+      module: "Challenges.HannaFamily"
+      status: "proved"
+      note: "Residues modulo m^2 for every m >= 2."
+    - source: "Paper on A396843, binary-digit divisibility"
+      lean: "OEISProofs.HannaFamily.pow_digitSum_dvd"
+      module: "Challenges.HannaFamily"
+      status: "proved"
+      note: "m^s divides a(n), s the binary digit sum of n - 1."
+    - source: "Paper on A396843, prime exponents"
+      lean: "OEISProofs.HannaFamily.prime_pow_dvd"
+      module: "Challenges.HannaFamily"
+      status: "proved"
+      note: "Lower bound and exact case for the exponent of a prime dividing m."
+    - source: "A396843, second conjecture (residues modulo 9)"
+      lean: "OEISProofs.HannaFamily.residues_mod_nine"
+      module: "Challenges.HannaFamily"
+      status: "disproved and corrected"
+      note: "The conjectured classification is false; this is the correct one."
+    - source: "A396844, conjecture (residues modulo 16)"
+      lean: "OEISProofs.HannaFamily.residues_mod_sixteen"
+      module: "Challenges.HannaFamily"
+      status: "disproved and corrected"
+      note: "The conjectured classification fails from n = 17; this is the correct one."
+    - source: "A396099, A396798, A396807 (definition)"
+      lean: "OEISProofs.ConsecutiveIterates.existsUnique"
+      module: "Challenges.ConsecutiveIterates"
+      status: "proved"
+      note: "Existence and uniqueness for every r."
+    - source: "A396807 conjectures; A396798 conjectures on iterates"
+      lean: "OEISProofs.ConsecutiveIterates.iterate_coeff_modEq"
+      module: "Challenges.ConsecutiveIterates"
+      status: "proved"
+      note: "Every nonnegative iterate modulo 2r, for every r >= 1."
+    - source: "A396807, iterates with negative index"
+      lean: "OEISProofs.ConsecutiveIterates.inverse_iterate_coeff_modEq"
+      module: "Challenges.ConsecutiveIterates"
+      status: "proved"
+      note: "Iterates of the compositional inverse modulo 2r."
+    - source: "A396099, four conjectures modulo 4"
+      lean: "OEISProofs.ConsecutiveIterates.a396099_conjectures"
+      module: "Challenges.ConsecutiveIterates"
+      status: "proved"
+    - source: "A396798, first conjecture (modulo 8)"
+      lean: "OEISProofs.ConsecutiveIterates.a396798_residues"
+      module: "Challenges.ConsecutiveIterates"
+      status: "corrected"
+      note: "The residues repeat 1, 1, 5, 5 from n = 2, not from n = 1 as conjectured."
+    - source: "A393856-A393859 (definition)"
+      lean: "OEISProofs.ScaledInverses.existsUnique"
+      module: "Challenges.ScaledInverses"
+      status: "proved"
+      note: "For every integer q."
+    - source: "A393856-A393859, conjectures modulo q + 1"
+      lean: "OEISProofs.ScaledInverses.coeff_modEq_one"
+      module: "Challenges.ScaledInverses"
+      status: "proved"
+      note: "For every natural number q."
+    - source: "A393856, A393858, parity conjectures"
+      lean: "OEISProofs.ScaledInverses.odd_coeff_iff"
+      module: "Challenges.ScaledInverses"
+      status: "proved"
+      note: "For every even q."
+    - source: "A378580 (definition)"
+      lean: "OEISProofs.Theta.quotient_existsUnique"
+      module: "Challenges.Theta"
+      status: "proved"
+    - source: "A378580, conjecture modulo 4"
+      lean: "OEISProofs.Theta.quotient_coeff"
+      module: "Challenges.Theta"
+      status: "proved"
+    - source: "A378581 (definition)"
+      lean: "OEISProofs.Theta.product_existsUnique"
+      module: "Challenges.Theta"
+      status: "proved"
+    - source: "A378581, conjecture modulo 4"
+      lean: "OEISProofs.Theta.product_coeff"
+      module: "Challenges.Theta"
+      status: "proved"
+    - source: "A380060 (definition)"
+      lean: "OEISProofs.Theta.implicit_existsUnique"
+      module: "Challenges.Theta"
+      status: "proved"
+      note: "One-sided form of the sum; its equality with the two-sided sum is proved only in the paper."
+    - source: "A380060, conjecture modulo 4"
+      lean: "OEISProofs.Theta.implicit_coeff"
+      module: "Challenges.Theta"
+      status: "proved"
+    - source: "A380680, conjecture modulo 4"
+      lean: "OEISProofs.Theta.explicit_coeff"
+      module: "Challenges.Theta"
+      status: "disproved and corrected"
+      note: "One-sided form of the sum, as for A380060; the square pattern holds at n = 2j^2 instead."
+    - source: "A355872 (definition)"
+      lean: "OEISProofs.Theta.bilateral_existsUnique"
+      module: "Challenges.Theta"
+      status: "proved"
+    - source: "A355872, three congruences"
+      lean: "OEISProofs.Theta.bilateral_coeff"
+      module: "Challenges.Theta"
+      status: "proved"
+      note: "a(n) = 2(-1)^(n-1) mod 16, which implies the three congruences of the entry."
+    - source: "A393172 (definition)"
+      lean: "OEISProofs.Catalan.a393172_existsUnique"
+      module: "Challenges.Catalan"
+      status: "proved"
+    - source: "A393172, conjecture modulo 4"
+      lean: "OEISProofs.Catalan.a393172_coeff"
+      module: "Challenges.Catalan"
+      status: "proved"
+    - source: "A393171 (definition)"
+      lean: "OEISProofs.Catalan.a393171_existsUnique"
+      module: "Challenges.Catalan"
+      status: "proved"
+    - source: "A393171, conjecture modulo 8"
+      lean: "OEISProofs.Catalan.a393171_coeff"
+      module: "Challenges.Catalan"
+      status: "proved"
+    - source: "A389536 (definition)"
+      lean: "OEISProofs.Catalan.a389536_existsUnique"
+      module: "Challenges.Catalan"
+      status: "proved"
+    - source: "A389536, conjecture modulo 4"
+      lean: "OEISProofs.Catalan.a389536_coeff"
+      module: "Challenges.Catalan"
+      status: "proved"
+    - source: "A397588 (definition)"
+      lean: "OEISProofs.Catalan.a397588_existsUnique"
+      module: "Challenges.Catalan"
+      status: "proved"
+    - source: "A397588, conjecture modulo 2 and divisibility by 3"
+      lean: "OEISProofs.Catalan.a397588_coeff"
+      module: "Challenges.Catalan"
+      status: "proved"
+    - source: "A195194 (definition)"
+      lean: "OEISProofs.Catalan.a195194_existsUnique"
+      module: "Challenges.Catalan"
+      status: "proved"
+      note: "The infinite nest is formalized as a sequence of mutually inverse normalized series."
+    - source: "A195194, conjecture modulo 2"
+      lean: "OEISProofs.Catalan.a195194_coeff"
+      module: "Challenges.Catalan"
+      status: "proved"
+    - source: "A389537 (definition)"
+      lean: "OEISProofs.Halving.a389537_existsUnique"
+      module: "Challenges.Halving"
+      status: "proved"
+    - source: "A389537, conjecture modulo 4"
+      lean: "OEISProofs.Halving.a389537_coeff"
+      module: "Challenges.Halving"
+      status: "proved"
+    - source: "A389542 (definition)"
+      lean: "OEISProofs.Halving.a389542_existsUnique"
+      module: "Challenges.Halving"
+      status: "proved"
+    - source: "A389542, conjecture modulo 4"
+      lean: "OEISProofs.Halving.a389542_coeff"
+      module: "Challenges.Halving"
+      status: "proved"
+    - source: "A389474 (definition)"
+      lean: "OEISProofs.Halving.a389474_existsUnique"
+      module: "Challenges.Halving"
+      status: "proved"
+    - source: "A389474, conjectures modulo 9 and 3"
+      lean: "OEISProofs.Halving.a389474_coeff"
+      module: "Challenges.Halving"
+      status: "proved"
+      note: "The first in the stronger form A^2 = x^2 + 2x^3 mod 9."
+    - source: "A389475 (definition)"
+      lean: "OEISProofs.Halving.a389475_existsUnique"
+      module: "Challenges.Halving"
+      status: "proved"
+    - source: "A389475, two conjectures modulo 3"
+      lean: "OEISProofs.Halving.a389475_coeff"
+      module: "Challenges.Halving"
+      status: "proved"
+    - source: "A396093, two parity conjectures"
+      lean: "OEISProofs.OtherResults.a396093_coeff"
+      module: "Challenges.OtherResults"
+      status: "proved"
+    - source: "A392210 (formula (1) of the entry)"
+      lean: "OEISProofs.OtherResults.a392210_existsUnique"
+      module: "Challenges.OtherResults"
+      status: "proved"
+      note: "That the nested square of the entry's name defines this series is proved only in the paper."
+    - source: "A392210, parity observation"
+      lean: "OEISProofs.OtherResults.a392210_coeff"
+      module: "Challenges.OtherResults"
+      status: "proved"
+    - source: "A396102 (definition, r = 3) and its family"
+      lean: "OEISProofs.OtherResults.a396102_existsUnique"
+      module: "Challenges.OtherResults"
+      status: "proved"
+    - source: "A396102, conjecture modulo 3, and its family"
+      lean: "OEISProofs.OtherResults.a396102_coeff"
+      module: "Challenges.OtherResults"
+      status: "proved"
+    - source: "A380056 (definition)"
+      lean: "OEISProofs.OtherResults.a380056_existsUnique"
+      module: "Challenges.OtherResults"
+      status: "proved"
+    - source: "A380056 (integrality of the terms)"
+      lean: "OEISProofs.OtherResults.a380056_integral"
+      module: "Challenges.OtherResults"
+      status: "proved"
+    - source: "A380056, conjectures modulo 4 and 5"
+      lean: "OEISProofs.OtherResults.a380056_coeff"
+      module: "Challenges.OtherResults"
+      status: "proved"
+      note: "Also the exact residues modulo 5."
+    - source: "A397346, recurrence (7) of the entry"
+      lean: "OEISProofs.OtherResults.a397346_existsUnique"
+      module: "Challenges.OtherResults"
+      status: "proved"
+    - source: "A397346, conjecture modulo 8"
+      lean: "OEISProofs.OtherResults.a397346_coeff"
+      module: "Challenges.OtherResults"
+      status: "proved"
+      note: "Also integrality, n | a(n) and the residues of a(n)/n modulo 8."
+    - source: "A397346 (definition)"
+      lean: "OEISProofs.OtherResults.a397346_derivative"
+      module: "Challenges.OtherResults"
+      status: "proved"
+      note: "A' = A*H'; the step to A = exp(H) is proved only in the paper."
+    - source: "A394576 (definition)"
+      lean: "OEISProofs.OtherResults.a394576_existsUnique"
+      module: "Challenges.OtherResults"
+      status: "proved"
+      note: "Indexed from 0."
+    - source: "A394576, first conjecture"
+      lean: "OEISProofs.OtherResults.a394576_bounds"
+      module: "Challenges.OtherResults"
+      status: "proved"
+      note: "Also the matching lower bound and the partition of the positive integers."
 
 acknowledgements: >-
-  Thanks to the authors of Lean 4 and Mathlib, and to the contributors of the OEIS entries and
-  conjectures treated here.
+  Thanks to the developers of Lean 4 and Mathlib, and to Paul D. Hanna and Hoang Xuan Thanh, who
+  contributed the sequences and the conjectures treated here to the OEIS.

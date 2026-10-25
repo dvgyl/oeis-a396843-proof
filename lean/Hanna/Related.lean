@@ -1,2 +1,4 @@
-import Hanna.Related.ScaledInverse
-import Hanna.Related.ScaledParity
+module
+
+public import Hanna.Related.ScaledInverse
+public import Hanna.Related.ScaledParity

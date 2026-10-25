@@ -1,3 +1,5 @@
-import Hanna.BinaryWeight
-import Hanna.Divisibility
-import Hanna.Statements
+module
+
+public import Hanna.BinaryWeight
+public import Hanna.Divisibility
+public import Hanna.Statements

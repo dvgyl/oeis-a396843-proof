@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A195194,
   author = {Goyal, Dev D.},
   title = {{Parity of an infinitely nested series reversion}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A195194-Parity-of-an-infinitely-nested-series-reversion/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A195194-Parity-of-an-infinitely-nested-series-reversion/paper.pdf}},
   year = {2026}
 }
 ```

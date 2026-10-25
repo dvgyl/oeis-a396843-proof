@@ -1,9 +1,13 @@
-import Hanna.Series.Inverse
+module
+
+public import Hanna.Series.Inverse
 
 /-!
 Composition and the consecutive-iterate equation.  All objects are actual
 Mathlib power series; no coefficient identities are assumed.
 -/
+
+@[expose] public section
 
 namespace Consecutive
 
@@ -30,7 +34,7 @@ theorem iter_normalized {F : PowerSeries R} (hF : Normalized F) (n : ℕ) :
   | succ n ih => exact hF.compose ih
 
 theorem iter_constantCoeff {F : PowerSeries R} (hF : Normalized F) (n : ℕ) :
-    constantCoeff R (iter F n) = 0 := (iter_normalized hF n).constantCoeff
+    constantCoeff (iter F n) = 0 := (iter_normalized hF n).constantCoeff
 
 theorem iter_add {F : PowerSeries R} (hF : Normalized F) (m n : ℕ) :
     iter F (m+n) = compose (iter F m) (iter F n) := by

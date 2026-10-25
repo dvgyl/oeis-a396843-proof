@@ -1,8 +1,10 @@
-import Mathlib.Tactic
-import Mathlib.RingTheory.PowerSeries.Derivative
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Algebra.BigOperators.NatAntidiagonal
+module
+
+public import Mathlib.Tactic
+public import Mathlib.RingTheory.PowerSeries.Derivative
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Algebra.BigOperators.NatAntidiagonal
 
 /-!
 # A397346: an exponential recurrence modulo eight
@@ -11,6 +13,8 @@ AI-generated mathematical proof and formalization for Dev D. Goyal.
 The canonical integer sequence is constructed from the source recurrence,
 with exact division and all index restrictions made explicit.
 -/
+
+@[expose] public section
 
 namespace Families.ExpRecurrence
 
@@ -160,7 +164,6 @@ theorem a_source : Source (fun n => (a n : ℚ)) := by
     rw [Nat.cast_sub (by omega : i.val≤n)]
     have hz : (i.val : ℚ)+2≠0 := by positivity
     field_simp
-    ring
   rw [hs]
   ring
 
@@ -233,11 +236,11 @@ noncomputable def exponentSeries : PowerSeries ℚ := PowerSeries.mk fun n =>
     (2*(n : ℚ)^2-1)/(2*(n : ℚ)^2)*(a n : ℚ)
 
 theorem exponent_derivative_zero :
-    PowerSeries.coeff ℚ 0 (PowerSeries.derivative ℚ exponentSeries)=1 := by
+    PowerSeries.coeff (R := ℚ) 0 (PowerSeries.derivative (R := ℚ) exponentSeries)=1 := by
   simp [PowerSeries.coeff_derivative, exponentSeries, PowerSeries.coeff_mk]
 
 theorem exponent_derivative_succ (n : ℕ) :
-    PowerSeries.coeff ℚ (n+1) (PowerSeries.derivative ℚ exponentSeries) =
+    PowerSeries.coeff (R := ℚ) (n+1) (PowerSeries.derivative (R := ℚ) exponentSeries) =
       (2*(n+2 : ℚ)^2-1)/(2*(n+2 : ℚ))*(a (n+2) : ℚ) := by
   rw [PowerSeries.coeff_derivative]
   simp only [exponentSeries, PowerSeries.coeff_mk]
@@ -250,8 +253,8 @@ theorem exponent_derivative_succ (n : ℕ) :
 /-- The actual formal differential identity obtained by differentiating the
 source exponential equation. No analytic convergence is used. -/
 theorem a_differential_equation :
-    PowerSeries.derivative ℚ generatingFunction =
-      generatingFunction * PowerSeries.derivative ℚ exponentSeries := by
+    PowerSeries.derivative (R := ℚ) generatingFunction =
+      generatingFunction * PowerSeries.derivative (R := ℚ) exponentSeries := by
   rw [mul_comm]
   ext n
   rw [PowerSeries.coeff_derivative, PowerSeries.coeff_mul,

@@ -1,5 +1,9 @@
-import Mathlib.Algebra.Ring.Basic
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Mathlib.Algebra.Ring.Basic
+public import Mathlib.Tactic.LinearCombination
+
+@[expose] public section
 
 namespace Hanna.Series
 

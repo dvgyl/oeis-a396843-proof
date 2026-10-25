@@ -1,0 +1,16 @@
+{
+  "challenge_module": "Challenges.Theta",
+  "solution_module": "Solutions.Theta",
+  "theorem_names": [
+    "OEISProofs.Theta.quotient_existsUnique",
+    "OEISProofs.Theta.quotient_coeff",
+    "OEISProofs.Theta.product_existsUnique",
+    "OEISProofs.Theta.product_coeff",
+    "OEISProofs.Theta.implicit_existsUnique",
+    "OEISProofs.Theta.implicit_coeff",
+    "OEISProofs.Theta.explicit_coeff",
+    "OEISProofs.Theta.bilateral_existsUnique",
+    "OEISProofs.Theta.bilateral_coeff"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

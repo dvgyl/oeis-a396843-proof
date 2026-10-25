@@ -1,4 +1,8 @@
-import Hanna.Recurrences
+module
+
+public import Hanna.Recurrences
+
+@[expose] public section
 
 namespace Hanna
 open PowerSeries
@@ -22,7 +26,7 @@ lemma parameter_dvd_fg (m : ℤ) (r : ℕ) (hr : 1 ≤ r) : m ∣ f m r ∧ m �
     exact dvd_mul_of_dvd_left (ih j (Finset.mem_Ico.mp hj).2 (Finset.mem_Ico.mp hj).1).1 _
 
 lemma parameter_dvd_coeff_G_pow (m : ℤ) (k r : ℕ) (hr : 1 ≤ r) :
-    m ∣ coeff ℤ r ((G m)^k) := by
+    m ∣ coeff (R := ℤ) r ((G m)^k) := by
   induction k generalizing r with
   | zero => simp [show r ≠ 0 by omega]
   | succ k ih =>
@@ -39,8 +43,8 @@ lemma square_dvd_g_add_f (m : ℤ) (r : ℕ) (hr : 1 ≤ r) :
     m^2 ∣ g m r + f m r := by
   rw [g_recurrence m r hr]
   have heq : -f m r - (∑ j ∈ Finset.Ico 1 r,
-      f m j * coeff ℤ (r-j) ((G m)^(j+1))) + f m r =
-      -(∑ j ∈ Finset.Ico 1 r, f m j * coeff ℤ (r-j) ((G m)^(j+1))) := by ring
+      f m j * coeff (R := ℤ) (r-j) ((G m)^(j+1))) + f m r =
+      -(∑ j ∈ Finset.Ico 1 r, f m j * coeff (R := ℤ) (r-j) ((G m)^(j+1))) := by ring
   rw [heq, dvd_neg]
   apply Finset.dvd_sum
   intro j hj

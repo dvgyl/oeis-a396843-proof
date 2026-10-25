@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A396102,
   author = {Goyal, Dev D.},
   title = {{Every coefficient is $1$ modulo $3$: the series with $A(A(A(x)))=(1+x)\,A(A(x))$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A396102-Every-coefficient-is-1-modulo-3/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A396102-Every-coefficient-is-1-modulo-3/paper.pdf}},
   year = {2026}
 }
 ```

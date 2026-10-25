@@ -1,4 +1,6 @@
-import Families.InverseIterate
+module
+
+public import Families.InverseIterate
 
 /-!
 # OEIS A396102
@@ -8,10 +10,11 @@ repository root), proved using the shared libraries of this project.
 Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
 
+@[expose] public section
+
 namespace OEIS.A396102
 
 open PowerSeries Hanna.Series
-
 
 noncomputable section
 
@@ -36,11 +39,11 @@ theorem source_existence_uniqueness :
   exact source_unique U hU.1 hU.2
 
 theorem coefficient_congruence (n : ℕ) (hn : 1 ≤ n) :
-    (coeff ℤ n A : ZMod 3) = 1 :=
+    (coeff (R := ℤ) n A : ZMod 3) = 1 :=
   InverseIterate.a396102_congruence n hn
 
 theorem iterate_congruence (k n : ℕ) (hn : 1 ≤ n) :
-    (coeff ℤ n (iter A k) : ZMod 3) = (k : ZMod 3)^(n-1) :=
+    (coeff (R := ℤ) n (iter A k) : ZMod 3) = (k : ZMod 3)^(n-1) :=
   InverseIterate.iterate_coefficient_congruence 3 k n hn
 
 theorem family_source_existence (r : ℕ) :
@@ -67,11 +70,11 @@ theorem inverse_left (r : ℕ) :
   InverseIterate.compose_F_R r
 
 theorem family_coefficient_congruence (r n : ℕ) (hn : 1 ≤ n) :
-    (coeff ℤ n (InverseIterate.F r) : ZMod r) = 1 :=
+    (coeff (R := ℤ) n (InverseIterate.F r) : ZMod r) = 1 :=
   InverseIterate.coefficient_congruence r n hn
 
 theorem family_iterate_congruence (r k n : ℕ) (hn : 1 ≤ n) :
-    (coeff ℤ n (iter (InverseIterate.F r) k) : ZMod r) =
+    (coeff (R := ℤ) n (iter (InverseIterate.F r) k) : ZMod r) =
       (k : ZMod r)^(n-1) :=
   InverseIterate.iterate_coefficient_congruence r k n hn
 

@@ -1,4 +1,6 @@
-import Consecutive
+module
+
+public import Consecutive
 
 /-!
 # OEIS A396099
@@ -7,6 +9,8 @@ Statements of the results in the accompanying paper (listed in `CONTENTS.md` at 
 repository root), proved using the shared libraries of this project.
 Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace OEIS.A396099
 
@@ -32,12 +36,12 @@ theorem exact_composition_order (k : ℤ) :
 
 theorem a396099_all_four {F : PowerSeries ℤ} (hF : Normalized F)
     (hEq : F=X+compose F F*compose F (compose F F)) :
-    (∀ n : ℕ, 0<n → Odd (coeff ℤ n F)) ∧
+    (∀ n : ℕ, 0<n → Odd (coeff (R := ℤ) n F)) ∧
     (∀ n : ℕ, 3≤n →
-      (coeff ℤ n F:ZMod 4)=if n%4=0 ∨ n%4=1 then 3 else 1) ∧
-    (∀ n : ℕ, 2<n → (coeff ℤ n (compose F F):ZMod 4)=0) ∧
+      (coeff (R := ℤ) n F:ZMod 4)=if n%4=0 ∨ n%4=1 then 3 else 1) ∧
+    (∀ n : ℕ, 2<n → (coeff (R := ℤ) n (compose F F):ZMod 4)=0) ∧
     (∀ n : ℕ, 2<n →
-      (coeff ℤ n (F-X*compose F (compose F F)):ZMod 4)=2) := by
+      (coeff (R := ℤ) n (F-X*compose F (compose F F)):ZMod 4)=2) := by
   exact Consecutive.a396099_all_four (F := F) hF hEq
 
 theorem a396099_odd (n : ℕ) (hn : 0<n) : Odd (a 2 n) := by
@@ -55,7 +59,7 @@ theorem a396099_period (j : ℕ) :
   exact Consecutive.a396099_period j
 
 theorem a396099_second_iterate_series :
-    iter (solution (R:=ZMod 4) 2) 2=X+C (ZMod 4) 2*X^2 := by
+    iter (solution (R:=ZMod 4) 2) 2=X+C (R := (ZMod 4)) 2*X^2 := by
   exact Consecutive.a396099_second_iterate_series
 
 theorem a396099_second_iterate (n : ℕ) (hn : 2<n) :
@@ -64,11 +68,11 @@ theorem a396099_second_iterate (n : ℕ) (hn : 2<n) :
 
 theorem a396099_difference_series :
     solution (R:=ZMod 4) 2-X*iter (solution (R:=ZMod 4) 2) 3=
-      X+C (ZMod 4) 2*X^3*geom 1 := by
+      X+C (R := (ZMod 4)) 2*X^3*geom 1 := by
   exact Consecutive.a396099_difference_series
 
 theorem a396099_difference (n : ℕ) (hn : 2<n) :
-    (coeff ℤ n (solution (R:=ℤ) 2-X*iter (solution (R:=ℤ) 2) 3):ZMod 4)=2 := by
+    (coeff (R := ℤ) n (solution (R:=ℤ) 2-X*iter (solution (R:=ℤ) 2) 3):ZMod 4)=2 := by
   exact Consecutive.a396099_difference n hn
 
 end OEIS.A396099

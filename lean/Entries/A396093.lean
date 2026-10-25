@@ -1,4 +1,6 @@
-import Families.RationalParity
+module
+
+public import Families.RationalParity
 
 /-!
 # OEIS A396093
@@ -8,16 +10,17 @@ repository root), proved using the shared libraries of this project.
 Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
 
+@[expose] public section
+
 namespace OEIS.A396093
 
 open PowerSeries Hanna.Series
-
 
 noncomputable section
 
 abbrev B : PowerSeries ℤ := RationalParity.B
 abbrev A : PowerSeries ℤ := RationalParity.A
-def a (n : ℕ) : ℤ := coeff ℤ n A
+def a (n : ℕ) : ℤ := coeff (R := ℤ) n A
 
 theorem source_denominator : B * (1-X)^2 = X :=
   RationalParity.B_denominator
@@ -25,7 +28,7 @@ theorem source_denominator : B * (1-X)^2 = X :=
 theorem source_composition : A = compose B (compose B B) :=
   RationalParity.A_definition
 
-theorem coefficient_definition (n : ℕ) : a n = coeff ℤ n A := rfl
+theorem coefficient_definition (n : ℕ) : a n = coeff (R := ℤ) n A := rfl
 
 theorem reduced_denominator :
     (RationalParity.A : PowerSeries (ZMod 2)) * (1+X^10) = X+X^3+X^7+X^9 :=

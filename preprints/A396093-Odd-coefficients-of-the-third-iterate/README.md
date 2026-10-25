@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A396093,
   author = {Goyal, Dev D.},
   title = {{When are the coefficients of $B(B(B(x)))$ odd?}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A396093-Odd-coefficients-of-the-third-iterate/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A396093-Odd-coefficients-of-the-third-iterate/paper.pdf}},
   year = {2026}
 }
 ```

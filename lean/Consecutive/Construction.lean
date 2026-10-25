@@ -1,6 +1,10 @@
-import Consecutive.Basic
+module
+
+public import Consecutive.Basic
 
 /-! Canonical normalized solutions over arbitrary commutative rings. -/
+
+@[expose] public section
 
 namespace Consecutive
 
@@ -9,7 +13,7 @@ open PowerSeries Hanna.Series
 variable {R : Type*} [CommRing R]
 
 lemma equation_triangular (r : ℕ) :
-    Triangular (fun a n => coeff R (n+2) (ofTail a-step r (ofTail a))) := by
+    Triangular (fun (a : ℕ → R) n => coeff (n+2) (ofTail a-step r (ofTail a))) := by
   intro n a b hab
   have hd := (agree_iff_X_pow_dvd_sub (n+2) (ofTail a) (ofTail b)).mp
     (ofTail_agree a b n hab)
@@ -20,7 +24,7 @@ lemma equation_triangular (r : ℕ) :
 
 theorem solution_exists (r : ℕ) :
     ∃ F : PowerSeries R, Normalized F ∧ F=step r F := by
-  let op := fun a n => coeff R (n+2) (ofTail a-step r (ofTail a))
+  let op := fun (a : ℕ → R) n => coeff (n+2) (ofTail a-step r (ofTail a))
   let a := triangularCoeffs op (fun _ => 0)
   have ha := triangularCoeffs_spec op (equation_triangular r) (fun _ => 0)
   refine ⟨ofTail a, normalized_ofTail a, ?_⟩
@@ -30,7 +34,7 @@ theorem solution_exists (r : ℕ) :
   · exact (normalized_ofTail a).1.trans hs.1.symm
   · exact (normalized_ofTail a).2.trans hs.2.symm
   · have hc := congrFun ha n
-    change coeff R (n+2) (ofTail a-step r (ofTail a))=0 at hc
+    change coeff (n+2) (ofTail a-step r (ofTail a))=0 at hc
     simpa only [map_sub, sub_eq_zero, Nat.succ_eq_add_one, Nat.add_assoc] using hc
 
 theorem solution_unique (r : ℕ) {A B : PowerSeries R}
@@ -68,10 +72,10 @@ theorem map_solution (f : R →+* S) (r : ℕ) :
   · rw [← map_step f r (solution_normalized r), ← solution_equation]
   · exact solution_equation r
 
-noncomputable def a (r n : ℕ) : ℤ := coeff ℤ n (solution (R:=ℤ) r)
+noncomputable def a (r n : ℕ) : ℤ := coeff (R := ℤ) n (solution (R:=ℤ) r)
 
 noncomputable def iterateCoeff (r k n : ℕ) : ℤ :=
-  coeff ℤ n (iter (solution (R:=ℤ) r) k)
+  coeff (R := ℤ) n (iter (solution (R:=ℤ) r) k)
 
 @[simp] theorem a_zero (r : ℕ) : a r 0=0 := (solution_normalized r).1
 

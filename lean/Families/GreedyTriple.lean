@@ -1,6 +1,8 @@
-import Mathlib.Tactic
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Order.Interval.Finset.Nat
+module
+
+public import Mathlib.Tactic
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Order.Interval.Finset.Nat
 
 /-!
 # The greedy sequence avoiding sums of three consecutive terms (A394576)
@@ -12,6 +14,8 @@ The source sequence and conjectures are due to Hoang Xuan Thanh.
 We construct it in blocks, prove the literal greedy-minimum specification,
 prove uniqueness for that specification, and then deduce all-index bounds.
 -/
+
+@[expose] public section
 
 namespace Families.GreedyTriple
 
@@ -35,7 +39,8 @@ theorem recurrence (n : ℕ) (hn : 3 ≤ n) :
     sequence n = 4 * (n / 3) + n % 3 +
       if skipped sequence (n / 3) ≤ 4 * (n / 3) + n % 3 then 1 else 0 := by
   rw [sequence]
-  simp [show ¬n < 3 by omega, skipped]
+  simp only [show ¬n < 3 by omega, if_false, skipped]
+  exact if_congr Iff.rfl rfl rfl
 
 theorem upper_sum (k : ℕ) (hk : 1 ≤ k) :
     (4 * (k - 1) + 3) / 3 + (4 * k + 3) / 3 +

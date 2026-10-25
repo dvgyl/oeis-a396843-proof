@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A393859,
   author = {Goyal, Dev D.},
   title = {{Congruences for the series $A$ with $A\bigl(x-x\,A(7x)/7\bigr)=x$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A393859-Congruences-for-a-scaled-inverse-series-q-7/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A393859-Congruences-for-a-scaled-inverse-series-q-7/paper.pdf}},
   year = {2026}
 }
 ```

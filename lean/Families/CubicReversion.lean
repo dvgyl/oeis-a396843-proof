@@ -1,4 +1,6 @@
-import Families.CubicFrobenius
+module
+
+public import Families.CubicFrobenius
 
 /-!
 AI-generated formalization by ChatGPT (OpenAI) for Dev D. Goyal.
@@ -9,6 +11,8 @@ The integer solution is constructed before its congruences are proved.
 Its coefficient recursion divides an always-even residual by two.
 -/
 
+@[expose] public section
+
 namespace Families.CubicReversion
 
 open PowerSeries Hanna.Series
@@ -18,10 +22,10 @@ noncomputable section
 variable {R : Type*} [CommRing R]
 
 def residual (s : R) (A : PowerSeries R) : PowerSeries R :=
-  A^2+2*C R s*A^3-compose A (3*X^2)+2*X^2
+  A^2+2*C s*A^3-compose A (3*X^2)+2*X^2
 
 def Equation (s : R) (A : PowerSeries R) : Prop :=
-  compose A (3*X^2)=2*X^2+A^2+2*C R s*A^3
+  compose A (3*X^2)=2*X^2+A^2+2*C s*A^3
 
 theorem equation_iff_residual (s : R) (A : PowerSeries R) :
     Equation s A ↔ residual s A=0 := by
@@ -42,7 +46,7 @@ theorem residual_perturbation (s : R) (A B : PowerSeries R) (r : ℕ) (hr : 2≤
       (dvd_add (X_pow_dvd_product hb hb) (X_pow_dvd_product hb ha))
       (X_pow_dvd_product ha ha)
   have hsquare := X_pow_dvd_product hab hsum
-  have hcube := dvd_mul_of_dvd_left (X_pow_dvd_product hab hquad) (2*C R s)
+  have hcube := dvd_mul_of_dvd_left (X_pow_dvd_product hab hquad) (2*C s)
   have hcomp : (X : PowerSeries R)^(r+2)∣compose (B-A) (3*X^2) := by
     have h := compose_outer_vanish (B-A) (3*X^2) r 2 (by simp) hab
       (dvd_mul_left (X^2) 3)
@@ -51,8 +55,8 @@ theorem residual_perturbation (s : R) (A B : PowerSeries R) (r : ℕ) (hr : 2≤
   rw [compose_sub _ _ _ (by simp)] at h
   convert h using 1; unfold residual; ring
 
-theorem residual_X (s : R) : residual s (X : PowerSeries R)=2*C R s*X^3 := by
-  have hz : constantCoeff R (3*X^2 : PowerSeries R)=0 := by simp
+theorem residual_X (s : R) : residual s (X : PowerSeries R)=2*C s*X^3 := by
+  have hz : constantCoeff (3*X^2 : PowerSeries R)=0 := by simp
   rw [residual, compose_X_left _ hz]
   ring
 
@@ -72,28 +76,28 @@ theorem residual_vanish_initial (s : R) (A : PowerSeries R) (hA : Normalized A) 
 
 theorem map_residual {S : Type*} [CommRing S] (f : R →+* S) (s : R) (A : PowerSeries R) :
     PowerSeries.map f (residual s A)=residual (f s) (PowerSeries.map f A) := by
-  have hz : constantCoeff R (3*X^2 : PowerSeries R)=0 := by simp
+  have hz : constantCoeff (3*X^2 : PowerSeries R)=0 := by simp
   simp only [residual, map_add, map_sub, map_mul, map_pow, PowerSeries.map_C,
     PowerSeries.map_X, map_ofNat, map_compose f A (3*X^2) hz]
 
 theorem residual_even (s : ℤ) (A : PowerSeries ℤ) (n : ℕ) :
-    (2:ℤ)∣coeff ℤ n (residual s A) := by
+    (2:ℤ)∣coeff (R := ℤ) n (residual s A) := by
   have hm : PowerSeries.map (Int.castRingHom (ZMod 2)) (residual s A)=0 := by
     rw [map_residual]
     have htwo : (2 : PowerSeries (ZMod 2))=0 := by
       have h : (2 : ZMod 2)=0 := by decide
-      simpa only [map_ofNat, map_zero] using congrArg (C (ZMod 2)) h
+      simpa only [map_ofNat, map_zero] using congrArg (C (R := (ZMod 2))) h
     have hthree : (3 : PowerSeries (ZMod 2))=1 := by
       have h : (3 : ZMod 2)=1 := by decide
-      simpa only [map_ofNat, map_one] using congrArg (C (ZMod 2)) h
+      simpa only [map_ofNat, map_one] using congrArg (C (R := (ZMod 2))) h
     simp only [residual, htwo, hthree, zero_mul, one_mul, add_zero]
     rw [square_substitution (PowerSeries.map (Int.castRingHom (ZMod 2)) A), sub_self]
-  have hc := congrArg (coeff (ZMod 2) n) hm
+  have hc := congrArg (coeff (R := (ZMod 2)) n) hm
   simp only [coeff_map, Int.coe_castRingHom, map_zero] at hc
   exact (ZMod.intCast_zmod_eq_zero_iff_dvd _ 2).mp hc
 
 def recursionOperator (s : ℤ) (a : ℕ → ℤ) (n : ℕ) : ℤ :=
-  coeff ℤ (n+3) (residual s (ofTail a))/2
+  coeff (R := ℤ) (n+3) (residual s (ofTail a))/2
 
 theorem recursion_triangular (s : ℤ) : Triangular (recursionOperator s) := by
   intro n a b hab
@@ -102,7 +106,7 @@ theorem recursion_triangular (s : ℤ) : Triangular (recursionOperator s) := by
   have hp := residual_perturbation s (ofTail b) (ofTail a) (n+2) (by omega)
     (normalized_ofTail b) (normalized_ofTail a) hd
   have hc := X_pow_dvd_iff.mp hp (n+3) (by omega)
-  have hx (F : PowerSeries ℤ) : coeff ℤ (n+3) (2*X*F)=2*coeff ℤ (n+2) F := by
+  have hx (F : PowerSeries ℤ) : coeff (R := ℤ) (n+3) (2*X*F)=2*coeff (R := ℤ) (n+2) F := by
     simp [two_mul, add_mul, show n+3=(n+2)+1 by omega]
   simp only [map_sub, hx, coeff_ofTail] at hc
   unfold recursionOperator
@@ -117,7 +121,7 @@ theorem solution_exists (s : ℤ) :
   by_cases hn : n<3
   · exact X_pow_dvd_iff.mp (residual_vanish_initial s (ofTail a) (normalized_ofTail a)) n hn
   · have he := congrFun ha (n-3)
-    change coeff ℤ (n-3+3) (residual s (ofTail a))/2=0 at he
+    change coeff (R := ℤ) (n-3+3) (residual s (ofTail a))/2=0 at he
     rw [Nat.sub_add_cancel (by omega)] at he
     obtain ⟨k,hk⟩ := residual_even s (ofTail a) n
     simp only [map_zero]
@@ -138,7 +142,7 @@ theorem solution_unique (s : ℤ) {A B : PowerSeries ℤ} (hA : Normalized A)
       have hp := residual_perturbation s B A n (by omega) hB hA hd
       have hc := X_pow_dvd_iff.mp hp (n+1) (by omega)
       rw [hzA, hzB] at hc
-      have hx : coeff ℤ (n+1) (2*X*(A-B))=2*(coeff ℤ n A-coeff ℤ n B) := by
+      have hx : coeff (R := ℤ) (n+1) (2*X*(A-B))=2*(coeff (R := ℤ) n A-coeff (R := ℤ) n B) := by
         simp [two_mul, add_mul]
       simp only [zero_sub, sub_zero, map_neg, hx] at hc
       omega

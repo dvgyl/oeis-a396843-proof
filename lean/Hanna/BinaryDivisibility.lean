@@ -1,5 +1,9 @@
-import Hanna.Recurrences
-import Hanna.BinaryWeight
+module
+
+public import Hanna.Recurrences
+public import Hanna.BinaryWeight
+
+@[expose] public section
 
 namespace Hanna
 open PowerSeries
@@ -12,8 +16,8 @@ lemma binary_product_dvd (m x y : R) (i j : ℕ)
   simpa only [pow_add] using mul_dvd_mul hx hy
 
 lemma binary_coeff_pow_dvd (m : R) (H : PowerSeries R) (d k : ℕ)
-    (hH : ∀ i ≤ d, m ^ binaryWeight i ∣ coeff R i H) :
-    m ^ binaryWeight d ∣ coeff R d (H^k) := by
+    (hH : ∀ i ≤ d, m ^ binaryWeight i ∣ coeff i H) :
+    m ^ binaryWeight d ∣ coeff d (H^k) := by
   induction k generalizing d with
   | zero =>
     by_cases hd : d = 0
@@ -77,13 +81,13 @@ lemma binary_divisibility_shifted (m : R) (r : ℕ) :
     simpa only [hs] using binary_product_dvd m _ _ j (r-j) (ih j hjhi).1 hp
 
 lemma binary_divisibility_coeff_A (m : R) (n : ℕ) (hn : 1 ≤ n) :
-    m ^ binaryWeight (n-1) ∣ coeff R n (A m) := by
+    m ^ binaryWeight (n-1) ∣ coeff n (A m) := by
   have h := (binary_divisibility_shifted m (n-1)).1
   rw [f_eq_coeff_A] at h
   simpa only [Nat.sub_add_cancel hn] using h
 
 lemma binary_divisibility_coeff_B (m : R) (n : ℕ) (hn : 1 ≤ n) :
-    m ^ binaryWeight (n-1) ∣ coeff R n (B m) := by
+    m ^ binaryWeight (n-1) ∣ coeff n (B m) := by
   have h := (binary_divisibility_shifted m (n-1)).2
   rw [g_eq_coeff_B] at h
   simpa only [Nat.sub_add_cancel hn] using h

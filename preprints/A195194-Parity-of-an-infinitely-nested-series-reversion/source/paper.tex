@@ -58,7 +58,8 @@ ideas. Claude Opus~5.5, used with Claude Code, then checked the work independent
 source and confirmed that they rely only on Lean's three standard axioms, recomputed the sequence from its definition
 compared it with the published terms and tested every claim numerically, and read every step of the proofs. It also wrote the present
 version of this paper.
-Dev~D.~Goyal has verified the results and is responsible for them. The paper has not been peer reviewed.
+Dev~D.~Goyal has reviewed the proofs and is responsible for them; this review is not an independent expert validation.
+The paper has not been peer reviewed.
 The section ``About this paper'' at the end gives the details.
 \end{minipage}\end{center}
 
@@ -385,7 +386,7 @@ A computation can only test finitely many cases, so it is a check on the definit
 
 \para{Formal proof in Lean.}
 Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical statements and their proofs are written
-in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.19.0) on top of
+in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.35.0) on top of
 Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements are collected in the file \texttt{lean/Entries/A195194.lean} of the repository,
 in the namespace \texttt{OEIS.A195194}. There, for a sequence of weights \texttt{w}, the series $F_j$ of the solution is \texttt{tail w j}, and the series $F^{[d]}_j$ of the tower of height $d$ is \texttt{approximation w d j}. The proofs are in the module \texttt{lean/Families/NestedReversion.lean}.
 The table lists where each result of this paper is proved.
@@ -407,7 +408,9 @@ Lean's \texttt{\#print axioms} command. Every one depends only on the three stan
 (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}); no step is left unproved. A formal proof certifies
 exactly the statement that Lean checks. Whether that statement says what the OEIS entry means is a separate question,
 so the Lean definitions were also compared with the definition in the OEIS entry
-(Section~\ref{sec:sequence}).
+(Section~\ref{sec:sequence}). The principal theorems are stated once more, using only Mathlib's definitions, in the
+file \texttt{lean/Challenges/Catalan.lean}, and Lean's Comparator tool confirms that the
+proved theorems have exactly these statements.
 
 \section{Discussion}\label{sec:discussion}
 
@@ -449,7 +452,8 @@ Section~\ref{sec:results} and the proof strategies are ChatGPT's. The Discussion
 in it, was written by Claude Opus~5.5; its observations were checked by computer and are not part of the Lean
 formalization.
 \end{itemize}
-Dev~D.~Goyal has verified the results and is responsible for this paper.
+Dev~D.~Goyal has reviewed the proofs and is responsible for this paper; this review is not an independent expert
+validation.
 
 \para{Review status.} This paper has not been peer reviewed, and it has not been submitted to a journal or to the OEIS.
 
@@ -473,7 +477,7 @@ The sequence and the conjecture are due to Paul~D.~Hanna~\cite{oeis}.
 \bibitem{stanley} R.~P.~Stanley, \emph{Enumerative Combinatorics}, Volume~2, Cambridge University Press, 1999. (Chapter~5 treats formal power series, composition and compositional inverses.)
 \bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.
 \bibitem{lean} L.~de~Moura and S.~Ullrich, The Lean~4 theorem prover and programming language, in \emph{Automated Deduction -- CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635.
-\bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{c44e0c8ee63c}.
-\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures}, repository, 2026. \url{https://github.com/dvgyl/oeis-a396843-proof}.
+\bibitem{mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381. Version used: commit \texttt{56a005855ea1}.
+\bibitem{repo} D.~D.~Goyal, \emph{Proofs and corrections of OEIS conjectures}, repository, 2026. \url{https://github.com/dvgyl/oeis-proofs}.
 \end{thebibliography}
 \end{document}

@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A389537,
   author = {Goyal, Dev D.},
   title = {{Congruences modulo $4$ for the series with $A\bigl(A(x)-x\bigr)=A(x)^2$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A389537-Congruences-modulo-4-for-a-sparse-reversion/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A389537-Congruences-modulo-4-for-a-sparse-reversion/paper.pdf}},
   year = {2026}
 }
 ```

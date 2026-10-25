@@ -1,4 +1,6 @@
-import Std
+module
+
+public import Std
 
 /-!
 # Binary digit weight
@@ -8,6 +10,8 @@ at each step it adds the remainder modulo two and divides the input by two.
 No digit-sum inequality is assumed. The inequalities below are proved from
 this definition and elementary natural-number arithmetic.
 -/
+
+@[expose] public section
 
 namespace Hanna
 

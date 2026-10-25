@@ -1,25 +1,27 @@
-import Families.BilateralTheta
-import Families.CatalanComposition
-import Families.CatalanStatements
-import Families.CubicConsequences
-import Families.CubicFrobenius
-import Families.CubicReversion
-import Families.DifferentialParity
-import Families.ElementaryStatements
-import Families.ExpCosine
-import Families.ExpCosineStatements
-import Families.ExpRecurrence
-import Families.GreedyTriple
-import Families.InverseIterate
-import Families.LacunaryInverse
-import Families.MahlerParity
-import Families.ModFour
-import Families.NestedBinomial
-import Families.NestedReversion
-import Families.NestedStatements
-import Families.RationalParity
-import Families.SquareComposition
-import Families.SquareReversion
-import Families.ThetaRational
-import Families.ThetaRationalStatements
-import Families.ThetaSubstitution
+module
+
+public import Families.BilateralTheta
+public import Families.CatalanComposition
+public import Families.CatalanStatements
+public import Families.CubicConsequences
+public import Families.CubicFrobenius
+public import Families.CubicReversion
+public import Families.DifferentialParity
+public import Families.ElementaryStatements
+public import Families.ExpCosine
+public import Families.ExpCosineStatements
+public import Families.ExpRecurrence
+public import Families.GreedyTriple
+public import Families.InverseIterate
+public import Families.LacunaryInverse
+public import Families.MahlerParity
+public import Families.ModFour
+public import Families.NestedBinomial
+public import Families.NestedReversion
+public import Families.NestedStatements
+public import Families.RationalParity
+public import Families.SquareComposition
+public import Families.SquareReversion
+public import Families.ThetaRational
+public import Families.ThetaRationalStatements
+public import Families.ThetaSubstitution

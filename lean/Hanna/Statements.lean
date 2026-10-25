@@ -1,5 +1,9 @@
-import Hanna.Corollaries
-import Hanna.Parity
+module
+
+public import Hanna.Corollaries
+public import Hanna.Parity
+
+@[expose] public section
 
 namespace Hanna.Statements
 

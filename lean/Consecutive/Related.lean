@@ -1,4 +1,6 @@
-import Consecutive.Coefficients
+module
+
+public import Consecutive.Coefficients
 
 /-!
 # Related OEIS conjectures
@@ -9,6 +11,8 @@ natural-iterate assertions for A396807.  Every endpoint refers to the canonical
 integer solution of the original functional equation.
 -/
 
+@[expose] public section
+
 namespace Consecutive
 
 open PowerSeries Hanna.Series
@@ -16,7 +20,7 @@ open PowerSeries Hanna.Series
 noncomputable section
 
 private theorem weighted_correction_eight (n : ℕ) (hn : 2≤n) :
-    coeff (ZMod 8) n (C (ZMod 8) 4*correction) =
+    coeff (R := (ZMod 8)) n (C (R := (ZMod 8)) 4*correction) =
       if n%4=0 ∨ n%4=1 then 4 else 0 := by
   rw [coeff_C_mul, coeff_correction]
   by_cases hn4 : 4≤n
@@ -36,9 +40,9 @@ theorem a396798_iterate_residue (k n : ℕ) (hn : 2≤n) :
     (Int.castRingHom (ZMod 8)) (iterateCoeff 4 k n) from rfl, cast_iterateCoeff]
   have hi := iter_solution_mod 4 k
   change iter (solution (R:=ZMod 8) 4) k =
-    mobius (k:ZMod 8)+if Even 4 ∧ Odd k then C (ZMod 8) 4*correction else 0 at hi
+    mobius (k:ZMod 8)+if Even 4 ∧ Odd k then C (R := (ZMod 8)) 4*correction else 0 at hi
   rw [hi, map_add]
-  have hm : coeff (ZMod 8) n (mobius (k:ZMod 8)) = (k:ZMod 8)^(n-1) := by
+  have hm : coeff (R := (ZMod 8)) n (mobius (k:ZMod 8)) = (k:ZMod 8)^(n-1) := by
     obtain ⟨m,rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : n≠0)
     simp
   rw [hm]

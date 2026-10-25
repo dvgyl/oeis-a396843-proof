@@ -1,4 +1,6 @@
-import Families.CatalanStatements
+module
+
+public import Families.CatalanStatements
 
 /-!
 # OEIS A393172
@@ -7,6 +9,8 @@ Statements of the results in the accompanying paper (listed in `CONTENTS.md` at 
 repository root), proved using the shared libraries of this project.
 Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace OEIS.A393172
 
@@ -18,24 +22,24 @@ attribute [local instance] Classical.propDecidable
 
 theorem first_existence :
     ∃! F : PowerSeries ℤ,
-      (coeff ℤ 0 F=0 ∧ coeff ℤ 1 F=1) ∧ compose F (X-X^2)=X+F^2 :=
+      (coeff (R := ℤ) 0 F=0 ∧ coeff (R := ℤ) 1 F=1) ∧ compose F (X-X^2)=X+F^2 :=
   a393172_existence_uniqueness
 
 theorem first_definition :
-    coeff ℤ 0 CatalanComposition.A=0 ∧ coeff ℤ 1 CatalanComposition.A=1 ∧
+    coeff (R := ℤ) 0 CatalanComposition.A=0 ∧ coeff (R := ℤ) 1 CatalanComposition.A=1 ∧
       compose (CatalanComposition.A : PowerSeries ℤ) (X-X^2)=X+CatalanComposition.A^2 :=
   ⟨A_normalized.1,A_normalized.2,A_equation⟩
 
 theorem first_residue (n : ℕ) (hn : 1<n) :
-    (((coeff ℤ n CatalanComposition.A : ℤ) : ZMod 4)=2 ↔ ∃ k : ℕ, n=2^k) ∧
-    (((coeff ℤ n CatalanComposition.A : ℤ) : ZMod 4)=0 ↔ ¬∃ k : ℕ, n=2^k) :=
+    (((coeff (R := ℤ) n CatalanComposition.A : ℤ) : ZMod 4)=2 ↔ ∃ k : ℕ, n=2^k) ∧
+    (((coeff (R := ℤ) n CatalanComposition.A : ℤ) : ZMod 4)=0 ↔ ¬∃ k : ℕ, n=2^k) :=
   a393172_residue n hn
 
 theorem first_arbitrary_source (F : PowerSeries ℤ)
-    (h0 : coeff ℤ 0 F=0) (h1 : coeff ℤ 1 F=1)
+    (h0 : coeff (R := ℤ) 0 F=0) (h1 : coeff (R := ℤ) 1 F=1)
     (he : compose F (X-X^2)=X+F^2) (n : ℕ) (hn : 1<n) :
-    (((coeff ℤ n F : ℤ) : ZMod 4)=2 ↔ ∃ k : ℕ, n=2^k) ∧
-    (((coeff ℤ n F : ℤ) : ZMod 4)=0 ↔ ¬∃ k : ℕ, n=2^k) := by
+    (((coeff (R := ℤ) n F : ℤ) : ZMod 4)=2 ↔ ∃ k : ℕ, n=2^k) ∧
+    (((coeff (R := ℤ) n F : ℤ) : ZMod 4)=0 ↔ ¬∃ k : ℕ, n=2^k) := by
   rw [A_unique ⟨h0,h1⟩ he]
   exact first_residue n hn
 
@@ -45,7 +49,7 @@ theorem complete_series_mod_four :
   rw [CatalanComposition.map_A, CatalanComposition.A_mod_four]
 
 theorem divisibility_complement (n : ℕ) (hn : 1<n) :
-    (4 : ℤ) ∣ coeff ℤ n (CatalanComposition.A : PowerSeries ℤ) ↔
+    (4 : ℤ) ∣ coeff (R := ℤ) n (CatalanComposition.A : PowerSeries ℤ) ↔
       ¬∃ k : ℕ, n=2^k :=
   CatalanComposition.a393172_four_dvd_iff n hn
 

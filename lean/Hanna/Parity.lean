@@ -1,9 +1,13 @@
-import Hanna.Canonical
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Algebra.Ring.Int.Parity
-import Mathlib.RingTheory.PowerSeries.WellKnown
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Hanna.Canonical
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Algebra.Ring.Int.Parity
+public import Mathlib.RingTheory.PowerSeries.WellKnown
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.LinearCombination
+
+@[expose] public section
 
 namespace Hanna.Parity
 
@@ -14,7 +18,7 @@ private abbrev U : PowerSeries F := PowerSeries.mk 1
 private noncomputable abbrev H : PowerSeries F := X * U
 
 private theorem two_eq_zero : (2 : PowerSeries F) = 0 := by
-  change C F (2 : F) = 0
+  change C (2 : F) = 0
   rw [show (2 : F) = 0 by decide]
   simp
 
@@ -32,7 +36,7 @@ private theorem h_normalized : Series.Normalized H := by
   · rw [show (1:ℕ) = 0 + 1 by omega, PowerSeries.coeff_succ_X_mul]
     simp [U]
 
-private theorem h_coeff (n : ℕ) (hn : 1 ≤ n) : coeff F n H = 1 := by
+private theorem h_coeff (n : ℕ) (hn : 1 ≤ n) : coeff n H = 1 := by
   obtain ⟨k, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : n ≠ 0)
   rw [H, PowerSeries.coeff_succ_X_mul]
   simp [U]
@@ -40,7 +44,7 @@ private theorem h_coeff (n : ℕ) (hn : 1 ≤ n) : coeff F n H = 1 := by
 private theorem t_eq : Series.T (1 : F) H = X ^ 2 * U ^ 2 := by
   have hg := u_geometric
   have htwo : (2 : PowerSeries F) = 0 := two_eq_zero
-  change X * (X * U) - C F 1 * X * (X * U) ^ 2 = X ^ 2 * U ^ 2
+  change X * (X * U) - C 1 * X * (X * U) ^ 2 = X ^ 2 * U ^ 2
   simp only [map_one, one_mul]
   have h : U + X * U ^ 2 = U ^ 2 := by
     linear_combination U * hg + (U - U ^ 2) * htwo
@@ -64,9 +68,9 @@ private theorem one_add_t : (1 : PowerSeries F) + Series.T 1 H = U ^ 2 := by
 
 private theorem h_equation : Series.Psi (1 : F) H = X ^ 2 := by
   let V : PowerSeries F := Series.T 1 H
-  have hv : constantCoeff F V = 0 := Series.constantCoeff_T 1 H
+  have hv : constantCoeff V = 0 := Series.constantCoeff_T 1 H
   have h_one : Series.compose (1 : PowerSeries F) V = 1 := by
-    change Series.compose (C F 1) V = 1
+    change Series.compose (C 1) V = 1
     rw [Series.compose_C 1 V hv]
     rfl
   have hgeom : Series.compose U V * (1 + V) = 1 := by
@@ -116,7 +120,7 @@ private theorem even_cast_zero {m : ℤ} (hm : Even m) : (m : F) = 0 := by
     _ = 0 := by rw [htwo, zero_mul]
 
 theorem odd_coeff (m : ℤ) (hm : Odd m) (n : ℕ) (hn : 1 ≤ n) : Odd (a m n) := by
-  have hmap := congrArg (coeff F n) (map_A (Int.castRingHom F) m)
+  have hmap := congrArg (coeff n) (map_A (Int.castRingHom F) m)
   have hcast : ((a m n : ℤ) : F) = 1 := by
     simpa [a, odd_cast_one hm, A_one, PowerSeries.coeff_map, h_coeff n hn] using hmap
   by_contra hodd
@@ -131,9 +135,9 @@ theorem even_coeff (m : ℤ) (hm : Even m) :
   constructor
   · exact (A_normalized m).2
   · intro n hn
-    have hmap := congrArg (coeff F n) (map_A (Int.castRingHom F) m)
+    have hmap := congrArg (coeff n) (map_A (Int.castRingHom F) m)
     have hcast : ((a m n : ℤ) : F) = 0 := by
-      have hnX : coeff F n (X : PowerSeries F) = 0 := by
+      have hnX : coeff n (X : PowerSeries F) = 0 := by
         simp [coeff_X, show n ≠ 1 by omega]
       simpa [a, even_cast_zero hm, A_zero, PowerSeries.coeff_map, hnX] using hmap
     exact (ZMod.intCast_zmod_eq_zero_iff_dvd (a m n) 2).mp hcast

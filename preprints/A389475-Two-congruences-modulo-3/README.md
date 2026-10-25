@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A389475,
   author = {Goyal, Dev D.},
   title = {{Two congruences modulo $3$ for the series with $A(3x^2)=2x^2+A^2-2A^3$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A389475-Two-congruences-modulo-3/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A389475-Two-congruences-modulo-3/paper.pdf}},
   year = {2026}
 }
 ```

@@ -1,16 +1,27 @@
 /-
-Axiom audit for the 29 entry files (independent check).
+Axiom audit (independent check).
 
-Run from the `lean/` folder after `lake build Entries`:
+Run from the `lean/` folder after `lake build`:
 
     lake env lean ../verification/AxiomAudit.lean
 
-For every theorem stated in `lean/Entries/*.lean`, Lean prints the axioms it
-depends on, transitively. The expected answer for each is a subset of
-`[propext, Classical.choice, Quot.sound]`; anything else (in particular
-`sorryAx`) would be a failure. `verification/check_axioms.py` checks the output.
+For every theorem stated in `lean/Entries/*.lean`, for the general theorems that the
+papers cite, and for the theorems in `lean/Solutions/` that are compared with the
+Challenge statements, Lean prints the axioms it depends on, transitively. The expected
+answer for each is a subset of `[propext, Classical.choice, Quot.sound]`; anything else
+(in particular `sorryAx`) would be a failure. `verification/check_axioms.py` checks the
+output.
 -/
-import Entries
+module
+
+import all Entries
+import all Solutions.HannaFamily
+import all Solutions.ConsecutiveIterates
+import all Solutions.ScaledInverses
+import all Solutions.Theta
+import all Solutions.Catalan
+import all Solutions.Halving
+import all Solutions.OtherResults
 
 -- A195194
 #print axioms OEIS.A195194.normalized_source
@@ -321,3 +332,68 @@ import Entries
 #print axioms Consecutive.ziter_solution_mod_eq_X_iff
 #print axioms Hanna.Related.ScaledInverse.integer_mod_parameter_add_one
 #print axioms Hanna.Related.ScaledInverse.integer_coeff_odd_iff
+
+-- Theorems compared with the Challenge statements (lean/Solutions/)
+-- HannaFamily
+#print axioms OEISProofs.HannaFamily.existsUnique
+#print axioms OEISProofs.HannaFamily.odd_coeff
+#print axioms OEISProofs.HannaFamily.even_coeff
+#print axioms OEISProofs.HannaFamily.modEq_sq
+#print axioms OEISProofs.HannaFamily.pow_digitSum_dvd
+#print axioms OEISProofs.HannaFamily.prime_pow_dvd
+#print axioms OEISProofs.HannaFamily.residues_mod_nine
+#print axioms OEISProofs.HannaFamily.residues_mod_sixteen
+-- ConsecutiveIterates
+#print axioms OEISProofs.ConsecutiveIterates.existsUnique
+#print axioms OEISProofs.ConsecutiveIterates.iterate_coeff_modEq
+#print axioms OEISProofs.ConsecutiveIterates.inverse_iterate_coeff_modEq
+#print axioms OEISProofs.ConsecutiveIterates.a396099_conjectures
+#print axioms OEISProofs.ConsecutiveIterates.a396798_residues
+-- ScaledInverses
+#print axioms OEISProofs.ScaledInverses.existsUnique
+#print axioms OEISProofs.ScaledInverses.coeff_modEq_one
+#print axioms OEISProofs.ScaledInverses.odd_coeff_iff
+-- Theta
+#print axioms OEISProofs.Theta.quotient_existsUnique
+#print axioms OEISProofs.Theta.quotient_coeff
+#print axioms OEISProofs.Theta.product_existsUnique
+#print axioms OEISProofs.Theta.product_coeff
+#print axioms OEISProofs.Theta.implicit_existsUnique
+#print axioms OEISProofs.Theta.implicit_coeff
+#print axioms OEISProofs.Theta.explicit_coeff
+#print axioms OEISProofs.Theta.bilateral_existsUnique
+#print axioms OEISProofs.Theta.bilateral_coeff
+-- Catalan
+#print axioms OEISProofs.Catalan.a393172_existsUnique
+#print axioms OEISProofs.Catalan.a393172_coeff
+#print axioms OEISProofs.Catalan.a393171_existsUnique
+#print axioms OEISProofs.Catalan.a393171_coeff
+#print axioms OEISProofs.Catalan.a389536_existsUnique
+#print axioms OEISProofs.Catalan.a389536_coeff
+#print axioms OEISProofs.Catalan.a397588_existsUnique
+#print axioms OEISProofs.Catalan.a397588_coeff
+#print axioms OEISProofs.Catalan.a195194_existsUnique
+#print axioms OEISProofs.Catalan.a195194_coeff
+-- Halving
+#print axioms OEISProofs.Halving.a389537_existsUnique
+#print axioms OEISProofs.Halving.a389537_coeff
+#print axioms OEISProofs.Halving.a389542_existsUnique
+#print axioms OEISProofs.Halving.a389542_coeff
+#print axioms OEISProofs.Halving.a389474_existsUnique
+#print axioms OEISProofs.Halving.a389474_coeff
+#print axioms OEISProofs.Halving.a389475_existsUnique
+#print axioms OEISProofs.Halving.a389475_coeff
+-- OtherResults
+#print axioms OEISProofs.OtherResults.a396093_coeff
+#print axioms OEISProofs.OtherResults.a392210_existsUnique
+#print axioms OEISProofs.OtherResults.a392210_coeff
+#print axioms OEISProofs.OtherResults.a396102_existsUnique
+#print axioms OEISProofs.OtherResults.a396102_coeff
+#print axioms OEISProofs.OtherResults.a380056_existsUnique
+#print axioms OEISProofs.OtherResults.a380056_integral
+#print axioms OEISProofs.OtherResults.a380056_coeff
+#print axioms OEISProofs.OtherResults.a397346_existsUnique
+#print axioms OEISProofs.OtherResults.a397346_coeff
+#print axioms OEISProofs.OtherResults.a397346_derivative
+#print axioms OEISProofs.OtherResults.a394576_existsUnique
+#print axioms OEISProofs.OtherResults.a394576_bounds

@@ -1,6 +1,8 @@
-import Families.ModFour
-import Families.CubicFrobenius
-import Hanna.Related.ScaledParity
+module
+
+public import Families.ModFour
+public import Families.CubicFrobenius
+public import Hanna.Related.ScaledParity
 
 /-!
 # OEIS A389537: reversion of an alternating binary lacunary series
@@ -11,6 +13,8 @@ coefficient pattern are proved for actual formal power series.
 
 AI-generated for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace Families.LacunaryInverse
 
@@ -37,7 +41,7 @@ theorem step_contraction (n : ℕ) (hn : 1≤n) (U V : PowerSeries S)
   convert dvd_neg.mpr hp using 1; simp only [step]; ring
 
 theorem recursion_triangular :
-    Triangular (fun a n => coeff S (n+2) (ofTail a-step (ofTail a))) := by
+    Triangular (fun (a : ℕ → S) n => coeff (n+2) (ofTail a-step (ofTail a))) := by
   intro n a b hab
   have hd := (agree_iff_X_pow_dvd_sub (n+2) (ofTail a) (ofTail b)).mp
     (ofTail_agree a b n hab)
@@ -47,7 +51,7 @@ theorem recursion_triangular :
   linear_combination -hc
 
 theorem auxiliary_exists : ∃ U : PowerSeries S, Normalized U ∧ U=step U := by
-  let op := fun a n => coeff S (n+2) (ofTail a-step (ofTail a))
+  let op := fun (a : ℕ → S) n => coeff (n+2) (ofTail a-step (ofTail a))
   let a := triangularCoeffs op (fun _ => 0)
   have ha := triangularCoeffs_spec op recursion_triangular (fun _ => 0)
   refine ⟨ofTail a,normalized_ofTail a,?_⟩
@@ -57,7 +61,7 @@ theorem auxiliary_exists : ∃ U : PowerSeries S, Normalized U ∧ U=step U := b
   · exact (normalized_ofTail a).1.trans hs.1.symm
   · exact (normalized_ofTail a).2.trans hs.2.symm
   · have hc := congrFun ha n
-    change coeff S (n+2) (ofTail a-step (ofTail a))=0 at hc
+    change coeff (n+2) (ofTail a-step (ofTail a))=0 at hc
     simpa only [map_sub, sub_eq_zero, Nat.succ_eq_add_one, Nat.add_assoc] using hc
 
 theorem auxiliary_unique {U V : PowerSeries S} (hU : Normalized U)
@@ -113,10 +117,10 @@ theorem map_A (f : S →+* T) : PowerSeries.map f (A : PowerSeries S)=(A : Power
 
 theorem A_equation : compose (A : PowerSeries S) (A-X)=A^2 := by
   have hA := A_normalized (S:=S)
-  have hsq : constantCoeff S (A^2 : PowerSeries S)=0 := by simp [hA.constantCoeff]
-  have hsub : constantCoeff S (A-X : PowerSeries S)=0 := by simp [hA.constantCoeff]
+  have hsq : constantCoeff (A^2 : PowerSeries S)=0 := by simp [hA.constantCoeff]
+  have hsub : constantCoeff (A-X : PowerSeries S)=0 := by simp [hA.constantCoeff]
   have he := congrArg (fun U : PowerSeries S => compose U A) (R_equation (S:=S))
-  dsimp only at he
+  try dsimp only at he
   rw [compose_add _ _ _ hA.constantCoeff, compose_assoc _ _ _ (by simp) hA.constantCoeff,
     compose_pow _ _ _ hA.constantCoeff, compose_X_left _ hA.constantCoeff, R_A] at he
   have hRA : compose (R : PowerSeries S) (A^2)=A-X := by linear_combination he
@@ -131,14 +135,14 @@ theorem inverse_source (U : PowerSeries S) (hU : Normalized U)
     inverse U hU=step (inverse U hU) := by
   let V := inverse U hU
   have hV : Normalized V := inverse_normalized U hU
-  have hsub : constantCoeff S (U-X)=0 := by simp [hU.constantCoeff]
+  have hsub : constantCoeff (U-X)=0 := by simp [hU.constantCoeff]
   have hUV : compose U V=X := compose_inverse_right U hU
   have hVU : compose V U=X := compose_inverse_left U hU
   have h := congrArg (fun E => compose V E) he
-  dsimp only at h
+  try dsimp only at h
   rw [← compose_assoc _ _ _ hU.constantCoeff hsub, hVU, compose_X_left _ hsub] at h
   have h' := congrArg (fun E => compose E V) h
-  dsimp only at h'
+  try dsimp only at h'
   rw [compose_sub _ _ _ hV.constantCoeff, hUV, compose_X_left _ hV.constantCoeff,
     compose_assoc _ _ _ (by simp [hU.constantCoeff]) hV.constantCoeff,
     compose_pow _ _ _ hV.constantCoeff, hUV] at h'
@@ -166,11 +170,11 @@ theorem A_mod_two : (A : PowerSeries (ZMod 2))=X+X^2 := by
       compose_X_left _ hR.constantCoeff] using h
   exact (inverse_unique hR A_normalized hcomp R_A).symm
 
-def a (n : ℕ) : ℤ := coeff ℤ n A
+def a (n : ℕ) : ℤ := coeff (R := ℤ) n A
 
 def H : PowerSeries ℤ := Families.ModFour.half ((A : PowerSeries ℤ)-X-X^2)
 
-theorem H_constantCoeff : constantCoeff ℤ H=0 := by
+theorem H_constantCoeff : constantCoeff (R := ℤ) H=0 := by
   apply Families.ModFour.half_constantCoeff
   simp [A_normalized.constantCoeff]
 
@@ -182,7 +186,6 @@ theorem A_decomposition : (A : PowerSeries ℤ)=X+X^2+2*H := by
   change 2*H=A-X-X^2 at h
   linear_combination -h
 
-
 theorem A_mod_four_decomposition :
     (A : PowerSeries (ZMod 4))=X+X^2+2*PowerSeries.map (Int.castRingHom (ZMod 4)) H := by
   have h := congrArg (PowerSeries.map (Int.castRingHom (ZMod 4))) A_decomposition
@@ -192,15 +195,15 @@ theorem H_mod_two_equation :
     let U := PowerSeries.map (Int.castRingHom (ZMod 2)) H
     U+U^2=(X : PowerSeries (ZMod 2))^3 := by
   let U := PowerSeries.map (Int.castRingHom (ZMod 4)) H
-  have hU : constantCoeff (ZMod 4) U=0 := by
+  have hU : constantCoeff (R := (ZMod 4)) U=0 := by
     simp only [U, constantCoeff_map, H_constantCoeff, map_zero]
-  have hD : constantCoeff (ZMod 4) (X^2+2*U)=0 := by simp [hU]
+  have hD : constantCoeff (R := (ZMod 4)) (X^2+2*U)=0 := by simp [hU]
   have ht : (2 : PowerSeries (ZMod 2))=0 := by
     have h : (2 : ZMod 2)=0 := by decide
-    simpa only [map_ofNat, map_zero] using congrArg (C (ZMod 2)) h
+    simpa only [map_ofNat, map_zero] using congrArg (C (R := (ZMod 2))) h
   have hf : (4 : PowerSeries (ZMod 4))=0 := by
     have h : (4 : ZMod 4)=0 := by decide
-    simpa only [map_ofNat, map_zero] using congrArg (C (ZMod 4)) h
+    simpa only [map_ofNat, map_zero] using congrArg (C (R := (ZMod 4))) h
   have hD2 : PowerSeries.map Families.ModFour.reduce (X^2+2*U)=
       (X : PowerSeries (ZMod 2))^2 := by
     simp only [map_add, map_pow, map_mul, map_ofNat, PowerSeries.map_X, ht,
@@ -230,7 +233,7 @@ theorem H_mod_two_equation :
   exact hg2
 
 theorem square_equation_unique (U V W : PowerSeries (ZMod 2))
-    (hU0 : constantCoeff (ZMod 2) U=0) (hV0 : constantCoeff (ZMod 2) V=0)
+    (hU0 : constantCoeff (R := (ZMod 2)) U=0) (hV0 : constantCoeff (R := (ZMod 2)) V=0)
     (hU : U+U^2=W) (hV : V+V^2=W) : U=V := by
   ext n
   induction n using Nat.strong_induction_on with
@@ -238,8 +241,8 @@ theorem square_equation_unique (U V W : PowerSeries (ZMod 2))
     by_cases hn : n=0
     · subst n
       simpa only [coeff_zero_eq_constantCoeff] using hU0.trans hV0.symm
-    · have hu := congrArg (coeff (ZMod 2) n) hU
-      have hv := congrArg (coeff (ZMod 2) n) hV
+    · have hu := congrArg (coeff (R := (ZMod 2)) n) hU
+      have hv := congrArg (coeff (R := (ZMod 2)) n) hV
       simp only [map_add, Hanna.Related.ScaledInverse.coeff_square_mod_two] at hu hv
       by_cases he : 2∣n
       · rw [if_pos he] at hu hv
@@ -252,7 +255,7 @@ theorem square_equation_unique (U V W : PowerSeries (ZMod 2))
 def binary : PowerSeries (ZMod 2) :=
   Hanna.Related.ScaledInverse.scaledSolution (0 : ZMod 2)
 
-theorem binary_constantCoeff : constantCoeff (ZMod 2) binary=0 :=
+theorem binary_constantCoeff : constantCoeff (R := (ZMod 2)) binary=0 :=
   (Hanna.Related.ScaledInverse.scaledSolution_normalized (0 : ZMod 2)).constantCoeff
 
 theorem binary_equation : binary+binary^2=(X : PowerSeries (ZMod 2)) := by
@@ -262,7 +265,7 @@ theorem binary_equation : binary+binary^2=(X : PowerSeries (ZMod 2)) := by
     rw [← two_mul]
     have ht : (2 : PowerSeries (ZMod 2))=0 := by
       have hc : (2 : ZMod 2)=0 := by decide
-      simpa only [map_ofNat, map_zero] using congrArg (C (ZMod 2)) hc
+      simpa only [map_ofNat, map_zero] using congrArg (C (R := (ZMod 2))) hc
     rw [ht, zero_mul]
   change binary-binary^2=X at h
   simpa only [sub_eq_add_neg, hneg] using h
@@ -274,18 +277,18 @@ theorem H_mod_two : PowerSeries.map (Int.castRingHom (ZMod 2)) H=
   · rw [constantCoeff_compose _ _ (by simp), binary_constantCoeff]
   · exact H_mod_two_equation
   · have h := congrArg (fun E : PowerSeries (ZMod 2) => compose E (X^3)) binary_equation
-    dsimp only at h
+    try dsimp only at h
     rw [compose_add _ _ _ (by simp), compose_pow _ _ _ (by simp),
       compose_X_left _ (by simp)] at h
     exact h
 
 theorem H_mod_two_coeff (n : ℕ) :
-    coeff (ZMod 2) n (PowerSeries.map (Int.castRingHom (ZMod 2)) H)=1 ↔
+    coeff (R := (ZMod 2)) n (PowerSeries.map (Int.castRingHom (ZMod 2)) H)=1 ↔
       ∃ k : ℕ, n=3*2^k := by
   rw [H_mod_two, coeff_compose_X_power _ 3 n (by omega)]
   by_cases hd : 3∣n
   · rw [if_pos hd]
-    change coeff (ZMod 2) (n/3) (Hanna.Related.ScaledInverse.scaledSolution 0)=1 ↔ _
+    change coeff (R := (ZMod 2)) (n/3) (Hanna.Related.ScaledInverse.scaledSolution 0)=1 ↔ _
     rw [Hanna.Related.ScaledInverse.scaledSolution_zero_coeff_one_iff]
     constructor
     · rintro ⟨k,hk⟩
@@ -301,17 +304,17 @@ theorem H_mod_two_coeff (n : ℕ) :
 open scoped Classical in
 theorem a389537_residue (n : ℕ) (hn : 2<n) :
     (a n : ZMod 4)=if ∃ k : ℕ, n=3*2^k then 2 else 0 := by
-  have h := congrArg (coeff (ZMod 4) n) A_mod_four_decomposition
-  have hX : coeff (ZMod 4) n X=0 := by
+  have h := congrArg (coeff (R := (ZMod 4)) n) A_mod_four_decomposition
+  have hX : coeff (R := (ZMod 4)) n X=0 := by
     rw [coeff_X, if_neg (by omega : n≠1)]
-  have hX2 : coeff (ZMod 4) n (X^2)=0 := by
+  have hX2 : coeff (R := (ZMod 4)) n (X^2)=0 := by
     rw [coeff_X_pow, if_neg (by omega : n≠2)]
   simp only [map_add, two_mul, hX, hX2, zero_add] at h
-  have ha : (a n : ZMod 4)=coeff (ZMod 4) n (A : PowerSeries (ZMod 4)) := by
+  have ha : (a n : ZMod 4)=coeff (R := (ZMod 4)) n (A : PowerSeries (ZMod 4)) := by
     rw [← map_A (Int.castRingHom (ZMod 4)), coeff_map]
     rfl
   rw [ha, h, ← two_mul]
-  let u : ZMod 4 := coeff (ZMod 4) n (PowerSeries.map (Int.castRingHom (ZMod 4)) H)
+  let u : ZMod 4 := coeff (R := (ZMod 4)) n (PowerSeries.map (Int.castRingHom (ZMod 4)) H)
   have hu : Families.ModFour.reduce u=1 ↔ ∃ k : ℕ, n=3*2^k := by
     simpa only [u, ← coeff_map, Families.ModFour.reduce_int_map] using H_mod_two_coeff n
   change 2*u=if ∃ k : ℕ, n=3*2^k then 2 else 0

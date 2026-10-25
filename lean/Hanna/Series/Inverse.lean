@@ -1,4 +1,8 @@
-import Hanna.Series.Construction
+module
+
+public import Hanna.Series.Construction
+
+@[expose] public section
 
 namespace Hanna.Series
 
@@ -7,7 +11,7 @@ open PowerSeries
 variable {R : Type*} [CommRing R]
 
 lemma compose_triangular (A : PowerSeries R) (hA : Normalized A) :
-    Triangular (fun a n => coeff R (n+2) (compose A (ofTail a))) := by
+    Triangular (fun (a : ℕ → R) n => coeff (n+2) (compose A (ofTail a))) := by
   intro n a b hab
   have hd := (agree_iff_X_pow_dvd_sub (n+2) (ofTail a) (ofTail b)).mp
     (ofTail_agree a b n hab)
@@ -18,7 +22,7 @@ lemma compose_triangular (A : PowerSeries R) (hA : Normalized A) :
 
 lemma right_inverse_exists (A : PowerSeries R) (hA : Normalized A) :
     ∃ B : PowerSeries R, Normalized B ∧ compose A B = X := by
-  let F : (ℕ → R) → ℕ → R := fun a n => coeff R (n+2) (compose A (ofTail a))
+  let F : (ℕ → R) → ℕ → R := fun (a : ℕ → R) n => coeff (n+2) (compose A (ofTail a))
   obtain ⟨a, ha, _⟩ := triangular_existsUnique F (compose_triangular A hA) (fun _ => 0)
   refine ⟨ofTail a, normalized_ofTail a, ?_⟩
   have hnorm := hA.compose (normalized_ofTail a)
@@ -27,7 +31,7 @@ lemma right_inverse_exists (A : PowerSeries R) (hA : Normalized A) :
   · simpa using hnorm.1
   · simpa using hnorm.2
   · have hc := congrFun ha n
-    change coeff R (n+2) (compose A (ofTail a)) = 0 at hc
+    change coeff (n+2) (compose A (ofTail a)) = 0 at hc
     simpa [Nat.succ_eq_add_one, Nat.add_assoc, coeff_X] using hc
 
 lemma left_inverse_of_right_inverse {A B : PowerSeries R}

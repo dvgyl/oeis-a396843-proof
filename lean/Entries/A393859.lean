@@ -1,4 +1,6 @@
-import Related
+module
+
+public import Related
 
 /-!
 # OEIS A393859
@@ -7,6 +9,8 @@ Statements of the results in the accompanying paper (listed in `CONTENTS.md` at 
 repository root), proved using the shared libraries of this project.
 Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace OEIS.A393859
 
@@ -26,7 +30,7 @@ theorem source_equation :
   exact scaledSolution_equation 7
 
 theorem a393859_mod_eight (n : ℕ) (hn : 1 ≤ n) :
-    ((coeff ℤ n (scaledSolution (7 : ℤ)) : ℤ) : ZMod 8) = 1 := by
+    ((coeff (R := ℤ) n (scaledSolution (7 : ℤ)) : ℤ) : ZMod 8) = 1 := by
   exact Hanna.Related.ScaledInverse.a393859_mod_eight n hn
 
 end OEIS.A393859

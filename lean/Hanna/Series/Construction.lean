@@ -1,5 +1,9 @@
-import Hanna.Series.Filtration
-import Hanna.Series.Triangular
+module
+
+public import Hanna.Series.Filtration
+public import Hanna.Series.Triangular
+
+@[expose] public section
 
 namespace Hanna.Series
 
@@ -11,14 +15,14 @@ noncomputable def ofTail (a : ℕ → R) : PowerSeries R :=
   PowerSeries.mk fun n => if n = 0 then 0 else if n = 1 then 1 else a (n-2)
 
 @[simp] lemma coeff_ofTail (a : ℕ → R) (n : ℕ) :
-    coeff R (n+2) (ofTail a) = a n := by
+    coeff (n+2) (ofTail a) = a n := by
   simp [ofTail]
 
 lemma normalized_ofTail (a : ℕ → R) : Normalized (ofTail a) := by
   simp [Normalized, ofTail]
 
 lemma ofTail_coeff {A : PowerSeries R} (hA : Normalized A) :
-    ofTail (fun n => coeff R (n+2) A) = A := by
+    ofTail (fun n => coeff (n+2) A) = A := by
   ext n
   rcases n with _ | (_ | n)
   · simpa [ofTail] using hA.1.symm
@@ -35,7 +39,7 @@ lemma ofTail_agree (a b : ℕ → R) (n : ℕ) (h : ∀ k < n, a k = b k) :
     exact h k (by omega)
 
 lemma psi_triangular (m : R) :
-    Triangular (fun a n => coeff R (n+3) (Psi m (ofTail a))) := by
+    Triangular (fun (a : ℕ → R) n => coeff (n+3) (Psi m (ofTail a))) := by
   intro n a b hab
   have hd := (agree_iff_X_pow_dvd_sub (n+2) (ofTail a) (ofTail b)).mp
     (ofTail_agree a b n hab)
@@ -57,9 +61,9 @@ lemma psi_normalized_low (m : R) (A : PowerSeries R) (hA : Normalized A) :
     have h1 : (X : PowerSeries R)^3 ∣ X*(A-X) := by
       simpa using X_pow_dvd_product (dvd_refl ((X : PowerSeries R)^1))
         ((normalized_iff_X_sq_dvd A).mp hA)
-    have h2 : (X : PowerSeries R)^3 ∣ C R m*X*A^2 := by
+    have h2 : (X : PowerSeries R)^3 ∣ C m*X*A^2 := by
       have hh := X_pow_dvd_product (dvd_refl ((X : PowerSeries R)^1)) hA2
-      convert dvd_mul_of_dvd_left hh (C R m) using 1; ring
+      convert dvd_mul_of_dvd_left hh (C m) using 1; ring
     convert dvd_sub h1 h2 using 1; unfold T; ring
   have hnonlin : (X : PowerSeries R)^3 ∣ Psi m A-T m A := by
     have h4 : (X : PowerSeries R)^4 ∣ (T m A)^2 := by
@@ -76,7 +80,7 @@ lemma psi_normalized_low (m : R) (A : PowerSeries R) (hA : Normalized A) :
 
 lemma solution_exists (m : R) :
     ∃ A : PowerSeries R, Normalized A ∧ Psi m A = X^2 := by
-  let a := triangularCoeffs (fun a n => coeff R (n+3) (Psi m (ofTail a))) (fun _ => 0)
+  let a := triangularCoeffs (fun (a : ℕ → R) n => coeff (n+3) (Psi m (ofTail a))) (fun _ => 0)
   have ha := triangularCoeffs_spec _ (psi_triangular m) (fun _ => 0)
   refine ⟨ofTail a, normalized_ofTail a, ?_⟩
   ext n
@@ -85,7 +89,7 @@ lemma solution_exists (m : R) :
     simpa only [map_sub, sub_eq_zero] using hc
   · have heq : n-3+3 = n := by omega
     have hc := congrFun ha (n-3)
-    change coeff R (n-3+3) (Psi m (ofTail a)) = 0 at hc
+    change coeff (n-3+3) (Psi m (ofTail a)) = 0 at hc
     rw [heq] at hc
     rw [hc, coeff_X_pow, if_neg (by omega : n ≠ 2)]
 

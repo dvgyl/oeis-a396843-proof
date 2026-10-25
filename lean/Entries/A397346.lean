@@ -1,9 +1,13 @@
-import Families.ExpRecurrence
+module
+
+public import Families.ExpRecurrence
 
 /-!
 Independent type statements for the exact finite recurrence and original
 modulo-eight conjecture of OEIS A397346. AI-generated for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace OEIS.A397346
 
@@ -53,10 +57,10 @@ theorem stronger_quotient_congruence (n : ℕ) (hn : 2≤n) :
   b_mod_eight n hn
 
 theorem exact_source_differential_identity :
-    PowerSeries.derivative ℚ
+    PowerSeries.derivative (R := ℚ)
       (PowerSeries.mk fun n => (a n : ℚ)) =
     (PowerSeries.mk fun n => (a n : ℚ)) *
-      PowerSeries.derivative ℚ
+      PowerSeries.derivative (R := ℚ)
         (PowerSeries.mk fun n =>
           if n=0 then 0 else if n=1 then 1 else
             (2*(n : ℚ)^2-1)/(2*(n : ℚ)^2)*(a n : ℚ)) :=

@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A397588,
   author = {Goyal, Dev D.},
   title = {{Odd coefficients at powers of two for $A=x+(xA^2)'$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A397588-Odd-coefficients-at-powers-of-two/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A397588-Odd-coefficients-at-powers-of-two/paper.pdf}},
   year = {2026}
 }
 ```

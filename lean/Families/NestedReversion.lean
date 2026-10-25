@@ -1,4 +1,6 @@
-import Hanna.Related.ScaledParity
+module
+
+public import Hanna.Related.ScaledParity
 
 /-!
 # OEIS A195194: parity of infinite nested reversion
@@ -8,6 +10,8 @@ Every inverse is a genuine formal compositional inverse.
 
 AI disclosure: OpenAI ChatGPT generated this proof for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace Families.NestedReversion
 
@@ -19,7 +23,7 @@ variable {R : Type*} [CommRing R]
 
 /-- The polynomial expression equivalent to the nested inverse equation. -/
 def branch (w : R) (A B : PowerSeries R) : PowerSeries R :=
-  X + C R w * A * compose B A
+  X + C w * A * compose B A
 
 theorem branch_normalized (w : R) {A B : PowerSeries R}
     (hA : Normalized A) (hB : Normalized B) : Normalized (branch w A B) := by
@@ -29,7 +33,7 @@ theorem branch_normalized (w : R) {A B : PowerSeries R}
     simpa using X_pow_dvd_product
       (show (X : PowerSeries R)^1 ∣ A by simpa using hA.X_dvd)
       (show (X : PowerSeries R)^1 ∣ compose B A by simpa using hc.X_dvd)
-  simpa [branch, mul_assoc] using dvd_mul_of_dvd_right hp (C R w)
+  simpa [branch, mul_assoc] using dvd_mul_of_dvd_right hp (C w)
 
 theorem compose_congr (n : ℕ) {A A' B B' : PowerSeries R}
     (hA : Normalized A) (hA' : Normalized A')
@@ -54,7 +58,7 @@ theorem branch_contraction (w : R) (n : ℕ) {A A' B B' : PowerSeries R}
   have hq := X_pow_dvd_product
     (compose_congr n hA hA' hAA hBB)
     (show (X : PowerSeries R)^1 ∣ A' by simpa using hA'.X_dvd)
-  have hs := dvd_mul_of_dvd_right (dvd_add hp hq) (C R w)
+  have hs := dvd_mul_of_dvd_right (dvd_add hp hq) (C w)
   convert hs using 1
   unfold branch
   ring
@@ -77,7 +81,7 @@ theorem step_contraction (w : R) (s : R →+* R) (n : ℕ)
     congrArg (PowerSeries.map s) hD
 
 theorem equation_triangular (w : R) (s : R →+* R) :
-    Triangular (fun a n => coeff R (n+2) (ofTail a-step w s (ofTail a))) := by
+    Triangular (fun (a : ℕ → R) n => coeff (n+2) (ofTail a-step w s (ofTail a))) := by
   intro n a b hab
   have hd := (agree_iff_X_pow_dvd_sub (n+2) (ofTail a) (ofTail b)).mp
     (ofTail_agree a b n hab)
@@ -88,7 +92,7 @@ theorem equation_triangular (w : R) (s : R →+* R) :
 
 theorem fixed_exists (w : R) (s : R →+* R) :
     ∃ A : PowerSeries R, Normalized A ∧ A=step w s A := by
-  let op := fun a n => coeff R (n+2) (ofTail a-step w s (ofTail a))
+  let op := fun (a : ℕ → R) n => coeff (n+2) (ofTail a-step w s (ofTail a))
   let a := triangularCoeffs op (fun _ => 0)
   have ha := triangularCoeffs_spec op (equation_triangular w s) (fun _ => 0)
   refine ⟨ofTail a, normalized_ofTail a, ?_⟩
@@ -98,7 +102,7 @@ theorem fixed_exists (w : R) (s : R →+* R) :
   · exact (normalized_ofTail a).1.trans hs.1.symm
   · exact (normalized_ofTail a).2.trans hs.2.symm
   · have hc := congrFun ha n
-    change coeff R (n+2) (ofTail a-step w s (ofTail a))=0 at hc
+    change coeff (n+2) (ofTail a-step w s (ofTail a))=0 at hc
     simpa only [map_sub, sub_eq_zero, Nat.succ_eq_add_one, Nat.add_assoc] using hc
 
 theorem fixed_unique (w : R) (s : R →+* R) {A B : PowerSeries R}
@@ -151,6 +155,7 @@ theorem tail_equation (w : ℕ → R) (j : ℕ) :
     ext n
     simp only [tail, coeff_map]
     rfl
+  rw [show tail w j = PowerSeries.map (evaluate (R:=R) j) (fixed w shift) from rfl]
   simpa only [step, branch, map_add, map_mul, PowerSeries.map_X, PowerSeries.map_C,
     map_compose _ _ _ (fixed_normalized w shift).constantCoeff, hshift,
     show evaluate (R:=R) j w=w j from rfl] using he
@@ -160,7 +165,7 @@ theorem family_unique (w : ℕ → R) {F G : ℕ → PowerSeries R}
     (hF : ∀ j, Normalized (F j)) (hG : ∀ j, Normalized (G j))
     (heF : ∀ j, F j=branch (w j) (F j) (F (j+1)))
     (heG : ∀ j, G j=branch (w j) (G j) (G (j+1))) : F=G := by
-  have hc : ∀ n j, coeff R n (F j)=coeff R n (G j) := by
+  have hc : ∀ n j, coeff n (F j)=coeff n (G j) := by
     intro n
     induction n using Nat.strong_induction_on with
     | h n ih =>
@@ -183,7 +188,7 @@ theorem family_existence_uniqueness (w : ℕ → R) :
     fun F hF => family_unique w hF.1 (tail_normalized w) hF.2 (tail_equation w)⟩
 
 /-- The expression to be reverted at one level of the nesting. -/
-def pre (w : R) (B : PowerSeries R) : PowerSeries R := X-C R w*X*B
+def pre (w : R) (B : PowerSeries R) : PowerSeries R := X-C w*X*B
 
 theorem pre_normalized (w : R) {B : PowerSeries R} (hB : Normalized B) :
     Normalized (pre w B) := by
@@ -191,7 +196,7 @@ theorem pre_normalized (w : R) {B : PowerSeries R} (hB : Normalized B) :
   have hp : (X : PowerSeries R)^2 ∣ X*B := by
     simpa using X_pow_dvd_product (dvd_refl ((X : PowerSeries R)^1))
       (show (X : PowerSeries R)^1 ∣ B by simpa using hB.X_dvd)
-  have hm := dvd_neg.mpr (dvd_mul_of_dvd_right hp (C R w))
+  have hm := dvd_neg.mpr (dvd_mul_of_dvd_right hp (C w))
   simpa [pre, mul_assoc] using hm
 
 theorem branch_iff_inverse_equation (w : R) {A B : PowerSeries R}
@@ -251,7 +256,7 @@ theorem pre_contraction (w : R) (n : ℕ) {A B : PowerSeries R}
     (hAB : (X : PowerSeries R)^n ∣ A-B) :
     (X : PowerSeries R)^(n+1) ∣ pre w A-pre w B := by
   have hp := X_pow_dvd_product hAB (dvd_refl ((X : PowerSeries R)^1))
-  have hm := dvd_mul_of_dvd_right hp (-C R w)
+  have hm := dvd_mul_of_dvd_right hp (-C w)
   convert hm using 1
   unfold pre
   ring
@@ -320,14 +325,14 @@ def weights (R : Type*) [CommRing R] : ℕ → R := fun j => (j+1 : ℕ)
 
 def A : PowerSeries ℤ := tail (weights ℤ) 0
 
-def a (n : ℕ) : ℤ := coeff ℤ n A
+def a (n : ℕ) : ℤ := coeff (R := ℤ) n A
 
 theorem A_normalized : Normalized A := tail_normalized (weights ℤ) 0
 
 theorem A_source :
     compose (X-X*tail (weights ℤ) 1) A=X := by
   have he := tail_right_inverse (weights ℤ) 0
-  change compose (X-C ℤ 1*X*tail (weights ℤ) 1) A=X at he
+  change compose (X-C (R := ℤ) 1*X*tail (weights ℤ) 1) A=X at he
   simpa only [map_one, one_mul] using he
 
 theorem A_source_left :
@@ -349,7 +354,7 @@ theorem a195194_parity (n : ℕ) : Odd (a n) ↔ ∃ k : ℕ, n=2^k := by
   have hc : ((a n : ZMod 2)=1) ↔ Odd (a n) := by
     simpa [Int.odd_iff] using ZMod.intCast_eq_intCast_iff' (a n) 1 2
   rw [← hc]
-  change (Int.castRingHom (ZMod 2)) (coeff ℤ n A)=1 ↔ _
+  change (Int.castRingHom (ZMod 2)) (coeff (R := ℤ) n A)=1 ↔ _
   rw [← coeff_map]
   exact Hanna.Related.ScaledInverse.quadratic_coeff_one_iff_power_two _
     (A_normalized.map _) A_mod_two_quadratic n

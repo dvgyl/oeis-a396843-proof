@@ -1,7 +1,9 @@
-import Hanna.Series.Inverse
-import Mathlib.RingTheory.PowerSeries.WellKnown
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Tactic.NormNum
+module
+
+public import Hanna.Series.Inverse
+public import Mathlib.RingTheory.PowerSeries.WellKnown
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Tactic.NormNum
 
 /-!
 # The scaled inverse family A393856--A393859
@@ -10,6 +12,8 @@ The source equation is `A(X - X * (A(qX)/q)) = X`.  The quotient is
 defined coefficientwise, so no invertibility assumption on `q` occurs.
 The construction and its uniqueness hold over every commutative ring.
 -/
+
+@[expose] public section
 
 namespace Hanna.Related.ScaledInverse
 
@@ -20,10 +24,10 @@ variable {R : Type*} [CommRing R]
 /-- Coefficientwise interpretation of `A(qX)/q`, for a series with zero
 constant coefficient.  Its definition makes sense even when `q = 0`. -/
 noncomputable def scaleTail (q : R) (A : PowerSeries R) : PowerSeries R :=
-  PowerSeries.mk (fun n => q ^ (n - 1) * coeff R n A)
+  PowerSeries.mk (fun n => q ^ (n - 1) * coeff n A)
 
 @[simp] theorem coeff_scaleTail (q : R) (A : PowerSeries R) (n : ℕ) :
-    coeff R n (scaleTail q A) = q ^ (n - 1) * coeff R n A := by
+    coeff n (scaleTail q A) = q ^ (n - 1) * coeff n A := by
   simp [scaleTail]
 
 theorem scaleTail_normalized (q : R) {A : PowerSeries R} (hA : Normalized A) :
@@ -34,7 +38,7 @@ noncomputable def argument (q : R) (A : PowerSeries R) : PowerSeries R :=
   X - X * scaleTail q A
 
 @[simp] theorem argument_constant (q : R) (A : PowerSeries R) :
-    constantCoeff R (argument q A) = 0 := by
+    constantCoeff (argument q A) = 0 := by
   simp [argument]
 
 theorem argument_normalized (q : R) {A : PowerSeries R} (hA : Normalized A) :
@@ -121,7 +125,7 @@ theorem core_perturbation (q : R) (A B : PowerSeries R) (n : ℕ)
   ring
 
 theorem core_triangular (q : R) :
-    Triangular (fun a n => coeff R (n+2) (core q (ofTail a))) := by
+    Triangular (fun (a : ℕ → R) n => coeff (n+2) (core q (ofTail a))) := by
   intro n a b hab
   have hd := (agree_iff_X_pow_dvd_sub (n+2) (ofTail a) (ofTail b)).mp
     (ofTail_agree a b n hab)
@@ -133,7 +137,7 @@ theorem core_triangular (q : R) :
 theorem solution_exists (q : R) :
     ∃ A : PowerSeries R, Normalized A ∧ SourceEquation q A := by
   obtain ⟨a, ha, _⟩ := triangular_existsUnique
-    (fun a n => coeff R (n+2) (core q (ofTail a))) (core_triangular q) (fun _ => 0)
+    (fun (a : ℕ → R) n => coeff (n+2) (core q (ofTail a))) (core_triangular q) (fun _ => 0)
   refine ⟨ofTail a, normalized_ofTail a, ?_⟩
   apply (source_iff_core q (normalized_ofTail a)).mpr
   have hn := core_normalized q (normalized_ofTail a)
@@ -142,7 +146,7 @@ theorem solution_exists (q : R) :
   · simpa using hn.1
   · simpa using hn.2
   · have hc := congrFun ha n
-    change coeff R (n+2) (core q (ofTail a)) = 0 at hc
+    change coeff (n+2) (core q (ofTail a)) = 0 at hc
     simpa [Nat.succ_eq_add_one, Nat.add_assoc, coeff_X] using hc
 
 theorem solution_unique (q : R) {A B : PowerSeries R}
@@ -207,7 +211,7 @@ theorem geometric_normalized : Normalized (geometric : PowerSeries R) := by
     simp
 
 theorem geometric_coeff (n : ℕ) (hn : 1 ≤ n) :
-    coeff R n (geometric : PowerSeries R) = 1 := by
+    coeff n (geometric : PowerSeries R) = 1 := by
   obtain ⟨k, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : n ≠ 0)
   rw [geometric, coeff_succ_X_mul]
   simp
@@ -230,7 +234,7 @@ theorem geometric_sourceEquation :
   apply (source_iff_core (-1) geometric_normalized).mpr
   have hA := geometric_normalized (R := R)
   have hone : compose (1 : PowerSeries R) geometric = 1 := by
-    change compose (C R 1) geometric = 1
+    change compose (C 1) geometric = 1
     rw [compose_C 1 geometric hA.constantCoeff]
     rfl
   have hcomp : compose (scaleTail (-1 : R) geometric) geometric * (1+geometric) =
@@ -260,14 +264,14 @@ theorem scaledSolution_neg_one :
     (scaledSolution_equation (-1)) geometric_sourceEquation
 
 theorem mapped_coeff_eq_one (f : R →+* S) (q : R) (hq : f q = -1)
-    (n : ℕ) (hn : 1 ≤ n) : f (coeff R n (scaledSolution q)) = 1 := by
-  have h := congrArg (coeff S n) (map_scaledSolution f q)
+    (n : ℕ) (hn : 1 ≤ n) : f (coeff n (scaledSolution q)) = 1 := by
+  have h := congrArg (coeff n) (map_scaledSolution f q)
   rw [PowerSeries.coeff_map, hq, scaledSolution_neg_one, geometric_coeff n hn] at h
   exact h
 
 /-- The uniform congruence for the entire family, with its natural modulus. -/
 theorem integer_mod_parameter_add_one (q n : ℕ) (hn : 1 ≤ n) :
-    ((coeff ℤ n (scaledSolution (q : ℤ)) : ℤ) : ZMod (q+1)) = 1 := by
+    ((coeff (R := ℤ) n (scaledSolution (q : ℤ)) : ℤ) : ZMod (q+1)) = 1 := by
   apply mapped_coeff_eq_one (Int.castRingHom (ZMod (q+1))) (q : ℤ) _ n hn
   change (q : ZMod (q+1)) = -1
   apply eq_neg_iff_add_eq_zero.mpr
@@ -275,22 +279,22 @@ theorem integer_mod_parameter_add_one (q n : ℕ) (hn : 1 ≤ n) :
 
 /-- A393856: the all-index congruence modulo 5. -/
 theorem a393856_mod_five (n : ℕ) (hn : 1 ≤ n) :
-    ((coeff ℤ n (scaledSolution (4 : ℤ)) : ℤ) : ZMod 5) = 1 := by
+    ((coeff (R := ℤ) n (scaledSolution (4 : ℤ)) : ℤ) : ZMod 5) = 1 := by
   exact mapped_coeff_eq_one (Int.castRingHom (ZMod 5)) 4 (by decide) n hn
 
 /-- A393857: the all-index congruence modulo 6, a composite modulus. -/
 theorem a393857_mod_six (n : ℕ) (hn : 1 ≤ n) :
-    ((coeff ℤ n (scaledSolution (5 : ℤ)) : ℤ) : ZMod 6) = 1 := by
+    ((coeff (R := ℤ) n (scaledSolution (5 : ℤ)) : ℤ) : ZMod 6) = 1 := by
   exact mapped_coeff_eq_one (Int.castRingHom (ZMod 6)) 5 (by decide) n hn
 
 /-- A393858: the all-index congruence modulo 7. -/
 theorem a393858_mod_seven (n : ℕ) (hn : 1 ≤ n) :
-    ((coeff ℤ n (scaledSolution (6 : ℤ)) : ℤ) : ZMod 7) = 1 := by
+    ((coeff (R := ℤ) n (scaledSolution (6 : ℤ)) : ℤ) : ZMod 7) = 1 := by
   exact mapped_coeff_eq_one (Int.castRingHom (ZMod 7)) 6 (by decide) n hn
 
 /-- A393859: the all-index congruence modulo 8, a composite modulus. -/
 theorem a393859_mod_eight (n : ℕ) (hn : 1 ≤ n) :
-    ((coeff ℤ n (scaledSolution (7 : ℤ)) : ℤ) : ZMod 8) = 1 := by
+    ((coeff (R := ℤ) n (scaledSolution (7 : ℤ)) : ℤ) : ZMod 8) = 1 := by
   exact mapped_coeff_eq_one (Int.castRingHom (ZMod 8)) 7 (by decide) n hn
 
 end Hanna.Related.ScaledInverse

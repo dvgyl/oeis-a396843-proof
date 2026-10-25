@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A393172,
   author = {Goyal, Dev D.},
   title = {{The Catalan numbers inside the equation $A(x-x^2)=x+A(x)^2$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A393172-The-Catalan-numbers-inside-a-functional-equation/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A393172-The-Catalan-numbers-inside-a-functional-equation/paper.pdf}},
   year = {2026}
 }
 ```

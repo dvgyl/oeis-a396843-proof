@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A380060,
   author = {Goyal, Dev D.},
   title = {{Square indices and remainders modulo 4 in a theta-type series}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A380060-Square-indices-in-a-theta-type-series/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A380060-Square-indices-in-a-theta-type-series/paper.pdf}},
   year = {2026}
 }
 ```

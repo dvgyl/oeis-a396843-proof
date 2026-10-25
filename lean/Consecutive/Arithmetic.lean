@@ -1,7 +1,11 @@
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Tactic
+module
+
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.Tactic
 
 /-! Elementary coefficient arithmetic, proved for every index. -/
+
+@[expose] public section
 
 namespace Consecutive
 

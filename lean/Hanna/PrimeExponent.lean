@@ -1,6 +1,11 @@
-import Mathlib.RingTheory.Multiplicity
-import Mathlib.Algebra.Prime.Lemmas
-import Mathlib.Data.Nat.Prime.Int
+module
+
+public import Mathlib.Algebra.Ring.Divisibility.Basic
+public import Mathlib.RingTheory.Multiplicity
+public import Mathlib.Algebra.Prime.Lemmas
+public import Mathlib.Data.Nat.Prime.Int
+
+@[expose] public section
 
 namespace Hanna
 

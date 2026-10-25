@@ -1,0 +1,12 @@
+{
+  "challenge_module": "Challenges.ConsecutiveIterates",
+  "solution_module": "Solutions.ConsecutiveIterates",
+  "theorem_names": [
+    "OEISProofs.ConsecutiveIterates.existsUnique",
+    "OEISProofs.ConsecutiveIterates.iterate_coeff_modEq",
+    "OEISProofs.ConsecutiveIterates.inverse_iterate_coeff_modEq",
+    "OEISProofs.ConsecutiveIterates.a396099_conjectures",
+    "OEISProofs.ConsecutiveIterates.a396798_residues"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

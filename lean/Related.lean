@@ -1,1 +1,3 @@
-import Hanna.Related
+module
+
+public import Hanna.Related

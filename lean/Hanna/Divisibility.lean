@@ -1,4 +1,6 @@
-import Hanna.BinaryWeight
+module
+
+public import Hanna.BinaryWeight
 
 /-!
 # Binary-weight divisibility for finite expressions
@@ -10,6 +12,8 @@ product is divisible by the same power indexed by the sum of all indices.
 The hypotheses are individual factor divisibilities, not the desired
 product conclusion. All results allow negative integer values.
 -/
+
+@[expose] public section
 
 namespace Hanna
 
@@ -65,7 +69,7 @@ theorem binaryWeight_power_dvd_product (m : Int) (factors : List (Nat × Int))
     m ^ binaryWeight (totalIndex factors) ∣ factorProduct factors := by
   have hweight : binaryWeight (totalIndex factors) ≤
       (factors.map (fun factor => binaryWeight factor.1)).sum := by
-    simpa [totalIndex, List.map_map] using binaryWeight_sum_le (factors.map Prod.fst)
+    simpa [totalIndex, List.map_map, Function.comp_def] using binaryWeight_sum_le (factors.map Prod.fst)
   exact Int.dvd_trans (int_pow_dvd_pow_of_le m hweight)
     (sum_weights_power_dvd_product m factors h)
 

@@ -1,5 +1,7 @@
-import Consecutive.Coefficients
-import Mathlib.Algebra.Ring.Int.Parity
+module
+
+public import Consecutive.Coefficients
+public import Mathlib.Algebra.Ring.Int.Parity
 
 /-!
 # Integer composition iterates
@@ -8,6 +10,8 @@ Negative iterates are repeated composition of the unique actual formal-series
 inverse.  They are not defined by a modular coefficient formula.  Coefficient
 reduction commutes with these inverses and iterates.
 -/
+
+@[expose] public section
 
 namespace Consecutive
 
@@ -115,17 +119,17 @@ theorem map_ziter_solution_mod_odd (r : ℕ) (hr : Odd r) (k : ℤ) :
     _ = _ := ziter_solution_mod_odd r hr k
 
 def integerIterateCoeff (r : ℕ) (k : ℤ) (n : ℕ) : ℤ :=
-  coeff ℤ n (ziter (solution (R:=ℤ) r) (solution_normalized r) k)
+  coeff (R := ℤ) n (ziter (solution (R:=ℤ) r) (solution_normalized r) k)
 
 theorem coeff_mobius_of_pos (a : R) (n : ℕ) (hn : 1 ≤ n) :
-    coeff R n (mobius a) = a^(n-1) := by
+    coeff n (mobius a) = a^(n-1) := by
   obtain ⟨j, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : n ≠ 0)
   simp [mobius]
 
 theorem integerIterateCoeff_mod_odd (r : ℕ) (hr : Odd r) (k : ℤ) (n : ℕ)
     (hn : 1 ≤ n) :
     (integerIterateCoeff r k n : ZMod (2*r)) = (k : ZMod (2*r))^(n-1) := by
-  have h := congrArg (coeff (ZMod (2*r)) n) (map_ziter_solution_mod_odd r hr k)
+  have h := congrArg (coeff (R := (ZMod (2*r))) n) (map_ziter_solution_mod_odd r hr k)
   simpa only [integerIterateCoeff, coeff_map, Int.coe_castRingHom,
     coeff_mobius_of_pos _ n hn] using h
 
@@ -138,7 +142,7 @@ theorem a396807_integer_iterate_congruence (k : ℤ) (n : ℕ) (hn : 1 ≤ n) :
 theorem mobius_eq_X_iff (a : R) : mobius a = X ↔ a=0 := by
   constructor
   · intro h
-    have hc := congrArg (coeff R 2) h
+    have hc := congrArg (coeff 2) h
     simpa [mobius, coeff_X] using hc
   · intro h
     rw [h, mobius_zero]
@@ -177,7 +181,7 @@ positive parameter.  This includes both the even and odd families. -/
 theorem ziter_solution_mod (r : ℕ) (hr : 0<r) (k : ℤ) :
     ziter (solution (R:=ZMod (2*r)) r) (solution_normalized r) k =
       mobius (k : ZMod (2*r)) +
-        if Even r ∧ Odd k then C (ZMod (2*r)) (r : ZMod (2*r))*correction else 0 := by
+        if Even r ∧ Odd k then C (R := (ZMod (2*r))) (r : ZMod (2*r))*correction else 0 := by
   cases k with
   | ofNat n =>
     simpa only [Int.ofNat_eq_natCast, ziter_nat, Int.cast_natCast, Int.odd_coe_nat]
@@ -200,7 +204,7 @@ theorem map_ziter_solution_mod (r : ℕ) (hr : 0<r) (k : ℤ) :
     PowerSeries.map (Int.castRingHom (ZMod (2*r)))
       (ziter (solution (R:=ℤ) r) (solution_normalized r) k) =
         mobius (k : ZMod (2*r)) +
-          if Even r ∧ Odd k then C (ZMod (2*r)) (r : ZMod (2*r))*correction else 0 := by
+          if Even r ∧ Odd k then C (R := (ZMod (2*r))) (r : ZMod (2*r))*correction else 0 := by
   rw [map_ziter]
   calc
     _ = ziter (solution (R:=ZMod (2*r)) r) (solution_normalized r) k :=
@@ -216,7 +220,7 @@ theorem integerIterateCoeff_mod (r : ℕ) (hr : 0<r) (k : ℤ) (n : ℕ)
         if Even r ∧ Odd k then
           (r : ZMod (2*r)) * (if 4≤n then ((n-2).choose 2 : ZMod (2*r)) else 0)
         else 0 := by
-  have h := congrArg (coeff (ZMod (2*r)) n) (map_ziter_solution_mod r hr k)
+  have h := congrArg (coeff (R := (ZMod (2*r))) n) (map_ziter_solution_mod r hr k)
   by_cases hh : Even r ∧ Odd k
   · simpa only [integerIterateCoeff, coeff_map, Int.coe_castRingHom,
       if_pos hh, map_add, coeff_mobius_of_pos _ n hn, coeff_C_mul, coeff_correction] using h
@@ -231,7 +235,7 @@ theorem ziter_solution_mod_eq_X_iff (r : ℕ) (hr : 0<r) (k : ℤ) :
   constructor
   · intro h
     rw [ziter_solution_mod r hr k] at h
-    have hc := congrArg (coeff (ZMod (2*r)) 2) h
+    have hc := congrArg (coeff (R := (ZMod (2*r))) 2) h
     have hk : (k : ZMod (2*r))=0 := by
       by_cases hh : Even r ∧ Odd k
       · simp only [if_pos hh, map_add, coeff_mobius_of_pos _ 2 (by omega),

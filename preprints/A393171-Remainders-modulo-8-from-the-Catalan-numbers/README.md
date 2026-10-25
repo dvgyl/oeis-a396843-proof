@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A393171,
   author = {Goyal, Dev D.},
   title = {{Remainders modulo $8$ of a series built from the Catalan numbers}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A393171-Remainders-modulo-8-from-the-Catalan-numbers/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A393171-Remainders-modulo-8-from-the-Catalan-numbers/paper.pdf}},
   year = {2026}
 }
 ```

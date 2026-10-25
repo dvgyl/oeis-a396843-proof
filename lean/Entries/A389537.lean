@@ -1,4 +1,6 @@
-import Families.LacunaryInverse
+module
+
+public import Families.LacunaryInverse
 
 /-!
 # OEIS A389537
@@ -7,6 +9,8 @@ Statements of the results in the accompanying paper (listed in `CONTENTS.md` at 
 repository root), proved using the shared libraries of this project.
 Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace OEIS.A389537
 
@@ -25,7 +29,7 @@ theorem inverse_right : compose (R : PowerSeries ℤ) A=X := R_A
 
 theorem inverse_left : compose (A : PowerSeries ℤ) R=X := A_R
 
-theorem normalized : coeff ℤ 0 (A : PowerSeries ℤ)=0 ∧ coeff ℤ 1 (A : PowerSeries ℤ)=1 :=
+theorem normalized : coeff (R := ℤ) 0 (A : PowerSeries ℤ)=0 ∧ coeff (R := ℤ) 1 (A : PowerSeries ℤ)=1 :=
   A_normalized
 
 theorem source_equation : compose (A : PowerSeries ℤ) (A-X)=A^2 := A_equation
@@ -44,13 +48,12 @@ theorem integer_decomposition : (A : PowerSeries ℤ)=X+X^2+2*H := A_decompositi
 theorem half_equation_mod_two : PowerSeries.map (Int.castRingHom (ZMod 2)) H +
     (PowerSeries.map (Int.castRingHom (ZMod 2)) H)^2=X^3 := H_mod_two_equation
 
-theorem half_binary_support (n : ℕ) : coeff (ZMod 2) n (PowerSeries.map (Int.castRingHom (ZMod 2)) H)=1 ↔
+theorem half_binary_support (n : ℕ) : coeff (R := (ZMod 2)) n (PowerSeries.map (Int.castRingHom (ZMod 2)) H)=1 ↔
     ∃ k : ℕ, n=3*2^k := H_mod_two_coeff n
 
 theorem residue_mod_four (n : ℕ) (hn : 2<n) :
-    (coeff ℤ n (A : PowerSeries ℤ) : ZMod 4)=
+    (coeff (R := ℤ) n (A : PowerSeries ℤ) : ZMod 4)=
       if ∃ k : ℕ, n=3*2^k then 2 else 0 := a389537_residue n hn
-
 
 end
 end OEIS.A389537

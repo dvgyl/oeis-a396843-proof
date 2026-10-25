@@ -1,5 +1,7 @@
-import Hanna.Related.ScaledParity
-import Mathlib.RingTheory.PowerSeries.Derivative
+module
+
+public import Hanna.Related.ScaledParity
+public import Mathlib.RingTheory.PowerSeries.Derivative
 
 /-!
 # OEIS A397588: parity of a differential fixed point
@@ -10,6 +12,8 @@ constructed and proved unique before its parity is determined.
 AI disclosure: OpenAI ChatGPT generated these proofs for Dev D. Goyal.
 -/
 
+@[expose] public section
+
 namespace Families.DifferentialParity
 
 open PowerSeries Hanna.Series
@@ -19,12 +23,12 @@ noncomputable section
 variable {R S : Type*} [CommRing R] [CommRing S]
 
 theorem derivative_vanish (G : PowerSeries R) (n : ℕ)
-    (hG : (X : PowerSeries R)^(n+1) ∣ G) : X^n ∣ derivative R G := by
+    (hG : (X : PowerSeries R)^(n+1) ∣ G) : X^n ∣ derivative G := by
   apply X_pow_dvd_iff.mpr
   intro k hk
   rw [coeff_derivative, X_pow_dvd_iff.mp hG (k+1) (by omega), zero_mul]
 
-def step (G : PowerSeries R) : PowerSeries R := X + derivative R (X*G^2)
+def step (G : PowerSeries R) : PowerSeries R := X + derivative (X*G^2)
 
 theorem step_normalized {G : PowerSeries R} (hG : Normalized G) :
     Normalized (step G) := by
@@ -50,7 +54,7 @@ theorem step_contraction (n : ℕ) {G H : PowerSeries R}
     simpa only [pow_one, show 1+(n+1)=n+1+1 by omega] using
       X_pow_dvd_product (dvd_refl ((X : PowerSeries R)^1)) hsq
   have hd := derivative_vanish (X*(G^2-H^2)) (n+1) hx
-  have he : step G-step H = derivative R (X*(G^2-H^2)) := by
+  have he : step G-step H = derivative (X*(G^2-H^2)) := by
     rw [mul_sub, map_sub]
     dsimp [step]
     ring
@@ -58,7 +62,7 @@ theorem step_contraction (n : ℕ) {G H : PowerSeries R}
   exact hd
 
 theorem equation_triangular :
-    Triangular (fun a n => coeff R (n+2) (ofTail a-step (ofTail a))) := by
+    Triangular (fun (a : ℕ → R) n => coeff (n+2) (ofTail a-step (ofTail a))) := by
   intro n a b hab
   have hd := (agree_iff_X_pow_dvd_sub (n+2) (ofTail a) (ofTail b)).mp
     (ofTail_agree a b n hab)
@@ -68,7 +72,7 @@ theorem equation_triangular :
   linear_combination -hc
 
 theorem solution_exists : ∃ G : PowerSeries R, Normalized G ∧ G=step G := by
-  let op := fun a n => coeff R (n+2) (ofTail a-step (ofTail a))
+  let op := fun (a : ℕ → R) n => coeff (n+2) (ofTail a-step (ofTail a))
   let a := triangularCoeffs op (fun _ => 0)
   have ha := triangularCoeffs_spec op equation_triangular (fun _ => 0)
   refine ⟨ofTail a, normalized_ofTail a, ?_⟩
@@ -78,7 +82,7 @@ theorem solution_exists : ∃ G : PowerSeries R, Normalized G ∧ G=step G := by
   · exact (normalized_ofTail a).1.trans hs.1.symm
   · exact (normalized_ofTail a).2.trans hs.2.symm
   · have hc := congrFun ha n
-    change coeff R (n+2) (ofTail a-step (ofTail a))=0 at hc
+    change coeff (n+2) (ofTail a-step (ofTail a))=0 at hc
     simpa only [map_sub, sub_eq_zero, Nat.succ_eq_add_one, Nat.add_assoc] using hc
 
 theorem solution_unique {G H : PowerSeries R} (hG : Normalized G)
@@ -93,7 +97,7 @@ theorem solution_unique {G H : PowerSeries R} (hG : Normalized G)
     exact hc
 
 theorem existence_uniqueness :
-    ∃! G : PowerSeries R, Normalized G ∧ G=X+derivative R (X*G^2) := by
+    ∃! G : PowerSeries R, Normalized G ∧ G=X+derivative (X*G^2) := by
   obtain ⟨G,hG,heG⟩ := solution_exists (R:=R)
   exact ⟨G,⟨hG,heG⟩,fun H hH => solution_unique hH.1 hG hH.2 heG⟩
 
@@ -102,11 +106,11 @@ def A : PowerSeries R := (existence_uniqueness (R:=R)).exists.choose
 theorem A_normalized : Normalized (A : PowerSeries R) :=
   (existence_uniqueness (R:=R)).exists.choose_spec.1
 
-theorem A_equation : (A : PowerSeries R)=X+derivative R (X*A^2) :=
+theorem A_equation : (A : PowerSeries R)=X+derivative (X*A^2) :=
   (existence_uniqueness (R:=R)).exists.choose_spec.2
 
 theorem map_derivative (f : R →+* S) (G : PowerSeries R) :
-    PowerSeries.map f (derivative R G)=derivative S (PowerSeries.map f G) := by
+    PowerSeries.map f (derivative G)=derivative (PowerSeries.map f G) := by
   ext n
   simp only [coeff_map, coeff_derivative, map_mul, map_add, map_natCast, map_one]
 
@@ -119,8 +123,8 @@ theorem map_A (f : R →+* S) :
 theorem A_mod_two_quadratic : (A : PowerSeries (ZMod 2))-A^2=X := by
   have htwo : (2 : PowerSeries (ZMod 2))=0 := by
     have h : (2 : ZMod 2)=0 := by decide
-    simpa only [map_ofNat, map_zero] using congrArg (C (ZMod 2)) h
-  have hsquare : derivative (ZMod 2) ((A : PowerSeries (ZMod 2))^2)=0 := by
+    simpa only [map_ofNat, map_zero] using congrArg (C (R := (ZMod 2))) h
+  have hsquare : derivative (R := (ZMod 2)) ((A : PowerSeries (ZMod 2))^2)=0 := by
     rw [pow_two, Derivation.leibniz]
     simp only [smul_eq_mul, ← two_mul, htwo, zero_mul]
   have he := A_equation (R:=ZMod 2)
@@ -132,7 +136,7 @@ theorem A_mod_two_quadratic : (A : PowerSeries (ZMod 2))-A^2=X := by
 stronger complete series reduction. -/
 theorem A_mod_three : (A : PowerSeries (ZMod 3))=X := by
   apply solution_unique A_normalized normalized_X A_equation
-  have hd : derivative (ZMod 3) ((X : PowerSeries (ZMod 3))^3)=0 := by
+  have hd : derivative (R := (ZMod 3)) ((X : PowerSeries (ZMod 3))^3)=0 := by
     ext n
     rw [coeff_derivative, coeff_X_pow, map_zero]
     by_cases hn : n+1=3
@@ -141,17 +145,17 @@ theorem A_mod_three : (A : PowerSeries (ZMod 3))=X := by
       subst n
       decide
     · rw [if_neg hn, zero_mul]
-  change X=X+derivative (ZMod 3) (X*X^2)
+  change X=X+derivative (R := (ZMod 3)) (X*X^2)
   rw [show (X : PowerSeries (ZMod 3))*X^2=X^3 by ring, hd, add_zero]
 
 /-- A397588, with its zero constant coefficient included. -/
-def a (n : ℕ) : ℤ := coeff ℤ n A
+def a (n : ℕ) : ℤ := coeff (R := ℤ) n A
 
 /-- The exact OEIS conjecture, strengthened to include the zero index. -/
 theorem a397588_parity (n : ℕ) : Odd (a n) ↔ ∃ k : ℕ, n=2^k := by
-  have hm := congrArg (coeff (ZMod 2) n) (map_A (Int.castRingHom (ZMod 2)))
+  have hm := congrArg (coeff (R := (ZMod 2)) n) (map_A (Int.castRingHom (ZMod 2)))
   rw [coeff_map] at hm
-  change (a n : ZMod 2)=coeff (ZMod 2) n A at hm
+  change (a n : ZMod 2)=coeff (R := (ZMod 2)) n A at hm
   have hc : ((a n : ZMod 2)=1) ↔ Odd (a n) := by
     simpa [Int.odd_iff] using ZMod.intCast_eq_intCast_iff' (a n) 1 2
   rw [← hc, hm]
@@ -160,7 +164,7 @@ theorem a397588_parity (n : ℕ) : Odd (a n) ↔ ∃ k : ℕ, n=2^k := by
 
 /-- This is an additional assertion in the entry, not another conjecture claim. -/
 theorem a397588_divisible_by_three (n : ℕ) (hn : 1<n) : (3 : ℤ) ∣ a n := by
-  have hm := congrArg (coeff (ZMod 3) n) (map_A (Int.castRingHom (ZMod 3)))
+  have hm := congrArg (coeff (R := (ZMod 3)) n) (map_A (Int.castRingHom (ZMod 3)))
   rw [coeff_map, A_mod_three, coeff_X, if_neg (by omega : n≠1)] at hm
   exact (ZMod.intCast_zmod_eq_zero_iff_dvd (a n) 3).mp hm
 

@@ -1,4 +1,6 @@
-import Hanna.Statements
+module
+
+public import Hanna.Statements
 
 /-!
 # OEIS A396844
@@ -7,6 +9,8 @@ Statements of the results in the accompanying paper (listed in `CONTENTS.md` at 
 repository root), proved using the shared libraries of this project.
 Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace OEIS.A396844
 

@@ -1,5 +1,7 @@
-import Consecutive.Modular
-import Mathlib.RingTheory.PowerSeries.Inverse
+module
+
+public import Consecutive.Modular
+public import Mathlib.RingTheory.PowerSeries.Inverse
 
 /-!
 # OEIS A378580 and A378581: theta substitution modulo four
@@ -14,6 +16,8 @@ ChatGPT for Dev D. Goyal.  Lean checks the proof terms against the definitions.
 The source conjectures were proposed by Paul D. Hanna in OEIS A378580/A378581.
 -/
 
+@[expose] public section
+
 namespace ThetaSubstitution
 
 open PowerSeries Hanna.Series
@@ -25,9 +29,9 @@ attribute [local instance] Classical.propDecidable
 variable {R S : Type*} [CommRing R] [CommRing S]
 
 theorem normalized_pow_diagonal {G : PowerSeries R} (hG : Normalized G) (n : ℕ) :
-    coeff R n (G^n)=1 := by
+    coeff n (G^n)=1 := by
   obtain ⟨U,hU⟩ := hG.X_dvd
-  have hc : constantCoeff R U=1 := by
+  have hc : constantCoeff U=1 := by
     have h := hG.2
     rw [hU, show 1=0+1 by omega, coeff_succ_X_mul,
       coeff_zero_eq_constantCoeff_apply] at h
@@ -37,7 +41,7 @@ theorem normalized_pow_diagonal {G : PowerSeries R} (hG : Normalized G) (n : ℕ
 
 theorem compose_outer_leading {E G : PowerSeries R} (n : ℕ)
     (hE : (X : PowerSeries R)^n ∣ E) (hG : Normalized G) :
-    coeff R n (compose E G)=coeff R n E := by
+    coeff n (compose E G)=coeff n E := by
   classical
   rw [coeff_compose E G hG.constantCoeff]
   rw [Finset.sum_eq_single n]
@@ -48,21 +52,21 @@ theorem compose_outer_leading {E G : PowerSeries R} (n : ℕ)
   · simp
 
 theorem mul_unit_leading {E T : PowerSeries R} (n : ℕ)
-    (hE : (X : PowerSeries R)^n ∣ E) (hT : constantCoeff R T=1) :
-    coeff R n (E*T)=coeff R n E := by
+    (hE : (X : PowerSeries R)^n ∣ E) (hT : constantCoeff T=1) :
+    coeff n (E*T)=coeff n E := by
   obtain ⟨D,rfl⟩ := hE
   rw [mul_assoc, coeff_X_pow_mul', coeff_X_pow_mul']
   simp [hT]
 
 theorem normalized_mul_unit {G T : PowerSeries R}
-    (hG : Normalized G) (hT : constantCoeff R T=1) : Normalized (G*T) := by
+    (hG : Normalized G) (hT : constantCoeff T=1) : Normalized (G*T) := by
   constructor
   · simp [coeff_zero_eq_constantCoeff_apply, hG.constantCoeff]
   · rw [coeff_one_mul, hG.2, hG.constantCoeff, hT]
     ring
 
-theorem normal_equation_triangular (T : PowerSeries R) (hT : constantCoeff R T=1) :
-    Triangular (fun a n => coeff R (n+2)
+theorem normal_equation_triangular (T : PowerSeries R) (hT : constantCoeff T=1) :
+    Triangular (fun (a : ℕ → R) n => coeff (n+2)
       (compose (ofTail a) (ofTail a)-ofTail a*T)) := by
   intro n a b hab
   have hd := (agree_iff_X_pow_dvd_sub (n+2) (ofTail a) (ofTail b)).mp
@@ -77,9 +81,9 @@ theorem normal_equation_triangular (T : PowerSeries R) (hT : constantCoeff R T=1
   simp only [sub_mul, map_sub, coeff_ofTail] at ho hi hm ⊢
   linear_combination ho + hi - hm
 
-theorem normal_equation_exists (T : PowerSeries R) (hT : constantCoeff R T=1) :
+theorem normal_equation_exists (T : PowerSeries R) (hT : constantCoeff T=1) :
     ∃ G : PowerSeries R, Normalized G ∧ compose G G=G*T := by
-  let op := fun a n => coeff R (n+2) (compose (ofTail a) (ofTail a)-ofTail a*T)
+  let op := fun (a : ℕ → R) n => coeff (n+2) (compose (ofTail a) (ofTail a)-ofTail a*T)
   let a := triangularCoeffs op (fun _ => 0)
   have ha := triangularCoeffs_spec op (normal_equation_triangular T hT) (fun _ => 0)
   refine ⟨ofTail a, normalized_ofTail a, ?_⟩
@@ -90,16 +94,16 @@ theorem normal_equation_exists (T : PowerSeries R) (hT : constantCoeff R T=1) :
   · exact hc.1.trans hm.1.symm
   · exact hc.2.trans hm.2.symm
   · have h := congrFun ha n
-    change coeff R (n+2) (compose (ofTail a) (ofTail a)-ofTail a*T)=0 at h
+    change coeff (n+2) (compose (ofTail a) (ofTail a)-ofTail a*T)=0 at h
     simpa only [map_sub, sub_eq_zero, Nat.succ_eq_add_one, Nat.add_assoc] using h
 
-theorem normal_equation_unique (T : PowerSeries R) (hT : constantCoeff R T=1)
+theorem normal_equation_unique (T : PowerSeries R) (hT : constantCoeff T=1)
     {G H : PowerSeries R} (hG : Normalized G) (hH : Normalized H)
     (hEG : compose G G=G*T) (hEH : compose H H=H*T) : G=H := by
   obtain ⟨a,_,hu⟩ := triangular_existsUnique _ (normal_equation_triangular T hT)
     (fun _ => 0)
   have htail (F : PowerSeries R) (hF : Normalized F) (he : compose F F=F*T) :
-      (fun n => coeff R (n+2) F)=a := by
+      (fun n => coeff (n+2) F)=a := by
     apply hu
     funext n
     rw [ofTail_coeff hF, he, sub_self, map_zero]
@@ -108,19 +112,19 @@ theorem normal_equation_unique (T : PowerSeries R) (hT : constantCoeff R T=1)
   simpa only [ofTail_coeff hG, ofTail_coeff hH] using hc
 
 theorem normal_equation_existence_uniqueness
-    (T : PowerSeries R) (hT : constantCoeff R T=1) :
+    (T : PowerSeries R) (hT : constantCoeff T=1) :
     ∃! G : PowerSeries R, Normalized G ∧ compose G G=G*T := by
   obtain ⟨G,hG,he⟩ := normal_equation_exists T hT
   exact ⟨G,⟨hG,he⟩,fun H hH => normal_equation_unique T hT hH.1 hG hH.2 he⟩
 
-def normalRoot (T : PowerSeries R) (hT : constantCoeff R T=1) : PowerSeries R :=
+def normalRoot (T : PowerSeries R) (hT : constantCoeff T=1) : PowerSeries R :=
   (normal_equation_existence_uniqueness T hT).exists.choose
 
-theorem normalRoot_normalized (T : PowerSeries R) (hT : constantCoeff R T=1) :
+theorem normalRoot_normalized (T : PowerSeries R) (hT : constantCoeff T=1) :
     Normalized (normalRoot T hT) :=
   (normal_equation_existence_uniqueness T hT).exists.choose_spec.1
 
-theorem normalRoot_equation (T : PowerSeries R) (hT : constantCoeff R T=1) :
+theorem normalRoot_equation (T : PowerSeries R) (hT : constantCoeff T=1) :
     compose (normalRoot T hT) (normalRoot T hT)=normalRoot T hT*T :=
   (normal_equation_existence_uniqueness T hT).exists.choose_spec.2
 
@@ -128,34 +132,34 @@ theorem normalRoot_equation (T : PowerSeries R) (hT : constantCoeff R T=1) :
 def unitInv (A : PowerSeries R) : PowerSeries R := PowerSeries.invOfUnit A 1
 
 @[simp] theorem unitInv_constant (A : PowerSeries R) :
-    constantCoeff R (unitInv A)=1 := by simp [unitInv, constantCoeff_invOfUnit]
+    constantCoeff (unitInv A)=1 := by simp [unitInv, constantCoeff_invOfUnit]
 
-theorem mul_unitInv {A : PowerSeries R} (hA : constantCoeff R A=1) :
+theorem mul_unitInv {A : PowerSeries R} (hA : constantCoeff A=1) :
     A*unitInv A=1 := PowerSeries.mul_invOfUnit A 1 (by simpa using hA)
 
-theorem unitInv_mul {A : PowerSeries R} (hA : constantCoeff R A=1) :
+theorem unitInv_mul {A : PowerSeries R} (hA : constantCoeff A=1) :
     unitInv A*A=1 := PowerSeries.invOfUnit_mul A 1 (by simpa using hA)
 
-theorem unitInv_unique {A B : PowerSeries R} (hA : constantCoeff R A=1)
+theorem unitInv_unique {A B : PowerSeries R} (hA : constantCoeff A=1)
     (he : A*B=1) : B=unitInv A := by
   calc
     B = (unitInv A*A)*B := by rw [unitInv_mul hA, one_mul]
     _ = unitInv A*(A*B) := by ring
     _ = unitInv A := by rw [he, mul_one]
 
-theorem unitInv_involutive {A : PowerSeries R} (hA : constantCoeff R A=1) :
+theorem unitInv_involutive {A : PowerSeries R} (hA : constantCoeff A=1) :
     unitInv (unitInv A)=A :=
   (unitInv_unique (unitInv_constant A) (unitInv_mul hA)).symm
 
 theorem map_unitInv (f : R →+* S) {A : PowerSeries R}
-    (hA : constantCoeff R A=1) :
+    (hA : constantCoeff A=1) :
     PowerSeries.map f (unitInv A)=unitInv (PowerSeries.map f A) := by
   apply unitInv_unique
   · rw [constantCoeff_map, hA, map_one]
   · rw [← map_mul, mul_unitInv hA, map_one]
 
 theorem compose_unitInv {A G : PowerSeries R}
-    (hA : constantCoeff R A=1) (hG : constantCoeff R G=0) :
+    (hA : constantCoeff A=1) (hG : constantCoeff G=0) :
     compose (unitInv A) G=unitInv (compose A G) := by
   apply unitInv_unique
   · rw [constantCoeff_compose _ _ hG, hA]
@@ -163,12 +167,12 @@ theorem compose_unitInv {A G : PowerSeries R}
 
 /-- Coefficient shift: `dropX G` is the quotient of a zero-constant series by X. -/
 def dropX (G : PowerSeries R) : PowerSeries R :=
-  PowerSeries.mk fun n => coeff R (n+1) G
+  PowerSeries.mk fun n => coeff (n+1) G
 
 @[simp] theorem coeff_dropX (G : PowerSeries R) (n : ℕ) :
-    coeff R n (dropX G)=coeff R (n+1) G := by simp [dropX]
+    coeff n (dropX G)=coeff (n+1) G := by simp [dropX]
 
-theorem X_mul_dropX {G : PowerSeries R} (hG : constantCoeff R G=0) :
+theorem X_mul_dropX {G : PowerSeries R} (hG : constantCoeff G=0) :
     X*dropX G=G := by
   ext n
   cases n with
@@ -176,13 +180,13 @@ theorem X_mul_dropX {G : PowerSeries R} (hG : constantCoeff R G=0) :
   | succ n => simp only [coeff_succ_X_mul, coeff_dropX, Nat.succ_eq_add_one]
 
 theorem dropX_constant {G : PowerSeries R} (hG : Normalized G) :
-    constantCoeff R (dropX G)=1 := by
+    constantCoeff (dropX G)=1 := by
   simpa only [← coeff_zero_eq_constantCoeff_apply, coeff_dropX, Nat.zero_add] using hG.2
 
 theorem normalized_mul_cancel {G P Q : PowerSeries R} (hG : Normalized G)
     (he : G*P=G*Q) : P=Q := by
   let U := dropX G
-  have hU : constantCoeff R U=1 := dropX_constant hG
+  have hU : constantCoeff U=1 := dropX_constant hG
   have hx : X*U=G := X_mul_dropX hG.constantCoeff
   have hh : U*P=U*Q := PowerSeries.X_mul_cancel (by simpa only [← mul_assoc, hx] using he)
   calc
@@ -191,22 +195,22 @@ theorem normalized_mul_cancel {G P Q : PowerSeries R} (hG : Normalized G)
     _ = Q := by rw [← mul_assoc, unitInv_mul hU, one_mul]
 
 /-- The unique constant-one solution of `A(X*A)=T`. -/
-def plus (T : PowerSeries R) (hT : constantCoeff R T=1) : PowerSeries R :=
+def plus (T : PowerSeries R) (hT : constantCoeff T=1) : PowerSeries R :=
   dropX (normalRoot T hT)
 
-theorem plus_congr {T U : PowerSeries R} (hT : constantCoeff R T=1)
-    (hU : constantCoeff R U=1) (he : T=U) : plus T hT=plus U hU := by
+theorem plus_congr {T U : PowerSeries R} (hT : constantCoeff T=1)
+    (hU : constantCoeff U=1) (he : T=U) : plus T hT=plus U hU := by
   subst U
   rfl
 
-theorem plus_constant (T : PowerSeries R) (hT : constantCoeff R T=1) :
-    constantCoeff R (plus T hT)=1 := dropX_constant (normalRoot_normalized T hT)
+theorem plus_constant (T : PowerSeries R) (hT : constantCoeff T=1) :
+    constantCoeff (plus T hT)=1 := dropX_constant (normalRoot_normalized T hT)
 
-theorem X_mul_plus (T : PowerSeries R) (hT : constantCoeff R T=1) :
+theorem X_mul_plus (T : PowerSeries R) (hT : constantCoeff T=1) :
     X*plus T hT=normalRoot T hT :=
   X_mul_dropX (normalRoot_normalized T hT).constantCoeff
 
-theorem plus_equation (T : PowerSeries R) (hT : constantCoeff R T=1) :
+theorem plus_equation (T : PowerSeries R) (hT : constantCoeff T=1) :
     compose (plus T hT) (X*plus T hT)=T := by
   have hG := normalRoot_normalized T hT
   have he := normalRoot_equation T hT
@@ -218,16 +222,16 @@ theorem plus_equation (T : PowerSeries R) (hT : constantCoeff R T=1) :
       rw [compose_mul _ _ _ hG.constantCoeff, compose_X_left _ hG.constantCoeff]
     _ = normalRoot T hT*T := by rw [X_mul_plus, he]
 
-theorem X_mul_normalized {A : PowerSeries R} (hA : constantCoeff R A=1) :
+theorem X_mul_normalized {A : PowerSeries R} (hA : constantCoeff A=1) :
     Normalized (X*A) := by
   constructor
   · simp
-  · change coeff R (0+1) (X*A)=1
+  · change coeff (0+1) (X*A)=1
     rw [coeff_succ_X_mul, coeff_zero_eq_constantCoeff_apply]
     exact hA
 
-theorem plus_unique (T : PowerSeries R) (hT : constantCoeff R T=1)
-    {A : PowerSeries R} (hA : constantCoeff R A=1)
+theorem plus_unique (T : PowerSeries R) (hT : constantCoeff T=1)
+    {A : PowerSeries R} (hA : constantCoeff A=1)
     (he : compose A (X*A)=T) : A=plus T hT := by
   apply PowerSeries.X_mul_cancel
   rw [X_mul_plus]
@@ -235,12 +239,12 @@ theorem plus_unique (T : PowerSeries R) (hT : constantCoeff R T=1)
     (normalRoot_normalized T hT) _ (normalRoot_equation T hT)
   rw [compose_mul _ _ _ (by simp), compose_X_left _ (by simp), he]
 
-theorem plus_existence_uniqueness (T : PowerSeries R) (hT : constantCoeff R T=1) :
-    ∃! A : PowerSeries R, constantCoeff R A=1 ∧ compose A (X*A)=T := by
+theorem plus_existence_uniqueness (T : PowerSeries R) (hT : constantCoeff T=1) :
+    ∃! A : PowerSeries R, constantCoeff A=1 ∧ compose A (X*A)=T := by
   exact ⟨plus T hT,⟨plus_constant T hT,plus_equation T hT⟩,
     fun A hA => plus_unique T hT hA.1 hA.2⟩
 
-theorem map_plus (f : R →+* S) (T : PowerSeries R) (hT : constantCoeff R T=1) :
+theorem map_plus (f : R →+* S) (T : PowerSeries R) (hT : constantCoeff T=1) :
     PowerSeries.map f (plus T hT)=plus (PowerSeries.map f T)
       (by rw [constantCoeff_map, hT, map_one]) := by
   apply plus_unique
@@ -249,41 +253,41 @@ theorem map_plus (f : R →+* S) (T : PowerSeries R) (hT : constantCoeff R T=1) 
       ← map_compose f _ _ (by simp), plus_equation]
 
 /-- The unique constant-one solution of `A(X/A)=T`, using genuine unit inversion. -/
-def minus (T : PowerSeries R) (_hT : constantCoeff R T=1) : PowerSeries R :=
+def minus (T : PowerSeries R) (_hT : constantCoeff T=1) : PowerSeries R :=
   unitInv (plus (unitInv T) (unitInv_constant T))
 
-theorem minus_congr {T U : PowerSeries R} (hT : constantCoeff R T=1)
-    (hU : constantCoeff R U=1) (he : T=U) : minus T hT=minus U hU := by
+theorem minus_congr {T U : PowerSeries R} (hT : constantCoeff T=1)
+    (hU : constantCoeff U=1) (he : T=U) : minus T hT=minus U hU := by
   subst U
   rfl
 
-theorem minus_constant (T : PowerSeries R) (hT : constantCoeff R T=1) :
-    constantCoeff R (minus T hT)=1 := unitInv_constant _
+theorem minus_constant (T : PowerSeries R) (hT : constantCoeff T=1) :
+    constantCoeff (minus T hT)=1 := unitInv_constant _
 
-theorem unitInv_minus (T : PowerSeries R) (hT : constantCoeff R T=1) :
+theorem unitInv_minus (T : PowerSeries R) (hT : constantCoeff T=1) :
     unitInv (minus T hT)=plus (unitInv T) (unitInv_constant T) :=
   unitInv_involutive (plus_constant _ _)
 
-theorem minus_equation (T : PowerSeries R) (hT : constantCoeff R T=1) :
+theorem minus_equation (T : PowerSeries R) (hT : constantCoeff T=1) :
     compose (minus T hT) (X*unitInv (minus T hT))=T := by
   rw [unitInv_minus, minus, compose_unitInv (plus_constant _ _) (by simp),
     plus_equation, unitInv_involutive hT]
 
-theorem minus_unique (T : PowerSeries R) (hT : constantCoeff R T=1)
-    {A : PowerSeries R} (hA : constantCoeff R A=1)
+theorem minus_unique (T : PowerSeries R) (hT : constantCoeff T=1)
+    {A : PowerSeries R} (hA : constantCoeff A=1)
     (he : compose A (X*unitInv A)=T) : A=minus T hT := by
   have hh : unitInv A=plus (unitInv T) (unitInv_constant T) := by
     apply plus_unique _ _ (unitInv_constant A)
     rw [compose_unitInv hA (by simp), he]
   rw [minus, ← hh, unitInv_involutive hA]
 
-theorem minus_existence_uniqueness (T : PowerSeries R) (hT : constantCoeff R T=1) :
+theorem minus_existence_uniqueness (T : PowerSeries R) (hT : constantCoeff T=1) :
     ∃! A : PowerSeries R,
-      constantCoeff R A=1 ∧ compose A (X*unitInv A)=T := by
+      constantCoeff A=1 ∧ compose A (X*unitInv A)=T := by
   exact ⟨minus T hT,⟨minus_constant T hT,minus_equation T hT⟩,
     fun A hA => minus_unique T hT hA.1 hA.2⟩
 
-theorem map_minus (f : R →+* S) (T : PowerSeries R) (hT : constantCoeff R T=1) :
+theorem map_minus (f : R →+* S) (T : PowerSeries R) (hT : constantCoeff T=1) :
     PowerSeries.map f (minus T hT)=minus (PowerSeries.map f T)
       (by rw [constantCoeff_map, hT, map_one]) := by
   apply minus_unique
@@ -301,17 +305,17 @@ def squareSupport : PowerSeries R := by
   exact PowerSeries.mk fun n => if n=0 then 0 else if squareIndex n then 1 else 0
 
 /-- Jacobi's theta series `1 + 2*X + 2*X^4 + 2*X^9 + ...`. -/
-def theta : PowerSeries R := 1+C R 2*squareSupport
+def theta : PowerSeries R := 1+C 2*squareSupport
 
-theorem squareSupport_constant : constantCoeff R (squareSupport (R:=R))=0 := by
+theorem squareSupport_constant : constantCoeff (squareSupport (R:=R))=0 := by
   classical
   simp [squareSupport]
 
-theorem theta_constant : constantCoeff R (theta (R:=R))=1 := by
+theorem theta_constant : constantCoeff (theta (R:=R))=1 := by
   simp [theta, squareSupport_constant]
 
 theorem theta_coefficient (n : ℕ) (hn : 0<n) :
-    coeff R n (theta (R:=R))=if squareIndex n then 2 else 0 := by
+    coeff n (theta (R:=R))=if squareIndex n then 2 else 0 := by
   classical
   simp [theta, squareSupport, Nat.ne_of_gt hn]
 
@@ -328,12 +332,12 @@ theorem map_theta (f : R →+* S) :
     map_ofNat, map_squareSupport]
 
 theorem double_substitution_fixed (H : PowerSeries (ZMod 4)) :
-    compose (1+C (ZMod 4) 2*H) (X*(1+C (ZMod 4) 2*H))=
-      1+C (ZMod 4) 2*H := by
-  have hz : C (ZMod 4) 2*C (ZMod 4) 2=0 := by
+    compose (1+C (R := (ZMod 4)) 2*H) (X*(1+C (R := (ZMod 4)) 2*H))=
+      1+C (R := (ZMod 4)) 2*H := by
+  have hz : C (R := (ZMod 4)) 2*C (R := (ZMod 4)) 2=0 := by
     rw [← map_mul, show (2 : ZMod 4)*2=0 by decide, map_zero]
   have hw := Consecutive.weighted_compose (2 : ZMod 4) H
-    (X*(1+C (ZMod 4) 2*H)) X (by simp) (by simp)
+    (X*(1+C (R := (ZMod 4)) 2*H)) X (by simp) (by simp)
     (by linear_combination (X : PowerSeries (ZMod 4))*H*hz)
   rw [compose_X_right] at hw
   rw [compose_add _ _ _ (by simp),
@@ -347,12 +351,12 @@ theorem theta_plus_mod_four :
 
 theorem theta_square_mod_four :
     (theta (R:=ZMod 4))*theta=1 := by
-  have hz : C (ZMod 4) 2*C (ZMod 4) 2=0 := by
+  have hz : C (R := (ZMod 4)) 2*C (R := (ZMod 4)) 2=0 := by
     rw [← map_mul, show (2 : ZMod 4)*2=0 by decide, map_zero]
-  have h2 : 2*C (ZMod 4) 2=0 := by
-    have h := congrArg (C (ZMod 4)) (show (2 : ZMod 4)*2=0 by decide)
-    simpa using h
-  change (1+C (ZMod 4) 2*squareSupport)*(1+C (ZMod 4) 2*squareSupport)=1
+  have h2 : 2*C (R := (ZMod 4)) 2=0 := by
+    rw [show (2 : PowerSeries (ZMod 4)) = C 2 from (map_ofNat C 2).symm]
+    exact hz
+  change (1+C (R := (ZMod 4)) 2*squareSupport)*(1+C (R := (ZMod 4)) 2*squareSupport)=1
   linear_combination squareSupport^2*hz + squareSupport*h2
 
 theorem theta_unitInv_mod_four :
@@ -370,9 +374,9 @@ def A378580 : PowerSeries ℤ := minus theta theta_constant
 /-- Canonical integer series for OEIS A378581, from its original source equation. -/
 def A378581 : PowerSeries ℤ := plus theta theta_constant
 
-theorem a378580_constant : constantCoeff ℤ A378580=1 := minus_constant _ _
+theorem a378580_constant : constantCoeff (R := ℤ) A378580=1 := minus_constant _ _
 
-theorem a378581_constant : constantCoeff ℤ A378581=1 := plus_constant _ _
+theorem a378581_constant : constantCoeff (R := ℤ) A378581=1 := plus_constant _ _
 
 /-- `X*unitInv A378580` is the literal formal quotient `X/A378580`. -/
 theorem a378580_quotient_identity : A378580*(X*unitInv A378580)=X := by
@@ -385,19 +389,19 @@ theorem a378581_source_equation :
     compose A378581 (X*A378581)=theta := plus_equation _ _
 
 theorem a378580_source_uniqueness {A : PowerSeries ℤ}
-    (hA : constantCoeff ℤ A=1) (he : compose A (X*unitInv A)=theta) :
+    (hA : constantCoeff (R := ℤ) A=1) (he : compose A (X*unitInv A)=theta) :
     A=A378580 := minus_unique _ _ hA he
 
 theorem a378581_source_uniqueness {A : PowerSeries ℤ}
-    (hA : constantCoeff ℤ A=1) (he : compose A (X*A)=theta) :
+    (hA : constantCoeff (R := ℤ) A=1) (he : compose A (X*A)=theta) :
     A=A378581 := plus_unique _ _ hA he
 
 theorem a378580_source_existence_uniqueness :
-    ∃! A : PowerSeries ℤ, constantCoeff ℤ A=1 ∧
+    ∃! A : PowerSeries ℤ, constantCoeff (R := ℤ) A=1 ∧
       compose A (X*unitInv A)=theta := minus_existence_uniqueness _ theta_constant
 
 theorem a378581_source_existence_uniqueness :
-    ∃! A : PowerSeries ℤ, constantCoeff ℤ A=1 ∧
+    ∃! A : PowerSeries ℤ, constantCoeff (R := ℤ) A=1 ∧
       compose A (X*A)=theta := plus_existence_uniqueness _ theta_constant
 
 /-- Entire-series congruence; its coefficients prove the source conjecture. -/
@@ -414,22 +418,22 @@ theorem a378581_series_mod_four :
 
 /-- OEIS A378580's square-support conjecture, at every positive index. -/
 theorem a378580_congruence (n : ℕ) (hn : 0<n) :
-    (coeff ℤ n A378580 : ZMod 4)=if squareIndex n then 2 else 0 := by
+    (coeff (R := ℤ) n A378580 : ZMod 4)=if squareIndex n then 2 else 0 := by
   classical
-  have h := congrArg (coeff (ZMod 4) n) a378580_series_mod_four
+  have h := congrArg (coeff (R := (ZMod 4)) n) a378580_series_mod_four
   simpa only [PowerSeries.coeff_map, Int.coe_castRingHom, theta_coefficient n hn] using h
 
 /-- OEIS A378581's square-support conjecture, at every positive index. -/
 theorem a378581_congruence (n : ℕ) (hn : 0<n) :
-    (coeff ℤ n A378581 : ZMod 4)=if squareIndex n then 2 else 0 := by
+    (coeff (R := ℤ) n A378581 : ZMod 4)=if squareIndex n then 2 else 0 := by
   classical
-  have h := congrArg (coeff (ZMod 4) n) a378581_series_mod_four
+  have h := congrArg (coeff (R := (ZMod 4)) n) a378581_series_mod_four
   simpa only [PowerSeries.coeff_map, Int.coe_castRingHom, theta_coefficient n hn] using h
 
 theorem a378580_square_iff (n : ℕ) (hn : 0<n) :
-    (coeff ℤ n A378580 : ZMod 4)=2 ↔ ∃ k : ℕ, n=k^2 := by
+    (coeff (R := ℤ) n A378580 : ZMod 4)=2 ↔ ∃ k : ℕ, n=k^2 := by
   classical
-  change (coeff ℤ n A378580 : ZMod 4)=2 ↔ squareIndex n
+  change (coeff (R := ℤ) n A378580 : ZMod 4)=2 ↔ squareIndex n
   rw [a378580_congruence n hn]
   by_cases h : squareIndex n
   · simp [h]
@@ -437,9 +441,9 @@ theorem a378580_square_iff (n : ℕ) (hn : 0<n) :
     exact iff_of_false (by decide) h
 
 theorem a378581_square_iff (n : ℕ) (hn : 0<n) :
-    (coeff ℤ n A378581 : ZMod 4)=2 ↔ ∃ k : ℕ, n=k^2 := by
+    (coeff (R := ℤ) n A378581 : ZMod 4)=2 ↔ ∃ k : ℕ, n=k^2 := by
   classical
-  change (coeff ℤ n A378581 : ZMod 4)=2 ↔ squareIndex n
+  change (coeff (R := ℤ) n A378581 : ZMod 4)=2 ↔ squareIndex n
   rw [a378581_congruence n hn]
   by_cases h : squareIndex n
   · simp [h]
@@ -448,9 +452,9 @@ theorem a378581_square_iff (n : ℕ) (hn : 0<n) :
 
 /-- The complementary clause of the A378580 conjecture, as integer divisibility. -/
 theorem a378580_four_dvd_iff (n : ℕ) (hn : 0<n) :
-    (4 : ℤ) ∣ coeff ℤ n A378580 ↔ ¬ ∃ k : ℕ, n=k^2 := by
+    (4 : ℤ) ∣ coeff (R := ℤ) n A378580 ↔ ¬ ∃ k : ℕ, n=k^2 := by
   classical
-  have hd : (coeff ℤ n A378580 : ZMod 4)=0 ↔ (4 : ℤ) ∣ coeff ℤ n A378580 :=
+  have hd : (coeff (R := ℤ) n A378580 : ZMod 4)=0 ↔ (4 : ℤ) ∣ coeff (R := ℤ) n A378580 :=
     ZMod.intCast_zmod_eq_zero_iff_dvd _ 4
   rw [← hd, a378580_congruence n hn]
   change (if squareIndex n then (2 : ZMod 4) else 0)=0 ↔ ¬squareIndex n
@@ -460,9 +464,9 @@ theorem a378580_four_dvd_iff (n : ℕ) (hn : 0<n) :
 
 /-- The complementary clause of the A378581 conjecture, as integer divisibility. -/
 theorem a378581_four_dvd_iff (n : ℕ) (hn : 0<n) :
-    (4 : ℤ) ∣ coeff ℤ n A378581 ↔ ¬ ∃ k : ℕ, n=k^2 := by
+    (4 : ℤ) ∣ coeff (R := ℤ) n A378581 ↔ ¬ ∃ k : ℕ, n=k^2 := by
   classical
-  have hd : (coeff ℤ n A378581 : ZMod 4)=0 ↔ (4 : ℤ) ∣ coeff ℤ n A378581 :=
+  have hd : (coeff (R := ℤ) n A378581 : ZMod 4)=0 ↔ (4 : ℤ) ∣ coeff (R := ℤ) n A378581 :=
     ZMod.intCast_zmod_eq_zero_iff_dvd _ 4
   rw [← hd, a378581_congruence n hn]
   change (if squareIndex n then (2 : ZMod 4) else 0)=0 ↔ ¬squareIndex n

@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A394576,
   author = {Goyal, Dev D.},
   title = {{A greedy sequence that avoids sums of three consecutive terms}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A394576-A-greedy-sequence-avoiding-sums-of-three-consecutive-terms/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A394576-A-greedy-sequence-avoiding-sums-of-three-consecutive-terms/paper.pdf}},
   year = {2026}
 }
 ```

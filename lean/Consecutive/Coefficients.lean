@@ -1,6 +1,8 @@
-import Consecutive.Construction
-import Consecutive.Modular
-import Consecutive.Arithmetic
+module
+
+public import Consecutive.Construction
+public import Consecutive.Modular
+public import Consecutive.Arithmetic
 
 /-!
 # Coefficient consequences for the canonical integer solutions
@@ -9,6 +11,8 @@ The endpoints below refer to `solution`, constructed from the defining
 functional equation in `Construction`, rather than to an assumed sequence
 of coefficients satisfying the desired congruences.
 -/
+
+@[expose] public section
 
 namespace Consecutive
 
@@ -19,11 +23,11 @@ noncomputable section
 variable {R : Type*} [CommRing R]
 
 @[simp] theorem coeff_mobius_succ (c : R) (n : ℕ) :
-    coeff R (n+1) (mobius c)=c^n := by
+    coeff (n+1) (mobius c)=c^n := by
   simp [mobius]
 
 theorem coeff_correction (n : ℕ) :
-    coeff R n (correction : PowerSeries R) =
+    coeff n (correction : PowerSeries R) =
       if 4≤n then ((n-2).choose 2:R) else 0 := by
   rw [correction, coeff_X_pow_mul', geom_one,
     show (3:ℕ)=2+1 by rfl, mk_one_pow_eq_mk_choose_add]
@@ -34,13 +38,13 @@ theorem coeff_correction (n : ℕ) :
   · rfl
 
 theorem coeff_candidate (c : R) (n : ℕ) (hn : 0<n) :
-    coeff R n (candidate c)=1+c*(if 4≤n then ((n-2).choose 2:R) else 0) := by
+    coeff n (candidate c)=1+c*(if 4≤n then ((n-2).choose 2:R) else 0) := by
   obtain ⟨m,rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hn)
   simp only [candidate, map_add, coeff_mobius_succ, one_pow,
     coeff_C_mul, coeff_correction]
 
 theorem coeff_candidate_periodic (c : R) (hc : 2*c=0) (n : ℕ) (hn : 3≤n) :
-    coeff R n (candidate c)=
+    coeff n (candidate c)=
       if n%4=0 ∨ n%4=1 then 1+c else 1 := by
   rw [coeff_candidate c n (by omega)]
   by_cases hn4 : 4≤n
@@ -54,12 +58,12 @@ theorem coeff_candidate_periodic (c : R) (hc : 2*c=0) (n : ℕ) (hn : 3≤n) :
     norm_num
 
 theorem cast_a (r n : ℕ) (f : ℤ →+* R) :
-    f (a r n) = coeff R n (solution (R:=R) r) := by
+    f (a r n) = coeff n (solution (R:=R) r) := by
   rw [← map_solution f r]
   simp [a]
 
 theorem cast_iterateCoeff (r k n : ℕ) (f : ℤ →+* R) :
-    f (iterateCoeff r k n)=coeff R n (iter (solution (R:=R) r) k) := by
+    f (iterateCoeff r k n)=coeff n (iter (solution (R:=R) r) k) := by
   rw [← map_solution f r, ← map_iter f (solution_normalized r)]
   simp [iterateCoeff]
 
@@ -73,7 +77,7 @@ theorem a396099_residue (n : ℕ) (hn : 3≤n) :
     (a 2 n : ZMod 4)=if n%4=0 ∨ n%4=1 then 3 else 1 := by
   rw [show (a 2 n:ZMod 4)=(Int.castRingHom (ZMod 4)) (a 2 n) from rfl,
     cast_a, solution_two_mod_four]
-  simpa using coeff_candidate_periodic (2:ZMod 4) (by decide) n hn
+  simpa [show (1 : ZMod 4) + 2 = 3 by decide] using coeff_candidate_periodic (2:ZMod 4) (by decide) n hn
 
 /-- The OEIS period `[1,3,3,1]`, with its stated starting index three. -/
 theorem a396099_period (j : ℕ) :
@@ -105,7 +109,7 @@ theorem a396099_odd (n : ℕ) (hn : 0<n) : Odd (a 2 n) := by
   exact zero_ne_one (hzero.symm.trans hcast)
 
 theorem a396099_second_iterate_series :
-    iter (solution (R:=ZMod 4) 2) 2=X+C (ZMod 4) 2*X^2 := by
+    iter (solution (R:=ZMod 4) 2) 2=X+C (R := (ZMod 4)) 2*X^2 := by
   rw [solution_two_mod_four]
   have h : iter (candidate (2:ZMod 4)) 2=mobius 2 := by
     simpa only [mul_one, Nat.cast_one] using
@@ -122,32 +126,32 @@ theorem a396099_second_iterate (n : ℕ) (hn : 2<n) :
 
 theorem a396099_difference_series :
     solution (R:=ZMod 4) 2-X*iter (solution (R:=ZMod 4) 2) 3=
-      X+C (ZMod 4) 2*X^3*geom 1 := by
+      X+C (R := (ZMod 4)) 2*X^3*geom 1 := by
   rw [show (3:ℕ)=2+1 from rfl, iter_succ, a396099_second_iterate_series,
     solution_two_mod_four, candidate_residual (2:ZMod 4) (by decide)]
-  have hneg : -(C (ZMod 4) 2)=C (ZMod 4) 2 := by
+  have hneg : -(C (R := (ZMod 4)) 2)=C (R := (ZMod 4)) 2 := by
     rw [← map_neg]
     congr 1
   calc
-    X-C (ZMod 4) 2*X^3*geom 1=
-        X+(-(C (ZMod 4) 2))*X^3*geom 1 := by ring
+    X-C (R := (ZMod 4)) 2*X^3*geom 1=
+        X+(-(C (R := (ZMod 4)) 2))*X^3*geom 1 := by ring
     _ = _ := by rw [hneg]
 
 /-- The coefficients of `F-X(F composed three times)` are two mod four above degree two. -/
 theorem a396099_difference (n : ℕ) (hn : 2<n) :
-    (coeff ℤ n (solution (R:=ℤ) 2-X*iter (solution (R:=ℤ) 2) 3):ZMod 4)=2 := by
+    (coeff (R := ℤ) n (solution (R:=ℤ) 2-X*iter (solution (R:=ℤ) 2) 3):ZMod 4)=2 := by
   have hmap : PowerSeries.map (Int.castRingHom (ZMod 4))
       (solution (R:=ℤ) 2-X*iter (solution (R:=ℤ) 2) 3)=
       solution (R:=ZMod 4) 2-X*iter (solution (R:=ZMod 4) 2) 3 := by
     simp only [map_sub, map_mul, PowerSeries.map_X, map_solution,
       map_iter _ (solution_normalized 2)]
-  have he := congrArg (coeff (ZMod 4) n) hmap
+  have he := congrArg (coeff (R := (ZMod 4)) n) hmap
   simp only [PowerSeries.coeff_map, Int.coe_castRingHom] at he
   rw [he, a396099_difference_series]
   rw [map_add, coeff_X]
   rw [if_neg (by omega)]
-  have hr : C (ZMod 4) 2*X^3*geom 1=
-      C (ZMod 4) 2*(X^3*geom 1) := by ring
+  have hr : C (R := (ZMod 4)) 2*X^3*geom 1=
+      C (R := (ZMod 4)) 2*(X^3*geom 1) := by ring
   rw [hr, coeff_C_mul, coeff_X_pow_mul', if_pos (by omega), coeff_geom]
   simp
 

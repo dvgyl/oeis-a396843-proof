@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A397346,
   author = {Goyal, Dev D.},
   title = {{Residues modulo $8$ for a series defined by a self-referential exponential}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A397346-Residues-modulo-8-for-a-self-referential-exponential/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A397346-Residues-modulo-8-for-a-self-referential-exponential/paper.pdf}},
   year = {2026}
 }
 ```

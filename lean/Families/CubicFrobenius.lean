@@ -1,14 +1,18 @@
-import Hanna.Series.Inverse
-import Mathlib.RingTheory.PowerSeries.Trunc
-import Mathlib.Algebra.Polynomial.Expand
-import Mathlib.FieldTheory.Finite.Basic
-import Mathlib.Tactic
+module
+
+public import Hanna.Series.Inverse
+public import Mathlib.RingTheory.PowerSeries.Trunc
+public import Mathlib.Algebra.Polynomial.Expand
+public import Mathlib.FieldTheory.Finite.Basic
+public import Mathlib.Tactic
 
 /-!
 # Frobenius substitution for actual formal power series over prime fields
 
 AI-generated formalization by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace Families.CubicReversion
 
@@ -17,7 +21,7 @@ open PowerSeries Hanna.Series
 variable {R : Type*} [CommRing R]
 
 theorem coeff_compose_X_power (A : PowerSeries R) (p n : ℕ) (hp : 0<p) :
-    coeff R n (compose A (X^p)) = if p∣n then coeff R (n/p) A else 0 := by
+    coeff n (compose A (X^p)) = if p∣n then coeff (n/p) A else 0 := by
   rw [coeff_compose A (X^p) (by simp [hp.ne'])]
   simp only [← pow_mul, coeff_X_pow]
   by_cases hd : p∣n
@@ -42,7 +46,7 @@ theorem coeff_compose_X_power (A : PowerSeries R) (p n : ℕ) (hp : 0<p) :
     exact hd ⟨k, he⟩
 
 theorem coeff_power_trunc (A : PowerSeries R) (n p : ℕ) :
-    coeff R n (A^p)=coeff R n ((PowerSeries.trunc (n+1) A : PowerSeries R)^p) := by
+    coeff n (A^p)=coeff n ((PowerSeries.trunc (n+1) A : PowerSeries R)^p) := by
   have hd : (X : PowerSeries R)^(n+1)∣A-(PowerSeries.trunc (n+1) A : PowerSeries R) := by
     apply X_pow_dvd_iff.mpr
     intro k hk
@@ -52,10 +56,10 @@ theorem coeff_power_trunc (A : PowerSeries R) (n p : ℕ) :
   simpa only [map_sub, sub_eq_zero] using he
 
 theorem coeff_frobenius (p : ℕ) [Fact p.Prime] (A : PowerSeries (ZMod p)) (n : ℕ) :
-    coeff (ZMod p) n (A^p)=if p∣n then coeff (ZMod p) (n/p) A else 0 := by
+    coeff (R := (ZMod p)) n (A^p)=if p∣n then coeff (R := (ZMod p)) (n/p) A else 0 := by
   have hp : 0<p := (Fact.out : p.Prime).pos
   rw [coeff_power_trunc A n p, ← Polynomial.coe_pow]
-  rw [← Polynomial.expand_char (p:=p), Polynomial.coeff_coe, Polynomial.coeff_map,
+  rw [← Polynomial.map_frobenius_expand p, Polynomial.coeff_coe, Polynomial.coeff_map,
     frobenius_def, Polynomial.coeff_expand hp]
   split_ifs with hd
   · rw [ZMod.pow_card, coeff_trunc, if_pos (Nat.lt_succ_of_le (Nat.div_le_self n p))]

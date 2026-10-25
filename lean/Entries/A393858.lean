@@ -1,4 +1,6 @@
-import Related
+module
+
+public import Related
 
 /-!
 # OEIS A393858
@@ -7,6 +9,8 @@ Statements of the results in the accompanying paper (listed in `CONTENTS.md` at 
 repository root), proved using the shared libraries of this project.
 Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace OEIS.A393858
 
@@ -26,11 +30,11 @@ theorem source_equation :
   exact scaledSolution_equation 6
 
 theorem a393858_mod_seven (n : ℕ) (hn : 1 ≤ n) :
-    ((coeff ℤ n (scaledSolution (6 : ℤ)) : ℤ) : ZMod 7) = 1 := by
+    ((coeff (R := ℤ) n (scaledSolution (6 : ℤ)) : ℤ) : ZMod 7) = 1 := by
   exact Hanna.Related.ScaledInverse.a393858_mod_seven n hn
 
 theorem a393858_parity (n : ℕ) :
-    Odd (coeff ℤ n (scaledSolution (6 : ℤ))) ↔ ∃ k : ℕ, n = 2^k := by
+    Odd (coeff (R := ℤ) n (scaledSolution (6 : ℤ))) ↔ ∃ k : ℕ, n = 2^k := by
   exact Hanna.Related.ScaledInverse.a393858_parity n
 
 end OEIS.A393858

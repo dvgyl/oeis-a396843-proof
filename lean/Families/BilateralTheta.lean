@@ -1,9 +1,11 @@
-import Hanna.Series.Triangular
-import Mathlib.RingTheory.PowerSeries.Basic
-import Mathlib.Algebra.BigOperators.Finprod
-import Mathlib.Data.Int.Interval
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Tactic
+module
+
+public import Hanna.Series.Triangular
+public import Mathlib.RingTheory.PowerSeries.Basic
+public import Mathlib.Algebra.BigOperators.Finprod
+public import Mathlib.Data.Int.Interval
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Tactic
 
 /-!
 # The three congruences for OEIS A355872
@@ -14,6 +16,8 @@ Its unique integral solution is constructed before any residue calculation.
 AI-generated proofs and formalization by ChatGPT (OpenAI) for Dev D. Goyal.
 Sequence and conjectures: Paul D. Hanna, OEIS A355872, 9 August 2022.
 -/
+
+@[expose] public section
 
 namespace Families.BilateralTheta
 
@@ -40,14 +44,14 @@ def term (A : PowerSeries R) (m : ℤ) : PowerSeries R :=
 def window (n : ℕ) : Finset ℤ := Finset.Icc (-(n+1 : ℕ) : ℤ) (n+1)
 
 theorem term_vanish (A : PowerSeries R) (m : ℤ) (n : ℕ)
-    (hn : n<m.natAbs^2) : coeff R n (term A m)=0 := by
+    (hn : n<m.natAbs^2) : coeff n (term A m)=0 := by
   have hd : (X : PowerSeries R)^(m.natAbs^2) ∣ term A m := by
     rw [term, neg_pow]
     exact dvd_mul_of_dvd_left (dvd_mul_left ((X : PowerSeries R)^(m.natAbs^2)) _) _
   exact X_pow_dvd_iff.mp hd n hn
 
 theorem outside_window_vanish (A : PowerSeries R) (m : ℤ) (n : ℕ)
-    (hm : m∉window n) : coeff R n (term A m)=0 := by
+    (hm : m∉window n) : coeff n (term A m)=0 := by
   apply term_vanish
   have habs : n+1<m.natAbs := by
     simp only [window, Finset.mem_Icc, not_and_or] at hm
@@ -57,14 +61,14 @@ theorem outside_window_vanish (A : PowerSeries R) (m : ℤ) (n : ℕ)
 
 /-- The literal bilateral sum, evaluated by a provably sufficient finite window. -/
 def bilateral (A : PowerSeries R) : PowerSeries R :=
-  PowerSeries.mk fun n => ∑ m ∈ window n, coeff R n (term A m)
+  PowerSeries.mk fun n => ∑ m ∈ window n, coeff n (term A m)
 
 @[simp] theorem bilateral_coeff (A : PowerSeries R) (n : ℕ) :
-    coeff R n (bilateral A)=∑ m ∈ window n, coeff R n (term A m) := by
+    coeff n (bilateral A)=∑ m ∈ window n, coeff n (term A m) := by
   simp [bilateral]
 
 theorem bilateral_coeff_finsum (A : PowerSeries R) (n : ℕ) :
-    coeff R n (bilateral A)=∑ᶠ m : ℤ, coeff R n (term A m) := by
+    coeff n (bilateral A)=∑ᶠ m : ℤ, coeff n (term A m) := by
   rw [bilateral_coeff]
   symm
   apply finsum_eq_sum_of_support_subset
@@ -96,7 +100,7 @@ theorem step_contraction (n : ℕ) (A B : PowerSeries R)
     (hd : (X : PowerSeries R)^n ∣ A-B) : X^(n+1) ∣ step A-step B := by
   apply X_pow_dvd_iff.mpr
   intro k hk
-  have hs : coeff R k (bilateral A)-coeff R k (bilateral B)=coeff R k A-coeff R k B := by
+  have hs : coeff k (bilateral A)-coeff k (bilateral B)=coeff k A-coeff k B := by
     simp only [bilateral_coeff, ← Finset.sum_sub_distrib]
     rw [Finset.sum_eq_single 0]
     · simp
@@ -109,7 +113,7 @@ theorem step_contraction (n : ℕ) (A B : PowerSeries R)
   linear_combination -hs
 
 theorem recursion_triangular :
-    Triangular (fun a n => coeff R n (PowerSeries.mk a-step (PowerSeries.mk a))) := by
+    Triangular (fun (a : ℕ → R) n => coeff n (PowerSeries.mk a-step (PowerSeries.mk a))) := by
   intro n a b hab
   have hd : (X : PowerSeries R)^n ∣ PowerSeries.mk a-PowerSeries.mk b := by
     apply X_pow_dvd_iff.mpr
@@ -121,21 +125,21 @@ theorem recursion_triangular :
   linear_combination -hp
 
 theorem existence_uniqueness : ∃! A : PowerSeries R, bilateral A=X := by
-  let op := fun a n => coeff R n (PowerSeries.mk a-step (PowerSeries.mk a))
+  let op := fun (a : ℕ → R) n => coeff n (PowerSeries.mk a-step (PowerSeries.mk a))
   obtain ⟨a,ha,hu⟩ := triangular_existsUnique op recursion_triangular (fun _ => 0)
   have he : PowerSeries.mk a=step (PowerSeries.mk a) := by
     ext n
     have h := congrFun ha n
-    change coeff R n (PowerSeries.mk a-step (PowerSeries.mk a))=0 at h
+    change coeff n (PowerSeries.mk a-step (PowerSeries.mk a))=0 at h
     simpa only [map_sub, sub_eq_zero] using h
   refine ⟨PowerSeries.mk a,(source_iff_fixed _).mpr he,?_⟩
   intro B hB
-  have hb : (fun n => coeff R n B)=a := by
+  have hb : (fun n => coeff n B)=a := by
     apply hu
     funext n
-    change coeff R n (PowerSeries.mk (fun n => coeff R n B)-
-      step (PowerSeries.mk (fun n => coeff R n B)))=0
-    have hm : PowerSeries.mk (fun n => coeff R n B)=B := by ext; simp
+    change coeff n (PowerSeries.mk (fun n => coeff n B)-
+      step (PowerSeries.mk (fun n => coeff n B)))=0
+    have hm : PowerSeries.mk (fun n => coeff n B)=B := by ext; simp
     rw [hm, ← (source_iff_fixed B).mp hB, sub_self, map_zero]
   ext n
   simpa only [coeff_mk] using congrFun hb n
@@ -159,7 +163,7 @@ theorem map_bilateral (f : R →+* S) (A : PowerSeries R) :
   apply Finset.sum_congr rfl
   intro m _
   exact (coeff_map f n (term A m)).symm.trans
-    (congrArg (coeff S n) (map_term f A m))
+    (congrArg (coeff n) (map_term f A m))
 
 theorem map_solution (f : R →+* S) :
     PowerSeries.map f (solution : PowerSeries R)=(solution : PowerSeries S) := by
@@ -168,7 +172,7 @@ theorem map_solution (f : R →+* S) :
 
 /-- All nonzero coefficients lie in one residue class of degrees modulo four. -/
 def Supported (r : ℕ) (A : PowerSeries R) : Prop :=
-  ∀ n : ℕ, n%4≠r%4 → coeff R n A=0
+  ∀ n : ℕ, n%4≠r%4 → coeff n A=0
 
 theorem supported_X : Supported 1 (X : PowerSeries R) := by
   intro n hn
@@ -222,7 +226,7 @@ theorem square_index_mod_four (m : ℤ) :
     (m.natAbs^2+(m-1).natAbs^2)%4=1 := by
   have hs (z : ℤ) : ((z.natAbs : ZMod 4)^2)=(z : ZMod 4)^2 := by
     have h := congrArg (Int.castRingHom (ZMod 4)) (Int.natAbs_sq z)
-    simpa only [map_pow,map_natCast,map_intCast] using h
+    simpa only [map_pow,map_natCast,map_intCast,eq_intCast] using h
   have h : ((m.natAbs^2+(m-1).natAbs^2 : ℕ) : ZMod 4)=1 := by
     simp only [Nat.cast_add,Nat.cast_pow,hs,Int.cast_sub,Int.cast_one]
     exact (by decide : ∀ t : ZMod 4, t^2+(t-1)^2=1) (m : ZMod 4)
@@ -272,7 +276,7 @@ theorem solution_supported : Supported 1 (solution : PowerSeries R) := by
   have h := X_pow_dvd_iff.mp (approximation_agrees (R:=R) (n+1)) n (by omega)
   simpa only [map_sub,approximation_supported (n+1) n hn,sub_zero] using h
 
-theorem solution_constant : constantCoeff R (solution : PowerSeries R)=0 := by
+theorem solution_constant : constantCoeff (solution : PowerSeries R)=0 := by
   simpa only [coeff_zero_eq_constantCoeff_apply] using solution_supported (R:=R) 0 (by decide)
 
 /-- A sparse integral rational series X/(1+X⁴). -/
@@ -280,11 +284,11 @@ def alternating : PowerSeries R :=
   PowerSeries.mk fun n => if n%4=1 then (-1)^(n/4) else 0
 
 @[simp] theorem alternating_coeff (n : ℕ) :
-    coeff R n (alternating : PowerSeries R)=if n%4=1 then (-1)^(n/4) else 0 := by
+    coeff n (alternating : PowerSeries R)=if n%4=1 then (-1)^(n/4) else 0 := by
   simp [alternating]
 
 theorem alternating_coeff_shift (n : ℕ) :
-    coeff R (n+4) (alternating : PowerSeries R)=-coeff R n alternating := by
+    coeff (n+4) (alternating : PowerSeries R)=-coeff n alternating := by
   have hm : (n+4)%4=n%4 := by omega
   have hd : (n+4)/4=n/4+1 := by omega
   simp only [alternating_coeff,hm,hd,pow_succ]
@@ -309,12 +313,12 @@ theorem comparison_equation :
 
 theorem comparison_fourth_zero : (comparison : PowerSeries (ZMod 8))^4=0 := by
   have hn : (16 : PowerSeries (ZMod 8))=0 := by
-    simpa only [map_ofNat,map_zero] using congrArg (C (ZMod 8)) (by decide : (16 : ZMod 8)=0)
+    simpa only [map_ofNat,map_zero] using congrArg (C (R := (ZMod 8))) (by decide : (16 : ZMod 8)=0)
   rw [comparison,mul_pow,show (2 : PowerSeries (ZMod 8))^4=16 by ring,hn,zero_mul]
 
 theorem comparison_fourth_zero_sixteen : (comparison : PowerSeries (ZMod 16))^4=0 := by
   have hn : (16 : PowerSeries (ZMod 16))=0 := by
-    simpa only [map_ofNat,map_zero] using congrArg (C (ZMod 16)) (by decide : (16 : ZMod 16)=0)
+    simpa only [map_ofNat,map_zero] using congrArg (C (R := (ZMod 16))) (by decide : (16 : ZMod 16)=0)
   rw [comparison,mul_pow,show (2 : PowerSeries (ZMod 16))^4=16 by ring,hn,zero_mul]
 
 theorem term_nilpotent (A : PowerSeries R) (hA : A^4=0) (m : ℤ)
@@ -330,14 +334,14 @@ theorem bilateral_of_fourth_zero (A : PowerSeries R) (hA : A^4=0) :
     bilateral A=A-X+X^4*A := by
   ext n
   rw [bilateral_coeff_finsum]
-  have he : (∑ᶠ m : ℤ, coeff R n (term A m))=
-      ∑ m ∈ ({0,1,2} : Finset ℤ), coeff R n (term A m) := by
+  have he : (∑ᶠ m : ℤ, coeff n (term A m))=
+      ∑ m ∈ ({0,1,2} : Finset ℤ), coeff n (term A m) := by
     apply finsum_eq_sum_of_support_subset
     intro m hm
     by_contra h
     simp only [Finset.mem_coe,Finset.mem_insert,Finset.mem_singleton,not_or] at h
     exact hm (by
-      change coeff R n (term A m)=0
+      change coeff n (term A m)=0
       rw [term_nilpotent A hA m h.1 h.2.1 h.2.2,map_zero])
   rw [he]
   simp [sub_eq_add_neg, add_assoc]
@@ -357,14 +361,14 @@ theorem solution_mod_sixteen : (solution : PowerSeries (ZMod 16))=comparison := 
   linear_combination h
 
 /-- Coefficients of the actual unique integer source series. -/
-def a (n : ℕ) : ℤ := coeff ℤ (4*n-3) solution
+def a (n : ℕ) : ℤ := coeff (R := ℤ) (4*n-3) solution
 
 theorem source_coefficient_expansion (n : ℕ) :
-    coeff ℤ n solution=∑ᶠ k : ℕ, coeff ℤ n (C ℤ (a (k+1))*X^(4*k+1)) := by
+    coeff (R := ℤ) n solution=∑ᶠ k : ℕ, coeff (R := ℤ) n (C (R := ℤ) (a (k+1))*X^(4*k+1)) := by
   by_cases hn : n%4=1
   · have he : n=4*(n/4)+1 := by omega
-    have hf : (∑ᶠ k : ℕ, coeff ℤ n (C ℤ (a (k+1))*X^(4*k+1)))=
-        ∑ k ∈ ({n/4} : Finset ℕ), coeff ℤ n (C ℤ (a (k+1))*X^(4*k+1)) := by
+    have hf : (∑ᶠ k : ℕ, coeff (R := ℤ) n (C (R := ℤ) (a (k+1))*X^(4*k+1)))=
+        ∑ k ∈ ({n/4} : Finset ℕ), coeff (R := ℤ) n (C (R := ℤ) (a (k+1))*X^(4*k+1)) := by
       apply finsum_eq_sum_of_support_subset
       intro k hk
       by_contra h
@@ -372,7 +376,7 @@ theorem source_coefficient_expansion (n : ℕ) :
         simp only [Finset.mem_coe,Finset.mem_singleton] at h
         omega
       apply hk
-      change coeff ℤ n (C ℤ (a (k+1))*X^(4*k+1))=0
+      change coeff (R := ℤ) n (C (R := ℤ) (a (k+1))*X^(4*k+1))=0
       rw [coeff_C_mul,coeff_X_pow,if_neg hneq,mul_zero]
     rw [hf]
     have hidx : 4*(n/4+1)-3=n := by omega
@@ -385,11 +389,11 @@ theorem source_coefficient_expansion (n : ℕ) :
     rw [coeff_C_mul,coeff_X_pow,if_neg hneq,mul_zero]
 
 theorem solution_coeff_mod_eight (n : ℕ) :
-    ((coeff ℤ n solution : ℤ) : ZMod 8)=
+    ((coeff (R := ℤ) n solution : ℤ) : ZMod 8)=
       if n%4=1 then 2*(-1)^(n/4) else 0 := by
-  have h := congrArg (coeff (ZMod 8) n) (map_solution (Int.castRingHom (ZMod 8)))
+  have h := congrArg (coeff (R := (ZMod 8)) n) (map_solution (Int.castRingHom (ZMod 8)))
   rw [coeff_map,solution_mod_eight,comparison,two_mul,map_add,alternating_coeff] at h
-  change ((coeff ℤ n solution : ℤ) : ZMod 8)=_ at h
+  change ((coeff (R := ℤ) n solution : ℤ) : ZMod 8)=_ at h
   split_ifs with hn
   · rw [if_pos hn] at h
     simpa only [two_mul] using h
@@ -403,11 +407,11 @@ theorem a_shift_mod_eight (n : ℕ) : (a (n+1) : ZMod 8)=2*(-1)^n := by
   simp [hd]
 
 theorem solution_coeff_mod_sixteen (n : ℕ) :
-    ((coeff ℤ n solution : ℤ) : ZMod 16)=
+    ((coeff (R := ℤ) n solution : ℤ) : ZMod 16)=
       if n%4=1 then 2*(-1)^(n/4) else 0 := by
-  have h := congrArg (coeff (ZMod 16) n) (map_solution (Int.castRingHom (ZMod 16)))
+  have h := congrArg (coeff (R := (ZMod 16)) n) (map_solution (Int.castRingHom (ZMod 16)))
   rw [coeff_map,solution_mod_sixteen,comparison,two_mul,map_add,alternating_coeff] at h
-  change ((coeff ℤ n solution : ℤ) : ZMod 16)=_ at h
+  change ((coeff (R := ℤ) n solution : ℤ) : ZMod 16)=_ at h
   split_ifs with hn
   · rw [if_pos hn] at h
     simpa only [two_mul] using h

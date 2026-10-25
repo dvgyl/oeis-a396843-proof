@@ -1,6 +1,8 @@
-import Hanna.Statements
-import Hanna.Corollaries
-import Hanna.Parity
+module
+
+public import Hanna.Statements
+public import Hanna.Corollaries
+public import Hanna.Parity
 
 /-!
 # OEIS A396843
@@ -9,6 +11,8 @@ Statements of the results in the accompanying paper (listed in `CONTENTS.md` at 
 repository root), proved using the shared libraries of this project.
 Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace OEIS.A396843
 

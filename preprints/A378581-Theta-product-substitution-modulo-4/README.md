@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A378581,
   author = {Goyal, Dev D.},
   title = {{Remainders modulo $4$ for the series with $A\bigl(x\,A(x)\bigr)=\theta_3(x)$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A378581-Theta-product-substitution-modulo-4/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A378581-Theta-product-substitution-modulo-4/paper.pdf}},
   year = {2026}
 }
 ```

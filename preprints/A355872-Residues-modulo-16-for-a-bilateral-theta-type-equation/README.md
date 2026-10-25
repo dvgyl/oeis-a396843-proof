@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A355872,
   author = {Goyal, Dev D.},
   title = {{Residues modulo $16$ for a series defined by a bilateral theta-type equation}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A355872-Residues-modulo-16-for-a-bilateral-theta-type-equation/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A355872-Residues-modulo-16-for-a-bilateral-theta-type-equation/paper.pdf}},
   year = {2026}
 }
 ```

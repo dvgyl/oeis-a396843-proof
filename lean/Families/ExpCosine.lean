@@ -1,8 +1,11 @@
-import Mathlib.RingTheory.PowerSeries.WellKnown
-import Mathlib.RingTheory.PowerSeries.Inverse
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Data.Nat.Choose.Sum
-import Mathlib.Tactic
+module
+
+public import Mathlib.RingTheory.PowerSeries.Exp
+public import Mathlib.RingTheory.PowerSeries.WellKnown
+public import Mathlib.RingTheory.PowerSeries.Inverse
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Data.Nat.Choose.Sum
+public import Mathlib.Tactic
 
 /-!
 # OEIS A380056: two conjectures about `(exp(x)-1)/cos(2*x)`
@@ -14,6 +17,8 @@ prime: all modular arguments take place in the integral binomial convolution.
 
 AI disclosure: OpenAI ChatGPT generated these proofs for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace Families.ExpCosine
 
@@ -254,17 +259,17 @@ theorem cosine_egf_eq : egf cosineCoeff=PowerSeries.rescale (2:ℚ) (PowerSeries
 /-- The actual series, with integral divided-power coefficients. -/
 def A : PowerSeries ℚ := egf a
 
-theorem A_coeff (n : ℕ) : coeff ℚ n A=(a n : ℚ)/(n.factorial : ℚ) := by
+theorem A_coeff (n : ℕ) : coeff (R := ℚ) n A=(a n : ℚ)/(n.factorial : ℚ) := by
   simp [A, egf]
 
 theorem A_integral_coefficients (n : ℕ) :
-    (n.factorial : ℚ)*coeff ℚ n A=(a n : ℚ) := by
+    (n.factorial : ℚ)*coeff (R := ℚ) n A=(a n : ℚ) := by
   rw [A_coeff]
   have hn : (n.factorial : ℚ)≠0 := by exact_mod_cast Nat.factorial_ne_zero n
   field_simp
 
 theorem cosine_constantCoeff :
-    constantCoeff ℚ (PowerSeries.rescale (2:ℚ) (PowerSeries.cos ℚ))=1 := by
+    constantCoeff (R := ℚ) (PowerSeries.rescale (2:ℚ) (PowerSeries.cos ℚ))=1 := by
   rw [← cosine_egf_eq, ← coeff_zero_eq_constantCoeff_apply]
   simp [egf]
 

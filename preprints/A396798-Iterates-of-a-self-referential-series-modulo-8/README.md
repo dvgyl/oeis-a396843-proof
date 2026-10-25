@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A396798,
   author = {Goyal, Dev D.},
   title = {{The iterates of a self-referential power series modulo $8$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A396798-Iterates-of-a-self-referential-series-modulo-8/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A396798-Iterates-of-a-self-referential-series-modulo-8/paper.pdf}},
   year = {2026}
 }
 ```

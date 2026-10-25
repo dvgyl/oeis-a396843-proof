@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A392210,
   author = {Goyal, Dev D.},
   title = {{The odd-indexed terms of a nested square are even after the first term}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A392210-Odd-indexed-terms-of-a-nested-square/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A392210-Odd-indexed-terms-of-a-nested-square/paper.pdf}},
   year = {2026}
 }
 ```

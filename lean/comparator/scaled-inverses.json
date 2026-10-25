@@ -1,0 +1,10 @@
+{
+  "challenge_module": "Challenges.ScaledInverses",
+  "solution_module": "Solutions.ScaledInverses",
+  "theorem_names": [
+    "OEISProofs.ScaledInverses.existsUnique",
+    "OEISProofs.ScaledInverses.coeff_modEq_one",
+    "OEISProofs.ScaledInverses.odd_coeff_iff"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

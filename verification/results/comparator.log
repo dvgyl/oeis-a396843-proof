@@ -1,0 +1,87 @@
+Output of lean/scripts/verify-comparator.sh (lake comparator with the Lean, NanoDa and con-ron kernels).
+Build output and warnings are omitted.
+
+== comparator/catalan.json
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.Catalan.a393172_existsUnique, OEISProofs.Catalan.a393172_coeff, OEISProofs.Catalan.a393171_existsUnique, OEISProofs.Catalan.a393171_coeff, OEISProofs.Catalan.a389536_existsUnique, OEISProofs.Catalan.a389536_coeff, OEISProofs.Catalan.a397588_existsUnique, OEISProofs.Catalan.a397588_coeff, OEISProofs.Catalan.a195194_existsUnique, OEISProofs.Catalan.a195194_coeff, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenges.Catalan
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.Catalan.a393172_existsUnique, OEISProofs.Catalan.a393172_coeff, OEISProofs.Catalan.a393171_existsUnique, OEISProofs.Catalan.a393171_coeff, OEISProofs.Catalan.a389536_existsUnique, OEISProofs.Catalan.a389536_coeff, OEISProofs.Catalan.a397588_existsUnique, OEISProofs.Catalan.a397588_coeff, OEISProofs.Catalan.a195194_existsUnique, OEISProofs.Catalan.a195194_coeff, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Solutions.Catalan
+Running con-ron kernel on solution
+con-ron: 2 declarations hoisted ahead of the pinned Nat operations they ground: Nat.mul._f, Nat.mul
+con-ron: accepted 16363 declarations (--verified)
+con-ron kernel accepts the solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!
+== comparator/consecutive-iterates.json
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.ConsecutiveIterates.existsUnique, OEISProofs.ConsecutiveIterates.iterate_coeff_modEq, OEISProofs.ConsecutiveIterates.inverse_iterate_coeff_modEq, OEISProofs.ConsecutiveIterates.a396099_conjectures, OEISProofs.ConsecutiveIterates.a396798_residues, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenges.ConsecutiveIterates
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.ConsecutiveIterates.existsUnique, OEISProofs.ConsecutiveIterates.iterate_coeff_modEq, OEISProofs.ConsecutiveIterates.inverse_iterate_coeff_modEq, OEISProofs.ConsecutiveIterates.a396099_conjectures, OEISProofs.ConsecutiveIterates.a396798_residues, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Solutions.ConsecutiveIterates
+Running con-ron kernel on solution
+con-ron: 2 declarations hoisted ahead of the pinned Nat operations they ground: Nat.mul._f, Nat.mul
+con-ron: accepted 13697 declarations (--verified)
+con-ron kernel accepts the solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!
+== comparator/halving.json
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.Halving.a389537_existsUnique, OEISProofs.Halving.a389537_coeff, OEISProofs.Halving.a389542_existsUnique, OEISProofs.Halving.a389542_coeff, OEISProofs.Halving.a389474_existsUnique, OEISProofs.Halving.a389474_coeff, OEISProofs.Halving.a389475_existsUnique, OEISProofs.Halving.a389475_coeff, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenges.Halving
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.Halving.a389537_existsUnique, OEISProofs.Halving.a389537_coeff, OEISProofs.Halving.a389542_existsUnique, OEISProofs.Halving.a389542_coeff, OEISProofs.Halving.a389474_existsUnique, OEISProofs.Halving.a389474_coeff, OEISProofs.Halving.a389475_existsUnique, OEISProofs.Halving.a389475_coeff, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Solutions.Halving
+Running con-ron kernel on solution
+con-ron: 2 declarations hoisted ahead of the pinned Nat operations they ground: Nat.mul._f, Nat.mul
+con-ron: accepted 16122 declarations (--verified)
+con-ron kernel accepts the solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!
+== comparator/hanna-family.json
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.HannaFamily.existsUnique, OEISProofs.HannaFamily.odd_coeff, OEISProofs.HannaFamily.even_coeff, OEISProofs.HannaFamily.modEq_sq, OEISProofs.HannaFamily.pow_digitSum_dvd, OEISProofs.HannaFamily.prime_pow_dvd, OEISProofs.HannaFamily.residues_mod_nine, OEISProofs.HannaFamily.residues_mod_sixteen, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenges.HannaFamily
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.HannaFamily.existsUnique, OEISProofs.HannaFamily.odd_coeff, OEISProofs.HannaFamily.even_coeff, OEISProofs.HannaFamily.modEq_sq, OEISProofs.HannaFamily.pow_digitSum_dvd, OEISProofs.HannaFamily.prime_pow_dvd, OEISProofs.HannaFamily.residues_mod_nine, OEISProofs.HannaFamily.residues_mod_sixteen, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Solutions.HannaFamily
+Running con-ron kernel on solution
+con-ron: 2 declarations hoisted ahead of the pinned Nat operations they ground: Nat.mul._f, Nat.mul
+con-ron: accepted 13716 declarations (--verified)
+con-ron kernel accepts the solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!
+== comparator/other-results.json
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.OtherResults.a396093_coeff, OEISProofs.OtherResults.a392210_existsUnique, OEISProofs.OtherResults.a392210_coeff, OEISProofs.OtherResults.a396102_existsUnique, OEISProofs.OtherResults.a396102_coeff, OEISProofs.OtherResults.a380056_existsUnique, OEISProofs.OtherResults.a380056_integral, OEISProofs.OtherResults.a380056_coeff, OEISProofs.OtherResults.a397346_existsUnique, OEISProofs.OtherResults.a397346_coeff, OEISProofs.OtherResults.a397346_derivative, OEISProofs.OtherResults.a394576_existsUnique, OEISProofs.OtherResults.a394576_bounds, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenges.OtherResults
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.OtherResults.a396093_coeff, OEISProofs.OtherResults.a392210_existsUnique, OEISProofs.OtherResults.a392210_coeff, OEISProofs.OtherResults.a396102_existsUnique, OEISProofs.OtherResults.a396102_coeff, OEISProofs.OtherResults.a380056_existsUnique, OEISProofs.OtherResults.a380056_integral, OEISProofs.OtherResults.a380056_coeff, OEISProofs.OtherResults.a397346_existsUnique, OEISProofs.OtherResults.a397346_coeff, OEISProofs.OtherResults.a397346_derivative, OEISProofs.OtherResults.a394576_existsUnique, OEISProofs.OtherResults.a394576_bounds, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Solutions.OtherResults
+Running con-ron kernel on solution
+con-ron: 2 declarations hoisted ahead of the pinned Nat operations they ground: Nat.mul._f, Nat.mul
+con-ron: accepted 20214 declarations (--verified)
+con-ron kernel accepts the solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!
+== comparator/scaled-inverses.json
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.ScaledInverses.existsUnique, OEISProofs.ScaledInverses.coeff_modEq_one, OEISProofs.ScaledInverses.odd_coeff_iff, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenges.ScaledInverses
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.ScaledInverses.existsUnique, OEISProofs.ScaledInverses.coeff_modEq_one, OEISProofs.ScaledInverses.odd_coeff_iff, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Solutions.ScaledInverses
+Running con-ron kernel on solution
+con-ron: 2 declarations hoisted ahead of the pinned Nat operations they ground: Nat.mul._f, Nat.mul
+con-ron: accepted 15857 declarations (--verified)
+con-ron kernel accepts the solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!
+== comparator/theta.json
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.Theta.quotient_existsUnique, OEISProofs.Theta.quotient_coeff, OEISProofs.Theta.product_existsUnique, OEISProofs.Theta.product_coeff, OEISProofs.Theta.implicit_existsUnique, OEISProofs.Theta.implicit_coeff, OEISProofs.Theta.explicit_coeff, OEISProofs.Theta.bilateral_existsUnique, OEISProofs.Theta.bilateral_coeff, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenges.Theta
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OEISProofs.Theta.quotient_existsUnique, OEISProofs.Theta.quotient_coeff, OEISProofs.Theta.product_existsUnique, OEISProofs.Theta.product_coeff, OEISProofs.Theta.implicit_existsUnique, OEISProofs.Theta.implicit_coeff, OEISProofs.Theta.explicit_coeff, OEISProofs.Theta.bilateral_existsUnique, OEISProofs.Theta.bilateral_coeff, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Solutions.Theta
+Running con-ron kernel on solution
+con-ron: 2 declarations hoisted ahead of the pinned Nat operations they ground: Nat.mul._f, Nat.mul
+con-ron: accepted 14628 declarations (--verified)
+con-ron kernel accepts the solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!

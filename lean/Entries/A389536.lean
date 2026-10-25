@@ -1,4 +1,6 @@
-import Families.ElementaryStatements
+module
+
+public import Families.ElementaryStatements
 
 /-!
 # OEIS A389536
@@ -7,6 +9,8 @@ Statements of the results in the accompanying paper (listed in `CONTENTS.md` at 
 repository root), proved using the shared libraries of this project.
 Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace OEIS.A389536
 
@@ -18,17 +22,17 @@ attribute [local instance] Classical.propDecidable
 
 theorem mahler_existence :
     ∃! F : PowerSeries ℤ,
-      (coeff ℤ 0 F=0 ∧ coeff ℤ 1 F=1) ∧
+      (coeff (R := ℤ) 0 F=0 ∧ coeff (R := ℤ) 1 F=1) ∧
         compose F (X^2+2*X^3)=X*F :=
   MahlerParity.existence_uniqueness
 
 theorem mahler_definition :
-    coeff ℤ 0 MahlerParity.A=0 ∧ coeff ℤ 1 MahlerParity.A=1 ∧
+    coeff (R := ℤ) 0 MahlerParity.A=0 ∧ coeff (R := ℤ) 1 MahlerParity.A=1 ∧
     compose (MahlerParity.A : PowerSeries ℤ) (X^2+2*X^3)=X*MahlerParity.A :=
   ⟨MahlerParity.A_normalized.1,MahlerParity.A_normalized.2,MahlerParity.A_equation⟩
 
 theorem mahler_source_unique (F : PowerSeries ℤ)
-    (h0 : coeff ℤ 0 F=0) (h1 : coeff ℤ 1 F=1)
+    (h0 : coeff (R := ℤ) 0 F=0) (h1 : coeff (R := ℤ) 1 F=1)
     (he : compose F (X^2+2*X^3)=X*F) : F=MahlerParity.A :=
   MahlerParity.solution_unique ⟨h0,h1⟩ MahlerParity.A_normalized he
     MahlerParity.A_equation
@@ -39,14 +43,13 @@ theorem mahler_mod_four :
   rw [MahlerParity.map_A, MahlerParity.A_mod_four]
 
 theorem mahler_residue (n : ℕ) (hn : 1<n) :
-    (((coeff ℤ n MahlerParity.A : ℤ) : ZMod 4)=2 ↔ ∃ k : ℕ, n=2^k+1) ∧
-    (((coeff ℤ n MahlerParity.A : ℤ) : ZMod 4)=0 ↔ ¬∃ k : ℕ, n=2^k+1) :=
+    (((coeff (R := ℤ) n MahlerParity.A : ℤ) : ZMod 4)=2 ↔ ∃ k : ℕ, n=2^k+1) ∧
+    (((coeff (R := ℤ) n MahlerParity.A : ℤ) : ZMod 4)=0 ↔ ¬∃ k : ℕ, n=2^k+1) :=
   MahlerParity.a389536_residue n hn
 
 theorem mahler_four_dvd_iff (n : ℕ) (hn : 1<n) :
-    (4 : ℤ) ∣ coeff ℤ n MahlerParity.A ↔ ¬∃ k : ℕ, n=2^k+1 :=
+    (4 : ℤ) ∣ coeff (R := ℤ) n MahlerParity.A ↔ ¬∃ k : ℕ, n=2^k+1 :=
   MahlerParity.a389536_four_dvd_iff n hn
-
 
 end
 end OEIS.A389536

@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A393857,
   author = {Goyal, Dev D.},
   title = {{Congruences for the series $A$ with $A\bigl(x-x\,A(5x)/5\bigr)=x$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A393857-Congruences-for-a-scaled-inverse-series-q-5/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A393857-Congruences-for-a-scaled-inverse-series-q-5/paper.pdf}},
   year = {2026}
 }
 ```

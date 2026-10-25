@@ -1,0 +1,15 @@
+{
+  "challenge_module": "Challenges.HannaFamily",
+  "solution_module": "Solutions.HannaFamily",
+  "theorem_names": [
+    "OEISProofs.HannaFamily.existsUnique",
+    "OEISProofs.HannaFamily.odd_coeff",
+    "OEISProofs.HannaFamily.even_coeff",
+    "OEISProofs.HannaFamily.modEq_sq",
+    "OEISProofs.HannaFamily.pow_digitSum_dvd",
+    "OEISProofs.HannaFamily.prime_pow_dvd",
+    "OEISProofs.HannaFamily.residues_mod_nine",
+    "OEISProofs.HannaFamily.residues_mod_sixteen"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

@@ -1,7 +1,11 @@
-import Hanna.Series.Basic
-import Mathlib.Algebra.GeomSum
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Hanna.Series.Basic
+public import Mathlib.Algebra.Ring.GeomSum
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.LinearCombination
+
+@[expose] public section
 
 namespace Hanna.Series
 
@@ -42,7 +46,7 @@ lemma X_pow_dvd_product {A B : PowerSeries R} {r s : ℕ}
   exact mul_dvd_mul hA hB
 
 lemma compose_inner_congr (A B D : PowerSeries R) (n : ℕ)
-    (hB : constantCoeff R B = 0) (hD : constantCoeff R D = 0)
+    (hB : constantCoeff B = 0) (hD : constantCoeff D = 0)
     (hBD : (X : PowerSeries R)^n ∣ B-D) :
     (X : PowerSeries R)^n ∣ compose A B-compose A D := by
   apply X_pow_dvd_iff.mpr
@@ -57,7 +61,7 @@ lemma compose_inner_congr (A B D : PowerSeries R) (n : ℕ)
   rw [X_pow_dvd_iff.mp hpow k hk, mul_zero]
 
 lemma compose_outer_vanish (A B : PowerSeries R) (r s : ℕ)
-    (hB : constantCoeff R B = 0)
+    (hB : constantCoeff B = 0)
     (hA : (X : PowerSeries R)^r ∣ A) (hBs : (X : PowerSeries R)^s ∣ B) :
     (X : PowerSeries R)^(s*r) ∣ compose A B := by
   obtain ⟨D, rfl⟩ := hA
@@ -65,7 +69,7 @@ lemma compose_outer_vanish (A B : PowerSeries R) (r s : ℕ)
   exact dvd_mul_of_dvd_left (pow_dvd_pow_of_dvd hBs r) _
 
 lemma compose_normalized_inner_error (A B D : PowerSeries R) (n : ℕ)
-    (hA : Normalized A) (hB : constantCoeff R B = 0) (hD : constantCoeff R D = 0)
+    (hA : Normalized A) (hB : constantCoeff B = 0) (hD : constantCoeff D = 0)
     (hBD : (X : PowerSeries R)^n ∣ B-D) :
     (X : PowerSeries R)^(n+1) ∣ compose A B-compose A D-(B-D) := by
   obtain ⟨F, rfl⟩ := hA.decompose
@@ -88,7 +92,7 @@ lemma compose_normalized_inner_error (A B D : PowerSeries R) (n : ℕ)
   convert dvd_add hfirst hsecond using 1; ring
 
 lemma T_sub (m : R) (A B : PowerSeries R) :
-    T m B-T m A = X*(B-A)*(1-C R m*(A+B)) := by
+    T m B-T m A = X*(B-A)*(1-C m*(A+B)) := by
   unfold T
   ring
 
@@ -97,8 +101,8 @@ lemma T_dvd_X_sq (m : R) (A : PowerSeries R) (hA : Normalized A) :
   have hx : (X : PowerSeries R)^1 ∣ A := by simpa using hA.X_dvd
   have h1 : (X : PowerSeries R)^2 ∣ X*A := by
     simpa using X_pow_dvd_product (dvd_refl ((X : PowerSeries R)^1)) hx
-  have h2 : (X : PowerSeries R)^2 ∣ C R m*X*A^2 := by
-    convert dvd_mul_of_dvd_left h1 (C R m*A) using 1; ring
+  have h2 : (X : PowerSeries R)^2 ∣ C m*X*A^2 := by
+    convert dvd_mul_of_dvd_left h1 (C m*A) using 1; ring
   exact dvd_sub h1 h2
 
 lemma psi_perturbation (m : R) (A B : PowerSeries R) (r : ℕ) (hr : 2 ≤ r)
@@ -124,7 +128,7 @@ lemma psi_perturbation (m : R) (A B : PowerSeries R) (r : ℕ) (hr : 2 ≤ r)
     have hprod : (X : PowerSeries R)^(r+2) ∣ X*(B-A)*(A+B) := by
       simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using
         X_pow_dvd_product (X_pow_dvd_product hx hAB) hsum
-    have hmul := dvd_mul_of_dvd_left hprod (-C R m)
+    have hmul := dvd_mul_of_dvd_left hprod (-C m)
     convert hmul using 1; unfold T; ring
   have hsum := dvd_add (dvd_add houter hinner) hlinear
   rw [compose_sub _ _ _ (constantCoeff_T m B)] at hsum

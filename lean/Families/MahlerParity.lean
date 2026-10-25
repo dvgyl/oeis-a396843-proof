@@ -1,6 +1,8 @@
-import Families.ModFour
-import Hanna.Related.ScaledParity
-import Families.CubicFrobenius
+module
+
+public import Families.ModFour
+public import Hanna.Related.ScaledParity
+public import Families.CubicFrobenius
 
 /-!
 # OEIS A389536: exact residues modulo four
@@ -12,6 +14,8 @@ indices one greater than a power of two, and zero otherwise.
 AI disclosure: OpenAI ChatGPT generated these proofs for Dev D. Goyal.
 -/
 
+@[expose] public section
+
 namespace Families.MahlerParity
 
 open PowerSeries Hanna.Series
@@ -22,7 +26,7 @@ variable {R S : Type*} [CommRing R] [CommRing S]
 
 def B : PowerSeries R := X^2+2*X^3
 
-theorem B_constantCoeff : constantCoeff R (B : PowerSeries R)=0 := by simp [B]
+theorem B_constantCoeff : constantCoeff (B : PowerSeries R)=0 := by simp [B]
 
 theorem B_order : (X : PowerSeries R)^2 ∣ (B : PowerSeries R) := by
   refine ⟨1+2*X, ?_⟩
@@ -60,20 +64,20 @@ theorem residual_perturbation (G H : PowerSeries R) (r : ℕ) (hr : 2≤r)
   ring
 
 theorem equation_triangular :
-    Triangular (fun a n => coeff R (n+3) (residual (ofTail a))) := by
+    Triangular (fun (a : ℕ → R) n => coeff (n+3) (residual (ofTail a))) := by
   intro n a b hab
   have hd := (agree_iff_X_pow_dvd_sub (n+2) (ofTail a) (ofTail b)).mp
     (ofTail_agree a b n hab)
   have hp := residual_perturbation (ofTail a) (ofTail b) (n+2) (by omega) hd
   have hc := X_pow_dvd_iff.mp hp (n+3) (by omega)
-  have hx (G : PowerSeries R) : coeff R (n+3) (X*G)=coeff R (n+2) G := by
+  have hx (G : PowerSeries R) : coeff (n+3) (X*G)=coeff (n+2) G := by
     simpa only [show n+3=(n+2)+1 by omega] using coeff_succ_X_mul (n+2) G
   simp only [map_sub, hx, coeff_ofTail] at hc ⊢
   linear_combination hc
 
 theorem solution_exists :
     ∃ G : PowerSeries R, Normalized G ∧ compose G B=X*G := by
-  let op := fun a n => coeff R (n+3) (residual (ofTail a))
+  let op := fun (a : ℕ → R) n => coeff (n+3) (residual (ofTail a))
   let a := triangularCoeffs op (fun _ => 0)
   have ha := triangularCoeffs_spec op equation_triangular (fun _ => 0)
   refine ⟨ofTail a, normalized_ofTail a, ?_⟩
@@ -82,7 +86,7 @@ theorem solution_exists :
     by_cases hn : n<3
     · exact X_pow_dvd_iff.mp (residual_vanish_initial _ (normalized_ofTail a)) n hn
     · have hc := congrFun ha (n-3)
-      change coeff R (n-3+3) (residual (ofTail a))=0 at hc
+      change coeff (n-3+3) (residual (ofTail a))=0 at hc
       simpa only [Nat.sub_add_cancel (by omega : 3≤n), map_zero] using hc
   exact (sub_eq_zero.mp he).symm
 
@@ -124,10 +128,10 @@ theorem map_A (f : R →+* S) :
   rw [Hanna.Series.map_compose f _ _ (by simp)] at h
   simpa only [B, map_add, map_mul, map_pow, map_ofNat, PowerSeries.map_X] using h
 
-private abbrev H : PowerSeries (ZMod 4) :=
+abbrev H : PowerSeries (ZMod 4) :=
   Hanna.Related.ScaledInverse.scaledSolution 0
 
-private def candidate : PowerSeries (ZMod 4) := X+2*(X*H)
+def candidate : PowerSeries (ZMod 4) := X+2*(X*H)
 
 private theorem candidate_normalized : Normalized candidate := by
   have hH := Hanna.Related.ScaledInverse.scaledSolution_normalized (0 : ZMod 4)
@@ -141,7 +145,7 @@ private theorem double_composition : 2*compose H B=2*H^2 := by
   have hB : PowerSeries.map Families.ModFour.reduce (B : PowerSeries (ZMod 4))=X^2 := by
     have htwo : (2 : PowerSeries (ZMod 2))=0 := by
       have ht : (2 : ZMod 2)=0 := by decide
-      simpa only [map_ofNat, map_zero] using congrArg (C (ZMod 2)) ht
+      simpa only [map_ofNat, map_zero] using congrArg (C (R := (ZMod 2))) ht
     simp only [B, map_add, map_pow, map_mul, map_ofNat, PowerSeries.map_X,
       htwo, zero_mul, add_zero]
   rw [hB]
@@ -150,7 +154,7 @@ private theorem double_composition : 2*compose H B=2*H^2 := by
 private theorem candidate_equation : compose candidate B=X*candidate := by
   have hfour : (4 : PowerSeries (ZMod 4))=0 := by
     have h : (4 : ZMod 4)=0 := by decide
-    simpa only [map_ofNat, map_zero] using congrArg (C (ZMod 4)) h
+    simpa only [map_ofNat, map_zero] using congrArg (C (R := (ZMod 4))) h
   have htwo : compose (2 : PowerSeries (ZMod 4)) B=2 := by
     simpa only [map_ofNat] using compose_C (2 : ZMod 4) B B_constantCoeff
   have hH := Hanna.Related.ScaledInverse.scaledSolution_zero_quadratic (R:=ZMod 4)
@@ -168,7 +172,7 @@ to the canonical solution by uniqueness. -/
 theorem A_mod_four : (A : PowerSeries (ZMod 4))=X+2*(X*H) :=
   solution_unique A_normalized candidate_normalized A_equation candidate_equation
 
-def a (n : ℕ) : ℤ := coeff ℤ n A
+def a (n : ℕ) : ℤ := coeff (R := ℤ) n A
 
 private theorem double_residue (u : ZMod 4) :
     (2*u=2 ↔ Families.ModFour.reduce u=1) ∧
@@ -181,17 +185,17 @@ private theorem double_residue (u : ZMod 4) :
 theorem a389536_residue (n : ℕ) (hn : 1<n) :
     ((a n : ZMod 4)=2 ↔ ∃ k : ℕ, n=2^k+1) ∧
     ((a n : ZMod 4)=0 ↔ ¬∃ k : ℕ, n=2^k+1) := by
-  have hm := congrArg (coeff (ZMod 4) n) (map_A (Int.castRingHom (ZMod 4)))
+  have hm := congrArg (coeff (R := (ZMod 4)) n) (map_A (Int.castRingHom (ZMod 4)))
   rw [coeff_map, A_mod_four] at hm
-  change (a n : ZMod 4)=coeff (ZMod 4) n (X+2*(X*H)) at hm
-  have he : (a n : ZMod 4)=2*coeff (ZMod 4) (n-1) H := by
+  change (a n : ZMod 4)=coeff (R := (ZMod 4)) n (X+2*(X*H)) at hm
+  have he : (a n : ZMod 4)=2*coeff (R := (ZMod 4)) (n-1) H := by
     rw [hm]
     have hn' : n=(n-1)+1 := by omega
     rw [hn']
     simp only [map_add, coeff_X, if_neg (by omega : n-1+1≠1), two_mul,
       map_add, coeff_succ_X_mul, zero_add, Nat.add_sub_cancel]
   rw [he, (double_residue _).1, (double_residue _).2]
-  have hmap := congrArg (coeff (ZMod 2) (n-1))
+  have hmap := congrArg (coeff (R := (ZMod 2)) (n-1))
     (Hanna.Related.ScaledInverse.map_scaledSolution Families.ModFour.reduce (0 : ZMod 4))
   simp only [coeff_map, map_zero] at hmap
   rw [hmap]

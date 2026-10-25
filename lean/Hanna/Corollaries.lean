@@ -1,6 +1,10 @@
-import Hanna.BinaryDivisibility
-import Hanna.ModSquare
-import Hanna.PrimeExponent
+module
+
+public import Hanna.BinaryDivisibility
+public import Hanna.ModSquare
+public import Hanna.PrimeExponent
+
+@[expose] public section
 
 namespace Hanna
 

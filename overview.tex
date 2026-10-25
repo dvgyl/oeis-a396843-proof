@@ -20,9 +20,9 @@
 \newcommand{\entry}[5]{\par\medskip\noindent\begin{minipage}{\linewidth}\raggedright
 {\bfseries #1.}\enspace #2\par\vspace{2pt}
 {\small #3\enspace\emph{(#4.)}\par}
-\vspace{1pt}{\footnotesize\href{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/#5/paper.pdf}{Paper}
+\vspace{1pt}{\footnotesize\href{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/#5/paper.pdf}{Paper}
 \enspace\textperiodcentered\enspace\href{https://oeis.org/#1}{OEIS #1}\enspace\textperiodcentered\enspace
-\href{https://github.com/dvgyl/oeis-a396843-proof/blob/main/lean/Entries/#1.lean}{Lean}\par}
+\href{https://github.com/dvgyl/oeis-proofs/blob/main/lean/Entries/#1.lean}{Lean}\par}
 \end{minipage}\par}
 \begin{document}
 \thispagestyle{firstpage}
@@ -43,7 +43,7 @@ statements were also checked numerically against the published OEIS data.
 The results were obtained in an AI research effort directed by Dev~D.~Goyal: ChatGPT (OpenAI, GPT-6 with Pro
 reasoning), working autonomously from Dev~D.~Goyal's prompts, found the proofs and wrote the Lean formalization, and Claude Opus~5.5,
 used with Claude Code, checked the work independently and wrote the papers in their present form. Dev~D.~Goyal has
-verified the results. The papers have not been peer reviewed.
+reviewed the proofs; this review is not an independent expert validation. The papers have not been peer reviewed.
 \section*{1. The family $A_m(xA_m-mxA_m^2)=x^2$}
 Parity, residues modulo $m^2$ and binary-digit divisibility for the unique normalized solution of $A_m(xA_m-mxA_m^2)=x^2$, with corrected residue classifications for the two entries.
 \entry{A396843}{Odd coefficients, remainders modulo $9$, and binary digits for the series $A(xA-3xA^2)=x^2$}{Every coefficient is odd; the exact residues modulo 9 (correcting the entry's second conjecture); $3^{s_2(n-1)}$ divides $a(n)$, where $s_2$ is the binary digit sum.}{proved; one statement corrected}{A396843-Odd-coefficients-remainders-modulo-9-and-binary-digits}

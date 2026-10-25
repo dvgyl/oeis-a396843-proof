@@ -1,10 +1,11 @@
 # Verification
 
-This directory contains the independent checks of the results: an axiom audit of the Lean formalization, and numerical checks against the data published in the OEIS. The PARI/GP checks were written independently of the Lean development.
+This directory contains the independent checks of the results: an axiom audit of the Lean formalization, the Comparator check of the Challenge statements, and numerical checks against the data published in the OEIS. The PARI/GP checks were written independently of the Lean development.
 
 | Check | Files | Result |
 |---|---|---|
-| Axiom audit of the formal proofs | [`AxiomAudit.lean`](AxiomAudit.lean), [`check_axioms.py`](check_axioms.py) | 249 of 249 theorems use only the standard axioms |
+| Axiom audit of the formal proofs | [`AxiomAudit.lean`](AxiomAudit.lean), [`check_axioms.py`](check_axioms.py) | 305 of 305 theorems use only the standard axioms |
+| Challenge statements against their proofs | [`../lean/comparator/`](../lean/comparator/), [`../lean/scripts/verify-comparator.sh`](../lean/scripts/verify-comparator.sh) | 7 of 7 configurations accepted by the Lean, NanoDa and con-ron kernels |
 | Main results against the OEIS data | [`independent_checks.gp`](independent_checks.gp), [`oeis_terms.gp`](oeis_terms.gp) | 156 of 156 checks pass |
 | Observations in the Discussion sections | [`discussion_checks.gp`](discussion_checks.gp), [`discussion_terms.gp`](discussion_terms.gp) | 207 of 207 checks pass |
 
@@ -12,9 +13,13 @@ The outputs are in [`results/`](results/).
 
 ## Axiom audit
 
-The Lean project in [`../lean/`](../lean/) was built from source with Lean 4.19.0 and Mathlib commit `c44e0c8ee63ca166450922a373c7409c5d26b00b` ([`results/lean_build.log`](results/lean_build.log)). [`AxiomAudit.lean`](AxiomAudit.lean) runs `#print axioms` on the 244 theorems stated in [`../lean/Entries/`](../lean/Entries/) and on 5 general theorems that the papers cite by name. [`check_axioms.py`](check_axioms.py) confirms that every listed theorem is reported and depends only on `propext`, `Classical.choice` and `Quot.sound`; an unfinished proof would appear as `sorryAx`. The output is in [`results/axiom_audit.txt`](results/axiom_audit.txt) and the verdict in [`results/axiom_audit_check.txt`](results/axiom_audit_check.txt).
+The Lean project in [`../lean/`](../lean/) was built from source with Lean 4.35.0 and Mathlib v4.35.0, commit `56a005855ea17e0b0958f73ec801ae140b0a1679` ([`results/lean_build.log`](results/lean_build.log)). [`AxiomAudit.lean`](AxiomAudit.lean) runs `#print axioms` on the 244 theorems stated in [`../lean/Entries/`](../lean/Entries/), on 5 general theorems that the papers cite by name, and on the 56 theorems in [`../lean/Solutions/`](../lean/Solutions/) that are compared with the Challenge statements. [`check_axioms.py`](check_axioms.py) confirms that every listed theorem is reported and depends only on `propext`, `Classical.choice` and `Quot.sound`; an unfinished proof would appear as `sorryAx`. The output is in [`results/axiom_audit.txt`](results/axiom_audit.txt) and the verdict in [`results/axiom_audit_check.txt`](results/axiom_audit_check.txt).
 
 A formal proof certifies the statement that Lean checks. For each entry, the Lean definition of the sequence was also compared with the definition in the OEIS entry. Where Lean uses an equivalent form of the definition, the paper proves the equivalence; these cases are listed under `fidelity` in [`../lean/formalization.yaml`](../lean/formalization.yaml).
+
+## Comparator
+
+The principal theorems of each family are stated a second time in [`../lean/Challenges/`](../lean/Challenges/), using Mathlib's definitions only, so that a reader can audit them without reading the library. [`../lean/scripts/verify-comparator.sh`](../lean/scripts/verify-comparator.sh) runs `lake comparator` on each configuration in [`../lean/comparator/`](../lean/comparator/): it checks that the Solution theorems have exactly the Challenge statements and use only the standard axioms, and replays the proofs through Lean's kernel and the independent NanoDa and con-ron kernels. The output is in [`results/comparator.log`](results/comparator.log).
 
 ## Numerical checks
 
@@ -57,6 +62,7 @@ A finite computation is evidence, not a proof; its purpose is to catch errors in
 # from lean/, after building the project
 lake env lean ../verification/AxiomAudit.lean > ../verification/results/axiom_audit.txt
 python3 ../verification/check_axioms.py ../verification/results/axiom_audit.txt
+scripts/verify-comparator.sh               # Linux with bubblewrap
 
 # from verification/ (PARI/GP 2.15 or later)
 gp -q independent_checks.gp < /dev/null    # about 20 minutes

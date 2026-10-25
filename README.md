@@ -31,17 +31,18 @@ The papers form six families of related results and a group of other results:
 - The [overview](overview.pdf) describes every result.
 - The [manuscript map](CONTENTS.md) lists the papers by family, with the result, status and abstract of each.
 - The [`preprints/`](preprints/) directory contains, for each paper, the PDF, the LaTeX source and a BibTeX citation.
-- The [Lean library](lean/README.md), the [formalization catalogue](lean/formalization.yaml) and the [per-paper notes](lean/docs/) describe the formal proofs and the declarations corresponding to each paper.
-- The [`verification/`](verification/README.md) directory contains the axiom audit of the formal proofs and the numerical checks against the published OEIS data.
+- The [Lean library](lean/README.md), the [formalization metadata](lean/formalization.yaml) and the [per-paper notes](lean/docs/) describe the formal proofs and the declarations corresponding to each paper. The principal theorems of each family are restated in [`lean/Challenges/`](lean/Challenges/) using Mathlib's definitions only.
+- The [`verification/`](verification/README.md) directory contains the axiom audit of the formal proofs, the Comparator check of the Challenge statements, and the numerical checks against the published OEIS data.
 
 ## Verification
 
-- **Formal proofs.** The Lean project builds from source with Lean 4.19.0 and Mathlib (commit `c44e0c8`). The 244 theorems stated in [`lean/Entries/`](lean/Entries/), and 5 general theorems cited in the papers, depend only on Lean's standard axioms `propext`, `Classical.choice` and `Quot.sound`. The sources contain no `sorry`.
-- **Definitions.** For each entry, the Lean definition of the sequence has been compared with the definition in the OEIS entry. Where the formal statement uses an equivalent form, the paper proves the equivalence; these cases are listed in the [formalization catalogue](lean/formalization.yaml).
+- **Formal proofs.** The Lean project builds from source with Lean 4.35.0 and Mathlib v4.35.0. The 244 theorems stated in [`lean/Entries/`](lean/Entries/), 5 general theorems cited in the papers, and the 56 theorems compared with the Challenge statements depend only on Lean's standard axioms `propext`, `Classical.choice` and `Quot.sound`. Apart from the deliberate placeholders in the Challenge files, the sources contain no `sorry`.
+- **Challenge statements.** For each of the seven families, [Comparator](https://github.com/leanprover/comparator) confirms that the proved theorems have exactly the statements in [`lean/Challenges/`](lean/Challenges/), and the proofs are accepted by Lean's kernel and by the independent NanoDa and con-ron kernels.
+- **Definitions.** For each entry, the Lean definition of the sequence has been compared with the definition in the OEIS entry. Where the formal statement uses an equivalent form, the paper proves the equivalence; these cases are listed in the [formalization metadata](lean/formalization.yaml).
 - **Numerical checks.** Each sequence is recomputed from its OEIS definition and compared with the published terms, and each theorem and each observation in the Discussion sections is tested over a range of indices. All 363 checks pass; see [`verification/`](verification/README.md).
 
 ## Citations
 
 Each paper's directory under [`preprints/`](preprints/) contains a BibTeX entry. The sequences and conjectures were contributed to the OEIS by Paul D. Hanna, except A394576, which was contributed by Hoang Xuan Thanh; when citing a result, please also cite the corresponding OEIS entry.
 
-OEIS text quoted in the papers is © The OEIS Foundation Inc. and is used under CC BY-SA 4.0.
+This repository is licensed under the Apache License 2.0 ([`LICENSE`](LICENSE)). OEIS text quoted in the papers is © The OEIS Foundation Inc. and is used under CC BY-SA 4.0.

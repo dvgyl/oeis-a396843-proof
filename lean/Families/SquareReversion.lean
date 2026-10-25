@@ -1,7 +1,9 @@
-import Families.CubicConsequences
-import Hanna.Related.ScaledParity
-import Mathlib.Tactic.FinCases
-import Families.ModFour
+module
+
+public import Families.CubicConsequences
+public import Hanna.Related.ScaledParity
+public import Mathlib.Tactic.FinCases
+public import Families.ModFour
 
 /-!
 # The modulus-four conjecture for OEIS A389542
@@ -12,6 +14,8 @@ The literal source equation and uniqueness are proved before the congruence.
 
 AI-generated mathematical proof and formalization prepared for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace Families.SquareReversion
 
@@ -26,7 +30,7 @@ def step (G : PowerSeries S) : PowerSeries S :=
 
 theorem step_normalized {G : PowerSeries S} (hG : Normalized G) :
     Normalized (step G) := by
-  have hi : constantCoeff S (compose G (4*X^3)) = 0 := by
+  have hi : constantCoeff (compose G (4*X^3)) = 0 := by
     rw [constantCoeff_compose _ _ (by simp)]
     exact hG.constantCoeff
   constructor
@@ -62,7 +66,7 @@ theorem step_contraction (n : ℕ) {G H : PowerSeries S}
   convert dvd_sub hsq hmul using 1; unfold step; ring
 
 theorem equation_triangular :
-    Triangular (fun a n => coeff S (n+2) (ofTail a-step (ofTail a))) := by
+    Triangular (fun (a : ℕ → S) n => coeff (n+2) (ofTail a-step (ofTail a))) := by
   intro n a b hab
   have hd := (agree_iff_X_pow_dvd_sub (n+2) (ofTail a) (ofTail b)).mp
     (ofTail_agree a b n hab)
@@ -72,7 +76,7 @@ theorem equation_triangular :
   linear_combination -hc
 
 theorem L_exists : ∃ G : PowerSeries S, Normalized G ∧ G=step G := by
-  let op := fun a n => coeff S (n+2) (ofTail a-step (ofTail a))
+  let op := fun (a : ℕ → S) n => coeff (n+2) (ofTail a-step (ofTail a))
   let a := triangularCoeffs op (fun _ => 0)
   have ha := triangularCoeffs_spec op equation_triangular (fun _ => 0)
   refine ⟨ofTail a, normalized_ofTail a, ?_⟩
@@ -82,7 +86,7 @@ theorem L_exists : ∃ G : PowerSeries S, Normalized G ∧ G=step G := by
   · exact (normalized_ofTail a).1.trans hs.1.symm
   · exact (normalized_ofTail a).2.trans hs.2.symm
   · have hc := congrFun ha n
-    change coeff S (n+2) (ofTail a-step (ofTail a))=0 at hc
+    change coeff (n+2) (ofTail a-step (ofTail a))=0 at hc
     simpa only [map_sub, sub_eq_zero, Nat.succ_eq_add_one, Nat.add_assoc] using hc
 
 theorem L_unique {G H : PowerSeries S} (hG : Normalized G) (hH : Normalized H)
@@ -118,7 +122,7 @@ theorem R_normalized : Normalized (R : PowerSeries S) := by
 def InverseEquation (G : PowerSeries S) : Prop := G^2+compose G (4*X^3)=X^2
 
 theorem R_equation : InverseEquation (R : PowerSeries S) := by
-  have hz : constantCoeff S (4*X^3 : PowerSeries S)=0 := by simp
+  have hz : constantCoeff (4*X^3 : PowerSeries S)=0 := by simp
   have he := L_equation (S:=S)
   unfold step at he
   have htwo : compose (2 : PowerSeries S) (4*X^3)=2 := by
@@ -144,8 +148,8 @@ def SourceEquation (G : PowerSeries S) : Prop := compose G (G^2-X^2)=4*G^3
 theorem source_of_inverse {A B : PowerSeries S} (hA : Normalized A)
     (hB : Normalized B) (hAB : compose A B=X) (hBA : compose B A=X)
     (he : InverseEquation B) : SourceEquation A := by
-  have hz : constantCoeff S (4*X^3 : PowerSeries S)=0 := by simp
-  have h4A : constantCoeff S (4*A^3)=0 := by simp [hA.constantCoeff]
+  have hz : constantCoeff (4*X^3 : PowerSeries S)=0 := by simp
+  have h4A : constantCoeff (4*A^3)=0 := by simp [hA.constantCoeff]
   have hfour : compose (4 : PowerSeries S) A=4 := by
     simpa using Families.CubicReversion.compose_natCast 4 A hA.constantCoeff
   have h := congrArg (fun F : PowerSeries S => compose F A) he
@@ -163,8 +167,8 @@ theorem source_of_inverse {A B : PowerSeries S} (hA : Normalized A)
 theorem inverse_of_source {A B : PowerSeries S} (hA : Normalized A)
     (hB : Normalized B) (hAB : compose A B=X) (hBA : compose B A=X)
     (he : SourceEquation A) : InverseEquation B := by
-  have hV : constantCoeff S (A^2-X^2)=0 := by simp [hA.constantCoeff]
-  have hW : constantCoeff S (X^2-B^2)=0 := by simp [hB.constantCoeff]
+  have hV : constantCoeff (A^2-X^2)=0 := by simp [hA.constantCoeff]
+  have hW : constantCoeff (X^2-B^2)=0 := by simp [hB.constantCoeff]
   have hfour : compose (4 : PowerSeries S) B=4 := by
     simpa using Families.CubicReversion.compose_natCast 4 B hB.constantCoeff
   have h := congrArg (fun F : PowerSeries S => compose F B) he
@@ -212,7 +216,7 @@ theorem inverse_equation_unique {G H : PowerSeries ℤ} (hG : Normalized G)
       have hp := inverse_residual_perturbation G H n (by omega) hG hH hd
       have hc := X_pow_dvd_iff.mp hp (n+1) (by omega)
       rw [heG, heH] at hc
-      have hx : coeff ℤ (n+1) (2*X*(G-H))=2*(coeff ℤ n G-coeff ℤ n H) := by
+      have hx : coeff (R := ℤ) (n+1) (2*X*(G-H))=2*(coeff (R := ℤ) n G-coeff (R := ℤ) n H) := by
         simp [two_mul, add_mul]
       simp only [sub_self, zero_sub, map_neg, hx] at hc
       omega
@@ -236,7 +240,7 @@ theorem a389542_existence_uniqueness :
 
 theorem map_step (f : S →+* T) (G : PowerSeries S) :
     PowerSeries.map f (step G)=step (PowerSeries.map f G) := by
-  have hz : constantCoeff S (4*X^3 : PowerSeries S)=0 := by simp
+  have hz : constantCoeff (4*X^3 : PowerSeries S)=0 := by simp
   simp only [step, map_sub, map_add, map_pow, map_mul, map_ofNat,
     PowerSeries.map_X, map_compose f G _ hz]
 
@@ -262,11 +266,11 @@ theorem map_A389542 (f : S →+* T) :
 
 private theorem two_zero : (2 : PowerSeries (ZMod 2))=0 := by
   have h : (2 : ZMod 2)=0 := by decide
-  simpa only [map_ofNat, map_zero] using congrArg (C (ZMod 2)) h
+  simpa only [map_ofNat, map_zero] using congrArg (C (R := (ZMod 2))) h
 
 private theorem four_zero : (4 : PowerSeries (ZMod 4))=0 := by
   have h : (4 : ZMod 4)=0 := by decide
-  simpa only [map_ofNat, map_zero] using congrArg (C (ZMod 4)) h
+  simpa only [map_ofNat, map_zero] using congrArg (C (R := (ZMod 4))) h
 
 theorem L_quadratic_mod_two :
     (L : PowerSeries (ZMod 2))-L^2=X := by
@@ -276,7 +280,7 @@ theorem L_quadratic_mod_two :
   linear_combination he
 
 theorem L_coeff_one_iff (n : ℕ) :
-    coeff (ZMod 2) n L=1 ↔ ∃ k : ℕ, n=2^k :=
+    coeff (R := (ZMod 2)) n L=1 ↔ ∃ k : ℕ, n=2^k :=
   Hanna.Related.ScaledInverse.quadratic_coeff_one_iff_power_two L L_normalized
     L_quadratic_mod_two n
 
@@ -316,12 +320,12 @@ theorem a389542_series_mod_four :
   rfl
 
 theorem a389542_coeff_mod_four (n : ℕ) (hn : 1<n) :
-    (coeff ℤ n (A389542 : PowerSeries ℤ) : ZMod 4)=
-      -2*coeff (ZMod 4) (n-1) L := by
-  have h := congrArg (coeff (ZMod 4) n) a389542_series_mod_four
+    (coeff (R := ℤ) n (A389542 : PowerSeries ℤ) : ZMod 4)=
+      -2*coeff (R := (ZMod 4)) (n-1) L := by
+  have h := congrArg (coeff (R := (ZMod 4)) n) a389542_series_mod_four
   rw [coeff_map] at h
   have hn1 : n=(n-1)+1 := by omega
-  have hx : coeff (ZMod 4) n (2*X*L)=2*coeff (ZMod 4) (n-1) L := by
+  have hx : coeff (R := (ZMod 4)) n (2*X*L)=2*coeff (R := (ZMod 4)) (n-1) L := by
     conv_lhs => rw [hn1]
     simp [two_mul, add_mul]
   simpa only [Int.coe_castRingHom, map_sub, coeff_X, if_neg (by omega : n≠1),
@@ -335,14 +339,14 @@ private theorem neg_double_residue (z : ZMod 4) :
 open scoped Classical in
 /-- The precise conjectured residue pattern for the actual source series. -/
 theorem a389542_residue (n : ℕ) (hn : 1<n) :
-    (coeff ℤ n (A389542 : PowerSeries ℤ) : ZMod 4)=
+    (coeff (R := ℤ) n (A389542 : PowerSeries ℤ) : ZMod 4)=
       if ∃ k : ℕ, n=2^k+1 then 2 else 0 := by
   classical
   rw [a389542_coeff_mod_four n hn, neg_double_residue]
-  have hmap := congrArg (coeff (ZMod 2) (n-1)) (map_L Families.ModFour.reduce)
+  have hmap := congrArg (coeff (R := (ZMod 2)) (n-1)) (map_L Families.ModFour.reduce)
   rw [coeff_map] at hmap
   rw [hmap]
-  have hp : coeff (ZMod 2) (n-1) L=1 ↔ ∃ k : ℕ, n=2^k+1 := by
+  have hp : coeff (R := (ZMod 2)) (n-1) L=1 ↔ ∃ k : ℕ, n=2^k+1 := by
     rw [L_coeff_one_iff]
     constructor
     · rintro ⟨k,hk⟩
@@ -353,7 +357,7 @@ theorem a389542_residue (n : ℕ) (hn : 1<n) :
 
 /-- Coefficients in degrees one more than powers of two are two modulo four. -/
 theorem a389542_two_mod_four_iff (n : ℕ) (hn : 1<n) :
-    (coeff ℤ n (A389542 : PowerSeries ℤ) : ZMod 4)=2 ↔
+    (coeff (R := ℤ) n (A389542 : PowerSeries ℤ) : ZMod 4)=2 ↔
       ∃ k : ℕ, n=2^k+1 := by
   classical
   rw [a389542_residue n hn]
@@ -362,11 +366,11 @@ theorem a389542_two_mod_four_iff (n : ℕ) (hn : 1<n) :
 
 /-- All other coefficients in degrees greater than one are divisible by four. -/
 theorem a389542_four_dvd_iff (n : ℕ) (hn : 1<n) :
-    (4 : ℤ) ∣ coeff ℤ n (A389542 : PowerSeries ℤ) ↔
+    (4 : ℤ) ∣ coeff (R := ℤ) n (A389542 : PowerSeries ℤ) ↔
       ¬ ∃ k : ℕ, n=2^k+1 := by
   classical
-  have hd : (coeff ℤ n (A389542 : PowerSeries ℤ) : ZMod 4)=0 ↔
-      (4 : ℤ) ∣ coeff ℤ n (A389542 : PowerSeries ℤ) :=
+  have hd : (coeff (R := ℤ) n (A389542 : PowerSeries ℤ) : ZMod 4)=0 ↔
+      (4 : ℤ) ∣ coeff (R := ℤ) n (A389542 : PowerSeries ℤ) :=
     ZMod.intCast_zmod_eq_zero_iff_dvd _ 4
   rw [← hd, a389542_residue n hn]
   split_ifs <;> simp_all [show (0 : ZMod 4) ≠ 2 by decide,

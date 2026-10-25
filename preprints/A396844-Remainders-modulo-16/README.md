@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A396844,
   author = {Goyal, Dev D.},
   title = {{Remainders modulo $16$ for the series $A(xA-4xA^2)=x^2$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A396844-Remainders-modulo-16/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A396844-Remainders-modulo-16/paper.pdf}},
   year = {2026}
 }
 ```

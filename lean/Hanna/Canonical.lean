@@ -1,5 +1,9 @@
-import Hanna.Series.Inverse
-import Mathlib.Algebra.Polynomial.Eval.Defs
+module
+
+public import Hanna.Series.Inverse
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+
+@[expose] public section
 
 namespace Hanna
 
@@ -31,15 +35,15 @@ lemma map_B (f : R →+* S) (m : R) : PowerSeries.map f (B m) = B (f m) := by
       B_comp_A, PowerSeries.map_X]
   · exact A_comp_B (f m)
 
-noncomputable def a (m : ℤ) (n : ℕ) : ℤ := coeff ℤ n (A m)
-noncomputable def b (m : ℤ) (n : ℕ) : ℤ := coeff ℤ n (B m)
-noncomputable def P (n : ℕ) : Polynomial ℤ := coeff (Polynomial ℤ) n (A Polynomial.X)
-noncomputable def Q (n : ℕ) : Polynomial ℤ := coeff (Polynomial ℤ) n (B Polynomial.X)
+noncomputable def a (m : ℤ) (n : ℕ) : ℤ := coeff (R := ℤ) n (A m)
+noncomputable def b (m : ℤ) (n : ℕ) : ℤ := coeff (R := ℤ) n (B m)
+noncomputable def P (n : ℕ) : Polynomial ℤ := coeff (R := (Polynomial ℤ)) n (A Polynomial.X)
+noncomputable def Q (n : ℕ) : Polynomial ℤ := coeff (R := (Polynomial ℤ)) n (B Polynomial.X)
 
 lemma coefficient_polynomial_specialization (m : ℤ) (n : ℕ) :
     Polynomial.eval m (P n) = a m n ∧ Polynomial.eval m (Q n) = b m n := by
-  have hA := congrArg (coeff ℤ n) (map_A (Polynomial.evalRingHom m) Polynomial.X)
-  have hB := congrArg (coeff ℤ n) (map_B (Polynomial.evalRingHom m) Polynomial.X)
+  have hA := congrArg (coeff (R := ℤ) n) (map_A (Polynomial.evalRingHom m) Polynomial.X)
+  have hB := congrArg (coeff (R := ℤ) n) (map_B (Polynomial.evalRingHom m) Polynomial.X)
   constructor
   · simpa [P, a] using hA
   · simpa [Q, b] using hB

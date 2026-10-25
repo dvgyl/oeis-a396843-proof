@@ -1,0 +1,15 @@
+{
+  "challenge_module": "Challenges.Halving",
+  "solution_module": "Solutions.Halving",
+  "theorem_names": [
+    "OEISProofs.Halving.a389537_existsUnique",
+    "OEISProofs.Halving.a389537_coeff",
+    "OEISProofs.Halving.a389542_existsUnique",
+    "OEISProofs.Halving.a389542_coeff",
+    "OEISProofs.Halving.a389474_existsUnique",
+    "OEISProofs.Halving.a389474_coeff",
+    "OEISProofs.Halving.a389475_existsUnique",
+    "OEISProofs.Halving.a389475_coeff"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

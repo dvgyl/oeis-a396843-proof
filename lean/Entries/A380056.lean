@@ -1,4 +1,6 @@
-import Families.ExpCosineStatements
+module
+
+public import Families.ExpCosineStatements
 
 /-!
 # OEIS A380056
@@ -7,6 +9,8 @@ Statements of the results in the accompanying paper (listed in `CONTENTS.md` at 
 repository root), proved using the shared libraries of this project.
 Formalization written by ChatGPT (OpenAI) for Dev D. Goyal.
 -/
+
+@[expose] public section
 
 namespace OEIS.A380056
 
@@ -34,14 +38,12 @@ theorem literal_source_unique :
   ExpCosine.a380056_source_existence_uniqueness
 
 theorem integer_coefficients (n : ℕ) :
-    (n.factorial : ℚ)*coeff ℚ n ExpCosine.A=(ExpCosine.a n : ℚ) :=
+    (n.factorial : ℚ)*coeff (R := ℚ) n ExpCosine.A=(ExpCosine.a n : ℚ) :=
   ExpCosine.A_integral_coefficients n
-
 
 theorem first_source_conjecture (n : ℕ) (hn : 1≤n) :
     (ExpCosine.a n : ZMod 4)=1 :=
   ExpCosine.a380056_mod_four n hn
-
 
 theorem second_source_conjecture (n : ℕ) (_hn : 1≤n) :
     (5:ℤ) ∣ ExpCosine.a (4*n) :=

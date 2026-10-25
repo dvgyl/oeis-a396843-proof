@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A389474,
   author = {Goyal, Dev D.},
   title = {{A power series whose square is $x^2+2x^3$ modulo $9$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A389474-A-series-whose-square-is-a-polynomial-modulo-9/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A389474-A-series-whose-square-is-a-polynomial-modulo-9/paper.pdf}},
   year = {2026}
 }
 ```

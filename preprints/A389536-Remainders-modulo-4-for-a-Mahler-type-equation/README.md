@@ -21,7 +21,7 @@ The LaTeX source is [`source/paper.tex`](source/paper.tex). It compiles on its o
 @misc{Goyal:A389536,
   author = {Goyal, Dev D.},
   title = {{Remainders modulo $4$ for the equation $A(x^2+2x^3)=x\,A(x)$}},
-  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-a396843-proof/blob/main/preprints/A389536-Remainders-modulo-4-for-a-Mahler-type-equation/paper.pdf}},
+  howpublished = {Preprint, \url{https://github.com/dvgyl/oeis-proofs/blob/main/preprints/A389536-Remainders-modulo-4-for-a-Mahler-type-equation/paper.pdf}},
   year = {2026}
 }
 ```
