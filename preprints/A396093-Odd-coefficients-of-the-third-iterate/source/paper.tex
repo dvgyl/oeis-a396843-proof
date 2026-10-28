@@ -29,17 +29,21 @@
 \newcommand{\coeff}[2]{[x^{#1}]\,#2}
 \newcommand{\hl}[1]{\textbf{#1}}
 \newcommand{\para}[1]{\par\medskip\noindent\textbf{#1}\enspace}
-\hypersetup{pdftitle={When are the coefficients of B(B(B(x))) odd? A proof of two conjectures in OEIS A396093},pdfauthor={Dev D. Goyal},pdfsubject={OEIS A396093}}
-\title{When are the coefficients of $B(B(B(x)))$ odd?\\[6pt]\large A proof of two conjectures in OEIS A396093}
+\hypersetup{pdftitle={When are the coefficients of B(B(B(x))) odd? A reference proof for OEIS A396093},pdfauthor={Dev D. Goyal},pdfsubject={OEIS A396093}}
+\title{When are the coefficients of $B(B(B(x)))$ odd?\\[6pt]\large A reference proof for OEIS A396093}
 \author{Dev D. Goyal}
 \date{October 2026}
 \begin{document}
 \maketitle
+\noindent\textbf{Reference material.} This paper gives another proof of a result proved in the
+\emph{agentic-conjectures} repository in a commit dated 11 August 2026~\cite{prior}.
+It is excluded from the active contribution set. The proof and Lean formalization are retained for reference.
 \begin{abstract}
 Substituting the power series $B(x)=x/(1-x)^2=x+2x^2+3x^3+\cdots$ into itself twice gives the series
 $A(x)=B(B(B(x)))=x+6x^2+33x^3+174x^4+\cdots$, whose coefficients form the sequence A396093 of the On-Line Encyclopedia
-of Integer Sequences (OEIS). Paul D.~Hanna conjectured two rules for when these coefficients are even. We prove both,
-and more: the coefficient of $x^n$ is odd if and only if $n$ leaves remainder $1$, $3$, $7$ or $9$ on division by $10$.
+of Integer Sequences (OEIS). The parity classification is proved in the \emph{agentic-conjectures} repository in a commit dated 11 August 2026.
+We give another proof. The coefficient of $x^n$ is odd if and only if $n$ leaves remainder $1$, $3$, $7$ or $9$ on division by $10$.
+This classification implies both of Paul D.~Hanna's parity conjectures.
 The proof works with coefficients modulo $2$, where the triple substitution reduces to the fraction
 $(x+x^3+x^7+x^9)/(1+x^{10})$. The result has also been checked by computer and proved formally in the Lean proof
 assistant.
@@ -114,12 +118,16 @@ once every coefficient is replaced by its remainder modulo $2$, the series $A(x)
 from which the pattern can be read off directly.
 
 \subsection{What was known}
-The OEIS entry also records a closed formula for $A(x)$ as a ratio of two polynomials (due to Vaclav Kotesovec), and a
-linear recurrence for $a(n)$ (due to Seiichi Manyama). For any sequence given by such a ratio, the remainders modulo
+The OEIS entry records a rational generating function supplied by Paul D.~Hanna and a linear recurrence
+supplied by Seiichi Manyama. For any sequence given by such a ratio, the remainders modulo
 $2$ are known to repeat periodically from some point on: there are only finitely many possible ``states'' of the
 recurrence modulo $2$. So a periodic parity pattern was to be expected, and in principle its period could be found by a
 finite computation from the recorded formula. We do not rely on that formula. The proof below works directly from the
-definition and shows \emph{why} the period is $10$. We are not aware of an earlier proof of the two conjectures.
+definition and shows why the period is $10$.
+A proof of the complete classification is present in the \emph{agentic-conjectures} repository in a
+commit dated 11 August 2026~\cite{prior}. Its written proof reduces the recorded rational function modulo $2$.
+Its Lean proof uses the recorded recurrence. The present Lean proof starts from $B(B(B(x)))$.
+This difference concerns the formalization. The mathematical classification was already known.
 
 \subsection{Motivation}
 Substituting a series into itself is a basic operation: it describes what happens when a process is repeated, and
@@ -305,7 +313,7 @@ Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical st
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.35.0) on top of
 Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements are collected in the file \texttt{lean/Entries/A396093.lean} of the repository,
 in the namespace \texttt{OEIS.A396093}. There $B$ is defined by the equation $B\cdot(1-x)^2=x$ and $A$ as $B\circ B\circ B$.
-The table lists where each result of this paper is proved.
+The table lists the results covered by the Lean formalization. The Lean formalization does not cover the additional arguments and observations in Section~\ref{sec:discussion}.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
 \toprule
@@ -358,7 +366,7 @@ Lean's standard axioms; compared the Lean definitions with the OEIS definition; 
 written PARI/GP code, compared it with the terms published in the OEIS, and tested every claim of the paper on many
 terms; and read every step of the proofs. It then wrote the present version of the paper, expanding the
 explanations and, in places, writing out an argument in more detail or by a more elementary route. The theorems of
-Section~\ref{sec:results} and the proof strategies are ChatGPT's. The Discussion section, including the short arguments
+Section~\ref{sec:results} are already known~\cite{prior}. ChatGPT produced the proofs in this version. The Discussion section, including the short arguments
 in it, was written by Claude Opus~5.5; its observations were checked by computer and are not part of the Lean
 formalization.
 \end{itemize}
@@ -375,12 +383,14 @@ made. No claim of priority is made.
 available.
 
 \section*{Acknowledgements}
-The sequence and both conjectures are due to Paul~D.~Hanna~\cite{oeis}. The closed formula and recurrence mentioned in
-the introduction were contributed to the entry by Vaclav~Kotesovec and Seiichi~Manyama.
+Paul~D.~Hanna contributed the sequence, both conjectures, and the rational generating function~\cite{oeis}.
+Seiichi~Manyama contributed the recurrence. The earlier proof and formalization are due to the
+\emph{agentic-conjectures} contributors~\cite{prior}.
 
 \begin{thebibliography}{99}\small
 \raggedright
 \bibitem{oeis} P.~D.~Hanna, entry A396093 (Third iteration of $x/(1-x)^2$), \emph{The On-Line Encyclopedia of Integer Sequences}, May 2026. \url{https://oeis.org/A396093}. Text as of October 2026.
+\bibitem{prior} \emph{agentic-conjectures} contributors, OEIS A396093: both parity conjectures, 11 August 2026, commit \texttt{c66cca68e85a}. \url{https://github.com/umaia1234/agentic-conjectures/blob/c66cca68e85af87d46a7f3431b2602f3c9ebfcf0/problems/oeis-a396093/README.md}.
 \bibitem{oeisdb} N.~J.~A.~Sloane and The OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences}. \url{https://oeis.org}.
 \bibitem{stanley} R.~P.~Stanley, \emph{Enumerative Combinatorics}, Volume~2, Cambridge University Press, 1999. (Chapter~5 treats formal power series, composition and compositional inverses.)
 \bibitem{niven} I.~Niven, Formal power series, \emph{American Mathematical Monthly} 76 (1969), 871--889.

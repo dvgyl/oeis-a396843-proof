@@ -43,7 +43,7 @@ every $n\ge1$, and that $a(4n)$ is divisible by $5$. We prove both, and more: mo
 $a(n)\equiv2\cdot2^n+3\cdot4^n$, so the remainders repeat in the cycle $1,1,3,0$, and $a(n)$ is divisible by $5$
 exactly when $n$ is a multiple of $4$. The proof first rewrites the definition as a recurrence that uses only
 integers, and then solves this recurrence modulo $4$ and modulo $5$. Modulo $5$ the solution is a combination of two
-geometric sequences, because modulo $5$ the coefficients of $\cos 2x$ agree with those of $(e^x+e^{-x})/2$. The results have also been checked by
+geometric sequences. The integer exponential coefficients $n!\coeff{n}{\cos 2x}$ agree modulo $5$ with $n!\coeff{n}{(e^x+e^{-x})/2}$. The results have also been checked by
 computer and proved formally in the Lean proof assistant.
 \end{abstract}
 \begin{center}\begin{minipage}{0.88\linewidth}\small
@@ -261,11 +261,11 @@ The first statement is part~(a). The second is the case ``$4$ divides the index'
 \section{Proofs}\label{sec:proofs}
 
 \para{The idea in brief.} By Lemma~\ref{lem:conv}, multiplying~\eqref{eq:def} by $\cos2x$ turns the definition into a
-recurrence for $a(n)$ that uses only integers. Modulo $4$, every coefficient of $\cos 2x$ except the first is
-divisible by $4$, so $\cos2x$ acts like $1$ and $a$ agrees with the coefficient sequence of $e^x-1$. Modulo $5$ we have
-$-4\equiv1$, so the coefficients of $\cos2x$ become those of $(e^x+e^{-x})/2$. Everything is then a combination of
-exponentials $e^{sx}$, whose coefficient sequences are the geometric sequences $g_s$, and a short calculation finds
-the answer.
+recurrence for $a(n)$ that uses only integers. Put $c(n)=n!\coeff{n}{\cos 2x}$.
+Every $c(n)$ with $n>0$ is divisible by $4$, so the recurrence gives $a(n)\equiv1\pmod4$ for $n\ge1$.
+Modulo $5$, we have $-4\equiv1$. Thus $c(n)$ agrees with $n!\coeff{n}{(e^x+e^{-x})/2}$ modulo $5$.
+The integer exponential coefficients of $e^{sx}$ form the geometric sequence $g_s$.
+Binomial convolution of these sequences gives the result.
 
 Throughout, let $c$ be the coefficient sequence of $\cos 2x$ (Section~\ref{sec:background}), and let
 $d=0,1,1,1,\dots$ be that of $e^x-1$, so that $\mathcal E(c)=\cos 2x$ and $\mathcal E(d)=e^x-1$.
@@ -340,7 +340,7 @@ Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical st
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.35.0) on top of
 Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements are collected in the file \texttt{lean/Entries/A380056.lean} of the repository,
 in the namespace \texttt{OEIS.A380056}. There the series $e^x$ and $\cos x$ are Mathlib's formal exponential and cosine series over $\Q$, with $x$ replaced by $2x$ in the cosine. The integer sequence is defined by the recurrence of Lemma~\ref{lem:rec}, and the proofs are in the file \texttt{lean/Families/ExpCosine.lean}.
-The table lists where each result of this paper is proved.
+The table lists the results covered by the Lean formalization. The Lean formalization does not cover the additional arguments and observations in Section~\ref{sec:discussion}.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
 \toprule

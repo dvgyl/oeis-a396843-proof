@@ -39,7 +39,7 @@
 The sequence A393859 of the On-Line Encyclopedia of Integer Sequences (OEIS) lists the coefficients of the power
 series $A(x)=x+x^2+9x^3+481x^4+\cdots$ defined by the equation
 $A\bigl(x-x\,A(7x)/7\bigr)=x$. The unknown series $A$ occurs both as the outer function and inside its own argument, and its coefficients grow rapidly.
-Paul~D.~Hanna conjectured that every coefficient leaves remainder $1$ on division by $8$. We prove this. In fact we prove that, with $7$ replaced by any positive integer $q$, the series becomes $x+x^2+x^3+\cdots$ once its coefficients are reduced modulo $q+1$. The proof rests on the congruence $q\equiv-1\pmod{q+1}$: for $q=-1$ the equation
+Paul~D.~Hanna conjectured that every coefficient of positive degree leaves remainder $1$ on division by $8$. We prove this. In fact we prove that, with $7$ replaced by any positive integer $q$, the series becomes $x+x^2+x^3+\cdots$ once its coefficients are reduced modulo $q+1$. The proof rests on the congruence $q\equiv-1\pmod{q+1}$: for $q=-1$ the equation
 has an explicit solution. The results have also been checked by computer and proved formally in the
 Lean proof assistant.
 \end{abstract}
@@ -265,7 +265,7 @@ reduction of $G_q$ modulo $m$ is the solution of \eqref{eq:def} over $\Z/m\Z$, w
 
 So the sequence of OEIS A393859 is $a(n)=\coeff{n}{G_{7}}$.
 
-\begin{theorem}[All coefficients are $1$ modulo $q+1$]\label{thm:mod}
+\begin{theorem}[Coefficients of positive degree modulo $q+1$]\label{thm:mod}
 For every integer $q\ge1$,
 \[
 G_q(x)\equiv\frac{x}{1-x}=x+x^2+x^3+\cdots\pmod{q+1}.
@@ -334,8 +334,11 @@ coefficient of $H$ of positive degree is $1$.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:parity}]
-If $q$ is odd, then $q+1$ is even. By Theorem~\ref{thm:mod}, every coefficient of positive degree is $1$ plus a multiple
-of $q+1$, hence odd.
+If $q$ is odd, work over $\F_2$, where $q=-1$. Put $H=x/(1-x)$.
+Then $L_{-1}(H)=x/(1+x)$, so $x-xL_{-1}(H)=x/(1+x)$.
+Substitution gives $H(x/(1+x))=x$.
+The uniqueness in Theorem~\ref{thm:exist} gives $G_q\equiv H\pmod2$.
+Thus every coefficient of positive degree is odd. This argument includes negative odd $q$.
 
 Now let $q$ be even, and work over $\F_2$, where $q=0$. By \eqref{eq:L}, $L_0(U)=u_1x$, which is $x$ for a normalized
 $U$, so over $\F_2$ the equation becomes $G(x-x^2)=x$. Thus $G$ is the compositional inverse of $x-x^2$
@@ -346,7 +349,7 @@ $U-U^2=x$ determines $U$ uniquely, one coefficient at a time. Hence $G_q\equiv S
 \end{proof}
 
 Corollary~\ref{cor:oeis} is the case $q=7$ of Theorems~\ref{thm:mod} and~\ref{thm:parity}.
-(For odd $q$ the parity statement adds nothing new: it already follows from the congruence modulo $q+1$. Since $8=2\cdot4$, the corollary also says that every $a(n)$ is odd and leaves remainder $1$ on division by $4$.)
+(For positive odd $q$, the parity statement already follows from the congruence modulo $q+1$. Since $8=2\cdot4$, the corollary also says that every $a(n)$ is odd and leaves remainder $1$ on division by $4$.)
 
 \section{Checking the results}\label{sec:checks}
 
@@ -367,7 +370,7 @@ Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical st
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.35.0) on top of
 Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements are collected in the file \texttt{lean/Entries/A393859.lean} of the repository,
 in the namespace \texttt{OEIS.A393859}. In Lean, the operation $L_q$ of \eqref{eq:L} is called \texttt{scaleTail q}. The general theorems for every $q$ are \texttt{integer\_mod\_parameter\_add\_one} (Theorem~\ref{thm:mod}) and \texttt{integer\_coeff\_odd\_iff} (Theorem~\ref{thm:parity} for even $q$), in the namespace \texttt{Hanna.\allowbreak Related.\allowbreak ScaledInverse}, in the files \texttt{lean/\allowbreak Hanna/\allowbreak Related/\allowbreak ScaledInverse.lean} and \texttt{ScaledParity.lean} of the same folder.
-The table lists where each result of this paper is proved.
+The table lists the results covered by the Lean formalization. The Lean formalization does not cover the additional arguments and observations in Section~\ref{sec:discussion}.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
 \toprule

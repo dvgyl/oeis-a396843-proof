@@ -36,8 +36,8 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $\theta(x)=1+2x+2x^4+2x^9+2x^{16}+\cdots$ be the Jacobi theta series $\theta_3$, whose coefficient of $x^n$ is $2$ when $n$ is a
-positive perfect square and $0$ otherwise. Entry A378580 of the On-Line Encyclopedia of Integer Sequences (OEIS),
+Let $\theta(x)=1+2x+2x^4+2x^9+2x^{16}+\cdots$ be the Jacobi theta series $\theta_3$. For $n>0$, its coefficient of $x^n$ is $2$ when $n$ is a
+perfect square and $0$ otherwise. Entry A378580 of the On-Line Encyclopedia of Integer Sequences (OEIS),
 contributed by Paul~D.~Hanna, lists the coefficients $a(n)$ of the power series $A(x)=1+2x+4x^2+16x^3+98x^4+\cdots$
 determined by $A\bigl(x/A(x)\bigr)=\theta(x)$. The entry conjectures that for $n>0$ the coefficient $a(n)$ leaves remainder $2$ on
 division by $4$ when $n$ is a perfect square, and is divisible by $4$ otherwise. We prove this conjecture. In fact,
@@ -377,7 +377,7 @@ product of $x$ with the multiplicative inverse of $A$. The general constructions
 over any commutative ring, are in \texttt{lean/Families/ThetaSubstitution.lean}. The Lean proof of Lemma~\ref{lem:unique}
 takes a slightly different route from the one above: it treats the product form through the equivalent equation
 $G(G(x))=G(x)\,T(x)$ for $G=xU$, and reduces the quotient form to the product form: if $U(x/U)=T$, then $V=1/U$ satisfies $V(xV)=1/T$.
-The table lists where each result of this paper is proved.
+The table lists the results covered by the Lean formalization. The Lean formalization does not cover the additional arguments and observations in Section~\ref{sec:discussion}.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
 \toprule
@@ -414,8 +414,8 @@ $20$ randomly chosen targets $T$, up to degree $59$. This general form is not pa
 
 \para{The two entries agree modulo $8$.} Neither solution agrees with $\theta$ modulo $8$: for both entries
 $a(2)=\pm4$, while the coefficient of $x^2$ in $\theta$ is $0$. But the two sequences A378580 and A378581 agree with
-\emph{each other} modulo $8$. More generally, for every series $T$ with integer coefficients and $T\equiv1\pmod 2$, the
-solutions of $U(x/U)=T$ and $U(xU)=T$ are congruent modulo $8$. Here is the argument, which is not part of the Lean
+\emph{each other} modulo $8$. More generally, for every series $T$ with integer coefficients, $T(0)=1$, and $T\equiv1\pmod 2$, the
+constant-one solutions of $U(x/U)=T$ and $U(xU)=T$ are congruent modulo $8$. Here is the argument, which is not part of the Lean
 formalization. Work over $\Z/8\Z$, and let $U$ solve $U(xU)=T$. Modulo $2$ we have $T=1$, and then $U=1$ is the
 solution, so $U=1+2W$ for some series $W$. Then $U^2=1+4(W+W^2)$, and since $(1+4X)^2=1+8X+16X^2=1$ in $\Z/8\Z$, we get
 $1/U^2=1+4(W+W^2)$ and

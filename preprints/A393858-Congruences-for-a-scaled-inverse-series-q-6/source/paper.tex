@@ -39,7 +39,7 @@
 The sequence A393858 of the On-Line Encyclopedia of Integer Sequences (OEIS) lists the coefficients of the power
 series $A(x)=x+x^2+8x^3+323x^4+\cdots$ defined by the equation
 $A\bigl(x-x\,A(6x)/6\bigr)=x$. The unknown series $A$ occurs both as the outer function and inside its own argument, and its coefficients grow rapidly.
-Paul~D.~Hanna conjectured that every coefficient leaves remainder $1$ on division by $7$, and that a coefficient is odd exactly when its index is a power of $2$. We prove both conjectures. In fact we prove two statements that hold with $6$ replaced by any positive integer $q$: modulo $q+1$ the series becomes $x+x^2+x^3+\cdots$, and, when $q$ is even, modulo $2$ it agrees with the generating series of the Catalan numbers, whose coefficient of $x^n$ is odd exactly when $n$ is a power of $2$. The proof rests on the congruence $q\equiv-1\pmod{q+1}$: for $q=-1$ the equation
+Paul~D.~Hanna conjectured that every coefficient of positive degree leaves remainder $1$ on division by $7$, and that a coefficient is odd exactly when its index is a power of $2$. We prove both conjectures. In fact we prove two statements that hold with $6$ replaced by any positive integer $q$: modulo $q+1$ the series becomes $x+x^2+x^3+\cdots$, and, when $q$ is even, modulo $2$ it agrees with the generating series of the Catalan numbers, whose coefficient of $x^n$ is odd exactly when $n$ is a power of $2$. The proof rests on the congruence $q\equiv-1\pmod{q+1}$: for $q=-1$ the equation
 has an explicit solution. The results have also been checked by computer and proved formally in the
 Lean proof assistant.
 \end{abstract}
@@ -303,7 +303,7 @@ reduction of $G_q$ modulo $m$ is the solution of \eqref{eq:def} over $\Z/m\Z$, w
 
 So the sequence of OEIS A393858 is $a(n)=\coeff{n}{G_{6}}$.
 
-\begin{theorem}[All coefficients are $1$ modulo $q+1$]\label{thm:mod}
+\begin{theorem}[Coefficients of positive degree modulo $q+1$]\label{thm:mod}
 For every integer $q\ge1$,
 \[
 G_q(x)\equiv\frac{x}{1-x}=x+x^2+x^3+\cdots\pmod{q+1}.
@@ -384,8 +384,11 @@ In other words, $G$ undoes the substitution $x\mapsto x-x^2$, so $G$ is the comp
 Theorem~\ref{thm:exist}, the reduction of $G_q$ modulo $2$ equals the reduction of $C$. By Lemma~\ref{lem:catalan}, that
 is $\sum_kx^{2^k}$.
 
-If $q$ is odd, then $q+1$ is even. By Theorem~\ref{thm:mod}, every coefficient of positive degree is $1$ plus a multiple
-of $q+1$, hence odd.
+If $q$ is odd, work over $\F_2$, where $q=-1$. Put $H=x/(1-x)$.
+Then $L_{-1}(H)=x/(1+x)$, so $x-xL_{-1}(H)=x/(1+x)$.
+Substitution gives $H(x/(1+x))=x$.
+The uniqueness in Theorem~\ref{thm:exist} gives $G_q\equiv H\pmod2$.
+Thus every coefficient of positive degree is odd. This argument includes negative odd $q$.
 \end{proof}
 
 Corollary~\ref{cor:oeis} is the case $q=6$ of Theorems~\ref{thm:mod} and~\ref{thm:parity}.
@@ -409,7 +412,7 @@ Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical st
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.35.0) on top of
 Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements are collected in the file \texttt{lean/Entries/A393858.lean} of the repository,
 in the namespace \texttt{OEIS.A393858}. In Lean, the operation $L_q$ of \eqref{eq:L} is called \texttt{scaleTail q}. The general theorems for every $q$ are \texttt{integer\_mod\_parameter\_add\_one} (Theorem~\ref{thm:mod}) and \texttt{integer\_coeff\_odd\_iff} (Theorem~\ref{thm:parity} for even $q$), in the namespace \texttt{Hanna.\allowbreak Related.\allowbreak ScaledInverse}, in the files \texttt{lean/\allowbreak Hanna/\allowbreak Related/\allowbreak ScaledInverse.lean} and \texttt{ScaledParity.lean} of the same folder.
-The table lists where each result of this paper is proved.
+The table lists the results covered by the Lean formalization. The Lean formalization does not cover the additional arguments and observations in Section~\ref{sec:discussion}.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
 \toprule

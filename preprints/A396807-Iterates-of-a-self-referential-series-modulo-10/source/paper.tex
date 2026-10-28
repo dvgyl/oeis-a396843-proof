@@ -142,7 +142,7 @@ of them.
 \subsection{Motivation}
 Most equations that define sequences in the OEIS combine \emph{known} series by sums, products and substitutions.
 In \eqref{eq:def} the unknown series is substituted into \emph{itself}, several times, inside its own definition.
-No closed formula for $A$ is known, and its coefficients grow quickly; Hanna's conjectures record simple patterns in
+We do not know a closed formula for $A$. Its coefficients grow quickly; Hanna's conjectures record simple patterns in
 their remainders.
 
 The explanation given here is that, modulo $2r$, the series $A$ is congruent to the fraction $x/(1-x)$, up to an
@@ -525,7 +525,7 @@ Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements
 in the namespace \texttt{OEIS.A396807}. The general results for the whole family are proved in the folder \texttt{lean/Consecutive} of the
 repository; the last three rows of the table give the full names of these theorems. In Lean, iterates with negative index are built from the
 compositional inverse, exactly as in Section~\ref{sec:background}.
-The table lists where each result of this paper is proved.
+The table lists the results covered by the Lean formalization. The Lean formalization does not cover the additional arguments and observations in Section~\ref{sec:discussion}.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
 \toprule
@@ -556,9 +556,9 @@ proved theorems have exactly these statements.
 exactly what the two conjectures of the entry assert. Theorem~\ref{thm:general} says nothing about remainders modulo numbers that do
 not divide $2r$, or about the size of the coefficients.
 
-\para{All coefficients are odd.} Since $2$ divides $2r$, the theorem also determines every $F_r$ modulo $2$: the
+\para{Coefficients of positive degree are odd.} Since $2$ divides $2r$, the theorem also determines every $F_r$ modulo $2$: the
 correction $rH$ has even coefficients when $r$ is even, so in all cases $F_r\equiv x/(1-x)\pmod2$. Thus every
-coefficient of every $F_r$ is odd.
+coefficient of positive degree in every $F_r$ is odd.
 
 \para{Higher moduli.} A computer calculation suggests that the remainders modulo $4r$ are periodic too. For $r=1,2,3,4,5$
 and all $n<130$, the residues of $\coeff{n}{F_r}$ modulo $4r$ repeat with period $3$, $4$, $6$, $8$ and $3$

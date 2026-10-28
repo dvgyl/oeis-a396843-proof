@@ -9,7 +9,7 @@ OEIS entry: [A393859](https://oeis.org/A393859) · Lean: [`lean/Entries/A393859.
 
 ## Abstract
 
-The sequence A393859 of the On-Line Encyclopedia of Integer Sequences (OEIS) lists the coefficients of the power series $`A(x)=x+x^2+9x^3+481x^4+\cdots`$ defined by the equation $`A\bigl(x-x\,A(7x)/7\bigr)=x`$. The unknown series $`A`$ occurs both as the outer function and inside its own argument, and its coefficients grow rapidly. Paul D. Hanna conjectured that every coefficient leaves remainder $`1`$ on division by $`8`$. We prove this. In fact we prove that, with $`7`$ replaced by any positive integer $`q`$, the series becomes $`x+x^2+x^3+\cdots`$ once its coefficients are reduced modulo $`q+1`$. The proof rests on the congruence $`q\equiv-1\pmod{q+1}`$: for $`q=-1`$ the equation has an explicit solution. The results have also been checked by computer and proved formally in the Lean proof assistant.
+The sequence A393859 of the On-Line Encyclopedia of Integer Sequences (OEIS) lists the coefficients of the power series $`A(x)=x+x^2+9x^3+481x^4+\cdots`$ defined by the equation $`A\bigl(x-x\,A(7x)/7\bigr)=x`$. The unknown series $`A`$ occurs both as the outer function and inside its own argument, and its coefficients grow rapidly. Paul D. Hanna conjectured that every coefficient of positive degree leaves remainder $`1`$ on division by $`8`$. We prove this. In fact we prove that, with $`7`$ replaced by any positive integer $`q`$, the series becomes $`x+x^2+x^3+\cdots`$ once its coefficients are reduced modulo $`q+1`$. The proof rests on the congruence $`q\equiv-1\pmod{q+1}`$: for $`q=-1`$ the equation has an explicit solution. The results have also been checked by computer and proved formally in the Lean proof assistant.
 
 ## Source
 

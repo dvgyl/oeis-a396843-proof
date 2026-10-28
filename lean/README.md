@@ -16,7 +16,7 @@ The library was written by ChatGPT (OpenAI, GPT-6 with Pro reasoning). Claude Op
 | [`Challenges/`](Challenges/) | One file per family of results. Each states the principal theorems using Mathlib's definitions only, with a docstring explaining each statement and its OEIS entry, and leaves the proofs as `sorry`. These are the statements a reader needs to audit. |
 | [`Solutions/`](Solutions/) | The same theorems, word for word, proved from the library. |
 | [`comparator/`](comparator/) | One Comparator configuration per family, naming the theorems that must match. |
-| [`Entries/`](Entries/) | One file per OEIS entry, in the namespace `OEIS.Axxxxxx`, restating every result of the paper in the notation of the library. |
+| [`Entries/`](Entries/) | One file per OEIS entry, in the namespace `OEIS.Axxxxxx`, restating the results covered by the formalization in the notation of the library. |
 | [`Hanna/Series/`](Hanna/Series/) | Foundations: composition of formal power series (Mathlib's substitution) and its coefficient formula, normalized series, coefficient-by-coefficient constructions, and compositional inverses. |
 | [`Hanna/`](Hanna/) | The family $`A_m(xA_m-mxA_m^2)=x^2`$: parity, residues modulo $`m^2`$, binary-digit divisibility and prime exponents (A396843, A396844). |
 | [`Hanna/Related/`](Hanna/Related/) | Scaled inverses $`A(x-x\,A(qx)/q)=x`$ (A393856–A393859). These files form the library `Related` (root file [`Related.lean`](Related.lean)). |

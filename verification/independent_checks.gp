@@ -412,4 +412,5 @@ print("  definition verified for n < 61; residues for n <= ", NR);
 \\ ===========================================================================
 print("");
 printf("RESULT: %d checks passed, %d failed\n", NPASS, NFAIL);
-quit(NFAIL > 0);
+if(NPASS + NFAIL != 152, print("INCOMPLETE: expected 152 checks, received ", NPASS + NFAIL));
+quit(NFAIL > 0 || NPASS + NFAIL != 152);

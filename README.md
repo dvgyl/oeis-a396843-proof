@@ -1,18 +1,18 @@
 # Proofs and corrections of OEIS conjectures
 
-A collection of proofs, disproofs and corrections of conjectures recorded in the [On-Line Encyclopedia of Integer Sequences](https://oeis.org) (OEIS), each with a self-contained paper and a Lean 4 formalization of its main theorems. The collection currently contains 28 papers.
+A collection of proofs, disproofs and corrections of conjectures recorded in the [On-Line Encyclopedia of Integer Sequences](https://oeis.org) (OEIS), each with a self-contained paper and a Lean 4 formalization of its main theorems. The collection contains 27 active proof notes and one reference proof. The [contribution scope](CONTRIBUTIONS.md) separates these notes from existing results and corrections.
 
 ## Background
 
 This project is an AI research effort that I directed. ChatGPT (OpenAI), using the GPT-6 model with Pro reasoning, worked autonomously from my prompts: it searched the OEIS for suitable conjectures, found the proofs and counterexamples, and wrote the Lean formalization. I chose which problems to pursue and asked for proofs, formal verification and revisions, but I did not supply proof ideas. I then used Claude Opus 5.5 with Claude Code to check the work independently and to write the papers in their present form.
 
-I have personally reviewed the AI-generated proofs to the best of my mathematical ability. The accompanying Lean formalizations have been machine-checked, but my review should not be considered independent expert validation. I make no claims regarding the novelty of these results and welcome further scrutiny, corrections, and feedback from the mathematical community. They have NOT been peer reviewed. An OEIS entry that labels a statement as a conjecture shows only that its contributor did not know a proof. The searches for earlier work were limited, and I claim no priority. Results that turned out to be known were removed from the collection, and earlier work that bears on the remaining entries is credited in the papers. The precise attribution of each contribution is in [AUTHORSHIP.md](AUTHORSHIP.md).
+I have personally reviewed the AI-generated proofs to the best of my mathematical ability. The accompanying Lean formalizations have been machine-checked, but my review should not be considered independent expert validation. I make no claims regarding the novelty of these results and welcome further scrutiny, corrections, and feedback from the mathematical community. They have NOT been peer reviewed. An OEIS entry that labels a statement as a conjecture shows only that its contributor did not know a proof. The searches for earlier work were limited, and I claim no priority. Known results are excluded from the active contribution set. Valid proofs can remain as labeled reference material, and earlier work that bears on the remaining entries is credited in the papers. The precise attribution of each contribution is in [AUTHORSHIP.md](AUTHORSHIP.md).
 
 — Dev D. Goyal
 
 ## Results
 
-Most of the sequences are coefficients of formal power series defined by functional equations, and most of the conjectures concern their residues modulo small integers. In 23 entries the conjectures treated are proved, and in A392210 an observation recorded in the entry is proved. In four entries (A380680, A396798, A396843 and A396844) a conjectured statement is false; the papers give counterexamples and prove the correct statements, and in A396798 and A396843 the other conjectured statements are proved. Where an entry records further conjectures that are not treated, the paper says so.
+Most of the sequences are coefficients of formal power series defined by functional equations, and most of the conjectures concern their residues modulo small integers. The active notes prove the treated conjectures in 22 entries and a recorded observation in A392210. A396093 is retained as a reference proof of an existing result. In four entries (A380680, A396798, A396843 and A396844) a conjectured statement is false; the papers give counterexamples and prove the correct statements, and in A396798 and A396843 the other conjectured statements are proved. Where an entry records further conjectures that are not treated, the paper says so.
 
 The papers form six families of related results and a group of other results:
 
@@ -24,7 +24,9 @@ The papers form six families of related results and a group of other results:
 | Theta series and theta-type equations | A378580, A378581, A380060, A380680, A355872 |
 | Catalan-type equations | A393172, A393171, A389536, A195194 |
 | Equations with an exact halving step | A389537, A389542, A389474, A389475 |
-| Other results | A396093, A392210, A396102, A380056, A397346, A394576 |
+| Other results | A392210, A396102, A380056, A397346, A394576 |
+
+A396093 is reference material. Its complete parity classification is proved in [agentic-conjectures](https://github.com/umaia1234/agentic-conjectures/blob/c66cca68e85af87d46a7f3431b2602f3c9ebfcf0/problems/oeis-a396093/README.md) in a commit dated 11 August 2026. The full verification counts below include this retained proof. Asaria's earlier A396843 counterexample and standard identities are also excluded from claims of new contributions.
 
 ## Navigating the collection
 

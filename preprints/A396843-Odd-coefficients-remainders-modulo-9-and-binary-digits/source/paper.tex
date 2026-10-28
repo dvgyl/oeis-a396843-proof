@@ -38,8 +38,8 @@
 \begin{abstract}
 Entry A396843 of the On-Line Encyclopedia of Integer Sequences (OEIS), contributed by Paul~D.~Hanna, lists the
 coefficients $a(n)$ of the power series $A(x)=x+3x^2+15x^3+117x^4+\cdots$ determined by the equation
-$A\bigl(xA(x)-3xA(x)^2\bigr)=x^2$. The entry conjectures that all coefficients are odd, and states a rule for their
-remainders modulo $9$ that has since been found to be false. We prove that all coefficients are odd, and we determine
+$A\bigl(xA(x)-3xA(x)^2\bigr)=x^2$. The entry conjectures that all coefficients of positive degree are odd, and states a rule for their
+remainders modulo $9$ that has since been found to be false. We prove that all coefficients of positive degree are odd, and we determine
 the remainders modulo $9$ exactly: for $n\ge2$, the remainder is $3$ if $n=4^k+1$, it is $6$ if $n=2\cdot4^k+1$, and it
 is $0$ otherwise. We also show that $a(n)$ is divisible by $3^s$, where $s$ is the number of ones in the binary expansion
 of $n-1$. All three results hold, in a form that depends on $m$, for the whole family of equations
@@ -151,7 +151,7 @@ where the exponents are the numbers $2^j+1$ and the signs alternate.
 The entry records several formulas due to Hanna. One of them, $B(x^2)=x\,A(x)-3\,x\,A(x)^2$, where $B$ is
 the compositional inverse of $A$ (Section~\ref{sec:background}), is the starting point of our proof of the divisibility
 result. In July 2026, Danial~Asaria added to the entry the counterexample $a(5)=975$ to the conjecture modulo~$9$.
-We are not aware of an earlier proof of these statements.
+We do not know an earlier proof of the parity theorem, the complete residue classification, or the binary-digit divisibility theorem stated here.
 
 \subsection{Motivation}
 Equation~\eqref{eq:entry} mixes two operations, multiplication and substitution. Such equations rarely have explicit
@@ -574,7 +574,7 @@ in the namespace \texttt{OEIS.A396843}. There the left side of \eqref{eq:general
 \texttt{compose A (X*A - C m * X * A\^{}2)}; the coefficients $a_n(m)$ and $b_n(m)$ are \texttt{a m n} and
 \texttt{b m n}. Sixteen principal statements about this family are collected in
 \texttt{lean/Hanna/Statements.lean}.
-The table lists where each result of this paper is proved.
+The table lists the results covered by the Lean formalization. The Lean formalization does not cover the additional arguments and observations in Section~\ref{sec:discussion}.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
 \toprule
@@ -612,7 +612,7 @@ the nonzero remainders can occur only at a very sparse set of indices. For $k=2$
 remainders completely. For $k=3$ the candidates are $n=1$, $n=2^i+1$ and $n=2^i+2^j+1$ with $i>j$. The remainders modulo
 $m^3$ are not determined here.
 
-\para{Other values of $m$.} For $m=1$ (entry A265940) the results say only that every coefficient is odd. For $m=2$
+\para{Other values of $m$.} For $m=1$ (entry A265940) the results say that every coefficient of positive degree is odd. For $m=2$
 (entry A271958) they say, for example, that $a_n(2)\equiv2\pmod 4$ when $n=2^j+1$ and $a_n(2)\equiv0\pmod4$ for the
 other $n\ge2$. For $m=5$ (entry A396845) the remainders modulo $25$ are $5$ and $20$ at $n=4^k+1$ and $n=2\cdot4^k+1$,
 respectively, and $0$ for the other $n\ge2$.

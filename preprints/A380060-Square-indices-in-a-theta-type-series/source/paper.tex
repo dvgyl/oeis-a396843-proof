@@ -361,7 +361,7 @@ Lean~\cite{lean} is a \emph{proof assistant}: a program in which mathematical st
 in a precise formal language, and every step is checked mechanically down to the basic rules of logic. The theorems of Section~\ref{sec:results} are proved in Lean~4 (version 4.35.0) on top of
 Mathlib~\cite{mathlib}, Lean's library of formalized mathematics; the steps proved only on paper are identified below. The statements are collected in the file \texttt{lean/Entries/A380060.lean} of the repository,
 in the namespace \texttt{OEIS.A380060}. There the one-sided sum $\Sigma(A)$ is written out coefficient by coefficient (only the indices $j\le n$ can contribute to $x^n$), and the multiplicative inverse of a series with constant term $1$ is written \texttt{unitInv}. The folding of the two-sided sum (Lemma~\ref{lem:fold}) is proved in this paper but not in Lean. The proofs are in the file \texttt{lean/Families/ThetaRational.lean}. 
-The table lists where each result of this paper is proved.
+The table lists the results covered by the Lean formalization. The Lean formalization does not cover the additional arguments and observations in Section~\ref{sec:discussion}.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
 \toprule

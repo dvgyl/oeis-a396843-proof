@@ -239,7 +239,8 @@ Let $r\ge0$ and $F,G\in\ps{R}$. If $F-G=O(x^r)$, then $\Phi(F)-\Phi(G)=O(x^{r+1}
 \end{lemma}
 
 \begin{proof}
-For every $e\ge0$, $F^e-G^e=(F-G)(F^{e-1}+F^{e-2}G+\cdots+G^{e-1})$ is a multiple of $F-G$, hence $O(x^r)$. For
+For $e=0$, the difference $F^e-G^e$ is zero. For $e\ge1$, the identity
+$F^e-G^e=(F-G)(F^{e-1}+F^{e-2}G+\cdots+G^{e-1})$ shows that the difference is a multiple of $F-G$, hence $O(x^r)$. For
 $j\neq0$ we have $j^2\ge1$, so $T_j(F)-T_j(G)=(-x)^{j^2}\bigl(F^{(j-1)^2}-G^{(j-1)^2}\bigr)=O(x^{r+1})$. The term
 $j=0$, which equals $F-G$, does not occur in $\Phi(F)-\Phi(G)$. Each coefficient of $\Phi(F)-\Phi(G)$ is a finite sum of
 coefficients of the differences $T_j(F)-T_j(G)$ with $j\ne0$, which proves the claim.
@@ -303,7 +304,7 @@ in the namespace \texttt{OEIS.A355872}. The construction over an arbitrary commu
 and the congruence for the whole series modulo $16$ are in \texttt{lean/Families/BilateralTheta.lean} (namespace
 \texttt{Families.BilateralTheta}). The theorems in the table assume only equation \eqref{eq:source}, as
 stated in the entry; no congruence is assumed.
-The table lists where each result of this paper is proved.
+The table lists the results covered by the Lean formalization. The Lean formalization does not cover the additional arguments and observations in Section~\ref{sec:discussion}.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
 \toprule
@@ -337,9 +338,11 @@ no longer zero, and more terms of the bilateral sum survive. A computer calculat
 periodic with period $4$: for $n<200$, $a(n)$ modulo $32$ repeats $2,14,18,30$, and modulo $64$ it repeats
 $2,14,50,62$, both from $n=1$. It would be interesting to describe $a(n)$ modulo every power of $2$.
 
-\para{Related equations.} The argument of this paper applies to any bilateral equation in which, as here, the term
-with $j=0$ is the unknown series and all other terms carry a positive power of $x$: existence and uniqueness then hold
-over every ring, and congruences can be found by exhibiting a solution of the reduced equation.
+\para{Related equations.} Let $R$ be a commutative ring. The same construction applies to
+$F+\sum_{j\ne0}x^{r_j}P_j(F)=H$, where $H\in\ps{R}$, each $r_j\ge1$, each $P_j$ is a polynomial
+over $\ps{R}$, and for each degree only finitely many terms can contribute, uniformly in $F$.
+The fixed-point map improves agreement by one degree, so the equation has a unique solution.
+A solution of the reduced equation then determines the coefficient congruences.
 
 \section*{About this paper}\label{sec:about}
 \para{How the work was done.}

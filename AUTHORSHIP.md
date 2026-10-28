@@ -15,7 +15,7 @@ The results in this repository were obtained in an AI research effort directed b
 - wrote the Lean 4 formalization in [`lean/`](lean/);
 - wrote the first drafts of the papers.
 
-The theorems stated in Section 3 ("Results") of each paper, and their proof strategies, are ChatGPT's.
+ChatGPT produced the proofs in this collection. This describes the production of these proofs and does not establish originality. The [contribution scope](CONTRIBUTIONS.md) identifies existing results and corrections.
 
 **Claude Opus 5.5**, used with Claude Code, checked the work independently and prepared the papers and the repository. It:
 
@@ -30,6 +30,8 @@ The theorems stated in Section 3 ("Results") of each paper, and their proof stra
 - wrote the Challenge and Solution modules in [`lean/Challenges/`](lean/Challenges/) and [`lean/Solutions/`](lean/Solutions/), which restate the principal theorems using Mathlib's definitions only and derive them from the library, and checked them with Comparator;
 - wrote [`lean/Families/ExpEquation.lean`](lean/Families/ExpEquation.lean), which proves that the exponential equation defining A397346 has exactly one solution, the generating function of the recurrence used in the paper; this step had been proved only on paper.
 
+Codex also assisted with source comparison, attribution corrections, proof repairs, and verification.
+
 ## Review status
 
 Dev D. Goyal has reviewed the AI-generated proofs; this review is not an independent expert validation. No claim of novelty is made. The papers have not been peer reviewed, and they have not been submitted to a journal or to the OEIS.
@@ -42,6 +44,7 @@ A Lean proof certifies the statement that Lean checks; whether that statement ma
 
 The sequences and the conjectures treated here were contributed to the OEIS by Paul D. Hanna, except A394576, which was contributed by Hoang Xuan Thanh. Some of the formulas in the entries that the papers use or mention were contributed by Vaclav Kotesovec and Seiichi Manyama, and the related entry A067145 (used in the paper on A396102) by Christian G. Bower. Earlier work credited in the papers:
 
+- The [agentic-conjectures contributors](https://github.com/umaia1234/agentic-conjectures/blob/c66cca68e85af87d46a7f3431b2602f3c9ebfcf0/problems/oeis-a396093/README.md) gave the complete A396093 parity classification in a commit dated 11 August 2026. Its paper is retained only as reference material.
 - Danial Asaria recorded a counterexample to the conjecture modulo 9 in A396843.
 - Shiva Priyan Shanmuga Sundaram proved the conjectures of A396797, the member $`r=3`$ of the family treated in the papers on A396099, A396798 and A396807.
 - Amol Bhave's comment in A196523 proves congruences for a different family by a comparison of the same kind as in the paper on A396102.

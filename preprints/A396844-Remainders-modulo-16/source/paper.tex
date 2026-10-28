@@ -571,7 +571,7 @@ Mathlib~\cite{mathlib}, Lean's library of formalized mathematics. The statements
 in the namespace \texttt{OEIS.A396844}. The general theorems of Section~\ref{sec:results}, for every $m$, are proved in the companion file
 \texttt{lean/Entries/A396843.lean}; see the paper on A396843 for the corresponding table. The failure of the
 conjectured clause at $n=17$ is the case $k=2$ of the first part of \texttt{residues\_parameter\_four}.
-The table lists where each result of this paper is proved.
+The table lists the results covered by the Lean formalization. The Lean formalization does not cover the additional arguments and observations in Section~\ref{sec:discussion}.
 \begin{center}\small\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.52\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
 \toprule
@@ -605,7 +605,7 @@ the nonzero remainders can occur only at a very sparse set of indices. For $k=2$
 remainders completely. For $k=3$ the candidates are $n=1$, $n=2^i+1$ and $n=2^i+2^j+1$ with $i>j$. The remainders modulo
 $m^3$ are not determined here.
 
-\para{Other values of $m$.} For $m=1$ (entry A265940) the results say only that every coefficient is odd. For $m=2$
+\para{Other values of $m$.} For $m=1$ (entry A265940) the results say that every coefficient of positive degree is odd. For $m=2$
 (entry A271958) they say, for example, that $a_n(2)\equiv2\pmod 4$ when $n=2^j+1$ and $a_n(2)\equiv0\pmod4$ for the
 other $n\ge2$. For $m=5$ (entry A396845) the remainders modulo $25$ are $5$ and $20$ at $n=4^k+1$ and $n=2\cdot4^k+1$,
 respectively, and $0$ for the other $n\ge2$.

@@ -658,4 +658,5 @@ ok("A397346: a(n)/n mod 16 repeats 2,6,2,2,10,14,2,2 from n = 2 (n < 200)", prod
 
 print("");
 printf("RESULT: %d checks passed, %d failed\n", NPASS, NFAIL);
-quit(NFAIL > 0);
+if(NPASS + NFAIL != 200, print("INCOMPLETE: expected 200 checks, received ", NPASS + NFAIL));
+quit(NFAIL > 0 || NPASS + NFAIL != 200);
